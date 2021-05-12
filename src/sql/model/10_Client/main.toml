@@ -1,0 +1,39 @@
+docType = "Client"
+tableComment = "клиент"
+
+tableName ="client"
+
+fields = [
+	{name="id",			type="serial"},
+	{name="title",					type="char",	size=150, 	ext="not null",	 comment="название"},
+	{name="search_text",			type="text",	comment="колонка для поиска"},
+	{name="options",				type="jsonb",	comment="разные дополнительные параметры"},
+	{name="created_at",				type="timestamp",	ext="with time zone"},
+	{name="updated_at",				type="timestamp",	ext="with time zone"},
+	{name="deleted",				type="bool",	ext="not null default false"}
+]
+
+fkConstraints = [
+	{name="client_title_already_exist", ext="UNIQUE (title)"}
+]
+
+triggers = [
+	{name="client_created", when="before insert or update", ref="for each row", funcName="builtin_fld_update"},
+	{name="client_trigger_before", when="before insert or update", ref="for each row", funcName="client_trigger_before"},
+	{name="client_trigger_after", when="after insert or update", ref="for each row", funcName="client_trigger_after"}
+]
+
+
+
+methods = [
+	"client_get_by_id",
+	"client_list",
+	"client_update",
+	"client_trigger_before",
+	"client_trigger_after"
+]
+
+alterScripts = [
+	"alter table client add column if not exists title CHARACTER VARYING(150);",
+	"alter table client add column if not exists search_text text;"
+]

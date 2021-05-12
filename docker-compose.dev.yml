@@ -1,0 +1,25 @@
+version: '2'
+services:
+  app:
+    build: .
+    networks:
+      - electron_is_net
+    depends_on:
+      - postgres
+
+  postgres:
+    image: postgres:12
+#    command: ["postgres", "-c", "log_statement=all", "-c", "log_destination=stderr"]
+    volumes:
+      - postgres_data_Electron_12:/var/lib/postgresql/data
+    ports:
+      - "5438:5432"
+    environment:
+      POSTGRES_PASSWORD: ktulhu77
+
+volumes:
+  postgres_data_Electron_12:
+
+networks:
+  electron_is_net:
+    driver: bridge

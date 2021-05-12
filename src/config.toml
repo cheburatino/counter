@@ -1,0 +1,35 @@
+
+[postgres]
+user = "postgres"
+password = "ktulhu77"
+dbName = "electron_is"
+host = "postgres"
+port = 5432
+modelDir = ["./sql/model"]
+viewDir = ["./sql/view"]
+templateDir = ["./sql/template"]
+
+[webServer]
+enable = true
+port = 3091
+url = "https://system.i-electron.ru"
+
+[graylog]
+host = "85.143.214.161"
+port = 12201
+
+[email]
+sender = "system@i-electron.ru"
+password = "Insys12332112"
+host = "smtp.yandex.ru"
+port = 465
+senderName = "Electron"
+isSendWithEmptySender = false
+
+
+
+
+
+
+
+

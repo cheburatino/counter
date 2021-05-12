@@ -1,4 +1,4 @@
-package legalEntity
+package man
 
 import (
 	t "github.com/pepelazz/projectGenerator/types"
@@ -6,11 +6,11 @@ import (
 )
 
 const (
-	name            = "legal_entity"
-	name_ru         = "юрЛица"
-	name_ru_plural  = "юрЛица"
-	menu_icon       = "https://image.flaticon.com/icons/svg/469/469323.svg"
-	breadcrumb_icon = "far fa-file-alt"
+	name            = "man"
+	name_ru         = "человек"
+	name_ru_plural  = "люди"
+	menu_icon       = ""
+	breadcrumb_icon = "fas fa-male"
 )
 
 func GetDoc() t.DocType {
@@ -20,10 +20,9 @@ func GetDoc() t.DocType {
 		PathPrefix: "docs",
 		Flds: []t.FldType{
 			t.GetFldTitle(),
-			t.GetFldString("inn", "ИНН", 30, [][]int{{2, 1}}, "col-4"),
-			t.GetFldString("kpp", "КПП", 30, [][]int{{2, 2}}, "col-4"),
-			t.GetFldString("type", "тип организации", 50, [][]int{{2, 2}}),
-			t.GetFldString("address_legal", "юр адрес", 0,   [][]int{{3, 1}}, "col-8"),
+			t.GetFldString("last_name", "фамилия", 30, [][]int{{2, 1}}, "col-3"),
+			t.GetFldString("name", "имя", 30, [][]int{{2, 2}}, "col-3"),
+			t.GetFldString("middle_name", "отчество", 30, [][]int{{2, 3}}, "col-3"),
 		},
 		Vue: t.DocVue{
 			RouteName:      name,
@@ -32,18 +31,18 @@ func GetDoc() t.DocType {
 			Roles:          []string{},
 		},
 		//Templates:   map[string]*t.DocTemplate{"webClient_item.vue": {},},
-		IsBaseTemapltes: t.DocIsBaseTemapltes{true, true},
+		IsBaseTemplates: t.DocIsBaseTemplates{true, true},
 		Sql: t.DocSql{
-			IsSearchText: true,
+			IsSearchText:    true,
 			IsBeforeTrigger: true,
-			IsAfterTrigger: true,
+			IsAfterTrigger:  true,
 		},
 	}
 	// создаем стандартные методы sql "list", "update", "get_by_id" с возможностью ограничения по ролям
 	doc.Sql.FillBaseMethods(doc.Name)
 
 	doc.Vue.I18n = map[string]string{
-		"listTitle": utils.UpperCaseFirst(name_ru_plural),
+		"listTitle":        utils.UpperCaseFirst(name_ru_plural),
 		"listDeletedTitle": "Удаленные " + name_ru_plural,
 	}
 

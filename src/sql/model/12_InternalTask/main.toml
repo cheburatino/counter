@@ -1,0 +1,72 @@
+docType = "InternalTask"
+tableComment = "внутренняя задача"
+
+tableName ="internal_task"
+
+fields = [
+	{name="id",			type="serial"},
+	{name="title",					type="char",	size=150, 	ext="not null",	 comment="название"},
+	{name="status",					type="char",	size=20,	 comment="статус"},
+	{name="description",					type="text",	 comment="описание"},
+	{name="author_id",					type="int",	 comment="автор"},
+	{name="director_id",					type="int",	 comment="постановщик"},
+	{name="executor_id",					type="int",	 comment="исполнитель"},
+	{name="acceptor_id",					type="int",	 comment="приёмщик"},
+	{name="plan_start_date",					type="timestamp",	 comment="плановая дата начала"},
+	{name="fact_start_date",					type="timestamp",	 comment="фактическая дата начала"},
+	{name="plan_end_date",					type="timestamp",	 comment="плановая дата завершения"},
+	{name="fact_end_date",					type="timestamp",	 comment="фактическая дата завершения"},
+	{name="client_id",					type="int",	 comment="заказчик"},
+	{name="project_id",					type="int",	 comment="проект"},
+	{name="parent_task_id",					type="int",	 comment="родительская задача"},
+	{name="search_text",			type="text",	comment="колонка для поиска"},
+	{name="options",				type="jsonb",	comment="разные дополнительные параметры"},
+	{name="created_at",				type="timestamp",	ext="with time zone"},
+	{name="updated_at",				type="timestamp",	ext="with time zone"},
+	{name="deleted",				type="bool",	ext="not null default false"}
+]
+
+fkConstraints = [
+	{name="internal_task_title_already_exist", ext="UNIQUE (title)"},
+{fld="author_id", ref="\"user\"", fk="id"},
+{fld="director_id", ref="\"user\"", fk="id"},
+{fld="executor_id", ref="\"user\"", fk="id"},
+{fld="acceptor_id", ref="\"user\"", fk="id"},
+	{fld="client_id", ref="client", fk="id"},
+	{fld="project_id", ref="project", fk="id"},
+	{fld="parent_task_id", ref="internal_task", fk="id"}
+]
+
+triggers = [
+	{name="internal_task_created", when="before insert or update", ref="for each row", funcName="builtin_fld_update"},
+	{name="internal_task_trigger_before", when="before insert or update", ref="for each row", funcName="internal_task_trigger_before"},
+	{name="internal_task_trigger_after", when="after insert or update", ref="for each row", funcName="internal_task_trigger_after"}
+]
+
+
+
+methods = [
+	"internal_task_get_by_id",
+	"internal_task_list",
+	"internal_task_update",
+	"internal_task_trigger_before",
+	"internal_task_trigger_after"
+]
+
+alterScripts = [
+	"alter table internal_task add column if not exists title CHARACTER VARYING(150);",
+	"alter table internal_task add column if not exists status CHARACTER VARYING(20);",
+	"alter table internal_task add column if not exists description text;",
+	"alter table internal_task add column if not exists author_id int;",
+	"alter table internal_task add column if not exists director_id int;",
+	"alter table internal_task add column if not exists executor_id int;",
+	"alter table internal_task add column if not exists acceptor_id int;",
+	"alter table internal_task add column if not exists plan_start_date timestamp;",
+	"alter table internal_task add column if not exists fact_start_date timestamp;",
+	"alter table internal_task add column if not exists plan_end_date timestamp;",
+	"alter table internal_task add column if not exists fact_end_date timestamp;",
+	"alter table internal_task add column if not exists client_id int;",
+	"alter table internal_task add column if not exists project_id int;",
+	"alter table internal_task add column if not exists parent_task_id int;",
+	"alter table internal_task add column if not exists search_text text;"
+]
