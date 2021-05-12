@@ -22,7 +22,7 @@ go build -o app 2>&1 # redirect error stream (2) to success stream (1)
 
 # копирование бинарника на сервер
 echo "transfer file to server..."
-pscp -r app  root@89.223.93.241://home/deploy/electron_is/src
+scp -r app  root@89.223.93.241://home/deploy/electron_is/src
 
 cd ./webClient
 echo "start quasar build..."
