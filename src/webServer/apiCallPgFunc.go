@@ -4,10 +4,10 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
+	"github.com/gin-gonic/gin"
 	"github.com/cheburatino/electron_is/src/pg"
 	"github.com/cheburatino/electron_is/src/types"
 	"github.com/cheburatino/electron_is/src/utils"
-	"github.com/gin-gonic/gin"
 	"github.com/tidwall/gjson"
 	"net/http"
 	"strings"
@@ -55,19 +55,19 @@ var (
 		PgMethod{"chat_get_by_id", []string{}, nil, BeforeHookAddUserId},
 		PgMethod{"chat_for_table_id", []string{}, nil, BeforeHookAddUserId},
 		PgMethod{"chat_message_update", []string{}, nil, BeforeHookAddUserId},
-
-		PgMethod{"client_list", []string{}, nil, BeforeHookAddUserId},
+		
 		PgMethod{"client_update", []string{}, nil, BeforeHookAddUserId},
 		PgMethod{"client_get_by_id", []string{}, nil, BeforeHookAddUserId},
+		PgMethod{"client_list", []string{}, nil, BeforeHookAddUserId},
 		PgMethod{"project_list", []string{}, nil, BeforeHookAddUserId},
 		PgMethod{"project_update", []string{}, nil, BeforeHookAddUserId},
 		PgMethod{"project_get_by_id", []string{}, nil, BeforeHookAddUserId},
 		PgMethod{"internal_task_list", []string{}, nil, BeforeHookAddUserId},
 		PgMethod{"internal_task_update", []string{}, nil, BeforeHookAddUserId},
 		PgMethod{"internal_task_get_by_id", []string{}, nil, BeforeHookAddUserId},
+		PgMethod{"man_list", []string{}, nil, BeforeHookAddUserId},
 		PgMethod{"man_update", []string{}, nil, BeforeHookAddUserId},
 		PgMethod{"man_get_by_id", []string{}, nil, BeforeHookAddUserId},
-		PgMethod{"man_list", []string{}, nil, BeforeHookAddUserId},
 	}
 )
 

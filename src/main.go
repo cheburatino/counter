@@ -6,11 +6,13 @@ import (
 	"github.com/cheburatino/electron_is/src/graylog"
 	"github.com/cheburatino/electron_is/src/jobs"
 	"github.com/cheburatino/electron_is/src/pg"
-	"github.com/cheburatino/electron_is/src/sse"
 	"github.com/cheburatino/electron_is/src/types"
 	"github.com/cheburatino/electron_is/src/utils"
 	"github.com/cheburatino/electron_is/src/webServer"
-
+	"github.com/cheburatino/electron_is/src/sse"
+	
+	
+	
 	"math/rand"
 	"os"
 	"time"
@@ -28,7 +30,7 @@ func main() {
 	pgPort := flag.String("pg_port", "", "an string")
 	pgPassword := flag.String("pg_pass", "", "an string")
 	dbName := flag.String("dbname", "", "an string")
-
+	
 	flag.Parse()
 
 	if *isDev {
@@ -43,7 +45,7 @@ func main() {
 		if len(*dbName) > 0 {
 			_ = os.Setenv("PG_DBNAME", *dbName)
 		}
-
+		
 		_ = os.Setenv("IS_DEVELOPMENT", "true")
 	}
 
@@ -69,8 +71,11 @@ func main() {
 	// передаем часть конфига в utils
 	utils.SetWebServerConfig(config.WebServer)
 	utils.SetEmailConfig(config.Email)
+	
+	
 
 	//go pg.GenerateFakeUsers(100)
+	
 
 	// инициализируем брокера для обработки подключений по SSE
 	sse.Init()

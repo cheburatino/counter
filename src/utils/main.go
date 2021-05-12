@@ -2,18 +2,18 @@ package utils
 
 import (
 	"bytes"
-	"crypto/rand"
 	"encoding/gob"
-	"encoding/json"
-	"errors"
-	"fmt"
-	"github.com/cheburatino/electron_is/src/types"
 	"github.com/gin-gonic/gin"
+	"github.com/cheburatino/electron_is/src/types"
 	"io/ioutil"
-	"log"
 	"mime/multipart"
 	"net/http"
+	"fmt"
 	"strconv"
+	"encoding/json"
+	"crypto/rand"
+	"errors"
+	"log"
 	"strings"
 )
 
@@ -246,7 +246,7 @@ func ReadUploadedFile(c *gin.Context, exts []string) (file multipart.File, filen
 	if len(fileExt) == 0 {
 		return nil, fileName, errors.New("wrong file extansion")
 	}
-	if exts != nil && len(exts) > 0 {
+	if exts != nil && len(exts) > 0{
 		isExtTrue := false
 		for _, v := range exts {
 			if fileExt == v {

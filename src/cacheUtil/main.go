@@ -1,9 +1,9 @@
 package cacheUtil
 
 import (
-	"fmt"
-	"github.com/bluele/gcache"
 	"time"
+	"github.com/bluele/gcache"
+	"fmt"
 )
 
 type cacheType struct {
@@ -14,8 +14,8 @@ type cacheType struct {
 var (
 	memCacheMap = map[string]cacheType{}
 	gc          = gcache.New(40).
-			LRU().
-			Build()
+		LRU().
+		Build()
 )
 
 func MemCacheGet(key string) interface{} {

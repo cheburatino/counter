@@ -1,11 +1,11 @@
 package webServer
 
 import (
+	"github.com/gin-gonic/gin"
 	"fmt"
 	"github.com/cheburatino/electron_is/src/graylog"
 	"github.com/cheburatino/electron_is/src/types"
 	"github.com/cheburatino/electron_is/src/utils"
-	"github.com/gin-gonic/gin"
 	"net/http"
 )
 

@@ -26,9 +26,9 @@ triggers = [
 
 
 methods = [
-	"client_get_by_id",
 	"client_list",
 	"client_update",
+	"client_get_by_id",
 	"client_trigger_before",
 	"client_trigger_after"
 ]

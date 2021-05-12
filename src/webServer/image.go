@@ -3,12 +3,12 @@ package webServer
 import (
 	"errors"
 	"fmt"
-	"github.com/cheburatino/electron_is/src/utils"
 	"github.com/gin-gonic/gin"
 	"github.com/muesli/smartcrop"
 	"github.com/muesli/smartcrop/nfnt"
 	"github.com/nfnt/resize"
 	"github.com/oklog/ulid"
+	"github.com/cheburatino/electron_is/src/utils"
 	"image"
 	"image/gif"
 	"image/jpeg"
@@ -114,7 +114,7 @@ func saveImage(c *gin.Context, path, filePrefix string, width int, crop []int) {
 
 	var isSaveAsIs bool
 	// для png, gif если не указаны параметры преобразования, то сохраняем их без декодирования. Иначе анимация gif теряется, а у png теряется прозрачный фон
-	if imgExt == "png" || imgExt == "gif" {
+	if imgExt =="png" || imgExt == "gif" {
 		if (crop == nil || len(crop) != 2) && width == 0 {
 			isSaveAsIs = true
 		}
@@ -153,6 +153,7 @@ func saveImage(c *gin.Context, path, filePrefix string, width int, crop []int) {
 			resizedImg = resizedImg.(SubImager).SubImage(topCrop)
 		}
 	}
+
 
 	// создаем директорию, если еще не создана
 	err = os.MkdirAll(path, os.ModePerm)
@@ -198,7 +199,7 @@ func saveImage(c *gin.Context, path, filePrefix string, width int, crop []int) {
 }
 
 // загрузка аватарки
-func uploadProfileImage(c *gin.Context) {
+func uploadProfileImage(c *gin.Context)  {
 	if userId, ok := utils.ExtractUserIdString(c); ok {
 		path := fmt.Sprintf("%s/profile", IMAGE_DIR)
 		prefix := fmt.Sprintf("id_%s_", userId)

@@ -3,11 +3,11 @@ package pg
 import (
 	"database/sql"
 	"fmt"
+	"github.com/lib/pq"
 	"github.com/cheburatino/electron_is/src/cacheUtil"
-	"github.com/cheburatino/electron_is/src/sse"
 	"github.com/cheburatino/electron_is/src/types"
 	"github.com/cheburatino/electron_is/src/utils"
-	"github.com/lib/pq"
+	"github.com/cheburatino/electron_is/src/sse"
 	"github.com/tidwall/gjson"
 	"strconv"
 	"time"
@@ -84,7 +84,7 @@ func processPgEvent(event string) {
 			cacheUtil.UserRemoveByToken(token)
 		}
 	case "message":
-		if gjson.Get(event, "flds.tg_op").Str == "INSERT" {
+		if (gjson.Get(event, "flds.tg_op").Str == "INSERT") {
 			userIdInt := gjson.Get(event, "flds.user_id").Int()
 			sse.SendJson(strconv.FormatInt(userIdInt, 10), gjson.Get(event, "flds").Value())
 		}

@@ -5,3 +5,5 @@ type JsonParamType struct {
 	Method    string      `json:"method"`
 	Params    interface{} `json:"params"`
 }
+
+

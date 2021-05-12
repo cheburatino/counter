@@ -7,8 +7,10 @@ import (
 	"github.com/cheburatino/electron_is/src/webServer/auth"
 	"github.com/gin-gonic/gin"
 
-	"fmt"
+
+	
 	"net/http"
+	"fmt"
 )
 
 func StartWebServer(config types.Config) {
@@ -32,7 +34,7 @@ func StartWebServer(config types.Config) {
 		authRoute.POST("/check_user_email", auth.EmailAuthCheckUserEmail)
 		authRoute.POST("/email_auth_start_recover_password", auth.EmailAuthStartRecoverPassword)
 		authRoute.POST("/email_auth_recover_password", auth.EmailAuthRecoverPassword)
-
+		
 	}
 
 	apiRoute := r.Group("/api", authRequired)
@@ -50,8 +52,17 @@ func StartWebServer(config types.Config) {
 		// загрузка фото
 		apiRoute.POST("/upload_image", uploadImage)
 		apiRoute.POST("/upload_profile_image", uploadProfileImage)
+		
 
+		
+
+		
 	}
+
+	
+
+	
+
 
 	// на ненайденный url отправляем статический файл для запуска vuejs приложения
 	r.NoRoute(func(c *gin.Context) {

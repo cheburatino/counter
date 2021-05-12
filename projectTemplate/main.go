@@ -28,7 +28,7 @@ func getProject() t.ProjectType {
 	}
 	// названием базы маленькими буквами, без пробелов
 	p.Config.Postgres = t.PostrgesConfig{"electron_is", 5646, "ktulhu77", "Europe/Moscow"}
-	p.Config.WebServer = t.WebServerConfig{3091, "https://system.i-electron.ru", "/home/deploy/electron_is", "85.210.890.567", "root"}
+	p.Config.WebServer = t.WebServerConfig{3091, "https://system.i-electron.ru", "/home/deploy/electron_is", "89.223.93.241", "root"}
 	// TODO: надо прописать настройки почтового сервера для отправки email
 	//Например, p.Config.Email = types.EmailConfig{"info@mail.ru", "password", "smtp.mail.ru", 465, "CompanyName"}
 	p.Config.Email = t.EmailConfig{"system@i-electron.ru", "Insys12332112", "smtp.yandex.ru", 465, "Electron", false}
