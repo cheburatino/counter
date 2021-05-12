@@ -9,7 +9,7 @@ const (
 	name            = "man"
 	name_ru         = "человек"
 	name_ru_plural  = "люди"
-	menu_icon       = ""
+	menu_icon       = "statics/image/man.svg"
 	breadcrumb_icon = "fas fa-male"
 )
 

@@ -32,18 +32,18 @@ func getProject() t.ProjectType {
 	// TODO: надо прописать настройки почтового сервера для отправки email
 	//Например, p.Config.Email = types.EmailConfig{"info@mail.ru", "password", "smtp.mail.ru", 465, "CompanyName"}
 	p.Config.Email = t.EmailConfig{"system@i-electron.ru", "Insys12332112", "smtp.yandex.ru", 465, "Electron", false}
-	p.Config.Logo = "https://sun9-62.userapi.com/impg/F-5YBo8Q_x7zEvb84K3yXcPszuaap01ckDVNFQ/CUIn2MAFtOQ.jpg?size=1126x465&quality=96&proxy=1&sign=429dc4b365be888cca6a277c5ebcfe54"
+	p.Config.Logo = "statics/image/electron_logo.png"
 	// формируем routes для Vue
 	p.FillVueBaseRoutes()
 	p.Vue.UiAppName = "Electron"
 
 	// боковое меню для Vue
 	p.Vue.Menu = []t.VueMenu{
-		{Url: "users", Text: "Пользователи", Icon: "https://image.flaticon.com/icons/svg/423/423063.svg", Roles: []string{utils.RoleAdmin}},
+		{Url: "users", Text: "Пользователи", Icon: "statics/image/user.svg", Roles: []string{utils.RoleAdmin}},
+		{DocName: "project"},
 		{DocName: "internal_task"},
 		{DocName: "client"},
 		{DocName: "man"},
-		{DocName: "project"},
 		//{Text: "Задачи", Icon: "https://image.flaticon.com/icons/svg/1642/1642808.svg", IsFolder:true, LinkList:[]t.VueMenu{{Text: "Список задач", Url: "task"}, {Text: "Типы задач", Url: "taskType"}}},
 	}
 	p.FillSideMenu()

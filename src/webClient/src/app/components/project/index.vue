@@ -14,7 +14,7 @@
 		<router-link :to="currentUrl + item.id" style="cursor: pointer">
 			<q-item-section avatar>
 			  <q-avatar rounded>
-				<img src="https://www.flaticon.com/svg/static/icons/svg/762/762631.svg" alt="">
+				<img src="statics/image/project.svg" alt="">
 			  </q-avatar>
 			</q-item-section>
 		</router-link>

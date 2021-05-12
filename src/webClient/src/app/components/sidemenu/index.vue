@@ -63,15 +63,15 @@
             return {
                 menuLinks: [
                     // for codeGenerate ##sidemenu_slot1
-									{icon: 'https://image.flaticon.com/icons/svg/423/423063.svg', text: 'Пользователи', url: '/users', roles: ['admin']},
+									{icon: 'statics/image/user.svg', text: 'Пользователи', url: '/users', roles: ['admin']},
 
-									{icon: 'https://www.flaticon.com/svg/static/icons/svg/1632/1632670.svg', text: 'Внутренние задачи', url: '/internal_task', roles: []},
+									{icon: 'statics/image/project.svg', text: 'Проекты', url: '/project', roles: []},
 
-									{icon: 'https://www.flaticon.com/svg/static/icons/svg/3787/3787909.svg', text: 'Клиенты', url: '/client', roles: []},
+									{icon: 'statics/image/internal_task.svg', text: 'Внутренние задачи', url: '/internal_task', roles: []},
 
-									{icon: '', text: 'Люди', url: '/man', roles: []},
+									{icon: 'statics/image/client.svg', text: 'Клиенты', url: '/client', roles: []},
 
-									{icon: 'https://www.flaticon.com/svg/static/icons/svg/762/762631.svg', text: 'Проекты', url: '/project', roles: []},
+									{icon: 'statics/image/man.svg', text: 'Люди', url: '/man', roles: []},
 
                 ],
             }

@@ -46,9 +46,9 @@ triggers = [
 
 
 methods = [
-	"internal_task_get_by_id",
 	"internal_task_list",
 	"internal_task_update",
+	"internal_task_get_by_id",
 	"internal_task_trigger_before",
 	"internal_task_trigger_after"
 ]

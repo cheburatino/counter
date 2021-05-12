@@ -9,7 +9,7 @@ const (
 	name            = "project"
 	name_ru         = "проект"
 	name_ru_plural  = "проекты"
-	menu_icon       = "https://www.flaticon.com/svg/static/icons/svg/762/762631.svg"
+	menu_icon       = "statics/image/project.svg"
 	breadcrumb_icon = "fas fa-project-diagram"
 )
 

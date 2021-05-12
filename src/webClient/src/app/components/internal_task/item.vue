@@ -68,7 +68,7 @@
       
       <div class="row q-col-gutter-md q-mb-sm">
       <div class="col-md-4 col-xs-6">
-          <comp-fld-ref-search outlined pgMethod="internal_task_list" label="родительская задача" :item='item.parent_task_title' :itemId='item.parent_task_id' :ext='{"avatar":"https://www.flaticon.com/svg/static/icons/svg/1632/1632670.svg","pathUrl":"/internal_task"}' @update="v=> item.parent_task_id = v.id" @clear="item.parent_task_id = null" :readonly='false'  class='q-mb-sm col-md-4 col-xs-6' />
+          <comp-fld-ref-search outlined pgMethod="internal_task_list" label="родительская задача" :item='item.parent_task_title' :itemId='item.parent_task_id' :ext='{"avatar":"statics/image/internal_task.svg","pathUrl":"/internal_task"}' @update="v=> item.parent_task_id = v.id" @clear="item.parent_task_id = null" :readonly='false'  class='q-mb-sm col-md-4 col-xs-6' />
       </div>
       </div>
       

@@ -9,7 +9,7 @@ const (
 	name            = "internal_task"
 	name_ru         = "внутренняя задача"
 	name_ru_plural  = "внутренние задачи"
-	menu_icon       = "https://www.flaticon.com/svg/static/icons/svg/1632/1632670.svg"
+	menu_icon       = "statics/image/internal_task.svg"
 	breadcrumb_icon = "fas fa-clipboard-check"
 )
 

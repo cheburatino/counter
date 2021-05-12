@@ -9,7 +9,7 @@ const (
 	name            = "client"
 	name_ru         = "клиент"
 	name_ru_plural  = "клиенты"
-	menu_icon       = "https://www.flaticon.com/svg/static/icons/svg/3787/3787909.svg"
+	menu_icon       = "statics/image/client.svg"
 	breadcrumb_icon = "fas fa-male"
 )
 
