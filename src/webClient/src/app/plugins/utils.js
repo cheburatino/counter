@@ -51,7 +51,7 @@ const getDocItemById = function ({method, cb}) {
     this.item = {id: -1}
     // заполняем поля вновь созданного документа либо default значением, либо null
     _.flattenDeep(this.flds).map(v => {
-      this.$set(this.item, v.name, v.default || null)
+      this.item[v.name] = v.default || null
     })
   } else {
     // дефолтный callback
@@ -143,10 +143,11 @@ const formatPgDate = (d) => {
 }
 
 
-const i18n_internal_task_status = (v) => {
+const i18n_invoice_state = (v) => {
 	const d = {
-		in_work: 'в работе',
-		completed: 'завершена'
+		planned: 'запланирован',
+		transferred: 'выставлен',
+		paid: 'оплачен'
 	}
 	return Array.isArray(v) ? v.map(v1 => d[v1]) : d[v]
 }
@@ -163,7 +164,7 @@ export default {
   formatPgDateTime,
   formatPgDate,
   _,
-  i18n_internal_task_status,
+  i18n_invoice_state,
 	
 }
 

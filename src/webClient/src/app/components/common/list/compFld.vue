@@ -3,16 +3,16 @@
     <div v-if="type=='separator' && vif" class="text-weight-bold form-separator-header">{{label}}</div>
     <!-- строка, число  -->
     <q-input v-if="type=='string' && vif"
-             outlined :type='type' :label="label" :value="fld"
+             outlined :type='type' :label="label" :modelValue="fld"
              @input="v=>$emit('update', v)"
              :readonly="readonly" autogrow/>
     <!-- строка, число  -->
     <q-input v-if="type=='number' && vif"
-             outlined :type='type' :label="label" :value="fld"
+             outlined :type='type' :label="label" :modelValue="fld"
              @input="v=>$emit('update', v)"
              :readonly="readonly"/>
     <q-input v-if="type=='phone' && vif"
-             outlined :label="label" :value="fld"
+             outlined :label="label" :modelValue="fld"
              @input="v=>$emit('update', v)"
              mask="+# (###) ### - ####"
              :readonly="readonly">
@@ -22,7 +22,7 @@
     <q-select
       v-if="type=='select' && vif"
       outlined
-      :label="label" :value="fld"
+      :label="label" :modelValue="fld"
       :options="selectOptions"
       @input="v=>$emit('update', v)"
       :readonly="readonly"
@@ -35,7 +35,7 @@
     <q-select
       v-if="type=='selectMultiple' && vif"
       outlined
-      :label="label" :value="fld"
+      :label="label" :modelValue="fld"
       multiple
       :options="selectOptions"
       @input="v=>$emit('update', v)"
@@ -72,11 +72,11 @@
   </div>
 </template>
 
-<style lang="stylus">
+<style lang="sass">
   .form-separator-header
-    padding: 0.5rem 0;
-    border-bottom: 1px solid #ccc;
-    margin: 1rem 0 0;
+    padding: 0.5rem 0
+    border-bottom: 1px solid #ccc
+    margin: 1rem 0 0
 </style>
 
 <script>

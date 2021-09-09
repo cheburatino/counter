@@ -2,7 +2,7 @@
   <div class="layout">
     <div>
       <div class="row justify-center" style="margin-top: 20px; margin-bottom: 10px">
-        <img src="statics/image/electron_logo.png" alt="" style="width: auto; max-height: 100px">
+        <img src="image/electron_logo.png" alt="" style="width: auto; max-height: 100px">
         
       </div>
       <!--Кнопки авторизации-->

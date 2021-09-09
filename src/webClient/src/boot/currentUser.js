@@ -1,10 +1,6 @@
 import CurrentUser from '../app/plugins/CurrentUser'
 
-// "async" is optional
-export default ({Vue}) => {
-  Vue.use({
-    install: (Vue, options) => {
-      Vue.prototype.$currentUser = new CurrentUser()
-    }
-  }, {})
+export default async ({app}) => {
+  app.config.globalProperties.$currentUser = new CurrentUser()
 }
+

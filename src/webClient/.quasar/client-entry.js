@@ -11,6 +11,13 @@
  **/
 
 
+import { createApp } from 'vue'
+
+
+
+
+
+
 
 import '@quasar/extras/fontawesome-v5/fontawesome-v5.css'
 
@@ -22,72 +29,60 @@ import '@quasar/extras/material-icons/material-icons.css'
 
 
 // We load Quasar stylesheet file
-import 'quasar/dist/quasar.styl'
+import 'quasar/dist/quasar.sass'
 
 
 
 
-import 'src/css/app.styl'
+import 'src/css/app.scss'
 
 
-import Vue from 'vue'
-import createApp from './app.js'
-
-
-
-
-import qboot_Bootconfig from 'boot/config'
-
-import qboot_Bootutils from 'boot/utils'
-
-import qboot_BootcurrentUser from 'boot/currentUser'
-
-import qboot_BootmyCommon from 'boot/myCommon'
-
-import qboot_BootuserTasks from 'boot/userTasks'
-
-import qboot_Bootaxios from 'boot/axios'
+import createQuasarApp from './app.js'
+import quasarUserOptions from './quasar-user-options.js'
 
 
 
 
 
 
+console.info('[Quasar] Running SPA.')
 
 
 
 
 
+const publicPath = `/static/`
 
-async function start () {
-  const { app, router } = await createApp()
+const doubleSlashRE = /\/\//
+const addPublicPath = url => (publicPath + url).replace(doubleSlashRE, '/')
 
+
+async function start ({ app, router }, bootFiles) {
   
 
   
-  let routeUnchanged = true
+  let hasRedirected = false
   const redirect = url => {
-    routeUnchanged = false
-    window.location.href = url
+    hasRedirected = true
+    const normalized = Object(url) === url
+      ? addPublicPath(router.resolve(url).fullPath)
+      : url
+
+    window.location.href = normalized
   }
 
   const urlPath = window.location.href.replace(window.location.origin, '')
-  const bootFiles = [qboot_Bootconfig,qboot_Bootutils,qboot_BootcurrentUser,qboot_BootmyCommon,qboot_BootuserTasks,qboot_Bootaxios]
 
-  for (let i = 0; routeUnchanged === true && i < bootFiles.length; i++) {
-    if (typeof bootFiles[i] !== 'function') {
-      continue
-    }
-
+  for (let i = 0; hasRedirected === false && i < bootFiles.length; i++) {
     try {
       await bootFiles[i]({
         app,
         router,
         
-        Vue,
         ssrContext: null,
         redirect,
-        urlPath
+        urlPath,
+        publicPath
       })
     }
     catch (err) {
@@ -101,21 +96,20 @@ async function start () {
     }
   }
 
-  if (routeUnchanged === false) {
+  if (hasRedirected === true) {
     return
   }
   
 
+  app.use(router)
+  
+
   
 
     
 
     
-
-    
-      new Vue(app)
-    
-
+      app.mount('#q-app')
     
 
     
@@ -124,4 +118,27 @@ async function start () {
 
 }
 
-start()
+createQuasarApp(createApp, quasarUserOptions)
+
+  .then(app => {
+    return Promise.all([
+      
+      import(/* webpackMode: "eager" */ 'boot/config'),
+      
+      import(/* webpackMode: "eager" */ 'boot/axios'),
+      
+      import(/* webpackMode: "eager" */ 'boot/currentUser'),
+      
+      import(/* webpackMode: "eager" */ 'boot/utils'),
+      
+      import(/* webpackMode: "eager" */ 'boot/myCommon')
+      
+    ]).then(bootFiles => {
+      const boot = bootFiles
+        .map(entry => entry.default)
+        .filter(entry => typeof entry === 'function')
+
+      start(app, boot)
+    })
+  })
+

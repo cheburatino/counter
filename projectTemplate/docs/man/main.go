@@ -1,15 +1,15 @@
 package man
 
 import (
-	t "github.com/pepelazz/projectGenerator/types"
-	"github.com/pepelazz/projectGenerator/utils"
+	t "github.com/pepelazz/nla_framework/types"
+	"github.com/pepelazz/nla_framework/utils"
 )
 
 const (
 	name            = "man"
 	name_ru         = "человек"
 	name_ru_plural  = "люди"
-	menu_icon       = "statics/image/man.svg"
+	menu_icon       = "image/man.svg"
 	breadcrumb_icon = "fas fa-male"
 )
 
@@ -23,6 +23,7 @@ func GetDoc() t.DocType {
 			t.GetFldString("last_name", "фамилия", 30, [][]int{{2, 1}}, "col-3"),
 			t.GetFldString("name", "имя", 30, [][]int{{2, 2}}, "col-3"),
 			t.GetFldString("middle_name", "отчество", 30, [][]int{{2, 3}}, "col-3"),
+			t.GetFldRef("company_id", "компания", "company", [][]int{{3, 1}}),
 		},
 		Vue: t.DocVue{
 			RouteName:      name,

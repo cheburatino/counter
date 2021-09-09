@@ -1,103 +1,143 @@
 <template>
   <q-page padding>
 
-    <comp-breadcrumb :list="[{label:'Задача', to:'/task', docType: 'task', icon: 'fas fa-tasks'},
-    {label: item && item.title ? `${item.title}` : '',  docType: 'edit'}]"/>
+    <comp-breadcrumb v-if="!isOpenInDialog" :list="[{label:'Задачи', to:'/task',  docType: 'task'},  {label: item ? (item.title ? item.title : 'Редактирование') : '',  docType: 'edit'}]"/>
 
     <div v-if="item" class="q-mt-sm">
       <!--  поля формы    -->
-      <div class="row q-col-gutter-md q-mb-sm" v-for="fldRow in flds">
-       <template v-if="Array.isArray(fldRow)">
-          <comp-fld v-for="fld in fldRow" :key='fld.name'
-                                :fld="item[fld.name]"
-                                :type="fld.type"
-                                @update="item[fld.name] = $event"
-                                :label="fld.label"
-                                :selectOptions="fld.selectOptions ? fld.selectOptions() : []"
-                                :ajaxSelectTitle="item[fld.ajaxSelectTitle]"
-                                :columnClass="fld.columnClass"
-                                :compName="fld.compName"
-                                :readonly="fld.readonly ? fld.readonly() : false"
-                                :pgMethod="fld.pgMethod"
-                    >
-<!--            <template v-if="fld.name === 'table_id'">-->
-<!--              <ref-table-id :fld="item[fld.name]" :label="fld.label" @update="item[fld.name] = $event"/>-->
-<!--            </template>-->
-          </comp-fld>
-       </template>
-        <template v-if="fldRow.name==='task_type_id'">
-          <ref-table-id :id="id" :task_type_id="item.task_type_id" :table_id="item.table_id"
-                        :task_type_title="item.task_type_title" :table_id_title="item.table_id_title"
-                        :table_name="item.table_name"
-                        @update="updateRefTable"/>
-        </template>
+      
+      <div class="row q-col-gutter-md q-mb-sm">
+      <div class="col-md-4 col-sm-6 col-xs-12">
+          <q-input outlined type='text' v-model="item.title" label="название" autogrow :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
       </div>
+      <div class="col-md-4 col-sm-6 col-xs-12">
+          <comp-fld-ref-search outlined pgMethod="ctlg_dev_task_state_list" label="статус" :item='item.state_title' :itemId='item.state' :ext='{}' @update="v=> item.state = v.id" @clear="item.state = null" :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
+      </div>
+      </div>
+      
+      <div class="row q-col-gutter-md q-mb-sm">
+      <div class="col-md-8 col-sm-12 col-xs-12">
+          <q-input outlined type='text' v-model="item.description" label="описание" autogrow :readonly='false'  class='q-mb-sm col-md-8 col-sm-12 col-xs-12' />
+      </div>
+      </div>
+      
+      <div class="row q-col-gutter-md q-mb-sm">
+      <div class="col-md-4 col-sm-6 col-xs-12">
+          <comp-fld-ref-search outlined pgMethod="user_list" label="автор" :item='item.author_title' :itemId='item.author_id' :ext='{}' @update="v=> item.author_id = v.id" @clear="item.author_id = null" :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
+      </div>
+      <div class="col-md-4 col-sm-6 col-xs-12">
+          <comp-fld-ref-search outlined pgMethod="user_list" label="постановщик" :item='item.director_title' :itemId='item.director_id' :ext='{}' @update="v=> item.director_id = v.id" @clear="item.director_id = null" :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
+      </div>
+      </div>
+      
+      <div class="row q-col-gutter-md q-mb-sm">
+      <div class="col-md-4 col-sm-6 col-xs-12">
+          <comp-fld-ref-search outlined pgMethod="user_list" label="исполнитель" :item='item.executor_title' :itemId='item.executor_id' :ext='{}' @update="v=> item.executor_id = v.id" @clear="item.executor_id = null" :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
+      </div>
+      <div class="col-md-4 col-sm-6 col-xs-12">
+          <comp-fld-ref-search outlined pgMethod="user_list" label="приёмщик" :item='item.acceptor_title' :itemId='item.acceptor_id' :ext='{}' @update="v=> item.acceptor_id = v.id" @clear="item.acceptor_id = null" :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
+      </div>
+      </div>
+      
+      <div class="row q-col-gutter-md q-mb-sm">
+      <div class="col-md-4 col-sm-6 col-xs-12">
+          <comp-fld-date outlined label="плановая дата начала" :date-string="$utils.formatPgDate(item.plan_start_date)" @update="v=> item.plan_start_date = v" :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
+      </div>
+      <div class="col-md-4 col-sm-6 col-xs-12">
+          <comp-fld-date outlined label="фактическая дата начала" :date-string="$utils.formatPgDate(item.fact_start_date)" @update="v=> item.fact_start_date = v" :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
+      </div>
+      </div>
+      
+      <div class="row q-col-gutter-md q-mb-sm">
+      <div class="col-md-4 col-sm-6 col-xs-12">
+          <comp-fld-date outlined label="плановая дата завершения" :date-string="$utils.formatPgDate(item.plan_end_date)" @update="v=> item.plan_end_date = v" :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
+      </div>
+      <div class="col-md-4 col-sm-6 col-xs-12">
+          <comp-fld-date outlined label="фактическая дата завершения" :date-string="$utils.formatPgDate(item.fact_end_date)" @update="v=> item.fact_end_date = v" :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
+      </div>
+      </div>
+      
+      <div class="row q-col-gutter-md q-mb-sm">
+      <div class="col-md-4 col-sm-6 col-xs-12">
+          <comp-fld-ref-search outlined pgMethod="task_list" label="родительская задача" :item='item.parent_task_title' :itemId='item.parent_task_id' :ext='{"avatar":"image/task.svg","pathUrl":"/task"}' @update="v=> item.parent_task_id = v.id" @clear="item.parent_task_id = null" :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
+      </div>
+      </div>
+      
+      <div class="row q-col-gutter-md q-mb-sm">
+      <div class="col-md-4 col-sm-6 col-xs-12">
+          <comp-fld-ref-search outlined pgMethod="digital_solution_list" label="цифровое решение" :item='item.digital_solution_title' :itemId='item.digital_solution_id' :ext='{}' @update="v=> item.digital_solution_id = v.id" @clear="item.digital_solution_id = null" :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
+      </div>
+      </div>
+      
 
       <!--  кнопки   -->
-      <comp-item-btn-save @save="save" @cancel="$router.push(docUrl)"/>
+      <comp-item-btn-save v-if="!isOpenInDialog" @save="save" :readonly="false" @cancel="$router.push(docUrl)"/>
+      <!--  при открытии в диалоге кнопку Отмена не показываем   -->
+      <q-btn v-else color="secondary" label="сохранить" class="q-mr-sm" @click="save"/>
+
+        
 
     </div>
   </q-page>
 </template>
 
 <script>
-    import refTableId from './comp/refTableId'
+
+    import currentUserMixin from '../../../app/mixins/currentUser'
     export default {
-        components: {refTableId},
-        props: ['id'],
+        props: ['id', 'isOpenInDialog'],
+        components: {},
+        mixins: [currentUserMixin,],
         computed: {
-            docUrl: () => '/task',
+            docUrl: function() {
+              return '/task'
+            },
         },
         data() {
             return {
                 item: null,
                 flds: [
-                    [
-                        {name: 'executor_id', type: 'userId', label: 'Исполнитель', ajaxSelectTitle: 'executor_fullname', readonly: () => this.id > 0},
-                    ],
-                    {name: 'task_type_id'},
-                    {name: 'table_id'},
-                    [
-                        {name: 'deadline', type: 'datetime', label: 'deadline', readonly: () => true}
-                    ],
-                    [
-                        {name: 'content', type: 'string', label: 'Текст', columnClass: 'col-xs-12 col-sm-8 col-md-8'},
-                        // {name: 'table_name', type: 'string', label: 'Название таблицы'},
-                        // {name: 'table_id', type: 'number', label: 'id в таблице'},
-                        // {name: 'executor_id', type: 'number', label: 'Исполнитель'},
-                        // {name: 'manager_id', type: 'number', label: 'Постановщик'},
-                        // {name: 'state', type: 'string', label: 'Статус'},
-                        // {name: 'deadline', type: 'timestamp', label: 'Срок'},
-                        // {name: 'date_completed', type: 'timestamp', label: 'Дата исполнения'},
-                        // {name: 'result', type: 'string', label: 'Отчет об исполнении'},
-                        // {name: 'success_rate', type: 'number', label: 'Оценка успешности (0-10)'},
-                    ],
+                        {name: 'title', label: 'название',  required: true},
+                        {name: 'state', label: 'статус'},
+                        {name: 'description', label: 'описание'},
+                        {name: 'author_id', label: 'автор'},
+                        {name: 'director_id', label: 'постановщик'},
+                        {name: 'executor_id', label: 'исполнитель'},
+                        {name: 'acceptor_id', label: 'приёмщик'},
+                        {name: 'plan_start_date', label: 'плановая дата начала'},
+                        {name: 'fact_start_date', label: 'фактическая дата начала'},
+                        {name: 'plan_end_date', label: 'плановая дата завершения'},
+                        {name: 'fact_end_date', label: 'фактическая дата завершения'},
+                        {name: 'parent_task_id', label: 'родительская задача'},
+                        {name: 'digital_solution_id', label: 'цифровое решение'},
                 ],
-                // список полей для редактирования из options
                 optionsFlds: [],
+                
             }
         },
         methods: {
-            updateRefTable({task_type_id, table_id}) {
-              this.item.task_type_id = task_type_id
-              this.item.table_id = table_id
-            },
+          
             resultModify(res) {
+                
                 return res
             },
             save() {
+                
                 this.$utils.saveItem.call(this, {
                     method: 'task_update',
                     itemForSaveMod: {},
                     resultModify: this.resultModify,
                 })
             },
-        },
-        mounted() {
+          reload() {
             let cb = (v) => {
-                this.item = this.resultModify(v)
+              this.item = this.resultModify(v)
             }
             this.$utils.getDocItemById.call(this, {method: 'task_get_by_id', cb})
+          }
+        },
+        mounted() {
+           this.reload()
         }
     }
 </script>

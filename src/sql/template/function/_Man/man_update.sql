@@ -30,6 +30,7 @@ BEGIN
     
     
     
+    
 
     if (params ->> 'id')::int = -1 then
         -- проверика наличия обязательных параметров
@@ -40,13 +41,14 @@ BEGIN
         END IF;
         
 
-        EXECUTE ('INSERT INTO man (title, last_name, name, middle_name, options) VALUES ($1, $2, $3, $4, $5)  RETURNING *;')
+        EXECUTE ('INSERT INTO man (title, last_name, name, middle_name, company_id, options) VALUES ($1, $2, $3, $4, $5, $6)  RETURNING *;')
 		INTO manRow
 		USING
 			(params ->> 'title')::text,
 			(params ->> 'last_name')::text,
 			(params ->> 'name')::text,
 			(params ->> 'middle_name')::text,
+			(params ->> 'company_id')::int,
 			coalesce(params -> 'options', '{}')::jsonb;
 
         
@@ -57,6 +59,7 @@ BEGIN
 			['last_name', 'last_name', 'text'],
 			['name', 'name', 'text'],
 			['middle_name', 'middle_name', 'text'],
+			['company_id', 'company_id', 'number'],
             ['options', 'options', 'jsonb'],
             ['deleted', 'deleted', 'bool']
             ]);

@@ -14,7 +14,7 @@
 		<router-link :to="currentUrl + item.id" style="cursor: pointer">
 			<q-item-section avatar>
 			  <q-avatar rounded>
-				<img src="statics/image/internal_task.svg" alt="">
+				<img src="image/internal_task.svg" alt="">
 			  </q-avatar>
 			</q-item-section>
 		</router-link>
@@ -43,7 +43,7 @@
     props: ['isOpenInDialog', 'ext'],
     mixins: [currentUserMixin],
     computed: {
-      currentUrl: () => 'internal_task/',
+      currentUrl: () => '/internal_task/',
     },
     data() {
       return {

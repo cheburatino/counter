@@ -2,7 +2,7 @@
   <q-page padding>
     <div class="row justify-center q-mt-lg">
       <div class="col-6">
-        <img src="statics/image/electron_logo.png" alt="" style="max-width: 90%">
+        <img src="image/electron_logo.png" alt="" style="max-width: 90%">
       </div>
     </div>
   </q-page>

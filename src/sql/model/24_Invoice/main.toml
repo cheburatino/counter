@@ -1,0 +1,60 @@
+docType = "Invoice"
+tableComment = "счёт"
+
+tableName ="invoice"
+
+fields = [
+	{name="id",			type="serial"},
+	{name="title",					type="char",	size=150, 	ext="not null",	 comment="название"},
+	{name="total_amount",					type="int",	 comment="сумма"},
+	{name="state",					type="char",	size=30,	 comment="статус"},
+	{name="system_id",					type="int",	 comment="система"},
+	{name="payer_id",					type="int",	 comment="плательщик"},
+	{name="recipient_id",					type="int",	 comment="получатель"},
+	{name="date_plan_transfer",					type="timestamp",	 comment="планируемая дата выставления"},
+	{name="date_plan_paid",					type="timestamp",	 comment="планируемая дата оплаты"},
+	{name="date_transfer",					type="timestamp",	 comment="дата выставления"},
+	{name="date_paid",					type="timestamp",	 comment="дата оплаты"},
+	{name="search_text",			type="text",	comment="колонка для поиска"},
+	{name="options",				type="jsonb",	comment="разные дополнительные параметры"},
+	{name="created_at",				type="timestamp",	ext="with time zone"},
+	{name="updated_at",				type="timestamp",	ext="with time zone"},
+	{name="deleted",				type="bool",	ext="not null default false"}
+]
+
+fkConstraints = [
+	{name="invoice_title_already_exist", ext="UNIQUE (title)"},
+	{fld="system_id", ref="system", fk="id"},
+	{fld="payer_id", ref="counterparty", fk="id"},
+	{fld="recipient_id", ref="counterparty", fk="id"}
+]
+
+triggers = [
+	{name="invoice_created", when="before insert or update", ref="for each row", funcName="builtin_fld_update"},
+	{name="invoice_trigger_before", when="before insert or update", ref="for each row", funcName="invoice_trigger_before"},
+	{name="invoice_trigger_after", when="after insert or update", ref="for each row", funcName="invoice_trigger_after"}
+]
+
+
+
+methods = [
+	"invoice_update",
+	"invoice_get_by_id",
+	"invoice_list",
+	"invoice_trigger_before",
+	"invoice_trigger_after"
+]
+
+alterScripts = [
+	"alter table invoice add column if not exists title CHARACTER VARYING(150);",
+	"alter table invoice add column if not exists total_amount int;",
+	"alter table invoice add column if not exists state CHARACTER VARYING(30);",
+	"alter table invoice add column if not exists system_id int;",
+	"alter table invoice add column if not exists payer_id int;",
+	"alter table invoice add column if not exists recipient_id int;",
+	"alter table invoice add column if not exists date_plan_transfer timestamp;",
+	"alter table invoice add column if not exists date_plan_paid timestamp;",
+	"alter table invoice add column if not exists date_transfer timestamp;",
+	"alter table invoice add column if not exists date_paid timestamp;",
+	"alter table invoice add column if not exists search_text text;"
+]

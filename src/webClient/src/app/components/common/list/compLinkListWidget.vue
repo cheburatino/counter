@@ -8,7 +8,7 @@
       <q-btn dense flat icon="add" @click="isShowAddDialog = true" v-if="!readonly"/>
     </q-bar>
 
-    <q-list bordered separator v-if="isShowList">
+    <q-list bordered separator v-if="isShowList" :dense="dense">
       <q-item v-for="item in filteredList" :key="item.id">
         <q-item-section avatar @click="$router.push(`${tableDependRoute}/${item[tableDependFldName]}`)">
           <q-avatar rounded>
@@ -108,16 +108,10 @@
 <script>
   import _ from 'lodash'
   export default {
-    props: ['id', 'tableIdName', 'tableIdFldName', 'tableDependName', 'tableDependFldName', 'tableDependRoute', 'linkTableName', 'label', 'avatarSrc', 'hideCreateNew', 'flds', 'readonly', 'searchExt', 'filterListFn'],
+    props: ['id', 'tableIdName', 'tableIdFldName', 'tableDependName', 'tableDependFldName', 'tableDependRoute', 'linkTableName', 'label', 'avatarSrc', 'hideCreateNew', 'flds', 'readonly', 'searchExt', 'filterListFn', 'dense'],
     computed: {
       tableDependFldTitle() {
         return this.tableDependFldName.split('_id')[0] + '_title'
-      },
-      avatar() {
-        return function(item) {
-          let fldName = this.tableDependFldName.split('_id')[0]
-          return item.options.title[fldName + '_avatar'] || this.avatarSrc || 'https://www.svgrepo.com/show/95333/avatar.svg'
-        }
       },
       filteredList() {
         // возможность передать в компоненту функцию для фильтрации списка
@@ -139,6 +133,10 @@
       }
     },
     methods: {
+      avatar(item) {
+        let fldName = this.tableDependFldName.split('_id')[0]
+        return item.options.title[fldName + '_avatar'] || this.avatarSrc || 'https://www.svgrepo.com/show/95333/avatar.svg'
+      },
       showDeleteDialog(id) {
         this.selectedForDeleteId = id
         this.isShowDeleteDialog = true
@@ -195,7 +193,7 @@
       this.reload()
       if (this.flds) {
         _.flattenDeep(this.flds).map(v => {
-          this.$set(this.localItem, v.name, v.type === 'checkbox' ? false : null)
+          this.localItem[v.name] = v.type === 'checkbox' ? false : null
         })
       }
     }

@@ -137,7 +137,7 @@
             this.urlQueryParams.map(v => {
               // объекты обрабатываем отдельно, например даты. Можно для них здесь написать отдельную обработку
               if (typeof v === 'string' && urlParams.has(v)) {
-                this.$set(this.listParams, v, urlParams.get(v))
+                this.listParams[v] = urlParams.get(v)
               }
             })
           }

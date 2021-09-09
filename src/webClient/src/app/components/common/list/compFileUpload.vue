@@ -27,7 +27,7 @@
 
 <script>
   export default {
-    props: ['url', 'fileExt', 'icon', 'tooltip', 'label', 'is_btn_with_label', 'size', 'color'],
+    props: ['url', 'fileExt', 'icon', 'tooltip', 'label', 'is_btn_with_label', 'size', 'color', 'notifyResultFunc'],
     computed: {
       uploadUrl() {
         return `${this.$config.apiUrl()}/api/${this.url}`
@@ -73,6 +73,12 @@
           this.$refs.uploader.reset()
           this.isOpenUpload = false
           this.$emit('result', res.result)
+          this.$emit('reloadList')
+          this.$q.notify({
+            color: 'positive',
+            position: 'bottom',
+            message: this.notifyResultFunc ? this.notifyResultFunc(res.result) : res.result,
+          })
         }
       },
       failed(msg) {

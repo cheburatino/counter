@@ -1,6 +1,6 @@
 <template>
   <div>
-    <q-drawer :value="rightSide" side="right" bordered @hide="$emit('hide')">
+    <q-drawer :modelValue="rightSide" side="right" bordered @hide="$emit('hide')">
       <q-list separator>
         <q-item-label header>
           Задачи
@@ -19,11 +19,10 @@
 </template>
 
 <script>
-    
-	import defaultTmpl from './taskTemplates/defaultTmpl'	
+    [[PrintImports]]
     export default {
         props: ['currentUser', 'rightSide'],
-        components: {defaultTmpl},
+        components: {[[PrintComps]]},
         computed: {
             listForRender: function () {
                 return this.list.filter(v => v.state === 'in_process').map(v => {

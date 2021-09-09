@@ -1,6 +1,6 @@
 import commonComponents from '../app/components/common'
 
-export default ({Vue}) => {
+export default ({app}) => {
   // подключаем свои common компоненты
-  commonComponents(Vue)
+  commonComponents(app)
 }

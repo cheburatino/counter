@@ -1,5 +1,5 @@
 <template>
-  <q-drawer :value="leftSide" side="left" bordered show-if-above
+  <q-drawer :modelValue="leftSide" side="left" bordered show-if-above
             content-class="bg-grey-2"
             :width="240" @hide="$emit('hide')">
     <q-scroll-area class="fit">
@@ -63,15 +63,38 @@
             return {
                 menuLinks: [
                     // for codeGenerate ##sidemenu_slot1
-									{icon: 'statics/image/user.svg', text: 'Пользователи', url: '/users', roles: ['admin']},
+									{icon: 'image/digital_solution.svg', text: 'Цифровые решения', url: '/digital_solution', roles: []},
 
-									{icon: 'statics/image/project.svg', text: 'Проекты', url: '/project', roles: []},
+									{icon: 'image/task.svg', text: 'Задачи', url: '/task', roles: []},
 
-									{icon: 'statics/image/internal_task.svg', text: 'Внутренние задачи', url: '/internal_task', roles: []},
+									{icon: 'image/request.svg', text: 'Запросы', url: '/request', roles: []},
 
-									{icon: 'statics/image/client.svg', text: 'Клиенты', url: '/client', roles: []},
+									{icon: 'image/functional_requirement.svg', text: 'Функциональные требования', url: '/functional_requirement', roles: []},
 
-									{icon: 'statics/image/man.svg', text: 'Люди', url: '/man', roles: []},
+									{icon: 'image/meeting.svg', text: 'Встречи', url: '/meeting', roles: []},
+
+									{icon: 'image/time_fast.svg', text: 'Время', url: '/time', roles: []},
+
+									{icon: 'image/sprint.svg', text: 'Спринты', url: '/sprint', roles: []},
+
+									{icon: 'image/system.svg', text: 'Системы', url: '/system', roles: []},
+
+									{icon: 'image/company.svg', text: 'Компании', url: '/company', roles: []},
+
+									{icon: 'image/man.svg', text: 'Люди', url: '/man', roles: []},
+
+									{icon: 'image/counterparty.svg', text: 'Контрагенты', url: '/counterparty', roles: []},
+
+									{icon: 'image/contract.svg', text: 'Договоры', url: '/contract', roles: []},
+
+									{icon: 'image/invoice.svg', text: 'Счета', url: '/invoice', roles: []},
+{isFolder: true, icon: 'image/catalog.svg', text: 'Справочники', roles: [], linkList: 								[
+								{icon: 'image/user.svg', text: 'Пользователи', url: '/users', roles: ['admin']},
+								{icon: '', text: 'Сотрудники', url: '/employee', roles: []},
+								{icon: '', text: 'Статусы задач разработки', url: '/ctlg_dev_task_state', roles: []},
+								{icon: '', text: 'Статусы запросов', url: '/ctlg_request_state', roles: []},
+								{icon: '', text: 'Типы времени', url: '/ctlg_time_type', roles: []},
+],},
 
                 ],
             }

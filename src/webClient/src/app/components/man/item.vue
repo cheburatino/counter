@@ -7,20 +7,26 @@
       <!--  поля формы    -->
       
       <div class="row q-col-gutter-md q-mb-sm">
-      <div class="col-md-4 col-xs-6">
-          <q-input outlined type='text' v-model="item.title" label="название" autogrow :readonly='false'  class='q-mb-sm col-md-4 col-xs-6' />
+      <div class="col-md-4 col-sm-6 col-xs-12">
+          <q-input outlined type='text' v-model="item.title" label="название" autogrow :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
       </div>
       </div>
       
       <div class="row q-col-gutter-md q-mb-sm">
       <div class="col-3">
-          <q-input outlined type='text' v-model="item.last_name" label="фамилия" autogrow :readonly='false'  class='q-mb-sm col-3' />
+          <q-input outlined type='text' v-model="item.last_name" label="фамилия"  :readonly='false'  class='q-mb-sm col-3' />
       </div>
       <div class="col-3">
-          <q-input outlined type='text' v-model="item.name" label="имя" autogrow :readonly='false'  class='q-mb-sm col-3' />
+          <q-input outlined type='text' v-model="item.name" label="имя"  :readonly='false'  class='q-mb-sm col-3' />
       </div>
       <div class="col-3">
-          <q-input outlined type='text' v-model="item.middle_name" label="отчество" autogrow :readonly='false'  class='q-mb-sm col-3' />
+          <q-input outlined type='text' v-model="item.middle_name" label="отчество"  :readonly='false'  class='q-mb-sm col-3' />
+      </div>
+      </div>
+      
+      <div class="row q-col-gutter-md q-mb-sm">
+      <div class="col-md-4 col-sm-6 col-xs-12">
+          <comp-fld-ref-search outlined pgMethod="company_list" label="компания" :item='item.company_title' :itemId='item.company_id' :ext='{}' @update="v=> item.company_id = v.id" @clear="item.company_id = null" :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
       </div>
       </div>
       
@@ -56,6 +62,7 @@
                         {name: 'last_name', label: 'фамилия'},
                         {name: 'name', label: 'имя'},
                         {name: 'middle_name', label: 'отчество'},
+                        {name: 'company_id', label: 'компания'},
                 ],
                 optionsFlds: [],
                 

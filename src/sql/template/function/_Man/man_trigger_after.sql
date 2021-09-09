@@ -7,6 +7,18 @@ DECLARE
         jsonbEl      jsonb;
 BEGIN
         
+IF (TG_OP = 'UPDATE') THEN
+-- при смене названия обновляем все ссылающиеся записи, чтобы там переписалось новое название
+if new.title != old.title then
+ for r in select * from request where customer_agent_id = new.id loop
+ update request set updated_at=now() where id = r.id;
+ end loop;
+ for r in select * from system where customer_agent_id = new.id loop
+ update system set updated_at=now() where id = r.id;
+ end loop;
+
+ end if;
+ end if;
 
         
 

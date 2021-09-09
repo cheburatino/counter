@@ -71,7 +71,7 @@
         },
         mounted() {
             this.item = this.currentUser
-            if (this.optionsFlds) this.optionsFlds.map(fldName => this.$set(this.item, fldName, this.item.options[fldName]))
+            if (this.optionsFlds) this.optionsFlds.map(fldName => this.item[fldName] = this.item.options[fldName])
         }
     }
 </script>

@@ -1,0 +1,39 @@
+docType = "Employee"
+tableComment = "сотрудник"
+
+tableName ="employee"
+
+fields = [
+	{name="id",			type="serial"},
+	{name="title",					type="char",	size=150, 	ext="not null",	 comment="название"},
+	{name="search_text",			type="text",	comment="колонка для поиска"},
+	{name="options",				type="jsonb",	comment="разные дополнительные параметры"},
+	{name="created_at",				type="timestamp",	ext="with time zone"},
+	{name="updated_at",				type="timestamp",	ext="with time zone"},
+	{name="deleted",				type="bool",	ext="not null default false"}
+]
+
+fkConstraints = [
+	{name="employee_title_already_exist", ext="UNIQUE (title)"}
+]
+
+triggers = [
+	{name="employee_created", when="before insert or update", ref="for each row", funcName="builtin_fld_update"},
+	{name="employee_trigger_before", when="before insert or update", ref="for each row", funcName="employee_trigger_before"},
+	{name="employee_trigger_after", when="after insert or update", ref="for each row", funcName="employee_trigger_after"}
+]
+
+
+
+methods = [
+	"employee_get_by_id",
+	"employee_list",
+	"employee_update",
+	"employee_trigger_before",
+	"employee_trigger_after"
+]
+
+alterScripts = [
+	"alter table employee add column if not exists title CHARACTER VARYING(150);",
+	"alter table employee add column if not exists search_text text;"
+]

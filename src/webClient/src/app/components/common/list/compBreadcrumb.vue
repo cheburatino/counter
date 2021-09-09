@@ -12,12 +12,10 @@
 <script>
     export default {
         props: ['list'],
-        computed: {
-            icon() {
-                return function(item) {
-                    if (item.docType === 'edit') return 'edit'
-                    return item.icon || this.$config.breadcrumbIcons[item.docType] || 'label'
-                }
+        methods: {
+            icon(item) {
+              if (item.docType === 'edit') return 'edit'
+              return item.icon || this.$config.breadcrumbIcons[item.docType] || 'label'
             }
         }
     }

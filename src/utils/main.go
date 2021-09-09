@@ -2,18 +2,18 @@ package utils
 
 import (
 	"bytes"
+	"crypto/rand"
 	"encoding/gob"
-	"github.com/gin-gonic/gin"
+	"encoding/json"
+	"errors"
+	"fmt"
 	"github.com/cheburatino/electron_is/src/types"
+	"github.com/gin-gonic/gin"
 	"io/ioutil"
+	"log"
 	"mime/multipart"
 	"net/http"
-	"fmt"
 	"strconv"
-	"encoding/json"
-	"crypto/rand"
-	"errors"
-	"log"
 	"strings"
 )
 
@@ -226,18 +226,29 @@ func GetJsonByUrl(url string, res interface{}) error {
 func ReadUploadedFile(c *gin.Context, exts []string) (file multipart.File, filename string, err error) {
 	// извлекаем файл из парамeтров post запроса
 	form, _ := c.MultipartForm()
-	var fileName, fileExt string
+	var fileName, fileExt, fileKey string
 
 	if len(form.File) == 0 {
 		return nil, fileName, errors.New("list of files is empty")
 	}
 	// берем первое имя файла из присланного списка
-	for key := range form.File {
+	for key, headers := range form.File {
 		if len(fileName) > 0 {
 			continue
 		}
-		fileName = key
-		// извлекаем расширение файла
+		// fileKey потом будем извлекать файл из формы
+		fileKey = key
+		// извлекаем название файла из headers формы
+		for _, h := range headers {
+			if h != nil && len(h.Filename) > 0 {
+				fileName = h.Filename
+			}
+		}
+		// если в header не нашли названия, то пробуем извлечь из ключа. Но в quasar 2 там undefined
+		if len(fileName) == 0 {
+			fileName = key
+		}
+		// извлекаем расширение файла из имени
 		arr := strings.Split(fileName, ".")
 		if len(arr) > 1 {
 			fileExt = arr[len(arr)-1]
@@ -246,7 +257,7 @@ func ReadUploadedFile(c *gin.Context, exts []string) (file multipart.File, filen
 	if len(fileExt) == 0 {
 		return nil, fileName, errors.New("wrong file extansion")
 	}
-	if exts != nil && len(exts) > 0{
+	if exts != nil && len(exts) > 0 {
 		isExtTrue := false
 		for _, v := range exts {
 			if fileExt == v {
@@ -257,8 +268,8 @@ func ReadUploadedFile(c *gin.Context, exts []string) (file multipart.File, filen
 			return nil, fileName, errors.New(fmt.Sprintf("file extansion must be %s", exts))
 		}
 	}
-	// извлекаем содержание присланного файла по названию файла
-	file, _, err = c.Request.FormFile(fileName)
+	// извлекаем содержание присланного файла по ключу
+	file, _, err = c.Request.FormFile(fileKey)
 	if err != nil {
 		return nil, fileName, errors.New(fmt.Sprintf("uploadFile c.Request.FormFile error: %s", err.Error()))
 	}

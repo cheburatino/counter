@@ -1,4 +1,4 @@
--- поиск Задача по id
+-- поиск задача по id
 -- параметры:
 -- id       type: int
 
@@ -10,11 +10,9 @@ AS
 $function$
 
 DECLARE
-    TaskRow         task%Rowtype;
+    taskRow         task%Rowtype;
     checkMsg               TEXT;
     result                 jsonb;
-    tableIdTitle text;
-    tableId int;
 BEGIN
 
     -- проверика наличия id
@@ -25,27 +23,20 @@ BEGIN
     END IF;
 
     with t1 as (select * from task where id = (params ->> 'id')::int),
-    t2 as (select t1.*, tt.title as task_type_title from t1 left join task_type tt on tt.id = t1.task_type_id),
-    t3 as (select t2.*, u.fullname as executor_fullname from t2 left join "user" u on u.id = t2.executor_id)
-    select row_to_json(t3.*)::jsonb
-    into result
-    from t3;
+		t2 as (select t1.*, c.title as state_title from t1 left join ctlg_dev_task_state c on c.id = t1.state),
+		t3 as (select t2.*, c.title as author_title from t2 left join "user" c on c.id = t2.author_id),
+		t4 as (select t3.*, c.title as director_title from t3 left join "user" c on c.id = t3.director_id),
+		t5 as (select t4.*, c.title as executor_title from t4 left join "user" c on c.id = t4.executor_id),
+		t6 as (select t5.*, c.title as acceptor_title from t5 left join "user" c on c.id = t5.acceptor_id),
+		t7 as (select t6.*, c.title as parent_task_title from t6 left join task c on c.id = t6.parent_task_id),
+		t8 as (select t7.*, c.title as digital_solution_title from t7 left join digital_solution c on c.id = t7.digital_solution_id)
+ 	select row_to_json(t8.*)::jsonb into result from t8;
 
     -- случай когда записи с таким id не найдено
     IF result ->> 'id' ISNULL
     THEN
         RETURN json_build_object('ok', FALSE, 'message', 'not found');
     END IF;
-
-    -- добавляем поле table_id_title - для селектора на интерфейсе
-    if result->>'table_id' notnull then
-        tableId = (result->>'table_id')::int;
-        if (result->>'table_name')::text = 'client' then
-            select title into tableIdTitle from client where id = tableId;
-        end if;
-    end if;
-
-    result = result || jsonb_build_object('table_id_title', tableIdTitle);
 
     RETURN json_build_object('ok', TRUE, 'result', result);
 

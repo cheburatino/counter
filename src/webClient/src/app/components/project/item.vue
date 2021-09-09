@@ -7,20 +7,20 @@
       <!--  поля формы    -->
       
       <div class="row q-col-gutter-md q-mb-sm">
-      <div class="col-md-4 col-xs-6">
-          <q-input outlined type='text' v-model="item.title" label="название" autogrow :readonly='false'  class='q-mb-sm col-md-4 col-xs-6' />
+      <div class="col-md-4 col-sm-6 col-xs-12">
+          <q-input outlined type='text' v-model="item.title" label="название" autogrow :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
       </div>
       </div>
       
       <div class="row q-col-gutter-md q-mb-sm">
-      <div class="col-8">
-          <q-input outlined type='text' v-model="item.description" label="описание" autogrow :readonly='false'  class='q-mb-sm col-8' />
+      <div class="col-md-8 col-sm-12 col-xs-12">
+          <q-input outlined type='text' v-model="item.description" label="описание" autogrow :readonly='false'  class='q-mb-sm col-md-8 col-sm-12 col-xs-12' />
       </div>
       </div>
       
       <div class="row q-col-gutter-md q-mb-sm">
-      <div class="col-md-4 col-xs-6">
-          <comp-fld-ref-search outlined pgMethod="client_list" label="заказчик" :item='item.client_title' :itemId='item.client_id' :ext='{}' @update="v=> item.client_id = v.id" @clear="item.client_id = null" :readonly='false'  class='q-mb-sm col-md-4 col-xs-6' />
+      <div class="col-md-4 col-sm-6 col-xs-12">
+          <comp-fld-ref-search outlined pgMethod="client_list" label="заказчик" :item='item.client_title' :itemId='item.client_id' :ext='{}' @update="v=> item.client_id = v.id" @clear="item.client_id = null" :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
       </div>
       </div>
       

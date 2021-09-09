@@ -1,27 +1,32 @@
 <template>
-  <q-page padding>
-    <comp-breadcrumb :list="[{label:'Задача', docType: 'task', icon: 'fas fa-tasks'}]"/>
+  <q-page :padding="!isOpenInDialog">
+    <comp-breadcrumb v-if="!isOpenInDialog" :list="[{label:'Задачи', docType:'task'}]"/>
 
-    <comp-doc-list ref="docList" doc-name="task" pg-method="task_list"
+    <comp-doc-list ref="docList" listTitle='Задачи' listDeletedTitle='Удаленные задачи' pg-method="task_list"
                    :list-sort-data="listSortData" :list-filter-data="listFilterData"
                    :newDocUrl="currentUrl + 'new'"
-                   search-fld-name="search_text">
+                   :ext="ext" 
+                   search-fld-name="search_text" :readonly="false">
+
 
       <template #listItem="{item}">
-        <q-item-section avatar @click="$router.push(`${currentUrl}${item.id}`)">
-            <q-avatar rounded>
-              <img src="https://image.flaticon.com/icons/svg/1642/1642808.svg">
-            </q-avatar>
-        </q-item-section>
-
+        
+		<router-link :to="currentUrl + item.id" style="cursor: pointer">
+			<q-item-section avatar>
+			  <q-avatar rounded>
+				<img src="image/task.svg" alt="">
+			  </q-avatar>
+			</q-item-section>
+		</router-link>
+	
+        
         <q-item-section>
-          <q-item-label lines="1">{{item.task_type_title}}</q-item-label>
-          <q-item-label v-if="item.executor_fullname" caption><q-icon name="person"/> {{item.executor_fullname}}</q-item-label>
-<!--          <q-item-label v-if="item.table_name == 'client'" caption @click="$router.push(`/client/${item.table_id}`)"><q-icon name="far fa-building"/> {{item.table_options.title}}</q-item-label>-->
+          <q-item-label lines="1" >{{item.title}}</q-item-label>
+          
         </q-item-section>
-
+	
         <q-item-section top side>
-          <comp-item-dropdown-btn :item="item" itemProp="title" :is-edit="true" :is-delete="true" fkProp=""
+          <comp-item-dropdown-btn :item="item" itemProp="title" :is-edit="true" :is-delete="!(false || false)" fkProp=""
                                   pg-method="task_update"
                                   @edit="$router.push(`${currentUrl}${item.id}`)"
                                   @reload-list="$refs.docList.reloadList()"/>
@@ -33,7 +38,10 @@
 </template>
 
 <script>
+  import currentUserMixin from '../../../app/mixins/currentUser'
   export default {
+    props: ['isOpenInDialog', 'ext'],
+    mixins: [currentUserMixin],
     computed: {
       currentUrl: () => '/task/',
     },
@@ -41,7 +49,7 @@
       return {
         listSortData: [
           {value: 'created_at', title: 'Дата'},
-          {value: 'Task', title: 'Название'}
+          {value: 'title', title: 'Название'}
         ],
         listFilterData: [
           {value: {deleted: false}, title: 'Активные'},
