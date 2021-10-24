@@ -1,8 +1,10 @@
+
+
 <template>
   <q-page :padding="!isOpenInDialog">
-    <comp-breadcrumb v-if="!isOpenInDialog" :list="[{label:'Счета', docType:'invoice'}]"/>
+    <comp-breadcrumb class="text-capitalize" v-if="!isOpenInDialog" :list="[{label: $t('invoice.name_plural'), docType:'invoice'}]"/>
 
-    <comp-doc-list ref="docList" listTitle='Счета' listDeletedTitle='Удаленные счета' pg-method="invoice_list"
+    <comp-doc-list ref="docList" :listTitle="$t('invoice.name_plural')" :listDeletedTitle="$t('invoice.name_plural_deleted')" pg-method="invoice_list"
                    :list-sort-data="listSortData" :list-filter-data="listFilterData"
                    :newDocUrl="currentUrl + 'new'"
                    :ext="ext" 
@@ -57,5 +59,10 @@
         ],
       }
     },
+    methods: {
+    },
+    mounted() {
+    
+    }
   }
 </script>

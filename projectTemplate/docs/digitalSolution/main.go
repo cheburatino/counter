@@ -20,12 +20,30 @@ func GetDoc() t.DocType {
 		PathPrefix: "docs",
 		Flds: []t.FldType{
 			t.GetFldTitle(),
-			t.GetFldString("description", "описание", 0, [][]int{{2, 1}}, "col-8"),
-			t.GetFldRef("modeling_estimate_id", "оценка моделирования", "time", [][]int{{3, 1}}),
-			t.GetFldRef("pre_realization_estimate_id", "предварительная оценка реализации", "time", [][]int{{3, 2}}),
-			t.GetFldRef("realization_estimate_id", "оценка реализации", "time", [][]int{{3, 2}}),
-			t.GetFldRef("sprint_id", "спринт", "sprint", [][]int{{4, 1}}, "col-4"),
-			t.GetFldFiles("file", "файлы", [][]int{{5, 1}}, t.FldVueFilesParams{}),
+			t.GetFldRef("state_id", "статус", "ctlg_digital_solution_state", [][]int{{1, 2}}, "col-2").SetDefault("1"),
+			t.GetFldRef("sprint_id", "спринт", "sprint", [][]int{{1, 3}}, "col-2", "isShowLink", "isClearable").SetVif("item.state_id === 4"),
+			t.GetFldSimpleHtml([][]int{{2, 1}}, "", "<p>Дата и время создания: {{item.created_at}}</p>"),
+			t.GetFldSimpleHtml([][]int{{2, 2}}, "", "<p>Дата и время изменения: {{item.updated_at}}</p>"),
+			t.GetFldString("description", "описание", 0, [][]int{{3, 1}}, "col-8"),
+			t.GetFldSimpleHtml([][]int{{4, 1}}, "", "<p>Здесь должны быть контролы с функциональными требованиями и задачами.</p>"),
+			t.GetFldJsonbCompositionWithoutFld([][]int{{5, 1}}, "col-4", "comp-participants"),
+			t.GetFldRef("customer_id", "заказчик", "company", [][]int{{6, 1}}, "isShowLink", "isClearable"),
+			t.GetFldRef("rsk_id", "рск", "man", [][]int{{6, 2}}, "isShowLink", "isClearable", "ext: {company_id: 1}"),
+			t.GetFldRef("system_id", "система", "system", [][]int{{7, 1}}, "isShowLink", "isClearable", "ext: {customer_id: item.customer_id}"),
+			t.GetFldRef("analyst_id", "аналитик", "man", [][]int{{7, 2}}, "isShowLink", "isClearable", "ext: {company_id: 1}"),
+			t.GetFldRef("client_agent_id", "представитель заказчика", "man", [][]int{{8, 1}}, "isShowLink", "isClearable", "ext: {company_id: item.customer_id}"),
+			t.GetFldRef("team_lead_id", "тимлид", "man", [][]int{{8, 2}}, "isShowLink", "isClearable", "ext: {company_id: 1}"),
+			t.GetFldJsonbCompositionWithoutFld([][]int{{9, 1}}, "col-4", "comp-modeling"),
+			t.GetFldDate("date_plan_start_modeling", "планируемая дата начала моделирования", [][]int{{10, 1}}, "col-4"),
+			t.GetFldDate("date_fact_start_modeling", "фактическая дата начала моделирования", [][]int{{10, 2}}, "col-4"),
+			t.GetFldString("model", "описание модели", 0, [][]int{{11, 1}}, "col-8"),
+			t.GetFldDate("date_plan_end_modeling", "планируемая дата завершения моделирования", [][]int{{12, 1}}, "col-4"),
+			t.GetFldDate("date_fact_end_modeling", "фактическая дата завершения моделирования", [][]int{{12, 2}}, "col-4"),
+			t.GetFldJsonbCompositionWithoutFld([][]int{{13, 1}}, "col-4", "comp-realization"),
+			t.GetFldDate("date_plan_start_realization", "планируемая дата начала реализации", [][]int{{14, 1}}, "col-4"),
+			t.GetFldDate("date_fact_start_realization", "фактическая дата начала реализации", [][]int{{14, 2}}, "col-4"),
+			t.GetFldDate("date_plan_end_realization", "планируемая дата завершения реализации", [][]int{{15, 1}}, "col-4"),
+			t.GetFldDate("date_fact_end_realization", "фактическая дата завершения реализации", [][]int{{15, 2}}, "col-4"),
 		},
 		Vue: t.DocVue{
 			RouteName:      name,
@@ -49,6 +67,11 @@ func GetDoc() t.DocType {
 
 	// создаем стандартные методы sql "list", "update", "get_by_id" с возможностью ограничения по ролям
 	doc.Sql.FillBaseMethods(doc.Name)
+	doc.Vue.AddFixedSaveBtn()
+
+	doc.AddVueComposition("docItem", "participants")
+	doc.AddVueComposition("docItem", "modeling")
+	doc.AddVueComposition("docItem", "realization")
 
 	doc.Vue.I18n = map[string]string{
 		"listTitle":        utils.UpperCaseFirst(name_ru_plural),

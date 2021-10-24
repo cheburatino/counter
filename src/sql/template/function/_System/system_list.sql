@@ -31,9 +31,7 @@ BEGIN
     -- сборка условия WHERE (where_str_build - функция из папки base)
     whereStr = where_str_build(params, 'doc', ARRAY [
         ['ilike', 'search_text', 'search_text'],
-		['notQuoted', 'rsk_id', 'doc.rsk_id'],
-		['notQuoted', 'customer_id', 'doc.customer_id'],
-		['notQuoted', 'customer_agent_id', 'doc.customer_agent_id']
+		['notQuoted', 'customer_id', 'doc.customer_id']
     ]);
 
     

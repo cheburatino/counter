@@ -20,10 +20,8 @@ func GetDoc() t.DocType {
 		PathPrefix: "docs",
 		Flds: []t.FldType{
 			t.GetFldTitle(),
+			t.GetFldRef("customer_id", "заказчик", "company", [][]int{{1, 2}}, "isShowLink", "isClearable"),
 			t.GetFldString("description", "описание", 0, [][]int{{2, 1}}, "col-8"),
-			t.GetFldRef("rsk_id", "рск", "employee", [][]int{{3, 1}}),
-			t.GetFldRef("customer_id", "заказчик", "company", [][]int{{4, 1}}),
-			t.GetFldRef("customer_agent_id", "представитель заказчика", "man", [][]int{{5, 1}}),
 		},
 		Vue: t.DocVue{
 			RouteName:      name,

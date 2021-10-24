@@ -19,7 +19,7 @@ func GetDoc() t.DocType {
 		NameRu:     name_ru,
 		PathPrefix: "docs",
 		Flds: []t.FldType{
-			t.GetFldTitle(),
+			t.GetFldTitle("col-2"),
 		},
 		Vue: t.DocVue{
 			RouteName:      name,

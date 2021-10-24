@@ -6,7 +6,7 @@
         
       </div>
       <!--Кнопки авторизации-->
-      <div class="row justify-center q-mt-lg">
+      <div class="row justify-center q-mt-lg q-col-gutter-md">
         <email-btn/>
         
 
@@ -21,7 +21,7 @@
   
 
     export default {
-      components: {emailBtn},
+      components: {emailBtn,},
       
         data() {
             return {}

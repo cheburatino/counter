@@ -6,12 +6,12 @@
           {{label}}
         </div>
       </comp-stat-img-src>
-      <q-btn outline round icon="add" color="grey" @click="isShowDialog = true" class="absolute-top-right">
+      <q-btn outline round icon="add" color="grey" @click="isShowDialog = true" class="absolute-top-right all-pointer-events">
         <q-tooltip>Загрузить фото</q-tooltip>
       </q-btn>
       <q-btn outline round size="sm" icon="delete" color="grey" @click="isShowDeleteDialog=true"
-             class="absolute-bottom-right">
-        <q-tooltip>Удалить фото</q-tooltip>
+             class="absolute-bottom-right all-pointer-events">
+        <q-tooltip>{{$t('message.delete')}} фото</q-tooltip>
       </q-btn>
     </div>
     <!-- диалог добавления   -->
@@ -35,12 +35,12 @@
       <q-card>
         <q-card-section class="row items-center">
           <q-avatar rounded icon="warning" color="warning" text-color="white"/>
-          <span class="q-ml-sm">Удалить?</span>
+          <span class="q-ml-sm">{{$t('message.delete')}}?</span>
         </q-card-section>
 
         <q-card-actions align="right">
-          <q-btn flat label="Отмена" v-close-popup/>
-          <q-btn flat label="Удалить" v-close-popup @click="remove"/>
+          <q-btn flat :label="$t('message.cancel')" v-close-popup/>
+          <q-btn flat :label="$t('message.delete')" v-close-popup @click="remove"/>
         </q-card-actions>
       </q-card>
     </q-dialog>

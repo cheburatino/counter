@@ -6,10 +6,8 @@ tableName ="system"
 fields = [
 	{name="id",			type="serial"},
 	{name="title",					type="char",	size=150, 	ext="not null",	 comment="название"},
-	{name="description",					type="text",	 comment="описание"},
-	{name="rsk_id",					type="int",	 comment="рск"},
 	{name="customer_id",					type="int",	 comment="заказчик"},
-	{name="customer_agent_id",					type="int",	 comment="представитель заказчика"},
+	{name="description",					type="text",	 comment="описание"},
 	{name="search_text",			type="text",	comment="колонка для поиска"},
 	{name="options",				type="jsonb",	comment="разные дополнительные параметры"},
 	{name="created_at",				type="timestamp",	ext="with time zone"},
@@ -19,9 +17,7 @@ fields = [
 
 fkConstraints = [
 	{name="system_title_already_exist", ext="UNIQUE (title)"},
-	{fld="rsk_id", ref="employee", fk="id"},
-	{fld="customer_id", ref="company", fk="id"},
-	{fld="customer_agent_id", ref="man", fk="id"}
+	{fld="customer_id", ref="company", fk="id"}
 ]
 
 triggers = [
@@ -42,9 +38,7 @@ methods = [
 
 alterScripts = [
 	"alter table system add column if not exists title CHARACTER VARYING(150);",
-	"alter table system add column if not exists description text;",
-	"alter table system add column if not exists rsk_id int;",
 	"alter table system add column if not exists customer_id int;",
-	"alter table system add column if not exists customer_agent_id int;",
+	"alter table system add column if not exists description text;",
 	"alter table system add column if not exists search_text text;"
 ]

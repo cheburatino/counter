@@ -19,11 +19,13 @@ func GetDoc() t.DocType {
 		NameRu:     name_ru,
 		PathPrefix: "docs",
 		Flds: []t.FldType{
-			t.GetFldTitle(),
-			t.GetFldString("last_name", "фамилия", 30, [][]int{{2, 1}}, "col-3"),
-			t.GetFldString("name", "имя", 30, [][]int{{2, 2}}, "col-3"),
-			t.GetFldString("middle_name", "отчество", 30, [][]int{{2, 3}}, "col-3"),
-			t.GetFldRef("company_id", "компания", "company", [][]int{{3, 1}}),
+			t.GetFldTitleComputed("ltrim(rtrim(format('%s %s %s', new.last_name, new.first_name, new.middle_name)))").SetIsHide(),
+			t.GetFldString("last_name", "фамилия", 30, [][]int{{1, 1}}, "col-2"),
+			t.GetFldString("first_name", "имя", 30, [][]int{{1, 2}}, "col-2"),
+			t.GetFldString("middle_name", "отчество", 30, [][]int{{1, 3}}, "col-2"),
+			t.GetFldRef("company_id", "компания", "company", [][]int{{2, 1}}),
+			t.GetFldString("position", "должность", 50, [][]int{{2, 2}}),
+			t.GetFldRef("user_table_id", "пользователь", "user", [][]int{{3, 1}}, "isShowLink", "isClearable"),
 		},
 		Vue: t.DocVue{
 			RouteName:      name,
@@ -37,6 +39,17 @@ func GetDoc() t.DocType {
 			IsSearchText:    true,
 			IsBeforeTrigger: true,
 			IsAfterTrigger:  true,
+	//		Hooks: t.DocSqlHooks{
+	//			ListAfterBuildWhere: []string{`
+	//if (params ->> 'is_electron_specialist')::bool then
+	//	whereStr = whereStr || ' AND is_electron_specialist = true';
+	//end if;
+	//
+	//if (params ->> 'client_id')::int notnull then
+    //    whereStr = format('%s AND company_id = %s', whereStr, (params ->> 'client_id')::int);
+    //end if;
+	//			`},
+	//		},
 		},
 	}
 	// создаем стандартные методы sql "list", "update", "get_by_id" с возможностью ограничения по ролям

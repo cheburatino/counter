@@ -24,13 +24,12 @@ BEGIN
 
     with t1 as (select * from task where id = (params ->> 'id')::int),
 		t2 as (select t1.*, c.title as state_title from t1 left join ctlg_dev_task_state c on c.id = t1.state),
-		t3 as (select t2.*, c.title as author_title from t2 left join "user" c on c.id = t2.author_id),
-		t4 as (select t3.*, c.title as director_title from t3 left join "user" c on c.id = t3.director_id),
-		t5 as (select t4.*, c.title as executor_title from t4 left join "user" c on c.id = t4.executor_id),
-		t6 as (select t5.*, c.title as acceptor_title from t5 left join "user" c on c.id = t5.acceptor_id),
-		t7 as (select t6.*, c.title as parent_task_title from t6 left join task c on c.id = t6.parent_task_id),
-		t8 as (select t7.*, c.title as digital_solution_title from t7 left join digital_solution c on c.id = t7.digital_solution_id)
- 	select row_to_json(t8.*)::jsonb into result from t8;
+		t3 as (select t2.*, c.title as digital_solution_title from t2 left join digital_solution c on c.id = t2.digital_solution_id),
+		t4 as (select t3.*, c.title as author_title from t3 left join man c on c.id = t3.author_id),
+		t5 as (select t4.*, c.title as director_title from t4 left join man c on c.id = t4.director_id),
+		t6 as (select t5.*, c.title as executor_title from t5 left join man c on c.id = t5.executor_id),
+		t7 as (select t6.*, c.title as acceptor_title from t6 left join man c on c.id = t6.acceptor_id)
+ 	select row_to_json(t7.*)::jsonb into result from t7;
 
     -- случай когда записи с таким id не найдено
     IF result ->> 'id' ISNULL

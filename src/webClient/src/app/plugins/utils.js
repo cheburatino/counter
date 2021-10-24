@@ -142,6 +142,22 @@ const formatPgDate = (d) => {
   return d ? moment(d, 'YYYY-MM-DDTHH:mm:ss').format('DD-MM-YYYY') : null
 }
 
+const notifySuccess = (msg) => {
+  Notify.create({
+    color: 'positive',
+    position: 'bottom-right',
+    message: msg
+  })
+}
+
+const notifyError = (msg) => {
+  Notify.create({
+    color: 'negative',
+    position: 'top-right',
+    message: msg
+  })
+}
+
 
 const i18n_invoice_state = (v) => {
 	const d = {
@@ -163,6 +179,8 @@ export default {
   updateUrlQuery,
   formatPgDateTime,
   formatPgDate,
+  notifySuccess,
+  notifyError,
   _,
   i18n_invoice_state,
 	

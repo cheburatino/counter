@@ -29,8 +29,6 @@ BEGIN
     
     
     
-    
-    
 
     if (params ->> 'id')::int = -1 then
         -- проверика наличия обязательных параметров
@@ -41,14 +39,12 @@ BEGIN
         END IF;
         
 
-        EXECUTE ('INSERT INTO system (title, description, rsk_id, customer_id, customer_agent_id, options) VALUES ($1, $2, $3, $4, $5, $6)  RETURNING *;')
+        EXECUTE ('INSERT INTO system (title, customer_id, description, options) VALUES ($1, $2, $3, $4)  RETURNING *;')
 		INTO systemRow
 		USING
 			(params ->> 'title')::text,
-			(params ->> 'description')::text,
-			(params ->> 'rsk_id')::int,
 			(params ->> 'customer_id')::int,
-			(params ->> 'customer_agent_id')::int,
+			(params ->> 'description')::text,
 			coalesce(params -> 'options', '{}')::jsonb;
 
         
@@ -56,10 +52,8 @@ BEGIN
     else
         updateValue = '' || update_str_from_json(params, ARRAY [
 			['title', 'title', 'text'],
-			['description', 'description', 'text'],
-			['rsk_id', 'rsk_id', 'number'],
 			['customer_id', 'customer_id', 'number'],
-			['customer_agent_id', 'customer_agent_id', 'number'],
+			['description', 'description', 'text'],
             ['options', 'options', 'jsonb'],
             ['deleted', 'deleted', 'bool']
             ]);

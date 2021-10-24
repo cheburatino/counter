@@ -7,32 +7,29 @@
       <!--  поля формы    -->
       
       <div class="row q-col-gutter-md q-mb-sm">
-      <div class="col-md-4 col-sm-6 col-xs-12">
-          <q-input outlined type='text' v-model="item.title" label="название" autogrow :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
+      <div class="col-3">
+          <q-input outlined type='text' v-model="item.title" :label="$t('functional_requirement.title')" autogrow :readonly='false'  class='q-mb-sm col-3' />
+      </div>
+      <div class="col-3">
+          <comp-fld-ref-search outlined pgMethod="request_list" :label="$t('functional_requirement.request_id')" :item='item.request_title' :itemId='item.request_id' :ext='{"avatar":"image/request.svg","pathUrl":"/request"}' @update="v=> item.request_id = v.id" @clear="item.request_id = null" :readonly='false'  class='q-mb-sm col-3' />
+      </div>
+      <div class="col-md-2 col-sm-3 col-xs-6">
+          <comp-fld-ref-search outlined pgMethod="ctlg_functional_requirement_state_list" :label="$t('functional_requirement.state_id')" :item='item.state_title' :itemId='item.state_id' :ext='{}' @update="v=> item.state_id = v.id" @clear="item.state_id = null" :readonly='false'  class='q-mb-sm col-md-2 col-sm-3 col-xs-6' />
       </div>
       </div>
       
       <div class="row q-col-gutter-md q-mb-sm">
       <div class="col-md-8 col-sm-12 col-xs-12">
-          <q-input outlined type='text' v-model="item.desctiption" label="описание" autogrow :readonly='false'  class='q-mb-sm col-md-8 col-sm-12 col-xs-12' />
+          <q-input outlined type='text' v-model="item.description" :label="$t('functional_requirement.description')" autogrow :readonly='false'  class='q-mb-sm col-md-8 col-sm-12 col-xs-12' />
       </div>
       </div>
       
       <div class="row q-col-gutter-md q-mb-sm">
       <div class="col-md-4 col-sm-6 col-xs-12">
-          <comp-fld-ref-search outlined pgMethod="employee_list" label="аналитик" :item='item.analyst_title' :itemId='item.analyst_id' :ext='{}' @update="v=> item.analyst_id = v.id" @clear="item.analyst_id = null" :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
+          <comp-fld-ref-search outlined pgMethod="man_list" :label="$t('functional_requirement.analyst_id')" :item='item.analyst_title' :itemId='item.analyst_id' :ext='{"avatar":"image/man.svg","pathUrl":"/man"}' @update="v=> item.analyst_id = v.id" @clear="item.analyst_id = null" :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
       </div>
-      </div>
-      
-      <div class="row q-col-gutter-md q-mb-sm">
       <div class="col-md-4 col-sm-6 col-xs-12">
-          <comp-fld-ref-search outlined pgMethod="request_list" label="запрос" :item='item.request_title' :itemId='item.request_id' :ext='{}' @update="v=> item.request_id = v.id" @clear="item.request_id = null" :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
-      </div>
-      </div>
-      
-      <div class="row q-col-gutter-md q-mb-sm">
-      <div class="col-md-4 col-sm-6 col-xs-12">
-          <comp-fld-ref-search outlined pgMethod="digital_solution_list" label="цифровое решение" :item='item.digital_solution_title' :itemId='item.digital_solution_id' :ext='{}' @update="v=> item.digital_solution_id = v.id" @clear="item.digital_solution_id = null" :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
+          <comp-fld-ref-search outlined pgMethod="digital_solution_list" :label="$t('functional_requirement.digital_solution_id')" :item='item.digital_solution_title' :itemId='item.digital_solution_id' :ext='{"avatar":"image/digital_solution.svg","pathUrl":"/digital_solution"}' @update="v=> item.digital_solution_id = v.id" @clear="item.digital_solution_id = null" :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
       </div>
       </div>
       
@@ -40,7 +37,7 @@
       <!--  кнопки   -->
       <comp-item-btn-save v-if="!isOpenInDialog" @save="save" :readonly="false" @cancel="$router.push(docUrl)"/>
       <!--  при открытии в диалоге кнопку Отмена не показываем   -->
-      <q-btn v-else color="secondary" label="сохранить" class="q-mr-sm" @click="save"/>
+      <q-btn v-else color="secondary" :label="$t('message.save')" class="q-mr-sm" @click="save"/>
 
         
 
@@ -65,9 +62,10 @@
                 item: null,
                 flds: [
                         {name: 'title', label: 'название',  required: true},
-                        {name: 'desctiption', label: 'описание'},
-                        {name: 'analyst_id', label: 'аналитик'},
                         {name: 'request_id', label: 'запрос'},
+                        {name: 'state_id', label: 'статус'},
+                        {name: 'description', label: 'описание'},
+                        {name: 'analyst_id', label: 'аналитик'},
                         {name: 'digital_solution_id', label: 'цифровое решение'},
                 ],
                 optionsFlds: [],

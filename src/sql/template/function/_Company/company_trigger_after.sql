@@ -16,6 +16,12 @@ if new.title != old.title then
  for r in select * from system where customer_id = new.id loop
  update system set updated_at=now() where id = r.id;
  end loop;
+ for r in select * from request where customer_id = new.id loop
+ update request set updated_at=now() where id = r.id;
+ end loop;
+ for r in select * from digital_solution where customer_id = new.id loop
+ update digital_solution set updated_at=now() where id = r.id;
+ end loop;
 
  end if;
  end if;

@@ -31,6 +31,7 @@ BEGIN
     
     
     
+    
 
     if (params ->> 'id')::int = -1 then
         -- проверика наличия обязательных параметров
@@ -41,14 +42,15 @@ BEGIN
         END IF;
         
 
-        EXECUTE ('INSERT INTO time (title, minute, specialist_id, task_id, type_id, options) VALUES ($1, $2, $3, $4, $5, $6)  RETURNING *;')
+        EXECUTE ('INSERT INTO time (title, minute, specialist_id, type_id, task_id, digital_solution_id, options) VALUES ($1, $2, $3, $4, $5, $6, $7)  RETURNING *;')
 		INTO timeRow
 		USING
 			(params ->> 'title')::text,
 			(params ->> 'minute')::int,
 			(params ->> 'specialist_id')::int,
-			(params ->> 'task_id')::int,
 			(params ->> 'type_id')::int,
+			(params ->> 'task_id')::int,
+			(params ->> 'digital_solution_id')::int,
 			coalesce(params -> 'options', '{}')::jsonb;
 
         
@@ -58,8 +60,9 @@ BEGIN
 			['title', 'title', 'text'],
 			['minute', 'minute', 'number'],
 			['specialist_id', 'specialist_id', 'number'],
-			['task_id', 'task_id', 'number'],
 			['type_id', 'type_id', 'number'],
+			['task_id', 'task_id', 'number'],
+			['digital_solution_id', 'digital_solution_id', 'number'],
             ['options', 'options', 'jsonb'],
             ['deleted', 'deleted', 'bool']
             ]);

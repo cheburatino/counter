@@ -1,0 +1,20 @@
+
+export default {
+ 		name_plural_deleted: 'deleted task',
+ 		title: 'title',
+ 		plan_end_date: 'plan end date',
+ 		name_plural: 'task',
+ 		digital_solution_id: 'digital solution ',
+ 		description: 'description',
+ 		author_id: 'author ',
+ 		executor_id: 'executor ',
+ 		fact_start_date: 'fact start date',
+ 		director_id: 'director ',
+ 		acceptor_id: 'acceptor ',
+ 		fact_end_date: 'fact end date',
+ 		name: 'task',
+ 		state: 'state',
+ 		files: 'files',
+ 		plan_start_date: 'plan start date',
+ 		result: 'result',
+}

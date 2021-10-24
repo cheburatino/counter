@@ -8,13 +8,9 @@ services:
     volumes:
       - /home/deploy/electron_is/src/config.toml:/config.toml
       - /home/deploy/electron_is/image:/image
+      - /home/deploy/electron_is/uploaded_files:/uploaded_files
     ports:
       - "3091:3091"
-    logging:
-      driver: gelf
-      options:
-        gelf-address: "udp://85.143.214.161:12201"
-        tag: docker.app.electron_is
     depends_on:
       - postgres
 
@@ -27,6 +23,7 @@ services:
       - /home/deploy/electron_is/postgres/logs:/logs
     ports:
       - "5646:5432"
+    command: postgres -c shared_preload_libraries=pg_stat_statements -c pg_stat_statements.track=all -c max_connections=200
     environment:
       POSTGRES_PASSWORD: ktulhu77
 

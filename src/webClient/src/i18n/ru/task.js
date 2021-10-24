@@ -1,0 +1,20 @@
+
+export default {
+ 		name_plural_deleted: 'удаленные Задачи',
+ 		digital_solution_id: 'цифровое решение',
+ 		files: 'файлы',
+ 		executor_id: 'исполнитель',
+ 		plan_end_date: 'плановая дата завершения',
+ 		result: 'результат',
+ 		name: 'задача',
+ 		description: 'описание',
+ 		fact_start_date: 'фактическая дата начала',
+ 		name_plural: 'Задачи',
+ 		plan_start_date: 'плановая дата начала',
+ 		fact_end_date: 'фактическая дата завершения',
+ 		acceptor_id: 'приёмщик',
+ 		state: 'статус',
+ 		author_id: 'автор',
+ 		director_id: 'постановщик',
+ 		title: 'название',
+}

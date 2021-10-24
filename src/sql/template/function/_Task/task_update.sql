@@ -39,6 +39,7 @@ BEGIN
     
     
     
+    
 
     if (params ->> 'id')::int = -1 then
         -- проверика наличия обязательных параметров
@@ -49,12 +50,14 @@ BEGIN
         END IF;
         
 
-        EXECUTE ('INSERT INTO task (title, state, description, author_id, director_id, executor_id, acceptor_id, plan_start_date, fact_start_date, plan_end_date, fact_end_date, parent_task_id, digital_solution_id, options) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14)  RETURNING *;')
+        EXECUTE ('INSERT INTO task (title, state, digital_solution_id, description, files, author_id, director_id, executor_id, acceptor_id, plan_start_date, fact_start_date, plan_end_date, fact_end_date, result, options) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15)  RETURNING *;')
 		INTO taskRow
 		USING
 			(params ->> 'title')::text,
-			(params ->> 'state')::int,
+			coalesce((params ->> 'state')::int, 1)::int,
+			(params ->> 'digital_solution_id')::int,
 			(params ->> 'description')::text,
+			(params -> 'files')::jsonb,
 			(params ->> 'author_id')::int,
 			(params ->> 'director_id')::int,
 			(params ->> 'executor_id')::int,
@@ -63,8 +66,7 @@ BEGIN
 			(params ->> 'fact_start_date')::timestamp,
 			(params ->> 'plan_end_date')::timestamp,
 			(params ->> 'fact_end_date')::timestamp,
-			(params ->> 'parent_task_id')::int,
-			(params ->> 'digital_solution_id')::int,
+			(params ->> 'result')::text,
 			coalesce(params -> 'options', '{}')::jsonb;
 
         
@@ -73,7 +75,9 @@ BEGIN
         updateValue = '' || update_str_from_json(params, ARRAY [
 			['title', 'title', 'text'],
 			['state', 'state', 'number'],
+			['digital_solution_id', 'digital_solution_id', 'number'],
 			['description', 'description', 'text'],
+			['files', 'files', 'jsonb'],
 			['author_id', 'author_id', 'number'],
 			['director_id', 'director_id', 'number'],
 			['executor_id', 'executor_id', 'number'],
@@ -82,8 +86,7 @@ BEGIN
 			['fact_start_date', 'fact_start_date', 'timestamp'],
 			['plan_end_date', 'plan_end_date', 'timestamp'],
 			['fact_end_date', 'fact_end_date', 'timestamp'],
-			['parent_task_id', 'parent_task_id', 'number'],
-			['digital_solution_id', 'digital_solution_id', 'number'],
+			['result', 'result', 'text'],
             ['options', 'options', 'jsonb'],
             ['deleted', 'deleted', 'bool']
             ]);

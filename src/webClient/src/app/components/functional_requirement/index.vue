@@ -1,8 +1,10 @@
+
+
 <template>
   <q-page :padding="!isOpenInDialog">
-    <comp-breadcrumb v-if="!isOpenInDialog" :list="[{label:'Функциональные требования', docType:'functional_requirement'}]"/>
+    <comp-breadcrumb class="text-capitalize" v-if="!isOpenInDialog" :list="[{label: $t('functional_requirement.name_plural'), docType:'functional_requirement'}]"/>
 
-    <comp-doc-list ref="docList" listTitle='Функциональные требования' listDeletedTitle='Удаленные функциональные требования' pg-method="functional_requirement_list"
+    <comp-doc-list ref="docList" :listTitle="$t('functional_requirement.name_plural')" :listDeletedTitle="$t('functional_requirement.name_plural_deleted')" pg-method="functional_requirement_list"
                    :list-sort-data="listSortData" :list-filter-data="listFilterData"
                    :newDocUrl="currentUrl + 'new'"
                    :ext="ext" 
@@ -57,5 +59,10 @@
         ],
       }
     },
+    methods: {
+    },
+    mounted() {
+    
+    }
   }
 </script>

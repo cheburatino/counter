@@ -31,6 +31,7 @@ BEGIN
     
     
     
+    
 
     if (params ->> 'id')::int = -1 then
         -- проверика наличия обязательных параметров
@@ -41,13 +42,14 @@ BEGIN
         END IF;
         
 
-        EXECUTE ('INSERT INTO functional_requirement (title, desctiption, analyst_id, request_id, digital_solution_id, options) VALUES ($1, $2, $3, $4, $5, $6)  RETURNING *;')
+        EXECUTE ('INSERT INTO functional_requirement (title, request_id, state_id, description, analyst_id, digital_solution_id, options) VALUES ($1, $2, $3, $4, $5, $6, $7)  RETURNING *;')
 		INTO functional_requirementRow
 		USING
 			(params ->> 'title')::text,
-			(params ->> 'desctiption')::text,
-			(params ->> 'analyst_id')::int,
 			(params ->> 'request_id')::int,
+			(params ->> 'state_id')::int,
+			(params ->> 'description')::text,
+			(params ->> 'analyst_id')::int,
 			(params ->> 'digital_solution_id')::int,
 			coalesce(params -> 'options', '{}')::jsonb;
 
@@ -56,9 +58,10 @@ BEGIN
     else
         updateValue = '' || update_str_from_json(params, ARRAY [
 			['title', 'title', 'text'],
-			['desctiption', 'desctiption', 'text'],
-			['analyst_id', 'analyst_id', 'number'],
 			['request_id', 'request_id', 'number'],
+			['state_id', 'state_id', 'number'],
+			['description', 'description', 'text'],
+			['analyst_id', 'analyst_id', 'number'],
 			['digital_solution_id', 'digital_solution_id', 'number'],
             ['options', 'options', 'jsonb'],
             ['deleted', 'deleted', 'bool']

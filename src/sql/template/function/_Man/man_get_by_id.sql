@@ -23,8 +23,9 @@ BEGIN
     END IF;
 
     with t1 as (select * from man where id = (params ->> 'id')::int),
-		t2 as (select t1.*, c.title as company_title from t1 left join company c on c.id = t1.company_id)
- 	select row_to_json(t2.*)::jsonb into result from t2;
+		t2 as (select t1.*, c.title as company_title from t1 left join company c on c.id = t1.company_id),
+		t3 as (select t2.*, c.title as user_table_title from t2 left join "user" c on c.id = t2.user_table_id)
+ 	select row_to_json(t3.*)::jsonb into result from t3;
 
     -- случай когда записи с таким id не найдено
     IF result ->> 'id' ISNULL

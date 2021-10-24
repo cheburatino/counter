@@ -1,8 +1,10 @@
+
+
 <template>
   <q-page :padding="!isOpenInDialog">
-    <comp-breadcrumb v-if="!isOpenInDialog" :list="[{label:'Системы', docType:'system'}]"/>
+    <comp-breadcrumb class="text-capitalize" v-if="!isOpenInDialog" :list="[{label: $t('system.name_plural'), docType:'system'}]"/>
 
-    <comp-doc-list ref="docList" listTitle='Системы' listDeletedTitle='Удаленные системы' pg-method="system_list"
+    <comp-doc-list ref="docList" :listTitle="$t('system.name_plural')" :listDeletedTitle="$t('system.name_plural_deleted')" pg-method="system_list"
                    :list-sort-data="listSortData" :list-filter-data="listFilterData"
                    :newDocUrl="currentUrl + 'new'"
                    :ext="ext" 
@@ -57,5 +59,10 @@
         ],
       }
     },
+    methods: {
+    },
+    mounted() {
+    
+    }
   }
 </script>

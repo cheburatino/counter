@@ -1,8 +1,10 @@
+
+
 <template>
   <q-page :padding="!isOpenInDialog">
-    <comp-breadcrumb v-if="!isOpenInDialog" :list="[{label:'Статусы задач разработки', docType:'ctlg_dev_task_state'}]"/>
+    <comp-breadcrumb class="text-capitalize" v-if="!isOpenInDialog" :list="[{label: $t('ctlg_dev_task_state.name_plural'), docType:'ctlg_dev_task_state'}]"/>
 
-    <comp-doc-list ref="docList" listTitle='Статусы задач разработки' listDeletedTitle='Удаленные статусы задач разработки' pg-method="ctlg_dev_task_state_list"
+    <comp-doc-list ref="docList" :listTitle="$t('ctlg_dev_task_state.name_plural')" :listDeletedTitle="$t('ctlg_dev_task_state.name_plural_deleted')" pg-method="ctlg_dev_task_state_list"
                    :list-sort-data="listSortData" :list-filter-data="listFilterData"
                    :newDocUrl="currentUrl + 'new'"
                    :ext="ext" 
@@ -57,5 +59,10 @@
         ],
       }
     },
+    methods: {
+    },
+    mounted() {
+    
+    }
   }
 </script>

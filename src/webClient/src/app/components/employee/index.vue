@@ -1,3 +1,5 @@
+
+
 <template>
   <q-page :padding="!isOpenInDialog">
     <comp-breadcrumb v-if="!isOpenInDialog" :list="[{label:'Сотрудники', docType:'employee'}]"/>
@@ -57,5 +59,10 @@
         ],
       }
     },
+    methods: {
+    },
+    mounted() {
+    
+    }
   }
 </script>
