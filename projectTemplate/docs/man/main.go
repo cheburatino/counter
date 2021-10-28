@@ -13,8 +13,9 @@ const (
 	breadcrumb_icon = "fas fa-male"
 )
 
-func GetDoc() t.DocType {
+func GetDoc(project *t.ProjectType) t.DocType {
 	doc := t.DocType{
+		Project: project,
 		Name:       name,
 		NameRu:     name_ru,
 		PathPrefix: "docs",
@@ -39,17 +40,6 @@ func GetDoc() t.DocType {
 			IsSearchText:    true,
 			IsBeforeTrigger: true,
 			IsAfterTrigger:  true,
-	//		Hooks: t.DocSqlHooks{
-	//			ListAfterBuildWhere: []string{`
-	//if (params ->> 'is_electron_specialist')::bool then
-	//	whereStr = whereStr || ' AND is_electron_specialist = true';
-	//end if;
-	//
-	//if (params ->> 'client_id')::int notnull then
-    //    whereStr = format('%s AND company_id = %s', whereStr, (params ->> 'client_id')::int);
-    //end if;
-	//			`},
-	//		},
 		},
 	}
 	// создаем стандартные методы sql "list", "update", "get_by_id" с возможностью ограничения по ролям

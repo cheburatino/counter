@@ -96,6 +96,7 @@
 								{icon: '', text: 'Статусы функциональных требований', url: '/ctlg_functional_requirement_state', roles: []},
 								{icon: '', text: 'Статусы цифровых решений', url: '/ctlg_digital_solution_state', roles: []},
 								{icon: '', text: 'Типы времени', url: '/ctlg_time_type', roles: []},
+								{icon: '', text: 'Типы задач', url: '/ctlg_task_type', roles: []},
 								{icon: '', text: 'Типы статусов задач', url: '/ctlg_task_status_type', roles: []},
 								{icon: '', text: 'Статусы задач разработки', url: '/ctlg_dev_task_state', roles: []},
 								{icon: '', text: 'Статусы подзадач', url: '/ctlg_subtask_state', roles: []},

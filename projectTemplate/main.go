@@ -12,6 +12,7 @@ import (
 	"github.com/cheburatino/electron_is/projectTemplate/docs/ctlgRequestState"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/ctlgSubtaskState"
 	ctlgTaskStatusType "github.com/cheburatino/electron_is/projectTemplate/docs/ctlgTaskStatusType"
+	"github.com/cheburatino/electron_is/projectTemplate/docs/ctlgTaskType"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/ctlgTimeType"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/digitalSolution"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/functionalRequirement"
@@ -41,28 +42,29 @@ func getProject() t.ProjectType {
 	p.Config.Vue.QuasarVersion = 2
 
 	p.Docs = []t.DocType{
-		ctlgElectronSkill.GetDoc(),
-		ctlgRequestState.GetDoc(),
-		ctlgTimeType.GetDoc(),
-		ctlgDigitalSolutionState.GetDoc(),
-		ctlgFunctionalRequirementState.GetDoc(),
-		ctlgDevTaskState.GetDoc(),
-		ctlgTaskStatusType.GetDoc(),
-		ctlgSubtaskState.GetDoc(),
-		meeting.GetDoc(),
-		contract.GetDoc(),
-		counterparty.GetDoc(),
-		company.GetDoc(),
-		man.GetDoc(),
-		system.GetDoc(),
-		request.GetDoc(),
-		sprint.GetDoc(),
-		digitalSolution.GetDoc(),
-		functionalRequirement.GetDoc(),
-		invoice.GetDoc(),
-		task.GetDoc(),
-		time.GetDoc(),
-		comment.GetDoc(),
+		ctlgElectronSkill.GetDoc(p),
+		ctlgRequestState.GetDoc(p),
+		ctlgTimeType.GetDoc(p),
+		ctlgDigitalSolutionState.GetDoc(p),
+		ctlgFunctionalRequirementState.GetDoc(p),
+		ctlgTaskType.GetDoc(p),
+		ctlgDevTaskState.GetDoc(p),
+		ctlgTaskStatusType.GetDoc(p),
+		ctlgSubtaskState.GetDoc(p),
+		meeting.GetDoc(p),
+		contract.GetDoc(p),
+		counterparty.GetDoc(p),
+		company.GetDoc(p),
+		man.GetDoc(p),
+		system.GetDoc(p),
+		request.GetDoc(p),
+		sprint.GetDoc(p),
+		digitalSolution.GetDoc(p),
+		functionalRequirement.GetDoc(p),
+		invoice.GetDoc(p),
+		task.GetDoc(p),
+		time.GetDoc(p),
+		comment.GetDoc(p),
 	}
 
 	// названием базы маленькими буквами, без пробелов
@@ -97,6 +99,7 @@ func getProject() t.ProjectType {
 			{Text: "Статусы функциональных требований", Url: "ctlg_functional_requirement_state"},
 			{Text: "Статусы цифровых решений", Url: "ctlg_digital_solution_state"},
 			{Text: "Типы времени", Url: "ctlg_time_type"},
+			{Text: "Типы задач", Url: "ctlg_task_type"},
 			{Text: "Типы статусов задач", Url: "ctlg_task_status_type"},
 			{Text: "Статусы задач разработки", Url: "ctlg_dev_task_state"},
 			{Text: "Статусы подзадач", Url: "ctlg_subtask_state"},

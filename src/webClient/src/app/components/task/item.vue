@@ -10,14 +10,17 @@
       <div class="col-md-4 col-sm-6 col-xs-12">
           <q-input outlined type='text' v-model="item.title" :label="$t('task.title')" autogrow :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
       </div>
-      <div class="col-md-2 col-sm-3 col-xs-6">
-          <comp-fld-ref-search outlined pgMethod="ctlg_dev_task_state_list" :label="$t('task.state')" :item='item.state_title' :itemId='item.state' :ext='{}' @update="v=> item.state = v.id" @clear="item.state = null" :readonly='false'  class='q-mb-sm col-md-2 col-sm-3 col-xs-6' />
+      <div class="col-md-4 col-sm-6 col-xs-12">
+          <comp-fld-ref-search outlined pgMethod="ctlg_dev_task_state_list" :label="$t('task.state')" :item='item.state_title' :itemId='item.state' :ext='{}' @update="v=> item.state = v.id" @clear="item.state = null" :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
       </div>
       </div>
       
       <div class="row q-col-gutter-md q-mb-sm">
       <div class="col-md-4 col-sm-6 col-xs-12">
           <comp-fld-ref-search outlined pgMethod="digital_solution_list" :label="$t('task.digital_solution_id')" :item='item.digital_solution_title' :itemId='item.digital_solution_id' :ext='{"avatar":"image/digital_solution.svg","pathUrl":"/digital_solution"}' @update="v=> item.digital_solution_id = v.id" @clear="item.digital_solution_id = null" :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
+      </div>
+      <div class="col-md-4 col-sm-6 col-xs-12">
+          <comp-fld-ref-search outlined pgMethod="ctlg_task_type_list" :label="$t('task.type_id')" :item='item.type_title' :itemId='item.type_id' :ext='{}' @update="v=> item.type_id = v.id" @clear="item.type_id = null" :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
       </div>
       </div>
       
@@ -30,6 +33,9 @@
       <div class="row q-col-gutter-md q-mb-sm">
       <div class="col-md-4 col-sm-6 col-xs-12">
           <comp-fld-files v-if="this.id != 'new'" fldName='files' :label="$t('task.files')" :fld='item.files' :ext = '{tableName: "task", tableId: this.id, maxFileSize: "10000"}' @update="v=> item.files = v" :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
+      </div>
+      <div class="col-md-4 col-sm-6 col-xs-12">
+          <comp-fld-img-list v-if="this.id != 'new'" :label="$t('task.images')" :fld='item.images' :ext = '{tableName: "task", tableId: this.id, fldName: "images"}' @update="v=> item.images = v" :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
       </div>
       </div>
       
@@ -106,8 +112,10 @@
                         {name: 'title', label: 'название',  required: true},
                         {name: 'state', label: 'статус'},
                         {name: 'digital_solution_id', label: 'цифровое решение'},
+                        {name: 'type_id', label: 'тип задачи'},
                         {name: 'description', label: 'описание'},
                         {name: 'files', label: 'файлы'},
+                        {name: 'images', label: 'изображения'},
                         {name: 'author_id', label: 'автор'},
                         {name: 'director_id', label: 'постановщик'},
                         {name: 'executor_id', label: 'исполнитель'},
@@ -121,6 +129,9 @@
                 optionsFlds: [],
                 
             }
+        },
+        watch: {
+          
         },
         methods: {
           

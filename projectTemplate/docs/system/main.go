@@ -13,8 +13,9 @@ const (
 	breadcrumb_icon = "fas fa-project-diagram"
 )
 
-func GetDoc() t.DocType {
+func GetDoc(project *t.ProjectType) t.DocType {
 	doc := t.DocType{
+		Project: project,
 		Name:       name,
 		NameRu:     name_ru,
 		PathPrefix: "docs",

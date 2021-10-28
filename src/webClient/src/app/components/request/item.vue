@@ -32,7 +32,7 @@
       
       <div class="row q-col-gutter-md q-mb-sm">
       <div class="col-md-4 col-sm-6 col-xs-12">
-          <comp-fld-date-time outlined :label="$t('request.datetime_reciept')" :date-string="$utils.formatPgDateTime(item.datetime_reciept)" @update="v=> item.datetime_reciept = v" :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
+          <comp-fld-date-time outlined :label="$t('request.datetime_reciept')" :date-string="$utils.formatPgDateTime(item.datetime_reciept)" @update="v=> item.datetime_reciept = v" @clear="item.datetime_reciept=null" :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
       </div>
       <div class="col-md-4 col-sm-6 col-xs-12">
           <q-input outlined type='text' v-model="item.how_request_received" :label="$t('request.how_request_received')" autogrow :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
@@ -50,7 +50,7 @@
       
       <div class="row q-col-gutter-md q-mb-sm">
       <div class="col-md-4 col-sm-6 col-xs-12">
-          <q-input outlined type='text' v-model="item.demo_functional_requirement_id" :label="$t('request.demo_functional_requirement_id')" autogrow :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
+          <ft-list-ref-list-widget v-if='item.id != -1' :id='item.id' :readonly='false'/>
       </div>
       <div class="col-md-4 col-sm-6 col-xs-12">
           <q-input outlined type='text' v-model="item.demo_task_id" :label="$t('request.demo_task_id')" autogrow :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
@@ -70,11 +70,11 @@
 </template>
 
 <script>
-
+	import ftListRefListWidget from './comp/ftListRefListWidget.vue'
     import currentUserMixin from '../../../app/mixins/currentUser'
     export default {
         props: ['id', 'isOpenInDialog'],
-        components: {},
+        components: {ftListRefListWidget},
         mixins: [currentUserMixin,],
         computed: {
             docUrl: function() {
@@ -94,12 +94,14 @@
                         {name: 'how_request_received', label: 'как получен запрос'},
                         {name: 'customer_id', label: 'заказчик'},
                         {name: 'customer_agent_id', label: 'представитель заказчика'},
-                        {name: 'demo_functional_requirement_id', label: 'функциональные требования'},
                         {name: 'demo_task_id', label: 'задачи'},
                 ],
                 optionsFlds: [],
                 
             }
+        },
+        watch: {
+          
         },
         methods: {
           

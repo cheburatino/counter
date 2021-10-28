@@ -1,0 +1,84 @@
+docType = "DigitalSolution"
+tableComment = "цифровое решение"
+
+tableName ="digital_solution"
+
+fields = [
+	{name="id",			type="serial"},
+	{name="title",					type="char",	size=150, 	ext="not null",	 comment="название"},
+	{name="state_id",					type="int", 	ext=" default 1",	 comment="статус"},
+	{name="sprint_id",					type="int",	 comment="спринт"},
+	{name="description",					type="text",	 comment="описание"},
+	{name="customer_id",					type="int",	 comment="заказчик"},
+	{name="rsk_id",					type="int",	 comment="рск"},
+	{name="system_id",					type="int",	 comment="система"},
+	{name="analyst_id",					type="int",	 comment="аналитик"},
+	{name="client_agent_id",					type="int",	 comment="представитель заказчика"},
+	{name="team_lead_id",					type="int",	 comment="тимлид"},
+	{name="date_plan_start_modeling",					type="timestamp",	 comment="планируемая дата начала моделирования"},
+	{name="date_fact_start_modeling",					type="timestamp",	 comment="фактическая дата начала моделирования"},
+	{name="model",					type="text",	 comment="описание модели"},
+	{name="date_plan_end_modeling",					type="timestamp",	 comment="планируемая дата завершения моделирования"},
+	{name="date_fact_end_modeling",					type="timestamp",	 comment="фактическая дата завершения моделирования"},
+	{name="date_plan_start_realization",					type="timestamp",	 comment="планируемая дата начала реализации"},
+	{name="date_fact_start_realization",					type="timestamp",	 comment="фактическая дата начала реализации"},
+	{name="date_plan_end_realization",					type="timestamp",	 comment="планируемая дата завершения реализации"},
+	{name="date_fact_end_realization",					type="timestamp",	 comment="фактическая дата завершения реализации"},
+	{name="search_text",			type="text",	comment="колонка для поиска"},
+	{name="options",				type="jsonb",	comment="разные дополнительные параметры"},
+	{name="created_at",				type="timestamp",	ext="with time zone"},
+	{name="updated_at",				type="timestamp",	ext="with time zone"},
+	{name="deleted",				type="bool",	ext="not null default false"}
+]
+
+fkConstraints = [
+	{name="digital_solution_title_already_exist", ext="UNIQUE (title)"},
+	{fld="state_id", ref="ctlg_digital_solution_state", fk="id"},
+	{fld="sprint_id", ref="sprint", fk="id"},
+	{fld="customer_id", ref="company", fk="id"},
+	{fld="rsk_id", ref="man", fk="id"},
+	{fld="system_id", ref="system", fk="id"},
+	{fld="analyst_id", ref="man", fk="id"},
+	{fld="client_agent_id", ref="man", fk="id"},
+	{fld="team_lead_id", ref="man", fk="id"}
+]
+
+triggers = [
+	{name="digital_solution_created", when="before insert or update", ref="for each row", funcName="builtin_fld_update"},
+	{name="digital_solution_trigger_before", when="before insert or update", ref="for each row", funcName="digital_solution_trigger_before"},
+	{name="digital_solution_trigger_after", when="after insert or update", ref="for each row", funcName="digital_solution_trigger_after"}
+]
+
+
+
+methods = [
+	"digital_solution_update",
+	"digital_solution_get_by_id",
+	"digital_solution_worked_time",
+	"digital_solution_list",
+	"digital_solution_trigger_before",
+	"digital_solution_trigger_after"
+]
+
+alterScripts = [
+	"alter table digital_solution add column if not exists title CHARACTER VARYING(150);",
+	"alter table digital_solution add column if not exists state_id int;",
+	"alter table digital_solution add column if not exists sprint_id int;",
+	"alter table digital_solution add column if not exists description text;",
+	"alter table digital_solution add column if not exists customer_id int;",
+	"alter table digital_solution add column if not exists rsk_id int;",
+	"alter table digital_solution add column if not exists system_id int;",
+	"alter table digital_solution add column if not exists analyst_id int;",
+	"alter table digital_solution add column if not exists client_agent_id int;",
+	"alter table digital_solution add column if not exists team_lead_id int;",
+	"alter table digital_solution add column if not exists date_plan_start_modeling timestamp;",
+	"alter table digital_solution add column if not exists date_fact_start_modeling timestamp;",
+	"alter table digital_solution add column if not exists model text;",
+	"alter table digital_solution add column if not exists date_plan_end_modeling timestamp;",
+	"alter table digital_solution add column if not exists date_fact_end_modeling timestamp;",
+	"alter table digital_solution add column if not exists date_plan_start_realization timestamp;",
+	"alter table digital_solution add column if not exists date_fact_start_realization timestamp;",
+	"alter table digital_solution add column if not exists date_plan_end_realization timestamp;",
+	"alter table digital_solution add column if not exists date_fact_end_realization timestamp;",
+	"alter table digital_solution add column if not exists search_text text;"
+]

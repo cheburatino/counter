@@ -13,17 +13,20 @@ const (
 	breadcrumb_icon = "fas fa-clipboard-check"
 )
 
-func GetDoc() t.DocType {
+func GetDoc(project *t.ProjectType) t.DocType {
 	doc := t.DocType{
+		Project: project,
 		Name:       name,
 		NameRu:     name_ru,
 		PathPrefix: "docs",
 		Flds: []t.FldType{
 			t.GetFldTitle(),
-			t.GetFldRef("state", "статус", "ctlg_dev_task_state", [][]int{{1, 2}}, "col-2").SetDefault("1"),
+			t.GetFldRef("state", "статус", "ctlg_dev_task_state", [][]int{{1, 2}}).SetDefault("1"),
 			t.GetFldRef("digital_solution_id", "цифровое решение", "digital_solution", [][]int{{2, 1}}, "col-4", "isShowLink"),
+			t.GetFldRef("type_id", "тип задачи", "ctlg_task_type", [][]int{{2, 2}}).SetDefault("1"),
 			t.GetFldString("description", "описание", 0, [][]int{{3, 1}}, "col-8"),
 			t.GetFldFiles("files", "файлы", [][]int{{4, 1}}, t.FldVueFilesParams{MaxFileSize: 10000}),
+			t.GetFldImgList("images", "изображения", [][]int{{4, 2}}, t.FldVueImgParams{}),
 			t.GetFldRef("author_id", "автор", "man", [][]int{{5, 1}}, "isShowLink", "isClearable"),
 			t.GetFldRef("director_id", "постановщик", "man", [][]int{{5, 2}}, "isShowLink", "isClearable"),
 			t.GetFldRef("executor_id", "исполнитель", "man", [][]int{{6, 1}}, "isShowLink", "isClearable"),

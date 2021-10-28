@@ -47,7 +47,7 @@ BEGIN
         END IF;
         
 
-        EXECUTE ('INSERT INTO request (title, system_id, description, state_id, rsk_id, datetime_reciept, how_request_received, customer_id, customer_agent_id, demo_functional_requirement_id, demo_task_id, options) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)  RETURNING *;')
+        EXECUTE ('INSERT INTO request (title, system_id, description, state_id, rsk_id, datetime_reciept, how_request_received, customer_id, customer_agent_id, demo_task_id, options) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)  RETURNING *;')
 		INTO requestRow
 		USING
 			(params ->> 'title')::text,
@@ -59,7 +59,6 @@ BEGIN
 			(params ->> 'how_request_received')::text,
 			(params ->> 'customer_id')::int,
 			(params ->> 'customer_agent_id')::int,
-			(params ->> 'demo_functional_requirement_id')::text,
 			(params ->> 'demo_task_id')::text,
 			coalesce(params -> 'options', '{}')::jsonb;
 
@@ -76,7 +75,6 @@ BEGIN
 			['how_request_received', 'how_request_received', 'text'],
 			['customer_id', 'customer_id', 'number'],
 			['customer_agent_id', 'customer_agent_id', 'number'],
-			['demo_functional_requirement_id', 'demo_functional_requirement_id', 'text'],
 			['demo_task_id', 'demo_task_id', 'text'],
             ['options', 'options', 'jsonb'],
             ['deleted', 'deleted', 'bool']

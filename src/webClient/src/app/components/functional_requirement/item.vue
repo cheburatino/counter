@@ -72,6 +72,9 @@
                 
             }
         },
+        watch: {
+          
+        },
         methods: {
           
             resultModify(res) {
