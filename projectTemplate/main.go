@@ -11,6 +11,7 @@ import (
 	"github.com/cheburatino/electron_is/projectTemplate/docs/ctlgFunctionalRequirementState"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/ctlgRequestState"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/ctlgSubtaskState"
+	"github.com/cheburatino/electron_is/projectTemplate/docs/ctlgTaskState"
 	ctlgTaskStatusType "github.com/cheburatino/electron_is/projectTemplate/docs/ctlgTaskStatusType"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/ctlgTaskType"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/ctlgTimeType"
@@ -48,6 +49,7 @@ func getProject() t.ProjectType {
 		ctlgDigitalSolutionState.GetDoc(p),
 		ctlgFunctionalRequirementState.GetDoc(p),
 		ctlgTaskType.GetDoc(p),
+		ctlgTaskState.GetDoc(p),
 		ctlgDevTaskState.GetDoc(p),
 		ctlgTaskStatusType.GetDoc(p),
 		ctlgSubtaskState.GetDoc(p),
@@ -101,6 +103,7 @@ func getProject() t.ProjectType {
 			{Text: "Типы времени", Url: "ctlg_time_type"},
 			{Text: "Типы задач", Url: "ctlg_task_type"},
 			{Text: "Типы статусов задач", Url: "ctlg_task_status_type"},
+			{Text: "Статусы задач", Url: "ctlg_task_state"},
 			{Text: "Статусы задач разработки", Url: "ctlg_dev_task_state"},
 			{Text: "Статусы подзадач", Url: "ctlg_subtask_state"},
 		}},

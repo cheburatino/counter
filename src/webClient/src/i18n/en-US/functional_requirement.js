@@ -1,13 +1,13 @@
 
 export default {
  		name_plural: 'functional requirement',
- 		state_id: 'state ',
- 		request_id: 'request ',
- 		result: 'result',
- 		digital_solution_id: 'digital solution ',
- 		analyst_id: 'analyst ',
- 		name: 'functional requirement',
  		name_plural_deleted: 'deleted functional requirement',
- 		title: 'title',
+ 		state_id: 'state ',
  		description: 'description',
+ 		digital_solution_id: 'digital solution ',
+ 		name: 'functional requirement',
+ 		title: 'title',
+ 		request_id: 'request ',
+ 		analyst_id: 'analyst ',
+ 		result: 'result',
 }
