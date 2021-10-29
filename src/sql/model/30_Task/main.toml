@@ -6,7 +6,7 @@ tableName ="task"
 fields = [
 	{name="id",			type="serial"},
 	{name="title",					type="char",	size=150, 	ext="not null",	 comment="название"},
-	{name="state",					type="int", 	ext=" default 1",	 comment="статус"},
+	{name="state",					type="int", 	ext="not null",	 comment="статус"},
 	{name="digital_solution_id",					type="int",	 comment="цифровое решение"},
 	{name="type_id",					type="int", 	ext=" default 1",	 comment="тип задачи"},
 	{name="description",					type="text",	 comment="описание"},
@@ -48,10 +48,10 @@ triggers = [
 
 
 methods = [
-	"task_update",
-	"task_get_by_id",
 	"task_get_statuses_by_status_type",
 	"task_list",
+	"task_update",
+	"task_get_by_id",
 	"task_trigger_before",
 	"task_trigger_after"
 ]

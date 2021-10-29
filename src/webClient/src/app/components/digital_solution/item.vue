@@ -62,7 +62,7 @@
           <comp-fld-ref-search outlined pgMethod="system_list" :label="$t('digital_solution.system_id')" :item='item.system_title' :itemId='item.system_id' :ext='{customer_id: item.customer_id, pathUrl: "/system", avatar: "image/system.svg", isClearable: "true"}' @update="v=> item.system_id = v.id" @clear="item.system_id = null" :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
       </div>
       <div class="col-md-4 col-sm-6 col-xs-12">
-          <comp-fld-ref-search outlined pgMethod="man_list" :label="$t('digital_solution.analyst_id')" :item='item.analyst_title' :itemId='item.analyst_id' :ext='{company_id: 1, pathUrl: "/man", avatar: "image/man.svg", isClearable: "true"}' @update="v=> item.analyst_id = v.id" @clear="item.analyst_id = null" :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
+          <comp-fld-ref-search outlined pgMethod="man_list" :label="$t('digital_solution.analyst_id')" :item='item.analyst_title' :itemId='item.analyst_id' :ext='{company_id: 1, avatar: "image/man.svg", isClearable: "true", pathUrl: "/man"}' @update="v=> item.analyst_id = v.id" @clear="item.analyst_id = null" :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
       </div>
       </div>
       
@@ -149,11 +149,11 @@
 </template>
 
 <script>
+	import compParticipants from './comp/participants.vue'
+	import compModeling from './comp/modeling.vue'
 	import compRealization from './comp/realization.vue'
 	import ftListRefListWidget from './comp/ftListRefListWidget.vue'
 	import taskListRefListWidget from './comp/taskListRefListWidget.vue'
-	import compParticipants from './comp/participants.vue'
-	import compModeling from './comp/modeling.vue'
     import currentUserMixin from '../../../app/mixins/currentUser'
     export default {
         props: ['id', 'isOpenInDialog'],

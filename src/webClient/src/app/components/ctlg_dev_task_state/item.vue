@@ -7,8 +7,8 @@
       <!--  поля формы    -->
       
       <div class="row q-col-gutter-md q-mb-sm">
-      <div class="col-md-2 col-sm-3 col-xs-6">
-          <q-input outlined type='text' v-model="item.title" :label="$t('ctlg_dev_task_state.title')" autogrow :readonly='false'  class='q-mb-sm col-md-2 col-sm-3 col-xs-6' />
+      <div class="col-md-4 col-sm-6 col-xs-12">
+          <q-input outlined type='text' v-model="item.title" :label="$t('ctlg_dev_task_state.title')" autogrow :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
       </div>
       </div>
       

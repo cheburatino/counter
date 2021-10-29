@@ -110,7 +110,7 @@
                 item: null,
                 flds: [
                         {name: 'title', label: 'название',  required: true},
-                        {name: 'state', label: 'статус'},
+                        {name: 'state', label: 'статус',  required: true},
                         {name: 'digital_solution_id', label: 'цифровое решение'},
                         {name: 'type_id', label: 'тип задачи'},
                         {name: 'description', label: 'описание'},

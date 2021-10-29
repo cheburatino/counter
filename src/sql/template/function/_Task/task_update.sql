@@ -45,7 +45,7 @@ BEGIN
 
     if (params ->> 'id')::int = -1 then
         -- проверика наличия обязательных параметров
-        checkMsg = check_required_params(params, ARRAY ['title']);
+        checkMsg = check_required_params(params, ARRAY ['title', 'state']);
         IF checkMsg IS NOT NULL
         THEN
             RETURN checkMsg;
@@ -56,7 +56,7 @@ BEGIN
 		INTO taskRow
 		USING
 			(params ->> 'title')::text,
-			coalesce((params ->> 'state')::int, 1)::int,
+			(params ->> 'state')::int,
 			(params ->> 'digital_solution_id')::int,
 			coalesce((params ->> 'type_id')::int, 1)::int,
 			(params ->> 'description')::text,

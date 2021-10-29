@@ -20,7 +20,7 @@ func GetDoc(project *t.ProjectType) t.DocType {
 		NameRu:     name_ru,
 		PathPrefix: "docs",
 		Flds: []t.FldType{
-			t.GetFldTitle("col-2"),
+			t.GetFldTitle(),
 			t.GetFldString("ctlg_table_name", "название таблицы справочника", 50, [][]int{{2, 1}}, "col-4"),
 		},
 		Vue: t.DocVue{

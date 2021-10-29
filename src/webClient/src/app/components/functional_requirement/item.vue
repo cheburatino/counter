@@ -32,7 +32,7 @@
       
       <div class="row q-col-gutter-md q-mb-sm">
       <div class="col-md-4 col-sm-6 col-xs-12">
-          <comp-fld-ref-search outlined pgMethod="man_list" :label="$t('functional_requirement.analyst_id')" :item='item.analyst_title' :itemId='item.analyst_id' :ext='{company_id: 1, isClearable: "true", pathUrl: "/man", avatar: "image/man.svg"}' @update="v=> item.analyst_id = v.id" @clear="item.analyst_id = null" :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
+          <comp-fld-ref-search outlined pgMethod="man_list" :label="$t('functional_requirement.analyst_id')" :item='item.analyst_title' :itemId='item.analyst_id' :ext='{company_id: 1, pathUrl: "/man", avatar: "image/man.svg", isClearable: "true"}' @update="v=> item.analyst_id = v.id" @clear="item.analyst_id = null" :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
       </div>
       </div>
       
