@@ -90,17 +90,12 @@
 									{icon: 'image/invoice.svg', text: 'i18n_menu.invoice', url: '/invoice', roles: []},
 {isFolder: true, icon: 'image/catalog.svg', text: 'Справочники', roles: [], linkList: 								[
 								{icon: 'image/user.svg', text: 'Пользователи', url: '/users', roles: ['admin']},
-								{icon: '', text: 'Сотрудники', url: '/employee', roles: []},
 								{icon: '', text: 'Компетенции', url: '/ctlg_electron_skill', roles: []},
 								{icon: '', text: 'Статусы запросов', url: '/ctlg_request_state', roles: []},
 								{icon: '', text: 'Статусы функциональных требований', url: '/ctlg_functional_requirement_state', roles: []},
 								{icon: '', text: 'Статусы цифровых решений', url: '/ctlg_digital_solution_state', roles: []},
-								{icon: '', text: 'Типы времени', url: '/ctlg_time_type', roles: []},
 								{icon: '', text: 'Типы задач', url: '/ctlg_task_type', roles: []},
-								{icon: '', text: 'Типы статусов задач', url: '/ctlg_task_status_type', roles: []},
 								{icon: '', text: 'Статусы задач', url: '/ctlg_task_state', roles: []},
-								{icon: '', text: 'Статусы задач разработки', url: '/ctlg_dev_task_state', roles: []},
-								{icon: '', text: 'Статусы подзадач', url: '/ctlg_subtask_state', roles: []},
 ],},
 
                 ],

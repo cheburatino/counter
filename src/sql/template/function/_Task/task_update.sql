@@ -41,6 +41,7 @@ BEGIN
     
     
     
+    
 
     if (params ->> 'id')::int = -1 then
         -- проверика наличия обязательных параметров
@@ -51,10 +52,11 @@ BEGIN
         END IF;
         
 
-        EXECUTE ('INSERT INTO task (title, digital_solution_id, type_id, description, files, images, author_id, director_id, executor_id, acceptor_id, plan_start_date, fact_start_date, plan_end_date, fact_end_date, result, options) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16)  RETURNING *;')
+        EXECUTE ('INSERT INTO task (title, state, digital_solution_id, type_id, description, files, images, author_id, director_id, executor_id, acceptor_id, plan_start_date, fact_start_date, plan_end_date, fact_end_date, result, options) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17)  RETURNING *;')
 		INTO taskRow
 		USING
 			(params ->> 'title')::text,
+			coalesce((params ->> 'state')::int, 1)::int,
 			(params ->> 'digital_solution_id')::int,
 			(params ->> 'type_id')::int,
 			(params ->> 'description')::text,
@@ -76,6 +78,7 @@ BEGIN
     else
         updateValue = '' || update_str_from_json(params, ARRAY [
 			['title', 'title', 'text'],
+			['state', 'state', 'number'],
 			['digital_solution_id', 'digital_solution_id', 'number'],
 			['type_id', 'type_id', 'number'],
 			['description', 'description', 'text'],

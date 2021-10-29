@@ -95,17 +95,16 @@ func getProject() t.ProjectType {
 		{DocName: "invoice"},
 		{Text: "Справочники", Icon: "image/catalog.svg", IsFolder: true, LinkList: []t.VueMenu{
 			{Url: "users", Text: "Пользователи", Icon: "image/user.svg", Roles: []string{utils.RoleAdmin}},
-			{Text: "Сотрудники", Url: "employee"},
 			{Text: "Компетенции", Url: "ctlg_electron_skill"},
 			{Text: "Статусы запросов", Url: "ctlg_request_state"},
 			{Text: "Статусы функциональных требований", Url: "ctlg_functional_requirement_state"},
 			{Text: "Статусы цифровых решений", Url: "ctlg_digital_solution_state"},
-			{Text: "Типы времени", Url: "ctlg_time_type"},
+			//{Text: "Типы времени", Url: "ctlg_time_type"},
 			{Text: "Типы задач", Url: "ctlg_task_type"},
-			{Text: "Типы статусов задач", Url: "ctlg_task_status_type"},
 			{Text: "Статусы задач", Url: "ctlg_task_state"},
-			{Text: "Статусы задач разработки", Url: "ctlg_dev_task_state"},
-			{Text: "Статусы подзадач", Url: "ctlg_subtask_state"},
+			//{Text: "Типы статусов задач", Url: "ctlg_task_status_type"},
+			//{Text: "Статусы задач разработки", Url: "ctlg_dev_task_state"},
+			//{Text: "Статусы подзадач", Url: "ctlg_subtask_state"},
 		}},
 	}
 	p.FillSideMenu()

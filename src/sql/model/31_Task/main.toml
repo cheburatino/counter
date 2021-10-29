@@ -6,6 +6,7 @@ tableName ="task"
 fields = [
 	{name="id",			type="serial"},
 	{name="title",					type="char",	size=150, 	ext="not null",	 comment="название"},
+	{name="state",					type="int", 	ext=" default 1",	 comment="статус"},
 	{name="digital_solution_id",					type="int",	 comment="цифровое решение"},
 	{name="type_id",					type="int", 	ext="not null",	 comment="тип задачи"},
 	{name="description",					type="text",	 comment="описание"},
@@ -29,6 +30,7 @@ fields = [
 
 fkConstraints = [
 	{name="task_title_already_exist", ext="UNIQUE (title)"},
+	{fld="state", ref="ctlg_task_state", fk="id"},
 	{fld="digital_solution_id", ref="digital_solution", fk="id"},
 	{fld="type_id", ref="ctlg_task_type", fk="id"},
 	{fld="author_id", ref="man", fk="id"},
@@ -56,6 +58,7 @@ methods = [
 
 alterScripts = [
 	"alter table task add column if not exists title CHARACTER VARYING(150);",
+	"alter table task add column if not exists state int;",
 	"alter table task add column if not exists digital_solution_id int;",
 	"alter table task add column if not exists type_id int;",
 	"alter table task add column if not exists description text;",
