@@ -23,11 +23,11 @@ BEGIN
     END IF;
 
     with t1 as (select * from request where id = (params ->> 'id')::int),
-		t2 as (select t1.*, c.title as system_title from t1 left join system c on c.id = t1.system_id),
-		t3 as (select t2.*, c.title as state_title from t2 left join ctlg_request_state c on c.id = t2.state_id),
-		t4 as (select t3.*, c.title as rsk_title from t3 left join man c on c.id = t3.rsk_id),
-		t5 as (select t4.*, c.title as customer_title from t4 left join company c on c.id = t4.customer_id),
-		t6 as (select t5.*, c.title as customer_agent_title from t5 left join man c on c.id = t5.customer_agent_id)
+		t2 as (select t1.*, c.title as state_title from t1 left join ctlg_request_state c on c.id = t1.state_id),
+		t3 as (select t2.*, c.title as rsk_title from t2 left join man c on c.id = t2.rsk_id),
+		t4 as (select t3.*, c.title as customer_title from t3 left join company c on c.id = t3.customer_id),
+		t5 as (select t4.*, c.title as customer_agent_title from t4 left join man c on c.id = t4.customer_agent_id),
+		t6 as (select t5.*, c.title as system_title from t5 left join system c on c.id = t5.system_id)
  	select row_to_json(t6.*)::jsonb into result from t6;
 
     -- случай когда записи с таким id не найдено

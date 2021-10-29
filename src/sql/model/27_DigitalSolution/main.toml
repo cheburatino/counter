@@ -52,10 +52,10 @@ triggers = [
 
 
 methods = [
-	"digital_solution_update",
-	"digital_solution_get_by_id",
 	"digital_solution_worked_time",
 	"digital_solution_list",
+	"digital_solution_update",
+	"digital_solution_get_by_id",
 	"digital_solution_trigger_before",
 	"digital_solution_trigger_after"
 ]

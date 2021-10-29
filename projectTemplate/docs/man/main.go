@@ -24,7 +24,7 @@ func GetDoc(project *t.ProjectType) t.DocType {
 			t.GetFldString("last_name", "фамилия", 30, [][]int{{1, 1}}, "col-2"),
 			t.GetFldString("first_name", "имя", 30, [][]int{{1, 2}}, "col-2"),
 			t.GetFldString("middle_name", "отчество", 30, [][]int{{1, 3}}, "col-2"),
-			t.GetFldRef("company_id", "компания", "company", [][]int{{2, 1}}),
+			t.GetFldRef("company_id", "компания", "company", [][]int{{2, 1}}, "isShowLink", "isClearable"),
 			t.GetFldString("position", "должность", 50, [][]int{{2, 2}}),
 			t.GetFldRef("user_table_id", "пользователь", "user", [][]int{{3, 1}}, "isShowLink", "isClearable"),
 		},

@@ -6,6 +6,8 @@ tableName ="sprint"
 fields = [
 	{name="id",			type="serial"},
 	{name="title",					type="char",	size=150, 	ext="not null",	 comment="название"},
+	{name="date_start",					type="timestamp",	 comment="дата старта"},
+	{name="date_finish",					type="timestamp",	 comment="дата финиша"},
 	{name="search_text",			type="text",	comment="колонка для поиска"},
 	{name="options",				type="jsonb",	comment="разные дополнительные параметры"},
 	{name="created_at",				type="timestamp",	ext="with time zone"},
@@ -35,5 +37,7 @@ methods = [
 
 alterScripts = [
 	"alter table sprint add column if not exists title CHARACTER VARYING(150);",
+	"alter table sprint add column if not exists date_start timestamp;",
+	"alter table sprint add column if not exists date_finish timestamp;",
 	"alter table sprint add column if not exists search_text text;"
 ]

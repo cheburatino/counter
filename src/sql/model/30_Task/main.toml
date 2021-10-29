@@ -48,10 +48,10 @@ triggers = [
 
 
 methods = [
-	"task_get_statuses_by_status_type",
-	"task_list",
 	"task_update",
 	"task_get_by_id",
+	"task_get_statuses_by_status_type",
+	"task_list",
 	"task_trigger_before",
 	"task_trigger_after"
 ]

@@ -20,7 +20,9 @@ func GetDoc(project *t.ProjectType) t.DocType {
 		NameRu:     name_ru,
 		PathPrefix: "docs",
 		Flds: []t.FldType{
-			t.GetFldTitle("col-2"),
+			t.GetFldTitle(),
+			t.GetFldDate("date_start", "дата старта", [][]int{{2, 1}}),
+			t.GetFldDate("date_finish", "дата финиша", [][]int{{2, 2}}),
 		},
 		Vue: t.DocVue{
 			RouteName:      name,

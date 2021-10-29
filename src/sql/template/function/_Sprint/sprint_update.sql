@@ -27,6 +27,8 @@ BEGIN
 
     
     
+    
+    
 
     if (params ->> 'id')::int = -1 then
         -- проверика наличия обязательных параметров
@@ -37,10 +39,12 @@ BEGIN
         END IF;
         
 
-        EXECUTE ('INSERT INTO sprint (title, options) VALUES ($1, $2)  RETURNING *;')
+        EXECUTE ('INSERT INTO sprint (title, date_start, date_finish, options) VALUES ($1, $2, $3, $4)  RETURNING *;')
 		INTO sprintRow
 		USING
 			(params ->> 'title')::text,
+			(params ->> 'date_start')::timestamp,
+			(params ->> 'date_finish')::timestamp,
 			coalesce(params -> 'options', '{}')::jsonb;
 
         
@@ -48,6 +52,8 @@ BEGIN
     else
         updateValue = '' || update_str_from_json(params, ARRAY [
 			['title', 'title', 'text'],
+			['date_start', 'date_start', 'timestamp'],
+			['date_finish', 'date_finish', 'timestamp'],
             ['options', 'options', 'jsonb'],
             ['deleted', 'deleted', 'bool']
             ]);

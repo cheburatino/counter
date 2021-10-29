@@ -7,8 +7,17 @@
       <!--  поля формы    -->
       
       <div class="row q-col-gutter-md q-mb-sm">
-      <div class="col-md-2 col-sm-3 col-xs-6">
-          <q-input outlined type='text' v-model="item.title" :label="$t('sprint.title')" autogrow :readonly='false'  class='q-mb-sm col-md-2 col-sm-3 col-xs-6' />
+      <div class="col-md-4 col-sm-6 col-xs-12">
+          <q-input outlined type='text' v-model="item.title" :label="$t('sprint.title')" autogrow :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
+      </div>
+      </div>
+      
+      <div class="row q-col-gutter-md q-mb-sm">
+      <div class="col-md-4 col-sm-6 col-xs-12">
+          <comp-fld-date outlined :label="$t('sprint.date_start')" :date-string="$utils.formatPgDate(item.date_start)" @update="v=> item.date_start = v" :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
+      </div>
+      <div class="col-md-4 col-sm-6 col-xs-12">
+          <comp-fld-date outlined :label="$t('sprint.date_finish')" :date-string="$utils.formatPgDate(item.date_finish)" @update="v=> item.date_finish = v" :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
       </div>
       </div>
       
@@ -41,6 +50,8 @@
                 item: null,
                 flds: [
                         {name: 'title', label: 'название',  required: true},
+                        {name: 'date_start', label: 'дата старта'},
+                        {name: 'date_finish', label: 'дата финиша'},
                 ],
                 optionsFlds: [],
                 

@@ -20,17 +20,18 @@ func GetDoc(project *t.ProjectType) t.DocType {
 		NameRu:     name_ru,
 		PathPrefix: "docs",
 		Flds: []t.FldType{
-			t.GetFldTitle("col-4"),
-			t.GetFldRef("system_id", "система", "system", [][]int{{1, 2}}, "col-4"),
+			t.GetFldTitle(),
+			t.GetFldDateTime("datetime_reciept", "дата и время получения запроса", [][]int{{1, 2}}, "col-2"),
+			t.GetFldRef("state_id", "статус", "ctlg_request_state", [][]int{{1, 3}}, "col-2").SetDefault("1"),
 			t.GetFldString("description", "описание", 0, [][]int{{2, 1}}, "col-8"),
-			t.GetFldRef("state_id", "статус", "ctlg_request_state", [][]int{{3, 1}}, "col-4"),
-			t.GetFldRef("rsk_id", "рск", "man", [][]int{{3, 2}}, "col-4"),
-			t.GetFldDateTime("datetime_reciept", "дата и время получения запроса", [][]int{{4, 1}}, "col-4"),
-			t.GetFldString("how_request_received", "как получен запрос", 0, [][]int{{4, 2}}, "col-4"),
-			t.GetFldRef("customer_id", "заказчик", "company", [][]int{{5, 1}}, "col-4"),
-			t.GetFldRef("customer_agent_id", "представитель заказчика", "man", [][]int{{5, 2}}, "col-4"),
-			//t.GetFldString("demo_functional_requirement_id", "функциональные требования", 0, [][]int{{6, 1}}, "col-4"),
-			t.GetFldString("demo_task_id", "задачи", 0, [][]int{{6, 2}}, "col-4"),
+			t.GetFldRef("rsk_id", "рск", "man", [][]int{{3, 1}}, "ext: {company_id: 1}", "isShowLink", "isClearable"),
+			t.GetFldString("how_request_received", "как получен запрос", 0, [][]int{{3, 2}}),
+			t.GetFldRef("customer_id", "заказчик", "company", [][]int{{4, 1}}, "isShowLink", "isClearable"),
+			t.GetFldRef("customer_agent_id", "представитель заказчика", "man", [][]int{{4, 2}}, "isShowLink", "isClearable", "ext: {company_id: item.customer_id}"),
+			t.GetFldRef("system_id", "система", "system", [][]int{{5, 1}}, "isShowLink", "isClearable", "ext: {customer_id: item.customer_id}"),
+			t.GetFldString("result", "результат", 0, [][]int{{6, 1}}, "col-8"),
+			// контрол с функциональными требованиями описан под doc.Init
+			// контрол с задачами doc.Init
 		},
 		Vue: t.DocVue{
 			RouteName:      name,
@@ -69,7 +70,21 @@ func GetDoc(project *t.ProjectType) t.DocType {
 		TitleTemplate: `
                 <q-item-label>{{v.title}}</q-item-label>
             `, // шаблон для названия в списке (vue синтаксис)
-	}, [][]int{{6, 1}}, "col-4"))
+	}, [][]int{{7, 1}}, "col-4"))
+
+	doc.AddFld(t.GetFldVueCompositionRefList(&doc, t.VueCompRefListWidgetParams{
+		Label:      "задачи",                  // название списка, которе выводится на экране
+		FldName:    "task_list",              // название поля. Любое, в формате snake_case. На основе этого названия формируется название компоненты во vue.
+		TableName:  "task",                   // название связанной таблицы, из которой будут выгружаться записи
+		RefFldName: "digital_solution_id", // название поля в связанной таблицы, по которому осуществляется связь
+		Avatar:     "image/task.svg",         // иконка, которая выводится в списке
+		NewFlds: []t.FldType{
+			t.GetFldString("title", "название", 300, [][]int{{1, 1}}).SetIsRequired(),
+		}, // список полей, которые заполняются при добавлении новой записи
+		TitleTemplate: `
+                <q-item-label>{{v.title}}</q-item-label>
+            `, // шаблон для названия в списке (vue синтаксис)
+	}, [][]int{{7, 2}}, "col-4"))
 
 	return doc
 }

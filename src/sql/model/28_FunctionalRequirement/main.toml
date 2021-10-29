@@ -6,11 +6,12 @@ tableName ="functional_requirement"
 fields = [
 	{name="id",			type="serial"},
 	{name="title",					type="char",	size=150, 	ext="not null",	 comment="название"},
-	{name="request_id",					type="int",	 comment="запрос"},
 	{name="state_id",					type="int",	 comment="статус"},
 	{name="description",					type="text",	 comment="описание"},
-	{name="analyst_id",					type="int",	 comment="аналитик"},
+	{name="request_id",					type="int",	 comment="запрос"},
 	{name="digital_solution_id",					type="int",	 comment="цифровое решение"},
+	{name="analyst_id",					type="int",	 comment="аналитик"},
+	{name="result",					type="text",	 comment="результат"},
 	{name="search_text",			type="text",	comment="колонка для поиска"},
 	{name="options",				type="jsonb",	comment="разные дополнительные параметры"},
 	{name="created_at",				type="timestamp",	ext="with time zone"},
@@ -20,10 +21,10 @@ fields = [
 
 fkConstraints = [
 	{name="functional_requirement_title_already_exist", ext="UNIQUE (title)"},
-	{fld="request_id", ref="request", fk="id"},
 	{fld="state_id", ref="ctlg_functional_requirement_state", fk="id"},
-	{fld="analyst_id", ref="man", fk="id"},
-	{fld="digital_solution_id", ref="digital_solution", fk="id"}
+	{fld="request_id", ref="request", fk="id"},
+	{fld="digital_solution_id", ref="digital_solution", fk="id"},
+	{fld="analyst_id", ref="man", fk="id"}
 ]
 
 triggers = [
@@ -35,19 +36,20 @@ triggers = [
 
 
 methods = [
-	"functional_requirement_get_by_id",
 	"functional_requirement_list",
 	"functional_requirement_update",
+	"functional_requirement_get_by_id",
 	"functional_requirement_trigger_before",
 	"functional_requirement_trigger_after"
 ]
 
 alterScripts = [
 	"alter table functional_requirement add column if not exists title CHARACTER VARYING(150);",
-	"alter table functional_requirement add column if not exists request_id int;",
 	"alter table functional_requirement add column if not exists state_id int;",
 	"alter table functional_requirement add column if not exists description text;",
-	"alter table functional_requirement add column if not exists analyst_id int;",
+	"alter table functional_requirement add column if not exists request_id int;",
 	"alter table functional_requirement add column if not exists digital_solution_id int;",
+	"alter table functional_requirement add column if not exists analyst_id int;",
+	"alter table functional_requirement add column if not exists result text;",
 	"alter table functional_requirement add column if not exists search_text text;"
 ]
