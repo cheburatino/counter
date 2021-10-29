@@ -103,6 +103,7 @@ func GetDoc(project *t.ProjectType) t.DocType {
 		Avatar:     "image/task.svg",         // иконка, которая выводится в списке
 		NewFlds: []t.FldType{
 			t.GetFldString("title", "название", 300, [][]int{{1, 1}}).SetIsRequired(),
+			t.GetFldRef("type_id", "тип задачи", "ctlg_task_type", [][]int{{2, 2}}).SetIsRequired(),
 		}, // список полей, которые заполняются при добавлении новой записи
 		TitleTemplate: `
                 <q-item-label>{{v.title}}</q-item-label>

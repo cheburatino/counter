@@ -1,13 +1,13 @@
 
 export default {
- 		state_id: 'статус',
- 		request_id: 'запрос',
+ 		title: 'название',
+ 		result: 'результат',
  		name: 'функциональное требование',
  		name_plural: 'Функциональные требования',
  		description: 'описание',
+ 		request_id: 'запрос',
  		digital_solution_id: 'цифровое решение',
  		analyst_id: 'аналитик',
- 		result: 'результат',
  		name_plural_deleted: 'удаленные Функциональные требования',
- 		title: 'название',
+ 		state_id: 'статус',
 }

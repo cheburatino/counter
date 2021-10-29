@@ -41,6 +41,8 @@
                     
                     <q-input outlined type='text' v-model="item.title" :label="$t('task.title')" autogrow :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
                     
+                    <comp-fld-ref-search outlined pgMethod="ctlg_task_type_list" :label="$t('task.type_id')" :item='item.type_title' :itemId='item.type_id' :ext='{}' @update="v=> item.type_id = v.id" @clear="item.type_id = null" :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
+                    
                 </q-card-section>
                 <q-card-actions align="right" class="bg-white text-teal">
                     <q-btn flat label="OK" @click="saveNew"/>
@@ -60,7 +62,7 @@
                 list: [],
                 isShowAddDialog: false,
                 deleted: false,
-                item: {title: null, },
+                item: {title: null, type_id: null, },
             }
         },
         methods: {
@@ -77,14 +79,20 @@
                     this.$q.notify({type: 'negative', message: 'не заполнено поле: "название"'})
                     return
                 }
+                    if (!this.item.type_id) {
+                    this.$q.notify({type: 'negative', message: 'не заполнено поле: "тип задачи"'})
+                    return
+                }
                 let params = Object.assign({id: -1, digital_solution_id: this.id}, this.item)
                 
+                    
                     
                 // если IsStateMachine то task_create, в остальных случаях task_update
                 this.$utils.callPgMethod('task_update', params, () => {
                     this.isShowAddDialog = false
                     
                     this.item.title = null 
+                    this.item.type_id = null 
                     this.reload()
                 })
             },

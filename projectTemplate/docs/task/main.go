@@ -21,9 +21,9 @@ func GetDoc(project *t.ProjectType) t.DocType {
 		PathPrefix: "docs",
 		Flds: []t.FldType{
 			t.GetFldTitle(),
-			t.GetFldRef("state", "статус", "ctlg_dev_task_state", [][]int{{1, 2}}).SetIsRequired(),
+			t.GetFldRef("state", "статус", "ctlg_dev_task_state", [][]int{{1, 2}}).SetDefault("1"),
 			t.GetFldRef("digital_solution_id", "цифровое решение", "digital_solution", [][]int{{2, 1}}, "col-4", "isShowLink"),
-			t.GetFldRef("type_id", "тип задачи", "ctlg_task_type", [][]int{{2, 2}}).SetDefault("1"),
+			t.GetFldRef("type_id", "тип задачи", "ctlg_task_type", [][]int{{2, 2}}).SetIsRequired(),
 			t.GetFldString("description", "описание", 0, [][]int{{3, 1}}, "col-8"),
 			t.GetFldFiles("files", "файлы", [][]int{{4, 1}}, t.FldVueFilesParams{MaxFileSize: 10000}),
 			t.GetFldImgList("images", "изображения", [][]int{{4, 2}}, t.FldVueImgParams{}),

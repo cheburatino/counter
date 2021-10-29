@@ -1,16 +1,16 @@
 
 export default {
- 		name: 'invoice',
- 		title: 'title',
- 		total_amount: 'total amount',
- 		recipient_id: 'recipient ',
  		date_plan_transfer: 'date plan transfer',
  		date_plan_paid: 'date plan pa',
  		date_transfer: 'date transfer',
+ 		date_paid: 'date pa',
+ 		name: 'invoice',
+ 		total_amount: 'total amount',
+ 		state: 'state',
+ 		payer_id: 'payer ',
+ 		recipient_id: 'recipient ',
  		name_plural: 'invoice',
  		name_plural_deleted: 'deleted invoice',
- 		state: 'state',
+ 		title: 'title',
  		system_id: 'system ',
- 		payer_id: 'payer ',
- 		date_paid: 'date pa',
 }

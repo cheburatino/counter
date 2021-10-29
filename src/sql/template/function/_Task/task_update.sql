@@ -45,7 +45,7 @@ BEGIN
 
     if (params ->> 'id')::int = -1 then
         -- проверика наличия обязательных параметров
-        checkMsg = check_required_params(params, ARRAY ['title', 'state']);
+        checkMsg = check_required_params(params, ARRAY ['title', 'type_id']);
         IF checkMsg IS NOT NULL
         THEN
             RETURN checkMsg;
@@ -56,9 +56,9 @@ BEGIN
 		INTO taskRow
 		USING
 			(params ->> 'title')::text,
-			(params ->> 'state')::int,
+			coalesce((params ->> 'state')::int, 1)::int,
 			(params ->> 'digital_solution_id')::int,
-			coalesce((params ->> 'type_id')::int, 1)::int,
+			(params ->> 'type_id')::int,
 			(params ->> 'description')::text,
 			(params -> 'files')::jsonb,
 			(params -> 'images')::jsonb,

@@ -6,9 +6,9 @@ tableName ="task"
 fields = [
 	{name="id",			type="serial"},
 	{name="title",					type="char",	size=150, 	ext="not null",	 comment="название"},
-	{name="state",					type="int", 	ext="not null",	 comment="статус"},
+	{name="state",					type="int", 	ext=" default 1",	 comment="статус"},
 	{name="digital_solution_id",					type="int",	 comment="цифровое решение"},
-	{name="type_id",					type="int", 	ext=" default 1",	 comment="тип задачи"},
+	{name="type_id",					type="int", 	ext="not null",	 comment="тип задачи"},
 	{name="description",					type="text",	 comment="описание"},
 	{name="files",					type="jsonb",	 comment="файлы"},
 	{name="images",					type="jsonb",	 comment="изображения"},
