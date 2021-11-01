@@ -53,7 +53,7 @@
           <comp-fld-ref-search outlined pgMethod="man_list" :label="$t('task.executor_id')" :item='item.executor_title' :itemId='item.executor_id' :ext='{company_id: 1, pathUrl: "/man", avatar: "image/man.svg", isClearable: "true"}' @update="v=> item.executor_id = v.id" @clear="item.executor_id = null" :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
       </div>
       <div class="col-md-4 col-sm-6 col-xs-12">
-          <comp-fld-ref-search outlined pgMethod="man_list" :label="$t('task.acceptor_id')" :item='item.acceptor_title' :itemId='item.acceptor_id' :ext='{company_id: 1, avatar: "image/man.svg", isClearable: "true", pathUrl: "/man"}' @update="v=> item.acceptor_id = v.id" @clear="item.acceptor_id = null" :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
+          <comp-fld-ref-search outlined pgMethod="man_list" :label="$t('task.acceptor_id')" :item='item.acceptor_title' :itemId='item.acceptor_id' :ext='{company_id: 1, isClearable: "true", pathUrl: "/man", avatar: "image/man.svg"}' @update="v=> item.acceptor_id = v.id" @clear="item.acceptor_id = null" :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
       </div>
       </div>
       
@@ -88,6 +88,13 @@
       <q-btn v-else color="secondary" :label="$t('message.save')" class="q-mr-sm" @click="save"/>
 
         
+            
+        <!-- кнопка сохранения, которая закреплена в углу экрана     -->
+	<q-page-sticky position="bottom-right" :offset="[18, 18]">
+	<q-btn size="sm" fab icon="save" color="primary" @click="save">
+	<q-tooltip>Сохранить</q-tooltip>
+	</q-btn>
+	</q-page-sticky>
 
     </div>
   </q-page>

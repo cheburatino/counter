@@ -44,7 +44,7 @@
       
       <div class="row q-col-gutter-md q-mb-sm">
       <div class="col-md-4 col-sm-6 col-xs-12">
-          <comp-fld-ref-search outlined pgMethod="system_list" :label="$t('request.system_id')" :item='item.system_title' :itemId='item.system_id' :ext='{customer_id: item.customer_id, pathUrl: "/system", avatar: "image/system.svg", isClearable: "true"}' @update="v=> item.system_id = v.id" @clear="item.system_id = null" :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
+          <comp-fld-ref-search outlined pgMethod="system_list" :label="$t('request.system_id')" :item='item.system_title' :itemId='item.system_id' :ext='{customer_id: item.customer_id, avatar: "image/system.svg", isClearable: "true", pathUrl: "/system"}' @update="v=> item.system_id = v.id" @clear="item.system_id = null" :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
       </div>
       </div>
       
@@ -76,8 +76,8 @@
 </template>
 
 <script>
-	import taskListRefListWidget from './comp/taskListRefListWidget.vue'
 	import ftListRefListWidget from './comp/ftListRefListWidget.vue'
+	import taskListRefListWidget from './comp/taskListRefListWidget.vue'
     import currentUserMixin from '../../../app/mixins/currentUser'
     export default {
         props: ['id', 'isOpenInDialog'],

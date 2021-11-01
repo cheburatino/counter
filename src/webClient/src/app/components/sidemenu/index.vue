@@ -96,6 +96,7 @@
 								{icon: '', text: 'Статусы цифровых решений', url: '/ctlg_digital_solution_state', roles: []},
 								{icon: '', text: 'Типы задач', url: '/ctlg_task_type', roles: []},
 								{icon: '', text: 'Статусы задач', url: '/ctlg_task_state', roles: []},
+								{icon: '', text: 'Роли задач', url: '/ctlg_task_role', roles: []},
 ],},
 
                 ],

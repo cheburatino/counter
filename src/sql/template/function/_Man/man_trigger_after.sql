@@ -43,6 +43,12 @@ if new.title != old.title then
  for r in select * from task where acceptor_id = new.id loop
  update task set updated_at=now() where id = r.id;
  end loop;
+ for r in select * from task_specialist_link where specialist_id = new.id loop
+ update task_specialist_link set updated_at=now() where id = r.id;
+ end loop;
+ for r in select * from task_specialist_link where author_id = new.id loop
+ update task_specialist_link set updated_at=now() where id = r.id;
+ end loop;
  for r in select * from time where specialist_id = new.id loop
  update time set updated_at=now() where id = r.id;
  end loop;

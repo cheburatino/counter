@@ -58,6 +58,7 @@ func GetDoc(project *t.ProjectType) t.DocType {
 	}
 	// создаем стандартные методы sql "list", "update", "get_by_id" с возможностью ограничения по ролям
 	doc.Sql.FillBaseMethods(doc.Name)
+	doc.Vue.AddFixedSaveBtn()
 
 	doc.Vue.I18n = map[string]string{
 		"listTitle":        utils.UpperCaseFirst(name_ru_plural),

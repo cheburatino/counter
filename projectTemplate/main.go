@@ -11,6 +11,7 @@ import (
 	"github.com/cheburatino/electron_is/projectTemplate/docs/ctlgFunctionalRequirementState"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/ctlgRequestState"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/ctlgSubtaskState"
+	"github.com/cheburatino/electron_is/projectTemplate/docs/ctlgTaskRole"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/ctlgTaskState"
 	ctlgTaskStatusType "github.com/cheburatino/electron_is/projectTemplate/docs/ctlgTaskStatusType"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/ctlgTaskType"
@@ -24,6 +25,7 @@ import (
 	"github.com/cheburatino/electron_is/projectTemplate/docs/sprint"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/system"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/task"
+	"github.com/cheburatino/electron_is/projectTemplate/docs/taskSpecialistLink"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/time"
 	"github.com/otiai10/copy"
 	"github.com/pepelazz/nla_framework"
@@ -50,6 +52,7 @@ func getProject() t.ProjectType {
 		ctlgFunctionalRequirementState.GetDoc(p),
 		ctlgTaskType.GetDoc(p),
 		ctlgTaskState.GetDoc(p),
+		ctlgTaskRole.GetDoc(p),
 		ctlgDevTaskState.GetDoc(p),
 		ctlgTaskStatusType.GetDoc(p),
 		ctlgSubtaskState.GetDoc(p),
@@ -65,6 +68,7 @@ func getProject() t.ProjectType {
 		functionalRequirement.GetDoc(p),
 		invoice.GetDoc(p),
 		task.GetDoc(p),
+		taskSpecialistLink.GetDoc(p),
 		time.GetDoc(p),
 		comment.GetDoc(p),
 	}
@@ -102,6 +106,7 @@ func getProject() t.ProjectType {
 			//{Text: "Типы времени", Url: "ctlg_time_type"},
 			{Text: "Типы задач", Url: "ctlg_task_type"},
 			{Text: "Статусы задач", Url: "ctlg_task_state"},
+			{Text: "Роли задач", Url: "ctlg_task_role"},
 			//{Text: "Типы статусов задач", Url: "ctlg_task_status_type"},
 			//{Text: "Статусы задач разработки", Url: "ctlg_dev_task_state"},
 			//{Text: "Статусы подзадач", Url: "ctlg_subtask_state"},
