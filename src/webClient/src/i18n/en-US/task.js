@@ -1,0 +1,22 @@
+
+export default {
+ 		images: 'images',
+ 		director_id: 'director ',
+ 		plan_start_date: 'plan start date',
+ 		digital_solution_id: 'digital solution ',
+ 		author_id: 'author ',
+ 		acceptor_id: 'acceptor ',
+ 		fact_start_date: 'fact start date',
+ 		plan_end_date: 'plan end date',
+ 		executor_id: 'executor ',
+ 		result: 'result',
+ 		description: 'description',
+ 		files: 'files',
+ 		name: 'task',
+ 		name_plural: 'task',
+ 		name_plural_deleted: 'deleted task',
+ 		title: 'title',
+ 		state: 'state',
+ 		type_id: 'type ',
+ 		fact_end_date: 'fact end date',
+}

@@ -13,17 +13,20 @@ const (
 	breadcrumb_icon = "fas fa-square-root-alt"
 )
 
-func GetDoc() t.DocType {
+func GetDoc(project *t.ProjectType) t.DocType {
 	doc := t.DocType{
+		Project: project,
 		Name:       name,
 		NameRu:     name_ru,
 		PathPrefix: "docs",
 		Flds: []t.FldType{
 			t.GetFldTitle(),
-			t.GetFldString("desctiption", "описание", 0, [][]int{{2, 1}}, "col-8"),
-			t.GetFldRef("analyst_id", "аналитик", "employee", [][]int{{3, 1}}),
-			t.GetFldRef("request_id", "запрос", "request", [][]int{{4, 1}}),
-			t.GetFldRef("digital_solution_id", "цифровое решение", "digital_solution", [][]int{{5, 1}}),
+			t.GetFldRef("state_id", "статус", "ctlg_functional_requirement_state", [][]int{{1, 2}}),
+			t.GetFldString("description", "описание", 0, [][]int{{2, 1}}, "col-8"),
+			t.GetFldRef("request_id", "запрос", "request", [][]int{{3, 1}}, "isShowLink", "isClearable"),
+			t.GetFldRef("digital_solution_id", "цифровое решение", "digital_solution", [][]int{{3, 2}}, "isShowLink", "isClearable"),
+			t.GetFldRef("analyst_id", "аналитик", "man", [][]int{{4, 1}}, "isShowLink", "isClearable", "ext: {company_id: 1}"),
+			t.GetFldString("result", "результат", 0, [][]int{{5, 1}}, "col-8"),
 		},
 		Vue: t.DocVue{
 			RouteName:      name,

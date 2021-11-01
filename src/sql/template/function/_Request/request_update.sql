@@ -33,6 +33,11 @@ BEGIN
     
     
     
+    
+    
+    
+    
+    
 
     if (params ->> 'id')::int = -1 then
         -- проверика наличия обязательных параметров
@@ -43,16 +48,19 @@ BEGIN
         END IF;
         
 
-        EXECUTE ('INSERT INTO request (title, system_id, description, rsk_id, customer_agent_id, datetime_reciept, state_id, options) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)  RETURNING *;')
+        EXECUTE ('INSERT INTO request (title, datetime_reciept, state_id, description, rsk_id, how_request_received, customer_id, customer_agent_id, system_id, result, options) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)  RETURNING *;')
 		INTO requestRow
 		USING
 			(params ->> 'title')::text,
-			(params ->> 'system_id')::int,
+			(params ->> 'datetime_reciept')::timestamp,
+			coalesce((params ->> 'state_id')::int, 1)::int,
 			(params ->> 'description')::text,
 			(params ->> 'rsk_id')::int,
+			(params ->> 'how_request_received')::text,
+			(params ->> 'customer_id')::int,
 			(params ->> 'customer_agent_id')::int,
-			(params ->> 'datetime_reciept')::timestamp,
-			(params ->> 'state_id')::int,
+			(params ->> 'system_id')::int,
+			(params ->> 'result')::text,
 			coalesce(params -> 'options', '{}')::jsonb;
 
         
@@ -60,12 +68,15 @@ BEGIN
     else
         updateValue = '' || update_str_from_json(params, ARRAY [
 			['title', 'title', 'text'],
-			['system_id', 'system_id', 'number'],
-			['description', 'description', 'text'],
-			['rsk_id', 'rsk_id', 'number'],
-			['customer_agent_id', 'customer_agent_id', 'number'],
 			['datetime_reciept', 'datetime_reciept', 'timestamp'],
 			['state_id', 'state_id', 'number'],
+			['description', 'description', 'text'],
+			['rsk_id', 'rsk_id', 'number'],
+			['how_request_received', 'how_request_received', 'text'],
+			['customer_id', 'customer_id', 'number'],
+			['customer_agent_id', 'customer_agent_id', 'number'],
+			['system_id', 'system_id', 'number'],
+			['result', 'result', 'text'],
             ['options', 'options', 'jsonb'],
             ['deleted', 'deleted', 'bool']
             ]);

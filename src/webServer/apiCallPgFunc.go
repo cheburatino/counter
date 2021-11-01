@@ -4,10 +4,10 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
+	"github.com/gin-gonic/gin"
 	"github.com/cheburatino/electron_is/src/pg"
 	"github.com/cheburatino/electron_is/src/types"
 	"github.com/cheburatino/electron_is/src/utils"
-	"github.com/gin-gonic/gin"
 	"github.com/tidwall/gjson"
 	"net/http"
 	"strings"
@@ -34,7 +34,7 @@ type (
 var (
 	pgFuncCache = map[string]pgFuncCacheType{}
 	pgFuncList  = []PgMethod{
-		PgMethod{"user_update", []string{"admin"}, nil, nil},
+		PgMethod{"user_update", []string{"admin",}, nil, nil},
 		PgMethod{"user_list", []string{}, nil, nil},
 		PgMethod{"user_get_by_id", []string{}, nil, BeforeHookAddUserId},
 		PgMethod{"user_get_by_id_for_ui", []string{}, nil, BeforeHookAddUserId},
@@ -55,62 +55,87 @@ var (
 		PgMethod{"chat_get_by_id", []string{}, nil, BeforeHookAddUserId},
 		PgMethod{"chat_for_table_id", []string{}, nil, BeforeHookAddUserId},
 		PgMethod{"chat_message_update", []string{}, nil, BeforeHookAddUserId},
-
-		PgMethod{"employee_list", []string{}, nil, BeforeHookAddUserId},
-		PgMethod{"employee_update", []string{}, nil, BeforeHookAddUserId},
-		PgMethod{"employee_get_by_id", []string{}, nil, BeforeHookAddUserId},
-		PgMethod{"meeting_get_by_id", []string{}, nil, BeforeHookAddUserId},
+		
+		PgMethod{"ctlg_electron_skill_get_by_id", []string{}, nil, BeforeHookAddUserId},
+		PgMethod{"ctlg_electron_skill_list", []string{}, nil, BeforeHookAddUserId},
+		PgMethod{"ctlg_electron_skill_update", []string{}, nil, BeforeHookAddUserId},
+		PgMethod{"ctlg_request_state_list", []string{}, nil, BeforeHookAddUserId},
+		PgMethod{"ctlg_request_state_update", []string{}, nil, BeforeHookAddUserId},
+		PgMethod{"ctlg_request_state_get_by_id", []string{}, nil, BeforeHookAddUserId},
+		PgMethod{"ctlg_time_type_get_by_id", []string{}, nil, BeforeHookAddUserId},
+		PgMethod{"ctlg_time_type_list", []string{}, nil, BeforeHookAddUserId},
+		PgMethod{"ctlg_time_type_update", []string{}, nil, BeforeHookAddUserId},
+		PgMethod{"ctlg_digital_solution_state_list", []string{}, nil, BeforeHookAddUserId},
+		PgMethod{"ctlg_digital_solution_state_update", []string{}, nil, BeforeHookAddUserId},
+		PgMethod{"ctlg_digital_solution_state_get_by_id", []string{}, nil, BeforeHookAddUserId},
+		PgMethod{"ctlg_functional_requirement_state_get_by_id", []string{}, nil, BeforeHookAddUserId},
+		PgMethod{"ctlg_functional_requirement_state_list", []string{}, nil, BeforeHookAddUserId},
+		PgMethod{"ctlg_functional_requirement_state_update", []string{}, nil, BeforeHookAddUserId},
+		PgMethod{"ctlg_task_type_update", []string{}, nil, BeforeHookAddUserId},
+		PgMethod{"ctlg_task_type_get_by_id", []string{}, nil, BeforeHookAddUserId},
+		PgMethod{"ctlg_task_type_list", []string{}, nil, BeforeHookAddUserId},
+		PgMethod{"ctlg_task_state_get_by_id", []string{}, nil, BeforeHookAddUserId},
+		PgMethod{"ctlg_task_state_list", []string{}, nil, BeforeHookAddUserId},
+		PgMethod{"ctlg_task_state_update", []string{}, nil, BeforeHookAddUserId},
+		PgMethod{"ctlg_task_role_get_by_id", []string{}, nil, BeforeHookAddUserId},
+		PgMethod{"ctlg_task_role_list", []string{}, nil, BeforeHookAddUserId},
+		PgMethod{"ctlg_task_role_update", []string{}, nil, BeforeHookAddUserId},
+		PgMethod{"ctlg_dev_task_state_list", []string{}, nil, BeforeHookAddUserId},
+		PgMethod{"ctlg_dev_task_state_update", []string{}, nil, BeforeHookAddUserId},
+		PgMethod{"ctlg_dev_task_state_get_by_id", []string{}, nil, BeforeHookAddUserId},
+		PgMethod{"ctlg_task_status_type_list", []string{}, nil, BeforeHookAddUserId},
+		PgMethod{"ctlg_task_status_type_update", []string{}, nil, BeforeHookAddUserId},
+		PgMethod{"ctlg_task_status_type_get_by_id", []string{}, nil, BeforeHookAddUserId},
+		PgMethod{"ctlg_subtask_state_get_by_id", []string{}, nil, BeforeHookAddUserId},
+		PgMethod{"ctlg_subtask_state_list", []string{}, nil, BeforeHookAddUserId},
+		PgMethod{"ctlg_subtask_state_update", []string{}, nil, BeforeHookAddUserId},
 		PgMethod{"meeting_list", []string{}, nil, BeforeHookAddUserId},
 		PgMethod{"meeting_update", []string{}, nil, BeforeHookAddUserId},
-		PgMethod{"comment_update", []string{}, nil, BeforeHookAddUserId},
-		PgMethod{"comment_get_by_id", []string{}, nil, BeforeHookAddUserId},
-		PgMethod{"comment_list", []string{}, nil, BeforeHookAddUserId},
+		PgMethod{"meeting_get_by_id", []string{}, nil, BeforeHookAddUserId},
 		PgMethod{"contract_list", []string{}, nil, BeforeHookAddUserId},
 		PgMethod{"contract_update", []string{}, nil, BeforeHookAddUserId},
 		PgMethod{"contract_get_by_id", []string{}, nil, BeforeHookAddUserId},
 		PgMethod{"counterparty_list", []string{}, nil, BeforeHookAddUserId},
 		PgMethod{"counterparty_update", []string{}, nil, BeforeHookAddUserId},
 		PgMethod{"counterparty_get_by_id", []string{}, nil, BeforeHookAddUserId},
-		PgMethod{"company_get_by_id", []string{}, nil, BeforeHookAddUserId},
 		PgMethod{"company_list", []string{}, nil, BeforeHookAddUserId},
 		PgMethod{"company_update", []string{}, nil, BeforeHookAddUserId},
+		PgMethod{"company_get_by_id", []string{}, nil, BeforeHookAddUserId},
 		PgMethod{"man_list", []string{}, nil, BeforeHookAddUserId},
 		PgMethod{"man_update", []string{}, nil, BeforeHookAddUserId},
 		PgMethod{"man_get_by_id", []string{}, nil, BeforeHookAddUserId},
-		PgMethod{"ctlg_time_type_list", []string{}, nil, BeforeHookAddUserId},
-		PgMethod{"ctlg_time_type_update", []string{}, nil, BeforeHookAddUserId},
-		PgMethod{"ctlg_time_type_get_by_id", []string{}, nil, BeforeHookAddUserId},
-		PgMethod{"ctlg_request_state_update", []string{}, nil, BeforeHookAddUserId},
-		PgMethod{"ctlg_request_state_get_by_id", []string{}, nil, BeforeHookAddUserId},
-		PgMethod{"ctlg_request_state_list", []string{}, nil, BeforeHookAddUserId},
+		PgMethod{"system_get_by_id", []string{}, nil, BeforeHookAddUserId},
+		PgMethod{"system_list", []string{}, nil, BeforeHookAddUserId},
+		PgMethod{"system_update", []string{}, nil, BeforeHookAddUserId},
 		PgMethod{"request_list", []string{}, nil, BeforeHookAddUserId},
 		PgMethod{"request_update", []string{}, nil, BeforeHookAddUserId},
 		PgMethod{"request_get_by_id", []string{}, nil, BeforeHookAddUserId},
-		PgMethod{"functional_requirement_list", []string{}, nil, BeforeHookAddUserId},
-		PgMethod{"functional_requirement_update", []string{}, nil, BeforeHookAddUserId},
-		PgMethod{"functional_requirement_get_by_id", []string{}, nil, BeforeHookAddUserId},
+		PgMethod{"sprint_list", []string{}, nil, BeforeHookAddUserId},
+		PgMethod{"sprint_update", []string{}, nil, BeforeHookAddUserId},
+		PgMethod{"sprint_get_by_id", []string{}, nil, BeforeHookAddUserId},
 		PgMethod{"digital_solution_worked_time", []string{}, nil, BeforeHookAddUserId},
 		PgMethod{"digital_solution_list", []string{}, nil, BeforeHookAddUserId},
 		PgMethod{"digital_solution_update", []string{}, nil, BeforeHookAddUserId},
 		PgMethod{"digital_solution_get_by_id", []string{}, nil, BeforeHookAddUserId},
-		PgMethod{"sprint_list", []string{}, nil, BeforeHookAddUserId},
-		PgMethod{"sprint_update", []string{}, nil, BeforeHookAddUserId},
-		PgMethod{"sprint_get_by_id", []string{}, nil, BeforeHookAddUserId},
-		PgMethod{"system_list", []string{}, nil, BeforeHookAddUserId},
-		PgMethod{"system_update", []string{}, nil, BeforeHookAddUserId},
-		PgMethod{"system_get_by_id", []string{}, nil, BeforeHookAddUserId},
+		PgMethod{"functional_requirement_list", []string{}, nil, BeforeHookAddUserId},
+		PgMethod{"functional_requirement_update", []string{}, nil, BeforeHookAddUserId},
+		PgMethod{"functional_requirement_get_by_id", []string{}, nil, BeforeHookAddUserId},
 		PgMethod{"invoice_list", []string{}, nil, BeforeHookAddUserId},
 		PgMethod{"invoice_update", []string{}, nil, BeforeHookAddUserId},
 		PgMethod{"invoice_get_by_id", []string{}, nil, BeforeHookAddUserId},
-		PgMethod{"ctlg_dev_task_state_list", []string{}, nil, BeforeHookAddUserId},
-		PgMethod{"ctlg_dev_task_state_update", []string{}, nil, BeforeHookAddUserId},
-		PgMethod{"ctlg_dev_task_state_get_by_id", []string{}, nil, BeforeHookAddUserId},
-		PgMethod{"time_list", []string{}, nil, BeforeHookAddUserId},
-		PgMethod{"time_update", []string{}, nil, BeforeHookAddUserId},
-		PgMethod{"time_get_by_id", []string{}, nil, BeforeHookAddUserId},
+		PgMethod{"task_get_statuses_by_status_type", []string{}, nil, BeforeHookAddUserId},
 		PgMethod{"task_list", []string{}, nil, BeforeHookAddUserId},
 		PgMethod{"task_update", []string{}, nil, BeforeHookAddUserId},
 		PgMethod{"task_get_by_id", []string{}, nil, BeforeHookAddUserId},
+		PgMethod{"task_specialist_link_list", []string{}, nil, BeforeHookAddUserId},
+		PgMethod{"task_specialist_link_update", []string{}, nil, BeforeHookAddUserId},
+		PgMethod{"task_specialist_link_get_by_id", []string{}, nil, BeforeHookAddUserId},
+		PgMethod{"time_list", []string{}, nil, BeforeHookAddUserId},
+		PgMethod{"time_update", []string{}, nil, BeforeHookAddUserId},
+		PgMethod{"time_get_by_id", []string{}, nil, BeforeHookAddUserId},
+		PgMethod{"comment_list", []string{}, nil, BeforeHookAddUserId},
+		PgMethod{"comment_update", []string{}, nil, BeforeHookAddUserId},
+		PgMethod{"comment_get_by_id", []string{}, nil, BeforeHookAddUserId},
 	}
 )
 
@@ -201,7 +226,7 @@ func apiCallPgFunc(c *gin.Context) {
 		var err error
 		queryRes, err = callPgFuncToJson(jsonParam.Method, jsonParam.Params)
 		if err != nil {
-			utils.HttpError(c, http.StatusBadRequest, fmt.Sprintf("%s", err))
+			utils.HttpError(c, http.StatusBadRequest, processPgErrorMsg(err))
 			return
 		}
 		// в случае если указан ключ для кэширования, сохраняем полученные данные из базы в кэш
@@ -280,4 +305,9 @@ func BeforeHookAddUserId(c *gin.Context, p interface{}) error {
 		m["user_id"] = user.Id
 	}
 	return nil
+}
+
+func processPgErrorMsg (err error) string  {
+
+	return err.Error()
 }

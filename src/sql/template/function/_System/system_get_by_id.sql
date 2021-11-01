@@ -23,10 +23,8 @@ BEGIN
     END IF;
 
     with t1 as (select * from system where id = (params ->> 'id')::int),
-		t2 as (select t1.*, c.title as rsk_title from t1 left join employee c on c.id = t1.rsk_id),
-		t3 as (select t2.*, c.title as customer_title from t2 left join company c on c.id = t2.customer_id),
-		t4 as (select t3.*, c.title as customer_agent_title from t3 left join man c on c.id = t3.customer_agent_id)
- 	select row_to_json(t4.*)::jsonb into result from t4;
+		t2 as (select t1.*, c.title as customer_title from t1 left join company c on c.id = t1.customer_id)
+ 	select row_to_json(t2.*)::jsonb into result from t2;
 
     -- случай когда записи с таким id не найдено
     IF result ->> 'id' ISNULL

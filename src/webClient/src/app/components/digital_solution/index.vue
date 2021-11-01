@@ -1,8 +1,10 @@
+
+
 <template>
   <q-page :padding="!isOpenInDialog">
-    <comp-breadcrumb v-if="!isOpenInDialog" :list="[{label:'Цифровые решения', docType:'digital_solution'}]"/>
+    <comp-breadcrumb class="text-capitalize" v-if="!isOpenInDialog" :list="[{label: $t('digital_solution.name_plural'), docType:'digital_solution'}]"/>
 
-    <comp-doc-list ref="docList" listTitle='Цифровые решения' listDeletedTitle='Удаленные цифровые решения' pg-method="digital_solution_list"
+    <comp-doc-list ref="docList" :listTitle="$t('digital_solution.name_plural')" :listDeletedTitle="$t('digital_solution.name_plural_deleted')" pg-method="digital_solution_list"
                    :list-sort-data="listSortData" :list-filter-data="listFilterData"
                    :newDocUrl="currentUrl + 'new'"
                    :ext="ext" 
@@ -57,5 +59,10 @@
         ],
       }
     },
+    methods: {
+    },
+    mounted() {
+    
+    }
   }
 </script>

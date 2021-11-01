@@ -8,7 +8,7 @@
       
       <div class="row q-col-gutter-md q-mb-sm">
       <div class="col-md-4 col-sm-6 col-xs-12">
-          <q-input outlined type='text' v-model="item.title" label="название" autogrow :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
+          <q-input outlined type='text' v-model="item.title" :label="$t('ctlg_time_type.title')" autogrow :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
       </div>
       </div>
       
@@ -16,7 +16,7 @@
       <!--  кнопки   -->
       <comp-item-btn-save v-if="!isOpenInDialog" @save="save" :readonly="false" @cancel="$router.push(docUrl)"/>
       <!--  при открытии в диалоге кнопку Отмена не показываем   -->
-      <q-btn v-else color="secondary" label="сохранить" class="q-mr-sm" @click="save"/>
+      <q-btn v-else color="secondary" :label="$t('message.save')" class="q-mr-sm" @click="save"/>
 
         
 
@@ -45,6 +45,9 @@
                 optionsFlds: [],
                 
             }
+        },
+        watch: {
+          
         },
         methods: {
           

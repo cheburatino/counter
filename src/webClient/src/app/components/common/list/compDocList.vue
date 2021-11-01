@@ -6,7 +6,7 @@
         <q-list bordered class="rounded-borders" separator>
           <q-item>
             <q-item-section>
-              <q-item-label caption>{{computedListTitle}}</q-item-label>
+              <q-item-label caption class="text-capitalize">{{computedListTitle}}</q-item-label>
             </q-item-section>
             <q-item-section top side>
               <div class="text-grey-8 q-gutter-xs">
@@ -114,7 +114,7 @@
         searchTxt: '',
         isShowSearchfld: false,
         itemList: [],
-        listParams: {page: 0, per_page: 10, deleted: false},
+        listParams: {page: 0, per_page: 10, deleted: false, order_by: 'created_at desc'},
         isUrlQueryProcessed: false, // флаг для обработки query из url при первоначальной загрузке
       }
     },

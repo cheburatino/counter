@@ -33,6 +33,25 @@ BEGIN
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 
     if (params ->> 'id')::int = -1 then
         -- проверика наличия обязательных параметров
@@ -43,16 +62,28 @@ BEGIN
         END IF;
         
 
-        EXECUTE ('INSERT INTO digital_solution (title, description, modeling_estimate_id, pre_realization_estimate_id, realization_estimate_id, sprint_id, file, options) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)  RETURNING *;')
+        EXECUTE ('INSERT INTO digital_solution (title, state_id, sprint_id, description, customer_id, rsk_id, system_id, analyst_id, client_agent_id, team_lead_id, date_plan_start_modeling, date_fact_start_modeling, model, date_plan_end_modeling, date_fact_end_modeling, date_plan_start_realization, date_fact_start_realization, date_plan_end_realization, date_fact_end_realization, options) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20)  RETURNING *;')
 		INTO digital_solutionRow
 		USING
 			(params ->> 'title')::text,
-			(params ->> 'description')::text,
-			(params ->> 'modeling_estimate_id')::int,
-			(params ->> 'pre_realization_estimate_id')::int,
-			(params ->> 'realization_estimate_id')::int,
+			coalesce((params ->> 'state_id')::int, 1)::int,
 			(params ->> 'sprint_id')::int,
-			(params -> 'file')::jsonb,
+			(params ->> 'description')::text,
+			(params ->> 'customer_id')::int,
+			(params ->> 'rsk_id')::int,
+			(params ->> 'system_id')::int,
+			(params ->> 'analyst_id')::int,
+			(params ->> 'client_agent_id')::int,
+			(params ->> 'team_lead_id')::int,
+			(params ->> 'date_plan_start_modeling')::timestamp,
+			(params ->> 'date_fact_start_modeling')::timestamp,
+			(params ->> 'model')::text,
+			(params ->> 'date_plan_end_modeling')::timestamp,
+			(params ->> 'date_fact_end_modeling')::timestamp,
+			(params ->> 'date_plan_start_realization')::timestamp,
+			(params ->> 'date_fact_start_realization')::timestamp,
+			(params ->> 'date_plan_end_realization')::timestamp,
+			(params ->> 'date_fact_end_realization')::timestamp,
 			coalesce(params -> 'options', '{}')::jsonb;
 
         
@@ -60,12 +91,24 @@ BEGIN
     else
         updateValue = '' || update_str_from_json(params, ARRAY [
 			['title', 'title', 'text'],
-			['description', 'description', 'text'],
-			['modeling_estimate_id', 'modeling_estimate_id', 'number'],
-			['pre_realization_estimate_id', 'pre_realization_estimate_id', 'number'],
-			['realization_estimate_id', 'realization_estimate_id', 'number'],
+			['state_id', 'state_id', 'number'],
 			['sprint_id', 'sprint_id', 'number'],
-			['file', 'file', 'jsonb'],
+			['description', 'description', 'text'],
+			['customer_id', 'customer_id', 'number'],
+			['rsk_id', 'rsk_id', 'number'],
+			['system_id', 'system_id', 'number'],
+			['analyst_id', 'analyst_id', 'number'],
+			['client_agent_id', 'client_agent_id', 'number'],
+			['team_lead_id', 'team_lead_id', 'number'],
+			['date_plan_start_modeling', 'date_plan_start_modeling', 'timestamp'],
+			['date_fact_start_modeling', 'date_fact_start_modeling', 'timestamp'],
+			['model', 'model', 'text'],
+			['date_plan_end_modeling', 'date_plan_end_modeling', 'timestamp'],
+			['date_fact_end_modeling', 'date_fact_end_modeling', 'timestamp'],
+			['date_plan_start_realization', 'date_plan_start_realization', 'timestamp'],
+			['date_fact_start_realization', 'date_fact_start_realization', 'timestamp'],
+			['date_plan_end_realization', 'date_plan_end_realization', 'timestamp'],
+			['date_fact_end_realization', 'date_fact_end_realization', 'timestamp'],
             ['options', 'options', 'jsonb'],
             ['deleted', 'deleted', 'bool']
             ]);

@@ -13,13 +13,16 @@ const (
 	breadcrumb_icon = "fas fa-running"
 )
 
-func GetDoc() t.DocType {
+func GetDoc(project *t.ProjectType) t.DocType {
 	doc := t.DocType{
+		Project: project,
 		Name:       name,
 		NameRu:     name_ru,
 		PathPrefix: "docs",
 		Flds: []t.FldType{
 			t.GetFldTitle(),
+			t.GetFldDate("date_start", "дата старта", [][]int{{2, 1}}),
+			t.GetFldDate("date_finish", "дата финиша", [][]int{{2, 2}}),
 		},
 		Vue: t.DocVue{
 			RouteName:      name,

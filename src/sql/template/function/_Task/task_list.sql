@@ -32,12 +32,12 @@ BEGIN
     whereStr = where_str_build(params, 'doc', ARRAY [
         ['ilike', 'search_text', 'search_text'],
 		['notQuoted', 'state', 'doc.state'],
+		['notQuoted', 'digital_solution_id', 'doc.digital_solution_id'],
+		['notQuoted', 'type_id', 'doc.type_id'],
 		['notQuoted', 'author_id', 'doc.author_id'],
 		['notQuoted', 'director_id', 'doc.director_id'],
 		['notQuoted', 'executor_id', 'doc.executor_id'],
-		['notQuoted', 'acceptor_id', 'doc.acceptor_id'],
-		['notQuoted', 'parent_task_id', 'doc.parent_task_id'],
-		['notQuoted', 'digital_solution_id', 'doc.digital_solution_id']
+		['notQuoted', 'acceptor_id', 'doc.acceptor_id']
     ]);
 
     

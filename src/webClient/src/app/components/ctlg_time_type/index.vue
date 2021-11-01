@@ -1,8 +1,10 @@
+
+
 <template>
   <q-page :padding="!isOpenInDialog">
-    <comp-breadcrumb v-if="!isOpenInDialog" :list="[{label:'Типы времени', docType:'ctlg_time_type'}]"/>
+    <comp-breadcrumb class="text-capitalize" v-if="!isOpenInDialog" :list="[{label: $t('ctlg_time_type.name_plural'), docType:'ctlg_time_type'}]"/>
 
-    <comp-doc-list ref="docList" listTitle='Типы времени' listDeletedTitle='Удаленные типы времени' pg-method="ctlg_time_type_list"
+    <comp-doc-list ref="docList" :listTitle="$t('ctlg_time_type.name_plural')" :listDeletedTitle="$t('ctlg_time_type.name_plural_deleted')" pg-method="ctlg_time_type_list"
                    :list-sort-data="listSortData" :list-filter-data="listFilterData"
                    :newDocUrl="currentUrl + 'new'"
                    :ext="ext" 
@@ -57,5 +59,10 @@
         ],
       }
     },
+    methods: {
+    },
+    mounted() {
+    
+    }
   }
 </script>

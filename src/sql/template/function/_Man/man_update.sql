@@ -31,24 +31,22 @@ BEGIN
     
     
     
+    
+    
 
     if (params ->> 'id')::int = -1 then
-        -- проверика наличия обязательных параметров
-        checkMsg = check_required_params(params, ARRAY ['title']);
-        IF checkMsg IS NOT NULL
-        THEN
-            RETURN checkMsg;
-        END IF;
         
 
-        EXECUTE ('INSERT INTO man (title, last_name, name, middle_name, company_id, options) VALUES ($1, $2, $3, $4, $5, $6)  RETURNING *;')
+        EXECUTE ('INSERT INTO man (title, last_name, first_name, middle_name, company_id, position, user_table_id, options) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)  RETURNING *;')
 		INTO manRow
 		USING
 			(params ->> 'title')::text,
 			(params ->> 'last_name')::text,
-			(params ->> 'name')::text,
+			(params ->> 'first_name')::text,
 			(params ->> 'middle_name')::text,
 			(params ->> 'company_id')::int,
+			(params ->> 'position')::text,
+			(params ->> 'user_table_id')::int,
 			coalesce(params -> 'options', '{}')::jsonb;
 
         
@@ -57,9 +55,11 @@ BEGIN
         updateValue = '' || update_str_from_json(params, ARRAY [
 			['title', 'title', 'text'],
 			['last_name', 'last_name', 'text'],
-			['name', 'name', 'text'],
+			['first_name', 'first_name', 'text'],
 			['middle_name', 'middle_name', 'text'],
 			['company_id', 'company_id', 'number'],
+			['position', 'position', 'text'],
+			['user_table_id', 'user_table_id', 'number'],
             ['options', 'options', 'jsonb'],
             ['deleted', 'deleted', 'bool']
             ]);

@@ -1,8 +1,10 @@
+
+
 <template>
   <q-page :padding="!isOpenInDialog">
-    <comp-breadcrumb v-if="!isOpenInDialog" :list="[{label:'Комментарии', docType:'comment'}]"/>
+    <comp-breadcrumb class="text-capitalize" v-if="!isOpenInDialog" :list="[{label: $t('comment.name_plural'), docType:'comment'}]"/>
 
-    <comp-doc-list ref="docList" listTitle='Комментарии' listDeletedTitle='Удаленные комментарии' pg-method="comment_list"
+    <comp-doc-list ref="docList" :listTitle="$t('comment.name_plural')" :listDeletedTitle="$t('comment.name_plural_deleted')" pg-method="comment_list"
                    :list-sort-data="listSortData" :list-filter-data="listFilterData"
                    :newDocUrl="currentUrl + 'new'"
                    :ext="ext" 
@@ -57,5 +59,10 @@
         ],
       }
     },
+    methods: {
+    },
+    mounted() {
+    
+    }
   }
 </script>

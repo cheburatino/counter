@@ -11,14 +11,14 @@ is_err () {
 }
 
 echo -e "\033[0;32m STEP1: create database dump...\033[0m"
-ssh root@89.223.93.241 << EOF
+ssh root@212.193.59.40 << EOF
     cd /home/deploy/electron_is
     docker exec -t electron_is_postgres_1 pg_dumpall -c -U postgres  > electron_is_dump
 EOF
 if is_err; then return; fi
 
 echo -e "\033[0;32m STEP2: copy file from server...\033[0m"
-scp root@89.223.93.241://home/deploy/electron_is/electron_is_dump .
+scp root@212.193.59.40://home/deploy/electron_is/electron_is_dump .
 
 # запускаем докер
 docker-compose --file docker-compose.dev.yml up -d

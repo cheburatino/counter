@@ -41,8 +41,6 @@ func StartWebServer(config types.Config) {
 	{
 		apiRoute.POST("/current_user", apiCurrentUser)
 		apiRoute.POST("/call_pg_func", apiCallPgFunc)
-		// отправка логов в graylog
-		apiRoute.POST("/log", logToGraylog)
 		// подключение по SSE
 		apiRoute.GET("/sse", sse.AddConn)
 		// операции с файлами
