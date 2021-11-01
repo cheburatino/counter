@@ -1,0 +1,47 @@
+docType = "DigitalSolution"
+tableComment = "цифровое решение"
+
+tableName ="digital_solution"
+
+fields = [
+	{name="id",			type="serial"},
+	{name="title",					type="char",	size=150, 	ext="not null",	 comment="название"},
+	{name="description",					type="text",	 comment="описание"},
+	{name="sprint_id",					type="int",	 comment="спринт"},
+	{name="file",					type="jsonb",	 comment="файлы"},
+	{name="search_text",			type="text",	comment="колонка для поиска"},
+	{name="options",				type="jsonb",	comment="разные дополнительные параметры"},
+	{name="created_at",				type="timestamp",	ext="with time zone"},
+	{name="updated_at",				type="timestamp",	ext="with time zone"},
+	{name="deleted",				type="bool",	ext="not null default false"}
+]
+
+fkConstraints = [
+	{name="digital_solution_title_already_exist", ext="UNIQUE (title)"},
+	{fld="sprint_id", ref="sprint", fk="id"}
+]
+
+triggers = [
+	{name="digital_solution_created", when="before insert or update", ref="for each row", funcName="builtin_fld_update"},
+	{name="digital_solution_trigger_before", when="before insert or update", ref="for each row", funcName="digital_solution_trigger_before"},
+	{name="digital_solution_trigger_after", when="after insert or update", ref="for each row", funcName="digital_solution_trigger_after"}
+]
+
+
+
+methods = [
+	"digital_solution_worked_time",
+	"digital_solution_list",
+	"digital_solution_update",
+	"digital_solution_get_by_id",
+	"digital_solution_trigger_before",
+	"digital_solution_trigger_after"
+]
+
+alterScripts = [
+	"alter table digital_solution add column if not exists title CHARACTER VARYING(150);",
+	"alter table digital_solution add column if not exists description text;",
+	"alter table digital_solution add column if not exists sprint_id int;",
+	"alter table digital_solution add column if not exists file jsonb;",
+	"alter table digital_solution add column if not exists search_text text;"
+]
