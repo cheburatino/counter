@@ -20,7 +20,7 @@
                 <q-item-section>
                     
                 <q-item-label>{{v.title}}</q-item-label>
-                <q-item-label caption>{{$utils.formatPgDate(v.register_date)}}</q-item-label>
+                <q-item-caption>{{v.state}}</q-item-caption>
             
                 </q-item-section>
                  <q-item-section side v-if="!readonly">

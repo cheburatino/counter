@@ -1,16 +1,16 @@
 
 export default {
+ 		name: 'request',
+ 		title: 'title',
+ 		description: 'description',
+ 		customer_id: 'customer ',
+ 		customer_agent_id: 'customer agent ',
  		name_plural: 'request',
  		name_plural_deleted: 'deleted request',
- 		title: 'title',
  		datetime_reciept: 'datetime reciept',
- 		customer_agent_id: 'customer agent ',
- 		system_id: 'system ',
- 		result: 'result',
- 		name: 'request',
  		state_id: 'state ',
- 		description: 'description',
  		rsk_id: 'rsk ',
  		how_request_received: 'how request received',
- 		customer_id: 'customer ',
+ 		system_id: 'system ',
+ 		result: 'result',
 }

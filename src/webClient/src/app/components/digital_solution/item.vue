@@ -71,7 +71,7 @@
           <comp-fld-ref-search outlined pgMethod="man_list" :label="$t('digital_solution.client_agent_id')" :item='item.client_agent_title' :itemId='item.client_agent_id' :ext='{company_id: item.customer_id, pathUrl: "/man", avatar: "image/man.svg", isClearable: "true"}' @update="v=> item.client_agent_id = v.id" @clear="item.client_agent_id = null" :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
       </div>
       <div class="col-md-4 col-sm-6 col-xs-12">
-          <comp-fld-ref-search outlined pgMethod="man_list" :label="$t('digital_solution.team_lead_id')" :item='item.team_lead_title' :itemId='item.team_lead_id' :ext='{company_id: 1, avatar: "image/man.svg", isClearable: "true", pathUrl: "/man"}' @update="v=> item.team_lead_id = v.id" @clear="item.team_lead_id = null" :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
+          <comp-fld-ref-search outlined pgMethod="man_list" :label="$t('digital_solution.team_lead_id')" :item='item.team_lead_title' :itemId='item.team_lead_id' :ext='{company_id: 1, pathUrl: "/man", avatar: "image/man.svg", isClearable: "true"}' @update="v=> item.team_lead_id = v.id" @clear="item.team_lead_id = null" :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
       </div>
       </div>
       
@@ -149,15 +149,15 @@
 </template>
 
 <script>
+	import compParticipants from './comp/participants.vue'
+	import compModeling from './comp/modeling.vue'
 	import compRealization from './comp/realization.vue'
 	import ftListRefListWidget from './comp/ftListRefListWidget.vue'
 	import taskListRefListWidget from './comp/taskListRefListWidget.vue'
-	import compParticipants from './comp/participants.vue'
-	import compModeling from './comp/modeling.vue'
     import currentUserMixin from '../../../app/mixins/currentUser'
     export default {
         props: ['id', 'isOpenInDialog'],
-        components: {compParticipants, compModeling, compRealization, ftListRefListWidget, taskListRefListWidget},
+        components: {ftListRefListWidget, taskListRefListWidget, compParticipants, compModeling, compRealization},
         mixins: [currentUserMixin,],
         computed: {
             docUrl: function() {

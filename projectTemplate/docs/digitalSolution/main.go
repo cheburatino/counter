@@ -107,7 +107,7 @@ func GetDoc(project *t.ProjectType) t.DocType {
 		}, // список полей, которые заполняются при добавлении новой записи
 		TitleTemplate: `
                 <q-item-label>{{v.title}}</q-item-label>
-                <q-item-label caption>{{$utils.formatPgDate(v.register_date)}}</q-item-label>
+                <q-item-caption>{{v.state}}</q-item-caption>
             `, // шаблон для названия в списке (vue синтаксис)
 	}, [][]int{{4, 2}}, "col-4"))
 

@@ -26,9 +26,9 @@ triggers = [
 
 
 methods = [
-	"ctlg_digital_solution_state_update",
 	"ctlg_digital_solution_state_get_by_id",
 	"ctlg_digital_solution_state_list",
+	"ctlg_digital_solution_state_update",
 	"ctlg_digital_solution_state_trigger_before",
 	"ctlg_digital_solution_state_trigger_after"
 ]
