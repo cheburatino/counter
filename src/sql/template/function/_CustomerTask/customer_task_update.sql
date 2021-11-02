@@ -1,4 +1,4 @@
--- создание задача
+-- создание задача заказчика
 
 DROP FUNCTION IF EXISTS customer_task_update(params JSONB);
 CREATE OR REPLACE FUNCTION customer_task_update(params JSONB)

@@ -81,6 +81,18 @@ func GetDoc(project *t.ProjectType) t.DocType {
 
 	doc.Init()
 
+	doc.Vue.TmplFuncs = map[string]func(t.DocType) string{
+		// шаблон названия в списке
+		"PrintListRowLabel": func(docType t.DocType) string {
+			return `
+				 <q-item-section>
+				    <q-item-label lines="1">{{item.title}}</q-item-label>
+					<q-item-label caption><q-badge>{{item.options.title.system_title}}</q-badge></q-item-label>
+				 </q-item-section>
+			`
+		},
+	}
+
 	doc.AddFld(t.GetFldVueCompositionRefList(&doc, t.VueCompRefListWidgetParams{
 		Label:      "Функциональные требования",                  // название списка, которе выводится на экране
 		FldName:    "ft_list",              // название поля. Любое, в формате snake_case. На основе этого названия формируется название компоненты во vue.

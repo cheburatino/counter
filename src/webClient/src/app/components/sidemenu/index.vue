@@ -71,7 +71,7 @@
 
 									{icon: 'image/task.svg', text: 'i18n_menu.task', url: '/task', roles: []},
 
-									{icon: 'image/task.svg', text: 'i18n_menu.customer_task', url: '/customer_task', roles: []},
+									{icon: 'image/customer_task.png', text: 'i18n_menu.customer_task', url: '/customer_task', roles: []},
 
 									{icon: 'image/bug.png', text: 'i18n_menu.bug', url: '/bug', roles: []},
 

@@ -16,7 +16,7 @@
 		<router-link :to="currentUrl + item.id" style="cursor: pointer">
 			<q-item-section avatar>
 			  <q-avatar rounded>
-				<img src="image/task.svg" alt="">
+				<img src="image/customer_task.png" alt="">
 			  </q-avatar>
 			</q-item-section>
 		</router-link>

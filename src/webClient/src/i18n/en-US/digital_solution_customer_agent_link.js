@@ -1,5 +1,6 @@
 
 export default {
+ 		description: 'description',
  		author_id: 'author ',
  		name: 'digital solution customer agent link',
  		name_plural: 'digital solution customer agent link',
@@ -7,5 +8,4 @@ export default {
  		title: 'title',
  		digital_solution_id: 'digital solution ',
  		customer_agent_id: 'customer agent ',
- 		description: 'description',
 }

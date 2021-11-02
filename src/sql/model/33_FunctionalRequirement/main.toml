@@ -6,7 +6,7 @@ tableName ="functional_requirement"
 fields = [
 	{name="id",			type="serial"},
 	{name="title",					type="char",	size=150, 	ext="not null",	 comment="название"},
-	{name="state_id",					type="int",	 comment="статус"},
+	{name="state_id",					type="int", 	ext=" default 1",	 comment="статус"},
 	{name="description",					type="text",	 comment="описание"},
 	{name="request_id",					type="int",	 comment="запрос"},
 	{name="digital_solution_id",					type="int",	 comment="цифровое решение"},

@@ -47,7 +47,7 @@ BEGIN
 		INTO functional_requirementRow
 		USING
 			(params ->> 'title')::text,
-			(params ->> 'state_id')::int,
+			coalesce((params ->> 'state_id')::int, 1)::int,
 			(params ->> 'description')::text,
 			(params ->> 'request_id')::int,
 			(params ->> 'digital_solution_id')::int,

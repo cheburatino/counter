@@ -7,9 +7,9 @@ import (
 
 const (
 	name            = "customer_task"
-	name_ru         = "задача"
-	name_ru_plural  = "задачи"
-	menu_icon       = "image/task.svg"
+	name_ru         = "задача заказчика"
+	name_ru_plural  = "задачи заказчиков"
+	menu_icon       = "image/customer_task.png"
 	breadcrumb_icon = "fas fa-clipboard-check"
 )
 

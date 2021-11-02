@@ -1,5 +1,6 @@
 
 export default {
+ 		functional_requirement_id: 'функциональное требование',
  		system_id: 'система',
  		name: 'баг',
  		name_plural: 'Баги',
@@ -7,5 +8,4 @@ export default {
  		title: 'название',
  		state_id: 'статус',
  		description: 'описание',
- 		functional_requirement_id: 'функциональное требование',
 }
