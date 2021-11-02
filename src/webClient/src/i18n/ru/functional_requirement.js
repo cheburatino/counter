@@ -1,12 +1,12 @@
 
 export default {
  		name: 'функциональное требование',
+ 		name_plural_deleted: 'удаленные Функциональные требования',
  		title: 'название',
+ 		state_id: 'статус',
  		request_id: 'запрос',
- 		digital_solution_id: 'цифровое решение',
  		result: 'результат',
  		name_plural: 'Функциональные требования',
- 		name_plural_deleted: 'удаленные Функциональные требования',
- 		state_id: 'статус',
  		description: 'описание',
+ 		digital_solution_id: 'цифровое решение',
 }

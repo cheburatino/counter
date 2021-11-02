@@ -41,7 +41,7 @@
       
       <div class="row q-col-gutter-md q-mb-sm">
       <div class="col-md-4 col-sm-6 col-xs-12">
-          <comp-fld-ref-search outlined pgMethod="man_list" :label="$t('task.author_id')" :item='item.author_title' :itemId='item.author_id' :ext='{company_id: 1, isClearable: "true", pathUrl: "/man", avatar: "image/man.svg"}' @update="v=> item.author_id = v.id" @clear="item.author_id = null" :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
+          <comp-fld-ref-search outlined pgMethod="man_list" :label="$t('task.author_id')" :item='item.author_title' :itemId='item.author_id' :ext='{company_id: 1, pathUrl: "/man", avatar: "image/man.svg", isClearable: "true"}' @update="v=> item.author_id = v.id" @clear="item.author_id = null" :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
       </div>
       <div class="col-md-4 col-sm-6 col-xs-12">
           <comp-fld-ref-search outlined pgMethod="man_list" :label="$t('task.director_id')" :item='item.director_title' :itemId='item.director_id' :ext='{company_id: 1, pathUrl: "/man", avatar: "image/man.svg", isClearable: "true"}' @update="v=> item.director_id = v.id" @clear="item.director_id = null" :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
@@ -81,6 +81,12 @@
       </div>
       </div>
       
+      <div class="row q-col-gutter-md q-mb-sm">
+      <div class="col-md-4 col-sm-6 col-xs-12">
+          <comp-specialist :item='item' :currentUser='currentUser'/>
+      </div>
+      </div>
+      
 
       <!--  кнопки   -->
       <comp-item-btn-save v-if="!isOpenInDialog" @save="save" :readonly="false" @cancel="$router.push(docUrl)"/>
@@ -101,11 +107,11 @@
 </template>
 
 <script>
-
+	import compSpecialist from './comp/specialist.vue'
     import currentUserMixin from '../../../app/mixins/currentUser'
     export default {
         props: ['id', 'isOpenInDialog'],
-        components: {},
+        components: {compSpecialist},
         mixins: [currentUserMixin,],
         computed: {
             docUrl: function() {

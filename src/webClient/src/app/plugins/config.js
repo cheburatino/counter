@@ -40,6 +40,7 @@ task: 'fas fa-clipboard-check',
 customer_task: 'fas fa-clipboard-check',
 bug: 'fas fa-exclamation-triangle',
 task_specialist_link: 'fas fa-list-ul',
+digital_solution_specialist_link: 'fas fa-list-ul',
 digital_solution_customer_agent_link: 'fas fa-list-ul',
 time: 'fas fa-building',
 comment: 'far fa-comment-dots'

@@ -48,7 +48,8 @@ triggers = [
 
 
 methods = [
-	"task_get_statuses_by_status_type",
+	"task_get_specialist",
+	"task_get_specialist_role",
 	"task_list",
 	"task_update",
 	"task_get_by_id",

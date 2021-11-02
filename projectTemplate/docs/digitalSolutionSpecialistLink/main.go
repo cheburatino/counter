@@ -22,7 +22,7 @@ func GetDoc(project *t.ProjectType) t.DocType {
 		Flds: []t.FldType{
 			t.GetFldTitle(),
 			t.GetFldRef("digital_solution_id", "id цифрового решения", "digital_solution", [][]int{{2, 1}}),
-			t.GetFldRef("specialist_id", "представитель заказчика", "man", [][]int{{2, 2}}),
+			t.GetFldRef("specialist_id", "специалист", "man", [][]int{{2, 2}}),
 			t.GetFldRef("role_id", "роль", "ctlg_digital_solution_specialist_role", [][]int{{3, 1}}),
 			t.GetFldString("description", "описание", 0, [][]int{{4, 1}}, "col-8"),
 			t.GetFldRef("author_id", "автор", "man", [][]int{{5, 1}}),

@@ -23,6 +23,7 @@ import (
 	"github.com/cheburatino/electron_is/projectTemplate/docs/customerTask"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/digitalSolution"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/digitalSolutionCustomerAgentLink"
+	"github.com/cheburatino/electron_is/projectTemplate/docs/digitalSolutionSpecialistLink"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/functionalRequirement"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/invoice"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/man"
@@ -80,6 +81,7 @@ func getProject() t.ProjectType {
 		customerTask.GetDoc(p),
 		bug.GetDoc(p),
 		taskSpecialistLink.GetDoc(p),
+		digitalSolutionSpecialistLink.GetDoc(p),
 		digitalSolutionCustomerAgentLink.GetDoc(p),
 		time.GetDoc(p),
 		comment.GetDoc(p),
