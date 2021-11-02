@@ -7,7 +7,6 @@ DECLARE
 	stateTitle TEXT;
 	requestTitle TEXT;
 	digitalSolutionTitle TEXT;
-	analystTitle TEXT;
 
        searchTxtVar TEXT := '';
 BEGIN
@@ -16,13 +15,12 @@ BEGIN
 		select title into stateTitle from ctlg_functional_requirement_state where id = new.state_id;
 		select title into requestTitle from request where id = new.request_id;
 		select title into digitalSolutionTitle from digital_solution where id = new.digital_solution_id;
-		select title into analystTitle from man where id = new.analyst_id;
         
         -- заполняем options.title
-        NEW.options = coalesce(OLD.options, '{}'::jsonb) || NEW.options || jsonb_build_object('title', jsonb_build_object('title', new.title, 'state_title', stateTitle, 'request_title', requestTitle, 'digital_solution_title', digitalSolutionTitle, 'analyst_title', analystTitle));
+        NEW.options = coalesce(OLD.options, '{}'::jsonb) || NEW.options || jsonb_build_object('title', jsonb_build_object('title', new.title, 'state_title', stateTitle, 'request_title', requestTitle, 'digital_solution_title', digitalSolutionTitle));
         -- заполняем search_text
         
-        NEW.search_text = concat(new.title, ' ', stateTitle, ' ', requestTitle, ' ', digitalSolutionTitle, ' ', analystTitle, ' ', searchTxtVar);
+        NEW.search_text = concat(new.title, ' ', stateTitle, ' ', requestTitle, ' ', digitalSolutionTitle, ' ', searchTxtVar);
 
         
 

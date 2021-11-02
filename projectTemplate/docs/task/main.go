@@ -15,7 +15,7 @@ const (
 
 func GetDoc(project *t.ProjectType) t.DocType {
 	doc := t.DocType{
-		Project: project,
+		Project:    project,
 		Name:       name,
 		NameRu:     name_ru,
 		PathPrefix: "docs",
@@ -31,13 +31,12 @@ func GetDoc(project *t.ProjectType) t.DocType {
 			t.GetFldRef("director_id", "постановщик", "man", [][]int{{5, 2}}, "isShowLink", "isClearable", "ext: {company_id: 1}"),
 			t.GetFldRef("executor_id", "исполнитель", "man", [][]int{{6, 1}}, "isShowLink", "isClearable", "ext: {company_id: 1}"),
 			t.GetFldRef("acceptor_id", "приёмщик", "man", [][]int{{6, 2}}, "isShowLink", "isClearable", "ext: {company_id: 1}"),
-			t.GetFldJsonbComposition("specialists", "Специалисты", [][]int{{6, 3}}, "", "comp-specialists", ":currentUser='currentUser'"),
-
 			t.GetFldDate("plan_start_date", "плановая дата начала", [][]int{{7, 1}}),
 			t.GetFldDate("fact_start_date", "фактическая дата начала", [][]int{{7, 2}}),
 			t.GetFldDate("plan_end_date", "плановая дата завершения", [][]int{{8, 1}}),
 			t.GetFldDate("fact_end_date", "фактическая дата завершения", [][]int{{8, 2}}),
 			t.GetFldString("result", "результат", 0, [][]int{{9, 1}}, "col-8"),
+			t.GetFldJsonbCompositionWithoutFld([][]int{{10, 1}}, "", "comp-specialist", ":currentUser='currentUser'"),
 		},
 		Vue: t.DocVue{
 			RouteName:      name,
@@ -46,9 +45,8 @@ func GetDoc(project *t.ProjectType) t.DocType {
 			Roles:          []string{},
 		},
 		Templates: map[string]*t.DocTemplate{
-			"sql_function_get_statuses_by_status_type.sql": {},
-			"sql_function_get_specialists.sql": {},
-			"sql_function_get_specialists_role.sql": {},
+			"sql_function_get_specialist.sql":              {},
+			"sql_function_get_specialist_role.sql":         {},
 		},
 		IsBaseTemplates: t.DocIsBaseTemplates{true, true},
 		Sql: t.DocSql{
@@ -56,9 +54,8 @@ func GetDoc(project *t.ProjectType) t.DocType {
 			IsBeforeTrigger: true,
 			IsAfterTrigger:  true,
 			Methods: map[string]*t.DocSqlMethod{
-				"task_get_statuses_by_status_type": {Name: "task_get_statuses_by_status_type"},
-				"task_get_specialists": {Name: "task_get_specialists"},
-				"task_get_specialists_role": {Name: "task_get_specialists_role"},
+				"task_get_specialist":              {Name: "task_get_specialist"},
+				"task_get_specialist_role":         {Name: "task_get_specialist_role"},
 			},
 		},
 	}
@@ -66,7 +63,7 @@ func GetDoc(project *t.ProjectType) t.DocType {
 	doc.Sql.FillBaseMethods(doc.Name)
 	doc.Vue.AddFixedSaveBtn()
 
-	doc.AddVueComposition("docItem", "specialists")
+	doc.AddVueComposition("docItem", "specialist")
 
 	doc.Vue.I18n = map[string]string{
 		"listTitle":        utils.UpperCaseFirst(name_ru_plural),
@@ -74,6 +71,18 @@ func GetDoc(project *t.ProjectType) t.DocType {
 	}
 
 	doc.Init()
+
+	doc.Vue.TmplFuncs = map[string]func(t.DocType) string{
+		// шаблон названия в списке
+		"PrintListRowLabel": func(docType t.DocType) string {
+			return `
+				 <q-item-section>
+				    <q-item-label lines="1">{{item.title}}</q-item-label>
+					<q-item-label caption><q-badge color="orange">{{item.options.title.state_title}}</q-badge></q-item-label>
+				 </q-item-section>
+			`
+		},
+	}
 
 	return doc
 }

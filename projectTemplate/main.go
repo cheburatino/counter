@@ -1,11 +1,15 @@
 package main
 
 import (
+	"github.com/cheburatino/electron_is/projectTemplate/docs/bug"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/comment"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/company"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/contract"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/counterparty"
+	"github.com/cheburatino/electron_is/projectTemplate/docs/ctlgBugState"
+	"github.com/cheburatino/electron_is/projectTemplate/docs/ctlgCustomerTaskState"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/ctlgDevTaskState"
+	"github.com/cheburatino/electron_is/projectTemplate/docs/ctlgDigitalSolutionSpecialistRole"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/ctlgDigitalSolutionState"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/ctlgElectronSkill"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/ctlgFunctionalRequirementState"
@@ -16,7 +20,10 @@ import (
 	ctlgTaskStatusType "github.com/cheburatino/electron_is/projectTemplate/docs/ctlgTaskStatusType"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/ctlgTaskType"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/ctlgTimeType"
+	"github.com/cheburatino/electron_is/projectTemplate/docs/customerTask"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/digitalSolution"
+	"github.com/cheburatino/electron_is/projectTemplate/docs/digitalSolutionCustomerAgentLink"
+	"github.com/cheburatino/electron_is/projectTemplate/docs/digitalSolutionSpecialistLink"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/functionalRequirement"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/invoice"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/man"
@@ -49,6 +56,7 @@ func getProject() t.ProjectType {
 		ctlgRequestState.GetDoc(p),
 		ctlgTimeType.GetDoc(p),
 		ctlgDigitalSolutionState.GetDoc(p),
+		ctlgDigitalSolutionSpecialistRole.GetDoc(p),
 		ctlgFunctionalRequirementState.GetDoc(p),
 		ctlgTaskType.GetDoc(p),
 		ctlgTaskState.GetDoc(p),
@@ -56,6 +64,8 @@ func getProject() t.ProjectType {
 		ctlgDevTaskState.GetDoc(p),
 		ctlgTaskStatusType.GetDoc(p),
 		ctlgSubtaskState.GetDoc(p),
+		ctlgBugState.GetDoc(p),
+		ctlgCustomerTaskState.GetDoc(p),
 		meeting.GetDoc(p),
 		contract.GetDoc(p),
 		counterparty.GetDoc(p),
@@ -68,7 +78,11 @@ func getProject() t.ProjectType {
 		functionalRequirement.GetDoc(p),
 		invoice.GetDoc(p),
 		task.GetDoc(p),
+		customerTask.GetDoc(p),
+		bug.GetDoc(p),
 		taskSpecialistLink.GetDoc(p),
+		digitalSolutionSpecialistLink.GetDoc(p),
+		digitalSolutionCustomerAgentLink.GetDoc(p),
 		time.GetDoc(p),
 		comment.GetDoc(p),
 	}
@@ -88,6 +102,8 @@ func getProject() t.ProjectType {
 		{DocName: "functional_requirement"},
 		{DocName: "digital_solution"},
 		{DocName: "task"},
+		{DocName: "customer_task"},
+		{DocName: "bug"},
 		{DocName: "meeting"},
 		{DocName: "time"},
 		{DocName: "sprint"},
@@ -107,6 +123,7 @@ func getProject() t.ProjectType {
 			{Text: "Типы задач", Url: "ctlg_task_type"},
 			{Text: "Статусы задач", Url: "ctlg_task_state"},
 			{Text: "Роли задач", Url: "ctlg_task_role"},
+			{Text: "Статусы задач заказчиков", Url: "ctlg_customer_task_state"},
 			//{Text: "Типы статусов задач", Url: "ctlg_task_status_type"},
 			//{Text: "Статусы задач разработки", Url: "ctlg_dev_task_state"},
 			//{Text: "Статусы подзадач", Url: "ctlg_subtask_state"},
