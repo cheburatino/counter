@@ -53,7 +53,10 @@
           <comp-fld-ref-search outlined pgMethod="man_list" :label="$t('task.executor_id')" :item='item.executor_title' :itemId='item.executor_id' :ext='{company_id: 1, pathUrl: "/man", avatar: "image/man.svg", isClearable: "true"}' @update="v=> item.executor_id = v.id" @clear="item.executor_id = null" :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
       </div>
       <div class="col-md-4 col-sm-6 col-xs-12">
-          <comp-fld-ref-search outlined pgMethod="man_list" :label="$t('task.acceptor_id')" :item='item.acceptor_title' :itemId='item.acceptor_id' :ext='{company_id: 1, isClearable: "true", pathUrl: "/man", avatar: "image/man.svg"}' @update="v=> item.acceptor_id = v.id" @clear="item.acceptor_id = null" :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
+          <comp-fld-ref-search outlined pgMethod="man_list" :label="$t('task.acceptor_id')" :item='item.acceptor_title' :itemId='item.acceptor_id' :ext='{company_id: 1, pathUrl: "/man", avatar: "image/man.svg", isClearable: "true"}' @update="v=> item.acceptor_id = v.id" @clear="item.acceptor_id = null" :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
+      </div>
+      <div class="col-md-4 col-sm-6 col-xs-12">
+          <comp-specialists :fld='item.specialists' :item='item' @update='item.specialists = $event' label='Специалисты' :currentUser='currentUser'/>
       </div>
       </div>
       
@@ -101,11 +104,11 @@
 </template>
 
 <script>
-
+	import compSpecialists from './comp/specialists.vue'
     import currentUserMixin from '../../../app/mixins/currentUser'
     export default {
         props: ['id', 'isOpenInDialog'],
-        components: {},
+        components: {compSpecialists},
         mixins: [currentUserMixin,],
         computed: {
             docUrl: function() {
@@ -127,6 +130,7 @@
                         {name: 'director_id', label: 'постановщик'},
                         {name: 'executor_id', label: 'исполнитель'},
                         {name: 'acceptor_id', label: 'приёмщик'},
+                        {name: 'specialists', label: 'Специалисты'},
                         {name: 'plan_start_date', label: 'плановая дата начала'},
                         {name: 'fact_start_date', label: 'фактическая дата начала'},
                         {name: 'plan_end_date', label: 'плановая дата завершения'},

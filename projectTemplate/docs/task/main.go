@@ -31,6 +31,8 @@ func GetDoc(project *t.ProjectType) t.DocType {
 			t.GetFldRef("director_id", "постановщик", "man", [][]int{{5, 2}}, "isShowLink", "isClearable", "ext: {company_id: 1}"),
 			t.GetFldRef("executor_id", "исполнитель", "man", [][]int{{6, 1}}, "isShowLink", "isClearable", "ext: {company_id: 1}"),
 			t.GetFldRef("acceptor_id", "приёмщик", "man", [][]int{{6, 2}}, "isShowLink", "isClearable", "ext: {company_id: 1}"),
+			t.GetFldJsonbComposition("specialists", "Специалисты", [][]int{{6, 3}}, "", "comp-specialists", ":currentUser='currentUser'"),
+
 			t.GetFldDate("plan_start_date", "плановая дата начала", [][]int{{7, 1}}),
 			t.GetFldDate("fact_start_date", "фактическая дата начала", [][]int{{7, 2}}),
 			t.GetFldDate("plan_end_date", "плановая дата завершения", [][]int{{8, 1}}),
@@ -45,6 +47,8 @@ func GetDoc(project *t.ProjectType) t.DocType {
 		},
 		Templates: map[string]*t.DocTemplate{
 			"sql_function_get_statuses_by_status_type.sql": {},
+			"sql_function_get_specialists.sql": {},
+			"sql_function_get_specialists_role.sql": {},
 		},
 		IsBaseTemplates: t.DocIsBaseTemplates{true, true},
 		Sql: t.DocSql{
@@ -53,12 +57,16 @@ func GetDoc(project *t.ProjectType) t.DocType {
 			IsAfterTrigger:  true,
 			Methods: map[string]*t.DocSqlMethod{
 				"task_get_statuses_by_status_type": {Name: "task_get_statuses_by_status_type"},
+				"task_get_specialists": {Name: "task_get_specialists"},
+				"task_get_specialists_role": {Name: "task_get_specialists_role"},
 			},
 		},
 	}
 	// создаем стандартные методы sql "list", "update", "get_by_id" с возможностью ограничения по ролям
 	doc.Sql.FillBaseMethods(doc.Name)
 	doc.Vue.AddFixedSaveBtn()
+
+	doc.AddVueComposition("docItem", "specialists")
 
 	doc.Vue.I18n = map[string]string{
 		"listTitle":        utils.UpperCaseFirst(name_ru_plural),

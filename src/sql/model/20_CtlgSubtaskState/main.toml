@@ -26,9 +26,9 @@ triggers = [
 
 
 methods = [
-	"ctlg_subtask_state_get_by_id",
 	"ctlg_subtask_state_list",
 	"ctlg_subtask_state_update",
+	"ctlg_subtask_state_get_by_id",
 	"ctlg_subtask_state_trigger_before",
 	"ctlg_subtask_state_trigger_after"
 ]
