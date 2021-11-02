@@ -1,12 +1,12 @@
 
 export default {
- 		role_id: 'роль',
+ 		name: 'участник задачи',
+ 		title: 'название',
+ 		task_id: 'id задачи',
+ 		specialist_id: 'специалист',
  		author_id: 'автор',
  		name_plural: 'Участники задач',
- 		task_id: 'id задачи',
- 		title: 'название',
- 		specialist_id: 'специалист',
- 		description: 'описание',
- 		name: 'участник задачи',
  		name_plural_deleted: 'удаленные Участники задач',
+ 		role_id: 'роль',
+ 		description: 'описание',
 }

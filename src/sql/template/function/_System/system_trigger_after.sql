@@ -19,6 +19,9 @@ if new.title != old.title then
  for r in select * from invoice where system_id = new.id loop
  update invoice set updated_at=now() where id = r.id;
  end loop;
+ for r in select * from bug where system_id = new.id loop
+ update bug set updated_at=now() where id = r.id;
+ end loop;
 
  end if;
  end if;

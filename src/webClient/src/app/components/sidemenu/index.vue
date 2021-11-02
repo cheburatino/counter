@@ -71,6 +71,10 @@
 
 									{icon: 'image/task.svg', text: 'i18n_menu.task', url: '/task', roles: []},
 
+									{icon: 'image/task.svg', text: 'i18n_menu.customer_task', url: '/customer_task', roles: []},
+
+									{icon: 'image/bug.png', text: 'i18n_menu.bug', url: '/bug', roles: []},
+
 									{icon: 'image/meeting.svg', text: 'i18n_menu.meeting', url: '/meeting', roles: []},
 
 									{icon: 'image/time_fast.svg', text: 'i18n_menu.time', url: '/time', roles: []},
@@ -97,6 +101,7 @@
 								{icon: '', text: 'Типы задач', url: '/ctlg_task_type', roles: []},
 								{icon: '', text: 'Статусы задач', url: '/ctlg_task_state', roles: []},
 								{icon: '', text: 'Роли задач', url: '/ctlg_task_role', roles: []},
+								{icon: '', text: 'Статусы задач заказчиков', url: '/ctlg_customer_task_state', roles: []},
 ],},
 
                 ],

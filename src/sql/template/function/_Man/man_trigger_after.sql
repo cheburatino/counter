@@ -28,9 +28,6 @@ if new.title != old.title then
  for r in select * from digital_solution where team_lead_id = new.id loop
  update digital_solution set updated_at=now() where id = r.id;
  end loop;
- for r in select * from functional_requirement where analyst_id = new.id loop
- update functional_requirement set updated_at=now() where id = r.id;
- end loop;
  for r in select * from task where author_id = new.id loop
  update task set updated_at=now() where id = r.id;
  end loop;
@@ -43,11 +40,20 @@ if new.title != old.title then
  for r in select * from task where acceptor_id = new.id loop
  update task set updated_at=now() where id = r.id;
  end loop;
+ for r in select * from customer_task where author_id = new.id loop
+ update customer_task set updated_at=now() where id = r.id;
+ end loop;
  for r in select * from task_specialist_link where specialist_id = new.id loop
  update task_specialist_link set updated_at=now() where id = r.id;
  end loop;
  for r in select * from task_specialist_link where author_id = new.id loop
  update task_specialist_link set updated_at=now() where id = r.id;
+ end loop;
+ for r in select * from digital_solution_customer_agent_link where customer_agent_id = new.id loop
+ update digital_solution_customer_agent_link set updated_at=now() where id = r.id;
+ end loop;
+ for r in select * from digital_solution_customer_agent_link where author_id = new.id loop
+ update digital_solution_customer_agent_link set updated_at=now() where id = r.id;
  end loop;
  for r in select * from time where specialist_id = new.id loop
  update time set updated_at=now() where id = r.id;

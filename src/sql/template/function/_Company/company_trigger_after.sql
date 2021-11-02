@@ -22,6 +22,9 @@ if new.title != old.title then
  for r in select * from digital_solution where customer_id = new.id loop
  update digital_solution set updated_at=now() where id = r.id;
  end loop;
+ for r in select * from customer_task where company_id = new.id loop
+ update customer_task set updated_at=now() where id = r.id;
+ end loop;
 
  end if;
  end if;

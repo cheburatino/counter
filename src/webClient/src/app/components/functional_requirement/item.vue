@@ -32,7 +32,7 @@
       
       <div class="row q-col-gutter-md q-mb-sm">
       <div class="col-md-4 col-sm-6 col-xs-12">
-          <comp-fld-ref-search outlined pgMethod="man_list" :label="$t('functional_requirement.analyst_id')" :item='item.analyst_title' :itemId='item.analyst_id' :ext='{company_id: 1, pathUrl: "/man", avatar: "image/man.svg", isClearable: "true"}' @update="v=> item.analyst_id = v.id" @clear="item.analyst_id = null" :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
+          <bug-list-ref-list-widget v-if='item.id != -1' :id='item.id' :readonly='false'/>
       </div>
       </div>
       
@@ -55,11 +55,11 @@
 </template>
 
 <script>
-
+	import bugListRefListWidget from './comp/bugListRefListWidget.vue'
     import currentUserMixin from '../../../app/mixins/currentUser'
     export default {
         props: ['id', 'isOpenInDialog'],
-        components: {},
+        components: {bugListRefListWidget},
         mixins: [currentUserMixin,],
         computed: {
             docUrl: function() {
@@ -75,7 +75,6 @@
                         {name: 'description', label: 'описание'},
                         {name: 'request_id', label: 'запрос'},
                         {name: 'digital_solution_id', label: 'цифровое решение'},
-                        {name: 'analyst_id', label: 'аналитик'},
                         {name: 'result', label: 'результат'},
                 ],
                 optionsFlds: [],
