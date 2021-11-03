@@ -30,21 +30,13 @@ BEGIN
     
     
     
-    
 
     if (params ->> 'id')::int = -1 then
-        -- проверика наличия обязательных параметров
-        checkMsg = check_required_params(params, ARRAY ['title']);
-        IF checkMsg IS NOT NULL
-        THEN
-            RETURN checkMsg;
-        END IF;
         
 
-        EXECUTE ('INSERT INTO digital_solution_customer_agent_link (title, digital_solution_id, customer_agent_id, description, author_id, options) VALUES ($1, $2, $3, $4, $5, $6)  RETURNING *;')
+        EXECUTE ('INSERT INTO digital_solution_customer_agent_link (digital_solution_id, customer_agent_id, description, author_id, options) VALUES ($1, $2, $3, $4, $5)  ON CONFLICT (digital_solution_id, customer_agent_id) DO UPDATE SET options=$5, deleted=false, description=$3 RETURNING *;')
 		INTO digital_solution_customer_agent_linkRow
 		USING
-			(params ->> 'title')::text,
 			(params ->> 'digital_solution_id')::int,
 			(params ->> 'customer_agent_id')::int,
 			(params ->> 'description')::text,
@@ -55,7 +47,6 @@ BEGIN
 
     else
         updateValue = '' || update_str_from_json(params, ARRAY [
-			['title', 'title', 'text'],
 			['digital_solution_id', 'digital_solution_id', 'number'],
 			['customer_agent_id', 'customer_agent_id', 'number'],
 			['description', 'description', 'text'],

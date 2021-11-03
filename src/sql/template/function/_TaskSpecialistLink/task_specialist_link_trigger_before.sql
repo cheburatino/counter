@@ -19,10 +19,10 @@ BEGIN
 		select title into authorTitle from man where id = new.author_id;
         
         -- заполняем options.title
-        NEW.options = coalesce(OLD.options, '{}'::jsonb) || NEW.options || jsonb_build_object('title', jsonb_build_object('title', new.title, 'task_title', taskTitle, 'specialist_title', specialistTitle, 'role_title', roleTitle, 'author_title', authorTitle));
+        NEW.options = coalesce(OLD.options, '{}'::jsonb) || NEW.options || jsonb_build_object('title', jsonb_build_object('task_title', taskTitle, 'specialist_title', specialistTitle, 'role_title', roleTitle, 'author_title', authorTitle));
         -- заполняем search_text
         
-        NEW.search_text = concat(new.title, ' ', taskTitle, ' ', specialistTitle, ' ', roleTitle, ' ', authorTitle, ' ', searchTxtVar);
+        NEW.search_text = concat(taskTitle, ' ', specialistTitle, ' ', roleTitle, ' ', authorTitle, ' ', searchTxtVar);
 
         
 

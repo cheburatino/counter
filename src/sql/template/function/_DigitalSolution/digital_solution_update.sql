@@ -50,7 +50,6 @@ BEGIN
     
     
     
-    
 
     if (params ->> 'id')::int = -1 then
         -- проверика наличия обязательных параметров
@@ -61,12 +60,11 @@ BEGIN
         END IF;
         
 
-        EXECUTE ('INSERT INTO digital_solution (title, state_id, sprint_id, description, customer_id, system_id, date_plan_start_modeling, date_fact_start_modeling, model, date_plan_end_modeling, date_fact_end_modeling, date_plan_start_realization, date_fact_start_realization, date_plan_end_realization, date_fact_end_realization, options) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16)  RETURNING *;')
+        EXECUTE ('INSERT INTO digital_solution (title, state_id, description, customer_id, system_id, date_plan_start_modeling, date_fact_start_modeling, model, date_plan_end_modeling, date_fact_end_modeling, date_plan_start_realization, date_fact_start_realization, date_plan_end_realization, date_fact_end_realization, options) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15)  RETURNING *;')
 		INTO digital_solutionRow
 		USING
 			(params ->> 'title')::text,
 			coalesce((params ->> 'state_id')::int, 1)::int,
-			(params ->> 'sprint_id')::int,
 			(params ->> 'description')::text,
 			(params ->> 'customer_id')::int,
 			(params ->> 'system_id')::int,
@@ -87,7 +85,6 @@ BEGIN
         updateValue = '' || update_str_from_json(params, ARRAY [
 			['title', 'title', 'text'],
 			['state_id', 'state_id', 'number'],
-			['sprint_id', 'sprint_id', 'number'],
 			['description', 'description', 'text'],
 			['customer_id', 'customer_id', 'number'],
 			['system_id', 'system_id', 'number'],

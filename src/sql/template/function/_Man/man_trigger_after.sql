@@ -40,6 +40,12 @@ if new.title != old.title then
  for r in select * from digital_solution_customer_agent_link where author_id = new.id loop
  update digital_solution_customer_agent_link set updated_at=now() where id = r.id;
  end loop;
+ for r in select * from work_specialist_link where specialist_id = new.id loop
+ update work_specialist_link set updated_at=now() where id = r.id;
+ end loop;
+ for r in select * from work_specialist_link where author_id = new.id loop
+ update work_specialist_link set updated_at=now() where id = r.id;
+ end loop;
  for r in select * from time where specialist_id = new.id loop
  update time set updated_at=now() where id = r.id;
  end loop;

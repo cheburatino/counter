@@ -63,6 +63,8 @@
             return {
                 menuLinks: [
                     // for codeGenerate ##sidemenu_slot1
+									{icon: 'image/system.svg', text: 'i18n_menu.system', url: '/system', roles: []},
+
 									{icon: 'image/request.svg', text: 'i18n_menu.request', url: '/request', roles: []},
 
 									{icon: 'image/functional_requirement.svg', text: 'i18n_menu.functional_requirement', url: '/functional_requirement', roles: []},
@@ -71,6 +73,8 @@
 
 									{icon: 'image/task.svg', text: 'i18n_menu.task', url: '/task', roles: []},
 
+									{icon: 'image/work.png', text: 'i18n_menu.work', url: '/work', roles: []},
+
 									{icon: 'image/customer_task.png', text: 'i18n_menu.customer_task', url: '/customer_task', roles: []},
 
 									{icon: 'image/bug.png', text: 'i18n_menu.bug', url: '/bug', roles: []},
@@ -78,10 +82,6 @@
 									{icon: 'image/meeting.svg', text: 'i18n_menu.meeting', url: '/meeting', roles: []},
 
 									{icon: 'image/time_fast.svg', text: 'i18n_menu.time', url: '/time', roles: []},
-
-									{icon: 'image/sprint.svg', text: 'i18n_menu.sprint', url: '/sprint', roles: []},
-
-									{icon: 'image/system.svg', text: 'i18n_menu.system', url: '/system', roles: []},
 
 									{icon: 'image/company.svg', text: 'i18n_menu.company', url: '/company', roles: []},
 
@@ -96,7 +96,6 @@
 									{icon: 'image/news_from_dima.png', text: 'i18n_menu.news_from_dima', url: '/news_from_dima', roles: []},
 {isFolder: true, icon: 'image/catalog.svg', text: 'Справочники', roles: [], linkList: 								[
 								{icon: 'image/user.svg', text: 'Пользователи', url: '/users', roles: ['admin']},
-								{icon: '', text: 'Компетенции', url: '/ctlg_electron_skill', roles: []},
 								{icon: '', text: 'Статусы запросов', url: '/ctlg_request_state', roles: []},
 								{icon: '', text: 'Статусы функциональных требований', url: '/ctlg_functional_requirement_state', roles: []},
 								{icon: '', text: 'Статусы цифровых решений', url: '/ctlg_digital_solution_state', roles: []},
@@ -104,6 +103,7 @@
 								{icon: '', text: 'Типы задач', url: '/ctlg_task_type', roles: []},
 								{icon: '', text: 'Статусы задач', url: '/ctlg_task_state', roles: []},
 								{icon: '', text: 'Роли в задачах', url: '/ctlg_task_role', roles: []},
+								{icon: '', text: 'Статусы дел', url: '/ctlg_work_state', roles: []},
 								{icon: '', text: 'Статусы задач заказчиков', url: '/ctlg_customer_task_state', roles: []},
 ],},
 

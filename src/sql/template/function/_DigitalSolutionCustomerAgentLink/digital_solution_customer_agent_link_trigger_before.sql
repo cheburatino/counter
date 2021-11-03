@@ -17,10 +17,10 @@ BEGIN
 		select title into authorTitle from man where id = new.author_id;
         
         -- заполняем options.title
-        NEW.options = coalesce(OLD.options, '{}'::jsonb) || NEW.options || jsonb_build_object('title', jsonb_build_object('title', new.title, 'digital_solution_title', digitalSolutionTitle, 'customer_agent_title', customerAgentTitle, 'author_title', authorTitle));
+        NEW.options = coalesce(OLD.options, '{}'::jsonb) || NEW.options || jsonb_build_object('title', jsonb_build_object('digital_solution_title', digitalSolutionTitle, 'customer_agent_title', customerAgentTitle, 'author_title', authorTitle));
         -- заполняем search_text
         
-        NEW.search_text = concat(new.title, ' ', digitalSolutionTitle, ' ', customerAgentTitle, ' ', authorTitle, ' ', searchTxtVar);
+        NEW.search_text = concat(digitalSolutionTitle, ' ', customerAgentTitle, ' ', authorTitle, ' ', searchTxtVar);
 
         
 

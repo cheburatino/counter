@@ -8,18 +8,16 @@ import (
 	"github.com/cheburatino/electron_is/projectTemplate/docs/counterparty"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/ctlgBugState"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/ctlgCustomerTaskState"
-	"github.com/cheburatino/electron_is/projectTemplate/docs/ctlgDevTaskState"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/ctlgDigitalSolutionSpecialistRole"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/ctlgDigitalSolutionState"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/ctlgElectronSkill"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/ctlgFunctionalRequirementState"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/ctlgRequestState"
-	"github.com/cheburatino/electron_is/projectTemplate/docs/ctlgSubtaskState"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/ctlgTaskRole"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/ctlgTaskState"
-	ctlgTaskStatusType "github.com/cheburatino/electron_is/projectTemplate/docs/ctlgTaskStatusType"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/ctlgTaskType"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/ctlgTimeType"
+	"github.com/cheburatino/electron_is/projectTemplate/docs/ctlgWorkState"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/customerTask"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/digitalSolution"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/digitalSolutionCustomerAgentLink"
@@ -30,11 +28,13 @@ import (
 	"github.com/cheburatino/electron_is/projectTemplate/docs/meeting"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/newsFromDima"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/request"
-	"github.com/cheburatino/electron_is/projectTemplate/docs/sprint"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/system"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/task"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/taskSpecialistLink"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/time"
+	"github.com/cheburatino/electron_is/projectTemplate/docs/work"
+	"github.com/cheburatino/electron_is/projectTemplate/docs/workSpecialistLink"
+	"github.com/cheburatino/electron_is/projectTemplate/docs/workTaskLink"
 	"github.com/otiai10/copy"
 	"github.com/pepelazz/nla_framework"
 	t "github.com/pepelazz/nla_framework/types"
@@ -62,9 +62,7 @@ func getProject() t.ProjectType {
 		ctlgTaskType.GetDoc(p),
 		ctlgTaskState.GetDoc(p),
 		ctlgTaskRole.GetDoc(p),
-		ctlgDevTaskState.GetDoc(p),
-		ctlgTaskStatusType.GetDoc(p),
-		ctlgSubtaskState.GetDoc(p),
+		ctlgWorkState.GetDoc(p),
 		ctlgBugState.GetDoc(p),
 		ctlgCustomerTaskState.GetDoc(p),
 		meeting.GetDoc(p),
@@ -74,16 +72,18 @@ func getProject() t.ProjectType {
 		man.GetDoc(p),
 		system.GetDoc(p),
 		request.GetDoc(p),
-		sprint.GetDoc(p),
 		digitalSolution.GetDoc(p),
 		functionalRequirement.GetDoc(p),
 		invoice.GetDoc(p),
 		task.GetDoc(p),
+		work.GetDoc(p),
 		customerTask.GetDoc(p),
 		bug.GetDoc(p),
 		taskSpecialistLink.GetDoc(p),
 		digitalSolutionSpecialistLink.GetDoc(p),
 		digitalSolutionCustomerAgentLink.GetDoc(p),
+		workSpecialistLink.GetDoc(p),
+		workTaskLink.GetDoc(p),
 		time.GetDoc(p),
 		comment.GetDoc(p),
 		newsFromDima.GetDoc(p),
@@ -100,16 +100,16 @@ func getProject() t.ProjectType {
 
 	// боковое меню для Vue
 	p.Vue.Menu = []t.VueMenu{
+		{DocName: "system"},
 		{DocName: "request"},
 		{DocName: "functional_requirement"},
 		{DocName: "digital_solution"},
 		{DocName: "task"},
+		{DocName: "work"},
 		{DocName: "customer_task"},
 		{DocName: "bug"},
 		{DocName: "meeting"},
 		{DocName: "time"},
-		{DocName: "sprint"},
-		{DocName: "system"},
 		{DocName: "company"},
 		{DocName: "man"},
 		{DocName: "counterparty"},
@@ -118,7 +118,6 @@ func getProject() t.ProjectType {
 		{DocName: "news_from_dima"},
 		{Text: "Справочники", Icon: "image/catalog.svg", IsFolder: true, LinkList: []t.VueMenu{
 			{Url: "users", Text: "Пользователи", Icon: "image/user.svg", Roles: []string{utils.RoleAdmin}},
-			{Text: "Компетенции", Url: "ctlg_electron_skill"},
 			{Text: "Статусы запросов", Url: "ctlg_request_state"},
 			{Text: "Статусы функциональных требований", Url: "ctlg_functional_requirement_state"},
 			{Text: "Статусы цифровых решений", Url: "ctlg_digital_solution_state"},
@@ -126,6 +125,7 @@ func getProject() t.ProjectType {
 			{Text: "Типы задач", Url: "ctlg_task_type"},
 			{Text: "Статусы задач", Url: "ctlg_task_state"},
 			{Text: "Роли в задачах", Url: "ctlg_task_role"},
+			{Text: "Статусы дел", Url: "ctlg_work_state"},
 			{Text: "Статусы задач заказчиков", Url: "ctlg_customer_task_state"},
 		}},
 	}

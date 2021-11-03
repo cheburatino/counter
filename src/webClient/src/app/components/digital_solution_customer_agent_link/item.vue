@@ -7,9 +7,7 @@
       <!--  поля формы    -->
       
       <div class="row q-col-gutter-md q-mb-sm">
-      <div class="col-md-4 col-sm-6 col-xs-12">
-          <q-input outlined type='text' v-model="item.title" :label="$t('digital_solution_customer_agent_link.title')" autogrow :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
-      </div>
+          not found vueFldTemplate for type ``
       </div>
       
       <div class="row q-col-gutter-md q-mb-sm">
@@ -61,7 +59,6 @@
             return {
                 item: null,
                 flds: [
-                        {name: 'title', label: 'название',  required: true},
                         {name: 'digital_solution_id', label: 'id цифрового решения'},
                         {name: 'customer_agent_id', label: 'представитель заказчика'},
                         {name: 'description', label: 'описание'},
