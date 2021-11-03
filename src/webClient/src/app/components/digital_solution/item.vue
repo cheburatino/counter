@@ -38,7 +38,16 @@
           <ft-list-ref-list-widget v-if='item.id != -1' :id='item.id' :readonly='false'/>
       </div>
       <div class="col-md-4 col-sm-6 col-xs-12">
+          <bug-list-ref-list-widget v-if='item.id != -1' :id='item.id' :readonly='false'/>
+      </div>
+      </div>
+      
+      <div class="row q-col-gutter-md q-mb-sm">
+      <div class="col-md-4 col-sm-6 col-xs-12">
           <task-list-ref-list-widget v-if='item.id != -1' :id='item.id' :readonly='false'/>
+      </div>
+      <div class="col-md-4 col-sm-6 col-xs-12">
+          <customer-task-list-ref-list-widget v-if='item.id != -1' :id='item.id' :readonly='false'/>
       </div>
       </div>
       
@@ -50,10 +59,10 @@
       
       <div class="row q-col-gutter-md q-mb-sm">
       <div class="col-md-4 col-sm-6 col-xs-12">
-          <comp-fld-ref-search outlined pgMethod="system_list" :label="$t('digital_solution.system_id')" :item='item.system_title' :itemId='item.system_id' :ext='{customer_id: item.customer_id, isClearable: "true", pathUrl: "/system", avatar: "image/system.svg"}' @update="v=> item.system_id = v.id" @clear="item.system_id = null" :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
+          <comp-fld-ref-search outlined pgMethod="company_list" :label="$t('digital_solution.customer_id')" :item='item.customer_title' :itemId='item.customer_id' :ext='{"avatar":"image/company.svg","isClearable":"true","pathUrl":"/company"}' @update="v=> item.customer_id = v.id" @clear="item.customer_id = null" :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
       </div>
       <div class="col-md-4 col-sm-6 col-xs-12">
-          <comp-fld-ref-search outlined pgMethod="company_list" :label="$t('digital_solution.customer_id')" :item='item.customer_title' :itemId='item.customer_id' :ext='{"avatar":"image/company.svg","isClearable":"true","pathUrl":"/company"}' @update="v=> item.customer_id = v.id" @clear="item.customer_id = null" :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
+          <comp-fld-ref-search outlined pgMethod="system_list" :label="$t('digital_solution.system_id')" :item='item.system_title' :itemId='item.system_id' :ext='{customer_id: item.customer_id, pathUrl: "/system", avatar: "image/system.svg", isClearable: "true"}' @update="v=> item.system_id = v.id" @clear="item.system_id = null" :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
       </div>
       </div>
       
@@ -138,7 +147,9 @@
 
 <script>
 	import ftListRefListWidget from './comp/ftListRefListWidget.vue'
+	import bugListRefListWidget from './comp/bugListRefListWidget.vue'
 	import taskListRefListWidget from './comp/taskListRefListWidget.vue'
+	import customerTaskListRefListWidget from './comp/customerTaskListRefListWidget.vue'
 	import compParticipants from './comp/participants.vue'
 	import compModeling from './comp/modeling.vue'
 	import compRealization from './comp/realization.vue'
@@ -146,7 +157,7 @@
     import currentUserMixin from '../../../app/mixins/currentUser'
     export default {
         props: ['id', 'isOpenInDialog'],
-        components: {compParticipants, compModeling, compRealization, compSpecialist, ftListRefListWidget, taskListRefListWidget},
+        components: {taskListRefListWidget, customerTaskListRefListWidget, compParticipants, compModeling, compRealization, compSpecialist, ftListRefListWidget, bugListRefListWidget},
         mixins: [currentUserMixin,],
         computed: {
             docUrl: function() {
@@ -161,8 +172,8 @@
                         {name: 'state_id', label: 'статус'},
                         {name: 'sprint_id', label: 'спринт'},
                         {name: 'description', label: 'описание'},
-                        {name: 'system_id', label: 'система'},
                         {name: 'customer_id', label: 'заказчик'},
+                        {name: 'system_id', label: 'система'},
                         {name: 'date_plan_start_modeling', label: 'планируемая дата начала моделирования'},
                         {name: 'date_fact_start_modeling', label: 'фактическая дата начала моделирования'},
                         {name: 'model', label: 'описание модели'},

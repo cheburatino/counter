@@ -27,21 +27,21 @@ func GetDoc(project *t.ProjectType) t.DocType {
 			t.GetFldSimpleHtml([][]int{{2, 2}}, "", "<p>Дата и время изменения: {{item.updated_at}}</p>"),
 			t.GetFldString("description", "описание", 0, [][]int{{3, 1}}, "col-8"),
 			// контролы описаны после doc.Init
-			t.GetFldJsonbCompositionWithoutFld([][]int{{5, 1}}, "col-4", "comp-participants"),
-			t.GetFldRef("system_id", "система", "system", [][]int{{6, 1}}, "isShowLink", "isClearable", "ext: {customer_id: item.customer_id}"),
-			t.GetFldRef("customer_id", "заказчик", "company", [][]int{{6, 2}}, "isShowLink", "isClearable"),
-			t.GetFldJsonbCompositionWithoutFld([][]int{{7, 1}}, "", "comp-specialist", ":currentUser='currentUser'"),
-			t.GetFldJsonbCompositionWithoutFld([][]int{{8, 1}}, "col-4", "comp-modeling"),
-			t.GetFldDate("date_plan_start_modeling", "планируемая дата начала моделирования", [][]int{{9, 1}}, "col-4"),
-			t.GetFldDate("date_fact_start_modeling", "фактическая дата начала моделирования", [][]int{{9, 2}}, "col-4"),
-			t.GetFldString("model", "описание модели", 0, [][]int{{10, 1}}, "col-8"),
-			t.GetFldDate("date_plan_end_modeling", "планируемая дата завершения моделирования", [][]int{{11, 1}}, "col-4"),
-			t.GetFldDate("date_fact_end_modeling", "фактическая дата завершения моделирования", [][]int{{11, 2}}, "col-4"),
-			t.GetFldJsonbCompositionWithoutFld([][]int{{12, 1}}, "col-4", "comp-realization"),
-			t.GetFldDate("date_plan_start_realization", "планируемая дата начала реализации", [][]int{{13, 1}}, "col-4"),
-			t.GetFldDate("date_fact_start_realization", "фактическая дата начала реализации", [][]int{{13, 2}}, "col-4"),
-			t.GetFldDate("date_plan_end_realization", "планируемая дата завершения реализации", [][]int{{14, 1}}, "col-4"),
-			t.GetFldDate("date_fact_end_realization", "фактическая дата завершения реализации", [][]int{{14, 2}}, "col-4"),
+			t.GetFldJsonbCompositionWithoutFld([][]int{{6, 1}}, "col-4", "comp-participants"),
+			t.GetFldRef("customer_id", "заказчик", "company", [][]int{{7, 1}}, "isShowLink", "isClearable"),
+			t.GetFldRef("system_id", "система", "system", [][]int{{7, 2}}, "isShowLink", "isClearable", "ext: {customer_id: item.customer_id}"),
+			t.GetFldJsonbCompositionWithoutFld([][]int{{8, 1}}, "", "comp-specialist", ":currentUser='currentUser'"),
+			t.GetFldJsonbCompositionWithoutFld([][]int{{9, 1}}, "col-4", "comp-modeling"),
+			t.GetFldDate("date_plan_start_modeling", "планируемая дата начала моделирования", [][]int{{10, 1}}, "col-4"),
+			t.GetFldDate("date_fact_start_modeling", "фактическая дата начала моделирования", [][]int{{10, 2}}, "col-4"),
+			t.GetFldString("model", "описание модели", 0, [][]int{{11, 1}}, "col-8"),
+			t.GetFldDate("date_plan_end_modeling", "планируемая дата завершения моделирования", [][]int{{12, 1}}, "col-4"),
+			t.GetFldDate("date_fact_end_modeling", "фактическая дата завершения моделирования", [][]int{{12, 2}}, "col-4"),
+			t.GetFldJsonbCompositionWithoutFld([][]int{{13, 1}}, "col-4", "comp-realization"),
+			t.GetFldDate("date_plan_start_realization", "планируемая дата начала реализации", [][]int{{14, 1}}, "col-4"),
+			t.GetFldDate("date_fact_start_realization", "фактическая дата начала реализации", [][]int{{14, 2}}, "col-4"),
+			t.GetFldDate("date_plan_end_realization", "планируемая дата завершения реализации", [][]int{{15, 1}}, "col-4"),
+			t.GetFldDate("date_fact_end_realization", "фактическая дата завершения реализации", [][]int{{15, 2}}, "col-4"),
 		},
 		Vue: t.DocVue{
 			RouteName:      name,
@@ -107,6 +107,21 @@ func GetDoc(project *t.ProjectType) t.DocType {
 	}, [][]int{{4, 1}}, "col-4"))
 
 	doc.AddFld(t.GetFldVueCompositionRefList(&doc, t.VueCompRefListWidgetParams{
+		Label:      "баги",                  // название списка, которе выводится на экране
+		FldName:    "bug_list",              // название поля. Любое, в формате snake_case. На основе этого названия формируется название компоненты во vue.
+		TableName:  "bug",                   // название связанной таблицы, из которой будут выгружаться записи
+		RefFldName: "functional_requirement_id", // название поля в связанной таблицы, по которому осуществляется связь
+		Avatar:     "image/bug.png",         // иконка, которая выводится в списке
+		NewFlds: []t.FldType{
+			t.GetFldString("title", "название", 300, [][]int{{1, 1}}).SetIsRequired(),
+		}, // список полей, которые заполняются при добавлении новой записи
+		TitleTemplate: `
+                <q-item-label>{{v.title}}</q-item-label>
+                <q-item-label caption><q-badge color="orange">{{v.options.title.state_title}}</q-badge></q-item-label>
+            `, // шаблон для названия в списке (vue синтаксис)
+	}, [][]int{{4, 2}}, "col-4"))
+
+	doc.AddFld(t.GetFldVueCompositionRefList(&doc, t.VueCompRefListWidgetParams{
 		Label:      "задачи",                  // название списка, которе выводится на экране
 		FldName:    "task_list",              // название поля. Любое, в формате snake_case. На основе этого названия формируется название компоненты во vue.
 		TableName:  "task",                   // название связанной таблицы, из которой будут выгружаться записи
@@ -120,7 +135,22 @@ func GetDoc(project *t.ProjectType) t.DocType {
                 <q-item-label>{{v.title}}</q-item-label>
                 <q-item-label caption><q-badge color="orange">{{v.options.title.state_title}}</q-badge></q-item-label>
             `, // шаблон для названия в списке (vue синтаксис)
-	}, [][]int{{4, 2}}, "col-4"))
+	}, [][]int{{5, 1}}, "col-4"))
+
+	doc.AddFld(t.GetFldVueCompositionRefList(&doc, t.VueCompRefListWidgetParams{
+		Label:      "задачи заказчика",                  // название списка, которе выводится на экране
+		FldName:    "customer_task_list",              // название поля. Любое, в формате snake_case. На основе этого названия формируется название компоненты во vue.
+		TableName:  "customer_task",                   // название связанной таблицы, из которой будут выгружаться записи
+		RefFldName: "digital_solution_id", // название поля в связанной таблицы, по которому осуществляется связь
+		Avatar:     "image/customer_task.png",         // иконка, которая выводится в списке
+		NewFlds: []t.FldType{
+			t.GetFldString("title", "название", 300, [][]int{{1, 1}}).SetIsRequired(),
+		}, // список полей, которые заполняются при добавлении новой записи
+		TitleTemplate: `
+                <q-item-label>{{v.title}}</q-item-label>
+                <q-item-label caption><q-badge color="orange">{{v.options.title.state_title}}</q-badge></q-item-label>
+            `, // шаблон для названия в списке (vue синтаксис)
+	}, [][]int{{5, 2}}, "col-4"))
 
 	return doc
 }
