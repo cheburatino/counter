@@ -2,23 +2,22 @@
   <div>
     <!--  bar  -->
     <q-bar class="bg-blue-6 text-white">
-      <q-icon name="fas fa-atom" />
+      <q-icon name="fas fa-user-astronaut" />
+<!--      <q-icon name="fas fa-atom" />-->
       <div v-if="!isShowDeleted">Специалисты</div>
       <div v-else>Удалённые</div>
       <q-space />
-      <q-btn flat round icon="close_fullscreen" v-if="!isHideList" @click="isHideList = true" />
-      <q-btn flat round icon="open_in_full" v-else  @click="isHideList = false" />
       <q-btn flat round icon="add" @click="showAddDialog" />
       <q-btn flat round icon="delete_outline" @click="isShowDeleted = !isShowDeleted" />
     </q-bar>
 
     <!--  list active  -->
-    <q-list v-if="!isShowDeleted && taskSpecList.length > 0 && !isHideList" bordered separator>
+    <q-list v-if="!isShowDeleted && taskSpecList.length > 0" bordered separator>
       <q-item clickable v-ripple v-for="item in taskSpecList" :key="item.id">
         <q-item-section @click="editPosition(item.id)">
-          <q-item-label>ФИО: {{ item.options.title.author_title }}</q-item-label>
-          <q-item-label caption>Роль: {{item.options.title.role_title}} </q-item-label>
-          <q-item-label caption>Описание роли: {{ item.description }} </q-item-label>
+          <q-item-label>{{ item.options.title.specialist_title }}</q-item-label>
+          <q-item-label caption>{{item.options.title.role_title}} </q-item-label>
+          <q-item-label caption>{{ item.description }} </q-item-label>
         </q-item-section>
 
         <q-item-section side>
@@ -28,12 +27,12 @@
     </q-list>
 
     <!--  list deleted  -->
-    <q-list v-if="isShowDeleted && deletedtaskSpecList.length > 0 && !isHideList" bordered separator>
+    <q-list v-if="isShowDeleted && deletedtaskSpecList.length > 0" bordered separator>
       <q-item clickable v-ripple v-for="item in deletedtaskSpecList" :key="item.id">
         <q-item-section @click="editPosition(item.id)">
-          <q-item-label>ФИО: {{ item.options.title.author_title }}</q-item-label>
-          <q-item-label caption>Роль: {{item.options.title.role_title}} </q-item-label>
-          <q-item-label caption>Описание роли: {{ item.description }} </q-item-label>
+          <q-item-label>{{ item.options.title.specialist_title }}</q-item-label>
+          <q-item-label caption>{{item.options.title.role_title}} </q-item-label>
+          <q-item-label caption>{{ item.description }} </q-item-label>
         </q-item-section>
 
         <q-item-section side>
@@ -118,7 +117,6 @@ export default {
   props: ['fld', 'item', 'currentUser'],
   data() {
     return {
-      isHideList: true,
       isShowDeleted: false,
       isShowDialog: false,
       editMode: false,
@@ -169,14 +167,14 @@ export default {
     addPosition() {
       let randomTitle = new Date();
       this.$utils.postCallPgMethod({
-        method: 'task_specialist_link_update',
+        method: 'digital_solution_specialist_link_update',
         params: {
           id: -1,
           specialist_id: this.specId,
           role_id: this.roleId,
           description: this.roleDesc,
           title: randomTitle,
-          task_id: this.item.id,
+          digital_solution_id: this.item.id,
           author_id: this.currentUser.id
         }
       }).subscribe(v => {
@@ -208,7 +206,7 @@ export default {
     },
     savePosition(id) {
       this.$utils.postCallPgMethod({
-        method: 'task_specialist_link_update',
+        method: 'digital_solution_specialist_link_update',
         params: {
           id: id,
           specialist_id: this.specId,
@@ -227,7 +225,7 @@ export default {
       let index = this.taskSpecList.findIndex(v => v.id === id)
       this.taskSpecList[index].deleted = true
       this.$utils.postCallPgMethod({
-        method: 'task_specialist_link_update',
+        method: 'digital_solution_specialist_link_update',
         params: {
           id: id,
           deleted: true
@@ -240,7 +238,7 @@ export default {
     },
     recoverPosition(id) {
       this.$utils.postCallPgMethod({
-        method: 'task_specialist_link_update',
+        method: 'digital_solution_specialist_link_update',
         params: {
           id: id,
           deleted: false
@@ -253,7 +251,7 @@ export default {
     },
     reloadList () {
       this.$utils.postCallPgMethod({
-        method: 'task_specialist_link_list',
+        method: 'digital_solution_specialist_link_list',
         params: {}
       }).subscribe(v => {
         if (v.ok) {
@@ -262,7 +260,7 @@ export default {
 
       })
       this.$utils.postCallPgMethod({
-        method: 'task_specialist_link_list',
+        method: 'digital_solution_specialist_link_list',
         params: {
           deleted: true
         }
@@ -279,7 +277,7 @@ export default {
     this.positionTemplate = Object.assign({}, this.position)
     this.reloadList()
     this.$utils.postCallPgMethod({
-      method: 'task_get_specialists',
+      method: 'task_get_specialist',
       params: {}
     }).subscribe(v => {
       if (v.ok) {
@@ -287,7 +285,7 @@ export default {
       }
     })
     this.$utils.postCallPgMethod({
-      method: 'task_get_specialists_role',
+      method: 'digital_solution_get_specialist_role',
       params: {}
     }).subscribe(v => {
       if (v.ok) {

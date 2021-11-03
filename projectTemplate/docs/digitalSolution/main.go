@@ -30,6 +30,8 @@ func GetDoc(project *t.ProjectType) t.DocType {
 			t.GetFldJsonbCompositionWithoutFld([][]int{{5, 1}}, "col-4", "comp-participants"),
 			t.GetFldRef("customer_id", "заказчик", "company", [][]int{{6, 1}}, "isShowLink", "isClearable"),
 			t.GetFldRef("rsk_id", "рск", "man", [][]int{{6, 2}}, "isShowLink", "isClearable", "ext: {company_id: 1}"),
+			t.GetFldJsonbCompositionWithoutFld([][]int{{6, 3}}, "", "comp-specialist", ":currentUser='currentUser'"),
+
 			t.GetFldRef("system_id", "система", "system", [][]int{{7, 1}}, "isShowLink", "isClearable", "ext: {customer_id: item.customer_id}"),
 			t.GetFldRef("analyst_id", "аналитик", "man", [][]int{{7, 2}}, "isShowLink", "isClearable", "ext: {company_id: 1}"),
 			t.GetFldRef("client_agent_id", "представитель заказчика", "man", [][]int{{8, 1}}, "isShowLink", "isClearable", "ext: {company_id: item.customer_id}"),
@@ -54,6 +56,7 @@ func GetDoc(project *t.ProjectType) t.DocType {
 		},
 		Templates: map[string]*t.DocTemplate{
 			"sql_function_worked_time.sql": {},
+			"sql_function_get_specialist_role.sql": {},
 		},
 		IsBaseTemplates: t.DocIsBaseTemplates{true, true},
 		Sql: t.DocSql{
@@ -62,6 +65,7 @@ func GetDoc(project *t.ProjectType) t.DocType {
 			IsAfterTrigger:  true,
 			Methods: map[string]*t.DocSqlMethod{
 				"digital_solution_worked_time": {Name: "digital_solution_worked_time"},
+				"digital_solution_get_specialist_role": {Name: "digital_solution_get_specialist_role"},
 			},
 		},
 	}
@@ -73,6 +77,7 @@ func GetDoc(project *t.ProjectType) t.DocType {
 	doc.AddVueComposition("docItem", "participants")
 	doc.AddVueComposition("docItem", "modeling")
 	doc.AddVueComposition("docItem", "realization")
+	doc.AddVueComposition("docItem", "specialist")
 
 	doc.Vue.I18n = map[string]string{
 		"listTitle":        utils.UpperCaseFirst(name_ru_plural),
