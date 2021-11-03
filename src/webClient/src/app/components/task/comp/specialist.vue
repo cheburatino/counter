@@ -252,7 +252,9 @@ export default {
     reloadList () {
       this.$utils.postCallPgMethod({
         method: 'task_specialist_link_list',
-        params: {}
+        params: {
+          task_id: this.item.id
+        }
       }).subscribe(v => {
         if (v.ok) {
           this.taskSpecList = v.result;
@@ -262,6 +264,7 @@ export default {
       this.$utils.postCallPgMethod({
         method: 'task_specialist_link_list',
         params: {
+          task_id: this.item.id,
           deleted: true
         }
       }).subscribe(v => {

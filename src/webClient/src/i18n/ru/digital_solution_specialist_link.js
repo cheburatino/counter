@@ -1,12 +1,12 @@
 
 export default {
- 		name: 'связь цифрового решения и специалиста',
+ 		specialist_id: 'специалист',
+ 		role_id: 'роль',
+ 		description: 'описание',
+ 		name_plural: 'Связи цифровых решений и специалиста',
  		name_plural_deleted: 'удаленные Связи цифровых решений и специалиста',
  		title: 'название',
- 		role_id: 'роль',
- 		name_plural: 'Связи цифровых решений и специалиста',
+ 		name: 'связь цифрового решения и специалиста',
  		digital_solution_id: 'id цифрового решения',
- 		specialist_id: 'специалист',
- 		description: 'описание',
  		author_id: 'автор',
 }

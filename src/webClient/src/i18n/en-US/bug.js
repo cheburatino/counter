@@ -1,12 +1,12 @@
 
 export default {
+ 		title: 'title',
+ 		state_id: 'state ',
+ 		functional_requirement_id: 'functional requirement ',
+ 		name: 'bug',
  		name_plural: 'bug',
  		name_plural_deleted: 'deleted bug',
- 		state_id: 'state ',
- 		digital_solution_id: 'digital solution ',
- 		name: 'bug',
  		description: 'description',
- 		functional_requirement_id: 'functional requirement ',
+ 		digital_solution_id: 'digital solution ',
  		system_id: 'system ',
- 		title: 'title',
 }
