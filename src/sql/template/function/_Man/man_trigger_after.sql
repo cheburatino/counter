@@ -16,28 +16,7 @@ if new.title != old.title then
  for r in select * from request where customer_agent_id = new.id loop
  update request set updated_at=now() where id = r.id;
  end loop;
- for r in select * from digital_solution where rsk_id = new.id loop
- update digital_solution set updated_at=now() where id = r.id;
- end loop;
- for r in select * from digital_solution where analyst_id = new.id loop
- update digital_solution set updated_at=now() where id = r.id;
- end loop;
- for r in select * from digital_solution where client_agent_id = new.id loop
- update digital_solution set updated_at=now() where id = r.id;
- end loop;
- for r in select * from digital_solution where team_lead_id = new.id loop
- update digital_solution set updated_at=now() where id = r.id;
- end loop;
  for r in select * from task where author_id = new.id loop
- update task set updated_at=now() where id = r.id;
- end loop;
- for r in select * from task where director_id = new.id loop
- update task set updated_at=now() where id = r.id;
- end loop;
- for r in select * from task where executor_id = new.id loop
- update task set updated_at=now() where id = r.id;
- end loop;
- for r in select * from task where acceptor_id = new.id loop
  update task set updated_at=now() where id = r.id;
  end loop;
  for r in select * from customer_task where author_id = new.id loop

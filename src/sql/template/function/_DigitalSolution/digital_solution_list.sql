@@ -33,12 +33,8 @@ BEGIN
         ['ilike', 'search_text', 'search_text'],
 		['notQuoted', 'state_id', 'doc.state_id'],
 		['notQuoted', 'sprint_id', 'doc.sprint_id'],
-		['notQuoted', 'customer_id', 'doc.customer_id'],
-		['notQuoted', 'rsk_id', 'doc.rsk_id'],
 		['notQuoted', 'system_id', 'doc.system_id'],
-		['notQuoted', 'analyst_id', 'doc.analyst_id'],
-		['notQuoted', 'client_agent_id', 'doc.client_agent_id'],
-		['notQuoted', 'team_lead_id', 'doc.team_lead_id']
+		['notQuoted', 'customer_id', 'doc.customer_id']
     ]);
 
     

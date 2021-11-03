@@ -49,9 +49,6 @@ BEGIN
     
     
     
-    
-    
-    
 
     if (params ->> 'id')::int = -1 then
         -- проверика наличия обязательных параметров
@@ -62,19 +59,15 @@ BEGIN
         END IF;
         
 
-        EXECUTE ('INSERT INTO digital_solution (title, state_id, sprint_id, description, customer_id, rsk_id, system_id, analyst_id, client_agent_id, team_lead_id, date_plan_start_modeling, date_fact_start_modeling, model, date_plan_end_modeling, date_fact_end_modeling, date_plan_start_realization, date_fact_start_realization, date_plan_end_realization, date_fact_end_realization, options) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20)  RETURNING *;')
+        EXECUTE ('INSERT INTO digital_solution (title, state_id, sprint_id, description, system_id, customer_id, date_plan_start_modeling, date_fact_start_modeling, model, date_plan_end_modeling, date_fact_end_modeling, date_plan_start_realization, date_fact_start_realization, date_plan_end_realization, date_fact_end_realization, options) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16)  RETURNING *;')
 		INTO digital_solutionRow
 		USING
 			(params ->> 'title')::text,
 			coalesce((params ->> 'state_id')::int, 1)::int,
 			(params ->> 'sprint_id')::int,
 			(params ->> 'description')::text,
-			(params ->> 'customer_id')::int,
-			(params ->> 'rsk_id')::int,
 			(params ->> 'system_id')::int,
-			(params ->> 'analyst_id')::int,
-			(params ->> 'client_agent_id')::int,
-			(params ->> 'team_lead_id')::int,
+			(params ->> 'customer_id')::int,
 			(params ->> 'date_plan_start_modeling')::timestamp,
 			(params ->> 'date_fact_start_modeling')::timestamp,
 			(params ->> 'model')::text,
@@ -94,12 +87,8 @@ BEGIN
 			['state_id', 'state_id', 'number'],
 			['sprint_id', 'sprint_id', 'number'],
 			['description', 'description', 'text'],
-			['customer_id', 'customer_id', 'number'],
-			['rsk_id', 'rsk_id', 'number'],
 			['system_id', 'system_id', 'number'],
-			['analyst_id', 'analyst_id', 'number'],
-			['client_agent_id', 'client_agent_id', 'number'],
-			['team_lead_id', 'team_lead_id', 'number'],
+			['customer_id', 'customer_id', 'number'],
 			['date_plan_start_modeling', 'date_plan_start_modeling', 'timestamp'],
 			['date_fact_start_modeling', 'date_fact_start_modeling', 'timestamp'],
 			['model', 'model', 'text'],
