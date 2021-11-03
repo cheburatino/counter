@@ -28,6 +28,7 @@ import (
 	"github.com/cheburatino/electron_is/projectTemplate/docs/invoice"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/man"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/meeting"
+	"github.com/cheburatino/electron_is/projectTemplate/docs/newsFromDima"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/request"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/sprint"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/system"
@@ -85,6 +86,7 @@ func getProject() t.ProjectType {
 		digitalSolutionCustomerAgentLink.GetDoc(p),
 		time.GetDoc(p),
 		comment.GetDoc(p),
+		newsFromDima.GetDoc(p),
 	}
 
 	// названием базы маленькими буквами, без пробелов
@@ -113,6 +115,7 @@ func getProject() t.ProjectType {
 		{DocName: "counterparty"},
 		{DocName: "contract"},
 		{DocName: "invoice"},
+		{DocName: "news_from_dima"},
 		{Text: "Справочники", Icon: "image/catalog.svg", IsFolder: true, LinkList: []t.VueMenu{
 			{Url: "users", Text: "Пользователи", Icon: "image/user.svg", Roles: []string{utils.RoleAdmin}},
 			{Text: "Компетенции", Url: "ctlg_electron_skill"},

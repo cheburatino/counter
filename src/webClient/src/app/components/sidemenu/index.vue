@@ -92,6 +92,8 @@
 									{icon: 'image/contract.svg', text: 'i18n_menu.contract', url: '/contract', roles: []},
 
 									{icon: 'image/invoice.svg', text: 'i18n_menu.invoice', url: '/invoice', roles: []},
+
+									{icon: 'image/news_from_dima.png', text: 'i18n_menu.news_from_dima', url: '/news_from_dima', roles: []},
 {isFolder: true, icon: 'image/catalog.svg', text: 'Справочники', roles: [], linkList: 								[
 								{icon: 'image/user.svg', text: 'Пользователи', url: '/users', roles: ['admin']},
 								{icon: '', text: 'Компетенции', url: '/ctlg_electron_skill', roles: []},
