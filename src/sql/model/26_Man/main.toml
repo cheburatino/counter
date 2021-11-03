@@ -33,9 +33,9 @@ triggers = [
 
 
 methods = [
+	"man_update",
 	"man_get_by_id",
 	"man_list",
-	"man_update",
 	"man_trigger_before",
 	"man_trigger_after"
 ]

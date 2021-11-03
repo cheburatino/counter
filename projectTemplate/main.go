@@ -4,6 +4,7 @@ import (
 	"github.com/cheburatino/electron_is/projectTemplate/docs/bug"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/comment"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/company"
+	"github.com/cheburatino/electron_is/projectTemplate/docs/companyManLink"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/contract"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/counterparty"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/ctlgBugState"
@@ -42,6 +43,9 @@ import (
 	"os"
 )
 
+const ROLE_CUSTOMER = "customer"
+const ROLE_SPECIALIST = "specialist"
+
 func main() {
 	nla_framework.Start(getProject(), nil)
 }
@@ -51,6 +55,7 @@ func getProject() t.ProjectType {
 		Name: "Electron",
 	}
 	p.Config.Vue.QuasarVersion = 2
+	p.FillI18n()
 
 	p.Docs = []t.DocType{
 		ctlgElectronSkill.GetDoc(p),
@@ -84,6 +89,7 @@ func getProject() t.ProjectType {
 		digitalSolutionCustomerAgentLink.GetDoc(p),
 		workSpecialistLink.GetDoc(p),
 		workTaskLink.GetDoc(p),
+		companyManLink.GetDoc(p),
 		time.GetDoc(p),
 		comment.GetDoc(p),
 		newsFromDima.GetDoc(p),
@@ -97,27 +103,31 @@ func getProject() t.ProjectType {
 	// формируем routes для Vue
 	p.FillVueBaseRoutes()
 	p.Vue.UiAppName = "Electron"
+	p.Roles = []t.ProjectRole{
+		{Name: ROLE_CUSTOMER, NameRu: "заказчик"},
+		{Name: ROLE_SPECIALIST, NameRu: "специалист"},
+	}
 
 	// боковое меню для Vue
 	p.Vue.Menu = []t.VueMenu{
-		{DocName: "system"},
-		{DocName: "request"},
-		{DocName: "functional_requirement"},
-		{DocName: "digital_solution"},
-		{DocName: "task"},
-		{DocName: "work"},
-		{DocName: "customer_task"},
-		{DocName: "bug"},
-		{DocName: "meeting"},
-		{DocName: "time"},
-		{DocName: "company"},
-		{DocName: "man"},
-		{DocName: "counterparty"},
-		{DocName: "contract"},
-		{DocName: "invoice"},
-		{DocName: "news_from_dima"},
-		{Text: "Справочники", Icon: "image/catalog.svg", IsFolder: true, LinkList: []t.VueMenu{
-			{Url: "users", Text: "Пользователи", Icon: "image/user.svg", Roles: []string{utils.RoleAdmin}},
+		{DocName: "system", Roles: []string{utils.RoleAdmin, ROLE_SPECIALIST, ROLE_CUSTOMER}},
+		{DocName: "request", Roles: []string{utils.RoleAdmin, ROLE_SPECIALIST, ROLE_CUSTOMER}},
+		{DocName: "functional_requirement", Roles: []string{utils.RoleAdmin, ROLE_SPECIALIST, ROLE_CUSTOMER}},
+		{DocName: "digital_solution", Roles: []string{utils.RoleAdmin, ROLE_SPECIALIST, ROLE_CUSTOMER}},
+		{DocName: "task", Roles: []string{utils.RoleAdmin, ROLE_SPECIALIST}},
+		{DocName: "work", Roles: []string{utils.RoleAdmin, ROLE_SPECIALIST}},
+		{DocName: "customer_task", Roles: []string{utils.RoleAdmin, ROLE_CUSTOMER, ROLE_SPECIALIST}},
+		{DocName: "bug", Roles: []string{utils.RoleAdmin, ROLE_CUSTOMER, ROLE_SPECIALIST}},
+		{DocName: "meeting", Roles: []string{utils.RoleAdmin, ROLE_SPECIALIST}},
+		{DocName: "time", Roles: []string{utils.RoleAdmin}},
+		{DocName: "company", Roles: []string{utils.RoleAdmin}},
+		{DocName: "man", Roles: []string{utils.RoleAdmin}},
+		{DocName: "counterparty", Roles: []string{utils.RoleAdmin}},
+		{DocName: "contract", Roles: []string{utils.RoleAdmin}},
+		{DocName: "invoice", Roles: []string{utils.RoleAdmin}},
+		{DocName: "news_from_dima", Roles: []string{utils.RoleAdmin}},
+		{Text: "Справочники", Icon: "image/catalog.svg", IsFolder: true, Roles: []string{utils.RoleAdmin}, LinkList: []t.VueMenu{
+			{Url: "users", Text: "Пользователи", Icon: "image/user.svg"},
 			{Text: "Статусы запросов", Url: "ctlg_request_state"},
 			{Text: "Статусы функциональных требований", Url: "ctlg_functional_requirement_state"},
 			{Text: "Статусы цифровых решений", Url: "ctlg_digital_solution_state"},
@@ -130,6 +140,9 @@ func getProject() t.ProjectType {
 		}},
 	}
 	p.FillSideMenu()
+
+	p.AddI18n("ru", "user", "role_" + ROLE_CUSTOMER, "заказчик")
+	p.AddI18n("ru", "user", "role_" + ROLE_SPECIALIST, "специалист")
 
 	// копируем файлы проекта (которые не шаблоны)
 	if _, err := os.Stat("./sourceFiles"); !os.IsNotExist(err) {

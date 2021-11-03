@@ -42,6 +42,7 @@ digital_solution_specialist_link: 'fas fa-list-ul',
 digital_solution_customer_agent_link: 'fas fa-list-ul',
 work_specialist_link: 'fas fa-list-ul',
 work_task_link: 'fas fa-list-ul',
+company_man_link: 'fas fa-list-ul',
 time: 'fas fa-building',
 comment: 'far fa-comment-dots',
 news_from_dima: 'far fa-newspaper'
