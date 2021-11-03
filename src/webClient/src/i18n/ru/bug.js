@@ -1,12 +1,12 @@
 
 export default {
- 		system_id: 'система',
- 		name_plural_deleted: 'удаленные Баги',
- 		functional_requirement_id: 'функциональное требование',
  		title: 'название',
  		state_id: 'статус',
  		description: 'описание',
- 		digital_solution_id: 'цифровое решение',
- 		name: 'баг',
+ 		functional_requirement_id: 'функциональное требование',
+ 		name_plural_deleted: 'удаленные Баги',
  		name_plural: 'Баги',
+ 		digital_solution_id: 'цифровое решение',
+ 		system_id: 'система',
+ 		name: 'баг',
 }

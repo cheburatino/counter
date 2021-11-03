@@ -119,14 +119,11 @@ func getProject() t.ProjectType {
 			{Text: "Статусы запросов", Url: "ctlg_request_state"},
 			{Text: "Статусы функциональных требований", Url: "ctlg_functional_requirement_state"},
 			{Text: "Статусы цифровых решений", Url: "ctlg_digital_solution_state"},
-			//{Text: "Типы времени", Url: "ctlg_time_type"},
+			{Text: "Роли специалистов в цифровых решениях", Url: "ctlg_digital_solution_specialist_role"},
 			{Text: "Типы задач", Url: "ctlg_task_type"},
 			{Text: "Статусы задач", Url: "ctlg_task_state"},
-			{Text: "Роли задач", Url: "ctlg_task_role"},
+			{Text: "Роли в задачах", Url: "ctlg_task_role"},
 			{Text: "Статусы задач заказчиков", Url: "ctlg_customer_task_state"},
-			//{Text: "Типы статусов задач", Url: "ctlg_task_status_type"},
-			//{Text: "Статусы задач разработки", Url: "ctlg_dev_task_state"},
-			//{Text: "Статусы подзадач", Url: "ctlg_subtask_state"},
 		}},
 	}
 	p.FillSideMenu()

@@ -26,7 +26,7 @@
       
       <div class="row q-col-gutter-md q-mb-sm">
       <div class="col-md-4 col-sm-6 col-xs-12">
-          <comp-fld-ref-search outlined pgMethod="man_list" :label="$t('request.rsk_id')" :item='item.rsk_title' :itemId='item.rsk_id' :ext='{company_id: 1, isClearable: "true", pathUrl: "/man", avatar: "image/man.svg"}' @update="v=> item.rsk_id = v.id" @clear="item.rsk_id = null" :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
+          <comp-fld-ref-search outlined pgMethod="man_list" :label="$t('request.rsk_id')" :item='item.rsk_title' :itemId='item.rsk_id' :ext='{company_id: 1, avatar: "image/man.svg", isClearable: "true", pathUrl: "/man"}' @update="v=> item.rsk_id = v.id" @clear="item.rsk_id = null" :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
       </div>
       <div class="col-md-4 col-sm-6 col-xs-12">
           <q-input outlined type='text' v-model="item.how_request_received" :label="$t('request.how_request_received')" autogrow :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
@@ -38,13 +38,13 @@
           <comp-fld-ref-search outlined pgMethod="company_list" :label="$t('request.customer_id')" :item='item.customer_title' :itemId='item.customer_id' :ext='{"avatar":"image/company.svg","isClearable":"true","pathUrl":"/company"}' @update="v=> item.customer_id = v.id" @clear="item.customer_id = null" :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
       </div>
       <div class="col-md-4 col-sm-6 col-xs-12">
-          <comp-fld-ref-search outlined pgMethod="man_list" :label="$t('request.customer_agent_id')" :item='item.customer_agent_title' :itemId='item.customer_agent_id' :ext='{company_id: item.customer_id, pathUrl: "/man", avatar: "image/man.svg", isClearable: "true"}' @update="v=> item.customer_agent_id = v.id" @clear="item.customer_agent_id = null" :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
+          <comp-fld-ref-search outlined pgMethod="man_list" :label="$t('request.customer_agent_id')" :item='item.customer_agent_title' :itemId='item.customer_agent_id' :ext='{company_id: item.customer_id, avatar: "image/man.svg", isClearable: "true", pathUrl: "/man"}' @update="v=> item.customer_agent_id = v.id" @clear="item.customer_agent_id = null" :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
       </div>
       </div>
       
       <div class="row q-col-gutter-md q-mb-sm">
       <div class="col-md-4 col-sm-6 col-xs-12">
-          <comp-fld-ref-search outlined pgMethod="system_list" :label="$t('request.system_id')" :item='item.system_title' :itemId='item.system_id' :ext='{customer_id: item.customer_id, pathUrl: "/system", avatar: "image/system.svg", isClearable: "true"}' @update="v=> item.system_id = v.id" @clear="item.system_id = null" :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
+          <comp-fld-ref-search outlined pgMethod="system_list" :label="$t('request.system_id')" :item='item.system_title' :itemId='item.system_id' :ext='{customer_id: item.customer_id, isClearable: "true", pathUrl: "/system", avatar: "image/system.svg"}' @update="v=> item.system_id = v.id" @clear="item.system_id = null" :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
       </div>
       </div>
       
