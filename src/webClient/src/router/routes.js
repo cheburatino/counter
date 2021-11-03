@@ -78,6 +78,8 @@ const routes = [
 	{path: '/time/:id', component: () => import(`../app/components/time/item.vue`), props: true},
 	{path: '/comment', component: () => import(`../app/components/comment/index.vue`), props: true},
 	{path: '/comment/:id', component: () => import(`../app/components/comment/item.vue`), props: true},
+	{path: '/news_from_dima', component: () => import(`../app/components/news_from_dima/index.vue`), props: true},
+	{path: '/news_from_dima/:id', component: () => import(`../app/components/news_from_dima/item.vue`), props: true},
   // Always leave this as last one,
   // but you can also remove it
   {

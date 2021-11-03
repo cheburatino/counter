@@ -1,6 +1,5 @@
 
 export default {
- 		title: 'название',
  		digital_solution_id: 'id цифрового решения',
  		customer_agent_id: 'представитель заказчика',
  		description: 'описание',
@@ -8,4 +7,5 @@ export default {
  		name: 'связь цифрового решения и заказчика',
  		name_plural: 'Связи цифровых решений и заказчиков',
  		name_plural_deleted: 'удаленные Связи цифровых решений и заказчиков',
+ 		title: 'название',
 }

@@ -40,9 +40,6 @@ BEGIN
     
     
     
-    
-    
-    
 
     if (params ->> 'id')::int = -1 then
         -- проверика наличия обязательных параметров
@@ -53,7 +50,7 @@ BEGIN
         END IF;
         
 
-        EXECUTE ('INSERT INTO task (title, state, digital_solution_id, type_id, description, files, images, author_id, director_id, executor_id, acceptor_id, plan_start_date, fact_start_date, plan_end_date, fact_end_date, result, options) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17)  RETURNING *;')
+        EXECUTE ('INSERT INTO task (title, state, digital_solution_id, type_id, description, files, images, author_id, plan_start_date, fact_start_date, plan_end_date, fact_end_date, result, options) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14)  RETURNING *;')
 		INTO taskRow
 		USING
 			(params ->> 'title')::text,
@@ -64,9 +61,6 @@ BEGIN
 			(params -> 'files')::jsonb,
 			(params -> 'images')::jsonb,
 			(params ->> 'author_id')::int,
-			(params ->> 'director_id')::int,
-			(params ->> 'executor_id')::int,
-			(params ->> 'acceptor_id')::int,
 			(params ->> 'plan_start_date')::timestamp,
 			(params ->> 'fact_start_date')::timestamp,
 			(params ->> 'plan_end_date')::timestamp,
@@ -86,9 +80,6 @@ BEGIN
 			['files', 'files', 'jsonb'],
 			['images', 'images', 'jsonb'],
 			['author_id', 'author_id', 'number'],
-			['director_id', 'director_id', 'number'],
-			['executor_id', 'executor_id', 'number'],
-			['acceptor_id', 'acceptor_id', 'number'],
 			['plan_start_date', 'plan_start_date', 'timestamp'],
 			['fact_start_date', 'fact_start_date', 'timestamp'],
 			['plan_end_date', 'plan_end_date', 'timestamp'],

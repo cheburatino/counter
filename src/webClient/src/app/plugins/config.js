@@ -43,7 +43,8 @@ task_specialist_link: 'fas fa-list-ul',
 digital_solution_specialist_link: 'fas fa-list-ul',
 digital_solution_customer_agent_link: 'fas fa-list-ul',
 time: 'fas fa-building',
-comment: 'far fa-comment-dots'
+comment: 'far fa-comment-dots',
+news_from_dima: 'far fa-newspaper'
   },
   
   tablesForTask: {},

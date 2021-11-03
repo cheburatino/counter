@@ -38,7 +38,7 @@
           <comp-fld-ref-search outlined pgMethod="company_list" :label="$t('request.customer_id')" :item='item.customer_title' :itemId='item.customer_id' :ext='{"avatar":"image/company.svg","isClearable":"true","pathUrl":"/company"}' @update="v=> item.customer_id = v.id" @clear="item.customer_id = null" :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
       </div>
       <div class="col-md-4 col-sm-6 col-xs-12">
-          <comp-fld-ref-search outlined pgMethod="man_list" :label="$t('request.customer_agent_id')" :item='item.customer_agent_title' :itemId='item.customer_agent_id' :ext='{company_id: item.customer_id, isClearable: "true", pathUrl: "/man", avatar: "image/man.svg"}' @update="v=> item.customer_agent_id = v.id" @clear="item.customer_agent_id = null" :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
+          <comp-fld-ref-search outlined pgMethod="man_list" :label="$t('request.customer_agent_id')" :item='item.customer_agent_title' :itemId='item.customer_agent_id' :ext='{company_id: item.customer_id, pathUrl: "/man", avatar: "image/man.svg", isClearable: "true"}' @update="v=> item.customer_agent_id = v.id" @clear="item.customer_agent_id = null" :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
       </div>
       </div>
       
@@ -81,7 +81,7 @@
     import currentUserMixin from '../../../app/mixins/currentUser'
     export default {
         props: ['id', 'isOpenInDialog'],
-        components: {ftListRefListWidget, taskListRefListWidget},
+        components: {taskListRefListWidget, ftListRefListWidget},
         mixins: [currentUserMixin,],
         computed: {
             docUrl: function() {

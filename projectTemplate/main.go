@@ -28,6 +28,7 @@ import (
 	"github.com/cheburatino/electron_is/projectTemplate/docs/invoice"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/man"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/meeting"
+	"github.com/cheburatino/electron_is/projectTemplate/docs/newsFromDima"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/request"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/sprint"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/system"
@@ -85,6 +86,7 @@ func getProject() t.ProjectType {
 		digitalSolutionCustomerAgentLink.GetDoc(p),
 		time.GetDoc(p),
 		comment.GetDoc(p),
+		newsFromDima.GetDoc(p),
 	}
 
 	// названием базы маленькими буквами, без пробелов
@@ -113,20 +115,18 @@ func getProject() t.ProjectType {
 		{DocName: "counterparty"},
 		{DocName: "contract"},
 		{DocName: "invoice"},
+		{DocName: "news_from_dima"},
 		{Text: "Справочники", Icon: "image/catalog.svg", IsFolder: true, LinkList: []t.VueMenu{
 			{Url: "users", Text: "Пользователи", Icon: "image/user.svg", Roles: []string{utils.RoleAdmin}},
 			{Text: "Компетенции", Url: "ctlg_electron_skill"},
 			{Text: "Статусы запросов", Url: "ctlg_request_state"},
 			{Text: "Статусы функциональных требований", Url: "ctlg_functional_requirement_state"},
 			{Text: "Статусы цифровых решений", Url: "ctlg_digital_solution_state"},
-			//{Text: "Типы времени", Url: "ctlg_time_type"},
+			{Text: "Роли специалистов в цифровых решениях", Url: "ctlg_digital_solution_specialist_role"},
 			{Text: "Типы задач", Url: "ctlg_task_type"},
 			{Text: "Статусы задач", Url: "ctlg_task_state"},
-			{Text: "Роли задач", Url: "ctlg_task_role"},
+			{Text: "Роли в задачах", Url: "ctlg_task_role"},
 			{Text: "Статусы задач заказчиков", Url: "ctlg_customer_task_state"},
-			//{Text: "Типы статусов задач", Url: "ctlg_task_status_type"},
-			//{Text: "Статусы задач разработки", Url: "ctlg_dev_task_state"},
-			//{Text: "Статусы подзадач", Url: "ctlg_subtask_state"},
 		}},
 	}
 	p.FillSideMenu()

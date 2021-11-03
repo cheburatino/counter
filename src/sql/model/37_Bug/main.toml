@@ -9,6 +9,7 @@ fields = [
 	{name="state_id",					type="int",	 comment="статус"},
 	{name="description",					type="text",	 comment="описание"},
 	{name="functional_requirement_id",					type="int",	 comment="функциональное требование"},
+	{name="digital_solution_id",					type="int",	 comment="цифровое решение"},
 	{name="system_id",					type="int",	 comment="система"},
 	{name="search_text",			type="text",	comment="колонка для поиска"},
 	{name="options",				type="jsonb",	comment="разные дополнительные параметры"},
@@ -21,6 +22,7 @@ fkConstraints = [
 	{name="bug_title_already_exist", ext="UNIQUE (title)"},
 	{fld="state_id", ref="ctlg_bug_state", fk="id"},
 	{fld="functional_requirement_id", ref="functional_requirement", fk="id"},
+	{fld="digital_solution_id", ref="digital_solution", fk="id"},
 	{fld="system_id", ref="system", fk="id"}
 ]
 
@@ -45,6 +47,7 @@ alterScripts = [
 	"alter table bug add column if not exists state_id int;",
 	"alter table bug add column if not exists description text;",
 	"alter table bug add column if not exists functional_requirement_id int;",
+	"alter table bug add column if not exists digital_solution_id int;",
 	"alter table bug add column if not exists system_id int;",
 	"alter table bug add column if not exists search_text text;"
 ]

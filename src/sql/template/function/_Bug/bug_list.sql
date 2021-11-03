@@ -33,6 +33,7 @@ BEGIN
         ['ilike', 'search_text', 'search_text'],
 		['notQuoted', 'state_id', 'doc.state_id'],
 		['notQuoted', 'functional_requirement_id', 'doc.functional_requirement_id'],
+		['notQuoted', 'digital_solution_id', 'doc.digital_solution_id'],
 		['notQuoted', 'system_id', 'doc.system_id']
     ]);
 
