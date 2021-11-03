@@ -1,19 +1,19 @@
 <template>
     <div>
         <q-bar class="bg-secondary text-white shadow-2">
-            <div>баги <span v-if="deleted">удаленные</span></div>
+            <div>цифровые решения <span v-if="deleted">удаленные</span></div>
             <q-space />
             <q-btn icon="add" v-if="!readonly" round flat @click="add"><q-tooltip>Добавить</q-tooltip></q-btn>
-            <q-btn v-if="deleted && !readonly" icon="delete" round flat @click="reload(false)"><q-tooltip>активные баги</q-tooltip></q-btn>
-            <q-btn v-if="!deleted && !readonly" icon="delete_outline" round flat @click="reload(true)"><q-tooltip>удаленные баги</q-tooltip></q-btn>
+            <q-btn v-if="deleted && !readonly" icon="delete" round flat @click="reload(false)"><q-tooltip>активные цифровые решения</q-tooltip></q-btn>
+            <q-btn v-if="!deleted && !readonly" icon="delete_outline" round flat @click="reload(true)"><q-tooltip>удаленные цифровые решения</q-tooltip></q-btn>
         </q-bar>
 
         <q-list bordered separator>
             <q-item v-for="v in list" :key="v.id">
-                <router-link :to="'/bug/' + v.id" style="cursor: pointer">
+                <router-link :to="'/digital_solution/' + v.id" style="cursor: pointer">
                     <q-item-section avatar>
                         <q-avatar rounded>
-                            <img src="image/bug.png" alt="">
+                            <img src="image/digital_solution.svg" alt="">
                         </q-avatar>
                     </q-item-section>
                 </router-link>
@@ -39,7 +39,7 @@
                 </q-bar>
                 <q-card-section>
                     
-                    <q-input outlined type='text' v-model="item.title" :label="$t('bug.title')" autogrow :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
+                    <q-input outlined type='text' v-model="item.title" :label="$t('digital_solution.title')" autogrow :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
                     
                 </q-card-section>
                 <q-card-actions align="right" class="bg-white text-teal">
@@ -69,7 +69,7 @@
             },
             reload(isDeleted) {
                 !isDeleted ? this.deleted = false : this.deleted = true
-                this.$utils.callPgMethod('bug_list', {'functional_requirement_id': this.id, deleted: this.deleted, 'order_by': 'created_at desc', }, (result) => this.list = result)
+                this.$utils.callPgMethod('digital_solution_list', {'system_id': this.id, deleted: this.deleted, 'order_by': 'created_at desc', }, (result) => this.list = result)
             },
             saveNew() {
                 
@@ -77,11 +77,11 @@
                     this.$q.notify({type: 'negative', message: 'не заполнено поле: "название"'})
                     return
                 }
-                let params = Object.assign({id: -1, functional_requirement_id: this.id}, this.item)
+                let params = Object.assign({id: -1, system_id: this.id}, this.item)
                 
                     
-                // если IsStateMachine то bug_create, в остальных случаях bug_update
-                this.$utils.callPgMethod('bug_update', params, () => {
+                // если IsStateMachine то digital_solution_create, в остальных случаях digital_solution_update
+                this.$utils.callPgMethod('digital_solution_update', params, () => {
                     this.isShowAddDialog = false
                     
                     this.item.title = null 
@@ -89,7 +89,7 @@
                 })
             },
             removeRecover({id}) {
-                this.$utils.callPgMethod('bug_update', {id, deleted: !this.deleted}, () => this.reload(this.deleted))
+                this.$utils.callPgMethod('digital_solution_update', {id, deleted: !this.deleted}, () => this.reload(this.deleted))
             }
         },
         mounted() {

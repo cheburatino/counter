@@ -49,5 +49,20 @@ func GetDoc(project *t.ProjectType) t.DocType {
 
 	doc.Init()
 
+	doc.AddFld(t.GetFldVueCompositionRefList(&doc, t.VueCompRefListWidgetParams{
+		Label:      "цифровые решения",                  // название списка, которе выводится на экране
+		FldName:    "digital_solution_list",              // название поля. Любое, в формате snake_case. На основе этого названия формируется название компоненты во vue.
+		TableName:  "digital_solution",                   // название связанной таблицы, из которой будут выгружаться записи
+		RefFldName: "system_id", // название поля в связанной таблицы, по которому осуществляется связь
+		Avatar:     "image/digital_solution.svg",         // иконка, которая выводится в списке
+		NewFlds: []t.FldType{
+			t.GetFldString("title", "название", 300, [][]int{{1, 1}}).SetIsRequired(),
+		}, // список полей, которые заполняются при добавлении новой записи
+		TitleTemplate: `
+                <q-item-label>{{v.title}}</q-item-label>
+                <q-item-label caption><q-badge color="orange">{{v.options.title.state_title}}</q-badge></q-item-label>
+            `, // шаблон для названия в списке (vue синтаксис)
+	}, [][]int{{3, 1}}, "col-4"))
+
 	return doc
 }
