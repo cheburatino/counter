@@ -165,16 +165,14 @@ export default {
       return id + 1
     },
     addPosition() {
-      let randomTitle = new Date();
       this.$utils.postCallPgMethod({
-        method: 'task_specialist_link_update',
+        method: 'digital_solution_specialist_link_update',
         params: {
           id: -1,
           specialist_id: this.specId,
           role_id: this.roleId,
           description: this.roleDesc,
-          title: randomTitle,
-          task_id: this.item.id,
+          digital_solution_id: this.item.id,
           author_id: this.currentUser.id
         }
       }).subscribe(v => {
@@ -206,7 +204,7 @@ export default {
     },
     savePosition(id) {
       this.$utils.postCallPgMethod({
-        method: 'task_specialist_link_update',
+        method: 'digital_solution_specialist_link_update',
         params: {
           id: id,
           specialist_id: this.specId,
@@ -225,7 +223,7 @@ export default {
       let index = this.taskSpecList.findIndex(v => v.id === id)
       this.taskSpecList[index].deleted = true
       this.$utils.postCallPgMethod({
-        method: 'task_specialist_link_update',
+        method: 'digital_solution_specialist_link_update',
         params: {
           id: id,
           deleted: true
@@ -238,7 +236,7 @@ export default {
     },
     recoverPosition(id) {
       this.$utils.postCallPgMethod({
-        method: 'task_specialist_link_update',
+        method: 'digital_solution_specialist_link_update',
         params: {
           id: id,
           deleted: false
@@ -251,9 +249,9 @@ export default {
     },
     reloadList () {
       this.$utils.postCallPgMethod({
-        method: 'task_specialist_link_list',
+        method: 'digital_solution_specialist_link_list',
         params: {
-          task_id: this.item.id
+          digital_solution_id: this.item.id
         }
       }).subscribe(v => {
         if (v.ok) {
@@ -262,9 +260,9 @@ export default {
 
       })
       this.$utils.postCallPgMethod({
-        method: 'task_specialist_link_list',
+        method: 'digital_solution_specialist_link_list',
         params: {
-          task_id: this.item.id,
+          digital_solution_id: this.item.id,
           deleted: true
         }
       }).subscribe(v => {
@@ -288,7 +286,7 @@ export default {
       }
     })
     this.$utils.postCallPgMethod({
-      method: 'task_get_specialist_role',
+      method: 'digital_solution_get_specialist_role',
       params: {}
     }).subscribe(v => {
       if (v.ok) {

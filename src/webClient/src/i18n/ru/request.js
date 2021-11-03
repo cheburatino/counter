@@ -1,16 +1,16 @@
 
 export default {
- 		name_plural_deleted: 'удаленные Запросы',
+ 		result: 'результат',
+ 		title: 'название',
+ 		datetime_reciept: 'дата и время получения запроса',
  		description: 'описание',
  		rsk_id: 'рск',
  		how_request_received: 'как получен запрос',
- 		customer_agent_id: 'представитель заказчика',
+ 		customer_id: 'заказчик',
  		system_id: 'система',
  		name: 'запрос',
  		name_plural: 'Запросы',
- 		title: 'название',
- 		datetime_reciept: 'дата и время получения запроса',
+ 		name_plural_deleted: 'удаленные Запросы',
  		state_id: 'статус',
- 		customer_id: 'заказчик',
- 		result: 'результат',
+ 		customer_agent_id: 'представитель заказчика',
 }

@@ -165,7 +165,6 @@ export default {
       return id + 1
     },
     addPosition() {
-      let randomTitle = new Date();
       this.$utils.postCallPgMethod({
         method: 'task_specialist_link_update',
         params: {
@@ -173,7 +172,6 @@ export default {
           specialist_id: this.specId,
           role_id: this.roleId,
           description: this.roleDesc,
-          title: randomTitle,
           task_id: this.item.id,
           author_id: this.currentUser.id
         }
