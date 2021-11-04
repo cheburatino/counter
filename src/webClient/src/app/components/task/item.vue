@@ -32,7 +32,7 @@
       
       <div class="row q-col-gutter-md q-mb-sm">
       <div class="col-md-4 col-sm-6 col-xs-12">
-          <comp-fld-files v-if="this.id != 'new'" fldName='files' :label="$t('task.files')" :fld='item.files' :ext = '{tableName: "task", tableId: this.id, maxFileSize: "10000"}' @update="v=> item.files = v" :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
+          <comp-fld-files v-if="this.id != 'new'" fldName='files' :label="$t('task.files')" :fld='item.files' :ext = '{tableName: "task", tableId: this.id}' @update="v=> item.files = v" :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
       </div>
       <div class="col-md-4 col-sm-6 col-xs-12">
           <comp-fld-img-list v-if="this.id != 'new'" :label="$t('task.images')" :fld='item.images' :ext = '{tableName: "task", tableId: this.id, fldName: "images"}' @update="v=> item.images = v" :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />

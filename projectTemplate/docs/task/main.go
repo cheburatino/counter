@@ -25,7 +25,7 @@ func GetDoc(project *t.ProjectType) t.DocType {
 			t.GetFldRef("digital_solution_id", "цифровое решение", "digital_solution", [][]int{{2, 1}}, "col-4", "isShowLink"),
 			t.GetFldRef("type_id", "тип задачи", "ctlg_task_type", [][]int{{2, 2}}).SetIsRequired(),
 			t.GetFldString("description", "описание", 0, [][]int{{3, 1}}, "col-8"),
-			t.GetFldFiles("files", "файлы", [][]int{{4, 1}}, t.FldVueFilesParams{MaxFileSize: 10000}),
+			t.GetFldFiles("files", "файлы", [][]int{{4, 1}}, t.FldVueFilesParams{}),
 			t.GetFldImgList("images", "изображения", [][]int{{4, 2}}, t.FldVueImgParams{}),
 			t.GetFldRef("author_id", "автор", "man", [][]int{{5, 1}}).SetIsHide(),
 			t.GetFldJsonbCompositionWithoutFld([][]int{{5, 1}}, "", "comp-specialist", ":currentUser='currentUser'"),
