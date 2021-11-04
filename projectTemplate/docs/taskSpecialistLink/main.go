@@ -20,7 +20,6 @@ func GetDoc(project *t.ProjectType) t.DocType {
 		NameRu:     name_ru,
 		PathPrefix: "docs",
 		Flds: []t.FldType{
-			t.GetFldTitle(),
 			t.GetFldRef("task_id", "id задачи", "task", [][]int{{2, 1}}),
 			t.GetFldRef("specialist_id", "специалист", "man", [][]int{{2, 2}}),
 			t.GetFldRef("role_id", "роль", "ctlg_task_role", [][]int{{3, 1}}),
@@ -39,6 +38,7 @@ func GetDoc(project *t.ProjectType) t.DocType {
 			IsSearchText:    true,
 			IsBeforeTrigger: true,
 			IsAfterTrigger:  true,
+			IsUniqLink: true,
 		},
 	}
 

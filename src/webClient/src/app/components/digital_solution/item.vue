@@ -10,11 +10,8 @@
       <div class="col-md-4 col-sm-6 col-xs-12">
           <q-input outlined type='text' v-model="item.title" :label="$t('digital_solution.title')" autogrow :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
       </div>
-      <div class="col-md-2 col-sm-3 col-xs-6">
-          <comp-fld-ref-search outlined pgMethod="ctlg_digital_solution_state_list" :label="$t('digital_solution.state_id')" :item='item.state_title' :itemId='item.state_id' :ext='{}' @update="v=> item.state_id = v.id" @clear="item.state_id = null" :readonly='false'  class='q-mb-sm col-md-2 col-sm-3 col-xs-6' />
-      </div>
-      <div class="col-md-2 col-sm-3 col-xs-6" v-if="item.state_id === 4 || item.state_id === 5 || item.state_id === 6">
-          <comp-fld-ref-search outlined pgMethod="sprint_list" :label="$t('digital_solution.sprint_id')" :item='item.sprint_title' :itemId='item.sprint_id' :ext='{"avatar":"image/sprint.svg","isClearable":"true","pathUrl":"/sprint"}' @update="v=> item.sprint_id = v.id" @clear="item.sprint_id = null" :readonly='false'  class='q-mb-sm col-md-2 col-sm-3 col-xs-6'  v-if="item.state_id === 4 || item.state_id === 5 || item.state_id === 6" />
+      <div class="col-md-4 col-sm-6 col-xs-12">
+          <comp-fld-ref-search outlined pgMethod="ctlg_digital_solution_state_list" :label="$t('digital_solution.state_id')" :item='item.state_title' :itemId='item.state_id' :ext='{}' @update="v=> item.state_id = v.id" @clear="item.state_id = null" :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
       </div>
       </div>
       
@@ -62,7 +59,7 @@
           <comp-fld-ref-search outlined pgMethod="company_list" :label="$t('digital_solution.customer_id')" :item='item.customer_title' :itemId='item.customer_id' :ext='{"avatar":"image/company.svg","isClearable":"true","pathUrl":"/company"}' @update="v=> item.customer_id = v.id" @clear="item.customer_id = null" :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
       </div>
       <div class="col-md-4 col-sm-6 col-xs-12">
-          <comp-fld-ref-search outlined pgMethod="system_list" :label="$t('digital_solution.system_id')" :item='item.system_title' :itemId='item.system_id' :ext='{customer_id: item.customer_id, avatar: "image/system.svg", isClearable: "true", pathUrl: "/system"}' @update="v=> item.system_id = v.id" @clear="item.system_id = null" :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
+          <comp-fld-ref-search outlined pgMethod="system_list" :label="$t('digital_solution.system_id')" :item='item.system_title' :itemId='item.system_id' :ext='{customer_id: item.customer_id, pathUrl: "/system", avatar: "image/system.svg", isClearable: "true"}' @update="v=> item.system_id = v.id" @clear="item.system_id = null" :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
       </div>
       </div>
       
@@ -146,18 +143,18 @@
 </template>
 
 <script>
-	import compRealization from './comp/realization.vue'
-	import compSpecialist from './comp/specialist.vue'
-	import ftListRefListWidget from './comp/ftListRefListWidget.vue'
-	import bugListRefListWidget from './comp/bugListRefListWidget.vue'
 	import taskListRefListWidget from './comp/taskListRefListWidget.vue'
 	import customerTaskListRefListWidget from './comp/customerTaskListRefListWidget.vue'
 	import compParticipants from './comp/participants.vue'
 	import compModeling from './comp/modeling.vue'
+	import compRealization from './comp/realization.vue'
+	import compSpecialist from './comp/specialist.vue'
+	import ftListRefListWidget from './comp/ftListRefListWidget.vue'
+	import bugListRefListWidget from './comp/bugListRefListWidget.vue'
     import currentUserMixin from '../../../app/mixins/currentUser'
     export default {
         props: ['id', 'isOpenInDialog'],
-        components: {compModeling, compRealization, compSpecialist, ftListRefListWidget, bugListRefListWidget, taskListRefListWidget, customerTaskListRefListWidget, compParticipants},
+        components: {compSpecialist, ftListRefListWidget, bugListRefListWidget, taskListRefListWidget, customerTaskListRefListWidget, compParticipants, compModeling, compRealization},
         mixins: [currentUserMixin,],
         computed: {
             docUrl: function() {
@@ -170,7 +167,6 @@
                 flds: [
                         {name: 'title', label: 'название',  required: true},
                         {name: 'state_id', label: 'статус'},
-                        {name: 'sprint_id', label: 'спринт'},
                         {name: 'description', label: 'описание'},
                         {name: 'customer_id', label: 'заказчик'},
                         {name: 'system_id', label: 'система'},

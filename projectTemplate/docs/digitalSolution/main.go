@@ -21,8 +21,7 @@ func GetDoc(project *t.ProjectType) t.DocType {
 		PathPrefix: "docs",
 		Flds: []t.FldType{
 			t.GetFldTitle(),
-			t.GetFldRef("state_id", "статус", "ctlg_digital_solution_state", [][]int{{1, 2}}, "col-2").SetDefault("1"),
-			t.GetFldRef("sprint_id", "спринт", "sprint", [][]int{{1, 3}}, "col-2", "isShowLink", "isClearable").SetVif("item.state_id === 4 || item.state_id === 5 || item.state_id === 6"),
+			t.GetFldRef("state_id", "статус", "ctlg_digital_solution_state", [][]int{{1, 2}}).SetDefault("1"),
 			t.GetFldSimpleHtml([][]int{{2, 1}}, "", "<p>Дата и время создания: {{item.created_at}}</p>"),
 			t.GetFldSimpleHtml([][]int{{2, 2}}, "", "<p>Дата и время изменения: {{item.updated_at}}</p>"),
 			t.GetFldString("description", "описание", 0, [][]int{{3, 1}}, "col-8"),

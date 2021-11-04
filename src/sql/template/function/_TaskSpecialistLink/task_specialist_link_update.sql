@@ -31,21 +31,13 @@ BEGIN
     
     
     
-    
 
     if (params ->> 'id')::int = -1 then
-        -- проверика наличия обязательных параметров
-        checkMsg = check_required_params(params, ARRAY ['title']);
-        IF checkMsg IS NOT NULL
-        THEN
-            RETURN checkMsg;
-        END IF;
         
 
-        EXECUTE ('INSERT INTO task_specialist_link (title, task_id, specialist_id, role_id, description, author_id, options) VALUES ($1, $2, $3, $4, $5, $6, $7)  RETURNING *;')
+        EXECUTE ('INSERT INTO task_specialist_link (task_id, specialist_id, role_id, description, author_id, options) VALUES ($1, $2, $3, $4, $5, $6)  ON CONFLICT (task_id, specialist_id) DO UPDATE SET options=$6, deleted=false, description=$4 RETURNING *;')
 		INTO task_specialist_linkRow
 		USING
-			(params ->> 'title')::text,
 			(params ->> 'task_id')::int,
 			(params ->> 'specialist_id')::int,
 			(params ->> 'role_id')::int,
@@ -57,7 +49,6 @@ BEGIN
 
     else
         updateValue = '' || update_str_from_json(params, ARRAY [
-			['title', 'title', 'text'],
 			['task_id', 'task_id', 'number'],
 			['specialist_id', 'specialist_id', 'number'],
 			['role_id', 'role_id', 'number'],

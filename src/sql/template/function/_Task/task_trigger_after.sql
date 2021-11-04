@@ -13,6 +13,15 @@ if new.title != old.title then
  for r in select * from task_specialist_link where task_id = new.id loop
  update task_specialist_link set updated_at=now() where id = r.id;
  end loop;
+ for r in select * from work_specialist_link where work_id = new.id loop
+ update work_specialist_link set updated_at=now() where id = r.id;
+ end loop;
+ for r in select * from work_task_link where task_id = new.id loop
+ update work_task_link set updated_at=now() where id = r.id;
+ end loop;
+ for r in select * from company_man_link where company_id = new.id loop
+ update company_man_link set updated_at=now() where id = r.id;
+ end loop;
  for r in select * from time where task_id = new.id loop
  update time set updated_at=now() where id = r.id;
  end loop;

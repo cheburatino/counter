@@ -3,6 +3,7 @@ package main
 import (
 	"encoding/gob"
 	"flag"
+	"github.com/cheburatino/electron_is/src/graylog"
 	"github.com/cheburatino/electron_is/src/jobs"
 	"github.com/cheburatino/electron_is/src/pg"
 	"github.com/cheburatino/electron_is/src/types"
@@ -56,7 +57,9 @@ func main() {
 	err = pg.StartPostgres(config.Postgres)
 	utils.CheckErr(err, "StartPostgres")
 
-	
+	// подключаемся к серверу сбора логов
+	err = graylog.Init(config.Graylog)
+	utils.CheckErr(err, "Connect to GraylogConfig")
 
 	// инициализируем генератор случайных чисел
 	rand.Seed(time.Now().UnixNano())

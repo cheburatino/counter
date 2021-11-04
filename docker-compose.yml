@@ -11,6 +11,11 @@ services:
       - /home/deploy/electron_is/uploaded_files:/uploaded_files
     ports:
       - "3091:3091"
+    logging:
+      driver: gelf
+      options:
+        gelf-address: "udp://85.143.214.161:12201"
+        tag: docker.app.electron_is
     depends_on:
       - postgres
 

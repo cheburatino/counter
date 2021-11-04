@@ -4,22 +4,21 @@ import (
 	"github.com/cheburatino/electron_is/projectTemplate/docs/bug"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/comment"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/company"
+	"github.com/cheburatino/electron_is/projectTemplate/docs/companyManLink"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/contract"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/counterparty"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/ctlgBugState"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/ctlgCustomerTaskState"
-	"github.com/cheburatino/electron_is/projectTemplate/docs/ctlgDevTaskState"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/ctlgDigitalSolutionSpecialistRole"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/ctlgDigitalSolutionState"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/ctlgElectronSkill"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/ctlgFunctionalRequirementState"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/ctlgRequestState"
-	"github.com/cheburatino/electron_is/projectTemplate/docs/ctlgSubtaskState"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/ctlgTaskRole"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/ctlgTaskState"
-	ctlgTaskStatusType "github.com/cheburatino/electron_is/projectTemplate/docs/ctlgTaskStatusType"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/ctlgTaskType"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/ctlgTimeType"
+	"github.com/cheburatino/electron_is/projectTemplate/docs/ctlgWorkState"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/customerTask"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/digitalSolution"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/digitalSolutionCustomerAgentLink"
@@ -30,17 +29,22 @@ import (
 	"github.com/cheburatino/electron_is/projectTemplate/docs/meeting"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/newsFromDima"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/request"
-	"github.com/cheburatino/electron_is/projectTemplate/docs/sprint"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/system"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/task"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/taskSpecialistLink"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/time"
+	"github.com/cheburatino/electron_is/projectTemplate/docs/work"
+	"github.com/cheburatino/electron_is/projectTemplate/docs/workSpecialistLink"
+	"github.com/cheburatino/electron_is/projectTemplate/docs/workTaskLink"
 	"github.com/otiai10/copy"
 	"github.com/pepelazz/nla_framework"
 	t "github.com/pepelazz/nla_framework/types"
 	"github.com/pepelazz/projectBlueprint/projectTemplate/utils"
 	"os"
 )
+
+const ROLE_CUSTOMER = "customer"
+const ROLE_SPECIALIST = "specialist"
 
 func main() {
 	nla_framework.Start(getProject(), nil)
@@ -51,6 +55,7 @@ func getProject() t.ProjectType {
 		Name: "Electron",
 	}
 	p.Config.Vue.QuasarVersion = 2
+	p.FillI18n()
 
 	p.Docs = []t.DocType{
 		ctlgElectronSkill.GetDoc(p),
@@ -62,9 +67,7 @@ func getProject() t.ProjectType {
 		ctlgTaskType.GetDoc(p),
 		ctlgTaskState.GetDoc(p),
 		ctlgTaskRole.GetDoc(p),
-		ctlgDevTaskState.GetDoc(p),
-		ctlgTaskStatusType.GetDoc(p),
-		ctlgSubtaskState.GetDoc(p),
+		ctlgWorkState.GetDoc(p),
 		ctlgBugState.GetDoc(p),
 		ctlgCustomerTaskState.GetDoc(p),
 		meeting.GetDoc(p),
@@ -74,16 +77,19 @@ func getProject() t.ProjectType {
 		man.GetDoc(p),
 		system.GetDoc(p),
 		request.GetDoc(p),
-		sprint.GetDoc(p),
 		digitalSolution.GetDoc(p),
 		functionalRequirement.GetDoc(p),
 		invoice.GetDoc(p),
 		task.GetDoc(p),
+		work.GetDoc(p),
 		customerTask.GetDoc(p),
 		bug.GetDoc(p),
 		taskSpecialistLink.GetDoc(p),
 		digitalSolutionSpecialistLink.GetDoc(p),
 		digitalSolutionCustomerAgentLink.GetDoc(p),
+		workSpecialistLink.GetDoc(p),
+		workTaskLink.GetDoc(p),
+		companyManLink.GetDoc(p),
 		time.GetDoc(p),
 		comment.GetDoc(p),
 		newsFromDima.GetDoc(p),
@@ -97,28 +103,33 @@ func getProject() t.ProjectType {
 	// формируем routes для Vue
 	p.FillVueBaseRoutes()
 	p.Vue.UiAppName = "Electron"
+	p.Roles = []t.ProjectRole{
+		{Name: ROLE_CUSTOMER, NameRu: "заказчик"},
+		{Name: ROLE_SPECIALIST, NameRu: "специалист"},
+	}
+
+	p.Config.Graylog = t.GraylogConfig{Host: "85.143.214.161", Port: 12201}
 
 	// боковое меню для Vue
 	p.Vue.Menu = []t.VueMenu{
-		{DocName: "request"},
-		{DocName: "functional_requirement"},
-		{DocName: "digital_solution"},
-		{DocName: "task"},
-		{DocName: "customer_task"},
-		{DocName: "bug"},
-		{DocName: "meeting"},
-		{DocName: "time"},
-		{DocName: "sprint"},
-		{DocName: "system"},
-		{DocName: "company"},
-		{DocName: "man"},
-		{DocName: "counterparty"},
-		{DocName: "contract"},
-		{DocName: "invoice"},
-		{DocName: "news_from_dima"},
-		{Text: "Справочники", Icon: "image/catalog.svg", IsFolder: true, LinkList: []t.VueMenu{
-			{Url: "users", Text: "Пользователи", Icon: "image/user.svg", Roles: []string{utils.RoleAdmin}},
-			{Text: "Компетенции", Url: "ctlg_electron_skill"},
+		{DocName: "system", Roles: []string{utils.RoleAdmin, ROLE_SPECIALIST, ROLE_CUSTOMER}},
+		{DocName: "request", Roles: []string{utils.RoleAdmin, ROLE_SPECIALIST, ROLE_CUSTOMER}},
+		{DocName: "functional_requirement", Roles: []string{utils.RoleAdmin, ROLE_SPECIALIST, ROLE_CUSTOMER}},
+		{DocName: "digital_solution", Roles: []string{utils.RoleAdmin, ROLE_SPECIALIST, ROLE_CUSTOMER}},
+		{DocName: "task", Roles: []string{utils.RoleAdmin, ROLE_SPECIALIST}},
+		{DocName: "work", Roles: []string{utils.RoleAdmin, ROLE_SPECIALIST}},
+		{DocName: "customer_task", Roles: []string{utils.RoleAdmin, ROLE_CUSTOMER, ROLE_SPECIALIST}},
+		{DocName: "bug", Roles: []string{utils.RoleAdmin, ROLE_CUSTOMER, ROLE_SPECIALIST}},
+		{DocName: "meeting", Roles: []string{utils.RoleAdmin, ROLE_SPECIALIST}},
+		{DocName: "time", Roles: []string{utils.RoleAdmin}},
+		{DocName: "company", Roles: []string{utils.RoleAdmin}},
+		{DocName: "man", Roles: []string{utils.RoleAdmin}},
+		{DocName: "counterparty", Roles: []string{utils.RoleAdmin}},
+		{DocName: "contract", Roles: []string{utils.RoleAdmin}},
+		{DocName: "invoice", Roles: []string{utils.RoleAdmin}},
+		{DocName: "news_from_dima", Roles: []string{utils.RoleAdmin}},
+		{Text: "Справочники", Icon: "image/catalog.svg", IsFolder: true, Roles: []string{utils.RoleAdmin}, LinkList: []t.VueMenu{
+			{Url: "users", Text: "Пользователи", Icon: "image/user.svg"},
 			{Text: "Статусы запросов", Url: "ctlg_request_state"},
 			{Text: "Статусы функциональных требований", Url: "ctlg_functional_requirement_state"},
 			{Text: "Статусы цифровых решений", Url: "ctlg_digital_solution_state"},
@@ -126,10 +137,14 @@ func getProject() t.ProjectType {
 			{Text: "Типы задач", Url: "ctlg_task_type"},
 			{Text: "Статусы задач", Url: "ctlg_task_state"},
 			{Text: "Роли в задачах", Url: "ctlg_task_role"},
+			{Text: "Статусы дел", Url: "ctlg_work_state"},
 			{Text: "Статусы задач заказчиков", Url: "ctlg_customer_task_state"},
 		}},
 	}
 	p.FillSideMenu()
+
+	p.AddI18n("ru", "user", "role_" + ROLE_CUSTOMER, "заказчик")
+	p.AddI18n("ru", "user", "role_" + ROLE_SPECIALIST, "специалист")
 
 	// копируем файлы проекта (которые не шаблоны)
 	if _, err := os.Stat("./sourceFiles"); !os.IsNotExist(err) {
