@@ -108,6 +108,8 @@ func getProject() t.ProjectType {
 		{Name: ROLE_SPECIALIST, NameRu: "специалист"},
 	}
 
+	p.Config.Graylog = t.GraylogConfig{Host: "85.143.214.161", Port: 12201}
+
 	// боковое меню для Vue
 	p.Vue.Menu = []t.VueMenu{
 		{DocName: "system", Roles: []string{utils.RoleAdmin, ROLE_SPECIALIST, ROLE_CUSTOMER}},

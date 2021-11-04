@@ -40,7 +40,8 @@ func StartWebServer(config types.Config) {
 	apiRoute := r.Group("/api", authRequired)
 	{
 		apiRoute.POST("/current_user", apiCurrentUser)
-		apiRoute.POST("/call_pg_func", apiCallPgFunc)
+		apiRoute.POST("/call_pg_func", apiCallPgFunc)// отправка логов в graylog
+		apiRoute.POST("/log", logToGraylog)
 		// подключение по SSE
 		apiRoute.GET("/sse", sse.AddConn)
 		// операции с файлами
