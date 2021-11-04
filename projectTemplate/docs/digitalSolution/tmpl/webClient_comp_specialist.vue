@@ -165,7 +165,6 @@ export default {
       return id + 1
     },
     addPosition() {
-      let randomTitle = new Date();
       this.$utils.postCallPgMethod({
         method: 'digital_solution_specialist_link_update',
         params: {
@@ -173,7 +172,6 @@ export default {
           specialist_id: this.specId,
           role_id: this.roleId,
           description: this.roleDesc,
-          title: randomTitle,
           digital_solution_id: this.item.id,
           author_id: this.currentUser.id
         }
@@ -252,7 +250,9 @@ export default {
     reloadList () {
       this.$utils.postCallPgMethod({
         method: 'digital_solution_specialist_link_list',
-        params: {}
+        params: {
+          digital_solution_id: this.item.id
+        }
       }).subscribe(v => {
         if (v.ok) {
           this.taskSpecList = v.result;
@@ -262,6 +262,7 @@ export default {
       this.$utils.postCallPgMethod({
         method: 'digital_solution_specialist_link_list',
         params: {
+          digital_solution_id: this.item.id,
           deleted: true
         }
       }).subscribe(v => {
