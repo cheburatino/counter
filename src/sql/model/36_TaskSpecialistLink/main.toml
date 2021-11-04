@@ -21,8 +21,7 @@ fkConstraints = [
 	{fld="task_id", ref="task", fk="id"},
 	{fld="specialist_id", ref="man", fk="id"},
 	{fld="role_id", ref="ctlg_task_role", fk="id"},
-	{fld="author_id", ref="man", fk="id"},
-	{name="task_specialist_link_already_exist", ext="UNIQUE (task_id, specialist_id)"},
+	{fld="author_id", ref="man", fk="id"}
 ]
 
 triggers = [

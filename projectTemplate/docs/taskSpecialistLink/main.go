@@ -38,7 +38,6 @@ func GetDoc(project *t.ProjectType) t.DocType {
 			IsSearchText:    true,
 			IsBeforeTrigger: true,
 			IsAfterTrigger:  true,
-			IsUniqLink: true,
 		},
 	}
 

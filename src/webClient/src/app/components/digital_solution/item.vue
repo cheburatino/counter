@@ -143,18 +143,18 @@
 </template>
 
 <script>
-	import taskListRefListWidget from './comp/taskListRefListWidget.vue'
-	import customerTaskListRefListWidget from './comp/customerTaskListRefListWidget.vue'
-	import compParticipants from './comp/participants.vue'
-	import compModeling from './comp/modeling.vue'
 	import compRealization from './comp/realization.vue'
 	import compSpecialist from './comp/specialist.vue'
 	import ftListRefListWidget from './comp/ftListRefListWidget.vue'
 	import bugListRefListWidget from './comp/bugListRefListWidget.vue'
+	import taskListRefListWidget from './comp/taskListRefListWidget.vue'
+	import customerTaskListRefListWidget from './comp/customerTaskListRefListWidget.vue'
+	import compParticipants from './comp/participants.vue'
+	import compModeling from './comp/modeling.vue'
     import currentUserMixin from '../../../app/mixins/currentUser'
     export default {
         props: ['id', 'isOpenInDialog'],
-        components: {compSpecialist, ftListRefListWidget, bugListRefListWidget, taskListRefListWidget, customerTaskListRefListWidget, compParticipants, compModeling, compRealization},
+        components: {taskListRefListWidget, customerTaskListRefListWidget, compParticipants, compModeling, compRealization, compSpecialist, ftListRefListWidget, bugListRefListWidget},
         mixins: [currentUserMixin,],
         computed: {
             docUrl: function() {
