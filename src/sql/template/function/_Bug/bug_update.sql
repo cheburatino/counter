@@ -30,8 +30,6 @@ BEGIN
     
     
     
-    
-    
 
     if (params ->> 'id')::int = -1 then
         -- проверика наличия обязательных параметров
@@ -42,14 +40,12 @@ BEGIN
         END IF;
         
 
-        EXECUTE ('INSERT INTO bug (title, state_id, description, functional_requirement_id, digital_solution_id, system_id, options) VALUES ($1, $2, $3, $4, $5, $6, $7)  RETURNING *;')
+        EXECUTE ('INSERT INTO bug (title, state_id, description, system_id, options) VALUES ($1, $2, $3, $4, $5)  RETURNING *;')
 		INTO bugRow
 		USING
 			(params ->> 'title')::text,
 			(params ->> 'state_id')::int,
 			(params ->> 'description')::text,
-			(params ->> 'functional_requirement_id')::int,
-			(params ->> 'digital_solution_id')::int,
 			(params ->> 'system_id')::int,
 			coalesce(params -> 'options', '{}')::jsonb;
 
@@ -60,8 +56,6 @@ BEGIN
 			['title', 'title', 'text'],
 			['state_id', 'state_id', 'number'],
 			['description', 'description', 'text'],
-			['functional_requirement_id', 'functional_requirement_id', 'number'],
-			['digital_solution_id', 'digital_solution_id', 'number'],
 			['system_id', 'system_id', 'number'],
             ['options', 'options', 'jsonb'],
             ['deleted', 'deleted', 'bool']
