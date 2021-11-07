@@ -21,8 +21,7 @@ fkConstraints = [
 	{fld="digital_solution_id", ref="digital_solution", fk="id"},
 	{fld="specialist_id", ref="man", fk="id"},
 	{fld="role_id", ref="ctlg_digital_solution_specialist_role", fk="id"},
-	{fld="author_id", ref="man", fk="id"},
-	{name="digital_solution_specialist_link_already_exist", ext="UNIQUE (digital_solution_id, specialist_id)"},
+	{fld="author_id", ref="man", fk="id"}
 ]
 
 triggers = [

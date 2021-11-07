@@ -13,6 +13,9 @@ if new.title != old.title then
  for r in select * from bug where functional_requirement_id = new.id loop
  update bug set updated_at=now() where id = r.id;
  end loop;
+ for r in select * from functional_requirement_customer_agent_link where functional_requirement_id = new.id loop
+ update functional_requirement_customer_agent_link set updated_at=now() where id = r.id;
+ end loop;
 
  end if;
  end if;

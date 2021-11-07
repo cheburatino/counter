@@ -25,7 +25,7 @@
 				 <q-item-section>
 				    <q-item-label lines="1">{{item.title}}</q-item-label>
 					<q-item-label caption>
-						<q-item-label caption><q-badge>{{item.options.title.system_title}}</q-badge></q-item-label>
+						<q-item-label caption><q-badge>{{item.options.title.state_title}}</q-badge></q-item-label>
 					</q-item-label>
 				 </q-item-section>
 			
@@ -53,7 +53,7 @@
       return {
         listSortData: [
           {value: 'created_at', title: 'Дата'},
-          {value: 'title', title: 'Название'}
+          {value: 'title', title: 'Название'},
         ],
         listFilterData: [
           {value: {deleted: false}, title: 'Активные'},

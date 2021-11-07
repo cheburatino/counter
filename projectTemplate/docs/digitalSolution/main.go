@@ -15,7 +15,7 @@ const (
 
 func GetDoc(project *t.ProjectType) t.DocType {
 	doc := t.DocType{
-		Project: project,
+		Project:    project,
 		Name:       name,
 		NameRu:     name_ru,
 		PathPrefix: "docs",
@@ -50,6 +50,7 @@ func GetDoc(project *t.ProjectType) t.DocType {
 		},
 		Templates: map[string]*t.DocTemplate{
 			"sql_function_get_specialist_role.sql": {},
+			"sql_function_get_by_id.sql":           {},
 		},
 		IsBaseTemplates: t.DocIsBaseTemplates{true, true},
 		Sql: t.DocSql{
@@ -91,11 +92,11 @@ func GetDoc(project *t.ProjectType) t.DocType {
 	}
 
 	doc.AddFld(t.GetFldVueCompositionRefList(&doc, t.VueCompRefListWidgetParams{
-		Label:      "Функциональные требования",                  // название списка, которе выводится на экране
-		FldName:    "ft_list",              // название поля. Любое, в формате snake_case. На основе этого названия формируется название компоненты во vue.
-		TableName:  "functional_requirement",                   // название связанной таблицы, из которой будут выгружаться записи
-		RefFldName: "digital_solution_id", // название поля в связанной таблицы, по которому осуществляется связь
-		Avatar:     "image/functional_requirement.svg",         // иконка, которая выводится в списке
+		Label:      "Функциональные требования",        // название списка, которе выводится на экране
+		FldName:    "ft_list",                          // название поля. Любое, в формате snake_case. На основе этого названия формируется название компоненты во vue.
+		TableName:  "functional_requirement",           // название связанной таблицы, из которой будут выгружаться записи
+		RefFldName: "digital_solution_id",              // название поля в связанной таблицы, по которому осуществляется связь
+		Avatar:     "image/functional_requirement.svg", // иконка, которая выводится в списке
 		NewFlds: []t.FldType{
 			t.GetFldString("title", "название", 300, [][]int{{1, 1}}).SetIsRequired(),
 		}, // список полей, которые заполняются при добавлении новой записи
@@ -106,11 +107,11 @@ func GetDoc(project *t.ProjectType) t.DocType {
 	}, [][]int{{4, 1}}, "col-4"))
 
 	doc.AddFld(t.GetFldVueCompositionRefList(&doc, t.VueCompRefListWidgetParams{
-		Label:      "баги",                  // название списка, которе выводится на экране
-		FldName:    "bug_list",              // название поля. Любое, в формате snake_case. На основе этого названия формируется название компоненты во vue.
-		TableName:  "bug",                   // название связанной таблицы, из которой будут выгружаться записи
+		Label:      "баги",                      // название списка, которе выводится на экране
+		FldName:    "bug_list",                  // название поля. Любое, в формате snake_case. На основе этого названия формируется название компоненты во vue.
+		TableName:  "bug",                       // название связанной таблицы, из которой будут выгружаться записи
 		RefFldName: "functional_requirement_id", // название поля в связанной таблицы, по которому осуществляется связь
-		Avatar:     "image/bug.png",         // иконка, которая выводится в списке
+		Avatar:     "image/bug.png",             // иконка, которая выводится в списке
 		NewFlds: []t.FldType{
 			t.GetFldString("title", "название", 300, [][]int{{1, 1}}).SetIsRequired(),
 		}, // список полей, которые заполняются при добавлении новой записи
@@ -121,11 +122,11 @@ func GetDoc(project *t.ProjectType) t.DocType {
 	}, [][]int{{4, 2}}, "col-4"))
 
 	doc.AddFld(t.GetFldVueCompositionRefList(&doc, t.VueCompRefListWidgetParams{
-		Label:      "задачи",                  // название списка, которе выводится на экране
-		FldName:    "task_list",              // название поля. Любое, в формате snake_case. На основе этого названия формируется название компоненты во vue.
-		TableName:  "task",                   // название связанной таблицы, из которой будут выгружаться записи
+		Label:      "задачи",              // название списка, которе выводится на экране
+		FldName:    "task_list",           // название поля. Любое, в формате snake_case. На основе этого названия формируется название компоненты во vue.
+		TableName:  "task",                // название связанной таблицы, из которой будут выгружаться записи
 		RefFldName: "digital_solution_id", // название поля в связанной таблицы, по которому осуществляется связь
-		Avatar:     "image/task.svg",         // иконка, которая выводится в списке
+		Avatar:     "image/task.svg",      // иконка, которая выводится в списке
 		NewFlds: []t.FldType{
 			t.GetFldString("title", "название", 300, [][]int{{1, 1}}).SetIsRequired(),
 			t.GetFldRef("type_id", "тип задачи", "ctlg_task_type", [][]int{{2, 2}}).SetIsRequired(),
@@ -137,11 +138,11 @@ func GetDoc(project *t.ProjectType) t.DocType {
 	}, [][]int{{5, 1}}, "col-4"))
 
 	doc.AddFld(t.GetFldVueCompositionRefList(&doc, t.VueCompRefListWidgetParams{
-		Label:      "задачи заказчика",                  // название списка, которе выводится на экране
-		FldName:    "customer_task_list",              // название поля. Любое, в формате snake_case. На основе этого названия формируется название компоненты во vue.
-		TableName:  "customer_task",                   // название связанной таблицы, из которой будут выгружаться записи
-		RefFldName: "digital_solution_id", // название поля в связанной таблицы, по которому осуществляется связь
-		Avatar:     "image/customer_task.png",         // иконка, которая выводится в списке
+		Label:      "задачи заказчика",        // название списка, которе выводится на экране
+		FldName:    "customer_task_list",      // название поля. Любое, в формате snake_case. На основе этого названия формируется название компоненты во vue.
+		TableName:  "customer_task",           // название связанной таблицы, из которой будут выгружаться записи
+		RefFldName: "digital_solution_id",     // название поля в связанной таблицы, по которому осуществляется связь
+		Avatar:     "image/customer_task.png", // иконка, которая выводится в списке
 		NewFlds: []t.FldType{
 			t.GetFldString("title", "название", 300, [][]int{{1, 1}}).SetIsRequired(),
 		}, // список полей, которые заполняются при добавлении новой записи

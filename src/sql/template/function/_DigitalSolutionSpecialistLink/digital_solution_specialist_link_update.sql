@@ -35,7 +35,7 @@ BEGIN
     if (params ->> 'id')::int = -1 then
         
 
-        EXECUTE ('INSERT INTO digital_solution_specialist_link (digital_solution_id, specialist_id, role_id, description, author_id, options) VALUES ($1, $2, $3, $4, $5, $6)  ON CONFLICT (digital_solution_id, specialist_id) DO UPDATE SET options=$6, deleted=false, description=$4 RETURNING *;')
+        EXECUTE ('INSERT INTO digital_solution_specialist_link (digital_solution_id, specialist_id, role_id, description, author_id, options) VALUES ($1, $2, $3, $4, $5, $6)  RETURNING *;')
 		INTO digital_solution_specialist_linkRow
 		USING
 			(params ->> 'digital_solution_id')::int,
