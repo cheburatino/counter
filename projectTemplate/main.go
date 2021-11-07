@@ -2,6 +2,7 @@ package main
 
 import (
 	"github.com/cheburatino/electron_is/projectTemplate/docs/bug"
+	"github.com/cheburatino/electron_is/projectTemplate/docs/bugCustomerAgentLink"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/comment"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/company"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/companyManLink"
@@ -20,15 +21,18 @@ import (
 	"github.com/cheburatino/electron_is/projectTemplate/docs/ctlgTimeType"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/ctlgWorkState"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/customerTask"
+	"github.com/cheburatino/electron_is/projectTemplate/docs/customerTaskCustomerAgentLink"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/digitalSolution"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/digitalSolutionCustomerAgentLink"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/digitalSolutionSpecialistLink"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/functionalRequirement"
+	"github.com/cheburatino/electron_is/projectTemplate/docs/functionalRequirementCustomerAgentLink"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/invoice"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/man"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/meeting"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/newsFromDima"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/request"
+	"github.com/cheburatino/electron_is/projectTemplate/docs/requestCustomerAgentLink"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/system"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/task"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/taskSpecialistLink"
@@ -85,8 +89,12 @@ func getProject() t.ProjectType {
 		customerTask.GetDoc(p),
 		bug.GetDoc(p),
 		taskSpecialistLink.GetDoc(p),
+		requestCustomerAgentLink.GetDoc(p),
+		functionalRequirementCustomerAgentLink.GetDoc(p),
 		digitalSolutionSpecialistLink.GetDoc(p),
 		digitalSolutionCustomerAgentLink.GetDoc(p),
+		customerTaskCustomerAgentLink.GetDoc(p),
+		bugCustomerAgentLink.GetDoc(p),
 		workSpecialistLink.GetDoc(p),
 		workTaskLink.GetDoc(p),
 		companyManLink.GetDoc(p),
@@ -143,8 +151,8 @@ func getProject() t.ProjectType {
 	}
 	p.FillSideMenu()
 
-	p.AddI18n("ru", "user", "role_" + ROLE_CUSTOMER, "заказчик")
-	p.AddI18n("ru", "user", "role_" + ROLE_SPECIALIST, "специалист")
+	p.AddI18n("ru", "user", "role_"+ROLE_CUSTOMER, "заказчик")
+	p.AddI18n("ru", "user", "role_"+ROLE_SPECIALIST, "специалист")
 
 	// копируем файлы проекта (которые не шаблоны)
 	if _, err := os.Stat("./sourceFiles"); !os.IsNotExist(err) {

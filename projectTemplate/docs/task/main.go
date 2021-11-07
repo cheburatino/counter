@@ -34,6 +34,7 @@ func GetDoc(project *t.ProjectType) t.DocType {
 			t.GetFldDate("plan_end_date", "плановая дата завершения", [][]int{{7, 1}}),
 			t.GetFldDate("fact_end_date", "фактическая дата завершения", [][]int{{7, 2}}),
 			t.GetFldString("result", "результат", 0, [][]int{{8, 1}}, "col-8"),
+			t.GetFldJsonbCompositionWithoutFld([][]int{{9, 1}}, "", "comp-work", ":currentUser='currentUser'"),
 		},
 		Vue: t.DocVue{
 			RouteName:      name,
@@ -42,8 +43,8 @@ func GetDoc(project *t.ProjectType) t.DocType {
 			Roles:          []string{},
 		},
 		Templates: map[string]*t.DocTemplate{
-			"sql_function_get_specialist.sql":              {},
-			"sql_function_get_specialist_role.sql":         {},
+			"sql_function_get_specialist.sql":      {},
+			"sql_function_get_specialist_role.sql": {},
 		},
 		IsBaseTemplates: t.DocIsBaseTemplates{true, true},
 		Sql: t.DocSql{
@@ -51,8 +52,8 @@ func GetDoc(project *t.ProjectType) t.DocType {
 			IsBeforeTrigger: true,
 			IsAfterTrigger:  true,
 			Methods: map[string]*t.DocSqlMethod{
-				"task_get_specialist":              {Name: "task_get_specialist"},
-				"task_get_specialist_role":         {Name: "task_get_specialist_role"},
+				"task_get_specialist":      {Name: "task_get_specialist"},
+				"task_get_specialist_role": {Name: "task_get_specialist_role"},
 			},
 		},
 	}
@@ -61,6 +62,7 @@ func GetDoc(project *t.ProjectType) t.DocType {
 	doc.Vue.AddFixedSaveBtn()
 
 	doc.AddVueComposition("docItem", "specialist")
+	doc.AddVueComposition("docItem", "work")
 
 	doc.Vue.I18n = map[string]string{
 		"listTitle":        utils.UpperCaseFirst(name_ru_plural),
