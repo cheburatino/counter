@@ -29,6 +29,7 @@ func GetDoc(project *t.ProjectType) t.DocType {
 			t.GetFldImgList("images", "изображения", [][]int{{4, 2}}, t.FldVueImgParams{}),
 			t.GetFldRef("author_id", "автор", "man", [][]int{{5, 1}}).SetIsHide(),
 			t.GetFldJsonbCompositionWithoutFld([][]int{{5, 1}}, "", "comp-specialist", ":currentUser='currentUser'"),
+			t.GetFldJsonbCompositionWithoutFld([][]int{{5, 2}}, "", "comp-work", ":currentUser='currentUser'"),
 			t.GetFldDate("plan_start_date", "плановая дата начала", [][]int{{6, 1}}),
 			t.GetFldDate("fact_start_date", "фактическая дата начала", [][]int{{6, 2}}),
 			t.GetFldDate("plan_end_date", "плановая дата завершения", [][]int{{7, 1}}),
@@ -61,6 +62,7 @@ func GetDoc(project *t.ProjectType) t.DocType {
 	doc.Vue.AddFixedSaveBtn()
 
 	doc.AddVueComposition("docItem", "specialist")
+	doc.AddVueComposition("docItem", "work")
 
 	doc.Vue.I18n = map[string]string{
 		"listTitle":        utils.UpperCaseFirst(name_ru_plural),

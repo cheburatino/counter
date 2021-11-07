@@ -43,6 +43,9 @@
       <div class="col-md-4 col-sm-6 col-xs-12">
           <comp-specialist :item='item' :currentUser='currentUser'/>
       </div>
+      <div class="col-md-4 col-sm-6 col-xs-12">
+          <comp-work :item='item' :currentUser='currentUser'/>
+      </div>
       </div>
       
       <div class="row q-col-gutter-md q-mb-sm">
@@ -90,10 +93,11 @@
 
 <script>
 	import compSpecialist from './comp/specialist.vue'
+	import compWork from './comp/work.vue'
     import currentUserMixin from '../../../app/mixins/currentUser'
     export default {
         props: ['id', 'isOpenInDialog'],
-        components: {compSpecialist},
+        components: {compWork, compSpecialist},
         mixins: [currentUserMixin,],
         computed: {
             docUrl: function() {

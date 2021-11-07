@@ -1,5 +1,6 @@
 
 export default {
+ 		name: 'участник задачи',
  		name_plural: 'Участники задач',
  		name_plural_deleted: 'удаленные Участники задач',
  		task_id: 'id задачи',
@@ -7,5 +8,4 @@ export default {
  		role_id: 'роль',
  		description: 'описание',
  		author_id: 'автор',
- 		name: 'участник задачи',
 }
