@@ -34,10 +34,10 @@ BEGIN
     if (params ->> 'id')::int = -1 then
         
 
-        EXECUTE ('INSERT INTO bug_customer_agent_link (request_id, customer_agent_id, description, author_id, options) VALUES ($1, $2, $3, $4, $5)  ON CONFLICT (request_id, customer_agent_id) DO UPDATE SET options=$5, deleted=false, description=$3 RETURNING *;')
+        EXECUTE ('INSERT INTO bug_customer_agent_link (bug_id, customer_agent_id, description, author_id, options) VALUES ($1, $2, $3, $4, $5)  ON CONFLICT (bug_id, customer_agent_id) DO UPDATE SET options=$5, deleted=false, description=$3 RETURNING *;')
 		INTO bug_customer_agent_linkRow
 		USING
-			(params ->> 'request_id')::int,
+			(params ->> 'bug_id')::int,
 			(params ->> 'customer_agent_id')::int,
 			(params ->> 'description')::text,
 			(params ->> 'author_id')::int,
@@ -47,7 +47,7 @@ BEGIN
 
     else
         updateValue = '' || update_str_from_json(params, ARRAY [
-			['request_id', 'request_id', 'number'],
+			['bug_id', 'bug_id', 'number'],
 			['customer_agent_id', 'customer_agent_id', 'number'],
 			['description', 'description', 'text'],
 			['author_id', 'author_id', 'number'],

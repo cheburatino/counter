@@ -23,7 +23,7 @@ BEGIN
     END IF;
 
     with t1 as (select * from bug_customer_agent_link where id = (params ->> 'id')::int),
-		t2 as (select t1.*, c.title as request_title from t1 left join request c on c.id = t1.request_id),
+		t2 as (select t1.*, c.title as bug_title from t1 left join bug c on c.id = t1.bug_id),
 		t3 as (select t2.*, c.title as customer_agent_title from t2 left join man c on c.id = t2.customer_agent_id),
 		t4 as (select t3.*, c.title as author_title from t3 left join man c on c.id = t3.author_id)
  	select row_to_json(t4.*)::jsonb into result from t4;

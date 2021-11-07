@@ -5,7 +5,7 @@ tableName ="bug_customer_agent_link"
 
 fields = [
 	{name="id",			type="serial"},
-	{name="request_id",					type="int",	 comment="запрос"},
+	{name="bug_id",					type="int",	 comment="баг"},
 	{name="customer_agent_id",					type="int",	 comment="представитель заказчика"},
 	{name="description",					type="text",	 comment="описание"},
 	{name="author_id",					type="int",	 comment="автор"},
@@ -17,10 +17,10 @@ fields = [
 ]
 
 fkConstraints = [
-	{fld="request_id", ref="request", fk="id"},
+	{fld="bug_id", ref="bug", fk="id"},
 	{fld="customer_agent_id", ref="man", fk="id"},
 	{fld="author_id", ref="man", fk="id"},
-	{name="bug_customer_agent_link_already_exist", ext="UNIQUE (request_id, customer_agent_id)"},
+	{name="bug_customer_agent_link_already_exist", ext="UNIQUE (bug_id, customer_agent_id)"},
 ]
 
 triggers = [
@@ -40,7 +40,7 @@ methods = [
 ]
 
 alterScripts = [
-	"alter table bug_customer_agent_link add column if not exists request_id int;",
+	"alter table bug_customer_agent_link add column if not exists bug_id int;",
 	"alter table bug_customer_agent_link add column if not exists customer_agent_id int;",
 	"alter table bug_customer_agent_link add column if not exists description text;",
 	"alter table bug_customer_agent_link add column if not exists author_id int;",
