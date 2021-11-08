@@ -25,6 +25,9 @@
       <div class="col-md-4 col-sm-6 col-xs-12">
           <digital-solution-list-ref-list-widget v-if='item.id != -1' :id='item.id' :readonly='false'/>
       </div>
+      <div class="col-md-4 col-sm-6 col-xs-12">
+          <bug-list-ref-list-widget v-if='item.id != -1' :id='item.id' :readonly='false'/>
+      </div>
       </div>
       
 
@@ -41,10 +44,11 @@
 
 <script>
 	import digitalSolutionListRefListWidget from './comp/digitalSolutionListRefListWidget.vue'
+	import bugListRefListWidget from './comp/bugListRefListWidget.vue'
     import currentUserMixin from '../../../app/mixins/currentUser'
     export default {
         props: ['id', 'isOpenInDialog'],
-        components: {digitalSolutionListRefListWidget},
+        components: {digitalSolutionListRefListWidget, bugListRefListWidget},
         mixins: [currentUserMixin,],
         computed: {
             docUrl: function() {
