@@ -26,7 +26,7 @@ func GetDoc(project *t.ProjectType) t.DocType {
 			t.GetFldRef("request_id", "запрос", "request", [][]int{{3, 1}}, "isShowLink", "isClearable"),
 			t.GetFldRef("digital_solution_id", "цифровое решение", "digital_solution", [][]int{{3, 2}}, "isShowLink", "isClearable"),
 			// описание контрола после doc.Init
-			t.GetFldString("result", "результат", 0, [][]int{{5, 1}}, "col-8"),
+			t.GetFldString("result", "результат", 0, [][]int{{4, 1}}, "col-8"),
 		},
 		Vue: t.DocVue{
 			RouteName:      name,
@@ -67,20 +67,20 @@ func GetDoc(project *t.ProjectType) t.DocType {
 		},
 	}
 
-	doc.AddFld(t.GetFldVueCompositionRefList(&doc, t.VueCompRefListWidgetParams{
-		Label:      "баги",                  // название списка, которе выводится на экране
-		FldName:    "bug_list",              // название поля. Любое, в формате snake_case. На основе этого названия формируется название компоненты во vue.
-		TableName:  "bug",                   // название связанной таблицы, из которой будут выгружаться записи
-		RefFldName: "functional_requirement_id", // название поля в связанной таблицы, по которому осуществляется связь
-		Avatar:     "image/bug.png",         // иконка, которая выводится в списке
-		NewFlds: []t.FldType{
-			t.GetFldString("title", "название", 300, [][]int{{1, 1}}).SetIsRequired(),
-		}, // список полей, которые заполняются при добавлении новой записи
-		TitleTemplate: `
-                <q-item-label>{{v.title}}</q-item-label>
-                <q-item-label caption><q-badge color="orange">{{v.options.title.state_title}}</q-badge></q-item-label>
-            `, // шаблон для названия в списке (vue синтаксис)
-	}, [][]int{{4, 1}}, "col-4"))
+	//doc.AddFld(t.GetFldVueCompositionRefList(&doc, t.VueCompRefListWidgetParams{
+	//	Label:      "баги",                  // название списка, которе выводится на экране
+	//	FldName:    "bug_list",              // название поля. Любое, в формате snake_case. На основе этого названия формируется название компоненты во vue.
+	//	TableName:  "bug",                   // название связанной таблицы, из которой будут выгружаться записи
+	//	RefFldName: "functional_requirement_id", // название поля в связанной таблицы, по которому осуществляется связь
+	//	Avatar:     "image/bug.png",         // иконка, которая выводится в списке
+	//	NewFlds: []t.FldType{
+	//		t.GetFldString("title", "название", 300, [][]int{{1, 1}}).SetIsRequired(),
+	//	}, // список полей, которые заполняются при добавлении новой записи
+	//	TitleTemplate: `
+    //            <q-item-label>{{v.title}}</q-item-label>
+    //            <q-item-label caption><q-badge color="orange">{{v.options.title.state_title}}</q-badge></q-item-label>
+    //        `, // шаблон для названия в списке (vue синтаксис)
+	//}, [][]int{{4, 1}}, "col-4"))
 
 	return doc
 }

@@ -95,8 +95,8 @@
 </template>
 
 <script>
-	import compSpecialist from './comp/specialist.vue'
 	import compWork from './comp/work.vue'
+	import compSpecialist from './comp/specialist.vue'
     import currentUserMixin from '../../../app/mixins/currentUser'
     export default {
         props: ['id', 'isOpenInDialog'],
