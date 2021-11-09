@@ -49,7 +49,7 @@ BEGIN
         END IF;
         
 
-        EXECUTE ('INSERT INTO customer_task (title, state_id, digital_solution_id, company_id, description, files, images, author_id, plan_start_date, fact_start_date, plan_end_date, fact_end_date, result, options) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14)  RETURNING *;')
+        EXECUTE ('INSERT INTO customer_task (title, state_id, digital_solution_id, company_id, description, files, images, plan_start_date, fact_start_date, plan_end_date, fact_end_date, result, options) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13)  RETURNING *;')
 		INTO customer_taskRow
 		USING
 			(params ->> 'title')::text,
@@ -59,7 +59,6 @@ BEGIN
 			(params ->> 'description')::text,
 			(params -> 'files')::jsonb,
 			(params -> 'images')::jsonb,
-			(params ->> 'author_id')::int,
 			(params ->> 'plan_start_date')::timestamp,
 			(params ->> 'fact_start_date')::timestamp,
 			(params ->> 'plan_end_date')::timestamp,
@@ -78,7 +77,6 @@ BEGIN
 			['description', 'description', 'text'],
 			['files', 'files', 'jsonb'],
 			['images', 'images', 'jsonb'],
-			['author_id', 'author_id', 'number'],
 			['plan_start_date', 'plan_start_date', 'timestamp'],
 			['fact_start_date', 'fact_start_date', 'timestamp'],
 			['plan_end_date', 'plan_end_date', 'timestamp'],

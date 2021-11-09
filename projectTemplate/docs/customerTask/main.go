@@ -27,7 +27,7 @@ func GetDoc(project *t.ProjectType) t.DocType {
 			t.GetFldString("description", "описание", 0, [][]int{{3, 1}}, "col-8"),
 			t.GetFldFiles("files", "файлы", [][]int{{4, 1}}, t.FldVueFilesParams{MaxFileSize: 10000}),
 			t.GetFldImgList("images", "изображения", [][]int{{4, 2}}, t.FldVueImgParams{}),
-			t.GetFldRef("author_id", "автор", "man", [][]int{{5, 1}}, "isShowLink", "isClearable", "ext: {company_id: 1}"),
+			t.GetFldJsonbCompositionWithoutFld([][]int{{5, 1}}, "", "comp-customerAgent", ":currentUser='currentUser'"),
 			t.GetFldDate("plan_start_date", "плановая дата начала", [][]int{{6, 1}}),
 			t.GetFldDate("fact_start_date", "фактическая дата начала", [][]int{{6, 2}}),
 			t.GetFldDate("plan_end_date", "плановая дата завершения", [][]int{{7, 1}}),
@@ -40,7 +40,9 @@ func GetDoc(project *t.ProjectType) t.DocType {
 			BreadcrumbIcon: breadcrumb_icon,
 			Roles:          []string{},
 		},
-		//Templates: map[string]*t.DocTemplate{},
+		Templates: map[string]*t.DocTemplate{
+			"sql_function_list.sql": {},
+		},
 		IsBaseTemplates: t.DocIsBaseTemplates{true, true},
 		Sql: t.DocSql{
 			IsSearchText:    true,
@@ -51,6 +53,8 @@ func GetDoc(project *t.ProjectType) t.DocType {
 	// создаем стандартные методы sql "list", "update", "get_by_id" с возможностью ограничения по ролям
 	doc.Sql.FillBaseMethods(doc.Name)
 	doc.Vue.AddFixedSaveBtn()
+
+	doc.AddVueComposition("docItem", "customerAgent")
 
 	doc.Vue.I18n = map[string]string{
 		"listTitle":        utils.UpperCaseFirst(name_ru_plural),

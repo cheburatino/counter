@@ -20,16 +20,13 @@
       
       <div class="row q-col-gutter-md q-mb-sm">
       <div class="col-md-8 col-sm-12 col-xs-12">
-          <q-input outlined type='text' v-model="item.description" :label="$t('request.description')" autogrow :readonly='false'  class='q-mb-sm col-md-8 col-sm-12 col-xs-12' />
+          <q-input outlined type='text' v-model="item.how_request_received" :label="$t('request.how_request_received')" autogrow :readonly='false'  class='q-mb-sm col-md-8 col-sm-12 col-xs-12' />
       </div>
       </div>
       
       <div class="row q-col-gutter-md q-mb-sm">
-      <div class="col-md-4 col-sm-6 col-xs-12">
-          <comp-fld-ref-search outlined pgMethod="man_list" :label="$t('request.rsk_id')" :item='item.rsk_title' :itemId='item.rsk_id' :ext='{company_id: 1, pathUrl: "/man", avatar: "image/man.svg", isClearable: "true"}' @update="v=> item.rsk_id = v.id" @clear="item.rsk_id = null" :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
-      </div>
-      <div class="col-md-4 col-sm-6 col-xs-12">
-          <q-input outlined type='text' v-model="item.how_request_received" :label="$t('request.how_request_received')" autogrow :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
+      <div class="col-md-8 col-sm-12 col-xs-12">
+          <q-input outlined type='text' v-model="item.description" :label="$t('request.description')" autogrow :readonly='false'  class='q-mb-sm col-md-8 col-sm-12 col-xs-12' />
       </div>
       </div>
       
@@ -38,7 +35,7 @@
           <comp-fld-ref-search outlined pgMethod="company_list" :label="$t('request.customer_id')" :item='item.customer_title' :itemId='item.customer_id' :ext='{"avatar":"image/company.svg","isClearable":"true","pathUrl":"/company"}' @update="v=> item.customer_id = v.id" @clear="item.customer_id = null" :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
       </div>
       <div class="col-md-4 col-sm-6 col-xs-12">
-          <comp-fld-ref-search outlined pgMethod="man_list" :label="$t('request.customer_agent_id')" :item='item.customer_agent_title' :itemId='item.customer_agent_id' :ext='{company_id: item.customer_id, pathUrl: "/man", avatar: "image/man.svg", isClearable: "true"}' @update="v=> item.customer_agent_id = v.id" @clear="item.customer_agent_id = null" :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
+          <comp-customerAgent :item='item' :currentUser='currentUser'/>
       </div>
       </div>
       
@@ -49,17 +46,17 @@
       </div>
       
       <div class="row q-col-gutter-md q-mb-sm">
-      <div class="col-md-8 col-sm-12 col-xs-12">
-          <q-input outlined type='text' v-model="item.result" :label="$t('request.result')" autogrow :readonly='false'  class='q-mb-sm col-md-8 col-sm-12 col-xs-12' />
-      </div>
-      </div>
-      
-      <div class="row q-col-gutter-md q-mb-sm">
       <div class="col-md-4 col-sm-6 col-xs-12">
           <ft-list-ref-list-widget v-if='item.id != -1' :id='item.id' :readonly='false'/>
       </div>
       <div class="col-md-4 col-sm-6 col-xs-12">
           <task-list-ref-list-widget v-if='item.id != -1' :id='item.id' :readonly='false'/>
+      </div>
+      </div>
+      
+      <div class="row q-col-gutter-md q-mb-sm">
+      <div class="col-md-8 col-sm-12 col-xs-12">
+          <q-input outlined type='text' v-model="item.result" :label="$t('request.result')" autogrow :readonly='false'  class='q-mb-sm col-md-8 col-sm-12 col-xs-12' />
       </div>
       </div>
       
@@ -76,12 +73,13 @@
 </template>
 
 <script>
+	import compCustomerAgent from './comp/customerAgent.vue'
 	import ftListRefListWidget from './comp/ftListRefListWidget.vue'
 	import taskListRefListWidget from './comp/taskListRefListWidget.vue'
     import currentUserMixin from '../../../app/mixins/currentUser'
     export default {
         props: ['id', 'isOpenInDialog'],
-        components: {ftListRefListWidget, taskListRefListWidget},
+        components: {compCustomerAgent, ftListRefListWidget, taskListRefListWidget},
         mixins: [currentUserMixin,],
         computed: {
             docUrl: function() {
@@ -95,11 +93,9 @@
                         {name: 'title', label: 'название',  required: true},
                         {name: 'datetime_reciept', label: 'дата и время получения запроса'},
                         {name: 'state_id', label: 'статус'},
-                        {name: 'description', label: 'описание'},
-                        {name: 'rsk_id', label: 'рск'},
                         {name: 'how_request_received', label: 'как получен запрос'},
+                        {name: 'description', label: 'описание'},
                         {name: 'customer_id', label: 'заказчик'},
-                        {name: 'customer_agent_id', label: 'представитель заказчика'},
                         {name: 'system_id', label: 'система'},
                         {name: 'result', label: 'результат'},
                 ],

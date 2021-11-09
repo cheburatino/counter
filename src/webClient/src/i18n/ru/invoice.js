@@ -1,16 +1,16 @@
 
 export default {
- 		state: 'статус',
- 		date_transfer: 'дата выставления',
- 		total_amount: 'сумма',
+ 		title: 'название',
  		system_id: 'система',
  		payer_id: 'плательщик',
- 		recipient_id: 'получатель',
- 		name: 'счёт',
  		name_plural: 'Счета',
  		name_plural_deleted: 'удаленные Счета',
- 		title: 'название',
+ 		total_amount: 'сумма',
+ 		state: 'статус',
+ 		recipient_id: 'получатель',
  		date_plan_transfer: 'планируемая дата выставления',
  		date_plan_paid: 'планируемая дата оплаты',
+ 		date_transfer: 'дата выставления',
+ 		name: 'счёт',
  		date_paid: 'дата оплаты',
 }

@@ -23,15 +23,14 @@ func GetDoc(project *t.ProjectType) t.DocType {
 			t.GetFldTitle(),
 			t.GetFldDateTime("datetime_reciept", "дата и время получения запроса", [][]int{{1, 2}}, "col-2"),
 			t.GetFldRef("state_id", "статус", "ctlg_request_state", [][]int{{1, 3}}, "col-2").SetDefault("1"),
-			t.GetFldString("description", "описание", 0, [][]int{{2, 1}}, "col-8"),
-			t.GetFldRef("rsk_id", "рск", "man", [][]int{{3, 1}}, "ext: {company_id: 1}", "isShowLink", "isClearable"),
-			t.GetFldString("how_request_received", "как получен запрос", 0, [][]int{{3, 2}}),
+			t.GetFldString("how_request_received", "как получен запрос", 0, [][]int{{2, 1}}, "col-8"),
+			t.GetFldString("description", "описание", 0, [][]int{{3, 1}}, "col-8"),
 			t.GetFldRef("customer_id", "заказчик", "company", [][]int{{4, 1}}, "isShowLink", "isClearable"),
-			t.GetFldRef("customer_agent_id", "представитель заказчика", "man", [][]int{{4, 2}}, "isShowLink", "isClearable", "ext: {company_id: item.customer_id}"),
+			t.GetFldJsonbCompositionWithoutFld([][]int{{4, 2}}, "", "comp-customerAgent", ":currentUser='currentUser'"),
 			t.GetFldRef("system_id", "система", "system", [][]int{{5, 1}}, "isShowLink", "isClearable", "ext: {customer_id: item.customer_id}"),
-			t.GetFldString("result", "результат", 0, [][]int{{6, 1}}, "col-8"),
-			// контрол с функциональными требованиями описан под doc.Init
-			// контрол с задачами doc.Init
+			// контрол с функциональными требованиями описан под doc.Init {{6, 1}}
+			// контрол с задачами doc.Init {{6, 2}}
+			t.GetFldString("result", "результат", 0, [][]int{{7, 1}}, "col-8"),
 		},
 		Vue: t.DocVue{
 			RouteName:      name,
@@ -39,7 +38,9 @@ func GetDoc(project *t.ProjectType) t.DocType {
 			BreadcrumbIcon: breadcrumb_icon,
 			Roles:          []string{},
 		},
-		//Templates:   map[string]*t.DocTemplate{"webClient_item.vue": {},},
+		Templates:   map[string]*t.DocTemplate{
+			"sql_function_list.sql": {},
+		},
 		IsBaseTemplates: t.DocIsBaseTemplates{true, true},
 		Sql: t.DocSql{
 			IsSearchText:    true,
@@ -50,6 +51,8 @@ func GetDoc(project *t.ProjectType) t.DocType {
 
 	// создаем стандартные методы sql "list", "update", "get_by_id" с возможностью ограничения по ролям
 	doc.Sql.FillBaseMethods(doc.Name)
+
+	doc.AddVueComposition("docItem", "customerAgent")
 
 	doc.Vue.I18n = map[string]string{
 		"listTitle":        utils.UpperCaseFirst(name_ru_plural),
@@ -70,7 +73,7 @@ func GetDoc(project *t.ProjectType) t.DocType {
 		TitleTemplate: `
                 <q-item-label>{{v.title}}</q-item-label>
             `, // шаблон для названия в списке (vue синтаксис)
-	}, [][]int{{7, 1}}, "col-4"))
+	}, [][]int{{6, 1}}, "col-4"))
 
 	doc.AddFld(t.GetFldVueCompositionRefList(&doc, t.VueCompRefListWidgetParams{
 		Label:      "задачи",                  // название списка, которе выводится на экране
@@ -84,7 +87,7 @@ func GetDoc(project *t.ProjectType) t.DocType {
 		TitleTemplate: `
                 <q-item-label>{{v.title}}</q-item-label>
             `, // шаблон для названия в списке (vue синтаксис)
-	}, [][]int{{7, 2}}, "col-4"))
+	}, [][]int{{6, 2}}, "col-4"))
 
 	return doc
 }

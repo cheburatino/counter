@@ -38,15 +38,18 @@ BEGIN
 
     
 
-    -- финальная сборка строки с условиями выборки (build_query_part_for_list - функция из папки base)
-    condQueryStr = '' || whereStr || build_query_part_for_list(params);
 
     -- для admin ограничений нет
+    raise notice 'step 1';
     if is_user_role((params->>'user_id')::int, '{admin}') is not true then
+        raise notice 'step 2';
         -- для сотрудника выбираем только те объекты, к которым у него есть доступ
         whereStr = whereStr || format(' AND id = ANY(%s) ', quote_literal((select coalesce(array_agg(digital_solution_id), '{}') from digital_solution_customer_agent_link where customer_agent_id = (select id from man where user_table_id = (params->>'user_id')::int) and deleted=false)));
+        raise notice 'step 3 %', whereStr;
     end if;
 
+    -- финальная сборка строки с условиями выборки (build_query_part_for_list - функция из папки base)
+    condQueryStr = '' || whereStr || build_query_part_for_list(params);
 
 
     EXECUTE ('

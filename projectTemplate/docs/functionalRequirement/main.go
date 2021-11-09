@@ -26,7 +26,8 @@ func GetDoc(project *t.ProjectType) t.DocType {
 			t.GetFldRef("request_id", "запрос", "request", [][]int{{3, 1}}, "isShowLink", "isClearable"),
 			t.GetFldRef("digital_solution_id", "цифровое решение", "digital_solution", [][]int{{3, 2}}, "isShowLink", "isClearable"),
 			// описание контрола после doc.Init
-			t.GetFldString("result", "результат", 0, [][]int{{4, 1}}, "col-8"),
+			t.GetFldJsonbCompositionWithoutFld([][]int{{4, 1}}, "", "comp-customerAgent", ":currentUser='currentUser'"),
+			t.GetFldString("result", "результат", 0, [][]int{{5, 1}}, "col-8"),
 		},
 		Vue: t.DocVue{
 			RouteName:      name,
@@ -34,7 +35,9 @@ func GetDoc(project *t.ProjectType) t.DocType {
 			BreadcrumbIcon: breadcrumb_icon,
 			Roles:          []string{},
 		},
-		//Templates:   map[string]*t.DocTemplate{"webClient_item.vue": {},},
+		Templates:   map[string]*t.DocTemplate{
+			"sql_function_list.sql": {},
+		},
 		IsBaseTemplates: t.DocIsBaseTemplates{true, true},
 		Sql: t.DocSql{
 			IsSearchText:    true,
@@ -45,6 +48,8 @@ func GetDoc(project *t.ProjectType) t.DocType {
 
 	// создаем стандартные методы sql "list", "update", "get_by_id" с возможностью ограничения по ролям
 	doc.Sql.FillBaseMethods(doc.Name)
+
+	doc.AddVueComposition("docItem", "customerAgent")
 
 	doc.Vue.I18n = map[string]string{
 		"listTitle":        utils.UpperCaseFirst(name_ru_plural),

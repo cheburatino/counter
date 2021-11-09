@@ -3,6 +3,12 @@
 <template>
   <q-page :padding="!isOpenInDialog">
     <comp-breadcrumb class="text-capitalize" v-if="!isOpenInDialog" :list="[{label: $t('task.name_plural'), docType:'task'}]"/>
+    <!-- фильтры   -->
+    <div class="row q-mt-sm q-col-gutter-sm">
+        <div class=" col-md-2 col-sm-4 col-xs-6">
+          <comp-fld-ref-search dense outlined pgMethod="ctlg_task_state_list" label="" :item='filterCtlgTaskStateTitle' :itemId='filterCtlgTaskStateId' :ext='{isClearable: true}'  @update="updateFilterCtlgTaskState" @clear="updateFilterCtlgTaskState"  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
+        </div>
+    </div>
 
     <comp-doc-list ref="docList" :listTitle="$t('task.name_plural')" :listDeletedTitle="$t('task.name_plural_deleted')" pg-method="task_list"
                    :list-sort-data="listSortData" :list-filter-data="listFilterData"
@@ -57,12 +63,27 @@
           {value: {deleted: false}, title: 'Активные'},
           {value: {deleted: true}, title: 'Удаленные'}
         ],
+        filterCtlgTaskStateTitle: null,
+        filterCtlgTaskStateId: null,
       }
     },
     methods: {
+      updateFilterCtlgTaskState(v) {
+        this.$refs.docList.changeItemList({'state': v ? v.id : null})
+        if (v) {
+          this.$utils.callPgMethod(`ctlg_task_state_get_by_id`, {id: v.id}, (res) => {
+            this.filterCtlgTaskStateTitle = res.title
+          })
+        }
+      },
     },
     mounted() {
-    
+    // извлекаем параметры фильтрации из url
+      const urlParams = new URLSearchParams(window.location.search)
+      if (urlParams.has('state')) {
+        let id = +urlParams.get('state')
+        if (id) this.updateFilterCtlgTaskState({id})
+      }
     }
   }
 </script>

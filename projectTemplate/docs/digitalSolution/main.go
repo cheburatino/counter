@@ -28,8 +28,9 @@ func GetDoc(project *t.ProjectType) t.DocType {
 			// контролы описаны после doc.Init
 			t.GetFldJsonbCompositionWithoutFld([][]int{{6, 1}}, "col-4", "comp-participants"),
 			t.GetFldRef("customer_id", "заказчик", "company", [][]int{{7, 1}}, "isShowLink", "isClearable"),
-			t.GetFldRef("system_id", "система", "system", [][]int{{7, 2}}, "isShowLink", "isClearable", "ext: {customer_id: item.customer_id}"),
-			t.GetFldJsonbCompositionWithoutFld([][]int{{8, 1}}, "", "comp-specialist", ":currentUser='currentUser'"),
+			t.GetFldJsonbCompositionWithoutFld([][]int{{7, 2}}, "", "comp-customerAgent", ":currentUser='currentUser'"),
+			t.GetFldRef("system_id", "система", "system", [][]int{{8, 1}}, "isShowLink", "isClearable", "ext: {customer_id: item.customer_id}"),
+			t.GetFldJsonbCompositionWithoutFld([][]int{{8, 2}}, "", "comp-specialist", ":currentUser='currentUser'"),
 			t.GetFldJsonbCompositionWithoutFld([][]int{{9, 1}}, "col-4", "comp-modeling"),
 			t.GetFldDate("date_plan_start_modeling", "планируемая дата начала моделирования", [][]int{{10, 1}}, "col-4"),
 			t.GetFldDate("date_fact_start_modeling", "фактическая дата начала моделирования", [][]int{{10, 2}}, "col-4"),
@@ -51,7 +52,7 @@ func GetDoc(project *t.ProjectType) t.DocType {
 		Templates: map[string]*t.DocTemplate{
 			"sql_function_get_specialist_role.sql": {},
 			"sql_function_get_by_id.sql":           {},
-			//"sql_function_list.sql": {},
+			"sql_function_list.sql": {},
 		},
 		IsBaseTemplates: t.DocIsBaseTemplates{true, true},
 		Sql: t.DocSql{
@@ -60,7 +61,6 @@ func GetDoc(project *t.ProjectType) t.DocType {
 			IsAfterTrigger:  true,
 			Methods: map[string]*t.DocSqlMethod{
 				"digital_solution_get_specialist_role": {Name: "digital_solution_get_specialist_role"},
-				//"digital_solution_list": {Name: "digital_solution_list"},
 			},
 		},
 	}
@@ -73,6 +73,7 @@ func GetDoc(project *t.ProjectType) t.DocType {
 	doc.AddVueComposition("docItem", "modeling")
 	doc.AddVueComposition("docItem", "realization")
 	doc.AddVueComposition("docItem", "specialist")
+	doc.AddVueComposition("docItem", "customerAgent")
 
 	doc.Vue.I18n = map[string]string{
 		"listTitle":        utils.UpperCaseFirst(name_ru_plural),

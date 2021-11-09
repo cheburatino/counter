@@ -106,6 +106,7 @@
 								{icon: '', text: 'Роли в задачах', url: '/ctlg_task_role', roles: []},
 								{icon: '', text: 'Статусы дел', url: '/ctlg_work_state', roles: []},
 								{icon: '', text: 'Статусы задач заказчиков', url: '/ctlg_customer_task_state', roles: []},
+								{icon: '', text: 'Статусы багов', url: '/ctlg_work_state', roles: []},
 ],},
 
                 ],

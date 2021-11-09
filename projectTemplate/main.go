@@ -147,6 +147,7 @@ func getProject() t.ProjectType {
 			{Text: "Роли в задачах", Url: "ctlg_task_role"},
 			{Text: "Статусы дел", Url: "ctlg_work_state"},
 			{Text: "Статусы задач заказчиков", Url: "ctlg_customer_task_state"},
+			{Text: "Статусы багов", Url: "ctlg_work_state"},
 		}},
 	}
 	p.FillSideMenu()

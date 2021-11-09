@@ -41,7 +41,7 @@
       
       <div class="row q-col-gutter-md q-mb-sm">
       <div class="col-md-4 col-sm-6 col-xs-12">
-          <comp-fld-ref-search outlined pgMethod="man_list" :label="$t('customer_task.author_id')" :item='item.author_title' :itemId='item.author_id' :ext='{company_id: 1, pathUrl: "/man", avatar: "image/man.svg", isClearable: "true"}' @update="v=> item.author_id = v.id" @clear="item.author_id = null" :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
+          <comp-customerAgent :item='item' :currentUser='currentUser'/>
       </div>
       </div>
       
@@ -89,11 +89,11 @@
 </template>
 
 <script>
-
+	import compCustomerAgent from './comp/customerAgent.vue'
     import currentUserMixin from '../../../app/mixins/currentUser'
     export default {
         props: ['id', 'isOpenInDialog'],
-        components: {},
+        components: {compCustomerAgent},
         mixins: [currentUserMixin,],
         computed: {
             docUrl: function() {
@@ -111,7 +111,6 @@
                         {name: 'description', label: 'описание'},
                         {name: 'files', label: 'файлы'},
                         {name: 'images', label: 'изображения'},
-                        {name: 'author_id', label: 'автор'},
                         {name: 'plan_start_date', label: 'плановая дата начала'},
                         {name: 'fact_start_date', label: 'фактическая дата начала'},
                         {name: 'plan_end_date', label: 'плановая дата завершения'},
