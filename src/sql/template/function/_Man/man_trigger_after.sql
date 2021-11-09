@@ -19,6 +19,12 @@ if new.title != old.title then
  for r in select * from task_specialist_link where author_id = new.id loop
  update task_specialist_link set updated_at=now() where id = r.id;
  end loop;
+ for r in select * from system_customer_agent_link where customer_agent_id = new.id loop
+ update system_customer_agent_link set updated_at=now() where id = r.id;
+ end loop;
+ for r in select * from system_customer_agent_link where author_id = new.id loop
+ update system_customer_agent_link set updated_at=now() where id = r.id;
+ end loop;
  for r in select * from request_customer_agent_link where customer_agent_id = new.id loop
  update request_customer_agent_link set updated_at=now() where id = r.id;
  end loop;

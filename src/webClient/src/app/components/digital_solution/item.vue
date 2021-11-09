@@ -62,7 +62,7 @@
       
       <div class="row q-col-gutter-md q-mb-sm">
       <div class="col-md-4 col-sm-6 col-xs-12">
-          <comp-fld-ref-search outlined pgMethod="system_list" :label="$t('digital_solution.system_id')" :item='item.system_title' :itemId='item.system_id' :ext='{customer_id: item.customer_id, isClearable: "true", pathUrl: "/system", avatar: "image/system.svg"}' @update="v=> item.system_id = v.id" @clear="item.system_id = null" :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
+          <comp-fld-ref-search outlined pgMethod="system_list" :label="$t('digital_solution.system_id')" :item='item.system_title' :itemId='item.system_id' :ext='{customer_id: item.customer_id, pathUrl: "/system", avatar: "image/system.svg", isClearable: "true"}' @update="v=> item.system_id = v.id" @clear="item.system_id = null" :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
       </div>
       <div class="col-md-4 col-sm-6 col-xs-12">
           <comp-specialist :item='item' :currentUser='currentUser'/>
@@ -143,7 +143,6 @@
 </template>
 
 <script>
-	import compParticipants from './comp/participants.vue'
 	import compModeling from './comp/modeling.vue'
 	import compRealization from './comp/realization.vue'
 	import compSpecialist from './comp/specialist.vue'
@@ -151,10 +150,11 @@
 	import ftListRefListWidget from './comp/ftListRefListWidget.vue'
 	import taskListRefListWidget from './comp/taskListRefListWidget.vue'
 	import customerTaskListRefListWidget from './comp/customerTaskListRefListWidget.vue'
+	import compParticipants from './comp/participants.vue'
     import currentUserMixin from '../../../app/mixins/currentUser'
     export default {
         props: ['id', 'isOpenInDialog'],
-        components: {customerTaskListRefListWidget, compParticipants, compModeling, compRealization, compSpecialist, compCustomerAgent, ftListRefListWidget, taskListRefListWidget},
+        components: {compCustomerAgent, ftListRefListWidget, taskListRefListWidget, customerTaskListRefListWidget, compParticipants, compModeling, compRealization, compSpecialist},
         mixins: [currentUserMixin,],
         computed: {
             docUrl: function() {
