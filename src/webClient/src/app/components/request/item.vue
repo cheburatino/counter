@@ -73,13 +73,13 @@
 </template>
 
 <script>
+	import taskListRefListWidget from './comp/taskListRefListWidget.vue'
 	import compCustomerAgent from './comp/customerAgent.vue'
 	import ftListRefListWidget from './comp/ftListRefListWidget.vue'
-	import taskListRefListWidget from './comp/taskListRefListWidget.vue'
     import currentUserMixin from '../../../app/mixins/currentUser'
     export default {
         props: ['id', 'isOpenInDialog'],
-        components: {compCustomerAgent, ftListRefListWidget, taskListRefListWidget},
+        components: {ftListRefListWidget, taskListRefListWidget, compCustomerAgent},
         mixins: [currentUserMixin,],
         computed: {
             docUrl: function() {

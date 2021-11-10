@@ -7,8 +7,8 @@ import (
 
 const (
 	name            = "man"
-	name_ru         = "человек"
-	name_ru_plural  = "люди"
+	name_ru         = "контакт"
+	name_ru_plural  = "контакты"
 	menu_icon       = "image/man.svg"
 	breadcrumb_icon = "fas fa-male"
 )

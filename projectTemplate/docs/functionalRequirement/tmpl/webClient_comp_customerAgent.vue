@@ -4,7 +4,7 @@
     <q-bar class="bg-secondary text-white">
       <q-icon name="fas fa-user-astronaut" />
 <!--      <q-icon name="fas fa-atom" />-->
-      <div v-if="!isShowDeleted">Наблюдатели</div>
+      <div v-if="!isShowDeleted">Представители заказчика</div>
       <div v-else>Удалённые</div>
       <q-space />
       <q-btn flat round icon="add" @click="showAddDialog" />

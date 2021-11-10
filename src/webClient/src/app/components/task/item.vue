@@ -100,7 +100,7 @@
     import currentUserMixin from '../../../app/mixins/currentUser'
     export default {
         props: ['id', 'isOpenInDialog'],
-        components: {compWork, compSpecialist},
+        components: {compSpecialist, compWork},
         mixins: [currentUserMixin,],
         computed: {
             docUrl: function() {
