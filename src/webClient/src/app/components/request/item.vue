@@ -70,8 +70,8 @@
 </template>
 
 <script>
-	import compCustomerAgent from './comp/customerAgent.vue'
 	import ftListRefListWidget from './comp/ftListRefListWidget.vue'
+	import compCustomerAgent from './comp/customerAgent.vue'
     import currentUserMixin from '../../../app/mixins/currentUser'
     export default {
         props: ['id', 'isOpenInDialog'],

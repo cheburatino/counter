@@ -64,7 +64,7 @@
                 menuLinks: [
                     // for codeGenerate ##sidemenu_slot1
 
-									{icon: 'image/system.svg', text: 'i18n_menu.system', url: '/system', roles: ['admin', 'specialist']},
+									{icon: 'image/system.svg', text: 'i18n_menu.system', url: '/system', roles: ['admin', 'specialist', 'customer']},
 
 									{icon: 'image/request.svg', text: 'i18n_menu.request', url: '/request', roles: ['admin', 'specialist', 'customer']},
 
@@ -106,7 +106,7 @@
 								{icon: '', text: 'Роли в задачах', url: '/ctlg_task_role', roles: []},
 								{icon: '', text: 'Статусы дел', url: '/ctlg_work_state', roles: []},
 								{icon: '', text: 'Статусы задач заказчиков', url: '/ctlg_customer_task_state', roles: []},
-								{icon: '', text: 'Статусы багов', url: '/ctlg_work_state', roles: []},
+								{icon: '', text: 'Статусы багов', url: '/ctlg_bug_state', roles: []},
 ],},
 
                 ],

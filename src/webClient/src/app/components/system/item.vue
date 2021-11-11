@@ -52,14 +52,14 @@
 </template>
 
 <script>
-	import digitalSolutionListRefListWidget from './comp/digitalSolutionListRefListWidget.vue'
 	import bugListRefListWidget from './comp/bugListRefListWidget.vue'
 	import requestListRefListWidget from './comp/requestListRefListWidget.vue'
 	import ftListRefListWidget from './comp/ftListRefListWidget.vue'
+	import digitalSolutionListRefListWidget from './comp/digitalSolutionListRefListWidget.vue'
     import currentUserMixin from '../../../app/mixins/currentUser'
     export default {
         props: ['id', 'isOpenInDialog'],
-        components: {requestListRefListWidget, ftListRefListWidget, digitalSolutionListRefListWidget, bugListRefListWidget},
+        components: {digitalSolutionListRefListWidget, bugListRefListWidget, requestListRefListWidget, ftListRefListWidget},
         mixins: [currentUserMixin,],
         computed: {
             docUrl: function() {
