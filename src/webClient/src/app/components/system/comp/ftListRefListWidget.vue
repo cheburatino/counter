@@ -13,14 +13,14 @@
                 <router-link :to="'/functional_requirement/' + v.id" style="cursor: pointer">
                     <q-item-section avatar>
                         <q-avatar rounded>
-                            <img src="image/request.svg" alt="">
+                            <img src="image/functional_requirement.svg" alt="">
                         </q-avatar>
                     </q-item-section>
                 </router-link>
                 <q-item-section>
                     
                 <q-item-label>{{v.title}}</q-item-label>
-                <q-item-label caption><q-badge color="orange">{{v.options.title.state_title}}</q-badge></q-item-label>
+                <q-item-label caption><q-badge color="orange">{{v.system_id}}</q-badge></q-item-label>
             
                 </q-item-section>
                  <q-item-section side v-if="!readonly">

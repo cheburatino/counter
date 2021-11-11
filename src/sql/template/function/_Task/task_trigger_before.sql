@@ -4,25 +4,31 @@ CREATE OR REPLACE FUNCTION task_trigger_before() RETURNS trigger AS
 $$
 DECLARE
         r record;
-	stateTitle TEXT;
-	digitalSolutionTitle TEXT;
 	typeTitle TEXT;
-	authorTitle TEXT;
+	stateTitle TEXT;
+	customerTitle TEXT;
+	systemTitle TEXT;
+	digitalSolutionTitle TEXT;
+	functionalRequirementTitle TEXT;
+	bugTitle TEXT;
 
        searchTxtVar TEXT := '';
 BEGIN
 
         -- заполняем ref поля
-		select title into stateTitle from ctlg_task_state where id = new.state;
-		select title into digitalSolutionTitle from digital_solution where id = new.digital_solution_id;
 		select title into typeTitle from ctlg_task_type where id = new.type_id;
-		select title into authorTitle from man where id = new.author_id;
+		select title into stateTitle from ctlg_task_state where id = new.state;
+		select title into customerTitle from company where id = new.customer_id;
+		select title into systemTitle from system where id = new.system_id;
+		select title into digitalSolutionTitle from digital_solution where id = new.digital_solution_id;
+		select title into functionalRequirementTitle from functional_requirement where id = new.functional_requirement_id;
+		select title into bugTitle from bug where id = new.bug_id;
         
         -- заполняем options.title
-        NEW.options = coalesce(OLD.options, '{}'::jsonb) || NEW.options || jsonb_build_object('title', jsonb_build_object('title', new.title, 'state_title', stateTitle, 'digital_solution_title', digitalSolutionTitle, 'type_title', typeTitle, 'author_title', authorTitle));
+        NEW.options = coalesce(OLD.options, '{}'::jsonb) || NEW.options || jsonb_build_object('title', jsonb_build_object('title', new.title, 'type_title', typeTitle, 'state_title', stateTitle, 'customer_title', customerTitle, 'system_title', systemTitle, 'digital_solution_title', digitalSolutionTitle, 'functional_requirement_title', functionalRequirementTitle, 'bug_title', bugTitle));
         -- заполняем search_text
         
-        NEW.search_text = concat(new.title, ' ', stateTitle, ' ', digitalSolutionTitle, ' ', typeTitle, ' ', authorTitle, ' ', searchTxtVar);
+        NEW.search_text = concat(new.title, ' ', typeTitle, ' ', stateTitle, ' ', customerTitle, ' ', systemTitle, ' ', digitalSolutionTitle, ' ', functionalRequirementTitle, ' ', bugTitle, ' ', searchTxtVar);
 
         
 

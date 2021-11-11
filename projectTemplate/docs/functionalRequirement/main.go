@@ -26,8 +26,8 @@ func GetDoc(project *t.ProjectType) t.DocType {
 			t.GetFldRef("request_id", "запрос", "request", [][]int{{3, 1}}, "isShowLink", "isClearable"),
 			t.GetFldRef("digital_solution_id", "цифровое решение", "digital_solution", [][]int{{3, 2}}, "isShowLink", "isClearable"),
 			// описание контрола после doc.Init
-			t.GetFldRef("system_id", "система", "system", [][]int{{5, 2}}),
 			t.GetFldJsonbCompositionWithoutFld([][]int{{4, 2}}, "", "comp-customerAgent", ":currentUser='currentUser'"),
+			t.GetFldRef("system_id", "система", "system", [][]int{{5, 1}}),
 			t.GetFldString("result", "результат", 0, [][]int{{6, 1}}, "col-8"),
 		},
 		Vue: t.DocVue{

@@ -41,9 +41,6 @@
       
       <div class="row q-col-gutter-md q-mb-sm">
       <div class="col-md-4 col-sm-6 col-xs-12">
-          not found vueFldTemplate for type ``
-      </div>
-      <div class="col-md-4 col-sm-6 col-xs-12">
           <comp-fld-ref-search outlined pgMethod="system_list" :label="$t('functional_requirement.system_id')" :item='item.system_title' :itemId='item.system_id' :ext='{}' @update="v=> item.system_id = v.id" @clear="item.system_id = null" :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
       </div>
       </div>
