@@ -3,6 +3,15 @@
 <template>
   <q-page :padding="!isOpenInDialog">
     <comp-breadcrumb class="text-capitalize" v-if="!isOpenInDialog" :list="[{label: $t('request.name_plural'), docType:'request'}]"/>
+    <!-- фильтры   -->
+    <div class="row q-mt-sm q-col-gutter-sm">
+        <div class=" col-md-2 col-sm-4 col-xs-6">
+          <comp-fld-ref-search dense outlined pgMethod="request_list" label="" :item='filterRequestTitle' :itemId='filterRequestId' :ext='{isClearable: true}'  @update="updateFilterRequest" @clear="updateFilterRequest"  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
+        </div>
+        <div class=" col-md-2 col-sm-4 col-xs-6">
+          <comp-fld-ref-search dense outlined pgMethod="digital_solution_list" label="" :item='filterDigitalSolutionTitle' :itemId='filterDigitalSolutionId' :ext='{isClearable: true}'  @update="updateFilterDigitalSolution" @clear="updateFilterDigitalSolution"  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
+        </div>
+    </div>
 
     <comp-doc-list ref="docList" :listTitle="$t('request.name_plural')" :listDeletedTitle="$t('request.name_plural_deleted')" pg-method="request_list"
                    :list-sort-data="listSortData" :list-filter-data="listFilterData"
@@ -57,12 +66,41 @@
           {value: {deleted: false}, title: 'Активные'},
           {value: {deleted: true}, title: 'Удаленные'}
         ],
+        filterRequestTitle: null,
+        filterRequestId: null,
+        filterDigitalSolutionTitle: null,
+        filterDigitalSolutionId: null,
       }
     },
     methods: {
+      updateFilterRequest(v) {
+        this.$refs.docList.changeItemList({'priority_id': v ? v.id : null})
+        if (v) {
+          this.$utils.callPgMethod(`request_get_by_id`, {id: v.id}, (res) => {
+            this.filterRequestTitle = res.title
+          })
+        }
+      },
+      updateFilterDigitalSolution(v) {
+        this.$refs.docList.changeItemList({'digital_solution_id': v ? v.id : null})
+        if (v) {
+          this.$utils.callPgMethod(`digital_solution_get_by_id`, {id: v.id}, (res) => {
+            this.filterDigitalSolutionTitle = res.title
+          })
+        }
+      },
     },
     mounted() {
-    
+    // извлекаем параметры фильтрации из url
+      const urlParams = new URLSearchParams(window.location.search)
+      if (urlParams.has('priority_id')) {
+        let id = +urlParams.get('priority_id')
+        if (id) this.updateFilterRequest({id})
+      }
+      if (urlParams.has('digital_solution_id')) {
+        let id = +urlParams.get('digital_solution_id')
+        if (id) this.updateFilterDigitalSolution({id})
+      }
     }
   }
 </script>

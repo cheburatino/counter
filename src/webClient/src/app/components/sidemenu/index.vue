@@ -98,6 +98,7 @@
 {isFolder: true, icon: 'image/catalog.svg', text: 'Справочники', roles: ['admin'], linkList: 								[
 								{icon: 'image/user.svg', text: 'Пользователи', url: '/users', roles: []},
 								{icon: '', text: 'Статусы запросов', url: '/ctlg_request_state', roles: []},
+								{icon: '', text: 'Приоритеты запросов', url: '/ctlg_request_priority', roles: []},
 								{icon: '', text: 'Статусы функциональных требований', url: '/ctlg_functional_requirement_state', roles: []},
 								{icon: '', text: 'Статусы цифровых решений', url: '/ctlg_digital_solution_state', roles: []},
 								{icon: '', text: 'Роли специалистов в цифровых решениях', url: '/ctlg_digital_solution_specialist_role', roles: []},

@@ -13,6 +13,7 @@ export default {
   breadcrumbIcons: {
     ctlg_electron_skill: 'fas fa-code',
 ctlg_request_state: 'fas fa-list-ul',
+ctlg_request_priority: 'fas fa-list-ul',
 ctlg_time_type: 'fas fa-list-ul',
 ctlg_digital_solution_state: 'fas fa-list-ul',
 ctlg_digital_solution_specialist_role: 'fas fa-list-ul',

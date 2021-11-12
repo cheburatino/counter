@@ -39,6 +39,12 @@
       </div>
       </div>
       
+      <div class="row q-col-gutter-md q-mb-sm">
+      <div class="col-md-4 col-sm-6 col-xs-12">
+          <task-list-ref-list-widget v-if='item.id != -1' :id='item.id' :readonly='false'/>
+      </div>
+      </div>
+      
 
       <!--  кнопки   -->
       <comp-item-btn-save v-if="!isOpenInDialog" @save="save" :readonly="false" @cancel="$router.push(docUrl)"/>
@@ -56,10 +62,11 @@
 	import ftListRefListWidget from './comp/ftListRefListWidget.vue'
 	import digitalSolutionListRefListWidget from './comp/digitalSolutionListRefListWidget.vue'
 	import bugListRefListWidget from './comp/bugListRefListWidget.vue'
+	import taskListRefListWidget from './comp/taskListRefListWidget.vue'
     import currentUserMixin from '../../../app/mixins/currentUser'
     export default {
         props: ['id', 'isOpenInDialog'],
-        components: {digitalSolutionListRefListWidget, bugListRefListWidget, requestListRefListWidget, ftListRefListWidget},
+        components: {digitalSolutionListRefListWidget, bugListRefListWidget, taskListRefListWidget, requestListRefListWidget, ftListRefListWidget},
         mixins: [currentUserMixin,],
         computed: {
             docUrl: function() {

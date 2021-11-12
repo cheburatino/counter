@@ -37,7 +37,8 @@ BEGIN
 		['notQuoted', 'system_id', 'doc.system_id'],
 		['notQuoted', 'digital_solution_id', 'doc.digital_solution_id'],
 		['notQuoted', 'functional_requirement_id', 'doc.functional_requirement_id'],
-		['notQuoted', 'bug_id', 'doc.bug_id']
+		['notQuoted', 'bug_id', 'doc.bug_id'],
+		['notQuoted', 'request_id', 'doc.request_id']
     ]);
 
     

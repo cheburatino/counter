@@ -47,17 +47,18 @@ BEGIN
     
     
     
+    
 
     if (params ->> 'id')::int = -1 then
         -- проверика наличия обязательных параметров
-        checkMsg = check_required_params(params, ARRAY ['title', 'type_id']);
+        checkMsg = check_required_params(params, ARRAY ['title']);
         IF checkMsg IS NOT NULL
         THEN
             RETURN checkMsg;
         END IF;
         
 
-        EXECUTE ('INSERT INTO task (title, type_id, state, description, files, images, customer_id, system_id, digital_solution_id, functional_requirement_id, bug_id, plan_start_date, fact_start_date, plan_end_date, fact_end_date, result, options) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17)  RETURNING *;')
+        EXECUTE ('INSERT INTO task (title, type_id, state, description, files, images, customer_id, system_id, digital_solution_id, functional_requirement_id, bug_id, request_id, plan_start_date, fact_start_date, plan_end_date, fact_end_date, result, options) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18)  RETURNING *;')
 		INTO taskRow
 		USING
 			(params ->> 'title')::text,
@@ -71,6 +72,7 @@ BEGIN
 			(params ->> 'digital_solution_id')::int,
 			(params ->> 'functional_requirement_id')::int,
 			(params ->> 'bug_id')::int,
+			(params ->> 'request_id')::int,
 			(params ->> 'plan_start_date')::timestamp,
 			(params ->> 'fact_start_date')::timestamp,
 			(params ->> 'plan_end_date')::timestamp,
@@ -93,6 +95,7 @@ BEGIN
 			['digital_solution_id', 'digital_solution_id', 'number'],
 			['functional_requirement_id', 'functional_requirement_id', 'number'],
 			['bug_id', 'bug_id', 'number'],
+			['request_id', 'request_id', 'number'],
 			['plan_start_date', 'plan_start_date', 'timestamp'],
 			['fact_start_date', 'fact_start_date', 'timestamp'],
 			['plan_end_date', 'plan_end_date', 'timestamp'],

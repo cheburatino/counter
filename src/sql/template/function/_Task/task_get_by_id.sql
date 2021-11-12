@@ -29,8 +29,9 @@ BEGIN
 		t5 as (select t4.*, c.title as system_title from t4 left join system c on c.id = t4.system_id),
 		t6 as (select t5.*, c.title as digital_solution_title from t5 left join digital_solution c on c.id = t5.digital_solution_id),
 		t7 as (select t6.*, c.title as functional_requirement_title from t6 left join functional_requirement c on c.id = t6.functional_requirement_id),
-		t8 as (select t7.*, c.title as bug_title from t7 left join bug c on c.id = t7.bug_id)
- 	select row_to_json(t8.*)::jsonb into result from t8;
+		t8 as (select t7.*, c.title as bug_title from t7 left join bug c on c.id = t7.bug_id),
+		t9 as (select t8.*, c.title as request_title from t8 left join request c on c.id = t8.request_id)
+ 	select row_to_json(t9.*)::jsonb into result from t9;
 
     -- случай когда записи с таким id не найдено
     IF result ->> 'id' ISNULL

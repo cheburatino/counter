@@ -11,6 +11,7 @@ DECLARE
 	digitalSolutionTitle TEXT;
 	functionalRequirementTitle TEXT;
 	bugTitle TEXT;
+	requestTitle TEXT;
 
        searchTxtVar TEXT := '';
 BEGIN
@@ -23,12 +24,13 @@ BEGIN
 		select title into digitalSolutionTitle from digital_solution where id = new.digital_solution_id;
 		select title into functionalRequirementTitle from functional_requirement where id = new.functional_requirement_id;
 		select title into bugTitle from bug where id = new.bug_id;
+		select title into requestTitle from request where id = new.request_id;
         
         -- заполняем options.title
-        NEW.options = coalesce(OLD.options, '{}'::jsonb) || NEW.options || jsonb_build_object('title', jsonb_build_object('title', new.title, 'type_title', typeTitle, 'state_title', stateTitle, 'customer_title', customerTitle, 'system_title', systemTitle, 'digital_solution_title', digitalSolutionTitle, 'functional_requirement_title', functionalRequirementTitle, 'bug_title', bugTitle));
+        NEW.options = coalesce(OLD.options, '{}'::jsonb) || NEW.options || jsonb_build_object('title', jsonb_build_object('title', new.title, 'type_title', typeTitle, 'state_title', stateTitle, 'customer_title', customerTitle, 'system_title', systemTitle, 'digital_solution_title', digitalSolutionTitle, 'functional_requirement_title', functionalRequirementTitle, 'bug_title', bugTitle, 'request_title', requestTitle));
         -- заполняем search_text
         
-        NEW.search_text = concat(new.title, ' ', typeTitle, ' ', stateTitle, ' ', customerTitle, ' ', systemTitle, ' ', digitalSolutionTitle, ' ', functionalRequirementTitle, ' ', bugTitle, ' ', searchTxtVar);
+        NEW.search_text = concat(new.title, ' ', typeTitle, ' ', stateTitle, ' ', customerTitle, ' ', systemTitle, ' ', digitalSolutionTitle, ' ', functionalRequirementTitle, ' ', bugTitle, ' ', requestTitle, ' ', searchTxtVar);
 
         
 
