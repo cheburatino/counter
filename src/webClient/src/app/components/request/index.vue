@@ -6,7 +6,7 @@
     <!-- фильтры   -->
     <div class="row q-mt-sm q-col-gutter-sm">
         <div class=" col-md-2 col-sm-4 col-xs-6">
-          <comp-fld-ref-search dense outlined pgMethod="request_list" label="" :item='filterRequestTitle' :itemId='filterRequestId' :ext='{isClearable: true}'  @update="updateFilterRequest" @clear="updateFilterRequest"  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
+          <comp-fld-ref-search dense outlined pgMethod="ctlg_request_priority_list" label="" :item='filterCtlgRequestPriorityTitle' :itemId='filterCtlgRequestPriorityId' :ext='{isClearable: true}'  @update="updateFilterCtlgRequestPriority" @clear="updateFilterCtlgRequestPriority"  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
         </div>
         <div class=" col-md-2 col-sm-4 col-xs-6">
           <comp-fld-ref-search dense outlined pgMethod="digital_solution_list" label="" :item='filterDigitalSolutionTitle' :itemId='filterDigitalSolutionId' :ext='{isClearable: true}'  @update="updateFilterDigitalSolution" @clear="updateFilterDigitalSolution"  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
@@ -66,18 +66,18 @@
           {value: {deleted: false}, title: 'Активные'},
           {value: {deleted: true}, title: 'Удаленные'}
         ],
-        filterRequestTitle: null,
-        filterRequestId: null,
+        filterCtlgRequestPriorityTitle: null,
+        filterCtlgRequestPriorityId: null,
         filterDigitalSolutionTitle: null,
         filterDigitalSolutionId: null,
       }
     },
     methods: {
-      updateFilterRequest(v) {
+      updateFilterCtlgRequestPriority(v) {
         this.$refs.docList.changeItemList({'priority_id': v ? v.id : null})
         if (v) {
-          this.$utils.callPgMethod(`request_get_by_id`, {id: v.id}, (res) => {
-            this.filterRequestTitle = res.title
+          this.$utils.callPgMethod(`ctlg_request_priority_get_by_id`, {id: v.id}, (res) => {
+            this.filterCtlgRequestPriorityTitle = res.title
           })
         }
       },
@@ -95,7 +95,7 @@
       const urlParams = new URLSearchParams(window.location.search)
       if (urlParams.has('priority_id')) {
         let id = +urlParams.get('priority_id')
-        if (id) this.updateFilterRequest({id})
+        if (id) this.updateFilterCtlgRequestPriority({id})
       }
       if (urlParams.has('digital_solution_id')) {
         let id = +urlParams.get('digital_solution_id')

@@ -32,13 +32,13 @@ BEGIN
     whereStr = where_str_build(params, 'doc', ARRAY [
         ['ilike', 'search_text', 'search_text'],
 		['notQuoted', 'type_id', 'doc.type_id'],
-		['notQuoted', 'state', 'doc.state'],
+		['notQuoted', 'state_id', 'doc.state_id'],
 		['notQuoted', 'customer_id', 'doc.customer_id'],
+		['notQuoted', 'request_id', 'doc.request_id'],
 		['notQuoted', 'system_id', 'doc.system_id'],
 		['notQuoted', 'digital_solution_id', 'doc.digital_solution_id'],
 		['notQuoted', 'functional_requirement_id', 'doc.functional_requirement_id'],
-		['notQuoted', 'bug_id', 'doc.bug_id'],
-		['notQuoted', 'request_id', 'doc.request_id']
+		['notQuoted', 'bug_id', 'doc.bug_id']
     ]);
 
     

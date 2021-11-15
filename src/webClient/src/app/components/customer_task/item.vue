@@ -17,10 +17,10 @@
       
       <div class="row q-col-gutter-md q-mb-sm">
       <div class="col-md-4 col-sm-6 col-xs-12">
-          <comp-fld-ref-search outlined pgMethod="digital_solution_list" :label="$t('customer_task.digital_solution_id')" :item='item.digital_solution_title' :itemId='item.digital_solution_id' :ext='{"avatar":"image/digital_solution.svg","pathUrl":"/digital_solution"}' @update="v=> item.digital_solution_id = v.id" @clear="item.digital_solution_id = null" :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
+          <p>Дата и время создания: {{item.created_at}}</p>
       </div>
       <div class="col-md-4 col-sm-6 col-xs-12">
-          <comp-fld-ref-search outlined pgMethod="company_list" :label="$t('customer_task.company_id')" :item='item.company_title' :itemId='item.company_id' :ext='{}' @update="v=> item.company_id = v.id" @clear="item.company_id = null" :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
+          <p>Дата и время изменения: {{item.updated_at}}</p>
       </div>
       </div>
       
@@ -41,7 +41,52 @@
       
       <div class="row q-col-gutter-md q-mb-sm">
       <div class="col-md-4 col-sm-6 col-xs-12">
+          <comp-customer :item='item' />
+      </div>
+      </div>
+      
+      <div class="row q-col-gutter-md q-mb-sm">
+      <div class="col-md-4 col-sm-6 col-xs-12">
+          <comp-fld-ref-search outlined pgMethod="company_list" :label="$t('customer_task.customer_id')" :item='item.customer_title' :itemId='item.customer_id' :ext='{"avatar":"image/company.svg","isClearable":"true","pathUrl":"/company"}' @update="v=> item.customer_id = v.id" @clear="item.customer_id = null" :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
+      </div>
+      <div class="col-md-4 col-sm-6 col-xs-12">
           <comp-customerAgent :item='item' :currentUser='currentUser'/>
+      </div>
+      </div>
+      
+      <div class="row q-col-gutter-md q-mb-sm">
+      <div class="col-md-4 col-sm-6 col-xs-12">
+          <comp-relation :item='item' />
+      </div>
+      </div>
+      
+      <div class="row q-col-gutter-md q-mb-sm">
+      <div class="col-md-4 col-sm-6 col-xs-12">
+          <comp-fld-ref-search outlined pgMethod="request_list" :label="$t('customer_task.request_id')" :item='item.request_title' :itemId='item.request_id' :ext='{"avatar":"image/request.svg","isClearable":"true","pathUrl":"/request"}' @update="v=> item.request_id = v.id" @clear="item.request_id = null" :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
+      </div>
+      <div class="col-md-4 col-sm-6 col-xs-12">
+          <comp-fld-ref-search outlined pgMethod="system_list" :label="$t('customer_task.system_id')" :item='item.system_title' :itemId='item.system_id' :ext='{"avatar":"image/system.svg","isClearable":"true","pathUrl":"/system"}' @update="v=> item.system_id = v.id" @clear="item.system_id = null" :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
+      </div>
+      </div>
+      
+      <div class="row q-col-gutter-md q-mb-sm">
+      <div class="col-md-4 col-sm-6 col-xs-12">
+          <comp-fld-ref-search outlined pgMethod="digital_solution_list" :label="$t('customer_task.digital_solution_id')" :item='item.digital_solution_title' :itemId='item.digital_solution_id' :ext='{"avatar":"image/digital_solution.svg","isClearable":"true","pathUrl":"/digital_solution"}' @update="v=> item.digital_solution_id = v.id" @clear="item.digital_solution_id = null" :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
+      </div>
+      <div class="col-md-4 col-sm-6 col-xs-12">
+          <comp-fld-ref-search outlined pgMethod="functional_requirement_list" :label="$t('customer_task.functional_requirement_id')" :item='item.functional_requirement_title' :itemId='item.functional_requirement_id' :ext='{"avatar":"image/functional_requirement.svg","isClearable":"true","pathUrl":"/functional_requirement"}' @update="v=> item.functional_requirement_id = v.id" @clear="item.functional_requirement_id = null" :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
+      </div>
+      </div>
+      
+      <div class="row q-col-gutter-md q-mb-sm">
+      <div class="col-md-4 col-sm-6 col-xs-12">
+          <comp-fld-ref-search outlined pgMethod="bug_list" :label="$t('customer_task.bug_id')" :item='item.bug_title' :itemId='item.bug_id' :ext='{"avatar":"image/bug.png","isClearable":"true","pathUrl":"/bug"}' @update="v=> item.bug_id = v.id" @clear="item.bug_id = null" :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
+      </div>
+      </div>
+      
+      <div class="row q-col-gutter-md q-mb-sm">
+      <div class="col-md-4 col-sm-6 col-xs-12">
+          <comp-date :item='item' />
       </div>
       </div>
       
@@ -60,6 +105,12 @@
       </div>
       <div class="col-md-4 col-sm-6 col-xs-12">
           <comp-fld-date outlined :label="$t('customer_task.fact_end_date')" :date-string="$utils.formatPgDate(item.fact_end_date)" @update="v=> item.fact_end_date = v" :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
+      </div>
+      </div>
+      
+      <div class="row q-col-gutter-md q-mb-sm">
+      <div class="col-md-4 col-sm-6 col-xs-12">
+          <comp-result :item='item' />
       </div>
       </div>
       
@@ -89,11 +140,15 @@
 </template>
 
 <script>
+	import compCustomer from './comp/customer.vue'
 	import compCustomerAgent from './comp/customerAgent.vue'
+	import compRelation from './comp/relation.vue'
+	import compDate from './comp/date.vue'
+	import compResult from './comp/result.vue'
     import currentUserMixin from '../../../app/mixins/currentUser'
     export default {
         props: ['id', 'isOpenInDialog'],
-        components: {compCustomerAgent},
+        components: {compCustomer, compCustomerAgent, compRelation, compDate, compResult},
         mixins: [currentUserMixin,],
         computed: {
             docUrl: function() {
@@ -106,11 +161,15 @@
                 flds: [
                         {name: 'title', label: 'название',  required: true},
                         {name: 'state_id', label: 'статус'},
-                        {name: 'digital_solution_id', label: 'цифровое решение'},
-                        {name: 'company_id', label: 'компания'},
                         {name: 'description', label: 'описание'},
                         {name: 'files', label: 'файлы'},
                         {name: 'images', label: 'изображения'},
+                        {name: 'customer_id', label: 'заказчик'},
+                        {name: 'request_id', label: 'запрос'},
+                        {name: 'system_id', label: 'система'},
+                        {name: 'digital_solution_id', label: 'цифровое решение'},
+                        {name: 'functional_requirement_id', label: 'функциональное требование'},
+                        {name: 'bug_id', label: 'баг'},
                         {name: 'plan_start_date', label: 'плановая дата начала'},
                         {name: 'fact_start_date', label: 'фактическая дата начала'},
                         {name: 'plan_end_date', label: 'плановая дата завершения'},

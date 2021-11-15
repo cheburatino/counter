@@ -23,15 +23,18 @@ func GetDoc(project *t.ProjectType) t.DocType {
 			t.GetFldTitle().SetReadonly("currentUser.role?.includes(`customer`) && item.state_id != 1"),
 			t.GetFldRef("state_id", "статус", "ctlg_bug_state", [][]int{{1, 2}}).SetReadonly("currentUser.role?.includes(`customer`)"),
 			t.GetFldString("description", "описание", 0, [][]int{{2, 1}}, "col-8").SetReadonly("currentUser.role?.includes(`customer`) && item.state_id != 1"),
-			t.GetFldJsonbCompositionWithoutFld([][]int{{3, 1}}, "col-4", "comp-relation"),
-			t.GetFldRef("customer_id", "заказчик", "company", [][]int{{4, 1}}, "isShowLink", "isClearable").SetReadonly("currentUser.role?.includes(`customer`)"),
-			t.GetFldRef("system_id", "система", "system", [][]int{{4, 2}}, "isShowLink", "isClearable").SetReadonly("currentUser.role?.includes(`customer`)"),
-			t.GetFldRef("digital_solution_id", "цифровое решение", "digital_solution", [][]int{{5, 1}}, "isShowLink", "isClearable").SetReadonly("currentUser.role?.includes(`customer`)"),
-			t.GetFldRef("functional_requirement_id", "функциональное требование", "functional_requirement", [][]int{{5, 2}}, "isShowLink", "isClearable").SetReadonly("currentUser.role?.includes(`customer`)"),
-			t.GetFldJsonbCompositionWithoutFld([][]int{{6, 1}}, "col-4", "comp-participant"),
-			t.GetFldSimpleHtml([][]int{{7, 1}}, "", "<p>Добавить контрол Специалисты</p>"),
-			t.GetFldJsonbCompositionWithoutFld([][]int{{7, 2}}, "", "comp-customerAgent", ":currentUser='currentUser'"),
-			t.GetFldString("result", "результат", 0, [][]int{{8, 1}}, "col-8").SetReadonly("currentUser.role?.includes(`customer`)"),
+			t.GetFldJsonbCompositionWithoutFld([][]int{{3, 1}}, "col-4", "comp-executor"),
+			t.GetFldSimpleHtml([][]int{{4, 1}}, "", "<p>Специалисты</p>"),
+			// Задачи. Контрол описан после doc.Init {{4, 2}}
+			t.GetFldJsonbCompositionWithoutFld([][]int{{5, 1}}, "col-4", "comp-customer"),
+			t.GetFldRef("customer_id", "заказчик", "company", [][]int{{6, 1}}, "isShowLink", "isClearable").SetReadonly("currentUser.role?.includes(`customer`)"),
+			t.GetFldJsonbCompositionWithoutFld([][]int{{7, 1}}, "", "comp-customerAgent", ":currentUser='currentUser'"),
+			// Задачи заказчика. Контрол описан после doc.Init {{7, 2}}
+			t.GetFldJsonbCompositionWithoutFld([][]int{{8, 1}}, "col-4", "comp-relation"),
+			t.GetFldRef("system_id", "система", "system", [][]int{{9, 1}}, "isShowLink", "isClearable").SetReadonly("currentUser.role?.includes(`customer`)"),
+			t.GetFldRef("digital_solution_id", "цифровое решение", "digital_solution", [][]int{{10, 1}}, "isShowLink", "isClearable").SetReadonly("currentUser.role?.includes(`customer`)"),
+			t.GetFldRef("functional_requirement_id", "функциональное требование", "functional_requirement", [][]int{{10, 2}}, "isShowLink", "isClearable").SetReadonly("currentUser.role?.includes(`customer`)"),
+			t.GetFldString("result", "результат", 0, [][]int{{11, 1}}, "col-8").SetReadonly("currentUser.role?.includes(`customer`)"),
 		},
 		Vue: t.DocVue{
 			RouteName:      name,
@@ -53,8 +56,9 @@ func GetDoc(project *t.ProjectType) t.DocType {
 	// создаем стандартные методы sql "list", "update", "get_by_id" с возможностью ограничения по ролям
 	doc.Sql.FillBaseMethods(doc.Name)
 
+	doc.AddVueComposition("docItem", "executor")
+	doc.AddVueComposition("docItem", "customer")
 	doc.AddVueComposition("docItem", "customerAgent")
-	doc.AddVueComposition("docItem", "participant")
 	doc.AddVueComposition("docItem", "relation")
 
 	doc.Vue.I18n = map[string]string{
@@ -63,6 +67,37 @@ func GetDoc(project *t.ProjectType) t.DocType {
 	}
 
 	doc.Init()
+
+	doc.AddFld(t.GetFldVueCompositionRefList(&doc, t.VueCompRefListWidgetParams{
+		Label:      "задачи",              // название списка, которе выводится на экране
+		FldName:    "task_list",           // название поля. Любое, в формате snake_case. На основе этого названия формируется название компоненты во vue.
+		TableName:  "task",                // название связанной таблицы, из которой будут выгружаться записи
+		RefFldName: "digital_solution_id", // название поля в связанной таблицы, по которому осуществляется связь
+		Avatar:     "image/task.svg",      // иконка, которая выводится в списке
+		NewFlds: []t.FldType{
+			t.GetFldString("title", "название", 300, [][]int{{1, 1}}).SetIsRequired(),
+			t.GetFldRef("type_id", "тип задачи", "ctlg_task_type", [][]int{{2, 2}}).SetIsRequired(),
+		}, // список полей, которые заполняются при добавлении новой записи
+		TitleTemplate: `
+                <q-item-label>{{v.title}}</q-item-label>
+                <q-item-label caption><q-badge color="orange">{{v.options.title.state_title}}</q-badge></q-item-label>
+            `, // шаблон для названия в списке (vue синтаксис)
+	}, [][]int{{4, 2}}, "col-4"))
+
+	doc.AddFld(t.GetFldVueCompositionRefList(&doc, t.VueCompRefListWidgetParams{
+		Label:      "задачи заказчика",        // название списка, которе выводится на экране
+		FldName:    "customer_task_list",      // название поля. Любое, в формате snake_case. На основе этого названия формируется название компоненты во vue.
+		TableName:  "customer_task",           // название связанной таблицы, из которой будут выгружаться записи
+		RefFldName: "digital_solution_id",     // название поля в связанной таблицы, по которому осуществляется связь
+		Avatar:     "image/customer_task.png", // иконка, которая выводится в списке
+		NewFlds: []t.FldType{
+			t.GetFldString("title", "название", 300, [][]int{{1, 1}}).SetIsRequired(),
+		}, // список полей, которые заполняются при добавлении новой записи
+		TitleTemplate: `
+                <q-item-label>{{v.title}}</q-item-label>
+                <q-item-label caption><q-badge color="orange">{{v.options.title.state_title}}</q-badge></q-item-label>
+            `, // шаблон для названия в списке (vue синтаксис)
+	}, [][]int{{7, 2}}, "col-4"))
 
 	return doc
 }

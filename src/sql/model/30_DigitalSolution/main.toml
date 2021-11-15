@@ -19,6 +19,7 @@ fields = [
 	{name="date_fact_start_realization",					type="timestamp",	 comment="фактическая дата начала реализации"},
 	{name="date_plan_end_realization",					type="timestamp",	 comment="планируемая дата завершения реализации"},
 	{name="date_fact_end_realization",					type="timestamp",	 comment="фактическая дата завершения реализации"},
+	{name="result",					type="text",	 comment="результат"},
 	{name="search_text",			type="text",	comment="колонка для поиска"},
 	{name="options",				type="jsonb",	comment="разные дополнительные параметры"},
 	{name="created_at",				type="timestamp",	ext="with time zone"},
@@ -42,10 +43,10 @@ triggers = [
 
 
 methods = [
-	"digital_solution_get_by_id",
 	"digital_solution_get_specialist_role",
 	"digital_solution_list",
 	"digital_solution_update",
+	"digital_solution_get_by_id",
 	"digital_solution_trigger_before",
 	"digital_solution_trigger_after"
 ]
@@ -65,5 +66,6 @@ alterScripts = [
 	"alter table digital_solution add column if not exists date_fact_start_realization timestamp;",
 	"alter table digital_solution add column if not exists date_plan_end_realization timestamp;",
 	"alter table digital_solution add column if not exists date_fact_end_realization timestamp;",
+	"alter table digital_solution add column if not exists result text;",
 	"alter table digital_solution add column if not exists search_text text;"
 ]

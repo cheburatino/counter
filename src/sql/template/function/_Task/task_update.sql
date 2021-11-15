@@ -48,6 +48,10 @@ BEGIN
     
     
     
+    
+    
+    
+    
 
     if (params ->> 'id')::int = -1 then
         -- проверика наличия обязательных параметров
@@ -58,21 +62,21 @@ BEGIN
         END IF;
         
 
-        EXECUTE ('INSERT INTO task (title, type_id, state, description, files, images, customer_id, system_id, digital_solution_id, functional_requirement_id, bug_id, request_id, plan_start_date, fact_start_date, plan_end_date, fact_end_date, result, options) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18)  RETURNING *;')
+        EXECUTE ('INSERT INTO task (title, type_id, state_id, description, files, images, customer_id, request_id, system_id, digital_solution_id, functional_requirement_id, bug_id, plan_start_date, fact_start_date, plan_end_date, fact_end_date, result, options) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18)  RETURNING *;')
 		INTO taskRow
 		USING
 			(params ->> 'title')::text,
 			(params ->> 'type_id')::int,
-			coalesce((params ->> 'state')::int, 1)::int,
+			coalesce((params ->> 'state_id')::int, 1)::int,
 			(params ->> 'description')::text,
 			(params -> 'files')::jsonb,
 			(params -> 'images')::jsonb,
 			(params ->> 'customer_id')::int,
+			(params ->> 'request_id')::int,
 			(params ->> 'system_id')::int,
 			(params ->> 'digital_solution_id')::int,
 			(params ->> 'functional_requirement_id')::int,
 			(params ->> 'bug_id')::int,
-			(params ->> 'request_id')::int,
 			(params ->> 'plan_start_date')::timestamp,
 			(params ->> 'fact_start_date')::timestamp,
 			(params ->> 'plan_end_date')::timestamp,
@@ -86,16 +90,16 @@ BEGIN
         updateValue = '' || update_str_from_json(params, ARRAY [
 			['title', 'title', 'text'],
 			['type_id', 'type_id', 'number'],
-			['state', 'state', 'number'],
+			['state_id', 'state_id', 'number'],
 			['description', 'description', 'text'],
 			['files', 'files', 'jsonb'],
 			['images', 'images', 'jsonb'],
 			['customer_id', 'customer_id', 'number'],
+			['request_id', 'request_id', 'number'],
 			['system_id', 'system_id', 'number'],
 			['digital_solution_id', 'digital_solution_id', 'number'],
 			['functional_requirement_id', 'functional_requirement_id', 'number'],
 			['bug_id', 'bug_id', 'number'],
-			['request_id', 'request_id', 'number'],
 			['plan_start_date', 'plan_start_date', 'timestamp'],
 			['fact_start_date', 'fact_start_date', 'timestamp'],
 			['plan_end_date', 'plan_end_date', 'timestamp'],

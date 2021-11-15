@@ -14,7 +14,16 @@
           <comp-fld-ref-search outlined pgMethod="ctlg_task_type_list" :label="$t('task.type_id')" :item='item.type_title' :itemId='item.type_id' :ext='{}' @update="v=> item.type_id = v.id" @clear="item.type_id = null" :readonly='false'  class='q-mb-sm col-md-2 col-sm-3 col-xs-6' />
       </div>
       <div class="col-md-2 col-sm-3 col-xs-6">
-          <comp-fld-ref-search outlined pgMethod="ctlg_task_state_list" :label="$t('task.state')" :item='item.state_title' :itemId='item.state' :ext='{}' @update="v=> item.state = v.id" @clear="item.state = null" :readonly='false'  class='q-mb-sm col-md-2 col-sm-3 col-xs-6' />
+          <comp-fld-ref-search outlined pgMethod="ctlg_task_state_list" :label="$t('task.state_id')" :item='item.state_title' :itemId='item.state_id' :ext='{}' @update="v=> item.state_id = v.id" @clear="item.state_id = null" :readonly='false'  class='q-mb-sm col-md-2 col-sm-3 col-xs-6' />
+      </div>
+      </div>
+      
+      <div class="row q-col-gutter-md q-mb-sm">
+      <div class="col-md-4 col-sm-6 col-xs-12">
+          <p>Дата и время создания: {{item.created_at}}</p>
+      </div>
+      <div class="col-md-4 col-sm-6 col-xs-12">
+          <p>Дата и время изменения: {{item.updated_at}}</p>
       </div>
       </div>
       
@@ -35,7 +44,28 @@
       
       <div class="row q-col-gutter-md q-mb-sm">
       <div class="col-md-4 col-sm-6 col-xs-12">
+          <comp-executor :item='item' />
+      </div>
+      </div>
+      
+      <div class="row q-col-gutter-md q-mb-sm">
+      <div class="col-md-4 col-sm-6 col-xs-12">
+          <comp-specialist :item='item' :currentUser='currentUser'/>
+      </div>
+      <div class="col-md-4 col-sm-6 col-xs-12">
           <comp-work :item='item' :currentUser='currentUser'/>
+      </div>
+      </div>
+      
+      <div class="row q-col-gutter-md q-mb-sm">
+      <div class="col-md-4 col-sm-6 col-xs-12">
+          <comp-customer :item='item' />
+      </div>
+      </div>
+      
+      <div class="row q-col-gutter-md q-mb-sm">
+      <div class="col-md-4 col-sm-6 col-xs-12">
+          <comp-fld-ref-search outlined pgMethod="company_list" :label="$t('task.customer_id')" :item='item.customer_title' :itemId='item.customer_id' :ext='{"avatar":"image/company.svg","isClearable":"true","pathUrl":"/company"}' @update="v=> item.customer_id = v.id" @clear="item.customer_id = null" :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
       </div>
       </div>
       
@@ -47,7 +77,7 @@
       
       <div class="row q-col-gutter-md q-mb-sm">
       <div class="col-md-4 col-sm-6 col-xs-12">
-          <comp-fld-ref-search outlined pgMethod="company_list" :label="$t('task.customer_id')" :item='item.customer_title' :itemId='item.customer_id' :ext='{"avatar":"image/company.svg","isClearable":"true","pathUrl":"/company"}' @update="v=> item.customer_id = v.id" @clear="item.customer_id = null" :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
+          <comp-fld-ref-search outlined pgMethod="request_list" :label="$t('task.request_id')" :item='item.request_title' :itemId='item.request_id' :ext='{"avatar":"image/request.svg","isClearable":"true","pathUrl":"/request"}' @update="v=> item.request_id = v.id" @clear="item.request_id = null" :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
       </div>
       <div class="col-md-4 col-sm-6 col-xs-12">
           <comp-fld-ref-search outlined pgMethod="system_list" :label="$t('task.system_id')" :item='item.system_title' :itemId='item.system_id' :ext='{"avatar":"image/system.svg","isClearable":"true","pathUrl":"/system"}' @update="v=> item.system_id = v.id" @clear="item.system_id = null" :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
@@ -66,21 +96,6 @@
       <div class="row q-col-gutter-md q-mb-sm">
       <div class="col-md-4 col-sm-6 col-xs-12">
           <comp-fld-ref-search outlined pgMethod="bug_list" :label="$t('task.bug_id')" :item='item.bug_title' :itemId='item.bug_id' :ext='{"avatar":"image/bug.png","isClearable":"true","pathUrl":"/bug"}' @update="v=> item.bug_id = v.id" @clear="item.bug_id = null" :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
-      </div>
-      <div class="col-md-4 col-sm-6 col-xs-12">
-          <comp-fld-ref-search outlined pgMethod="request_list" :label="$t('task.request_id')" :item='item.request_title' :itemId='item.request_id' :ext='{}' @update="v=> item.request_id = v.id" @clear="item.request_id = null" :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
-      </div>
-      </div>
-      
-      <div class="row q-col-gutter-md q-mb-sm">
-      <div class="col-md-4 col-sm-6 col-xs-12">
-          <comp-participant :item='item' />
-      </div>
-      </div>
-      
-      <div class="row q-col-gutter-md q-mb-sm">
-      <div class="col-md-4 col-sm-6 col-xs-12">
-          <comp-specialist :item='item' :currentUser='currentUser'/>
       </div>
       </div>
       
@@ -105,6 +120,12 @@
       </div>
       <div class="col-md-4 col-sm-6 col-xs-12">
           <comp-fld-date outlined :label="$t('task.fact_end_date')" :date-string="$utils.formatPgDate(item.fact_end_date)" @update="v=> item.fact_end_date = v" :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
+      </div>
+      </div>
+      
+      <div class="row q-col-gutter-md q-mb-sm">
+      <div class="col-md-4 col-sm-6 col-xs-12">
+          <comp-result :item='item' />
       </div>
       </div>
       
@@ -136,13 +157,15 @@
 <script>
 	import compSpecialist from './comp/specialist.vue'
 	import compWork from './comp/work.vue'
-	import compParticipant from './comp/participant.vue'
+	import compCustomer from './comp/customer.vue'
 	import compRelation from './comp/relation.vue'
 	import compDate from './comp/date.vue'
+	import compResult from './comp/result.vue'
+	import compExecutor from './comp/executor.vue'
     import currentUserMixin from '../../../app/mixins/currentUser'
     export default {
         props: ['id', 'isOpenInDialog'],
-        components: {compSpecialist, compWork, compParticipant, compRelation, compDate},
+        components: {compExecutor, compSpecialist, compWork, compCustomer, compRelation, compDate, compResult},
         mixins: [currentUserMixin,],
         computed: {
             docUrl: function() {
@@ -155,16 +178,16 @@
                 flds: [
                         {name: 'title', label: 'название',  required: true},
                         {name: 'type_id', label: 'тип задачи'},
-                        {name: 'state', label: 'статус'},
+                        {name: 'state_id', label: 'статус'},
                         {name: 'description', label: 'описание'},
                         {name: 'files', label: 'файлы'},
                         {name: 'images', label: 'изображения'},
                         {name: 'customer_id', label: 'заказчик'},
+                        {name: 'request_id', label: 'запрос'},
                         {name: 'system_id', label: 'система'},
                         {name: 'digital_solution_id', label: 'цифровое решение'},
                         {name: 'functional_requirement_id', label: 'функциональное требование'},
                         {name: 'bug_id', label: 'баг'},
-                        {name: 'request_id', label: 'запрос'},
                         {name: 'plan_start_date', label: 'плановая дата начала'},
                         {name: 'fact_start_date', label: 'фактическая дата начала'},
                         {name: 'plan_end_date', label: 'плановая дата завершения'},

@@ -66,7 +66,7 @@
     import currentUserMixin from '../../../app/mixins/currentUser'
     export default {
         props: ['id', 'isOpenInDialog'],
-        components: {digitalSolutionListRefListWidget, bugListRefListWidget, taskListRefListWidget, requestListRefListWidget, ftListRefListWidget},
+        components: {requestListRefListWidget, ftListRefListWidget, digitalSolutionListRefListWidget, bugListRefListWidget, taskListRefListWidget},
         mixins: [currentUserMixin,],
         computed: {
             docUrl: function() {

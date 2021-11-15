@@ -50,6 +50,10 @@ BEGIN
     
     
     
+    
+    
+    
+    
 
     if (params ->> 'id')::int = -1 then
         -- проверика наличия обязательных параметров
@@ -60,7 +64,7 @@ BEGIN
         END IF;
         
 
-        EXECUTE ('INSERT INTO digital_solution (title, state_id, description, customer_id, system_id, date_plan_start_modeling, date_fact_start_modeling, model, date_plan_end_modeling, date_fact_end_modeling, date_plan_start_realization, date_fact_start_realization, date_plan_end_realization, date_fact_end_realization, options) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15)  RETURNING *;')
+        EXECUTE ('INSERT INTO digital_solution (title, state_id, description, customer_id, system_id, date_plan_start_modeling, date_fact_start_modeling, model, date_plan_end_modeling, date_fact_end_modeling, date_plan_start_realization, date_fact_start_realization, date_plan_end_realization, date_fact_end_realization, result, options) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16)  RETURNING *;')
 		INTO digital_solutionRow
 		USING
 			(params ->> 'title')::text,
@@ -77,6 +81,7 @@ BEGIN
 			(params ->> 'date_fact_start_realization')::timestamp,
 			(params ->> 'date_plan_end_realization')::timestamp,
 			(params ->> 'date_fact_end_realization')::timestamp,
+			(params ->> 'result')::text,
 			coalesce(params -> 'options', '{}')::jsonb;
 
         
@@ -97,6 +102,7 @@ BEGIN
 			['date_fact_start_realization', 'date_fact_start_realization', 'timestamp'],
 			['date_plan_end_realization', 'date_plan_end_realization', 'timestamp'],
 			['date_fact_end_realization', 'date_fact_end_realization', 'timestamp'],
+			['result', 'result', 'text'],
             ['options', 'options', 'jsonb'],
             ['deleted', 'deleted', 'bool']
             ]);

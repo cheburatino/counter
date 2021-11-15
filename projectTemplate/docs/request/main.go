@@ -21,19 +21,21 @@ func GetDoc(project *t.ProjectType) t.DocType {
 		PathPrefix: "docs",
 		Flds: []t.FldType{
 			t.GetFldTitle(),
-			t.GetFldRef("priority_id", "приоритет", "ctlg_request_priority", [][]int{{1, 2}}, "col-2"),
-			t.GetFldRef("state_id", "статус", "ctlg_request_state", [][]int{{1, 3}}, "col-2").SetDefault("1"),
-			t.GetFldString("how_request_received", "как получен запрос", 0, [][]int{{2, 1}}),
-			t.GetFldDateTime("datetime_reciept", "дата и время получения запроса", [][]int{{2, 2}}),
-			t.GetFldString("description", "описание", 0, [][]int{{3, 1}}, "col-8"),
-			t.GetFldJsonbCompositionWithoutFld([][]int{{4, 1}}, "col-4", "comp-relation"),
-			t.GetFldRef("customer_id", "заказчик", "company", [][]int{{5, 1}}, "isShowLink", "isClearable"),
-			t.GetFldRef("system_id", "система", "system", [][]int{{5, 2}}, "isShowLink", "isClearable", "ext: {customer_id: item.customer_id}"),
-			// контрол с функциональными требованиями описан под doc.Init {{6, 1}}
-			// контрол с задачами описан под doc.Init {{6, 2}}
-			t.GetFldJsonbCompositionWithoutFld([][]int{{7, 1}}, "col-4", "comp-participant"),
-			t.GetFldJsonbCompositionWithoutFld([][]int{{8, 1}}, "", "comp-customerAgent", ":currentUser='currentUser'"),
-			t.GetFldString("result", "результат", 0, [][]int{{9, 1}}, "col-8"),
+			t.GetFldRef("state_id", "статус", "ctlg_request_state", [][]int{{1, 2}}, "col-4").SetDefault("1"),
+			t.GetFldString("description", "описание", 0, [][]int{{2, 1}}, "col-8"),
+			t.GetFldString("how_request_received", "как получен запрос", 0, [][]int{{3, 1}}),
+			t.GetFldDateTime("datetime_reciept", "дата и время получения запроса", [][]int{{3, 2}}),
+			t.GetFldJsonbCompositionWithoutFld([][]int{{4, 1}}, "col-4", "comp-specandtask"),
+			t.GetFldSimpleHtml([][]int{{5, 1}}, "", "<p>Специалисты</p>"),
+			// Задачи. Описан под doc.Init {{5, 2}}
+			t.GetFldJsonbCompositionWithoutFld([][]int{{6, 1}}, "col-4", "comp-customer"),
+			t.GetFldRef("customer_id", "заказчик", "company", [][]int{{7, 1}}, "isShowLink", "isClearable"),
+			t.GetFldJsonbCompositionWithoutFld([][]int{{7, 2}}, "", "comp-customerAgent", ":currentUser='currentUser'"),
+			t.GetFldJsonbCompositionWithoutFld([][]int{{8, 1}}, "col-4", "comp-relation"),
+			t.GetFldRef("system_id", "система", "system", [][]int{{9, 1}}, "isShowLink", "isClearable", "ext: {customer_id: item.customer_id}"),
+			// Функциональные требования. Описан под doc.Init {{9, 2}}
+			t.GetFldString("result", "результат", 0, [][]int{{10, 1}}, "col-8"),
+			t.GetFldInt("system_sequence", "последовательность в системе", [][]int{{11, 1}}),
 		},
 		Vue: t.DocVue{
 			RouteName:      name,
@@ -47,12 +49,16 @@ func GetDoc(project *t.ProjectType) t.DocType {
 		},
 		Templates:   map[string]*t.DocTemplate{
 			"sql_function_list.sql": {},
+			"sql_function_change_system_sequence.sql": {},
 		},
 		IsBaseTemplates: t.DocIsBaseTemplates{true, true},
 		Sql: t.DocSql{
 			IsSearchText:    true,
 			IsBeforeTrigger: true,
 			IsAfterTrigger:  true,
+			Methods: map[string]*t.DocSqlMethod{
+				"request_change_system_sequence": {Name: "request_change_system_sequence"},
+			},
 		},
 	}
 
@@ -60,8 +66,9 @@ func GetDoc(project *t.ProjectType) t.DocType {
 	doc.Sql.FillBaseMethods(doc.Name)
 
 	doc.AddVueComposition("docItem", "customerAgent")
-	doc.AddVueComposition("docItem", "participant")
 	doc.AddVueComposition("docItem", "relation")
+	doc.AddVueComposition("docItem", "specandtask")
+	doc.AddVueComposition("docItem", "customer")
 	//doc.AddVueComposition("docItem", "date")
 
 	doc.Vue.I18n = map[string]string{
@@ -83,7 +90,7 @@ func GetDoc(project *t.ProjectType) t.DocType {
 		TitleTemplate: `
                 <q-item-label>{{v.title}}</q-item-label>
             `, // шаблон для названия в списке (vue синтаксис)
-	}, [][]int{{6, 1}}, "col-4"))
+	}, [][]int{{9, 2}}, "col-4"))
 
 	doc.AddFld(t.GetFldVueCompositionRefList(&doc, t.VueCompRefListWidgetParams{
 		Label:      "задачи",                  // название списка, которе выводится на экране
@@ -97,7 +104,7 @@ func GetDoc(project *t.ProjectType) t.DocType {
 		TitleTemplate: `
                <q-item-label>{{v.title}}</q-item-label>
            `, // шаблон для названия в списке (vue синтаксис)
-	}, [][]int{{6, 2}}, "col-4").SetVif("currentUser.role?.includes(`admin`)"))
+	}, [][]int{{5, 2}}, "col-4").SetVif("currentUser.role?.includes(`admin`)"))
 
 	return doc
 }
