@@ -1,15 +1,16 @@
 
 export default {
- 		system_sequence: 'system sequence',
+ 		name: 'request',
+ 		name_plural: 'request',
  		name_plural_deleted: 'deleted request',
  		title: 'title',
+ 		files: 'files',
+ 		images: 'images',
+ 		datetime_reciept: 'datetime reciept',
  		state_id: 'state ',
  		description: 'description',
  		how_request_received: 'how request received',
- 		result: 'result',
- 		name: 'request',
- 		name_plural: 'request',
- 		datetime_reciept: 'datetime reciept',
  		customer_id: 'customer ',
  		system_id: 'system ',
+ 		result: 'result',
 }

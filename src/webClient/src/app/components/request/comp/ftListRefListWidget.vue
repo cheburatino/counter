@@ -1,11 +1,11 @@
 <template>
     <div>
         <q-bar class="bg-secondary text-white shadow-2">
-            <div>Функциональные требования <span v-if="deleted">удаленные</span></div>
+            <div>функциональные требования <span v-if="deleted">удаленные</span></div>
             <q-space />
             <q-btn icon="add" v-if="!readonly" round flat @click="add"><q-tooltip>Добавить</q-tooltip></q-btn>
-            <q-btn v-if="deleted && !readonly" icon="delete" round flat @click="reload(false)"><q-tooltip>активные Функциональные требования</q-tooltip></q-btn>
-            <q-btn v-if="!deleted && !readonly" icon="delete_outline" round flat @click="reload(true)"><q-tooltip>удаленные Функциональные требования</q-tooltip></q-btn>
+            <q-btn v-if="deleted && !readonly" icon="delete" round flat @click="reload(false)"><q-tooltip>активные функциональные требования</q-tooltip></q-btn>
+            <q-btn v-if="!deleted && !readonly" icon="delete_outline" round flat @click="reload(true)"><q-tooltip>удаленные функциональные требования</q-tooltip></q-btn>
         </q-bar>
 
         <q-list bordered separator>

@@ -51,7 +51,6 @@ BEGIN
     
     
     
-    
 
     if (params ->> 'id')::int = -1 then
         -- проверика наличия обязательных параметров
@@ -62,7 +61,7 @@ BEGIN
         END IF;
         
 
-        EXECUTE ('INSERT INTO task (title, type_id, state_id, description, files, images, customer_id, request_id, system_id, digital_solution_id, functional_requirement_id, bug_id, plan_start_date, fact_start_date, plan_end_date, fact_end_date, result, options) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18)  RETURNING *;')
+        EXECUTE ('INSERT INTO task (title, type_id, state_id, description, files, images, customer_id, request_id, system_id, digital_solution_id, functional_requirement_id, bug_id, plan_start_date, plan_end_date, result, options) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16)  RETURNING *;')
 		INTO taskRow
 		USING
 			(params ->> 'title')::text,
@@ -78,9 +77,7 @@ BEGIN
 			(params ->> 'functional_requirement_id')::int,
 			(params ->> 'bug_id')::int,
 			(params ->> 'plan_start_date')::timestamp,
-			(params ->> 'fact_start_date')::timestamp,
 			(params ->> 'plan_end_date')::timestamp,
-			(params ->> 'fact_end_date')::timestamp,
 			(params ->> 'result')::text,
 			coalesce(params -> 'options', '{}')::jsonb;
 
@@ -101,9 +98,7 @@ BEGIN
 			['functional_requirement_id', 'functional_requirement_id', 'number'],
 			['bug_id', 'bug_id', 'number'],
 			['plan_start_date', 'plan_start_date', 'timestamp'],
-			['fact_start_date', 'fact_start_date', 'timestamp'],
 			['plan_end_date', 'plan_end_date', 'timestamp'],
-			['fact_end_date', 'fact_end_date', 'timestamp'],
 			['result', 'result', 'text'],
             ['options', 'options', 'jsonb'],
             ['deleted', 'deleted', 'bool']

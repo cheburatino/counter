@@ -32,6 +32,15 @@
       
       <div class="row q-col-gutter-md q-mb-sm">
       <div class="col-md-4 col-sm-6 col-xs-12">
+          <comp-fld-files v-if="this.id != 'new'" fldName='files' :label="$t('digital_solution.files')" :fld='item.files' :ext = '{tableName: "digital_solution", tableId: this.id}' @update="v=> item.files = v" :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
+      </div>
+      <div class="col-md-4 col-sm-6 col-xs-12">
+          <comp-fld-img-list v-if="this.id != 'new'" :label="$t('digital_solution.images')" :fld='item.images' :ext = '{tableName: "digital_solution", tableId: this.id, fldName: "images"}' @update="v=> item.images = v" :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
+      </div>
+      </div>
+      
+      <div class="row q-col-gutter-md q-mb-sm">
+      <div class="col-md-4 col-sm-6 col-xs-12">
           <comp-executor :item='item' />
       </div>
       </div>
@@ -94,11 +103,14 @@
       </div>
       
       <div class="row q-col-gutter-md q-mb-sm">
-      <div class="col-md-4 col-sm-6 col-xs-12">
-          <comp-fld-date outlined :label="$t('digital_solution.date_plan_start_modeling')" :date-string="$utils.formatPgDate(item.date_plan_start_modeling)" @update="v=> item.date_plan_start_modeling = v" :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
+      <div class="col-3">
+          <comp-fld-date outlined :label="$t('digital_solution.date_plan_start_modeling')" :date-string="$utils.formatPgDate(item.date_plan_start_modeling)" @update="v=> item.date_plan_start_modeling = v" :readonly='false'  class='q-mb-sm col-3' />
       </div>
-      <div class="col-md-4 col-sm-6 col-xs-12">
-          <comp-fld-date outlined :label="$t('digital_solution.date_fact_start_modeling')" :date-string="$utils.formatPgDate(item.date_fact_start_modeling)" @update="v=> item.date_fact_start_modeling = v" :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
+      <div class="col-3">
+          <comp-fld-date outlined :label="$t('digital_solution.date_plan_end_modeling')" :date-string="$utils.formatPgDate(item.date_plan_end_modeling)" @update="v=> item.date_plan_end_modeling = v" :readonly='false'  class='q-mb-sm col-3' />
+      </div>
+      <div class="col-md-2 col-sm-3 col-xs-6">
+          <p>История моделирования</p>
       </div>
       </div>
       
@@ -110,34 +122,25 @@
       
       <div class="row q-col-gutter-md q-mb-sm">
       <div class="col-md-4 col-sm-6 col-xs-12">
-          <comp-fld-date outlined :label="$t('digital_solution.date_plan_end_modeling')" :date-string="$utils.formatPgDate(item.date_plan_end_modeling)" @update="v=> item.date_plan_end_modeling = v" :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
-      </div>
-      <div class="col-md-4 col-sm-6 col-xs-12">
-          <comp-fld-date outlined :label="$t('digital_solution.date_fact_end_modeling')" :date-string="$utils.formatPgDate(item.date_fact_end_modeling)" @update="v=> item.date_fact_end_modeling = v" :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
-      </div>
-      </div>
-      
-      <div class="row q-col-gutter-md q-mb-sm">
-      <div class="col-md-4 col-sm-6 col-xs-12">
           <comp-realization :item='item' />
       </div>
       </div>
       
       <div class="row q-col-gutter-md q-mb-sm">
-      <div class="col-md-4 col-sm-6 col-xs-12">
-          <comp-fld-date outlined :label="$t('digital_solution.date_plan_start_realization')" :date-string="$utils.formatPgDate(item.date_plan_start_realization)" @update="v=> item.date_plan_start_realization = v" :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
+      <div class="col-3">
+          <comp-fld-date outlined :label="$t('digital_solution.date_plan_start_realization')" :date-string="$utils.formatPgDate(item.date_plan_start_realization)" @update="v=> item.date_plan_start_realization = v" :readonly='false'  class='q-mb-sm col-3' />
       </div>
-      <div class="col-md-4 col-sm-6 col-xs-12">
-          <comp-fld-date outlined :label="$t('digital_solution.date_fact_start_realization')" :date-string="$utils.formatPgDate(item.date_fact_start_realization)" @update="v=> item.date_fact_start_realization = v" :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
+      <div class="col-3">
+          <comp-fld-date outlined :label="$t('digital_solution.date_plan_end_realization')" :date-string="$utils.formatPgDate(item.date_plan_end_realization)" @update="v=> item.date_plan_end_realization = v" :readonly='false'  class='q-mb-sm col-3' />
+      </div>
+      <div class="col-md-2 col-sm-3 col-xs-6">
+          <p>История реализации</p>
       </div>
       </div>
       
       <div class="row q-col-gutter-md q-mb-sm">
       <div class="col-md-4 col-sm-6 col-xs-12">
-          <comp-fld-date outlined :label="$t('digital_solution.date_plan_end_realization')" :date-string="$utils.formatPgDate(item.date_plan_end_realization)" @update="v=> item.date_plan_end_realization = v" :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
-      </div>
-      <div class="col-md-4 col-sm-6 col-xs-12">
-          <comp-fld-date outlined :label="$t('digital_solution.date_fact_end_realization')" :date-string="$utils.formatPgDate(item.date_fact_end_realization)" @update="v=> item.date_fact_end_realization = v" :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
+          <comp-result :item='item' />
       </div>
       </div>
       
@@ -167,21 +170,22 @@
 </template>
 
 <script>
+	import compSpecialist from './comp/specialist.vue'
 	import compCustomerAgent from './comp/customerAgent.vue'
+	import compModeling from './comp/modeling.vue'
+	import compResult from './comp/result.vue'
 	import customerTaskListRefListWidget from './comp/customerTaskListRefListWidget.vue'
+	import bugListRefListWidget from './comp/bugListRefListWidget.vue'
 	import compExecutor from './comp/executor.vue'
 	import compCustomer from './comp/customer.vue'
 	import compRelation from './comp/relation.vue'
-	import compModeling from './comp/modeling.vue'
 	import compRealization from './comp/realization.vue'
-	import compSpecialist from './comp/specialist.vue'
 	import taskListRefListWidget from './comp/taskListRefListWidget.vue'
 	import ftListRefListWidget from './comp/ftListRefListWidget.vue'
-	import bugListRefListWidget from './comp/bugListRefListWidget.vue'
     import currentUserMixin from '../../../app/mixins/currentUser'
     export default {
         props: ['id', 'isOpenInDialog'],
-        components: {compCustomerAgent, customerTaskListRefListWidget, compExecutor, compCustomer, compRelation, compModeling, compRealization, compSpecialist, taskListRefListWidget, ftListRefListWidget, bugListRefListWidget},
+        components: {compRelation, compRealization, taskListRefListWidget, ftListRefListWidget, compExecutor, compCustomer, compModeling, compResult, customerTaskListRefListWidget, bugListRefListWidget, compSpecialist, compCustomerAgent},
         mixins: [currentUserMixin,],
         computed: {
             docUrl: function() {
@@ -195,17 +199,15 @@
                         {name: 'title', label: 'название',  required: true},
                         {name: 'state_id', label: 'статус'},
                         {name: 'description', label: 'описание'},
+                        {name: 'files', label: 'файлы'},
+                        {name: 'images', label: 'изображения'},
                         {name: 'customer_id', label: 'заказчик'},
                         {name: 'system_id', label: 'система'},
                         {name: 'date_plan_start_modeling', label: 'планируемая дата начала моделирования'},
-                        {name: 'date_fact_start_modeling', label: 'фактическая дата начала моделирования'},
-                        {name: 'model', label: 'описание модели'},
                         {name: 'date_plan_end_modeling', label: 'планируемая дата завершения моделирования'},
-                        {name: 'date_fact_end_modeling', label: 'фактическая дата завершения моделирования'},
+                        {name: 'model', label: 'описание модели'},
                         {name: 'date_plan_start_realization', label: 'планируемая дата начала реализации'},
-                        {name: 'date_fact_start_realization', label: 'фактическая дата начала реализации'},
                         {name: 'date_plan_end_realization', label: 'планируемая дата завершения реализации'},
-                        {name: 'date_fact_end_realization', label: 'фактическая дата завершения реализации'},
                         {name: 'result', label: 'результат'},
                 ],
                 optionsFlds: [],

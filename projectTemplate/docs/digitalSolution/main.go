@@ -25,28 +25,29 @@ func GetDoc(project *t.ProjectType) t.DocType {
 			t.GetFldSimpleHtml([][]int{{2, 1}}, "", "<p>Дата и время создания: {{item.created_at}}</p>"),
 			t.GetFldSimpleHtml([][]int{{2, 2}}, "", "<p>Дата и время изменения: {{item.updated_at}}</p>"),
 			t.GetFldString("description", "описание", 0, [][]int{{3, 1}}, "col-8"),
-			t.GetFldJsonbCompositionWithoutFld([][]int{{4, 1}}, "col-4", "comp-executor"),
-			t.GetFldJsonbCompositionWithoutFld([][]int{{5, 1}}, "", "comp-specialist", ":currentUser='currentUser'"),
-			// Задачи. Контрол описан после doc.Init {{5, 2}}
-			t.GetFldJsonbCompositionWithoutFld([][]int{{6, 1}}, "col-4", "comp-customer"),
-			t.GetFldRef("customer_id", "заказчик", "company", [][]int{{7, 1}}, "isShowLink", "isClearable"),
-			t.GetFldJsonbCompositionWithoutFld([][]int{{8, 1}}, "", "comp-customerAgent", ":currentUser='currentUser'"),
-			// Задачи заказчика. Контрол описан после doc.Init {{8, 2}}
-			t.GetFldJsonbCompositionWithoutFld([][]int{{9, 1}}, "col-4", "comp-relation"),
-			t.GetFldRef("system_id", "система", "system", [][]int{{10, 1}}, "isShowLink", "isClearable", "ext: {customer_id: item.customer_id}"),
-			// Функциональные требования. Контрол описан после oc.Init {{11, 1}}
-			// Баги. Контрол описан после oc.Init {{11, 2}}
-			t.GetFldJsonbCompositionWithoutFld([][]int{{12, 1}}, "col-4", "comp-modeling"),
-			t.GetFldDate("date_plan_start_modeling", "планируемая дата начала моделирования", [][]int{{13, 1}}, "col-4"),
-			t.GetFldDate("date_fact_start_modeling", "фактическая дата начала моделирования", [][]int{{13, 2}}, "col-4"),
-			t.GetFldString("model", "описание модели", 0, [][]int{{14, 1}}, "col-8"),
-			t.GetFldDate("date_plan_end_modeling", "планируемая дата завершения моделирования", [][]int{{15, 1}}, "col-4"),
-			t.GetFldDate("date_fact_end_modeling", "фактическая дата завершения моделирования", [][]int{{15, 2}}, "col-4"),
+			t.GetFldFiles("files", "файлы", [][]int{{4, 1}}, t.FldVueFilesParams{}),
+			t.GetFldImgList("images", "изображения", [][]int{{4, 2}}, t.FldVueImgParams{}),
+			t.GetFldJsonbCompositionWithoutFld([][]int{{5, 1}}, "col-4", "comp-executor"),
+			t.GetFldJsonbCompositionWithoutFld([][]int{{6, 1}}, "", "comp-specialist", ":currentUser='currentUser'"),
+			// Задачи. Контрол описан после doc.Init {{6, 2}}
+			t.GetFldJsonbCompositionWithoutFld([][]int{{7, 1}}, "col-4", "comp-customer"),
+			t.GetFldRef("customer_id", "заказчик", "company", [][]int{{8, 1}}, "isShowLink", "isClearable"),
+			t.GetFldJsonbCompositionWithoutFld([][]int{{9, 1}}, "", "comp-customerAgent", ":currentUser='currentUser'"),
+			// Задачи заказчика. Контрол описан после doc.Init {{9, 2}}
+			t.GetFldJsonbCompositionWithoutFld([][]int{{10, 1}}, "col-4", "comp-relation"),
+			t.GetFldRef("system_id", "система", "system", [][]int{{11, 1}}, "isShowLink", "isClearable", "ext: {customer_id: item.customer_id}"),
+			// Функциональные требования. Контрол описан после oc.Init {{12, 1}}
+			// Баги. Контрол описан после oc.Init {{12, 2}}
+			t.GetFldJsonbCompositionWithoutFld([][]int{{13, 1}}, "col-4", "comp-modeling"),
+			t.GetFldDate("date_plan_start_modeling", "планируемая дата начала моделирования", [][]int{{14, 1}}, "col-3"),
+			t.GetFldDate("date_plan_end_modeling", "планируемая дата завершения моделирования", [][]int{{14, 2}}, "col-3"),
+			t.GetFldSimpleHtml([][]int{{14, 3}}, "col-2", "<p>История моделирования</p>"),
+			t.GetFldString("model", "описание модели", 0, [][]int{{15, 1}}, "col-8"),
 			t.GetFldJsonbCompositionWithoutFld([][]int{{16, 1}}, "col-4", "comp-realization"),
-			t.GetFldDate("date_plan_start_realization", "планируемая дата начала реализации", [][]int{{17, 1}}, "col-4"),
-			t.GetFldDate("date_fact_start_realization", "фактическая дата начала реализации", [][]int{{17, 2}}, "col-4"),
-			t.GetFldDate("date_plan_end_realization", "планируемая дата завершения реализации", [][]int{{18, 1}}, "col-4"),
-			t.GetFldDate("date_fact_end_realization", "фактическая дата завершения реализации", [][]int{{18, 2}}, "col-4"),
+			t.GetFldDate("date_plan_start_realization", "планируемая дата начала реализации", [][]int{{17, 1}}, "col-3"),
+			t.GetFldDate("date_plan_end_realization", "планируемая дата завершения реализации", [][]int{{17, 2}}, "col-3"),
+			t.GetFldSimpleHtml([][]int{{17, 3}}, "col-2", "<p>История реализации</p>"),
+			t.GetFldJsonbCompositionWithoutFld([][]int{{18, 1}}, "col-4", "comp-result"),
 			t.GetFldString("result", "результат", 0, [][]int{{19, 1}}, "col-8"),
 		},
 		Vue: t.DocVue{
@@ -78,10 +79,11 @@ func GetDoc(project *t.ProjectType) t.DocType {
 	doc.AddVueComposition("docItem", "executor")
 	doc.AddVueComposition("docItem", "customer")
 	doc.AddVueComposition("docItem", "relation")
-	doc.AddVueComposition("docItem", "modeling")
-	doc.AddVueComposition("docItem", "realization")
 	doc.AddVueComposition("docItem", "specialist")
 	doc.AddVueComposition("docItem", "customerAgent")
+	doc.AddVueComposition("docItem", "modeling")
+	doc.AddVueComposition("docItem", "realization")
+	doc.AddVueComposition("docItem", "result")
 
 	doc.Vue.I18n = map[string]string{
 		"listTitle":        utils.UpperCaseFirst(name_ru_plural),
@@ -115,7 +117,7 @@ func GetDoc(project *t.ProjectType) t.DocType {
                 <q-item-label>{{v.title}}</q-item-label>
                 <q-item-label caption><q-badge color="orange">{{v.options.title.state_title}}</q-badge></q-item-label>
             `, // шаблон для названия в списке (vue синтаксис)
-	}, [][]int{{5, 2}}, "col-4"))
+	}, [][]int{{6, 2}}, "col-4"))
 
 	doc.AddFld(t.GetFldVueCompositionRefList(&doc, t.VueCompRefListWidgetParams{
 		Label:      "задачи заказчика",        // название списка, которе выводится на экране
@@ -130,7 +132,7 @@ func GetDoc(project *t.ProjectType) t.DocType {
                 <q-item-label>{{v.title}}</q-item-label>
                 <q-item-label caption><q-badge color="orange">{{v.options.title.state_title}}</q-badge></q-item-label>
             `, // шаблон для названия в списке (vue синтаксис)
-	}, [][]int{{8, 2}}, "col-4"))
+	}, [][]int{{9, 2}}, "col-4"))
 
 	doc.AddFld(t.GetFldVueCompositionRefList(&doc, t.VueCompRefListWidgetParams{
 		Label:      "Функциональные требования",        // название списка, которе выводится на экране
@@ -145,7 +147,7 @@ func GetDoc(project *t.ProjectType) t.DocType {
                 <q-item-label>{{v.title}}</q-item-label>
 				<q-item-label caption><q-badge color="orange">{{v.options.title.state_title}}</q-badge></q-item-label>
             `, // шаблон для названия в списке (vue синтаксис)
-	}, [][]int{{11, 1}}, "col-4"))
+	}, [][]int{{12, 1}}, "col-4"))
 
 	doc.AddFld(t.GetFldVueCompositionRefList(&doc, t.VueCompRefListWidgetParams{
 		Label:      "баги",                      // название списка, которе выводится на экране
@@ -160,7 +162,7 @@ func GetDoc(project *t.ProjectType) t.DocType {
                <q-item-label>{{v.title}}</q-item-label>
                <q-item-label caption><q-badge color="orange">{{v.options.title.state_title}}</q-badge></q-item-label>
            `, // шаблон для названия в списке (vue синтаксис)
-	}, [][]int{{11, 2}}, "col-4"))
+	}, [][]int{{12, 2}}, "col-4"))
 
 	return doc
 }

@@ -1,14 +1,16 @@
 
 export default {
- 		name: 'functional requirement',
  		name_plural_deleted: 'deleted functional requirement',
  		title: 'title',
- 		description: 'description',
- 		customer_id: 'customer ',
- 		result: 'result',
- 		name_plural: 'functional requirement',
  		state_id: 'state ',
+ 		description: 'description',
  		request_id: 'request ',
+ 		name: 'functional requirement',
+ 		name_plural: 'functional requirement',
+ 		files: 'files',
+ 		images: 'images',
+ 		customer_id: 'customer ',
  		system_id: 'system ',
  		digital_solution_id: 'digital solution ',
+ 		result: 'result',
 }

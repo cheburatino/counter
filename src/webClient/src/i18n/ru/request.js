@@ -1,15 +1,16 @@
 
 export default {
- 		system_id: 'система',
- 		name_plural: 'Запросы',
- 		name_plural_deleted: 'удаленные Запросы',
+ 		files: 'файлы',
+ 		images: 'изображения',
  		how_request_received: 'как получен запрос',
- 		customer_id: 'заказчик',
  		datetime_reciept: 'дата и время получения запроса',
- 		result: 'результат',
- 		system_sequence: 'последовательность в системе',
- 		name: 'запрос',
+ 		customer_id: 'заказчик',
+ 		name_plural_deleted: 'удаленные Запросы',
  		title: 'название',
  		state_id: 'статус',
+ 		system_id: 'система',
+ 		result: 'результат',
+ 		name: 'запрос',
+ 		name_plural: 'Запросы',
  		description: 'описание',
 }

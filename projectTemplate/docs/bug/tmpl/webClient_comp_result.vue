@@ -7,7 +7,7 @@
                                 width: 203%;
                                 color: #4f6ccd;
                                 font-weight: 600;">
-    Специалисты и задачи:
+    Итоги:
   </div>
 </template>
 

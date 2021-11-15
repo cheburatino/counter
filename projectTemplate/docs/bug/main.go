@@ -22,19 +22,24 @@ func GetDoc(project *t.ProjectType) t.DocType {
 		Flds: []t.FldType{
 			t.GetFldTitle().SetReadonly("currentUser.role?.includes(`customer`) && item.state_id != 1"),
 			t.GetFldRef("state_id", "статус", "ctlg_bug_state", [][]int{{1, 2}}).SetReadonly("currentUser.role?.includes(`customer`)"),
-			t.GetFldString("description", "описание", 0, [][]int{{2, 1}}, "col-8").SetReadonly("currentUser.role?.includes(`customer`) && item.state_id != 1"),
-			t.GetFldJsonbCompositionWithoutFld([][]int{{3, 1}}, "col-4", "comp-executor"),
-			t.GetFldSimpleHtml([][]int{{4, 1}}, "", "<p>Специалисты</p>"),
-			// Задачи. Контрол описан после doc.Init {{4, 2}}
-			t.GetFldJsonbCompositionWithoutFld([][]int{{5, 1}}, "col-4", "comp-customer"),
-			t.GetFldRef("customer_id", "заказчик", "company", [][]int{{6, 1}}, "isShowLink", "isClearable").SetReadonly("currentUser.role?.includes(`customer`)"),
-			t.GetFldJsonbCompositionWithoutFld([][]int{{7, 1}}, "", "comp-customerAgent", ":currentUser='currentUser'"),
-			// Задачи заказчика. Контрол описан после doc.Init {{7, 2}}
-			t.GetFldJsonbCompositionWithoutFld([][]int{{8, 1}}, "col-4", "comp-relation"),
-			t.GetFldRef("system_id", "система", "system", [][]int{{9, 1}}, "isShowLink", "isClearable").SetReadonly("currentUser.role?.includes(`customer`)"),
-			t.GetFldRef("digital_solution_id", "цифровое решение", "digital_solution", [][]int{{10, 1}}, "isShowLink", "isClearable").SetReadonly("currentUser.role?.includes(`customer`)"),
-			t.GetFldRef("functional_requirement_id", "функциональное требование", "functional_requirement", [][]int{{10, 2}}, "isShowLink", "isClearable").SetReadonly("currentUser.role?.includes(`customer`)"),
-			t.GetFldString("result", "результат", 0, [][]int{{11, 1}}, "col-8").SetReadonly("currentUser.role?.includes(`customer`)"),
+			t.GetFldSimpleHtml([][]int{{2, 1}}, "", "<p>Дата и время создания: {{item.created_at}}</p>"),
+			t.GetFldSimpleHtml([][]int{{2, 2}}, "", "<p>Дата и время изменения: {{item.updated_at}}</p>"),
+			t.GetFldString("description", "описание", 0, [][]int{{3, 1}}, "col-8").SetReadonly("currentUser.role?.includes(`customer`) && item.state_id != 1"),
+			t.GetFldFiles("files", "файлы", [][]int{{4, 1}}, t.FldVueFilesParams{}),
+			t.GetFldImgList("images", "изображения", [][]int{{4, 2}}, t.FldVueImgParams{}),
+			t.GetFldJsonbCompositionWithoutFld([][]int{{5, 1}}, "col-4", "comp-executor"),
+			t.GetFldSimpleHtml([][]int{{6, 1}}, "", "<p>Специалисты</p>"),
+			// Задачи. Контрол описан после doc.Init {{6, 2}}
+			t.GetFldJsonbCompositionWithoutFld([][]int{{7, 1}}, "col-4", "comp-customer"),
+			t.GetFldRef("customer_id", "заказчик", "company", [][]int{{8, 1}}, "isShowLink", "isClearable").SetReadonly("currentUser.role?.includes(`customer`)"),
+			t.GetFldJsonbCompositionWithoutFld([][]int{{9, 1}}, "", "comp-customerAgent", ":currentUser='currentUser'"),
+			// Задачи заказчика. Контрол описан после doc.Init {{9, 2}}
+			t.GetFldJsonbCompositionWithoutFld([][]int{{10, 1}}, "col-4", "comp-relation"),
+			t.GetFldRef("system_id", "система", "system", [][]int{{11, 1}}, "isShowLink", "isClearable").SetReadonly("currentUser.role?.includes(`customer`)"),
+			t.GetFldRef("digital_solution_id", "цифровое решение", "digital_solution", [][]int{{12, 1}}, "isShowLink", "isClearable").SetReadonly("currentUser.role?.includes(`customer`)"),
+			t.GetFldRef("functional_requirement_id", "функциональное требование", "functional_requirement", [][]int{{12, 2}}, "isShowLink", "isClearable").SetReadonly("currentUser.role?.includes(`customer`)"),
+			t.GetFldJsonbCompositionWithoutFld([][]int{{13, 1}}, "col-4", "comp-result"),
+			t.GetFldString("result", "результат", 0, [][]int{{14, 1}}, "col-8").SetReadonly("currentUser.role?.includes(`customer`)"),
 		},
 		Vue: t.DocVue{
 			RouteName:      name,
@@ -60,6 +65,7 @@ func GetDoc(project *t.ProjectType) t.DocType {
 	doc.AddVueComposition("docItem", "customer")
 	doc.AddVueComposition("docItem", "customerAgent")
 	doc.AddVueComposition("docItem", "relation")
+	doc.AddVueComposition("docItem", "result")
 
 	doc.Vue.I18n = map[string]string{
 		"listTitle":        utils.UpperCaseFirst(name_ru_plural),
@@ -82,7 +88,7 @@ func GetDoc(project *t.ProjectType) t.DocType {
                 <q-item-label>{{v.title}}</q-item-label>
                 <q-item-label caption><q-badge color="orange">{{v.options.title.state_title}}</q-badge></q-item-label>
             `, // шаблон для названия в списке (vue синтаксис)
-	}, [][]int{{4, 2}}, "col-4"))
+	}, [][]int{{6, 2}}, "col-4"))
 
 	doc.AddFld(t.GetFldVueCompositionRefList(&doc, t.VueCompRefListWidgetParams{
 		Label:      "задачи заказчика",        // название списка, которе выводится на экране
@@ -97,7 +103,7 @@ func GetDoc(project *t.ProjectType) t.DocType {
                 <q-item-label>{{v.title}}</q-item-label>
                 <q-item-label caption><q-badge color="orange">{{v.options.title.state_title}}</q-badge></q-item-label>
             `, // шаблон для названия в списке (vue синтаксис)
-	}, [][]int{{7, 2}}, "col-4"))
+	}, [][]int{{9, 2}}, "col-4"))
 
 	return doc
 }

@@ -16,8 +16,26 @@
       </div>
       
       <div class="row q-col-gutter-md q-mb-sm">
+      <div class="col-md-4 col-sm-6 col-xs-12">
+          <p>Дата и время создания: {{item.created_at}}</p>
+      </div>
+      <div class="col-md-4 col-sm-6 col-xs-12">
+          <p>Дата и время изменения: {{item.updated_at}}</p>
+      </div>
+      </div>
+      
+      <div class="row q-col-gutter-md q-mb-sm">
       <div class="col-md-8 col-sm-12 col-xs-12">
           <q-input outlined type='text' v-model="item.description" :label="$t('bug.description')" autogrow :readonly='currentUser.role?.includes(`customer`) && item.state_id != 1'  class='q-mb-sm col-md-8 col-sm-12 col-xs-12' />
+      </div>
+      </div>
+      
+      <div class="row q-col-gutter-md q-mb-sm">
+      <div class="col-md-4 col-sm-6 col-xs-12">
+          <comp-fld-files v-if="this.id != 'new'" fldName='files' :label="$t('bug.files')" :fld='item.files' :ext = '{tableName: "bug", tableId: this.id}' @update="v=> item.files = v" :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
+      </div>
+      <div class="col-md-4 col-sm-6 col-xs-12">
+          <comp-fld-img-list v-if="this.id != 'new'" :label="$t('bug.images')" :fld='item.images' :ext = '{tableName: "bug", tableId: this.id, fldName: "images"}' @update="v=> item.images = v" :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
       </div>
       </div>
       
@@ -79,6 +97,12 @@
       </div>
       
       <div class="row q-col-gutter-md q-mb-sm">
+      <div class="col-md-4 col-sm-6 col-xs-12">
+          <comp-result :item='item' />
+      </div>
+      </div>
+      
+      <div class="row q-col-gutter-md q-mb-sm">
       <div class="col-md-8 col-sm-12 col-xs-12">
           <q-input outlined type='text' v-model="item.result" :label="$t('bug.result')" autogrow :readonly='currentUser.role?.includes(`customer`)'  class='q-mb-sm col-md-8 col-sm-12 col-xs-12' />
       </div>
@@ -97,16 +121,17 @@
 </template>
 
 <script>
-	import taskListRefListWidget from './comp/taskListRefListWidget.vue'
-	import customerTaskListRefListWidget from './comp/customerTaskListRefListWidget.vue'
-	import compExecutor from './comp/executor.vue'
 	import compCustomer from './comp/customer.vue'
 	import compCustomerAgent from './comp/customerAgent.vue'
 	import compRelation from './comp/relation.vue'
+	import compResult from './comp/result.vue'
+	import taskListRefListWidget from './comp/taskListRefListWidget.vue'
+	import customerTaskListRefListWidget from './comp/customerTaskListRefListWidget.vue'
+	import compExecutor from './comp/executor.vue'
     import currentUserMixin from '../../../app/mixins/currentUser'
     export default {
         props: ['id', 'isOpenInDialog'],
-        components: {compExecutor, compCustomer, compCustomerAgent, compRelation, taskListRefListWidget, customerTaskListRefListWidget},
+        components: {compExecutor, compCustomer, compCustomerAgent, compRelation, compResult, taskListRefListWidget, customerTaskListRefListWidget},
         mixins: [currentUserMixin,],
         computed: {
             docUrl: function() {
@@ -120,6 +145,8 @@
                         {name: 'title', label: 'название',  required: true},
                         {name: 'state_id', label: 'статус'},
                         {name: 'description', label: 'описание'},
+                        {name: 'files', label: 'файлы'},
+                        {name: 'images', label: 'изображения'},
                         {name: 'customer_id', label: 'заказчик'},
                         {name: 'system_id', label: 'система'},
                         {name: 'digital_solution_id', label: 'цифровое решение'},

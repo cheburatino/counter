@@ -7,7 +7,7 @@
                                 width: 203%;
                                 color: #4f6ccd;
                                 font-weight: 600;">
-    Участники:
+    Исполнитель:
   </div>
 </template>
 

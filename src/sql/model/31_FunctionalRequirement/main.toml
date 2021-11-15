@@ -8,6 +8,8 @@ fields = [
 	{name="title",					type="char",	size=150, 	ext="not null",	 comment="название"},
 	{name="state_id",					type="int", 	ext=" default 1",	 comment="статус"},
 	{name="description",					type="text",	 comment="описание"},
+	{name="files",					type="jsonb",	 comment="файлы"},
+	{name="images",					type="jsonb",	 comment="изображения"},
 	{name="customer_id",					type="int",	 comment="заказчик"},
 	{name="request_id",					type="int",	 comment="запрос"},
 	{name="system_id",					type="int",	 comment="система"},
@@ -38,9 +40,9 @@ triggers = [
 
 
 methods = [
+	"functional_requirement_list",
 	"functional_requirement_update",
 	"functional_requirement_get_by_id",
-	"functional_requirement_list",
 	"functional_requirement_trigger_before",
 	"functional_requirement_trigger_after"
 ]
@@ -49,6 +51,8 @@ alterScripts = [
 	"alter table functional_requirement add column if not exists title CHARACTER VARYING(150);",
 	"alter table functional_requirement add column if not exists state_id int;",
 	"alter table functional_requirement add column if not exists description text;",
+	"alter table functional_requirement add column if not exists files jsonb;",
+	"alter table functional_requirement add column if not exists images jsonb;",
 	"alter table functional_requirement add column if not exists customer_id int;",
 	"alter table functional_requirement add column if not exists request_id int;",
 	"alter table functional_requirement add column if not exists system_id int;",

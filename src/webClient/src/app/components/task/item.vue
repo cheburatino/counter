@@ -106,20 +106,11 @@
       </div>
       
       <div class="row q-col-gutter-md q-mb-sm">
-      <div class="col-md-4 col-sm-6 col-xs-12">
-          <comp-fld-date outlined :label="$t('task.plan_start_date')" :date-string="$utils.formatPgDate(item.plan_start_date)" @update="v=> item.plan_start_date = v" :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
+      <div class="col-3">
+          <comp-fld-date outlined :label="$t('task.plan_start_date')" :date-string="$utils.formatPgDate(item.plan_start_date)" @update="v=> item.plan_start_date = v" :readonly='false'  class='q-mb-sm col-3' />
       </div>
-      <div class="col-md-4 col-sm-6 col-xs-12">
-          <comp-fld-date outlined :label="$t('task.fact_start_date')" :date-string="$utils.formatPgDate(item.fact_start_date)" @update="v=> item.fact_start_date = v" :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
-      </div>
-      </div>
-      
-      <div class="row q-col-gutter-md q-mb-sm">
-      <div class="col-md-4 col-sm-6 col-xs-12">
-          <comp-fld-date outlined :label="$t('task.plan_end_date')" :date-string="$utils.formatPgDate(item.plan_end_date)" @update="v=> item.plan_end_date = v" :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
-      </div>
-      <div class="col-md-4 col-sm-6 col-xs-12">
-          <comp-fld-date outlined :label="$t('task.fact_end_date')" :date-string="$utils.formatPgDate(item.fact_end_date)" @update="v=> item.fact_end_date = v" :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
+      <div class="col-3">
+          <comp-fld-date outlined :label="$t('task.plan_end_date')" :date-string="$utils.formatPgDate(item.plan_end_date)" @update="v=> item.plan_end_date = v" :readonly='false'  class='q-mb-sm col-3' />
       </div>
       </div>
       
@@ -132,6 +123,18 @@
       <div class="row q-col-gutter-md q-mb-sm">
       <div class="col-md-8 col-sm-12 col-xs-12">
           <q-input outlined type='text' v-model="item.result" :label="$t('task.result')" autogrow :readonly='false'  class='q-mb-sm col-md-8 col-sm-12 col-xs-12' />
+      </div>
+      </div>
+      
+      <div class="row q-col-gutter-md q-mb-sm">
+      <div class="col-md-2 col-sm-3 col-xs-6">
+          not found vueFldTemplate for type ``
+      </div>
+      <div class="col-md-2 col-sm-3 col-xs-6">
+          not found vueFldTemplate for type ``
+      </div>
+      <div class="col-md-2 col-sm-3 col-xs-6">
+          <p>История</p>
       </div>
       </div>
       
@@ -155,17 +158,17 @@
 </template>
 
 <script>
+	import compResult from './comp/result.vue'
+	import compExecutor from './comp/executor.vue'
 	import compSpecialist from './comp/specialist.vue'
 	import compWork from './comp/work.vue'
 	import compCustomer from './comp/customer.vue'
 	import compRelation from './comp/relation.vue'
 	import compDate from './comp/date.vue'
-	import compResult from './comp/result.vue'
-	import compExecutor from './comp/executor.vue'
     import currentUserMixin from '../../../app/mixins/currentUser'
     export default {
         props: ['id', 'isOpenInDialog'],
-        components: {compExecutor, compSpecialist, compWork, compCustomer, compRelation, compDate, compResult},
+        components: {compRelation, compDate, compResult, compExecutor, compSpecialist, compWork, compCustomer},
         mixins: [currentUserMixin,],
         computed: {
             docUrl: function() {
@@ -189,9 +192,7 @@
                         {name: 'functional_requirement_id', label: 'функциональное требование'},
                         {name: 'bug_id', label: 'баг'},
                         {name: 'plan_start_date', label: 'плановая дата начала'},
-                        {name: 'fact_start_date', label: 'фактическая дата начала'},
                         {name: 'plan_end_date', label: 'плановая дата завершения'},
-                        {name: 'fact_end_date', label: 'фактическая дата завершения'},
                         {name: 'result', label: 'результат'},
                 ],
                 optionsFlds: [],
