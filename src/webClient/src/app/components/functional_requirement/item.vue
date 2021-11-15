@@ -118,24 +118,31 @@
       <q-btn v-else color="secondary" :label="$t('message.save')" class="q-mr-sm" @click="save"/>
 
         
+            
+        <!-- кнопка сохранения, которая закреплена в углу экрана     -->
+	<q-page-sticky position="bottom-right" :offset="[18, 18]">
+	<q-btn size="sm" fab icon="save" color="primary" @click="save">
+	<q-tooltip>Сохранить</q-tooltip>
+	</q-btn>
+	</q-page-sticky>
 
     </div>
   </q-page>
 </template>
 
 <script>
+	import compCustomer from './comp/customer.vue'
+	import compCustomerAgent from './comp/customerAgent.vue'
+	import compRelation from './comp/relation.vue'
 	import compResult from './comp/result.vue'
 	import taskListRefListWidget from './comp/taskListRefListWidget.vue'
 	import customerTaskListRefListWidget from './comp/customerTaskListRefListWidget.vue'
 	import bugListRefListWidget from './comp/bugListRefListWidget.vue'
 	import compExecutor from './comp/executor.vue'
-	import compCustomer from './comp/customer.vue'
-	import compCustomerAgent from './comp/customerAgent.vue'
-	import compRelation from './comp/relation.vue'
     import currentUserMixin from '../../../app/mixins/currentUser'
     export default {
         props: ['id', 'isOpenInDialog'],
-        components: {bugListRefListWidget, compExecutor, compCustomer, compCustomerAgent, compRelation, compResult, taskListRefListWidget, customerTaskListRefListWidget},
+        components: {customerTaskListRefListWidget, bugListRefListWidget, compExecutor, compCustomer, compCustomerAgent, compRelation, compResult, taskListRefListWidget},
         mixins: [currentUserMixin,],
         computed: {
             docUrl: function() {

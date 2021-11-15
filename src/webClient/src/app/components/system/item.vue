@@ -106,26 +106,33 @@
       <q-btn v-else color="secondary" :label="$t('message.save')" class="q-mr-sm" @click="save"/>
 
         
+            
+        <!-- кнопка сохранения, которая закреплена в углу экрана     -->
+	<q-page-sticky position="bottom-right" :offset="[18, 18]">
+	<q-btn size="sm" fab icon="save" color="primary" @click="save">
+	<q-tooltip>Сохранить</q-tooltip>
+	</q-btn>
+	</q-page-sticky>
 
     </div>
   </q-page>
 </template>
 
 <script>
-	import compCustomer from './comp/customer.vue'
 	import requestListRefListWidget from './comp/requestListRefListWidget.vue'
-	import ftListRefListWidget from './comp/ftListRefListWidget.vue'
 	import compExecutor from './comp/executor.vue'
-	import compCustomerAgent from './comp/customerAgent.vue'
-	import compRelation from './comp/relation.vue'
+	import compCustomer from './comp/customer.vue'
 	import taskListRefListWidget from './comp/taskListRefListWidget.vue'
 	import customerTaskListRefListWidget from './comp/customerTaskListRefListWidget.vue'
-	import digitalSolutionListRefListWidget from './comp/digitalSolutionListRefListWidget.vue'
 	import bugListRefListWidget from './comp/bugListRefListWidget.vue'
+	import compCustomerAgent from './comp/customerAgent.vue'
+	import compRelation from './comp/relation.vue'
+	import ftListRefListWidget from './comp/ftListRefListWidget.vue'
+	import digitalSolutionListRefListWidget from './comp/digitalSolutionListRefListWidget.vue'
     import currentUserMixin from '../../../app/mixins/currentUser'
     export default {
         props: ['id', 'isOpenInDialog'],
-        components: {bugListRefListWidget, compExecutor, compCustomerAgent, compRelation, taskListRefListWidget, customerTaskListRefListWidget, digitalSolutionListRefListWidget, compCustomer, requestListRefListWidget, ftListRefListWidget},
+        components: {compExecutor, compCustomer, taskListRefListWidget, customerTaskListRefListWidget, requestListRefListWidget, compCustomerAgent, compRelation, ftListRefListWidget, digitalSolutionListRefListWidget, bugListRefListWidget},
         mixins: [currentUserMixin,],
         computed: {
             docUrl: function() {

@@ -3,6 +3,15 @@
 <template>
   <q-page :padding="!isOpenInDialog">
     <comp-breadcrumb class="text-capitalize" v-if="!isOpenInDialog" :list="[{label: $t('digital_solution.name_plural'), docType:'digital_solution'}]"/>
+    <!-- фильтры   -->
+    <div class="row q-mt-sm q-col-gutter-sm">
+        <div class=" col-md-2 col-sm-4 col-xs-6">
+          <comp-fld-ref-search dense outlined pgMethod="ctlg_digital_solution_state_list" label="" :item='filterCtlgDigitalSolutionStateTitle' :itemId='filterCtlgDigitalSolutionStateId' :ext='{isClearable: true}'  @update="updateFilterCtlgDigitalSolutionState" @clear="updateFilterCtlgDigitalSolutionState"  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
+        </div>
+        <div class=" col-md-2 col-sm-4 col-xs-6">
+          <comp-fld-ref-search dense outlined pgMethod="system_list" label="" :item='filterSystemTitle' :itemId='filterSystemId' :ext='{isClearable: true}'  @update="updateFilterSystem" @clear="updateFilterSystem"  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
+        </div>
+    </div>
 
     <comp-doc-list ref="docList" :listTitle="$t('digital_solution.name_plural')" :listDeletedTitle="$t('digital_solution.name_plural_deleted')" pg-method="digital_solution_list"
                    :list-sort-data="listSortData" :list-filter-data="listFilterData"
@@ -57,12 +66,41 @@
           {value: {deleted: false}, title: 'Активные'},
           {value: {deleted: true}, title: 'Удаленные'}
         ],
+        filterCtlgDigitalSolutionStateTitle: null,
+        filterCtlgDigitalSolutionStateId: null,
+        filterSystemTitle: null,
+        filterSystemId: null,
       }
     },
     methods: {
+      updateFilterCtlgDigitalSolutionState(v) {
+        this.$refs.docList.changeItemList({'state': v ? v.id : null})
+        if (v) {
+          this.$utils.callPgMethod(`ctlg_digital_solution_state_get_by_id`, {id: v.id}, (res) => {
+            this.filterCtlgDigitalSolutionStateTitle = res.title
+          })
+        }
+      },
+      updateFilterSystem(v) {
+        this.$refs.docList.changeItemList({'system_id': v ? v.id : null})
+        if (v) {
+          this.$utils.callPgMethod(`system_get_by_id`, {id: v.id}, (res) => {
+            this.filterSystemTitle = res.title
+          })
+        }
+      },
     },
     mounted() {
-    
+    // извлекаем параметры фильтрации из url
+      const urlParams = new URLSearchParams(window.location.search)
+      if (urlParams.has('state')) {
+        let id = +urlParams.get('state')
+        if (id) this.updateFilterCtlgDigitalSolutionState({id})
+      }
+      if (urlParams.has('system_id')) {
+        let id = +urlParams.get('system_id')
+        if (id) this.updateFilterSystem({id})
+      }
     }
   }
 </script>

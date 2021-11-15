@@ -6,6 +6,7 @@ tableName ="request"
 fields = [
 	{name="id",			type="serial"},
 	{name="title",					type="char",	size=150, 	ext="not null",	 comment="название"},
+	{name="priority_id",					type="int",	 comment="приоритет"},
 	{name="state_id",					type="int", 	ext=" default 1",	 comment="статус"},
 	{name="description",					type="text",	 comment="описание"},
 	{name="files",					type="jsonb",	 comment="файлы"},
@@ -24,6 +25,7 @@ fields = [
 
 fkConstraints = [
 	{name="request_title_already_exist", ext="UNIQUE (title)"},
+	{fld="priority_id", ref="ctlg_request_priority", fk="id"},
 	{fld="state_id", ref="ctlg_request_state", fk="id"},
 	{fld="customer_id", ref="company", fk="id"},
 	{fld="system_id", ref="system", fk="id"}
@@ -38,16 +40,17 @@ triggers = [
 
 
 methods = [
-	"request_get_by_id",
 	"request_change_system_sequence",
 	"request_list",
 	"request_update",
+	"request_get_by_id",
 	"request_trigger_before",
 	"request_trigger_after"
 ]
 
 alterScripts = [
 	"alter table request add column if not exists title CHARACTER VARYING(150);",
+	"alter table request add column if not exists priority_id int;",
 	"alter table request add column if not exists state_id int;",
 	"alter table request add column if not exists description text;",
 	"alter table request add column if not exists files jsonb;",

@@ -21,7 +21,8 @@ func GetDoc(project *t.ProjectType) t.DocType {
 		PathPrefix: "docs",
 		Flds: []t.FldType{
 			t.GetFldTitle().SetReadonly("currentUser.role?.includes(`customer`) && item.state_id != 1"),
-			t.GetFldRef("state_id", "статус", "ctlg_request_state", [][]int{{1, 2}}, "col-4").SetDefault("1").SetReadonly("currentUser.role?.includes(`customer`) && item.state_id != 1"),
+			t.GetFldRef("priority_id", "приоритет", "ctlg_request_priority", [][]int{{1, 2}}, "col-2"),
+			t.GetFldRef("state_id", "статус", "ctlg_request_state", [][]int{{1, 3}}, "col-2").SetDefault("1").SetReadonly("currentUser.role?.includes(`customer`) && item.state_id != 1"),
 			t.GetFldSimpleHtml([][]int{{2, 1}}, "", "<p>Дата и время создания: {{item.created_at}}</p>"),
 			t.GetFldSimpleHtml([][]int{{2, 2}}, "", "<p>Дата и время изменения: {{item.updated_at}}</p>"),
 			t.GetFldString("description", "описание", 0, [][]int{{3, 1}}, "col-8").SetReadonly("currentUser.role?.includes(`customer`) && item.state_id != 1"),
@@ -48,8 +49,8 @@ func GetDoc(project *t.ProjectType) t.DocType {
 			BreadcrumbIcon: breadcrumb_icon,
 			Roles:          []string{},
 			FilterList: []t.VueDocListFilter{
-				{FldName: "priority_id", IsRef: true, RefTable: "ctlg_request_priority"},
-				{FldName: "digital_solution_id", IsRef: true, RefTable: "digital_solution"},
+				{FldName: "state_id", IsRef: true, RefTable: "ctlg_request_state"},
+				{FldName: "system_id", IsRef: true, RefTable: "system"},
 			},
 		},
 		Templates:   map[string]*t.DocTemplate{
@@ -70,6 +71,8 @@ func GetDoc(project *t.ProjectType) t.DocType {
 	// создаем стандартные методы sql "list", "update", "get_by_id" с возможностью ограничения по ролям
 	doc.Sql.FillBaseMethods(doc.Name)
 
+	doc.Vue.AddFixedSaveBtn()
+
 	doc.AddVueComposition("docItem", "customerAgent")
 	doc.AddVueComposition("docItem", "relation")
 	doc.AddVueComposition("docItem", "executor")
@@ -83,6 +86,18 @@ func GetDoc(project *t.ProjectType) t.DocType {
 	}
 
 	doc.Init()
+
+	doc.Vue.TmplFuncs = map[string]func(t.DocType) string{
+		// шаблон названия в списке
+		"PrintListRowLabel": func(docType t.DocType) string {
+			return `
+				 <q-item-section>
+				    <q-item-label lines="1">{{item.title}}</q-item-label>
+					<q-item-label caption><q-badge color="orange">{{item.options.title.state_title}}</q-badge></q-item-label>
+				 </q-item-section>
+			`
+		},
+	}
 
 	doc.AddFld(t.GetFldVueCompositionRefList(&doc, t.VueCompRefListWidgetParams{
 		Label:      "задачи",                  // название списка, которе выводится на экране

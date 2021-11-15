@@ -10,8 +10,11 @@
       <div class="col-md-4 col-sm-6 col-xs-12">
           <q-input outlined type='text' v-model="item.title" :label="$t('request.title')" autogrow :readonly='currentUser.role?.includes(`customer`) && item.state_id != 1'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
       </div>
-      <div class="col-md-4 col-sm-6 col-xs-12">
-          <comp-fld-ref-search outlined pgMethod="ctlg_request_state_list" :label="$t('request.state_id')" :item='item.state_title' :itemId='item.state_id' :ext='{}' @update="v=> item.state_id = v.id" @clear="item.state_id = null" :readonly='currentUser.role?.includes(`customer`) && item.state_id != 1'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
+      <div class="col-md-2 col-sm-3 col-xs-6">
+          <comp-fld-ref-search outlined pgMethod="ctlg_request_priority_list" :label="$t('request.priority_id')" :item='item.priority_title' :itemId='item.priority_id' :ext='{}' @update="v=> item.priority_id = v.id" @clear="item.priority_id = null" :readonly='false'  class='q-mb-sm col-md-2 col-sm-3 col-xs-6' />
+      </div>
+      <div class="col-md-2 col-sm-3 col-xs-6">
+          <comp-fld-ref-search outlined pgMethod="ctlg_request_state_list" :label="$t('request.state_id')" :item='item.state_title' :itemId='item.state_id' :ext='{}' @update="v=> item.state_id = v.id" @clear="item.state_id = null" :readonly='currentUser.role?.includes(`customer`) && item.state_id != 1'  class='q-mb-sm col-md-2 col-sm-3 col-xs-6' />
       </div>
       </div>
       
@@ -118,24 +121,31 @@
       <q-btn v-else color="secondary" :label="$t('message.save')" class="q-mr-sm" @click="save"/>
 
         
+            
+        <!-- кнопка сохранения, которая закреплена в углу экрана     -->
+	<q-page-sticky position="bottom-right" :offset="[18, 18]">
+	<q-btn size="sm" fab icon="save" color="primary" @click="save">
+	<q-tooltip>Сохранить</q-tooltip>
+	</q-btn>
+	</q-page-sticky>
 
     </div>
   </q-page>
 </template>
 
 <script>
+	import compExecutor from './comp/executor.vue'
+	import compCustomer from './comp/customer.vue'
 	import compResult from './comp/result.vue'
 	import taskListRefListWidget from './comp/taskListRefListWidget.vue'
 	import customerTaskListRefListWidget from './comp/customerTaskListRefListWidget.vue'
 	import ftListRefListWidget from './comp/ftListRefListWidget.vue'
 	import compCustomerAgent from './comp/customerAgent.vue'
 	import compRelation from './comp/relation.vue'
-	import compExecutor from './comp/executor.vue'
-	import compCustomer from './comp/customer.vue'
     import currentUserMixin from '../../../app/mixins/currentUser'
     export default {
         props: ['id', 'isOpenInDialog'],
-        components: {compRelation, compExecutor, compCustomer, compResult, taskListRefListWidget, customerTaskListRefListWidget, ftListRefListWidget, compCustomerAgent},
+        components: {ftListRefListWidget, compCustomerAgent, compRelation, compExecutor, compCustomer, compResult, taskListRefListWidget, customerTaskListRefListWidget},
         mixins: [currentUserMixin,],
         computed: {
             docUrl: function() {
@@ -147,6 +157,7 @@
                 item: null,
                 flds: [
                         {name: 'title', label: 'название',  required: true},
+                        {name: 'priority_id', label: 'приоритет'},
                         {name: 'state_id', label: 'статус'},
                         {name: 'description', label: 'описание'},
                         {name: 'files', label: 'файлы'},

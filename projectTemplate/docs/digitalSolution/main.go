@@ -53,6 +53,10 @@ func GetDoc(project *t.ProjectType) t.DocType {
 			MenuIcon:       menu_icon,
 			BreadcrumbIcon: breadcrumb_icon,
 			Roles:          []string{},
+			FilterList: []t.VueDocListFilter{
+				{FldName: "state", IsRef: true, RefTable: "ctlg_digital_solution_state"},
+				{FldName: "system_id", IsRef: true, RefTable: "system"},
+			},
 		},
 		Templates: map[string]*t.DocTemplate{
 			"sql_function_get_specialist_role.sql": {},
@@ -72,6 +76,7 @@ func GetDoc(project *t.ProjectType) t.DocType {
 
 	// создаем стандартные методы sql "list", "update", "get_by_id" с возможностью ограничения по ролям
 	doc.Sql.FillBaseMethods(doc.Name)
+
 	doc.Vue.AddFixedSaveBtn()
 
 	doc.AddVueComposition("docItem", "executor")
@@ -101,6 +106,7 @@ func GetDoc(project *t.ProjectType) t.DocType {
 			`
 		},
 	}
+
 	doc.AddFld(t.GetFldVueCompositionRefList(&doc, t.VueCompRefListWidgetParams{
 		Label:      "задачи",              // название списка, которе выводится на экране
 		FldName:    "task_list",           // название поля. Любое, в формате snake_case. На основе этого названия формируется название компоненты во vue.

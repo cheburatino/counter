@@ -60,6 +60,8 @@ func GetDoc(project *t.ProjectType) t.DocType {
 	// создаем стандартные методы sql "list", "update", "get_by_id" с возможностью ограничения по ролям
 	doc.Sql.FillBaseMethods(doc.Name)
 
+	doc.Vue.AddFixedSaveBtn()
+
 	doc.AddVueComposition("docItem", "executor")
 	doc.AddVueComposition("docItem", "customer")
 	doc.AddVueComposition("docItem", "customerAgent")
@@ -71,6 +73,18 @@ func GetDoc(project *t.ProjectType) t.DocType {
 	}
 
 	doc.Init()
+
+	doc.Vue.TmplFuncs = map[string]func(t.DocType) string{
+		// шаблон названия в списке
+		"PrintListRowLabel": func(docType t.DocType) string {
+			return `
+				 <q-item-section>
+				    <q-item-label lines="1">{{item.title}}</q-item-label>
+					<q-item-label caption><q-badge>{{item.options.title.customer_title}}</q-badge></q-item-label>
+				 </q-item-section>
+			`
+		},
+	}
 
 	doc.AddFld(t.GetFldVueCompositionRefList(&doc, t.VueCompRefListWidgetParams{
 		Label:      "задачи",                  // название списка, которе выводится на экране

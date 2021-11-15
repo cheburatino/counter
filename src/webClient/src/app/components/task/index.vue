@@ -9,6 +9,9 @@
           <comp-fld-ref-search dense outlined pgMethod="ctlg_task_state_list" label="" :item='filterCtlgTaskStateTitle' :itemId='filterCtlgTaskStateId' :ext='{isClearable: true}'  @update="updateFilterCtlgTaskState" @clear="updateFilterCtlgTaskState"  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
         </div>
         <div class=" col-md-2 col-sm-4 col-xs-6">
+          <comp-fld-ref-search dense outlined pgMethod="system_list" label="" :item='filterSystemTitle' :itemId='filterSystemId' :ext='{isClearable: true}'  @update="updateFilterSystem" @clear="updateFilterSystem"  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
+        </div>
+        <div class=" col-md-2 col-sm-4 col-xs-6">
           <comp-fld-ref-search dense outlined pgMethod="digital_solution_list" label="" :item='filterDigitalSolutionTitle' :itemId='filterDigitalSolutionId' :ext='{isClearable: true}'  @update="updateFilterDigitalSolution" @clear="updateFilterDigitalSolution"  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
         </div>
     </div>
@@ -68,6 +71,8 @@
         ],
         filterCtlgTaskStateTitle: null,
         filterCtlgTaskStateId: null,
+        filterSystemTitle: null,
+        filterSystemId: null,
         filterDigitalSolutionTitle: null,
         filterDigitalSolutionId: null,
       }
@@ -78,6 +83,14 @@
         if (v) {
           this.$utils.callPgMethod(`ctlg_task_state_get_by_id`, {id: v.id}, (res) => {
             this.filterCtlgTaskStateTitle = res.title
+          })
+        }
+      },
+      updateFilterSystem(v) {
+        this.$refs.docList.changeItemList({'system_id': v ? v.id : null})
+        if (v) {
+          this.$utils.callPgMethod(`system_get_by_id`, {id: v.id}, (res) => {
+            this.filterSystemTitle = res.title
           })
         }
       },
@@ -96,6 +109,10 @@
       if (urlParams.has('state')) {
         let id = +urlParams.get('state')
         if (id) this.updateFilterCtlgTaskState({id})
+      }
+      if (urlParams.has('system_id')) {
+        let id = +urlParams.get('system_id')
+        if (id) this.updateFilterSystem({id})
       }
       if (urlParams.has('digital_solution_id')) {
         let id = +urlParams.get('digital_solution_id')

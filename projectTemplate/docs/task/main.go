@@ -53,6 +53,7 @@ func GetDoc(project *t.ProjectType) t.DocType {
 			Roles:          []string{},
 			FilterList: []t.VueDocListFilter{
 				{FldName: "state", IsRef: true, RefTable: "ctlg_task_state"},
+				{FldName: "system_id", IsRef: true, RefTable: "system"},
 				{FldName: "digital_solution_id", IsRef: true, RefTable: "digital_solution"},
 			},
 		},
@@ -73,6 +74,7 @@ func GetDoc(project *t.ProjectType) t.DocType {
 	}
 	// создаем стандартные методы sql "list", "update", "get_by_id" с возможностью ограничения по ролям
 	doc.Sql.FillBaseMethods(doc.Name)
+
 	doc.Vue.AddFixedSaveBtn()
 
 	doc.AddVueComposition("docItem", "executor")
