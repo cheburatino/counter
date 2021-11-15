@@ -11,6 +11,9 @@
         <div class=" col-md-2 col-sm-4 col-xs-6">
           <comp-fld-ref-search dense outlined pgMethod="system_list" label="" :item='filterSystemTitle' :itemId='filterSystemId' :ext='{isClearable: true}'  @update="updateFilterSystem" @clear="updateFilterSystem"  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
         </div>
+        <div class=" col-md-2 col-sm-4 col-xs-6">
+          <comp-fld-ref-search dense outlined pgMethod="ctlg_request_priority_list" label="" :item='filterCtlgRequestPriorityTitle' :itemId='filterCtlgRequestPriorityId' :ext='{isClearable: true}'  @update="updateFilterCtlgRequestPriority" @clear="updateFilterCtlgRequestPriority"  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
+        </div>
     </div>
 
     <comp-doc-list ref="docList" :listTitle="$t('request.name_plural')" :listDeletedTitle="$t('request.name_plural_deleted')" pg-method="request_list"
@@ -70,6 +73,8 @@
         filterCtlgRequestStateId: null,
         filterSystemTitle: null,
         filterSystemId: null,
+        filterCtlgRequestPriorityTitle: null,
+        filterCtlgRequestPriorityId: null,
       }
     },
     methods: {
@@ -89,6 +94,14 @@
           })
         }
       },
+      updateFilterCtlgRequestPriority(v) {
+        this.$refs.docList.changeItemList({'priority_id': v ? v.id : null})
+        if (v) {
+          this.$utils.callPgMethod(`ctlg_request_priority_get_by_id`, {id: v.id}, (res) => {
+            this.filterCtlgRequestPriorityTitle = res.title
+          })
+        }
+      },
     },
     mounted() {
     // извлекаем параметры фильтрации из url
@@ -100,6 +113,10 @@
       if (urlParams.has('system_id')) {
         let id = +urlParams.get('system_id')
         if (id) this.updateFilterSystem({id})
+      }
+      if (urlParams.has('priority_id')) {
+        let id = +urlParams.get('priority_id')
+        if (id) this.updateFilterCtlgRequestPriority({id})
       }
     }
   }

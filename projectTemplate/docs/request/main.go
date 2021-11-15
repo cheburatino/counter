@@ -51,6 +51,7 @@ func GetDoc(project *t.ProjectType) t.DocType {
 			FilterList: []t.VueDocListFilter{
 				{FldName: "state_id", IsRef: true, RefTable: "ctlg_request_state"},
 				{FldName: "system_id", IsRef: true, RefTable: "system"},
+				{FldName: "priority_id", IsRef: true, RefTable: "ctlg_request_priority"},
 			},
 		},
 		Templates:   map[string]*t.DocTemplate{

@@ -1,17 +1,17 @@
 
 export default {
+ 		customer_id: 'customer ',
+ 		result: 'result',
  		name: 'request',
+ 		priority_id: 'priority ',
  		state_id: 'state ',
  		description: 'description',
- 		files: 'files',
+ 		images: 'images',
  		name_plural: 'request',
  		title: 'title',
- 		priority_id: 'priority ',
- 		result: 'result',
- 		how_request_received: 'how request received',
- 		customer_id: 'customer ',
+ 		files: 'files',
  		system_id: 'system ',
  		name_plural_deleted: 'deleted request',
- 		images: 'images',
+ 		how_request_received: 'how request received',
  		datetime_reciept: 'datetime reciept',
 }
