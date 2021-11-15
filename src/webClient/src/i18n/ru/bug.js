@@ -1,16 +1,16 @@
 
 export default {
- 		images: 'изображения',
  		customer_id: 'заказчик',
- 		functional_requirement_id: 'функциональное требование',
  		name: 'баг',
- 		title: 'название',
- 		description: 'описание',
- 		files: 'файлы',
- 		digital_solution_id: 'цифровое решение',
- 		result: 'результат',
  		name_plural: 'Баги',
  		name_plural_deleted: 'удаленные Баги',
+ 		title: 'название',
  		state_id: 'статус',
+ 		files: 'файлы',
+ 		images: 'изображения',
  		system_id: 'система',
+ 		digital_solution_id: 'цифровое решение',
+ 		description: 'описание',
+ 		functional_requirement_id: 'функциональное требование',
+ 		result: 'результат',
 }

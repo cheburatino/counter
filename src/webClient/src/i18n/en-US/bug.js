@@ -1,16 +1,16 @@
 
 export default {
- 		name: 'bug',
+ 		name_plural: 'bug',
  		title: 'title',
- 		customer_id: 'customer ',
- 		functional_requirement_id: 'functional requirement ',
- 		result: 'result',
- 		images: 'images',
  		system_id: 'system ',
  		digital_solution_id: 'digital solution ',
- 		name_plural: 'bug',
+ 		functional_requirement_id: 'functional requirement ',
+ 		result: 'result',
+ 		name: 'bug',
  		name_plural_deleted: 'deleted bug',
  		state_id: 'state ',
  		description: 'description',
  		files: 'files',
+ 		images: 'images',
+ 		customer_id: 'customer ',
 }

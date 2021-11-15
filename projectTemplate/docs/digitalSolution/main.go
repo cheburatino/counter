@@ -20,35 +20,33 @@ func GetDoc(project *t.ProjectType) t.DocType {
 		NameRu:     name_ru,
 		PathPrefix: "docs",
 		Flds: []t.FldType{
-			t.GetFldTitle(),
-			t.GetFldRef("state_id", "статус", "ctlg_digital_solution_state", [][]int{{1, 2}}).SetDefault("1"),
+			t.GetFldTitle().SetReadonly("currentUser.role?.includes(`customer`)"),
+			t.GetFldRef("state_id", "статус", "ctlg_digital_solution_state", [][]int{{1, 2}}).SetDefault("1").SetReadonly("currentUser.role?.includes(`customer`)"),
 			t.GetFldSimpleHtml([][]int{{2, 1}}, "", "<p>Дата и время создания: {{item.created_at}}</p>"),
 			t.GetFldSimpleHtml([][]int{{2, 2}}, "", "<p>Дата и время изменения: {{item.updated_at}}</p>"),
-			t.GetFldString("description", "описание", 0, [][]int{{3, 1}}, "col-8"),
-			t.GetFldFiles("files", "файлы", [][]int{{4, 1}}, t.FldVueFilesParams{}),
-			t.GetFldImgList("images", "изображения", [][]int{{4, 2}}, t.FldVueImgParams{}),
+			t.GetFldString("description", "описание", 0, [][]int{{3, 1}}, "col-8").SetReadonly("currentUser.role?.includes(`customer`)"),
+			t.GetFldFiles("files", "файлы", [][]int{{4, 1}}, t.FldVueFilesParams{}).SetReadonly("currentUser.role?.includes(`customer`)"),
+			t.GetFldImgList("images", "изображения", [][]int{{4, 2}}, t.FldVueImgParams{}).SetReadonly("currentUser.role?.includes(`customer`)"),
 			t.GetFldJsonbCompositionWithoutFld([][]int{{5, 1}}, "col-4", "comp-executor"),
 			t.GetFldJsonbCompositionWithoutFld([][]int{{6, 1}}, "", "comp-specialist", ":currentUser='currentUser'"),
 			// Задачи. Контрол описан после doc.Init {{6, 2}}
 			t.GetFldJsonbCompositionWithoutFld([][]int{{7, 1}}, "col-4", "comp-customer"),
-			t.GetFldRef("customer_id", "заказчик", "company", [][]int{{8, 1}}, "isShowLink", "isClearable"),
+			t.GetFldRef("customer_id", "заказчик", "company", [][]int{{8, 1}}, "isShowLink", "isClearable").SetReadonly("currentUser.role?.includes(`customer`)"),
 			t.GetFldJsonbCompositionWithoutFld([][]int{{9, 1}}, "", "comp-customerAgent", ":currentUser='currentUser'"),
 			// Задачи заказчика. Контрол описан после doc.Init {{9, 2}}
 			t.GetFldJsonbCompositionWithoutFld([][]int{{10, 1}}, "col-4", "comp-relation"),
-			t.GetFldRef("system_id", "система", "system", [][]int{{11, 1}}, "isShowLink", "isClearable", "ext: {customer_id: item.customer_id}"),
+			t.GetFldRef("system_id", "система", "system", [][]int{{11, 1}}, "isShowLink", "isClearable", "ext: {customer_id: item.customer_id}").SetReadonly("currentUser.role?.includes(`customer`)"),
 			// Функциональные требования. Контрол описан после oc.Init {{12, 1}}
 			// Баги. Контрол описан после oc.Init {{12, 2}}
 			t.GetFldJsonbCompositionWithoutFld([][]int{{13, 1}}, "col-4", "comp-modeling"),
-			t.GetFldDate("date_plan_start_modeling", "планируемая дата начала моделирования", [][]int{{14, 1}}, "col-3"),
-			t.GetFldDate("date_plan_end_modeling", "планируемая дата завершения моделирования", [][]int{{14, 2}}, "col-3"),
-			t.GetFldSimpleHtml([][]int{{14, 3}}, "col-2", "<p>История моделирования</p>"),
-			t.GetFldString("model", "описание модели", 0, [][]int{{15, 1}}, "col-8"),
+			t.GetFldDate("date_plan_start_modeling", "планируемая дата начала моделирования", [][]int{{14, 1}}).SetReadonly("currentUser.role?.includes(`customer`)"),
+			t.GetFldDate("date_plan_end_modeling", "планируемая дата завершения моделирования", [][]int{{14, 2}}).SetReadonly("currentUser.role?.includes(`customer`)"),
+			t.GetFldString("model", "описание модели", 0, [][]int{{15, 1}}, "col-8").SetReadonly("currentUser.role?.includes(`customer`)"),
 			t.GetFldJsonbCompositionWithoutFld([][]int{{16, 1}}, "col-4", "comp-realization"),
-			t.GetFldDate("date_plan_start_realization", "планируемая дата начала реализации", [][]int{{17, 1}}, "col-3"),
-			t.GetFldDate("date_plan_end_realization", "планируемая дата завершения реализации", [][]int{{17, 2}}, "col-3"),
-			t.GetFldSimpleHtml([][]int{{17, 3}}, "col-2", "<p>История реализации</p>"),
+			t.GetFldDate("date_plan_start_realization", "планируемая дата начала реализации", [][]int{{17, 1}}).SetReadonly("currentUser.role?.includes(`customer`)"),
+			t.GetFldDate("date_plan_end_realization", "планируемая дата завершения реализации", [][]int{{17, 2}}).SetReadonly("currentUser.role?.includes(`customer`)"),
 			t.GetFldJsonbCompositionWithoutFld([][]int{{18, 1}}, "col-4", "comp-result"),
-			t.GetFldString("result", "результат", 0, [][]int{{19, 1}}, "col-8"),
+			t.GetFldString("result", "результат", 0, [][]int{{19, 1}}, "col-8").SetReadonly("currentUser.role?.includes(`customer`)"),
 		},
 		Vue: t.DocVue{
 			RouteName:      name,
@@ -117,7 +115,7 @@ func GetDoc(project *t.ProjectType) t.DocType {
                 <q-item-label>{{v.title}}</q-item-label>
                 <q-item-label caption><q-badge color="orange">{{v.options.title.state_title}}</q-badge></q-item-label>
             `, // шаблон для названия в списке (vue синтаксис)
-	}, [][]int{{6, 2}}, "col-4"))
+	}, [][]int{{6, 2}}, "col-4").SetVif("currentUser.role?.includes(`admin`)"))
 
 	doc.AddFld(t.GetFldVueCompositionRefList(&doc, t.VueCompRefListWidgetParams{
 		Label:      "задачи заказчика",        // название списка, которе выводится на экране
