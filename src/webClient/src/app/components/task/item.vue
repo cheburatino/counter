@@ -158,13 +158,13 @@
 </template>
 
 <script>
+	import compExecutor from './comp/executor.vue'
 	import compSpecialist from './comp/specialist.vue'
 	import compWork from './comp/work.vue'
 	import compCustomer from './comp/customer.vue'
 	import compRelation from './comp/relation.vue'
 	import compDate from './comp/date.vue'
 	import compResult from './comp/result.vue'
-	import compExecutor from './comp/executor.vue'
     import currentUserMixin from '../../../app/mixins/currentUser'
     export default {
         props: ['id', 'isOpenInDialog'],
