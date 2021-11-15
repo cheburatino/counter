@@ -38,10 +38,10 @@ triggers = [
 
 
 methods = [
+	"request_get_by_id",
 	"request_change_system_sequence",
 	"request_list",
 	"request_update",
-	"request_get_by_id",
 	"request_trigger_before",
 	"request_trigger_after"
 ]

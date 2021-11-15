@@ -20,18 +20,18 @@ func GetDoc(project *t.ProjectType) t.DocType {
 		NameRu:     name_ru,
 		PathPrefix: "docs",
 		Flds: []t.FldType{
-			t.GetFldTitle(),
-			t.GetFldString("state", "статус", 50, [][]int{{1, 2}}),
-			t.GetFldSimpleHtml([][]int{{2, 1}}, "", "<p>Дата и время создания: {{item.created_at}}</p>"),
-			t.GetFldSimpleHtml([][]int{{2, 2}}, "", "<p>Дата и время изменения: {{item.updated_at}}</p>"),
-			t.GetFldString("description", "описание", 0, [][]int{{3, 1}}, "col-8"),
+			t.GetFldTitle().SetReadonly("currentUser.role?.includes(`customer`)"),
+			t.GetFldString("state", "статус", 50, [][]int{{1, 2}}).SetVif("currentUser.role?.includes(`admin`)"),
+			t.GetFldSimpleHtml([][]int{{2, 1}}, "", "<p>Дата и время создания: {{item.created_at}}</p>").SetVif("currentUser.role?.includes(`admin`)"),
+			t.GetFldSimpleHtml([][]int{{2, 2}}, "", "<p>Дата и время изменения: {{item.updated_at}}</p>").SetVif("currentUser.role?.includes(`admin`)"),
+			t.GetFldString("description", "описание", 0, [][]int{{3, 1}}, "col-8").SetReadonly("currentUser.role?.includes(`customer`)"),
 			t.GetFldFiles("files", "файлы", [][]int{{4, 1}}, t.FldVueFilesParams{}),
 			t.GetFldImgList("images", "изображения", [][]int{{4, 2}}, t.FldVueImgParams{}),
-			t.GetFldJsonbCompositionWithoutFld([][]int{{5, 1}}, "col-4", "comp-executor"),
-			t.GetFldSimpleHtml([][]int{{6, 1}}, "", "<p>Специалисты</p>"),
+			t.GetFldJsonbCompositionWithoutFld([][]int{{5, 1}}, "col-4", "comp-executor").SetVif("currentUser.role?.includes(`admin`)"),
+			t.GetFldSimpleHtml([][]int{{6, 1}}, "", "<p>Специалисты</p>").SetVif("currentUser.role?.includes(`admin`)"),
 			// Задачи. Описание контрола после doc.Init {{6, 2}}
 			t.GetFldJsonbCompositionWithoutFld([][]int{{7, 1}}, "col-4", "comp-customer"),
-			t.GetFldRef("customer_id", "заказчик", "company", [][]int{{8, 1}}, "isShowLink", "isClearable"),
+			t.GetFldRef("customer_id", "заказчик", "company", [][]int{{8, 1}}, "isShowLink", "isClearable").SetReadonly("currentUser.role?.includes(`customer`)"),
 			t.GetFldJsonbCompositionWithoutFld([][]int{{9, 1}}, "", "comp-customerAgent", ":currentUser='currentUser'"),
 			// Задачи заказчика. Описание контрола после doc.Init {{9, 2}}
 			t.GetFldJsonbCompositionWithoutFld([][]int{{10, 1}}, "col-4", "comp-relation"),
@@ -85,7 +85,7 @@ func GetDoc(project *t.ProjectType) t.DocType {
 	           <q-item-label>{{v.title}}</q-item-label>
 	           <q-item-label caption><q-badge color="orange">{{v.options.title.state_title}}</q-badge></q-item-label>
 	       `, // шаблон для названия в списке (vue синтаксис)
-	}, [][]int{{6, 2}}, "col-4"))
+	}, [][]int{{6, 2}}, "col-4").SetVif("currentUser.role?.includes(`admin`)"))
 
 	doc.AddFld(t.GetFldVueCompositionRefList(&doc, t.VueCompRefListWidgetParams{
 		Label:      "задачи заказчика",        // название списка, которе выводится на экране
@@ -100,7 +100,7 @@ func GetDoc(project *t.ProjectType) t.DocType {
                 <q-item-label>{{v.title}}</q-item-label>
                 <q-item-label caption><q-badge color="orange">{{v.options.title.state_title}}</q-badge></q-item-label>
             `, // шаблон для названия в списке (vue синтаксис)
-	}, [][]int{{9, 2}}, "col-4"))
+	}, [][]int{{9, 2}}, "col-4").SetReadonly("currentUser.role?.includes(`customer`)"))
 
 	doc.AddFld(t.GetFldVueCompositionRefList(&doc, t.VueCompRefListWidgetParams{
 		Label:      "запросы",                  // название списка, которе выводится на экране
@@ -115,7 +115,7 @@ func GetDoc(project *t.ProjectType) t.DocType {
                 <q-item-label>{{v.title}}</q-item-label>
                 <q-item-label caption><q-badge color="orange">{{v.options.title.state_title}}</q-badge></q-item-label>
             `, // шаблон для названия в списке (vue синтаксис)
-	}, [][]int{{11, 1}}, "col-4"))
+	}, [][]int{{11, 1}}, "col-4").SetReadonly("currentUser.role?.includes(`customer`)"))
 
 	doc.AddFld(t.GetFldVueCompositionRefList(&doc, t.VueCompRefListWidgetParams{
 		Label:      "функциональные требования",                // название списка, которе выводится на экране
@@ -130,7 +130,7 @@ func GetDoc(project *t.ProjectType) t.DocType {
                 <q-item-label>{{v.title}}</q-item-label>
                 <q-item-label caption><q-badge color="orange">{{v.system_id}}</q-badge></q-item-label>
             `, // шаблон для названия в списке (vue синтаксис)
-	}, [][]int{{11, 2}}, "col-4"))
+	}, [][]int{{11, 2}}, "col-4").SetReadonly("currentUser.role?.includes(`customer`)"))
 	//<q-item-label caption><q-badge color="orange">{{v.options.title.state_title}}</q-badge></q-item-label>
 
 	doc.AddFld(t.GetFldVueCompositionRefList(&doc, t.VueCompRefListWidgetParams{
@@ -146,7 +146,7 @@ func GetDoc(project *t.ProjectType) t.DocType {
                 <q-item-label>{{v.title}}</q-item-label>
                 <q-item-label caption><q-badge color="orange">{{v.options.title.state_title}}</q-badge></q-item-label>
             `, // шаблон для названия в списке (vue синтаксис)
-	}, [][]int{{12, 1}}, "col-4"))
+	}, [][]int{{12, 1}}, "col-4").SetReadonly("currentUser.role?.includes(`customer`)"))
 
 	doc.AddFld(t.GetFldVueCompositionRefList(&doc, t.VueCompRefListWidgetParams{
 		Label:      "баги",                  // название списка, которе выводится на экране
@@ -161,7 +161,7 @@ func GetDoc(project *t.ProjectType) t.DocType {
 	           <q-item-label>{{v.title}}</q-item-label>
 	           <q-item-label caption><q-badge color="orange">{{v.options.title.state_title}}</q-badge></q-item-label>
 	       `, // шаблон для названия в списке (vue синтаксис)
-	}, [][]int{{12, 2}}, "col-4"))
+	}, [][]int{{12, 2}}, "col-4").SetReadonly("currentUser.role?.includes(`customer`)"))
 
 	return doc
 }
