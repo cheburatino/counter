@@ -1,4 +1,4 @@
--- создание статус задачи клиента
+-- создание статус задачи заказчика
 
 DROP FUNCTION IF EXISTS ctlg_customer_task_state_update(params JSONB);
 CREATE OR REPLACE FUNCTION ctlg_customer_task_state_update(params JSONB)

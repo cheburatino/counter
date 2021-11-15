@@ -80,7 +80,7 @@ func GetDoc(project *t.ProjectType) t.DocType {
 			return `
 				 <q-item-section>
 				    <q-item-label lines="1">{{item.title}}</q-item-label>
-					<q-item-label caption><q-badge>{{item.options.title.customer_title}}</q-badge></q-item-label>
+					<q-item-label caption><q-badge color="positive">{{item.options.title.customer_title}}</q-badge></q-item-label>
 				 </q-item-section>
 			`
 		},

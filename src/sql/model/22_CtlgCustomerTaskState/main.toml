@@ -1,5 +1,5 @@
 docType = "CtlgCustomerTaskState"
-tableComment = "статус задачи клиента"
+tableComment = "статус задачи заказчика"
 
 tableName ="ctlg_customer_task_state"
 
@@ -26,9 +26,9 @@ triggers = [
 
 
 methods = [
-	"ctlg_customer_task_state_get_by_id",
 	"ctlg_customer_task_state_list",
 	"ctlg_customer_task_state_update",
+	"ctlg_customer_task_state_get_by_id",
 	"ctlg_customer_task_state_trigger_before",
 	"ctlg_customer_task_state_trigger_after"
 ]

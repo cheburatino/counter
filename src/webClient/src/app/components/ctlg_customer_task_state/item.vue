@@ -1,7 +1,7 @@
 <template>
   <q-page padding>
 
-    <comp-breadcrumb v-if="!isOpenInDialog" :list="[{label:'Статусы задач клиентов', to:'/ctlg_customer_task_state',  docType: 'ctlg_customer_task_state'},  {label: item ? (item.title ? item.title : 'Редактирование') : '',  docType: 'edit'}]"/>
+    <comp-breadcrumb v-if="!isOpenInDialog" :list="[{label:'Статусы задач заказчиков', to:'/ctlg_customer_task_state',  docType: 'ctlg_customer_task_state'},  {label: item ? (item.title ? item.title : 'Редактирование') : '',  docType: 'edit'}]"/>
 
     <div v-if="item" class="q-mt-sm">
       <!--  поля формы    -->
