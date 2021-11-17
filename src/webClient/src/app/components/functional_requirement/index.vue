@@ -82,7 +82,7 @@
     },
     methods: {
       updateFilterCtlgFunctionalRequirementState(v) {
-        this.$refs.docList.changeItemList({'state': v ? v.id : null})
+        this.$refs.docList.changeItemList({'state_id': v ? v.id : null})
         if (v) {
           this.$utils.callPgMethod(`ctlg_functional_requirement_state_get_by_id`, {id: v.id}, (res) => {
             this.filterCtlgFunctionalRequirementStateTitle = res.title
@@ -109,8 +109,8 @@
     mounted() {
     // извлекаем параметры фильтрации из url
       const urlParams = new URLSearchParams(window.location.search)
-      if (urlParams.has('state')) {
-        let id = +urlParams.get('state')
+      if (urlParams.has('state_id')) {
+        let id = +urlParams.get('state_id')
         if (id) this.updateFilterCtlgFunctionalRequirementState({id})
       }
       if (urlParams.has('system_id')) {
