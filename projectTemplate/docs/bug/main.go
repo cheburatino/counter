@@ -54,6 +54,7 @@ func GetDoc(project *t.ProjectType) t.DocType {
 		},
 		Templates:   map[string]*t.DocTemplate{
 			"sql_function_list.sql": {},
+			"webClient_comp_index.vue": {},
 		},
 		IsBaseTemplates: t.DocIsBaseTemplates{true, true},
 		Sql: t.DocSql{
@@ -73,6 +74,7 @@ func GetDoc(project *t.ProjectType) t.DocType {
 	doc.AddVueComposition("docItem", "customerAgent")
 	doc.AddVueComposition("docItem", "relation")
 	doc.AddVueComposition("docItem", "result")
+	doc.AddVueComposition("docIndex", "index")
 
 	doc.Vue.I18n = map[string]string{
 		"listTitle":        utils.UpperCaseFirst(name_ru_plural),

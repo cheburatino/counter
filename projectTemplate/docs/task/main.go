@@ -42,7 +42,7 @@ func GetDoc(project *t.ProjectType) t.DocType {
 			t.GetFldJsonbCompositionWithoutFld([][]int{{13, 1}}, "col-4", "comp-date"),
 			t.GetFldDate("plan_start_date", "плановая дата начала", [][]int{{14, 1}}, "col-3"),
 			t.GetFldDate("plan_end_date", "плановая дата завершения", [][]int{{14, 2}}, "col-3"),
-			t.GetFldSimpleHtml([][]int{{17, 3}}, "col-2", "<p>История</p>"),
+			//t.GetFldSimpleHtml([][]int{{17, 3}}, "col-2", "<p>История</p>"),
 			t.GetFldJsonbCompositionWithoutFld([][]int{{15, 1}}, "col-4", "comp-result"),
 			t.GetFldString("result", "результат", 0, [][]int{{16, 1}}, "col-8"),
 		},

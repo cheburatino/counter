@@ -126,18 +126,6 @@
       </div>
       </div>
       
-      <div class="row q-col-gutter-md q-mb-sm">
-      <div class="col-md-2 col-sm-3 col-xs-6">
-          not found vueFldTemplate for type ``
-      </div>
-      <div class="col-md-2 col-sm-3 col-xs-6">
-          not found vueFldTemplate for type ``
-      </div>
-      <div class="col-md-2 col-sm-3 col-xs-6">
-          <p>История</p>
-      </div>
-      </div>
-      
 
       <!--  кнопки   -->
       <comp-item-btn-save v-if="!isOpenInDialog" @save="save" :readonly="false" @cancel="$router.push(docUrl)"/>
@@ -158,17 +146,17 @@
 </template>
 
 <script>
-	import compWork from './comp/work.vue'
-	import compCustomer from './comp/customer.vue'
-	import compRelation from './comp/relation.vue'
 	import compDate from './comp/date.vue'
 	import compResult from './comp/result.vue'
 	import compExecutor from './comp/executor.vue'
 	import compSpecialist from './comp/specialist.vue'
+	import compWork from './comp/work.vue'
+	import compCustomer from './comp/customer.vue'
+	import compRelation from './comp/relation.vue'
     import currentUserMixin from '../../../app/mixins/currentUser'
     export default {
         props: ['id', 'isOpenInDialog'],
-        components: {compCustomer, compRelation, compDate, compResult, compExecutor, compSpecialist, compWork},
+        components: {compWork, compCustomer, compRelation, compDate, compResult, compExecutor, compSpecialist},
         mixins: [currentUserMixin,],
         computed: {
             docUrl: function() {
