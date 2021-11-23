@@ -40,8 +40,9 @@ func GetDoc(project *t.ProjectType) t.DocType {
 			t.GetFldJsonbCompositionWithoutFld([][]int{{11, 1}}, "col-4", "comp-relation"),
 			t.GetFldRef("system_id", "система", "system", [][]int{{12, 1}}, "isShowLink", "isClearable", "ext: {customer_id: item.customer_id}").SetReadonly("currentUser.role?.includes(`customer`) && item.state_id != 1"),
 			// Функциональные требования. Описан под doc.Init {{12, 2}}
-			t.GetFldJsonbCompositionWithoutFld([][]int{{13, 1}}, "col-4", "comp-result"),
-			t.GetFldString("result", "результат", 0, [][]int{{14, 1}}, "col-8").SetReadonly("currentUser.role?.includes(`customer`) && item.state_id != 1"),
+			t.GetFldInt("cost_estimate", "оценка стоимости", [][]int{{13, 1}}),
+			t.GetFldJsonbCompositionWithoutFld([][]int{{14, 1}}, "col-4", "comp-result"),
+			t.GetFldString("result", "результат", 0, [][]int{{15, 1}}, "col-8").SetReadonly("currentUser.role?.includes(`customer`) && item.state_id != 1"),
 		},
 		Vue: t.DocVue{
 			RouteName:      name,

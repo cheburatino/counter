@@ -15,6 +15,7 @@ fields = [
 	{name="datetime_reciept",					type="timestamp",	 comment="дата и время получения запроса"},
 	{name="customer_id",					type="int",	 comment="заказчик"},
 	{name="system_id",					type="int",	 comment="система"},
+	{name="cost_estimate",					type="int",	 comment="оценка стоимости"},
 	{name="result",					type="text",	 comment="результат"},
 	{name="search_text",			type="text",	comment="колонка для поиска"},
 	{name="options",				type="jsonb",	comment="разные дополнительные параметры"},
@@ -59,6 +60,7 @@ alterScripts = [
 	"alter table request add column if not exists datetime_reciept timestamp;",
 	"alter table request add column if not exists customer_id int;",
 	"alter table request add column if not exists system_id int;",
+	"alter table request add column if not exists cost_estimate int;",
 	"alter table request add column if not exists result text;",
 	"alter table request add column if not exists search_text text;"
 ]

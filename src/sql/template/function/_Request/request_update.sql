@@ -48,6 +48,7 @@ BEGIN
     
     
     
+    
 
     if (params ->> 'id')::int = -1 then
         -- проверика наличия обязательных параметров
@@ -58,7 +59,7 @@ BEGIN
         END IF;
         
 
-        EXECUTE ('INSERT INTO request (title, priority_id, state_id, description, files, images, how_request_received, datetime_reciept, customer_id, system_id, result, options) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)  RETURNING *;')
+        EXECUTE ('INSERT INTO request (title, priority_id, state_id, description, files, images, how_request_received, datetime_reciept, customer_id, system_id, cost_estimate, result, options) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13)  RETURNING *;')
 		INTO requestRow
 		USING
 			(params ->> 'title')::text,
@@ -71,6 +72,7 @@ BEGIN
 			(params ->> 'datetime_reciept')::timestamp,
 			(params ->> 'customer_id')::int,
 			(params ->> 'system_id')::int,
+			(params ->> 'cost_estimate')::int,
 			(params ->> 'result')::text,
 			coalesce(params -> 'options', '{}')::jsonb;
 
@@ -88,6 +90,7 @@ BEGIN
 			['datetime_reciept', 'datetime_reciept', 'timestamp'],
 			['customer_id', 'customer_id', 'number'],
 			['system_id', 'system_id', 'number'],
+			['cost_estimate', 'cost_estimate', 'number'],
 			['result', 'result', 'text'],
             ['options', 'options', 'jsonb'],
             ['deleted', 'deleted', 'bool']
