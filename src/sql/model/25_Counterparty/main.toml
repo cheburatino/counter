@@ -26,9 +26,9 @@ triggers = [
 
 
 methods = [
+	"counterparty_get_by_id",
 	"counterparty_list",
 	"counterparty_update",
-	"counterparty_get_by_id",
 	"counterparty_trigger_before",
 	"counterparty_trigger_after"
 ]

@@ -1,16 +1,16 @@
 
 export default {
- 		name_plural: 'Функциональные требования',
+ 		request_id: 'запрос',
+ 		system_id: 'система',
  		title: 'название',
+ 		files: 'файлы',
+ 		customer_id: 'заказчик',
  		state_id: 'статус',
  		description: 'описание',
  		images: 'изображения',
- 		name: 'функциональное требование',
- 		files: 'файлы',
- 		customer_id: 'заказчик',
- 		request_id: 'запрос',
- 		system_id: 'система',
  		digital_solution_id: 'цифровое решение',
  		result: 'результат',
+ 		name: 'функциональное требование',
+ 		name_plural: 'Функциональные требования',
  		name_plural_deleted: 'удаленные Функциональные требования',
 }
