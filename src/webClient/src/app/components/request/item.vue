@@ -104,6 +104,9 @@
       
       <div class="row q-col-gutter-md q-mb-sm">
       <div class="col-md-4 col-sm-6 col-xs-12">
+          <q-input outlined type='number' v-model="item.time_estimate" :label="$t('request.time_estimate')" :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
+      </div>
+      <div class="col-md-4 col-sm-6 col-xs-12">
           <q-input outlined type='number' v-model="item.cost_estimate" :label="$t('request.cost_estimate')" :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
       </div>
       </div>
@@ -140,6 +143,7 @@
 </template>
 
 <script>
+	import compCustomer from './comp/customer.vue'
 	import compResult from './comp/result.vue'
 	import taskListRefListWidget from './comp/taskListRefListWidget.vue'
 	import customerTaskListRefListWidget from './comp/customerTaskListRefListWidget.vue'
@@ -147,11 +151,10 @@
 	import compCustomerAgent from './comp/customerAgent.vue'
 	import compRelation from './comp/relation.vue'
 	import compExecutor from './comp/executor.vue'
-	import compCustomer from './comp/customer.vue'
     import currentUserMixin from '../../../app/mixins/currentUser'
     export default {
         props: ['id', 'isOpenInDialog'],
-        components: {compCustomer, compResult, taskListRefListWidget, customerTaskListRefListWidget, ftListRefListWidget, compCustomerAgent, compRelation, compExecutor},
+        components: {compRelation, compExecutor, compCustomer, compResult, taskListRefListWidget, customerTaskListRefListWidget, ftListRefListWidget, compCustomerAgent},
         mixins: [currentUserMixin,],
         computed: {
             docUrl: function() {
@@ -172,6 +175,7 @@
                         {name: 'datetime_reciept', label: 'дата и время получения запроса'},
                         {name: 'customer_id', label: 'заказчик'},
                         {name: 'system_id', label: 'система'},
+                        {name: 'time_estimate', label: 'оценка времени'},
                         {name: 'cost_estimate', label: 'оценка стоимости'},
                         {name: 'result', label: 'результат'},
                 ],

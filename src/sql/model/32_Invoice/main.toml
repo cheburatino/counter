@@ -38,9 +38,9 @@ triggers = [
 
 
 methods = [
-	"invoice_update",
 	"invoice_get_by_id",
 	"invoice_list",
+	"invoice_update",
 	"invoice_trigger_before",
 	"invoice_trigger_after"
 ]
