@@ -12,7 +12,7 @@
       
       <div class="row q-col-gutter-md q-mb-sm">
       <div class="col-md-4 col-sm-6 col-xs-12">
-          <comp-fld-ref-search outlined pgMethod="request_list" :label="$t('bug_customer_agent_link.request_id')" :item='item.request_title' :itemId='item.request_id' :ext='{}' @update="v=> item.request_id = v.id" @clear="item.request_id = null" :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
+          <comp-fld-ref-search outlined pgMethod="bug_list" :label="$t('bug_customer_agent_link.bug_id')" :item='item.bug_title' :itemId='item.bug_id' :ext='{}' @update="v=> item.bug_id = v.id" @clear="item.bug_id = null" :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
       </div>
       <div class="col-md-4 col-sm-6 col-xs-12">
           <comp-fld-ref-search outlined pgMethod="man_list" :label="$t('bug_customer_agent_link.customer_agent_id')" :item='item.customer_agent_title' :itemId='item.customer_agent_id' :ext='{}' @update="v=> item.customer_agent_id = v.id" @clear="item.customer_agent_id = null" :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
@@ -59,7 +59,7 @@
             return {
                 item: null,
                 flds: [
-                        {name: 'request_id', label: 'запрос'},
+                        {name: 'bug_id', label: 'баг'},
                         {name: 'customer_agent_id', label: 'представитель заказчика'},
                         {name: 'description', label: 'описание'},
                         {name: 'author_id', label: 'автор'},

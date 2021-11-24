@@ -39,6 +39,15 @@ BEGIN
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
 
     if (params ->> 'id')::int = -1 then
         -- проверика наличия обязательных параметров
@@ -49,21 +58,22 @@ BEGIN
         END IF;
         
 
-        EXECUTE ('INSERT INTO customer_task (title, state_id, digital_solution_id, company_id, description, files, images, author_id, plan_start_date, fact_start_date, plan_end_date, fact_end_date, result, options) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14)  RETURNING *;')
+        EXECUTE ('INSERT INTO customer_task (title, state_id, description, files, images, customer_id, request_id, system_id, digital_solution_id, functional_requirement_id, bug_id, plan_start_date, plan_end_date, result, options) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15)  RETURNING *;')
 		INTO customer_taskRow
 		USING
 			(params ->> 'title')::text,
 			coalesce((params ->> 'state_id')::int, 1)::int,
-			(params ->> 'digital_solution_id')::int,
-			(params ->> 'company_id')::int,
 			(params ->> 'description')::text,
 			(params -> 'files')::jsonb,
 			(params -> 'images')::jsonb,
-			(params ->> 'author_id')::int,
+			(params ->> 'customer_id')::int,
+			(params ->> 'request_id')::int,
+			(params ->> 'system_id')::int,
+			(params ->> 'digital_solution_id')::int,
+			(params ->> 'functional_requirement_id')::int,
+			(params ->> 'bug_id')::int,
 			(params ->> 'plan_start_date')::timestamp,
-			(params ->> 'fact_start_date')::timestamp,
 			(params ->> 'plan_end_date')::timestamp,
-			(params ->> 'fact_end_date')::timestamp,
 			(params ->> 'result')::text,
 			coalesce(params -> 'options', '{}')::jsonb;
 
@@ -73,16 +83,17 @@ BEGIN
         updateValue = '' || update_str_from_json(params, ARRAY [
 			['title', 'title', 'text'],
 			['state_id', 'state_id', 'number'],
-			['digital_solution_id', 'digital_solution_id', 'number'],
-			['company_id', 'company_id', 'number'],
 			['description', 'description', 'text'],
 			['files', 'files', 'jsonb'],
 			['images', 'images', 'jsonb'],
-			['author_id', 'author_id', 'number'],
+			['customer_id', 'customer_id', 'number'],
+			['request_id', 'request_id', 'number'],
+			['system_id', 'system_id', 'number'],
+			['digital_solution_id', 'digital_solution_id', 'number'],
+			['functional_requirement_id', 'functional_requirement_id', 'number'],
+			['bug_id', 'bug_id', 'number'],
 			['plan_start_date', 'plan_start_date', 'timestamp'],
-			['fact_start_date', 'fact_start_date', 'timestamp'],
 			['plan_end_date', 'plan_end_date', 'timestamp'],
-			['fact_end_date', 'fact_end_date', 'timestamp'],
 			['result', 'result', 'text'],
             ['options', 'options', 'jsonb'],
             ['deleted', 'deleted', 'bool']

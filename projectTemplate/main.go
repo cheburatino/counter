@@ -14,6 +14,7 @@ import (
 	"github.com/cheburatino/electron_is/projectTemplate/docs/ctlgDigitalSolutionState"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/ctlgElectronSkill"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/ctlgFunctionalRequirementState"
+	"github.com/cheburatino/electron_is/projectTemplate/docs/ctlgRequestPriority"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/ctlgRequestState"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/ctlgTaskRole"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/ctlgTaskState"
@@ -34,6 +35,7 @@ import (
 	"github.com/cheburatino/electron_is/projectTemplate/docs/request"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/requestCustomerAgentLink"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/system"
+	"github.com/cheburatino/electron_is/projectTemplate/docs/systemCustomerAgentLink"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/task"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/taskSpecialistLink"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/time"
@@ -64,6 +66,7 @@ func getProject() t.ProjectType {
 	p.Docs = []t.DocType{
 		ctlgElectronSkill.GetDoc(p),
 		ctlgRequestState.GetDoc(p),
+		ctlgRequestPriority.GetDoc(p),
 		ctlgTimeType.GetDoc(p),
 		ctlgDigitalSolutionState.GetDoc(p),
 		ctlgDigitalSolutionSpecialistRole.GetDoc(p),
@@ -89,6 +92,7 @@ func getProject() t.ProjectType {
 		customerTask.GetDoc(p),
 		bug.GetDoc(p),
 		taskSpecialistLink.GetDoc(p),
+		systemCustomerAgentLink.GetDoc(p),
 		requestCustomerAgentLink.GetDoc(p),
 		functionalRequirementCustomerAgentLink.GetDoc(p),
 		digitalSolutionSpecialistLink.GetDoc(p),
@@ -139,6 +143,7 @@ func getProject() t.ProjectType {
 		{Text: "Справочники", Icon: "image/catalog.svg", IsFolder: true, Roles: []string{utils.RoleAdmin}, LinkList: []t.VueMenu{
 			{Url: "users", Text: "Пользователи", Icon: "image/user.svg"},
 			{Text: "Статусы запросов", Url: "ctlg_request_state"},
+			{Text: "Приоритеты запросов", Url: "ctlg_request_priority"},
 			{Text: "Статусы функциональных требований", Url: "ctlg_functional_requirement_state"},
 			{Text: "Статусы цифровых решений", Url: "ctlg_digital_solution_state"},
 			{Text: "Роли специалистов в цифровых решениях", Url: "ctlg_digital_solution_specialist_role"},
@@ -147,6 +152,7 @@ func getProject() t.ProjectType {
 			{Text: "Роли в задачах", Url: "ctlg_task_role"},
 			{Text: "Статусы дел", Url: "ctlg_work_state"},
 			{Text: "Статусы задач заказчиков", Url: "ctlg_customer_task_state"},
+			{Text: "Статусы багов", Url: "ctlg_bug_state"},
 		}},
 	}
 	p.FillSideMenu()

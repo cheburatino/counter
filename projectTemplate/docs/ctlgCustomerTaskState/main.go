@@ -7,8 +7,8 @@ import (
 
 const (
 	name            = "ctlg_customer_task_state"
-	name_ru         = "статус задачи клиента"
-	name_ru_plural  = "статусы задач клиентов"
+	name_ru         = "статус задачи заказчика"
+	name_ru_plural  = "статусы задач заказчиков"
 	menu_icon       = "image/catalog.svg"
 	breadcrumb_icon = "fas fa-list-ul"
 )

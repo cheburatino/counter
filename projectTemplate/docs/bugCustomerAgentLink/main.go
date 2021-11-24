@@ -20,7 +20,7 @@ func GetDoc(project *t.ProjectType) t.DocType {
 		NameRu:     name_ru,
 		PathPrefix: "docs",
 		Flds: []t.FldType{
-			t.GetFldRef("request_id", "запрос", "request", [][]int{{2, 1}}),
+			t.GetFldRef("bug_id", "баг", "bug", [][]int{{2, 1}}),
 			t.GetFldRef("customer_agent_id", "представитель заказчика", "man", [][]int{{2, 2}}),
 			t.GetFldString("description", "описание", 0, [][]int{{3, 1}}, "col-8"),
 			t.GetFldRef("author_id", "автор", "man", [][]int{{4, 1}}),

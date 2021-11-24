@@ -13,15 +13,15 @@
                 <router-link :to="'/task/' + v.id" style="cursor: pointer">
                     <q-item-section avatar>
                         <q-avatar rounded>
-                            <img src="image/task.svg" alt="">
+                            <img src="image/bug.png" alt="">
                         </q-avatar>
                     </q-item-section>
                 </router-link>
                 <q-item-section>
                     
-                <q-item-label>{{v.title}}</q-item-label>
-                <q-item-caption>{{v.state}}</q-item-caption>
-            
+               <q-item-label>{{v.title}}</q-item-label>
+               <q-item-label caption><q-badge color="orange">{{v.options.title.state_title}}</q-badge></q-item-label>
+           
                 </q-item-section>
                  <q-item-section side v-if="!readonly">
                     <q-icon :name="deleted ? 'done' : 'delete'" size="xs" class="cursor-pointer" color="grey" @click="removeRecover(v)"/>
@@ -40,8 +40,6 @@
                 <q-card-section>
                     
                     <q-input outlined type='text' v-model="item.title" :label="$t('task.title')" autogrow :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
-                    
-                    <comp-fld-ref-search outlined pgMethod="ctlg_task_type_list" :label="$t('task.type_id')" :item='item.type_title' :itemId='item.type_id' :ext='{}' @update="v=> item.type_id = v.id" @clear="item.type_id = null" :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
                     
                 </q-card-section>
                 <q-card-actions align="right" class="bg-white text-teal">
@@ -62,7 +60,7 @@
                 list: [],
                 isShowAddDialog: false,
                 deleted: false,
-                item: {title: null, type_id: null, },
+                item: {title: null, },
             }
         },
         methods: {
@@ -71,7 +69,7 @@
             },
             reload(isDeleted) {
                 !isDeleted ? this.deleted = false : this.deleted = true
-                this.$utils.callPgMethod('task_list', {'digital_solution_id': this.id, deleted: this.deleted, 'order_by': 'created_at desc', }, (result) => this.list = result)
+                this.$utils.callPgMethod('task_list', {'functional_requirement_id': this.id, deleted: this.deleted, 'order_by': 'created_at desc', }, (result) => this.list = result)
             },
             saveNew() {
                 
@@ -79,20 +77,14 @@
                     this.$q.notify({type: 'negative', message: 'не заполнено поле: "название"'})
                     return
                 }
-                    if (!this.item.type_id) {
-                    this.$q.notify({type: 'negative', message: 'не заполнено поле: "тип задачи"'})
-                    return
-                }
-                let params = Object.assign({id: -1, digital_solution_id: this.id}, this.item)
+                let params = Object.assign({id: -1, functional_requirement_id: this.id}, this.item)
                 
-                    
                     
                 // если IsStateMachine то task_create, в остальных случаях task_update
                 this.$utils.callPgMethod('task_update', params, () => {
                     this.isShowAddDialog = false
                     
                     this.item.title = null 
-                    this.item.type_id = null 
                     this.reload()
                 })
             },

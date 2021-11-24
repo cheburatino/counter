@@ -9,7 +9,6 @@ $function$
 
 DECLARE
     checkMsg JSONB;
-
     result JSONB;
 
 BEGIN

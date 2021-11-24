@@ -19,8 +19,8 @@
                 </router-link>
                 <q-item-section>
                     
-                <q-item-label>{{v.title}}</q-item-label>
-            
+               <q-item-label>{{v.title}}</q-item-label>
+           
                 </q-item-section>
                  <q-item-section side v-if="!readonly">
                     <q-icon :name="deleted ? 'done' : 'delete'" size="xs" class="cursor-pointer" color="grey" @click="removeRecover(v)"/>

@@ -1,12 +1,16 @@
 
 export default {
- 		state_id: 'статус',
- 		digital_solution_id: 'цифровое решение',
- 		name: 'баг',
- 		name_plural_deleted: 'удаленные Баги',
- 		description: 'описание',
- 		functional_requirement_id: 'функциональное требование',
+ 		customer_id: 'заказчик',
  		system_id: 'система',
+ 		digital_solution_id: 'цифровое решение',
+ 		result: 'результат',
  		name_plural: 'Баги',
+ 		name_plural_deleted: 'удаленные Баги',
+ 		state_id: 'статус',
+ 		files: 'файлы',
+ 		functional_requirement_id: 'функциональное требование',
+ 		name: 'баг',
  		title: 'название',
+ 		description: 'описание',
+ 		images: 'изображения',
 }

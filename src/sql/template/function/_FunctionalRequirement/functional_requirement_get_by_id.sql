@@ -24,9 +24,11 @@ BEGIN
 
     with t1 as (select * from functional_requirement where id = (params ->> 'id')::int),
 		t2 as (select t1.*, c.title as state_title from t1 left join ctlg_functional_requirement_state c on c.id = t1.state_id),
-		t3 as (select t2.*, c.title as request_title from t2 left join request c on c.id = t2.request_id),
-		t4 as (select t3.*, c.title as digital_solution_title from t3 left join digital_solution c on c.id = t3.digital_solution_id)
- 	select row_to_json(t4.*)::jsonb into result from t4;
+		t3 as (select t2.*, c.title as customer_title from t2 left join company c on c.id = t2.customer_id),
+		t4 as (select t3.*, c.title as request_title from t3 left join request c on c.id = t3.request_id),
+		t5 as (select t4.*, c.title as system_title from t4 left join system c on c.id = t4.system_id),
+		t6 as (select t5.*, c.title as digital_solution_title from t5 left join digital_solution c on c.id = t5.digital_solution_id)
+ 	select row_to_json(t6.*)::jsonb into result from t6;
 
     -- случай когда записи с таким id не найдено
     IF result ->> 'id' ISNULL

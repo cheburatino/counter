@@ -22,11 +22,11 @@
 		</router-link>
 	
         
-        <q-item-section>
-          <q-item-label lines="1" >{{item.title}}</q-item-label>
-          
-        </q-item-section>
-	
+				 <q-item-section>
+				    <q-item-label lines="1">{{item.title}}</q-item-label>
+					<q-item-label caption><q-badge color="positive">{{item.options.title.customer_title}}</q-badge></q-item-label>
+				 </q-item-section>
+			
         <q-item-section top side>
           <comp-item-dropdown-btn :item="item" itemProp="title" :is-edit="true" :is-delete="!(false || false)" fkProp=""
                                   pg-method="system_update"

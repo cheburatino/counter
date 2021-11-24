@@ -1,4 +1,4 @@
--- создание человек
+-- создание контакт
 
 DROP FUNCTION IF EXISTS man_update(params JSONB);
 CREATE OR REPLACE FUNCTION man_update(params JSONB)

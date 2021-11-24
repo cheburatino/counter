@@ -23,11 +23,15 @@ BEGIN
     END IF;
 
     with t1 as (select * from task where id = (params ->> 'id')::int),
-		t2 as (select t1.*, c.title as state_title from t1 left join ctlg_task_state c on c.id = t1.state),
-		t3 as (select t2.*, c.title as digital_solution_title from t2 left join digital_solution c on c.id = t2.digital_solution_id),
-		t4 as (select t3.*, c.title as type_title from t3 left join ctlg_task_type c on c.id = t3.type_id),
-		t5 as (select t4.*, c.title as author_title from t4 left join man c on c.id = t4.author_id)
- 	select row_to_json(t5.*)::jsonb into result from t5;
+		t2 as (select t1.*, c.title as type_title from t1 left join ctlg_task_type c on c.id = t1.type_id),
+		t3 as (select t2.*, c.title as state_title from t2 left join ctlg_task_state c on c.id = t2.state_id),
+		t4 as (select t3.*, c.title as customer_title from t3 left join company c on c.id = t3.customer_id),
+		t5 as (select t4.*, c.title as request_title from t4 left join request c on c.id = t4.request_id),
+		t6 as (select t5.*, c.title as system_title from t5 left join system c on c.id = t5.system_id),
+		t7 as (select t6.*, c.title as digital_solution_title from t6 left join digital_solution c on c.id = t6.digital_solution_id),
+		t8 as (select t7.*, c.title as functional_requirement_title from t7 left join functional_requirement c on c.id = t7.functional_requirement_id),
+		t9 as (select t8.*, c.title as bug_title from t8 left join bug c on c.id = t8.bug_id)
+ 	select row_to_json(t9.*)::jsonb into result from t9;
 
     -- случай когда записи с таким id не найдено
     IF result ->> 'id' ISNULL
