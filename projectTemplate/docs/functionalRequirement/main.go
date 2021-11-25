@@ -29,7 +29,7 @@ func GetDoc(project *t.ProjectType) t.DocType {
 			t.GetFldImgList("images", "изображения", [][]int{{4, 2}}, t.FldVueImgParams{}).SetReadonly("currentUser.role?.includes(`customer`)"),
 			t.GetFldString("description_for_dev", "описание для разработки", 0, [][]int{{5, 1}}, "col-8").SetVif("!currentUser.role?.includes(`customer`)"),
 			t.GetFldFiles("files_for_dev", "файлы для разработки", [][]int{{6, 1}}, t.FldVueFilesParams{}),
-			t.GetFldImgList("imagesfor_dev", "изображения для разработки", [][]int{{6, 2}}, t.FldVueImgParams{}).SetReadonly("currentUser.role?.includes(`customer`)"),
+			t.GetFldImgList("images_for_dev", "изображения для разработки", [][]int{{6, 2}}, t.FldVueImgParams{}).SetReadonly("currentUser.role?.includes(`customer`)"),
 			t.GetFldJsonbCompositionWithoutFld([][]int{{7, 1}}, "col-4", "comp-executor"),
 			t.GetFldSimpleHtml([][]int{{8, 1}}, "", "<p>Специалисты</p>"),
 			// Задачи. Описание контрола после doc.Init {{8, 2}}

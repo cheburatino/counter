@@ -60,7 +60,7 @@ BEGIN
         END IF;
         
 
-        EXECUTE ('INSERT INTO functional_requirement (title, state_id, description, files, images, description_for_dev, files_for_dev, imagesfor_dev, customer_id, system_id, request_id, digital_solution_id, result, options) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14)  RETURNING *;')
+        EXECUTE ('INSERT INTO functional_requirement (title, state_id, description, files, images, description_for_dev, files_for_dev, images_for_dev, customer_id, system_id, request_id, digital_solution_id, result, options) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14)  RETURNING *;')
 		INTO functional_requirementRow
 		USING
 			(params ->> 'title')::text,
@@ -70,7 +70,7 @@ BEGIN
 			(params -> 'images')::jsonb,
 			(params ->> 'description_for_dev')::text,
 			(params -> 'files_for_dev')::jsonb,
-			(params -> 'imagesfor_dev')::jsonb,
+			(params -> 'images_for_dev')::jsonb,
 			(params ->> 'customer_id')::int,
 			(params ->> 'system_id')::int,
 			(params ->> 'request_id')::int,
@@ -89,7 +89,7 @@ BEGIN
 			['images', 'images', 'jsonb'],
 			['description_for_dev', 'description_for_dev', 'text'],
 			['files_for_dev', 'files_for_dev', 'jsonb'],
-			['imagesfor_dev', 'imagesfor_dev', 'jsonb'],
+			['images_for_dev', 'images_for_dev', 'jsonb'],
 			['customer_id', 'customer_id', 'number'],
 			['system_id', 'system_id', 'number'],
 			['request_id', 'request_id', 'number'],

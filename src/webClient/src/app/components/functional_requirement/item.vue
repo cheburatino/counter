@@ -50,7 +50,7 @@
           <comp-fld-files v-if="this.id != 'new'" fldName='files_for_dev' :label="$t('functional_requirement.files_for_dev')" :fld='item.files_for_dev' :ext = '{tableName: "functional_requirement", tableId: this.id}' @update="v=> item.files_for_dev = v" :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
       </div>
       <div class="col-md-4 col-sm-6 col-xs-12">
-          <comp-fld-img-list v-if="this.id != 'new'" :label="$t('functional_requirement.imagesfor_dev')" :fld='item.imagesfor_dev' :ext = '{tableName: "functional_requirement", tableId: this.id, fldName: "imagesfor_dev"}' @update="v=> item.imagesfor_dev = v" :readonly='currentUser.role?.includes(`customer`)'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
+          <comp-fld-img-list v-if="this.id != 'new'" :label="$t('functional_requirement.images_for_dev')" :fld='item.images_for_dev' :ext = '{tableName: "functional_requirement", tableId: this.id, fldName: "images_for_dev"}' @update="v=> item.images_for_dev = v" :readonly='currentUser.role?.includes(`customer`)'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
       </div>
       </div>
       
@@ -146,14 +146,14 @@
 </template>
 
 <script>
-	import compCustomerAgent from './comp/customerAgent.vue'
-	import compRelation from './comp/relation.vue'
 	import compResult from './comp/result.vue'
 	import taskListRefListWidget from './comp/taskListRefListWidget.vue'
 	import customerTaskListRefListWidget from './comp/customerTaskListRefListWidget.vue'
 	import bugListRefListWidget from './comp/bugListRefListWidget.vue'
 	import compExecutor from './comp/executor.vue'
 	import compCustomer from './comp/customer.vue'
+	import compCustomerAgent from './comp/customerAgent.vue'
+	import compRelation from './comp/relation.vue'
     import currentUserMixin from '../../../app/mixins/currentUser'
     export default {
         props: ['id', 'isOpenInDialog'],
@@ -175,7 +175,7 @@
                         {name: 'images', label: 'изображения'},
                         {name: 'description_for_dev', label: 'описание для разработки'},
                         {name: 'files_for_dev', label: 'файлы для разработки'},
-                        {name: 'imagesfor_dev', label: 'изображения для разработки'},
+                        {name: 'images_for_dev', label: 'изображения для разработки'},
                         {name: 'customer_id', label: 'заказчик'},
                         {name: 'system_id', label: 'система'},
                         {name: 'request_id', label: 'запрос'},
