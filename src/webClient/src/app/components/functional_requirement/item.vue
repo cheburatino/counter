@@ -47,10 +47,10 @@
       
       <div class="row q-col-gutter-md q-mb-sm">
       <div class="col-md-4 col-sm-6 col-xs-12">
-          <comp-fld-files v-if="this.id != 'new'" fldName='files' :label="$t('functional_requirement.files')" :fld='item.files' :ext = '{tableName: "functional_requirement", tableId: this.id}' @update="v=> item.files = v" :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
+          <comp-fld-files v-if="this.id != 'new'" fldName='files_for_dev' :label="$t('functional_requirement.files_for_dev')" :fld='item.files_for_dev' :ext = '{tableName: "functional_requirement", tableId: this.id}' @update="v=> item.files_for_dev = v" :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
       </div>
       <div class="col-md-4 col-sm-6 col-xs-12">
-          <comp-fld-img-list v-if="this.id != 'new'" :label="$t('functional_requirement.images')" :fld='item.images' :ext = '{tableName: "functional_requirement", tableId: this.id, fldName: "images"}' @update="v=> item.images = v" :readonly='currentUser.role?.includes(`customer`)'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
+          <comp-fld-img-list v-if="this.id != 'new'" :label="$t('functional_requirement.imagesfor_dev')" :fld='item.imagesfor_dev' :ext = '{tableName: "functional_requirement", tableId: this.id, fldName: "imagesfor_dev"}' @update="v=> item.imagesfor_dev = v" :readonly='currentUser.role?.includes(`customer`)'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
       </div>
       </div>
       
@@ -157,7 +157,7 @@
     import currentUserMixin from '../../../app/mixins/currentUser'
     export default {
         props: ['id', 'isOpenInDialog'],
-        components: {compCustomerAgent, compRelation, compResult, taskListRefListWidget, customerTaskListRefListWidget, bugListRefListWidget, compExecutor, compCustomer},
+        components: {compCustomer, compCustomerAgent, compRelation, compResult, taskListRefListWidget, customerTaskListRefListWidget, bugListRefListWidget, compExecutor},
         mixins: [currentUserMixin,],
         computed: {
             docUrl: function() {
@@ -174,8 +174,8 @@
                         {name: 'files', label: 'файлы'},
                         {name: 'images', label: 'изображения'},
                         {name: 'description_for_dev', label: 'описание для разработки'},
-                        {name: 'files', label: 'файлы'},
-                        {name: 'images', label: 'изображения'},
+                        {name: 'files_for_dev', label: 'файлы для разработки'},
+                        {name: 'imagesfor_dev', label: 'изображения для разработки'},
                         {name: 'customer_id', label: 'заказчик'},
                         {name: 'system_id', label: 'система'},
                         {name: 'request_id', label: 'запрос'},

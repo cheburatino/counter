@@ -28,8 +28,8 @@ func GetDoc(project *t.ProjectType) t.DocType {
 			t.GetFldFiles("files", "файлы", [][]int{{4, 1}}, t.FldVueFilesParams{}).SetReadonly("currentUser.role?.includes(`customer`)"),
 			t.GetFldImgList("images", "изображения", [][]int{{4, 2}}, t.FldVueImgParams{}).SetReadonly("currentUser.role?.includes(`customer`)"),
 			t.GetFldString("description_for_dev", "описание для разработки", 0, [][]int{{5, 1}}, "col-8").SetVif("!currentUser.role?.includes(`customer`)"),
-			t.GetFldFiles("files", "файлы", [][]int{{6, 1}}, t.FldVueFilesParams{}),
-			t.GetFldImgList("images", "изображения", [][]int{{6, 2}}, t.FldVueImgParams{}).SetReadonly("currentUser.role?.includes(`customer`)"),
+			t.GetFldFiles("files_for_dev", "файлы для разработки", [][]int{{6, 1}}, t.FldVueFilesParams{}),
+			t.GetFldImgList("imagesfor_dev", "изображения для разработки", [][]int{{6, 2}}, t.FldVueImgParams{}).SetReadonly("currentUser.role?.includes(`customer`)"),
 			t.GetFldJsonbCompositionWithoutFld([][]int{{7, 1}}, "col-4", "comp-executor"),
 			t.GetFldSimpleHtml([][]int{{8, 1}}, "", "<p>Специалисты</p>"),
 			// Задачи. Описание контрола после doc.Init {{8, 2}}
@@ -118,7 +118,7 @@ func GetDoc(project *t.ProjectType) t.DocType {
 		Label:      "задачи заказчика",        // название списка, которе выводится на экране
 		FldName:    "customer_task_list",      // название поля. Любое, в формате snake_case. На основе этого названия формируется название компоненты во vue.
 		TableName:  "customer_task",           // название связанной таблицы, из которой будут выгружаться записи
-		RefFldName: "digital_solution_id",     // название поля в связанной таблицы, по которому осуществляется связь
+		RefFldName: "functional_requirement_id",     // название поля в связанной таблицы, по которому осуществляется связь
 		Avatar:     "image/customer_task.png", // иконка, которая выводится в списке
 		NewFlds: []t.FldType{
 			t.GetFldString("title", "название", 300, [][]int{{1, 1}}).SetIsRequired(),
