@@ -71,7 +71,7 @@
             },
             reload(isDeleted) {
                 !isDeleted ? this.deleted = false : this.deleted = true
-                this.$utils.callPgMethod('task_list', {'digital_solution_id': this.id, deleted: this.deleted, 'order_by': 'created_at desc', }, (result) => this.list = result)
+                this.$utils.callPgMethod('task_list', {'bug_id': this.id, deleted: this.deleted, 'order_by': 'created_at desc', }, (result) => this.list = result)
             },
             saveNew() {
                 
@@ -83,7 +83,7 @@
                     this.$q.notify({type: 'negative', message: 'не заполнено поле: "тип задачи"'})
                     return
                 }
-                let params = Object.assign({id: -1, digital_solution_id: this.id}, this.item)
+                let params = Object.assign({id: -1, bug_id: this.id}, this.item)
                 
                     
                     

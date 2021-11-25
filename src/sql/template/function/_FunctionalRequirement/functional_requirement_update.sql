@@ -47,6 +47,9 @@ BEGIN
     
     
     
+    
+    
+    
 
     if (params ->> 'id')::int = -1 then
         -- проверика наличия обязательных параметров
@@ -57,7 +60,7 @@ BEGIN
         END IF;
         
 
-        EXECUTE ('INSERT INTO functional_requirement (title, state_id, description, files, images, customer_id, request_id, system_id, digital_solution_id, result, options) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)  RETURNING *;')
+        EXECUTE ('INSERT INTO functional_requirement (title, state_id, description, files, images, description_for_dev, files, images, customer_id, system_id, request_id, digital_solution_id, result, options) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14)  RETURNING *;')
 		INTO functional_requirementRow
 		USING
 			(params ->> 'title')::text,
@@ -65,9 +68,12 @@ BEGIN
 			(params ->> 'description')::text,
 			(params -> 'files')::jsonb,
 			(params -> 'images')::jsonb,
+			(params ->> 'description_for_dev')::text,
+			(params -> 'files')::jsonb,
+			(params -> 'images')::jsonb,
 			(params ->> 'customer_id')::int,
-			(params ->> 'request_id')::int,
 			(params ->> 'system_id')::int,
+			(params ->> 'request_id')::int,
 			(params ->> 'digital_solution_id')::int,
 			(params ->> 'result')::text,
 			coalesce(params -> 'options', '{}')::jsonb;
@@ -81,9 +87,12 @@ BEGIN
 			['description', 'description', 'text'],
 			['files', 'files', 'jsonb'],
 			['images', 'images', 'jsonb'],
+			['description_for_dev', 'description_for_dev', 'text'],
+			['files', 'files', 'jsonb'],
+			['images', 'images', 'jsonb'],
 			['customer_id', 'customer_id', 'number'],
-			['request_id', 'request_id', 'number'],
 			['system_id', 'system_id', 'number'],
+			['request_id', 'request_id', 'number'],
 			['digital_solution_id', 'digital_solution_id', 'number'],
 			['result', 'result', 'text'],
             ['options', 'options', 'jsonb'],
