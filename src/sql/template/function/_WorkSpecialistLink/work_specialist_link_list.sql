@@ -33,7 +33,8 @@ BEGIN
         ['ilike', 'search_text', 'search_text'],
 		['notQuoted', 'work_id', 'doc.work_id'],
 		['notQuoted', 'specialist_id', 'doc.specialist_id'],
-		['notQuoted', 'author_id', 'doc.author_id']
+		['notQuoted', 'author_id', 'doc.author_id'],
+		['notQuoted', 'role_id', 'doc.role_id']
     ]);
 
     
