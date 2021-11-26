@@ -40,6 +40,21 @@
       </div>
       
       <div class="row q-col-gutter-md q-mb-sm">
+      <div class="col-md-8 col-sm-12 col-xs-12" v-if="!currentUser.role?.includes(`customer`)">
+          <q-input outlined type='text' v-model="item.description_for_dev" :label="$t('functional_requirement.description_for_dev')" autogrow :readonly='false'  class='q-mb-sm col-md-8 col-sm-12 col-xs-12'  v-if="!currentUser.role?.includes(`customer`)" />
+      </div>
+      </div>
+      
+      <div class="row q-col-gutter-md q-mb-sm">
+      <div class="col-md-4 col-sm-6 col-xs-12">
+          <comp-fld-files v-if="this.id != 'new'" fldName='files_for_dev' :label="$t('functional_requirement.files_for_dev')" :fld='item.files_for_dev' :ext = '{tableName: "functional_requirement", tableId: this.id}' @update="v=> item.files_for_dev = v" :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
+      </div>
+      <div class="col-md-4 col-sm-6 col-xs-12">
+          <comp-fld-img-list v-if="this.id != 'new'" :label="$t('functional_requirement.images_for_dev')" :fld='item.images_for_dev' :ext = '{tableName: "functional_requirement", tableId: this.id, fldName: "images_for_dev"}' @update="v=> item.images_for_dev = v" :readonly='currentUser.role?.includes(`customer`)'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
+      </div>
+      </div>
+      
+      <div class="row q-col-gutter-md q-mb-sm">
       <div class="col-md-4 col-sm-6 col-xs-12">
           <comp-executor :item='item' />
       </div>
@@ -83,10 +98,10 @@
       
       <div class="row q-col-gutter-md q-mb-sm">
       <div class="col-md-4 col-sm-6 col-xs-12">
-          <comp-fld-ref-search outlined pgMethod="request_list" :label="$t('functional_requirement.request_id')" :item='item.request_title' :itemId='item.request_id' :ext='{"avatar":"image/request.svg","isClearable":"true","pathUrl":"/request"}' @update="v=> item.request_id = v.id" @clear="item.request_id = null" :readonly='currentUser.role?.includes(`customer`)'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
+          <comp-fld-ref-search outlined pgMethod="system_list" :label="$t('functional_requirement.system_id')" :item='item.system_title' :itemId='item.system_id' :ext='{"avatar":"image/system.svg","isClearable":"true","pathUrl":"/system"}' @update="v=> item.system_id = v.id" @clear="item.system_id = null" :readonly='currentUser.role?.includes(`customer`)'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
       </div>
       <div class="col-md-4 col-sm-6 col-xs-12">
-          <comp-fld-ref-search outlined pgMethod="system_list" :label="$t('functional_requirement.system_id')" :item='item.system_title' :itemId='item.system_id' :ext='{"avatar":"image/system.svg","isClearable":"true","pathUrl":"/system"}' @update="v=> item.system_id = v.id" @clear="item.system_id = null" :readonly='currentUser.role?.includes(`customer`)'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
+          <comp-fld-ref-search outlined pgMethod="request_list" :label="$t('functional_requirement.request_id')" :item='item.request_title' :itemId='item.request_id' :ext='{"avatar":"image/request.svg","isClearable":"true","pathUrl":"/request"}' @update="v=> item.request_id = v.id" @clear="item.request_id = null" :readonly='currentUser.role?.includes(`customer`)'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
       </div>
       </div>
       
@@ -131,7 +146,6 @@
 </template>
 
 <script>
-	import compRelation from './comp/relation.vue'
 	import compResult from './comp/result.vue'
 	import taskListRefListWidget from './comp/taskListRefListWidget.vue'
 	import customerTaskListRefListWidget from './comp/customerTaskListRefListWidget.vue'
@@ -139,10 +153,11 @@
 	import compExecutor from './comp/executor.vue'
 	import compCustomer from './comp/customer.vue'
 	import compCustomerAgent from './comp/customerAgent.vue'
+	import compRelation from './comp/relation.vue'
     import currentUserMixin from '../../../app/mixins/currentUser'
     export default {
         props: ['id', 'isOpenInDialog'],
-        components: {compExecutor, compCustomer, compCustomerAgent, compRelation, compResult, taskListRefListWidget, customerTaskListRefListWidget, bugListRefListWidget},
+        components: {compCustomer, compCustomerAgent, compRelation, compResult, taskListRefListWidget, customerTaskListRefListWidget, bugListRefListWidget, compExecutor},
         mixins: [currentUserMixin,],
         computed: {
             docUrl: function() {
@@ -158,9 +173,12 @@
                         {name: 'description', label: 'описание'},
                         {name: 'files', label: 'файлы'},
                         {name: 'images', label: 'изображения'},
+                        {name: 'description_for_dev', label: 'описание для разработки'},
+                        {name: 'files_for_dev', label: 'файлы для разработки'},
+                        {name: 'images_for_dev', label: 'изображения для разработки'},
                         {name: 'customer_id', label: 'заказчик'},
-                        {name: 'request_id', label: 'запрос'},
                         {name: 'system_id', label: 'система'},
+                        {name: 'request_id', label: 'запрос'},
                         {name: 'digital_solution_id', label: 'цифровое решение'},
                         {name: 'result', label: 'результат'},
                 ],

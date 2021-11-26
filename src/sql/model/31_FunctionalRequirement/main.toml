@@ -10,9 +10,12 @@ fields = [
 	{name="description",					type="text",	 comment="описание"},
 	{name="files",					type="jsonb",	 comment="файлы"},
 	{name="images",					type="jsonb",	 comment="изображения"},
+	{name="description_for_dev",					type="text",	 comment="описание для разработки"},
+	{name="files_for_dev",					type="jsonb",	 comment="файлы для разработки"},
+	{name="images_for_dev",					type="jsonb",	 comment="изображения для разработки"},
 	{name="customer_id",					type="int",	 comment="заказчик"},
-	{name="request_id",					type="int",	 comment="запрос"},
 	{name="system_id",					type="int",	 comment="система"},
+	{name="request_id",					type="int",	 comment="запрос"},
 	{name="digital_solution_id",					type="int",	 comment="цифровое решение"},
 	{name="result",					type="text",	 comment="результат"},
 	{name="search_text",			type="text",	comment="колонка для поиска"},
@@ -26,8 +29,8 @@ fkConstraints = [
 	{name="functional_requirement_title_already_exist", ext="UNIQUE (title)"},
 	{fld="state_id", ref="ctlg_functional_requirement_state", fk="id"},
 	{fld="customer_id", ref="company", fk="id"},
-	{fld="request_id", ref="request", fk="id"},
 	{fld="system_id", ref="system", fk="id"},
+	{fld="request_id", ref="request", fk="id"},
 	{fld="digital_solution_id", ref="digital_solution", fk="id"}
 ]
 
@@ -53,9 +56,12 @@ alterScripts = [
 	"alter table functional_requirement add column if not exists description text;",
 	"alter table functional_requirement add column if not exists files jsonb;",
 	"alter table functional_requirement add column if not exists images jsonb;",
+	"alter table functional_requirement add column if not exists description_for_dev text;",
+	"alter table functional_requirement add column if not exists files_for_dev jsonb;",
+	"alter table functional_requirement add column if not exists images_for_dev jsonb;",
 	"alter table functional_requirement add column if not exists customer_id int;",
-	"alter table functional_requirement add column if not exists request_id int;",
 	"alter table functional_requirement add column if not exists system_id int;",
+	"alter table functional_requirement add column if not exists request_id int;",
 	"alter table functional_requirement add column if not exists digital_solution_id int;",
 	"alter table functional_requirement add column if not exists result text;",
 	"alter table functional_requirement add column if not exists search_text text;"
