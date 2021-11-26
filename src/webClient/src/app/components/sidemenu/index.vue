@@ -100,6 +100,7 @@
 								{icon: '', text: 'Статусы запросов', url: '/ctlg_request_state', roles: []},
 								{icon: '', text: 'Приоритеты запросов', url: '/ctlg_request_priority', roles: []},
 								{icon: '', text: 'Статусы функциональных требований', url: '/ctlg_functional_requirement_state', roles: []},
+								{icon: '', text: 'Роли специалистов в функциональных требованиях', url: '/ctlg_functional_requirement_specialist_role', roles: []},
 								{icon: '', text: 'Статусы цифровых решений', url: '/ctlg_digital_solution_state', roles: []},
 								{icon: '', text: 'Роли специалистов в цифровых решениях', url: '/ctlg_digital_solution_specialist_role', roles: []},
 								{icon: '', text: 'Типы задач', url: '/ctlg_task_type', roles: []},

@@ -13,6 +13,7 @@ import (
 	"github.com/cheburatino/electron_is/projectTemplate/docs/ctlgDigitalSolutionSpecialistRole"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/ctlgDigitalSolutionState"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/ctlgElectronSkill"
+	"github.com/cheburatino/electron_is/projectTemplate/docs/ctlgFunctionalRequirementSpecialistRole"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/ctlgFunctionalRequirementState"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/ctlgRequestPriority"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/ctlgRequestState"
@@ -28,6 +29,7 @@ import (
 	"github.com/cheburatino/electron_is/projectTemplate/docs/digitalSolutionSpecialistLink"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/functionalRequirement"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/functionalRequirementCustomerAgentLink"
+	"github.com/cheburatino/electron_is/projectTemplate/docs/functionalRequirementSpecialistLink"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/invoice"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/man"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/meeting"
@@ -71,6 +73,7 @@ func getProject() t.ProjectType {
 		ctlgDigitalSolutionState.GetDoc(p),
 		ctlgDigitalSolutionSpecialistRole.GetDoc(p),
 		ctlgFunctionalRequirementState.GetDoc(p),
+		ctlgFunctionalRequirementSpecialistRole.GetDoc(p),
 		ctlgTaskType.GetDoc(p),
 		ctlgTaskState.GetDoc(p),
 		ctlgTaskRole.GetDoc(p),
@@ -96,6 +99,7 @@ func getProject() t.ProjectType {
 		requestCustomerAgentLink.GetDoc(p),
 		functionalRequirementCustomerAgentLink.GetDoc(p),
 		digitalSolutionSpecialistLink.GetDoc(p),
+		functionalRequirementSpecialistLink.GetDoc(p),
 		digitalSolutionCustomerAgentLink.GetDoc(p),
 		customerTaskCustomerAgentLink.GetDoc(p),
 		bugCustomerAgentLink.GetDoc(p),
@@ -145,6 +149,7 @@ func getProject() t.ProjectType {
 			{Text: "Статусы запросов", Url: "ctlg_request_state"},
 			{Text: "Приоритеты запросов", Url: "ctlg_request_priority"},
 			{Text: "Статусы функциональных требований", Url: "ctlg_functional_requirement_state"},
+			{Text: "Роли специалистов в функциональных требованиях", Url: "ctlg_functional_requirement_specialist_role"},
 			{Text: "Статусы цифровых решений", Url: "ctlg_digital_solution_state"},
 			{Text: "Роли специалистов в цифровых решениях", Url: "ctlg_digital_solution_specialist_role"},
 			{Text: "Типы задач", Url: "ctlg_task_type"},
