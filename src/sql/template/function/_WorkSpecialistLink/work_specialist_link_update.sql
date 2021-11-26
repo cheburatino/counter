@@ -30,17 +30,19 @@ BEGIN
     
     
     
+    
 
     if (params ->> 'id')::int = -1 then
         
 
-        EXECUTE ('INSERT INTO work_specialist_link (work_id, specialist_id, description, author_id, options) VALUES ($1, $2, $3, $4, $5)  ON CONFLICT (work_id, specialist_id) DO UPDATE SET options=$5, deleted=false, description=$3 RETURNING *;')
+        EXECUTE ('INSERT INTO work_specialist_link (work_id, specialist_id, description, author_id, role_id, options) VALUES ($1, $2, $3, $4, $5, $6)  ON CONFLICT (work_id, specialist_id) DO UPDATE SET options=$6, deleted=false, description=$3 RETURNING *;')
 		INTO work_specialist_linkRow
 		USING
 			(params ->> 'work_id')::int,
 			(params ->> 'specialist_id')::int,
 			(params ->> 'description')::text,
 			(params ->> 'author_id')::int,
+			(params ->> 'role_id')::int,
 			coalesce(params -> 'options', '{}')::jsonb;
 
         
@@ -51,6 +53,7 @@ BEGIN
 			['specialist_id', 'specialist_id', 'number'],
 			['description', 'description', 'text'],
 			['author_id', 'author_id', 'number'],
+			['role_id', 'role_id', 'number'],
             ['options', 'options', 'jsonb'],
             ['deleted', 'deleted', 'bool']
             ]);

@@ -31,6 +31,12 @@
       </div>
       </div>
       
+      <div class="row q-col-gutter-md q-mb-sm">
+      <div class="col-md-4 col-sm-6 col-xs-12">
+          <comp-fld-ref-search outlined pgMethod="ctlg_work_specialist_role_list" :label="$t('work_specialist_link.role_id')" :item='item.role_title' :itemId='item.role_id' :ext='{}' @update="v=> item.role_id = v.id" @clear="item.role_id = null" :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
+      </div>
+      </div>
+      
 
       <!--  кнопки   -->
       <comp-item-btn-save v-if="!isOpenInDialog" @save="save" :readonly="false" @cancel="$router.push(docUrl)"/>
@@ -63,6 +69,7 @@
                         {name: 'specialist_id', label: 'специалист'},
                         {name: 'description', label: 'описание'},
                         {name: 'author_id', label: 'автор'},
+                        {name: 'role_id', label: 'роль'},
                 ],
                 optionsFlds: [],
                 

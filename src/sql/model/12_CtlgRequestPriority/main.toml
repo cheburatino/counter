@@ -26,9 +26,9 @@ triggers = [
 
 
 methods = [
+	"ctlg_request_priority_get_by_id",
 	"ctlg_request_priority_list",
 	"ctlg_request_priority_update",
-	"ctlg_request_priority_get_by_id",
 	"ctlg_request_priority_trigger_before",
 	"ctlg_request_priority_trigger_after"
 ]

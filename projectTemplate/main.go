@@ -21,6 +21,7 @@ import (
 	"github.com/cheburatino/electron_is/projectTemplate/docs/ctlgTaskState"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/ctlgTaskType"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/ctlgTimeType"
+	"github.com/cheburatino/electron_is/projectTemplate/docs/ctlgWorkSpecialistRole"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/ctlgWorkState"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/customerTask"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/customerTaskCustomerAgentLink"
@@ -78,6 +79,7 @@ func getProject() t.ProjectType {
 		ctlgTaskState.GetDoc(p),
 		ctlgTaskRole.GetDoc(p),
 		ctlgWorkState.GetDoc(p),
+		ctlgWorkSpecialistRole.GetDoc(p),
 		ctlgBugState.GetDoc(p),
 		ctlgCustomerTaskState.GetDoc(p),
 		meeting.GetDoc(p),
@@ -156,6 +158,7 @@ func getProject() t.ProjectType {
 			{Text: "Статусы задач", Url: "ctlg_task_state"},
 			{Text: "Роли в задачах", Url: "ctlg_task_role"},
 			{Text: "Статусы дел", Url: "ctlg_work_state"},
+			{Text: "Роли специалистов в делах", Url: "ctlg_work_specialist_role"},
 			{Text: "Статусы задач заказчиков", Url: "ctlg_customer_task_state"},
 			{Text: "Статусы багов", Url: "ctlg_bug_state"},
 		}},

@@ -15,7 +15,7 @@ const (
 
 func GetDoc(project *t.ProjectType) t.DocType {
 	doc := t.DocType{
-		Project: project,
+		Project:    project,
 		Name:       name,
 		NameRu:     name_ru,
 		PathPrefix: "docs",
@@ -24,6 +24,7 @@ func GetDoc(project *t.ProjectType) t.DocType {
 			t.GetFldRef("specialist_id", "специалист", "man", [][]int{{2, 2}}),
 			t.GetFldString("description", "описание", 0, [][]int{{3, 1}}, "col-8"),
 			t.GetFldRef("author_id", "автор", "man", [][]int{{4, 1}}),
+			t.GetFldRef("role_id", "роль", "ctlg_work_specialist_role", [][]int{{5, 1}}),
 		},
 		Vue: t.DocVue{
 			RouteName:      name,
@@ -37,7 +38,7 @@ func GetDoc(project *t.ProjectType) t.DocType {
 			IsSearchText:    true,
 			IsBeforeTrigger: true,
 			IsAfterTrigger:  true,
-			IsUniqLink: true,
+			IsUniqLink:      true,
 		},
 	}
 
