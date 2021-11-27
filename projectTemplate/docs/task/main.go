@@ -58,6 +58,7 @@ func GetDoc(project *t.ProjectType) t.DocType {
 			},
 		},
 		Templates: map[string]*t.DocTemplate{
+			"sql_function_list.sql":      {},
 			"sql_function_get_specialist.sql":      {},
 			"sql_function_get_specialist_role.sql": {},
 			"webClient_index.vue":                  {},

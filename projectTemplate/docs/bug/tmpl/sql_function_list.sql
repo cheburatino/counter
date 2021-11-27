@@ -42,6 +42,9 @@ BEGIN
         whereStr = whereStr || format(' AND id = ANY(%s) ', quote_literal((select coalesce(array_agg(bug_id), '{}') from bug_customer_agent_link where customer_agent_id = (select id from man where user_table_id = (params->>'user_id')::int) and deleted=false)));
     end if;
 
+    -- показываем только активные
+    whereStr = whereStr || ' and state_id != 4';
+
     -- финальная сборка строки с условиями выборки (build_query_part_for_list - функция из папки base)
     condQueryStr = '' || whereStr || build_query_part_for_list(params);
 
@@ -53,7 +56,3 @@ BEGIN
 
 END
 $function$;
-
-
-
-
