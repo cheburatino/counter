@@ -101,6 +101,8 @@ func GetDoc(project *t.ProjectType) t.DocType {
 				 <q-item-section>
 				    <q-item-label lines="1">{{item.title}}</q-item-label>
 					<q-item-label caption><q-badge color="orange">{{item.options.title.state_title}}</q-badge> <q-badge>{{item.options.title.system_title}}</q-badge></q-item-label>
+					<q-item-label caption>ФТ: {{item.options.title.functional_requirement_title}}</q-item-label>
+					<q-item-label caption>Баг: {{item.options.title.bug_title}}</q-item-label>
 				 </q-item-section>
 			`
 		},

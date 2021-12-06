@@ -44,6 +44,8 @@ func GetDoc(project *t.ProjectType) t.DocType {
 			// Баги. Описание контрола после doc.Init {{14, 2}}
 			t.GetFldJsonbCompositionWithoutFld([][]int{{15, 1}}, "col-4", "comp-result"),
 			t.GetFldString("result", "результат", 0, [][]int{{16, 1}}, "col-8").SetReadonly("currentUser.role?.includes(`customer`)"),
+			t.GetFldFiles("result_file", "файлы результата", [][]int{{17, 1}}, t.FldVueFilesParams{}),
+			t.GetFldImgList("result_image", "изображения результата", [][]int{{17, 2}}, t.FldVueImgParams{}),
 		},
 		Vue: t.DocVue{
 			RouteName:      name,
@@ -134,7 +136,7 @@ func GetDoc(project *t.ProjectType) t.DocType {
 		FldName:    "bug_list",              // название поля. Любое, в формате snake_case. На основе этого названия формируется название компоненты во vue.
 		TableName:  "bug",                   // название связанной таблицы, из которой будут выгружаться записи
 		RefFldName: "functional_requirement_id", // название поля в связанной таблицы, по которому осуществляется связь
-		Avatar:     "image/bug.png",         // иконка, которая выводится в списке
+		Avatar:     "image/functional_requirement.png",         // иконка, которая выводится в списке
 		NewFlds: []t.FldType{
 			t.GetFldString("title", "название", 300, [][]int{{1, 1}}).SetIsRequired(),
 		}, // список полей, которые заполняются при добавлении новой записи

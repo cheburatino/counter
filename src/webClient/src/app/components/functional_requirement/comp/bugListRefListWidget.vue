@@ -13,7 +13,7 @@
                 <router-link :to="'/bug/' + v.id" style="cursor: pointer">
                     <q-item-section avatar>
                         <q-avatar rounded>
-                            <img src="image/bug.png" alt="">
+                            <img src="image/functional_requirement.png" alt="">
                         </q-avatar>
                     </q-item-section>
                 </router-link>

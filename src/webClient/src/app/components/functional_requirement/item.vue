@@ -126,6 +126,15 @@
       </div>
       </div>
       
+      <div class="row q-col-gutter-md q-mb-sm">
+      <div class="col-md-4 col-sm-6 col-xs-12">
+          <comp-fld-files v-if="this.id != 'new'" fldName='result_file' :label="$t('functional_requirement.result_file')" :fld='item.result_file' :ext = '{tableName: "functional_requirement", tableId: this.id}' @update="v=> item.result_file = v" :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
+      </div>
+      <div class="col-md-4 col-sm-6 col-xs-12">
+          <comp-fld-img-list v-if="this.id != 'new'" :label="$t('functional_requirement.result_image')" :fld='item.result_image' :ext = '{tableName: "functional_requirement", tableId: this.id, fldName: "result_image"}' @update="v=> item.result_image = v" :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
+      </div>
+      </div>
+      
 
       <!--  кнопки   -->
       <comp-item-btn-save v-if="!isOpenInDialog" @save="save" :readonly="false" @cancel="$router.push(docUrl)"/>
@@ -146,18 +155,18 @@
 </template>
 
 <script>
-	import compCustomer from './comp/customer.vue'
-	import compCustomerAgent from './comp/customerAgent.vue'
-	import compRelation from './comp/relation.vue'
 	import compResult from './comp/result.vue'
 	import taskListRefListWidget from './comp/taskListRefListWidget.vue'
 	import customerTaskListRefListWidget from './comp/customerTaskListRefListWidget.vue'
 	import bugListRefListWidget from './comp/bugListRefListWidget.vue'
 	import compExecutor from './comp/executor.vue'
+	import compCustomer from './comp/customer.vue'
+	import compCustomerAgent from './comp/customerAgent.vue'
+	import compRelation from './comp/relation.vue'
     import currentUserMixin from '../../../app/mixins/currentUser'
     export default {
         props: ['id', 'isOpenInDialog'],
-        components: {compExecutor, compCustomer, compCustomerAgent, compRelation, compResult, taskListRefListWidget, customerTaskListRefListWidget, bugListRefListWidget},
+        components: {customerTaskListRefListWidget, bugListRefListWidget, compExecutor, compCustomer, compCustomerAgent, compRelation, compResult, taskListRefListWidget},
         mixins: [currentUserMixin,],
         computed: {
             docUrl: function() {
@@ -181,6 +190,8 @@
                         {name: 'request_id', label: 'запрос'},
                         {name: 'digital_solution_id', label: 'цифровое решение'},
                         {name: 'result', label: 'результат'},
+                        {name: 'result_file', label: 'файлы результата'},
+                        {name: 'result_image', label: 'изображения результата'},
                 ],
                 optionsFlds: [],
                 
