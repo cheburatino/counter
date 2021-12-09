@@ -106,11 +106,11 @@
       </div>
       
       <div class="row q-col-gutter-md q-mb-sm">
-      <div class="col-3">
-          <comp-fld-date outlined :label="$t('task.plan_start_date')" :date-string="$utils.formatPgDate(item.plan_start_date)" @update="v=> item.plan_start_date = v" :readonly='false'  class='q-mb-sm col-3' />
+      <div class="col-md-4 col-sm-6 col-xs-12">
+          <comp-fld-date outlined :label="$t('task.plan_start_date')" :date-string="$utils.formatPgDate(item.plan_start_date)" @update="v=> item.plan_start_date = v" :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
       </div>
-      <div class="col-3">
-          <comp-fld-date outlined :label="$t('task.plan_end_date')" :date-string="$utils.formatPgDate(item.plan_end_date)" @update="v=> item.plan_end_date = v" :readonly='false'  class='q-mb-sm col-3' />
+      <div class="col-md-4 col-sm-6 col-xs-12">
+          <comp-fld-date outlined :label="$t('task.plan_end_date')" :date-string="$utils.formatPgDate(item.plan_end_date)" @update="v=> item.plan_end_date = v" :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
       </div>
       </div>
       
@@ -146,17 +146,17 @@
 </template>
 
 <script>
+	import compDate from './comp/date.vue'
 	import compResult from './comp/result.vue'
 	import compExecutor from './comp/executor.vue'
 	import compSpecialist from './comp/specialist.vue'
 	import compWork from './comp/work.vue'
 	import compCustomer from './comp/customer.vue'
 	import compRelation from './comp/relation.vue'
-	import compDate from './comp/date.vue'
     import currentUserMixin from '../../../app/mixins/currentUser'
     export default {
         props: ['id', 'isOpenInDialog'],
-        components: {compResult, compExecutor, compSpecialist, compWork, compCustomer, compRelation, compDate},
+        components: {compDate, compResult, compExecutor, compSpecialist, compWork, compCustomer, compRelation},
         mixins: [currentUserMixin,],
         computed: {
             docUrl: function() {
