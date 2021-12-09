@@ -106,7 +106,7 @@ func GetDoc(project *t.ProjectType) t.DocType {
 		Label:      "задачи",                  // название списка, которе выводится на экране
 		FldName:    "task_list",              // название поля. Любое, в формате snake_case. На основе этого названия формируется название компоненты во vue.
 		TableName:  "task",                   // название связанной таблицы, из которой будут выгружаться записи
-		RefFldName: "digital_solution_id", // название поля в связанной таблицы, по которому осуществляется связь
+		RefFldName: "request_id", // название поля в связанной таблицы, по которому осуществляется связь
 		Avatar:     "image/task.svg",         // иконка, которая выводится в списке
 		NewFlds: []t.FldType{
 			t.GetFldString("title", "название", 300, [][]int{{1, 1}}).SetIsRequired(),

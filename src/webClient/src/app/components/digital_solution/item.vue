@@ -83,7 +83,7 @@
       
       <div class="row q-col-gutter-md q-mb-sm">
       <div class="col-md-4 col-sm-6 col-xs-12">
-          <comp-fld-ref-search outlined pgMethod="system_list" :label="$t('digital_solution.system_id')" :item='item.system_title' :itemId='item.system_id' :ext='{customer_id: item.customer_id, avatar: "image/system.svg", isClearable: "true", pathUrl: "/system"}' @update="v=> item.system_id = v.id" @clear="item.system_id = null" :readonly='currentUser.role?.includes(`customer`)'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
+          <comp-fld-ref-search outlined pgMethod="system_list" :label="$t('digital_solution.system_id')" :item='item.system_title' :itemId='item.system_id' :ext='{customer_id: item.customer_id, isClearable: "true", pathUrl: "/system", avatar: "image/system.svg"}' @update="v=> item.system_id = v.id" @clear="item.system_id = null" :readonly='currentUser.role?.includes(`customer`)'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
       </div>
       </div>
       
@@ -167,19 +167,19 @@
 	import compSpecialist from './comp/specialist.vue'
 	import compCustomerAgent from './comp/customerAgent.vue'
 	import compModeling from './comp/modeling.vue'
-	import compRealization from './comp/realization.vue'
-	import taskListRefListWidget from './comp/taskListRefListWidget.vue'
-	import customerTaskListRefListWidget from './comp/customerTaskListRefListWidget.vue'
 	import ftListRefListWidget from './comp/ftListRefListWidget.vue'
+	import compExecutor from './comp/executor.vue'
 	import compCustomer from './comp/customer.vue'
 	import compRelation from './comp/relation.vue'
-	import compResult from './comp/result.vue'
+	import customerTaskListRefListWidget from './comp/customerTaskListRefListWidget.vue'
 	import bugListRefListWidget from './comp/bugListRefListWidget.vue'
-	import compExecutor from './comp/executor.vue'
+	import compRealization from './comp/realization.vue'
+	import compResult from './comp/result.vue'
+	import taskListRefListWidget from './comp/taskListRefListWidget.vue'
     import currentUserMixin from '../../../app/mixins/currentUser'
     export default {
         props: ['id', 'isOpenInDialog'],
-        components: {compModeling, compRealization, taskListRefListWidget, customerTaskListRefListWidget, ftListRefListWidget, compCustomer, compSpecialist, compCustomerAgent, bugListRefListWidget, compExecutor, compRelation, compResult},
+        components: {compModeling, ftListRefListWidget, compExecutor, compCustomer, compRelation, compSpecialist, compCustomerAgent, compRealization, compResult, taskListRefListWidget, customerTaskListRefListWidget, bugListRefListWidget},
         mixins: [currentUserMixin,],
         computed: {
             docUrl: function() {

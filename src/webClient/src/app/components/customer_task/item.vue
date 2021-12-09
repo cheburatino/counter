@@ -142,7 +142,7 @@
     import currentUserMixin from '../../../app/mixins/currentUser'
     export default {
         props: ['id', 'isOpenInDialog'],
-        components: {compRelation, compDate, compResult, compCustomer, compCustomerAgent},
+        components: {compCustomer, compCustomerAgent, compRelation, compDate, compResult},
         mixins: [currentUserMixin,],
         computed: {
             docUrl: function() {
