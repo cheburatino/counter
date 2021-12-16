@@ -20,6 +20,7 @@ fields = [
 	{name="plan_start_date",					type="timestamp",	 comment="плановая дата начала"},
 	{name="plan_end_date",					type="timestamp",	 comment="плановая дата завершения"},
 	{name="result",					type="text",	 comment="результат"},
+	{name="priority",					type="int",	 comment="приоритет"},
 	{name="search_text",			type="text",	comment="колонка для поиска"},
 	{name="options",				type="jsonb",	comment="разные дополнительные параметры"},
 	{name="created_at",				type="timestamp",	ext="with time zone"},
@@ -48,11 +49,11 @@ triggers = [
 
 
 methods = [
+	"task_get_by_id",
+	"task_get_specialist",
 	"task_get_specialist_role",
 	"task_list",
 	"task_update",
-	"task_get_by_id",
-	"task_get_specialist",
 	"task_trigger_before",
 	"task_trigger_after"
 ]
@@ -73,5 +74,6 @@ alterScripts = [
 	"alter table task add column if not exists plan_start_date timestamp;",
 	"alter table task add column if not exists plan_end_date timestamp;",
 	"alter table task add column if not exists result text;",
+	"alter table task add column if not exists priority int;",
 	"alter table task add column if not exists search_text text;"
 ]

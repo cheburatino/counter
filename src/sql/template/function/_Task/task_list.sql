@@ -42,7 +42,12 @@ BEGIN
     ]);
 
     -- показываем только активные
-    whereStr = whereStr || ' and state_id != 4';
+--     whereStr = whereStr || ' and state_id != 4';
+
+    if (params->>'is_active')::bool = true
+    then
+        whereStr = whereStr || ' and state_id != 4';
+    end if;
 
     -- финальная сборка строки с условиями выборки (build_query_part_for_list - функция из папки base)
     condQueryStr = '' || whereStr || build_query_part_for_list(params);

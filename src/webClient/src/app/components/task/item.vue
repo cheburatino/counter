@@ -126,6 +126,12 @@
       </div>
       </div>
       
+      <div class="row q-col-gutter-md q-mb-sm">
+      <div class="col-md-4 col-sm-6 col-xs-12">
+          <q-input outlined type='number' v-model="item.priority" :label="$t('task.priority')" :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
+      </div>
+      </div>
+      
 
       <!--  кнопки   -->
       <comp-item-btn-save v-if="!isOpenInDialog" @save="save" :readonly="false" @cancel="$router.push(docUrl)"/>
@@ -146,17 +152,17 @@
 </template>
 
 <script>
-	import compDate from './comp/date.vue'
-	import compResult from './comp/result.vue'
-	import compExecutor from './comp/executor.vue'
 	import compSpecialist from './comp/specialist.vue'
 	import compWork from './comp/work.vue'
 	import compCustomer from './comp/customer.vue'
 	import compRelation from './comp/relation.vue'
+	import compDate from './comp/date.vue'
+	import compResult from './comp/result.vue'
+	import compExecutor from './comp/executor.vue'
     import currentUserMixin from '../../../app/mixins/currentUser'
     export default {
         props: ['id', 'isOpenInDialog'],
-        components: {compDate, compResult, compExecutor, compSpecialist, compWork, compCustomer, compRelation},
+        components: {compExecutor, compSpecialist, compWork, compCustomer, compRelation, compDate, compResult},
         mixins: [currentUserMixin,],
         computed: {
             docUrl: function() {
@@ -182,6 +188,7 @@
                         {name: 'plan_start_date', label: 'плановая дата начала'},
                         {name: 'plan_end_date', label: 'плановая дата завершения'},
                         {name: 'result', label: 'результат'},
+                        {name: 'priority', label: 'приоритет'},
                 ],
                 optionsFlds: [],
                 

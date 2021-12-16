@@ -26,9 +26,9 @@ triggers = [
 
 
 methods = [
+	"ctlg_functional_requirement_state_list",
 	"ctlg_functional_requirement_state_update",
 	"ctlg_functional_requirement_state_get_by_id",
-	"ctlg_functional_requirement_state_list",
 	"ctlg_functional_requirement_state_trigger_before",
 	"ctlg_functional_requirement_state_trigger_after"
 ]

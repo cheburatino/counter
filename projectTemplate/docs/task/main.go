@@ -45,6 +45,7 @@ func GetDoc(project *t.ProjectType) t.DocType {
 			//t.GetFldSimpleHtml([][]int{{17, 3}}, "col-2", "<p>История</p>"),
 			t.GetFldJsonbCompositionWithoutFld([][]int{{15, 1}}, "col-4", "comp-result"),
 			t.GetFldString("result", "результат", 0, [][]int{{16, 1}}, "col-8"),
+			t.GetFldInt("priority", "приоритет", [][]int{{17, 1}}),
 		},
 		Vue: t.DocVue{
 			RouteName:      name,
