@@ -26,6 +26,10 @@ BEGIN
         RETURN checkMsg;
     END IF;
 
+--     if params->>'type' notnull and (params->>'type')::text != '[]' then
+--         whereStr = whereStr || format(' AND type = ANY(%s)', quote_literal(text_array_from_json((params->>'type')::jsonb)));
+--     end if;
+
     
 
     -- сборка условия WHERE (where_str_build - функция из папки base)

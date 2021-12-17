@@ -106,11 +106,11 @@
       </div>
       
       <div class="row q-col-gutter-md q-mb-sm">
-      <div class="col-3">
-          <comp-fld-date outlined :label="$t('task.plan_start_date')" :date-string="$utils.formatPgDate(item.plan_start_date)" @update="v=> item.plan_start_date = v" :readonly='false'  class='q-mb-sm col-3' />
+      <div class="col-md-4 col-sm-6 col-xs-12">
+          <comp-fld-date outlined :label="$t('task.plan_start_date')" :date-string="$utils.formatPgDate(item.plan_start_date)" @update="v=> item.plan_start_date = v" :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
       </div>
-      <div class="col-3">
-          <comp-fld-date outlined :label="$t('task.plan_end_date')" :date-string="$utils.formatPgDate(item.plan_end_date)" @update="v=> item.plan_end_date = v" :readonly='false'  class='q-mb-sm col-3' />
+      <div class="col-md-4 col-sm-6 col-xs-12">
+          <comp-fld-date outlined :label="$t('task.plan_end_date')" :date-string="$utils.formatPgDate(item.plan_end_date)" @update="v=> item.plan_end_date = v" :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
       </div>
       </div>
       
@@ -123,6 +123,12 @@
       <div class="row q-col-gutter-md q-mb-sm">
       <div class="col-md-8 col-sm-12 col-xs-12">
           <q-input outlined type='text' v-model="item.result" :label="$t('task.result')" autogrow :readonly='false'  class='q-mb-sm col-md-8 col-sm-12 col-xs-12' />
+      </div>
+      </div>
+      
+      <div class="row q-col-gutter-md q-mb-sm">
+      <div class="col-md-4 col-sm-6 col-xs-12">
+          <q-input outlined type='number' v-model="item.priority" :label="$t('task.priority')" :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
       </div>
       </div>
       
@@ -146,17 +152,17 @@
 </template>
 
 <script>
-	import compExecutor from './comp/executor.vue'
 	import compSpecialist from './comp/specialist.vue'
 	import compWork from './comp/work.vue'
 	import compCustomer from './comp/customer.vue'
 	import compRelation from './comp/relation.vue'
 	import compDate from './comp/date.vue'
 	import compResult from './comp/result.vue'
+	import compExecutor from './comp/executor.vue'
     import currentUserMixin from '../../../app/mixins/currentUser'
     export default {
         props: ['id', 'isOpenInDialog'],
-        components: {compResult, compExecutor, compSpecialist, compWork, compCustomer, compRelation, compDate},
+        components: {compExecutor, compSpecialist, compWork, compCustomer, compRelation, compDate, compResult},
         mixins: [currentUserMixin,],
         computed: {
             docUrl: function() {
@@ -182,6 +188,7 @@
                         {name: 'plan_start_date', label: 'плановая дата начала'},
                         {name: 'plan_end_date', label: 'плановая дата завершения'},
                         {name: 'result', label: 'результат'},
+                        {name: 'priority', label: 'приоритет'},
                 ],
                 optionsFlds: [],
                 

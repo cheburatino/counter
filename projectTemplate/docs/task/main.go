@@ -40,11 +40,12 @@ func GetDoc(project *t.ProjectType) t.DocType {
 			t.GetFldRef("functional_requirement_id", "функциональное требование", "functional_requirement", [][]int{{11, 2}}, "isShowLink", "isClearable"),
 			t.GetFldRef("bug_id", "баг", "bug", [][]int{{12, 1}}, "isShowLink", "isClearable"),
 			t.GetFldJsonbCompositionWithoutFld([][]int{{13, 1}}, "col-4", "comp-date"),
-			t.GetFldDate("plan_start_date", "плановая дата начала", [][]int{{14, 1}}, "col-3"),
-			t.GetFldDate("plan_end_date", "плановая дата завершения", [][]int{{14, 2}}, "col-3"),
+			t.GetFldDate("plan_start_date", "плановая дата начала", [][]int{{14, 1}}),
+			t.GetFldDate("plan_end_date", "плановая дата завершения", [][]int{{14, 2}}),
 			//t.GetFldSimpleHtml([][]int{{17, 3}}, "col-2", "<p>История</p>"),
 			t.GetFldJsonbCompositionWithoutFld([][]int{{15, 1}}, "col-4", "comp-result"),
 			t.GetFldString("result", "результат", 0, [][]int{{16, 1}}, "col-8"),
+			t.GetFldInt("priority", "приоритет", [][]int{{17, 1}}),
 		},
 		Vue: t.DocVue{
 			RouteName:      name,
@@ -58,6 +59,7 @@ func GetDoc(project *t.ProjectType) t.DocType {
 			},
 		},
 		Templates: map[string]*t.DocTemplate{
+			"sql_function_list.sql":      {},
 			"sql_function_get_specialist.sql":      {},
 			"sql_function_get_specialist_role.sql": {},
 			"webClient_index.vue":                  {},
@@ -100,6 +102,8 @@ func GetDoc(project *t.ProjectType) t.DocType {
 				 <q-item-section>
 				    <q-item-label lines="1">{{item.title}}</q-item-label>
 					<q-item-label caption><q-badge color="orange">{{item.options.title.state_title}}</q-badge> <q-badge>{{item.options.title.system_title}}</q-badge></q-item-label>
+					<q-item-label caption>ФТ: {{item.options.title.functional_requirement_title}}</q-item-label>
+					<q-item-label caption>Баг: {{item.options.title.bug_title}}</q-item-label>
 				 </q-item-section>
 			`
 		},

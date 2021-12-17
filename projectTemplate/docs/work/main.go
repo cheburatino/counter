@@ -30,7 +30,9 @@ func GetDoc(project *t.ProjectType) t.DocType {
 			BreadcrumbIcon: breadcrumb_icon,
 			Roles:          []string{},
 		},
-		//Templates:   map[string]*t.DocTemplate{"webClient_item.vue": {},},
+		Templates:   map[string]*t.DocTemplate{
+			"sql_function_list.sql": {},
+		},
 		IsBaseTemplates: t.DocIsBaseTemplates{true, true},
 		Sql: t.DocSql{
 			IsSearchText:    true,

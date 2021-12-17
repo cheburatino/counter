@@ -18,6 +18,8 @@ fields = [
 	{name="request_id",					type="int",	 comment="запрос"},
 	{name="digital_solution_id",					type="int",	 comment="цифровое решение"},
 	{name="result",					type="text",	 comment="результат"},
+	{name="result_file",					type="jsonb",	 comment="файлы результата"},
+	{name="result_image",					type="jsonb",	 comment="изображения результата"},
 	{name="search_text",			type="text",	comment="колонка для поиска"},
 	{name="options",				type="jsonb",	comment="разные дополнительные параметры"},
 	{name="created_at",				type="timestamp",	ext="with time zone"},
@@ -64,5 +66,7 @@ alterScripts = [
 	"alter table functional_requirement add column if not exists request_id int;",
 	"alter table functional_requirement add column if not exists digital_solution_id int;",
 	"alter table functional_requirement add column if not exists result text;",
+	"alter table functional_requirement add column if not exists result_file jsonb;",
+	"alter table functional_requirement add column if not exists result_image jsonb;",
 	"alter table functional_requirement add column if not exists search_text text;"
 ]
