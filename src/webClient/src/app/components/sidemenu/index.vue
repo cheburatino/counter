@@ -2,7 +2,7 @@
   <q-drawer :modelValue="leftSide" side="left" bordered show-if-above
             content-class="bg-grey-2"
             :width="240" @hide="$emit('hide')">
-    <q-scroll-area class="fit">
+<!--    <q-scroll-area class="fit">-->
       <q-list padding>
         <div v-for="link in menuLinks" :key="link.text">
             <span v-if="isRole(link.roles)">
@@ -13,7 +13,7 @@
                   </q-avatar>
                 </q-item-section>
                 <q-item-section>
-                  <q-item-label>{{link.text.includes("i18n_") ? $t(link.text.replace("i18n_", "")) : link.text}}</q-item-label>
+                  <q-item-label v-html='link.text.includes("i18n_") ? $t(link.text.replace("i18n_", "")) : link.text'/>
                 </q-item-section>
               </q-item>
               <q-expansion-item v-else header-class="text-grey" closed>
@@ -24,14 +24,14 @@
                     </q-avatar>
                   </q-item-section>
                     <q-item-section>
-                      {{link.text.includes("i18n_") ? $t(link.text.replace("i18n_", "")) : link.text}}
+                      <q-item-label v-html='link.text.includes("i18n_") ? $t(link.text.replace("i18n_", "")) : link.text'/>
                     </q-item-section>
                 </template>
                 <span v-for="link1 in link.linkList" :key="link1.text" >
                   <q-item v-if="isRole(link1.roles)" :inset-level="1" v-ripple clickable :to="link1.url"
                           exact>
                   <q-item-section>
-                    <q-item-label>{{link1.text.includes("i18n_") ? $t(link1.text.replace("i18n_", "")) : link1.text}}</q-item-label>
+                    <q-item-label v-html='link1.text.includes("i18n_") ? $t(link1.text.replace("i18n_", "")) : link1.text'/>
                   </q-item-section>
                 </q-item>
                 </span>
@@ -39,7 +39,7 @@
             </span>
         </div>
       </q-list>
-    </q-scroll-area>
+<!--    </q-scroll-area>-->
   </q-drawer>
 </template>
 

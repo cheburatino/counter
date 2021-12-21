@@ -106,7 +106,7 @@ func GetDoc(project *t.ProjectType) t.DocType {
 		FldName:    "task_list",              // название поля. Любое, в формате snake_case. На основе этого названия формируется название компоненты во vue.
 		TableName:  "task",                   // название связанной таблицы, из которой будут выгружаться записи
 		RefFldName: "functional_requirement_id", // название поля в связанной таблицы, по которому осуществляется связь
-		Avatar:     "image/bug.png",         // иконка, которая выводится в списке
+		Avatar:     "image/task.svg",         // иконка, которая выводится в списке
 		NewFlds: []t.FldType{
 			t.GetFldString("title", "название", 300, [][]int{{1, 1}}).SetIsRequired(),
 		}, // список полей, которые заполняются при добавлении новой записи
@@ -136,7 +136,7 @@ func GetDoc(project *t.ProjectType) t.DocType {
 		FldName:    "bug_list",              // название поля. Любое, в формате snake_case. На основе этого названия формируется название компоненты во vue.
 		TableName:  "bug",                   // название связанной таблицы, из которой будут выгружаться записи
 		RefFldName: "functional_requirement_id", // название поля в связанной таблицы, по которому осуществляется связь
-		Avatar:     "image/functional_requirement.png",         // иконка, которая выводится в списке
+		Avatar:     "image/bug.png",         // иконка, которая выводится в списке
 		NewFlds: []t.FldType{
 			t.GetFldString("title", "название", 300, [][]int{{1, 1}}).SetIsRequired(),
 		}, // список полей, которые заполняются при добавлении новой записи

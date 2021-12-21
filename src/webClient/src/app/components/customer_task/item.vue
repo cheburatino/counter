@@ -134,15 +134,15 @@
 </template>
 
 <script>
+	import compResult from './comp/result.vue'
 	import compCustomer from './comp/customer.vue'
 	import compCustomerAgent from './comp/customerAgent.vue'
 	import compRelation from './comp/relation.vue'
 	import compDate from './comp/date.vue'
-	import compResult from './comp/result.vue'
     import currentUserMixin from '../../../app/mixins/currentUser'
     export default {
         props: ['id', 'isOpenInDialog'],
-        components: {compDate, compResult, compCustomer, compCustomerAgent, compRelation},
+        components: {compResult, compCustomer, compCustomerAgent, compRelation, compDate},
         mixins: [currentUserMixin,],
         computed: {
             docUrl: function() {
