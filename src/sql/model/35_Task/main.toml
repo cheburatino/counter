@@ -29,7 +29,6 @@ fields = [
 ]
 
 fkConstraints = [
-	{name="task_title_already_exist", ext="UNIQUE (title)"},
 	{fld="type_id", ref="ctlg_task_type", fk="id"},
 	{fld="state_id", ref="ctlg_task_state", fk="id"},
 	{fld="customer_id", ref="company", fk="id"},

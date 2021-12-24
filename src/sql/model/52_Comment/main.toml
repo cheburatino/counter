@@ -26,9 +26,9 @@ triggers = [
 
 
 methods = [
-	"comment_list",
 	"comment_update",
 	"comment_get_by_id",
+	"comment_list",
 	"comment_trigger_before",
 	"comment_trigger_after"
 ]
