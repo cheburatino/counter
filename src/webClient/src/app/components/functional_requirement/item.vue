@@ -17,10 +17,10 @@
       
       <div class="row q-col-gutter-md q-mb-sm">
       <div class="col-md-4 col-sm-6 col-xs-12">
-          <p>Дата и время создания: {{item.created_at}}</p>
+          <q-input outlined type='number' v-model="item.internal_priority" :label="$t('functional_requirement.internal_priority')" :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
       </div>
       <div class="col-md-4 col-sm-6 col-xs-12">
-          <p>Дата и время изменения: {{item.updated_at}}</p>
+          <q-input outlined type='number' v-model="item.customer_priority" :label="$t('functional_requirement.customer_priority')" :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
       </div>
       </div>
       
@@ -166,7 +166,7 @@
     import currentUserMixin from '../../../app/mixins/currentUser'
     export default {
         props: ['id', 'isOpenInDialog'],
-        components: {compCustomerAgent, compRelation, compResult, taskListRefListWidget, customerTaskListRefListWidget, bugListRefListWidget, compExecutor, compCustomer},
+        components: {compExecutor, compCustomer, compCustomerAgent, compRelation, compResult, taskListRefListWidget, customerTaskListRefListWidget, bugListRefListWidget},
         mixins: [currentUserMixin,],
         computed: {
             docUrl: function() {
@@ -179,6 +179,8 @@
                 flds: [
                         {name: 'title', label: 'название',  required: true},
                         {name: 'state_id', label: 'статус'},
+                        {name: 'internal_priority', label: 'внутренний приоритет'},
+                        {name: 'customer_priority', label: 'приоритет заказчика'},
                         {name: 'description', label: 'описание'},
                         {name: 'files', label: 'файлы'},
                         {name: 'images', label: 'изображения'},

@@ -62,11 +62,13 @@ BEGIN
         END IF;
         
 
-        EXECUTE ('INSERT INTO functional_requirement (title, state_id, description, files, images, description_for_dev, files_for_dev, images_for_dev, customer_id, system_id, request_id, digital_solution_id, result, result_file, result_image, options) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16)  RETURNING *;')
+        EXECUTE ('INSERT INTO functional_requirement (title, state_id, internal_priority, customer_priority, description, files, images, description_for_dev, files_for_dev, images_for_dev, customer_id, system_id, request_id, digital_solution_id, result, result_file, result_image, options) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18)  RETURNING *;')
 		INTO functional_requirementRow
 		USING
 			(params ->> 'title')::text,
 			coalesce((params ->> 'state_id')::int, 1)::int,
+			(params ->> 'internal_priority')::int,
+			(params ->> 'customer_priority')::int,
 			(params ->> 'description')::text,
 			(params -> 'files')::jsonb,
 			(params -> 'images')::jsonb,
@@ -88,6 +90,8 @@ BEGIN
         updateValue = '' || update_str_from_json(params, ARRAY [
 			['title', 'title', 'text'],
 			['state_id', 'state_id', 'number'],
+			['internal_priority', 'internal_priority', 'number'],
+			['customer_priority', 'customer_priority', 'number'],
 			['description', 'description', 'text'],
 			['files', 'files', 'jsonb'],
 			['images', 'images', 'jsonb'],

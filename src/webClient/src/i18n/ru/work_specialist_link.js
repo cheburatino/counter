@@ -1,6 +1,5 @@
 
 export default {
- 		name_plural: 'Участники дел',
  		name_plural_deleted: 'удаленные Участники дел',
  		work_id: 'дело',
  		specialist_id: 'специалист',
@@ -8,4 +7,5 @@ export default {
  		author_id: 'автор',
  		role_id: 'роль',
  		name: 'участник дела',
+ 		name_plural: 'Участники дел',
 }

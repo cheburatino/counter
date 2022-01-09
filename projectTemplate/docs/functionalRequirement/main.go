@@ -22,8 +22,8 @@ func GetDoc(project *t.ProjectType) t.DocType {
 		Flds: []t.FldType{
 			t.GetFldTitle().SetReadonly("currentUser.role?.includes(`customer`)"),
 			t.GetFldRef("state_id", "статус", "ctlg_functional_requirement_state", [][]int{{1, 2}}).SetDefault("1").SetReadonly("currentUser.role?.includes(`customer`)"),
-			t.GetFldSimpleHtml([][]int{{2, 1}}, "", "<p>Дата и время создания: {{item.created_at}}</p>"),
-			t.GetFldSimpleHtml([][]int{{2, 2}}, "", "<p>Дата и время изменения: {{item.updated_at}}</p>"),
+			t.GetFldInt("internal_priority", "внутренний приоритет", [][]int{{2, 1}}),
+			t.GetFldInt("customer_priority", "приоритет заказчика", [][]int{{2, 2}}),
 			t.GetFldString("description", "описание", 0, [][]int{{3, 1}}, "col-8").SetReadonly("currentUser.role?.includes(`customer`)"),
 			t.GetFldFiles("files", "файлы", [][]int{{4, 1}}, t.FldVueFilesParams{}).SetReadonly("currentUser.role?.includes(`customer`)"),
 			t.GetFldImgList("images", "изображения", [][]int{{4, 2}}, t.FldVueImgParams{}).SetReadonly("currentUser.role?.includes(`customer`)"),
