@@ -36,9 +36,8 @@ func GetDoc(project *t.ProjectType) t.DocType {
 			// Задачи заказчика. Контрол описан после doc.Init {{9, 2}}
 			t.GetFldJsonbCompositionWithoutFld([][]int{{10, 1}}, "col-4", "comp-relation"),
 			t.GetFldRef("system_id", "система", "system", [][]int{{11, 1}}, "isShowLink", "isClearable").SetReadonly("currentUser.role?.includes(`customer`)"),
-			t.GetFldRef("digital_solution_id", "цифровое решение", "digital_solution", [][]int{{12, 1}}, "isShowLink", "isClearable").SetReadonly("currentUser.role?.includes(`customer`)"),
-			t.GetFldRef("functional_requirement_id", "функциональное требование", "functional_requirement", [][]int{{12, 2}}, "isShowLink", "isClearable").SetReadonly("currentUser.role?.includes(`customer`)"),
-			t.GetFldJsonbCompositionWithoutFld([][]int{{13, 1}}, "col-4", "comp-result"),
+			t.GetFldRef("functional_requirement_id", "функциональное требование", "functional_requirement", [][]int{{11, 2}}, "isShowLink", "isClearable").SetReadonly("currentUser.role?.includes(`customer`)"),
+			t.GetFldJsonbCompositionWithoutFld([][]int{{12, 1}}, "col-4", "comp-result"),
 			t.GetFldString("result", "результат", 0, [][]int{{14, 1}}, "col-8").SetReadonly("currentUser.role?.includes(`customer`)"),
 		},
 		Vue: t.DocVue{

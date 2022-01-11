@@ -17,10 +17,25 @@
       
       <div class="row q-col-gutter-md q-mb-sm">
       <div class="col-md-4 col-sm-6 col-xs-12">
-          <q-input outlined type='number' v-model="item.internal_priority" :label="$t('functional_requirement.internal_priority')" :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
+          <comp-fld-ref-search outlined pgMethod="system_list" :label="$t('functional_requirement.system_id')" :item='item.system_title' :itemId='item.system_id' :ext='{"avatar":"image/system.svg","isClearable":"true","pathUrl":"/system"}' @update="v=> item.system_id = v.id" @clear="item.system_id = null" :readonly='currentUser.role?.includes(`customer`)'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
       </div>
       <div class="col-md-4 col-sm-6 col-xs-12">
-          <q-input outlined type='number' v-model="item.customer_priority" :label="$t('functional_requirement.customer_priority')" :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
+          <comp-fld-ref-search outlined pgMethod="request_list" :label="$t('functional_requirement.request_id')" :item='item.request_title' :itemId='item.request_id' :ext='{"avatar":"image/request.svg","isClearable":"true","pathUrl":"/request"}' @update="v=> item.request_id = v.id" @clear="item.request_id = null" :readonly='currentUser.role?.includes(`customer`)'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
+      </div>
+      </div>
+      
+      <div class="row q-col-gutter-md q-mb-sm">
+      <div class="col-md-2 col-sm-3 col-xs-6">
+          <comp-fld-date outlined :label="$t('functional_requirement.plan_end_date')" :date-string="$utils.formatPgDate(item.plan_end_date)" @update="v=> item.plan_end_date = v" :readonly='currentUser.role?.includes(`customer`)'  class='q-mb-sm col-md-2 col-sm-3 col-xs-6' />
+      </div>
+      <div class="col-md-2 col-sm-3 col-xs-6">
+          <comp-fld-date outlined :label="$t('functional_requirement.fact_end_date')" :date-string="$utils.formatPgDate(item.fact_end_date)" @update="v=> item.fact_end_date = v" :readonly='currentUser.role?.includes(`customer`)'  class='q-mb-sm col-md-2 col-sm-3 col-xs-6' />
+      </div>
+      <div class="col-md-2 col-sm-3 col-xs-6">
+          <q-input outlined type='number' v-model="item.customer_priority" :label="$t('functional_requirement.customer_priority')" :readonly='currentUser.role?.includes(`customer`)'  class='q-mb-sm col-md-2 col-sm-3 col-xs-6' />
+      </div>
+      <div class="col-md-2 col-sm-3 col-xs-6" v-if="currentUser.role?.includes(`admin`)">
+          <q-input outlined type='number' v-model="item.internal_priority" :label="$t('functional_requirement.internal_priority')" :readonly='false'  class='q-mb-sm col-md-2 col-sm-3 col-xs-6'  v-if="currentUser.role?.includes(`admin`)" />
       </div>
       </div>
       
@@ -40,83 +55,11 @@
       </div>
       
       <div class="row q-col-gutter-md q-mb-sm">
-      <div class="col-md-8 col-sm-12 col-xs-12" v-if="!currentUser.role?.includes(`customer`)">
-          <q-input outlined type='text' v-model="item.description_for_dev" :label="$t('functional_requirement.description_for_dev')" autogrow :readonly='false'  class='q-mb-sm col-md-8 col-sm-12 col-xs-12'  v-if="!currentUser.role?.includes(`customer`)" />
-      </div>
-      </div>
-      
-      <div class="row q-col-gutter-md q-mb-sm">
-      <div class="col-md-4 col-sm-6 col-xs-12">
-          <comp-fld-files v-if="this.id != 'new'" fldName='files_for_dev' :label="$t('functional_requirement.files_for_dev')" :fld='item.files_for_dev' :ext = '{tableName: "functional_requirement", tableId: this.id}' @update="v=> item.files_for_dev = v" :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
-      </div>
-      <div class="col-md-4 col-sm-6 col-xs-12">
-          <comp-fld-img-list v-if="this.id != 'new'" :label="$t('functional_requirement.images_for_dev')" :fld='item.images_for_dev' :ext = '{tableName: "functional_requirement", tableId: this.id, fldName: "images_for_dev"}' @update="v=> item.images_for_dev = v" :readonly='currentUser.role?.includes(`customer`)'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
-      </div>
-      </div>
-      
-      <div class="row q-col-gutter-md q-mb-sm">
-      <div class="col-md-4 col-sm-6 col-xs-12">
-          <comp-executor :item='item' />
-      </div>
-      </div>
-      
-      <div class="row q-col-gutter-md q-mb-sm">
-      <div class="col-md-4 col-sm-6 col-xs-12">
-          <p>Специалисты</p>
-      </div>
       <div class="col-md-4 col-sm-6 col-xs-12" v-if="currentUser.role?.includes(`admin`)">
           <task-list-ref-list-widget v-if='item.id != -1' :id='item.id' :readonly='false'/>
       </div>
-      </div>
-      
-      <div class="row q-col-gutter-md q-mb-sm">
-      <div class="col-md-4 col-sm-6 col-xs-12">
-          <comp-customer :item='item' />
-      </div>
-      </div>
-      
-      <div class="row q-col-gutter-md q-mb-sm">
-      <div class="col-md-4 col-sm-6 col-xs-12">
-          <comp-fld-ref-search outlined pgMethod="company_list" :label="$t('functional_requirement.customer_id')" :item='item.customer_title' :itemId='item.customer_id' :ext='{"avatar":"image/company.svg","isClearable":"true","pathUrl":"/company"}' @update="v=> item.customer_id = v.id" @clear="item.customer_id = null" :readonly='currentUser.role?.includes(`customer`)'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
-      </div>
-      </div>
-      
-      <div class="row q-col-gutter-md q-mb-sm">
-      <div class="col-md-4 col-sm-6 col-xs-12">
-          <comp-customerAgent :item='item' :currentUser='currentUser'/>
-      </div>
-      <div class="col-md-4 col-sm-6 col-xs-12">
-          <customer-task-list-ref-list-widget v-if='item.id != -1' :id='item.id' :readonly='false'/>
-      </div>
-      </div>
-      
-      <div class="row q-col-gutter-md q-mb-sm">
-      <div class="col-md-4 col-sm-6 col-xs-12">
-          <comp-relation :item='item' />
-      </div>
-      </div>
-      
-      <div class="row q-col-gutter-md q-mb-sm">
-      <div class="col-md-4 col-sm-6 col-xs-12">
-          <comp-fld-ref-search outlined pgMethod="system_list" :label="$t('functional_requirement.system_id')" :item='item.system_title' :itemId='item.system_id' :ext='{"avatar":"image/system.svg","isClearable":"true","pathUrl":"/system"}' @update="v=> item.system_id = v.id" @clear="item.system_id = null" :readonly='currentUser.role?.includes(`customer`)'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
-      </div>
-      <div class="col-md-4 col-sm-6 col-xs-12">
-          <comp-fld-ref-search outlined pgMethod="request_list" :label="$t('functional_requirement.request_id')" :item='item.request_title' :itemId='item.request_id' :ext='{"avatar":"image/request.svg","isClearable":"true","pathUrl":"/request"}' @update="v=> item.request_id = v.id" @clear="item.request_id = null" :readonly='currentUser.role?.includes(`customer`)'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
-      </div>
-      </div>
-      
-      <div class="row q-col-gutter-md q-mb-sm">
-      <div class="col-md-4 col-sm-6 col-xs-12">
-          <comp-fld-ref-search outlined pgMethod="digital_solution_list" :label="$t('functional_requirement.digital_solution_id')" :item='item.digital_solution_title' :itemId='item.digital_solution_id' :ext='{"avatar":"image/digital_solution.svg","isClearable":"true","pathUrl":"/digital_solution"}' @update="v=> item.digital_solution_id = v.id" @clear="item.digital_solution_id = null" :readonly='currentUser.role?.includes(`customer`)'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
-      </div>
       <div class="col-md-4 col-sm-6 col-xs-12">
           <bug-list-ref-list-widget v-if='item.id != -1' :id='item.id' :readonly='false'/>
-      </div>
-      </div>
-      
-      <div class="row q-col-gutter-md q-mb-sm">
-      <div class="col-md-4 col-sm-6 col-xs-12">
-          <comp-result :item='item' />
       </div>
       </div>
       
@@ -155,18 +98,12 @@
 </template>
 
 <script>
-	import compExecutor from './comp/executor.vue'
-	import compCustomer from './comp/customer.vue'
-	import compCustomerAgent from './comp/customerAgent.vue'
-	import compRelation from './comp/relation.vue'
-	import compResult from './comp/result.vue'
 	import taskListRefListWidget from './comp/taskListRefListWidget.vue'
-	import customerTaskListRefListWidget from './comp/customerTaskListRefListWidget.vue'
 	import bugListRefListWidget from './comp/bugListRefListWidget.vue'
     import currentUserMixin from '../../../app/mixins/currentUser'
     export default {
         props: ['id', 'isOpenInDialog'],
-        components: {compExecutor, compCustomer, compCustomerAgent, compRelation, compResult, taskListRefListWidget, customerTaskListRefListWidget, bugListRefListWidget},
+        components: {taskListRefListWidget, bugListRefListWidget},
         mixins: [currentUserMixin,],
         computed: {
             docUrl: function() {
@@ -179,18 +116,15 @@
                 flds: [
                         {name: 'title', label: 'название',  required: true},
                         {name: 'state_id', label: 'статус'},
-                        {name: 'internal_priority', label: 'внутренний приоритет'},
+                        {name: 'system_id', label: 'система'},
+                        {name: 'request_id', label: 'запрос'},
+                        {name: 'plan_end_date', label: 'плановая дата завершения'},
+                        {name: 'fact_end_date', label: 'фактическая дата завершения'},
                         {name: 'customer_priority', label: 'приоритет заказчика'},
+                        {name: 'internal_priority', label: 'внутренний приоритет'},
                         {name: 'description', label: 'описание'},
                         {name: 'files', label: 'файлы'},
                         {name: 'images', label: 'изображения'},
-                        {name: 'description_for_dev', label: 'описание для разработки'},
-                        {name: 'files_for_dev', label: 'файлы для разработки'},
-                        {name: 'images_for_dev', label: 'изображения для разработки'},
-                        {name: 'customer_id', label: 'заказчик'},
-                        {name: 'system_id', label: 'система'},
-                        {name: 'request_id', label: 'запрос'},
-                        {name: 'digital_solution_id', label: 'цифровое решение'},
                         {name: 'result', label: 'результат'},
                         {name: 'result_file', label: 'файлы результата'},
                         {name: 'result_image', label: 'изображения результата'},

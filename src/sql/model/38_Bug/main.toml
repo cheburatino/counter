@@ -12,7 +12,6 @@ fields = [
 	{name="images",					type="jsonb",	 comment="изображения"},
 	{name="customer_id",					type="int",	 comment="заказчик"},
 	{name="system_id",					type="int",	 comment="система"},
-	{name="digital_solution_id",					type="int",	 comment="цифровое решение"},
 	{name="functional_requirement_id",					type="int",	 comment="функциональное требование"},
 	{name="result",					type="text",	 comment="результат"},
 	{name="search_text",			type="text",	comment="колонка для поиска"},
@@ -27,7 +26,6 @@ fkConstraints = [
 	{fld="state_id", ref="ctlg_bug_state", fk="id"},
 	{fld="customer_id", ref="company", fk="id"},
 	{fld="system_id", ref="system", fk="id"},
-	{fld="digital_solution_id", ref="digital_solution", fk="id"},
 	{fld="functional_requirement_id", ref="functional_requirement", fk="id"}
 ]
 
@@ -40,9 +38,9 @@ triggers = [
 
 
 methods = [
-	"bug_list",
 	"bug_update",
 	"bug_get_by_id",
+	"bug_list",
 	"bug_trigger_before",
 	"bug_trigger_after"
 ]
@@ -55,7 +53,6 @@ alterScripts = [
 	"alter table bug add column if not exists images jsonb;",
 	"alter table bug add column if not exists customer_id int;",
 	"alter table bug add column if not exists system_id int;",
-	"alter table bug add column if not exists digital_solution_id int;",
 	"alter table bug add column if not exists functional_requirement_id int;",
 	"alter table bug add column if not exists result text;",
 	"alter table bug add column if not exists search_text text;"
