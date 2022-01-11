@@ -21,31 +21,32 @@ func GetDoc(project *t.ProjectType) t.DocType {
 		PathPrefix: "docs",
 		Flds: []t.FldType{
 			t.GetFldTitle().SetIsNotUniq(),
-			t.GetFldRef("type_id", "тип задачи", "ctlg_task_type", [][]int{{1, 2}}, "col-2"),
+			//t.GetFldRef("type_id", "тип задачи", "ctlg_task_type", [][]int{{1, 2}}, "col-2"),
+			t.GetFldInt("priority", "приоритет", [][]int{{1, 2}}, "col-2"),
 			t.GetFldRef("state_id", "статус", "ctlg_task_state", [][]int{{1, 3}}, "col-2").SetDefault("1"),
-			t.GetFldSimpleHtml([][]int{{2, 1}}, "", "<p>Дата и время создания: {{item.created_at}}</p>"),
-			t.GetFldSimpleHtml([][]int{{2, 2}}, "", "<p>Дата и время изменения: {{item.updated_at}}</p>"),
-			t.GetFldString("description", "описание", 0, [][]int{{3, 1}}, "col-8"),
-			t.GetFldFiles("files", "файлы", [][]int{{4, 1}}, t.FldVueFilesParams{}),
-			t.GetFldImgList("images", "изображения", [][]int{{4, 2}}, t.FldVueImgParams{}),
-			t.GetFldJsonbCompositionWithoutFld([][]int{{5, 1}}, "col-4", "comp-executor"),
-			t.GetFldJsonbCompositionWithoutFld([][]int{{6, 1}}, "", "comp-specialist", ":currentUser='currentUser'"),
-			t.GetFldJsonbCompositionWithoutFld([][]int{{6, 2}}, "", "comp-work", ":currentUser='currentUser'"),
-			t.GetFldJsonbCompositionWithoutFld([][]int{{7, 1}}, "col-4", "comp-customer"),
-			t.GetFldRef("customer_id", "заказчик", "company", [][]int{{8, 1}}, "col-4", "isShowLink", "isClearable"),
-			t.GetFldJsonbCompositionWithoutFld([][]int{{9, 1}}, "col-4", "comp-relation"),
-			t.GetFldRef("request_id", "запрос", "request", [][]int{{10, 1}}, "isShowLink", "isClearable"),
-			t.GetFldRef("system_id", "система", "system", [][]int{{10, 2}}, "isShowLink", "isClearable"),
-			t.GetFldRef("digital_solution_id", "цифровое решение", "digital_solution", [][]int{{11, 1}}, "isShowLink", "isClearable"),
-			t.GetFldRef("functional_requirement_id", "функциональное требование", "functional_requirement", [][]int{{11, 2}}, "isShowLink", "isClearable"),
-			t.GetFldRef("bug_id", "баг", "bug", [][]int{{12, 1}}, "isShowLink", "isClearable"),
-			t.GetFldJsonbCompositionWithoutFld([][]int{{13, 1}}, "col-4", "comp-date"),
-			t.GetFldDate("plan_start_date", "плановая дата начала", [][]int{{14, 1}}),
-			t.GetFldDate("plan_end_date", "плановая дата завершения", [][]int{{14, 2}}),
+			t.GetFldRef("system_id", "система", "system", [][]int{{2, 1}}, "isShowLink", "isClearable"),
+			t.GetFldRef("functional_requirement_id", "функциональное требование", "functional_requirement", [][]int{{2, 2}}, "col-2", "isShowLink", "isClearable"),
+			t.GetFldRef("bug_id", "баг", "bug", [][]int{{2, 3}}, "col-2", "isShowLink", "isClearable"),
+			t.GetFldJsonbCompositionWithoutFld([][]int{{3, 1}}, "", "comp-specialist", ":currentUser='currentUser'"),
+			t.GetFldDate("plan_end_date", "плановая дата завершения", [][]int{{3, 2}}, "col-2"),
+			t.GetFldDate("fact_end_date", "фактическая дата завершения", [][]int{{3, 3}}, "col-2"),
+			t.GetFldString("description", "описание", 0, [][]int{{4, 1}}, "col-8"),
+			t.GetFldFiles("files", "файлы", [][]int{{5, 1}}, t.FldVueFilesParams{}),
+			t.GetFldImgList("images", "изображения", [][]int{{5, 2}}, t.FldVueImgParams{}),
+			//t.GetFldJsonbCompositionWithoutFld([][]int{{5, 1}}, "col-4", "comp-executor"),
+			//t.GetFldJsonbCompositionWithoutFld([][]int{{6, 2}}, "", "comp-work", ":currentUser='currentUser'"),
+			//t.GetFldJsonbCompositionWithoutFld([][]int{{7, 1}}, "col-4", "comp-customer"),
+			//t.GetFldRef("customer_id", "заказчик", "company", [][]int{{8, 1}}, "col-4", "isShowLink", "isClearable"),
+			//t.GetFldJsonbCompositionWithoutFld([][]int{{9, 1}}, "col-4", "comp-relation"),
+			//t.GetFldRef("request_id", "запрос", "request", [][]int{{10, 1}}, "isShowLink", "isClearable"),
+			//t.GetFldRef("digital_solution_id", "цифровое решение", "digital_solution", [][]int{{11, 1}}, "isShowLink", "isClearable"),
+			//t.GetFldJsonbCompositionWithoutFld([][]int{{13, 1}}, "col-4", "comp-date"),
+			//t.GetFldDate("plan_start_date", "плановая дата начала", [][]int{{14, 1}}),
 			//t.GetFldSimpleHtml([][]int{{17, 3}}, "col-2", "<p>История</p>"),
-			t.GetFldJsonbCompositionWithoutFld([][]int{{15, 1}}, "col-4", "comp-result"),
-			t.GetFldString("result", "результат", 0, [][]int{{16, 1}}, "col-8"),
-			t.GetFldInt("priority", "приоритет", [][]int{{17, 1}}),
+			//t.GetFldJsonbCompositionWithoutFld([][]int{{15, 1}}, "col-4", "comp-result"),
+			t.GetFldString("result", "результат", 0, [][]int{{6, 1}}, "col-8"),
+			t.GetFldFiles("result_files", "файлы результата", [][]int{{7, 1}}, t.FldVueFilesParams{}),
+			t.GetFldImgList("result_images", "изображения результата", [][]int{{7, 2}}, t.FldVueImgParams{}),
 		},
 		Vue: t.DocVue{
 			RouteName:      name,
@@ -80,13 +81,13 @@ func GetDoc(project *t.ProjectType) t.DocType {
 
 	doc.Vue.AddFixedSaveBtn()
 
-	doc.AddVueComposition("docItem", "executor")
+	//doc.AddVueComposition("docItem", "executor")
 	doc.AddVueComposition("docItem", "specialist")
-	doc.AddVueComposition("docItem", "work")
-	doc.AddVueComposition("docItem", "customer")
-	doc.AddVueComposition("docItem", "relation")
-	doc.AddVueComposition("docItem", "date")
-	doc.AddVueComposition("docItem", "result")
+	//doc.AddVueComposition("docItem", "work")
+	//doc.AddVueComposition("docItem", "customer")
+	//doc.AddVueComposition("docItem", "relation")
+	//doc.AddVueComposition("docItem", "date")
+	//doc.AddVueComposition("docItem", "result")
 
 	doc.Vue.I18n = map[string]string{
 		"listTitle":        utils.UpperCaseFirst(name_ru_plural),

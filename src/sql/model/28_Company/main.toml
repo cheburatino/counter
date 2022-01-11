@@ -26,9 +26,9 @@ triggers = [
 
 
 methods = [
-	"company_update",
 	"company_get_by_id",
 	"company_list",
+	"company_update",
 	"company_trigger_before",
 	"company_trigger_after"
 ]

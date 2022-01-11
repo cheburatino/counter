@@ -7,13 +7,16 @@ fields = [
 	{name="id",			type="serial"},
 	{name="title",					type="char",	size=150, 	ext="not null",	 comment="название"},
 	{name="state_id",					type="int",	 comment="статус"},
+	{name="system_id",					type="int",	 comment="система"},
+	{name="functional_requirement_id",					type="int",	 comment="функциональное требование"},
+	{name="plan_end_date",					type="timestamp",	 comment="плановая дата завершения"},
+	{name="fact_end_date",					type="timestamp",	 comment="фактическая дата завершения"},
 	{name="description",					type="text",	 comment="описание"},
 	{name="files",					type="jsonb",	 comment="файлы"},
 	{name="images",					type="jsonb",	 comment="изображения"},
-	{name="customer_id",					type="int",	 comment="заказчик"},
-	{name="system_id",					type="int",	 comment="система"},
-	{name="functional_requirement_id",					type="int",	 comment="функциональное требование"},
 	{name="result",					type="text",	 comment="результат"},
+	{name="result_files",					type="jsonb",	 comment="файлы результата"},
+	{name="result_images",					type="jsonb",	 comment="изображения результата"},
 	{name="search_text",			type="text",	comment="колонка для поиска"},
 	{name="options",				type="jsonb",	comment="разные дополнительные параметры"},
 	{name="created_at",				type="timestamp",	ext="with time zone"},
@@ -24,7 +27,6 @@ fields = [
 fkConstraints = [
 	{name="bug_title_already_exist", ext="UNIQUE (title)"},
 	{fld="state_id", ref="ctlg_bug_state", fk="id"},
-	{fld="customer_id", ref="company", fk="id"},
 	{fld="system_id", ref="system", fk="id"},
 	{fld="functional_requirement_id", ref="functional_requirement", fk="id"}
 ]
@@ -38,9 +40,9 @@ triggers = [
 
 
 methods = [
+	"bug_list",
 	"bug_update",
 	"bug_get_by_id",
-	"bug_list",
 	"bug_trigger_before",
 	"bug_trigger_after"
 ]
@@ -48,12 +50,15 @@ methods = [
 alterScripts = [
 	"alter table bug add column if not exists title CHARACTER VARYING(150);",
 	"alter table bug add column if not exists state_id int;",
+	"alter table bug add column if not exists system_id int;",
+	"alter table bug add column if not exists functional_requirement_id int;",
+	"alter table bug add column if not exists plan_end_date timestamp;",
+	"alter table bug add column if not exists fact_end_date timestamp;",
 	"alter table bug add column if not exists description text;",
 	"alter table bug add column if not exists files jsonb;",
 	"alter table bug add column if not exists images jsonb;",
-	"alter table bug add column if not exists customer_id int;",
-	"alter table bug add column if not exists system_id int;",
-	"alter table bug add column if not exists functional_requirement_id int;",
 	"alter table bug add column if not exists result text;",
+	"alter table bug add column if not exists result_files jsonb;",
+	"alter table bug add column if not exists result_images jsonb;",
 	"alter table bug add column if not exists search_text text;"
 ]
