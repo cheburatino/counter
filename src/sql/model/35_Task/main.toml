@@ -7,6 +7,7 @@ fields = [
 	{name="id",			type="serial"},
 	{name="title",					type="char",	size=150, 	ext="not null",	 comment="название"},
 	{name="priority",					type="int",	 comment="приоритет"},
+	{name="paused",					type="bool", 	ext=" default false",	 comment="на паузе"},
 	{name="state_id",					type="int", 	ext=" default 1",	 comment="статус"},
 	{name="system_id",					type="int",	 comment="система"},
 	{name="functional_requirement_id",					type="int",	 comment="функциональное требование"},
@@ -54,6 +55,7 @@ methods = [
 alterScripts = [
 	"alter table task add column if not exists title CHARACTER VARYING(150);",
 	"alter table task add column if not exists priority int;",
+	"alter table task add column if not exists paused bool;",
 	"alter table task add column if not exists state_id int;",
 	"alter table task add column if not exists system_id int;",
 	"alter table task add column if not exists functional_requirement_id int;",

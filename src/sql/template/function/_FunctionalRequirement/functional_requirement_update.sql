@@ -42,6 +42,7 @@ BEGIN
     
     
     
+    
 
     if (params ->> 'id')::int = -1 then
         -- проверика наличия обязательных параметров
@@ -52,10 +53,11 @@ BEGIN
         END IF;
         
 
-        EXECUTE ('INSERT INTO functional_requirement (title, state_id, system_id, request_id, plan_end_date, fact_end_date, customer_priority, internal_priority, description, files, images, result, result_file, result_image, options) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15)  RETURNING *;')
+        EXECUTE ('INSERT INTO functional_requirement (title, paused, state_id, system_id, request_id, plan_end_date, fact_end_date, customer_priority, internal_priority, description, files, images, result, result_file, result_image, options) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16)  RETURNING *;')
 		INTO functional_requirementRow
 		USING
 			(params ->> 'title')::text,
+			coalesce((params ->> 'paused')::bool, false)::bool,
 			coalesce((params ->> 'state_id')::int, 1)::int,
 			(params ->> 'system_id')::int,
 			(params ->> 'request_id')::int,
@@ -76,6 +78,7 @@ BEGIN
     else
         updateValue = '' || update_str_from_json(params, ARRAY [
 			['title', 'title', 'text'],
+			['paused', 'paused', 'bool'],
 			['state_id', 'state_id', 'number'],
 			['system_id', 'system_id', 'number'],
 			['request_id', 'request_id', 'number'],

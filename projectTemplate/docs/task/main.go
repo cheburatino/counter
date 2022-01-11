@@ -22,8 +22,9 @@ func GetDoc(project *t.ProjectType) t.DocType {
 		Flds: []t.FldType{
 			t.GetFldTitle().SetIsNotUniq(),
 			//t.GetFldRef("type_id", "тип задачи", "ctlg_task_type", [][]int{{1, 2}}, "col-2"),
-			t.GetFldInt("priority", "приоритет", [][]int{{1, 2}}, "col-2"),
-			t.GetFldRef("state_id", "статус", "ctlg_task_state", [][]int{{1, 3}}, "col-2").SetDefault("1"),
+			t.GetFldInt("priority", "приоритет", [][]int{{1, 2}}, "col-1"),
+			t.GetFldCheckbox("paused", "на паузе", [][]int{{1, 3}}, "col-1").SetDefault("false"),
+			t.GetFldRef("state_id", "статус", "ctlg_task_state", [][]int{{1, 4}}, "col-2").SetDefault("1"),
 			t.GetFldRef("system_id", "система", "system", [][]int{{2, 1}}, "isShowLink", "isClearable"),
 			t.GetFldRef("functional_requirement_id", "функциональное требование", "functional_requirement", [][]int{{2, 2}}, "col-2", "isShowLink", "isClearable"),
 			t.GetFldRef("bug_id", "баг", "bug", [][]int{{2, 3}}, "col-2", "isShowLink", "isClearable"),
@@ -102,9 +103,10 @@ func GetDoc(project *t.ProjectType) t.DocType {
 			return `
 				 <q-item-section>
 				    <q-item-label lines="1">{{item.title}}</q-item-label>
-					<q-item-label caption><q-badge color="orange">{{item.options.title.state_title}}</q-badge> <q-badge>{{item.options.title.system_title}}</q-badge></q-item-label>
-					<q-item-label caption>ФТ: {{item.options.title.functional_requirement_title}}</q-item-label>
-					<q-item-label caption>Баг: {{item.options.title.bug_title}}</q-item-label>
+					<q-item-label caption>
+						<q-item-label caption><q-badge color="orange">{{item.options.title.state_title}}</q-badge> <q-badge>{{item.options.title.system_title}}</q-badge></q-item-label>
+						<q-item-label caption>Плановая дата завершения: {{item.plan_end_date}}</q-item-label>
+					</q-item-label>
 				 </q-item-section>
 			`
 		},

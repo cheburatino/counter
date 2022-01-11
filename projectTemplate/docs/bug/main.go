@@ -21,7 +21,8 @@ func GetDoc(project *t.ProjectType) t.DocType {
 		PathPrefix: "docs",
 		Flds: []t.FldType{
 			t.GetFldTitle().SetReadonly("currentUser.role?.includes(`customer`) && item.state_id != 1"),
-			t.GetFldRef("state_id", "статус", "ctlg_bug_state", [][]int{{1, 2}}).SetReadonly("currentUser.role?.includes(`customer`)"),
+			t.GetFldCheckbox("paused", "на паузе", [][]int{{1, 2}}, "col-2"),
+			t.GetFldRef("state_id", "статус", "ctlg_bug_state", [][]int{{1, 3}}, "col-2").SetReadonly("currentUser.role?.includes(`customer`)"),
 			t.GetFldRef("system_id", "система", "system", [][]int{{2, 1}},  "col-2", "isShowLink", "isClearable").SetReadonly("currentUser.role?.includes(`customer`)"),
 			t.GetFldRef("functional_requirement_id", "функциональное требование", "functional_requirement", [][]int{{2, 2}},"col-2", "isShowLink", "isClearable").SetReadonly("currentUser.role?.includes(`customer`)"),
 			t.GetFldDate("plan_end_date", "плановая дата завершения", [][]int{{2, 3}}, "col-2"),
@@ -76,7 +77,6 @@ func GetDoc(project *t.ProjectType) t.DocType {
 			return `
 				 <q-item-section>
 				    <q-item-label lines="1">{{item.title}}</q-item-label>
-					<q-item-label caption><q-badge color="orange">{{item.options.title.state_title}}</q-badge> <q-badge>{{item.options.title.system_title}}</q-badge></q-item-label>
 				 </q-item-section>
 			`
 		},
@@ -90,7 +90,6 @@ func GetDoc(project *t.ProjectType) t.DocType {
 		Avatar:     "image/task.svg",      // иконка, которая выводится в списке
 		NewFlds: []t.FldType{
 			t.GetFldString("title", "название", 300, [][]int{{1, 1}}).SetIsRequired(),
-			t.GetFldRef("type_id", "тип задачи", "ctlg_task_type", [][]int{{2, 2}}).SetIsRequired(),
 		}, // список полей, которые заполняются при добавлении новой записи
 		TitleTemplate: `
                 <q-item-label>{{v.title}}</q-item-label>
