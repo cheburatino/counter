@@ -73,6 +73,8 @@
 									{icon: 'image/task.svg', text: 'i18n_menu.task', url: '/task', roles: ['admin', 'specialist']},
 
 									{icon: 'image/bug.png', text: 'i18n_menu.bug', url: '/bug', roles: ['admin', 'customer', 'specialist']},
+
+									{icon: 'image/company.svg', text: 'i18n_menu.company', url: '/company', roles: ['admin']},
 {isFolder: true, icon: 'image/catalog.svg', text: 'Справочники', roles: ['admin'], linkList: 								[
 								{icon: 'image/user.svg', text: 'Пользователи', url: '/users', roles: []},
 								{icon: '', text: 'Статусы запросов', url: '/ctlg_request_state', roles: []},

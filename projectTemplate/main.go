@@ -140,7 +140,7 @@ func getProject() t.ProjectType {
 		//{DocName: "customer_task", Roles: []string{utils.RoleAdmin, ROLE_CUSTOMER, ROLE_SPECIALIST}},
 		//{DocName: "meeting", Roles: []string{utils.RoleAdmin, ROLE_SPECIALIST}},
 		//{DocName: "time", Roles: []string{utils.RoleAdmin}},
-		//{DocName: "company", Roles: []string{utils.RoleAdmin}},
+		{DocName: "company", Roles: []string{utils.RoleAdmin}},
 		//{DocName: "man", Roles: []string{utils.RoleAdmin}},
 		//{DocName: "counterparty", Roles: []string{utils.RoleAdmin}},
 		//{DocName: "contract", Roles: []string{utils.RoleAdmin}},
