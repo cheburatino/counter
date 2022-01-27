@@ -58,6 +58,12 @@
       </div>
       
       <div class="row q-col-gutter-md q-mb-sm">
+      <div class="col-md-8 col-sm-12 col-xs-12">
+          <q-input outlined type='text' v-model="item.benefit" :label="$t('functional_requirement.benefit')" autogrow :readonly='false'  class='q-mb-sm col-md-8 col-sm-12 col-xs-12' />
+      </div>
+      </div>
+      
+      <div class="row q-col-gutter-md q-mb-sm">
       <div class="col-md-8 col-sm-12 col-xs-12" v-if="!currentUser.role?.includes(`customer`)">
           <q-input outlined type='text' v-model="item.description_for_dev" :label="$t('functional_requirement.description_for_dev')" autogrow :readonly='false'  class='q-mb-sm col-md-8 col-sm-12 col-xs-12'  v-if="!currentUser.role?.includes(`customer`)" />
       </div>
@@ -116,12 +122,12 @@
 </template>
 
 <script>
-	import bugListRefListWidget from './comp/bugListRefListWidget.vue'
 	import taskListRefListWidget from './comp/taskListRefListWidget.vue'
+	import bugListRefListWidget from './comp/bugListRefListWidget.vue'
     import currentUserMixin from '../../../app/mixins/currentUser'
     export default {
         props: ['id', 'isOpenInDialog'],
-        components: {taskListRefListWidget, bugListRefListWidget},
+        components: {bugListRefListWidget, taskListRefListWidget},
         mixins: [currentUserMixin,],
         computed: {
             docUrl: function() {
@@ -144,6 +150,7 @@
                         {name: 'description', label: 'описание'},
                         {name: 'files', label: 'файлы'},
                         {name: 'images', label: 'изображения'},
+                        {name: 'benefit', label: 'польза'},
                         {name: 'description_for_dev', label: 'описание для разработки'},
                         {name: 'files_for_dev', label: 'файлы для разработки'},
                         {name: 'images_for_dev', label: 'изображения для разработки'},

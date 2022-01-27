@@ -32,22 +32,15 @@ func GetDoc(project *t.ProjectType) t.DocType {
 			t.GetFldString("description", "описание", 0, [][]int{{4, 1}}, "col-8").SetReadonly("currentUser.role?.includes(`customer`)"),
 			t.GetFldFiles("files", "файлы", [][]int{{5, 1}}, t.FldVueFilesParams{}).SetReadonly("currentUser.role?.includes(`customer`)"),
 			t.GetFldImgList("images", "изображения", [][]int{{5, 2}}, t.FldVueImgParams{}).SetReadonly("currentUser.role?.includes(`customer`)"),
-			t.GetFldString("description_for_dev", "описание для разработки", 0, [][]int{{6, 1}}, "col-8").SetVif("!currentUser.role?.includes(`customer`)"),
-			t.GetFldFiles("files_for_dev", "файлы для разработки", [][]int{{7, 1}}, t.FldVueFilesParams{}),
-			t.GetFldImgList("images_for_dev", "изображения для разработки", [][]int{{7, 2}}, t.FldVueImgParams{}).SetReadonly("currentUser.role?.includes(`customer`)"),
-			// Задачи. Описание контрола после doc.Init {{8, 1}}
-			// Баги. Описание контрола после doc.Init {{8, 2}}
-			//t.GetFldJsonbCompositionWithoutFld([][]int{{7, 1}}, "col-4", "comp-executor"),
-			//t.GetFldSimpleHtml([][]int{{8, 1}}, "", "<p>Специалисты</p>"),
-			//t.GetFldJsonbCompositionWithoutFld([][]int{{9, 1}}, "col-4", "comp-customer"),
-			//t.GetFldRef("customer_id", "заказчик", "company", [][]int{{10, 1}}, "isShowLink", "isClearable").SetReadonly("currentUser.role?.includes(`customer`)"),
-			//t.GetFldJsonbCompositionWithoutFld([][]int{{11, 1}}, "", "comp-customerAgent", ":currentUser='currentUser'").SetReadonly("currentUser.role?.includes(`customer`)"),
-			//t.GetFldJsonbCompositionWithoutFld([][]int{{12, 1}}, "col-4", "comp-relation"),
-			//t.GetFldRef("digital_solution_id", "цифровое решение", "digital_solution", [][]int{{14, 1}}, "isShowLink", "isClearable").SetReadonly("currentUser.role?.includes(`customer`)"),
-			//t.GetFldJsonbCompositionWithoutFld([][]int{{15, 1}}, "col-4", "comp-result"),
-			t.GetFldString("result", "результат", 0, [][]int{{9, 1}}, "col-8").SetReadonly("currentUser.role?.includes(`customer`)"),
-			t.GetFldFiles("result_file", "файлы результата", [][]int{{10, 1}}, t.FldVueFilesParams{}),
-			t.GetFldImgList("result_image", "изображения результата", [][]int{{10, 2}}, t.FldVueImgParams{}),
+			t.GetFldString("benefit", "польза", 0, [][]int{{6, 1}}, "col-8"),
+			t.GetFldString("description_for_dev", "описание для разработки", 0, [][]int{{7, 1}}, "col-8").SetVif("!currentUser.role?.includes(`customer`)"),
+			t.GetFldFiles("files_for_dev", "файлы для разработки", [][]int{{8, 1}}, t.FldVueFilesParams{}),
+			t.GetFldImgList("images_for_dev", "изображения для разработки", [][]int{{8, 2}}, t.FldVueImgParams{}).SetReadonly("currentUser.role?.includes(`customer`)"),
+			// Задачи. Описание контрола после doc.Init {{9, 1}}
+			// Баги. Описание контрола после doc.Init {{9, 2}}
+			t.GetFldString("result", "результат", 0, [][]int{{10, 1}}, "col-8").SetReadonly("currentUser.role?.includes(`customer`)"),
+			t.GetFldFiles("result_file", "файлы результата", [][]int{{11, 1}}, t.FldVueFilesParams{}),
+			t.GetFldImgList("result_image", "изображения результата", [][]int{{11, 2}}, t.FldVueImgParams{}),
 		},
 		Vue: t.DocVue{
 			RouteName:      name,
@@ -76,12 +69,6 @@ func GetDoc(project *t.ProjectType) t.DocType {
 
 	doc.Vue.AddFixedSaveBtn()
 
-	//doc.AddVueComposition("docItem", "executor")
-	//doc.AddVueComposition("docItem", "customer")
-	//doc.AddVueComposition("docItem", "customerAgent")
-	//doc.AddVueComposition("docItem", "relation")
-	//doc.AddVueComposition("docItem", "result")
-
 	doc.Vue.I18n = map[string]string{
 		"listTitle":        utils.UpperCaseFirst(name_ru_plural),
 		"listDeletedTitle": "Удаленные " + name_ru_plural,
@@ -104,11 +91,11 @@ func GetDoc(project *t.ProjectType) t.DocType {
 		},
 	}
 	doc.AddFld(t.GetFldVueCompositionRefList(&doc, t.VueCompRefListWidgetParams{
-		Label:      "задачи",                  // название списка, которе выводится на экране
-		FldName:    "task_list",              // название поля. Любое, в формате snake_case. На основе этого названия формируется название компоненты во vue.
-		TableName:  "task",                   // название связанной таблицы, из которой будут выгружаться записи
-		RefFldName: "functional_requirement_id", // название поля в связанной таблицы, по которому осуществляется связь
-		Avatar:     "image/task.svg",         // иконка, которая выводится в списке
+		Label:      "задачи",                 		// название списка, которе выводится на экране
+		FldName:    "task_list",              		// название поля. Любое, в формате snake_case. На основе этого названия формируется название компоненты во vue.
+		TableName:  "task",                   		// название связанной таблицы, из которой будут выгружаться записи
+		RefFldName: "functional_requirement_id", 	// название поля в связанной таблицы, по которому осуществляется связь
+		Avatar:     "image/task.svg",         		// иконка, которая выводится в списке
 		NewFlds: []t.FldType{
 			t.GetFldString("title", "название", 300, [][]int{{1, 1}}).SetIsRequired(),
 		}, // список полей, которые заполняются при добавлении новой записи
@@ -116,22 +103,7 @@ func GetDoc(project *t.ProjectType) t.DocType {
                <q-item-label>{{v.title}}</q-item-label>
                <q-item-label caption><q-badge color="orange">{{v.options.title.state_title}}</q-badge></q-item-label>
            `, // шаблон для названия в списке (vue синтаксис)
-	}, [][]int{{8, 1}}, "col-4").SetVif("currentUser.role?.includes(`admin`)"))
-
-	//doc.AddFld(t.GetFldVueCompositionRefList(&doc, t.VueCompRefListWidgetParams{
-	//	Label:      "задачи заказчика",        // название списка, которе выводится на экране
-	//	FldName:    "customer_task_list",      // название поля. Любое, в формате snake_case. На основе этого названия формируется название компоненты во vue.
-	//	TableName:  "customer_task",           // название связанной таблицы, из которой будут выгружаться записи
-	//	RefFldName: "functional_requirement_id",     // название поля в связанной таблицы, по которому осуществляется связь
-	//	Avatar:     "image/customer_task.png", // иконка, которая выводится в списке
-	//	NewFlds: []t.FldType{
-	//		t.GetFldString("title", "название", 300, [][]int{{1, 1}}).SetIsRequired(),
-	//	}, // список полей, которые заполняются при добавлении новой записи
-	//	TitleTemplate: `
-    //            <q-item-label>{{v.title}}</q-item-label>
-    //            <q-item-label caption><q-badge color="orange">{{v.options.title.state_title}}</q-badge></q-item-label>
-    //        `, // шаблон для названия в списке (vue синтаксис)
-	//}, [][]int{{6, 2}}, "col-4"))
+	}, [][]int{{9, 1}}, "col-4").SetVif("currentUser.role?.includes(`admin`)"))
 
 	doc.AddFld(t.GetFldVueCompositionRefList(&doc, t.VueCompRefListWidgetParams{
 		Label:      "баги",                  // название списка, которе выводится на экране
@@ -146,8 +118,7 @@ func GetDoc(project *t.ProjectType) t.DocType {
                <q-item-label>{{v.title}}</q-item-label>
                <q-item-label caption><q-badge color="orange">{{v.options.title.state_title}}</q-badge></q-item-label>
            `, // шаблон для названия в списке (vue синтаксис)
-	}, [][]int{{8, 2}}, "col-4"))
-
+	}, [][]int{{9, 2}}, "col-4"))
 
 	return doc
 }
