@@ -102,6 +102,18 @@
       </div>
       </div>
       
+      <div class="row q-col-gutter-md q-mb-sm">
+      <div class="col-3">
+          <q-input outlined type='number' v-model="item.analisys_estimate" :label="$t('functional_requirement.analisys_estimate')" :readonly='false'  class='q-mb-sm col-3' />
+      </div>
+      <div class="col-3">
+          <q-input outlined type='number' v-model="item.frontend_estimate" :label="$t('functional_requirement.frontend_estimate')" :readonly='false'  class='q-mb-sm col-3' />
+      </div>
+      <div class="col-3">
+          <q-input outlined type='number' v-model="item.backend_estimate" :label="$t('functional_requirement.backend_estimate')" :readonly='false'  class='q-mb-sm col-3' />
+      </div>
+      </div>
+      
 
       <!--  кнопки   -->
       <comp-item-btn-save v-if="!isOpenInDialog" @save="save" :readonly="false" @cancel="$router.push(docUrl)"/>
@@ -127,7 +139,7 @@
     import currentUserMixin from '../../../app/mixins/currentUser'
     export default {
         props: ['id', 'isOpenInDialog'],
-        components: {bugListRefListWidget, taskListRefListWidget},
+        components: {taskListRefListWidget, bugListRefListWidget},
         mixins: [currentUserMixin,],
         computed: {
             docUrl: function() {
@@ -157,6 +169,9 @@
                         {name: 'result', label: 'результат'},
                         {name: 'result_file', label: 'файлы результата'},
                         {name: 'result_image', label: 'изображения результата'},
+                        {name: 'analisys_estimate', label: 'оценка анализа'},
+                        {name: 'frontend_estimate', label: 'оценка фронт'},
+                        {name: 'backend_estimate', label: 'оценка бэк'},
                 ],
                 optionsFlds: [],
                 

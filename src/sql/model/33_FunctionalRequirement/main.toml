@@ -24,6 +24,9 @@ fields = [
 	{name="result",					type="text",	 comment="результат"},
 	{name="result_file",					type="jsonb",	 comment="файлы результата"},
 	{name="result_image",					type="jsonb",	 comment="изображения результата"},
+	{name="analisys_estimate",					type="int",	 comment="оценка анализа"},
+	{name="frontend_estimate",					type="int",	 comment="оценка фронт"},
+	{name="backend_estimate",					type="int",	 comment="оценка бэк"},
 	{name="search_text",			type="text",	comment="колонка для поиска"},
 	{name="options",				type="jsonb",	comment="разные дополнительные параметры"},
 	{name="created_at",				type="timestamp",	ext="with time zone"},
@@ -74,5 +77,8 @@ alterScripts = [
 	"alter table functional_requirement add column if not exists result text;",
 	"alter table functional_requirement add column if not exists result_file jsonb;",
 	"alter table functional_requirement add column if not exists result_image jsonb;",
+	"alter table functional_requirement add column if not exists analisys_estimate int;",
+	"alter table functional_requirement add column if not exists frontend_estimate int;",
+	"alter table functional_requirement add column if not exists backend_estimate int;",
 	"alter table functional_requirement add column if not exists search_text text;"
 ]

@@ -47,6 +47,9 @@ BEGIN
     
     
     
+    
+    
+    
 
     if (params ->> 'id')::int = -1 then
         -- проверика наличия обязательных параметров
@@ -57,7 +60,7 @@ BEGIN
         END IF;
         
 
-        EXECUTE ('INSERT INTO functional_requirement (title, paused, state_id, system_id, request_id, plan_end_date, fact_end_date, customer_priority, internal_priority, description, files, images, benefit, description_for_dev, files_for_dev, images_for_dev, result, result_file, result_image, options) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20)  RETURNING *;')
+        EXECUTE ('INSERT INTO functional_requirement (title, paused, state_id, system_id, request_id, plan_end_date, fact_end_date, customer_priority, internal_priority, description, files, images, benefit, description_for_dev, files_for_dev, images_for_dev, result, result_file, result_image, analisys_estimate, frontend_estimate, backend_estimate, options) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21, $22, $23)  RETURNING *;')
 		INTO functional_requirementRow
 		USING
 			(params ->> 'title')::text,
@@ -79,6 +82,9 @@ BEGIN
 			(params ->> 'result')::text,
 			(params -> 'result_file')::jsonb,
 			(params -> 'result_image')::jsonb,
+			(params ->> 'analisys_estimate')::int,
+			(params ->> 'frontend_estimate')::int,
+			(params ->> 'backend_estimate')::int,
 			coalesce(params -> 'options', '{}')::jsonb;
 
         
@@ -104,6 +110,9 @@ BEGIN
 			['result', 'result', 'text'],
 			['result_file', 'result_file', 'jsonb'],
 			['result_image', 'result_image', 'jsonb'],
+			['analisys_estimate', 'analisys_estimate', 'number'],
+			['frontend_estimate', 'frontend_estimate', 'number'],
+			['backend_estimate', 'backend_estimate', 'number'],
             ['options', 'options', 'jsonb'],
             ['deleted', 'deleted', 'bool']
             ]);

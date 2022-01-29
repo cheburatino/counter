@@ -41,6 +41,9 @@ func GetDoc(project *t.ProjectType) t.DocType {
 			t.GetFldString("result", "результат", 0, [][]int{{10, 1}}, "col-8").SetReadonly("currentUser.role?.includes(`customer`)"),
 			t.GetFldFiles("result_file", "файлы результата", [][]int{{11, 1}}, t.FldVueFilesParams{}),
 			t.GetFldImgList("result_image", "изображения результата", [][]int{{11, 2}}, t.FldVueImgParams{}),
+			t.GetFldInt("analisys_estimate", "оценка анализа", [][]int{{12, 1}}, "col-3"),
+			t.GetFldInt("frontend_estimate", "оценка фронт", [][]int{{12, 2}}, "col-3"),
+			t.GetFldInt("backend_estimate", "оценка бэк", [][]int{{12, 3}}, "col-3"),
 		},
 		Vue: t.DocVue{
 			RouteName:      name,
