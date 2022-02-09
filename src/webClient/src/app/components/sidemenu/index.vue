@@ -64,6 +64,8 @@
                 menuLinks: [
                     // for codeGenerate ##sidemenu_slot1
 
+									{icon: 'image/sprint.svg', text: 'i18n_menu.sprint', url: '/sprint', roles: ['admin', 'specialist', 'customer']},
+
 									{icon: 'image/system.svg', text: 'i18n_menu.system', url: '/system', roles: ['admin', 'specialist', 'customer']},
 
 									{icon: 'image/request.svg', text: 'i18n_menu.request', url: '/request', roles: ['admin', 'specialist', 'customer']},

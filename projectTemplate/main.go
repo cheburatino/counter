@@ -37,6 +37,7 @@ import (
 	"github.com/cheburatino/electron_is/projectTemplate/docs/newsFromDima"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/request"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/requestCustomerAgentLink"
+	"github.com/cheburatino/electron_is/projectTemplate/docs/sprint"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/system"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/systemCustomerAgentLink"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/task"
@@ -92,6 +93,7 @@ func getProject() t.ProjectType {
 		digitalSolution.GetDoc(p),
 		functionalRequirement.GetDoc(p),
 		invoice.GetDoc(p),
+		sprint.GetDoc(p),
 		task.GetDoc(p),
 		work.GetDoc(p),
 		customerTask.GetDoc(p),
@@ -130,6 +132,7 @@ func getProject() t.ProjectType {
 
 	// боковое меню для Vue
 	p.Vue.Menu = []t.VueMenu{
+		{DocName: "sprint", Roles: []string{utils.RoleAdmin, ROLE_SPECIALIST, ROLE_CUSTOMER}},
 		{DocName: "system", Roles: []string{utils.RoleAdmin, ROLE_SPECIALIST, ROLE_CUSTOMER}},
 		{DocName: "request", Roles: []string{utils.RoleAdmin, ROLE_SPECIALIST, ROLE_CUSTOMER}},
 		{DocName: "functional_requirement", Roles: []string{utils.RoleAdmin, ROLE_SPECIALIST, ROLE_CUSTOMER}},
