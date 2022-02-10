@@ -78,6 +78,15 @@
       </div>
       </div>
       
+      <div class="row q-col-gutter-md q-mb-sm">
+      <div class="col-md-4 col-sm-6 col-xs-12">
+          <comp-fld-ref-search outlined pgMethod="ctlg_task_type_list" :label="$t('task.type_id')" :item='item.type_title' :itemId='item.type_id' :ext='{}' @update="v=> item.type_id = v.id" @clear="item.type_id = null" :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
+      </div>
+      <div class="col-md-4 col-sm-6 col-xs-12">
+          <q-input outlined type='number' v-model="item.estimate" :label="$t('task.estimate')" :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
+      </div>
+      </div>
+      
 
       <!--  кнопки   -->
       <comp-item-btn-save v-if="!isOpenInDialog" @save="save" :readonly="false" @cancel="$router.push(docUrl)"/>
@@ -129,6 +138,8 @@
                         {name: 'result', label: 'результат'},
                         {name: 'result_files', label: 'файлы результата'},
                         {name: 'result_images', label: 'изображения результата'},
+                        {name: 'type_id', label: 'тип задачи'},
+                        {name: 'estimate', label: 'оценка времени (минут)'},
                 ],
                 optionsFlds: [],
                 

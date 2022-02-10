@@ -27,8 +27,9 @@ BEGIN
 		t3 as (select t2.*, c.title as system_title from t2 left join system c on c.id = t2.system_id),
 		t4 as (select t3.*, c.title as sprint_title from t3 left join sprint c on c.id = t3.sprint_id),
 		t5 as (select t4.*, c.title as functional_requirement_title from t4 left join functional_requirement c on c.id = t4.functional_requirement_id),
-		t6 as (select t5.*, c.title as bug_title from t5 left join bug c on c.id = t5.bug_id)
- 	select row_to_json(t6.*)::jsonb into result from t6;
+		t6 as (select t5.*, c.title as bug_title from t5 left join bug c on c.id = t5.bug_id),
+		t7 as (select t6.*, c.title as type_title from t6 left join ctlg_task_type c on c.id = t6.type_id)
+ 	select row_to_json(t7.*)::jsonb into result from t7;
 
     -- случай когда записи с таким id не найдено
     IF result ->> 'id' ISNULL

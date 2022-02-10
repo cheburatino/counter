@@ -43,6 +43,8 @@ BEGIN
     
     
     
+    
+    
 
     if (params ->> 'id')::int = -1 then
         -- проверика наличия обязательных параметров
@@ -53,7 +55,7 @@ BEGIN
         END IF;
         
 
-        EXECUTE ('INSERT INTO task (title, priority, paused, state_id, system_id, sprint_id, functional_requirement_id, bug_id, plan_end_date, fact_end_date, description, files, images, result, result_files, result_images, options) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17)  RETURNING *;')
+        EXECUTE ('INSERT INTO task (title, priority, paused, state_id, system_id, sprint_id, functional_requirement_id, bug_id, plan_end_date, fact_end_date, description, files, images, result, result_files, result_images, type_id, estimate, options) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19)  RETURNING *;')
 		INTO taskRow
 		USING
 			(params ->> 'title')::text,
@@ -72,6 +74,8 @@ BEGIN
 			(params ->> 'result')::text,
 			(params -> 'result_files')::jsonb,
 			(params -> 'result_images')::jsonb,
+			(params ->> 'type_id')::int,
+			(params ->> 'estimate')::int,
 			coalesce(params -> 'options', '{}')::jsonb;
 
         
@@ -94,6 +98,8 @@ BEGIN
 			['result', 'result', 'text'],
 			['result_files', 'result_files', 'jsonb'],
 			['result_images', 'result_images', 'jsonb'],
+			['type_id', 'type_id', 'number'],
+			['estimate', 'estimate', 'number'],
             ['options', 'options', 'jsonb'],
             ['deleted', 'deleted', 'bool']
             ]);
