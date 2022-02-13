@@ -23,12 +23,12 @@ BEGIN
     END IF;
 
     with t1 as (select * from task where id = (params ->> 'id')::int),
-		t2 as (select t1.*, c.title as state_title from t1 left join ctlg_task_state c on c.id = t1.state_id),
-		t3 as (select t2.*, c.title as system_title from t2 left join system c on c.id = t2.system_id),
-		t4 as (select t3.*, c.title as sprint_title from t3 left join sprint c on c.id = t3.sprint_id),
-		t5 as (select t4.*, c.title as functional_requirement_title from t4 left join functional_requirement c on c.id = t4.functional_requirement_id),
-		t6 as (select t5.*, c.title as bug_title from t5 left join bug c on c.id = t5.bug_id),
-		t7 as (select t6.*, c.title as type_title from t6 left join ctlg_task_type c on c.id = t6.type_id)
+		t2 as (select t1.*, c.title as type_title from t1 left join ctlg_task_type c on c.id = t1.type_id),
+		t3 as (select t2.*, c.title as state_title from t2 left join ctlg_task_state c on c.id = t2.state_id),
+		t4 as (select t3.*, c.title as system_title from t3 left join system c on c.id = t3.system_id),
+		t5 as (select t4.*, c.title as sprint_title from t4 left join sprint c on c.id = t4.sprint_id),
+		t6 as (select t5.*, c.title as functional_requirement_title from t5 left join functional_requirement c on c.id = t5.functional_requirement_id),
+		t7 as (select t6.*, c.title as bug_title from t6 left join bug c on c.id = t6.bug_id)
  	select row_to_json(t7.*)::jsonb into result from t7;
 
     -- случай когда записи с таким id не найдено

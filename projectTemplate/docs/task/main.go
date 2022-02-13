@@ -21,14 +21,17 @@ func GetDoc(project *t.ProjectType) t.DocType {
 		PathPrefix: "docs",
 		Flds: []t.FldType{
 			t.GetFldTitle().SetIsNotUniq(),
-			t.GetFldRef("state_id", "статус", "ctlg_task_state", [][]int{{1, 2}}, "isShowLink", "isClearable").SetDefault("1"),
+			t.GetFldRef("type_id", "тип задачи", "ctlg_task_type", [][]int{{1, 2}}, "col-2"),
+			t.GetFldRef("state_id", "статус", "ctlg_task_state", [][]int{{1, 3}}, "col-2").SetDefault("1"),
 			t.GetFldRef("system_id", "система", "system", [][]int{{2, 1}}, "col-2", "isShowLink", "isClearable"),
 			t.GetFldRef("sprint_id", "спринт", "sprint", [][]int{{2, 2}}, "col-2", "isShowLink", "isClearable"),
 			t.GetFldRef("functional_requirement_id", "функциональное требование", "functional_requirement", [][]int{{2, 3}}, "col-2", "isShowLink", "isClearable"),
 			t.GetFldRef("bug_id", "баг", "bug", [][]int{{2, 4}}, "col-2", "isShowLink", "isClearable"),
-			t.GetFldJsonbCompositionWithoutFld([][]int{{3, 1}}, "", "comp-specialist", ":currentUser='currentUser'"),
-			t.GetFldDate("plan_end_date", "плановая дата завершения", [][]int{{3, 2}}, "col-2"),
-			t.GetFldDate("fact_end_date", "фактическая дата завершения", [][]int{{3, 3}}, "col-2"),
+			t.GetFldInt("estimate", "оценка времени (минут)", [][]int{{3, 1}}, "col-2"),
+			t.GetFldInt("worked_time", "затраченно времени (минут)", [][]int{{3, 2}}, "col-2"),
+			//t.GetFldJsonbCompositionWithoutFld([][]int{{3, 1}}, "", "comp-specialist", ":currentUser='currentUser'"),
+			t.GetFldDate("plan_end_date", "плановая дата завершения", [][]int{{3, 3}}, "col-2"),
+			t.GetFldDate("fact_end_date", "фактическая дата завершения", [][]int{{3, 4}}, "col-2"),
 			t.GetFldString("description", "описание", 0, [][]int{{4, 1}}, "col-8"),
 			t.GetFldFiles("files", "файлы", [][]int{{5, 1}}, t.FldVueFilesParams{}),
 			t.GetFldImgList("images", "изображения", [][]int{{5, 2}}, t.FldVueImgParams{}),
@@ -38,9 +41,6 @@ func GetDoc(project *t.ProjectType) t.DocType {
 			t.GetFldString("result", "результат", 0, [][]int{{8, 1}}, "col-8"),
 			t.GetFldFiles("result_files", "файлы результата", [][]int{{9, 1}}, t.FldVueFilesParams{}),
 			t.GetFldImgList("result_images", "изображения результата", [][]int{{9, 2}}, t.FldVueImgParams{}),
-			t.GetFldRef("type_id", "тип задачи", "ctlg_task_type", [][]int{{10, 1}}),
-			t.GetFldInt("estimate", "оценка времени (минут)", [][]int{{10, 2}}, "col-2"),
-			t.GetFldInt("worked_time", "затраченно времени (минут)", [][]int{{10, 3}}, "col-2"),
 		},
 		Vue: t.DocVue{
 			RouteName:      name,
@@ -76,7 +76,7 @@ func GetDoc(project *t.ProjectType) t.DocType {
 	doc.Vue.AddFixedSaveBtn()
 
 	//doc.AddVueComposition("docItem", "executor")
-	doc.AddVueComposition("docItem", "specialist")
+	//doc.AddVueComposition("docItem", "specialist")
 	//doc.AddVueComposition("docItem", "work")
 	//doc.AddVueComposition("docItem", "customer")
 	//doc.AddVueComposition("docItem", "relation")

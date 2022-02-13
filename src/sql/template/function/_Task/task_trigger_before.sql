@@ -4,29 +4,29 @@ CREATE OR REPLACE FUNCTION task_trigger_before() RETURNS trigger AS
 $$
 DECLARE
         r record;
+	typeTitle TEXT;
 	stateTitle TEXT;
 	systemTitle TEXT;
 	sprintTitle TEXT;
 	functionalRequirementTitle TEXT;
 	bugTitle TEXT;
-	typeTitle TEXT;
 
        searchTxtVar TEXT := '';
 BEGIN
 
         -- заполняем ref поля
+		select title into typeTitle from ctlg_task_type where id = new.type_id;
 		select title into stateTitle from ctlg_task_state where id = new.state_id;
 		select title into systemTitle from system where id = new.system_id;
 		select title into sprintTitle from sprint where id = new.sprint_id;
 		select title into functionalRequirementTitle from functional_requirement where id = new.functional_requirement_id;
 		select title into bugTitle from bug where id = new.bug_id;
-		select title into typeTitle from ctlg_task_type where id = new.type_id;
         
         -- заполняем options.title
-        NEW.options = coalesce(OLD.options, '{}'::jsonb) || NEW.options || jsonb_build_object('title', jsonb_build_object('title', new.title, 'state_title', stateTitle, 'system_title', systemTitle, 'sprint_title', sprintTitle, 'functional_requirement_title', functionalRequirementTitle, 'bug_title', bugTitle, 'type_title', typeTitle));
+        NEW.options = coalesce(OLD.options, '{}'::jsonb) || NEW.options || jsonb_build_object('title', jsonb_build_object('title', new.title, 'type_title', typeTitle, 'state_title', stateTitle, 'system_title', systemTitle, 'sprint_title', sprintTitle, 'functional_requirement_title', functionalRequirementTitle, 'bug_title', bugTitle));
         -- заполняем search_text
         
-        NEW.search_text = concat(new.title, ' ', stateTitle, ' ', systemTitle, ' ', sprintTitle, ' ', functionalRequirementTitle, ' ', bugTitle, ' ', typeTitle, ' ', searchTxtVar);
+        NEW.search_text = concat(new.title, ' ', typeTitle, ' ', stateTitle, ' ', systemTitle, ' ', sprintTitle, ' ', functionalRequirementTitle, ' ', bugTitle, ' ', searchTxtVar);
 
         
 

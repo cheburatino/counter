@@ -10,8 +10,11 @@
       <div class="col-md-4 col-sm-6 col-xs-12">
           <q-input outlined type='text' v-model="item.title" :label="$t('task.title')" autogrow :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
       </div>
-      <div class="col-md-4 col-sm-6 col-xs-12">
-          <comp-fld-ref-search outlined pgMethod="ctlg_task_state_list" :label="$t('task.state_id')" :item='item.state_title' :itemId='item.state_id' :ext='{"avatar":"image/catalog.svg","isClearable":"true","pathUrl":"/ctlg_task_state"}' @update="v=> item.state_id = v.id" @clear="item.state_id = null" :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
+      <div class="col-md-2 col-sm-3 col-xs-6">
+          <comp-fld-ref-search outlined pgMethod="ctlg_task_type_list" :label="$t('task.type_id')" :item='item.type_title' :itemId='item.type_id' :ext='{}' @update="v=> item.type_id = v.id" @clear="item.type_id = null" :readonly='false'  class='q-mb-sm col-md-2 col-sm-3 col-xs-6' />
+      </div>
+      <div class="col-md-2 col-sm-3 col-xs-6">
+          <comp-fld-ref-search outlined pgMethod="ctlg_task_state_list" :label="$t('task.state_id')" :item='item.state_title' :itemId='item.state_id' :ext='{}' @update="v=> item.state_id = v.id" @clear="item.state_id = null" :readonly='false'  class='q-mb-sm col-md-2 col-sm-3 col-xs-6' />
       </div>
       </div>
       
@@ -31,8 +34,11 @@
       </div>
       
       <div class="row q-col-gutter-md q-mb-sm">
-      <div class="col-md-4 col-sm-6 col-xs-12">
-          <comp-specialist :item='item' :currentUser='currentUser'/>
+      <div class="col-md-2 col-sm-3 col-xs-6">
+          <q-input outlined type='number' v-model="item.estimate" :label="$t('task.estimate')" :readonly='false'  class='q-mb-sm col-md-2 col-sm-3 col-xs-6' />
+      </div>
+      <div class="col-md-2 col-sm-3 col-xs-6">
+          <q-input outlined type='number' v-model="item.worked_time" :label="$t('task.worked_time')" :readonly='false'  class='q-mb-sm col-md-2 col-sm-3 col-xs-6' />
       </div>
       <div class="col-md-2 col-sm-3 col-xs-6">
           <comp-fld-date outlined :label="$t('task.plan_end_date')" :date-string="$utils.formatPgDate(item.plan_end_date)" @update="v=> item.plan_end_date = v" :readonly='false'  class='q-mb-sm col-md-2 col-sm-3 col-xs-6' />
@@ -87,18 +93,6 @@
       </div>
       </div>
       
-      <div class="row q-col-gutter-md q-mb-sm">
-      <div class="col-md-4 col-sm-6 col-xs-12">
-          <comp-fld-ref-search outlined pgMethod="ctlg_task_type_list" :label="$t('task.type_id')" :item='item.type_title' :itemId='item.type_id' :ext='{}' @update="v=> item.type_id = v.id" @clear="item.type_id = null" :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
-      </div>
-      <div class="col-md-2 col-sm-3 col-xs-6">
-          <q-input outlined type='number' v-model="item.estimate" :label="$t('task.estimate')" :readonly='false'  class='q-mb-sm col-md-2 col-sm-3 col-xs-6' />
-      </div>
-      <div class="col-md-2 col-sm-3 col-xs-6">
-          <q-input outlined type='number' v-model="item.worked_time" :label="$t('task.worked_time')" :readonly='false'  class='q-mb-sm col-md-2 col-sm-3 col-xs-6' />
-      </div>
-      </div>
-      
 
       <!--  кнопки   -->
       <comp-item-btn-save v-if="!isOpenInDialog" @save="save" :readonly="false" @cancel="$router.push(docUrl)"/>
@@ -119,11 +113,11 @@
 </template>
 
 <script>
-	import compSpecialist from './comp/specialist.vue'
+
     import currentUserMixin from '../../../app/mixins/currentUser'
     export default {
         props: ['id', 'isOpenInDialog'],
-        components: {compSpecialist},
+        components: {},
         mixins: [currentUserMixin,],
         computed: {
             docUrl: function() {
@@ -135,11 +129,14 @@
                 item: null,
                 flds: [
                         {name: 'title', label: 'название',  required: true},
+                        {name: 'type_id', label: 'тип задачи'},
                         {name: 'state_id', label: 'статус'},
                         {name: 'system_id', label: 'система'},
                         {name: 'sprint_id', label: 'спринт'},
                         {name: 'functional_requirement_id', label: 'функциональное требование'},
                         {name: 'bug_id', label: 'баг'},
+                        {name: 'estimate', label: 'оценка времени (минут)'},
+                        {name: 'worked_time', label: 'затраченно времени (минут)'},
                         {name: 'plan_end_date', label: 'плановая дата завершения'},
                         {name: 'fact_end_date', label: 'фактическая дата завершения'},
                         {name: 'description', label: 'описание'},
@@ -151,9 +148,6 @@
                         {name: 'result', label: 'результат'},
                         {name: 'result_files', label: 'файлы результата'},
                         {name: 'result_images', label: 'изображения результата'},
-                        {name: 'type_id', label: 'тип задачи'},
-                        {name: 'estimate', label: 'оценка времени (минут)'},
-                        {name: 'worked_time', label: 'затраченно времени (минут)'},
                 ],
                 optionsFlds: [],
                 

@@ -46,7 +46,6 @@ BEGIN
     
     
     
-    
 
     if (params ->> 'id')::int = -1 then
         -- проверика наличия обязательных параметров
@@ -57,15 +56,18 @@ BEGIN
         END IF;
         
 
-        EXECUTE ('INSERT INTO task (title, state_id, system_id, sprint_id, functional_requirement_id, bug_id, plan_end_date, fact_end_date, description, files, images, process, process_files, process_images, result, result_files, result_images, type_id, estimate, worked_time, options) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21)  RETURNING *;')
+        EXECUTE ('INSERT INTO task (title, type_id, state_id, system_id, sprint_id, functional_requirement_id, bug_id, estimate, worked_time, plan_end_date, fact_end_date, description, files, images, process, process_files, process_images, result, result_files, result_images, options) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21)  RETURNING *;')
 		INTO taskRow
 		USING
 			(params ->> 'title')::text,
+			(params ->> 'type_id')::int,
 			coalesce((params ->> 'state_id')::int, 1)::int,
 			(params ->> 'system_id')::int,
 			(params ->> 'sprint_id')::int,
 			(params ->> 'functional_requirement_id')::int,
 			(params ->> 'bug_id')::int,
+			(params ->> 'estimate')::int,
+			(params ->> 'worked_time')::int,
 			(params ->> 'plan_end_date')::timestamp,
 			(params ->> 'fact_end_date')::timestamp,
 			(params ->> 'description')::text,
@@ -77,9 +79,6 @@ BEGIN
 			(params ->> 'result')::text,
 			(params -> 'result_files')::jsonb,
 			(params -> 'result_images')::jsonb,
-			(params ->> 'type_id')::int,
-			(params ->> 'estimate')::int,
-			(params ->> 'worked_time')::int,
 			coalesce(params -> 'options', '{}')::jsonb;
 
         
@@ -87,11 +86,14 @@ BEGIN
     else
         updateValue = '' || update_str_from_json(params, ARRAY [
 			['title', 'title', 'text'],
+			['type_id', 'type_id', 'number'],
 			['state_id', 'state_id', 'number'],
 			['system_id', 'system_id', 'number'],
 			['sprint_id', 'sprint_id', 'number'],
 			['functional_requirement_id', 'functional_requirement_id', 'number'],
 			['bug_id', 'bug_id', 'number'],
+			['estimate', 'estimate', 'number'],
+			['worked_time', 'worked_time', 'number'],
 			['plan_end_date', 'plan_end_date', 'timestamp'],
 			['fact_end_date', 'fact_end_date', 'timestamp'],
 			['description', 'description', 'text'],
@@ -103,9 +105,6 @@ BEGIN
 			['result', 'result', 'text'],
 			['result_files', 'result_files', 'jsonb'],
 			['result_images', 'result_images', 'jsonb'],
-			['type_id', 'type_id', 'number'],
-			['estimate', 'estimate', 'number'],
-			['worked_time', 'worked_time', 'number'],
             ['options', 'options', 'jsonb'],
             ['deleted', 'deleted', 'bool']
             ]);
