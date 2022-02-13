@@ -6,8 +6,6 @@ tableName ="task"
 fields = [
 	{name="id",			type="serial"},
 	{name="title",					type="char",	size=150, 	ext="not null",	 comment="название"},
-	{name="priority",					type="int",	 comment="приоритет"},
-	{name="paused",					type="bool", 	ext=" default false",	 comment="на паузе"},
 	{name="state_id",					type="int", 	ext=" default 1",	 comment="статус"},
 	{name="system_id",					type="int",	 comment="система"},
 	{name="sprint_id",					type="int",	 comment="спринт"},
@@ -18,6 +16,9 @@ fields = [
 	{name="description",					type="text",	 comment="описание"},
 	{name="files",					type="jsonb",	 comment="файлы"},
 	{name="images",					type="jsonb",	 comment="изображения"},
+	{name="process",					type="text",	 comment="процесс"},
+	{name="process_files",					type="jsonb",	 comment="файлы результата"},
+	{name="process_images",					type="jsonb",	 comment="изображения результата"},
 	{name="result",					type="text",	 comment="результат"},
 	{name="result_files",					type="jsonb",	 comment="файлы результата"},
 	{name="result_images",					type="jsonb",	 comment="изображения результата"},
@@ -60,8 +61,6 @@ methods = [
 
 alterScripts = [
 	"alter table task add column if not exists title CHARACTER VARYING(150);",
-	"alter table task add column if not exists priority int;",
-	"alter table task add column if not exists paused bool;",
 	"alter table task add column if not exists state_id int;",
 	"alter table task add column if not exists system_id int;",
 	"alter table task add column if not exists sprint_id int;",
@@ -72,6 +71,9 @@ alterScripts = [
 	"alter table task add column if not exists description text;",
 	"alter table task add column if not exists files jsonb;",
 	"alter table task add column if not exists images jsonb;",
+	"alter table task add column if not exists process text;",
+	"alter table task add column if not exists process_files jsonb;",
+	"alter table task add column if not exists process_images jsonb;",
 	"alter table task add column if not exists result text;",
 	"alter table task add column if not exists result_files jsonb;",
 	"alter table task add column if not exists result_images jsonb;",
