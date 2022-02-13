@@ -38,7 +38,8 @@ func GetDoc(project *t.ProjectType) t.DocType {
 			t.GetFldFiles("result_files", "файлы результата", [][]int{{7, 1}}, t.FldVueFilesParams{}),
 			t.GetFldImgList("result_images", "изображения результата", [][]int{{7, 2}}, t.FldVueImgParams{}),
 			t.GetFldRef("type_id", "тип задачи", "ctlg_task_type", [][]int{{8, 1}}),
-			t.GetFldInt("estimate", "оценка времени (минут)", [][]int{{8, 2}}),
+			t.GetFldInt("estimate", "оценка времени (минут)", [][]int{{8, 2}}, "col-2"),
+			t.GetFldInt("worked_time", "затраченно времени (минут)", [][]int{{8, 3}}, "col-2"),
 		},
 		Vue: t.DocVue{
 			RouteName:      name,

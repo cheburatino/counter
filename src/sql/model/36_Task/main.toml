@@ -23,6 +23,7 @@ fields = [
 	{name="result_images",					type="jsonb",	 comment="изображения результата"},
 	{name="type_id",					type="int",	 comment="тип задачи"},
 	{name="estimate",					type="int",	 comment="оценка времени (минут)"},
+	{name="worked_time",					type="int",	 comment="затраченно времени (минут)"},
 	{name="search_text",			type="text",	comment="колонка для поиска"},
 	{name="options",				type="jsonb",	comment="разные дополнительные параметры"},
 	{name="created_at",				type="timestamp",	ext="with time zone"},
@@ -48,11 +49,11 @@ triggers = [
 
 
 methods = [
-	"task_get_by_id",
 	"task_get_specialist",
 	"task_get_specialist_role",
 	"task_list",
 	"task_update",
+	"task_get_by_id",
 	"task_trigger_before",
 	"task_trigger_after"
 ]
@@ -76,5 +77,6 @@ alterScripts = [
 	"alter table task add column if not exists result_images jsonb;",
 	"alter table task add column if not exists type_id int;",
 	"alter table task add column if not exists estimate int;",
+	"alter table task add column if not exists worked_time int;",
 	"alter table task add column if not exists search_text text;"
 ]
