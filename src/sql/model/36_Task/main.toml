@@ -7,6 +7,7 @@ fields = [
 	{name="id",			type="serial"},
 	{name="title",					type="char",	size=150, 	ext="not null",	 comment="название"},
 	{name="type_id",					type="int",	 comment="тип задачи"},
+	{name="needs_discusion",					type="bool", 	ext=" default false",	 comment="требует обсуждения"},
 	{name="state_id",					type="int", 	ext=" default 1",	 comment="статус"},
 	{name="system_id",					type="int",	 comment="система"},
 	{name="sprint_id",					type="int",	 comment="спринт"},
@@ -62,6 +63,7 @@ methods = [
 alterScripts = [
 	"alter table task add column if not exists title CHARACTER VARYING(150);",
 	"alter table task add column if not exists type_id int;",
+	"alter table task add column if not exists needs_discusion bool;",
 	"alter table task add column if not exists state_id int;",
 	"alter table task add column if not exists system_id int;",
 	"alter table task add column if not exists sprint_id int;",
