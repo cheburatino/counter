@@ -167,7 +167,8 @@ const i18n_contract_state = (v) => {
 	const d = {
 		preparation: 'подготовка',
 		approval: 'согласование',
-		signed: 'подписан'
+		signed: 'подписан',
+		original_received: 'получены оригиналы'
 	}
 	return Array.isArray(v) ? v.map(v1 => d[v1]) : d[v]
 }
@@ -176,7 +177,8 @@ const i18n_technical_task_state = (v) => {
 	const d = {
 		preparation: 'подготовка',
 		approval: 'согласование',
-		signed: 'подписан'
+		signed: 'подписано',
+		original_received: 'получены оригиналы'
 	}
 	return Array.isArray(v) ? v.map(v1 => d[v1]) : d[v]
 }

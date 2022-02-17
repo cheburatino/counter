@@ -7,11 +7,11 @@ fields = [
 	{name="id",			type="serial"},
 	{name="title",					type="char",	size=150, 	ext="not null",	 comment="название"},
 	{name="date",					type="timestamp",	 comment="дата"},
+	{name="state",					type="char",	size=30, 	ext=" default 'preparation'",	 comment="статус"},
+	{name="counterparty_id",					type="int",	 comment="контрагент"},
 	{name="description",					type="text",	 comment="описание"},
 	{name="draft",					type="jsonb",	 comment="черновик"},
 	{name="signed",					type="jsonb",	 comment="подписанный"},
-	{name="counterparty_id",					type="int",	 comment="контрагент"},
-	{name="state",					type="char",	size=30,	 comment="статус"},
 	{name="search_text",			type="text",	comment="колонка для поиска"},
 	{name="options",				type="jsonb",	comment="разные дополнительные параметры"},
 	{name="created_at",				type="timestamp",	ext="with time zone"},
@@ -43,10 +43,10 @@ methods = [
 alterScripts = [
 	"alter table contract add column if not exists title CHARACTER VARYING(150);",
 	"alter table contract add column if not exists date timestamp;",
+	"alter table contract add column if not exists state CHARACTER VARYING(30);",
+	"alter table contract add column if not exists counterparty_id int;",
 	"alter table contract add column if not exists description text;",
 	"alter table contract add column if not exists draft jsonb;",
 	"alter table contract add column if not exists signed jsonb;",
-	"alter table contract add column if not exists counterparty_id int;",
-	"alter table contract add column if not exists state CHARACTER VARYING(30);",
 	"alter table contract add column if not exists search_text text;"
 ]

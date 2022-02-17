@@ -20,19 +20,20 @@ func GetDoc(project *t.ProjectType) t.DocType {
 		NameRu:     name_ru,
 		PathPrefix: "docs",
 		Flds: []t.FldType{
-			t.GetFldTitle(),
-			t.GetFldRef("contract_id", "договор", "contract", [][]int{{1, 2}}, "col-2", "isShowLink", "isClearable"),
-			t.GetFldDate("date", "дата", [][]int{{1, 3}}, "col-2"),
-			t.GetFldInt("number", "номер", [][]int{{2, 1}}),
-			t.GetFldString("description", "описание", 0, [][]int{{2, 1}}, "col-6"),
-			t.GetFldFiles("draft", "черновик", [][]int{{3, 1}}, t.FldVueFilesParams{}),
-			t.GetFldFiles("signed", "подписанный", [][]int{{3, 2}}, t.FldVueFilesParams{}),
-			t.GetFldSelectString("state", "статус", 30, [][]int{{4, 1}}, []t.FldVueOptionsItem{
+			t.GetFldTitle("col-3"),
+			t.GetFldInt("number", "номер", [][]int{{1, 2}}, "col-1"),
+			t.GetFldInt("amount", "сумма", [][]int{{1, 3}}, "col-2"),
+			t.GetFldSelectString("state", "статус", 30, [][]int{{1, 4}}, []t.FldVueOptionsItem{
 				{Label: "подготовка", Value: "preparation"},
 				{Label: "согласование", Value: "approval"},
-				{Label: "подписан", Value: "signed"},
+				{Label: "подписано", Value: "signed"},
+				{Label: "получены оригиналы", Value: "original_received"},
 			}, "col-2"),
-			t.GetFldInt("amount", "сумма", [][]int{{5, 1}}),
+			t.GetFldRef("contract_id", "договор", "contract", [][]int{{2, 1}}, "col-2", "isShowLink", "isClearable"),
+			t.GetFldDate("date", "дата", [][]int{{2, 2}}, "col-2"),
+			t.GetFldString("description", "описание", 0, [][]int{{2, 3}}),
+			t.GetFldFiles("draft", "черновик", [][]int{{3, 1}}, t.FldVueFilesParams{}),
+			t.GetFldFiles("signed", "подписанный", [][]int{{3, 2}}, t.FldVueFilesParams{}),
 		},
 		Vue: t.DocVue{
 			RouteName:      name,
@@ -58,6 +59,21 @@ func GetDoc(project *t.ProjectType) t.DocType {
 	}
 
 	doc.Init()
+
+	doc.AddFld(t.GetFldVueCompositionRefList(&doc, t.VueCompRefListWidgetParams{
+		Label:      "счета",           // название списка, которе выводится на экране
+		FldName:    "invoice_list",           // название поля. Любое, в формате snake_case. На основе этого названия формируется название компоненты во vue.
+		TableName:  "invoice",                // название связанной таблицы, из которой будут выгружаться записи
+		RefFldName: "technical_task_id", 					 // название поля в связанной таблицы, по которому осуществляется связь
+		Avatar:     "image/invoice.svg",      // иконка, которая выводится в списке
+		NewFlds: []t.FldType{
+			t.GetFldString("title", "название", 300, [][]int{{1, 1}}).SetIsRequired(),
+		}, // список полей, которые заполняются при добавлении новой записи
+		TitleTemplate: `
+                <q-item-label>{{v.title}}</q-item-label>
+                <q-item-label caption><q-badge color="orange">{{v.options.title.state_title}}</q-badge></q-item-label>
+            `, // шаблон для названия в списке (vue синтаксис)
+	}, [][]int{{4, 1}}, "col-4"))
 
 	return doc
 }

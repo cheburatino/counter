@@ -7,20 +7,29 @@
       <!--  поля формы    -->
       
       <div class="row q-col-gutter-md q-mb-sm">
-      <div class="col-md-4 col-sm-6 col-xs-12">
-          <q-input outlined type='text' v-model="item.title" :label="$t('technical_task.title')" autogrow :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
+      <div class="col-3">
+          <q-input outlined type='text' v-model="item.title" :label="$t('technical_task.title')" autogrow :readonly='false'  class='q-mb-sm col-3' />
       </div>
+      <div class="col-md-1 col-sm-2 col-xs-6">
+          <q-input outlined type='number' v-model="item.number" :label="$t('technical_task.number')" :readonly='false'  class='q-mb-sm col-md-1 col-sm-2 col-xs-6' />
+      </div>
+      <div class="col-md-2 col-sm-3 col-xs-6">
+          <q-input outlined type='number' v-model="item.amount" :label="$t('technical_task.amount')" :readonly='false'  class='q-mb-sm col-md-2 col-sm-3 col-xs-6' />
+      </div>
+      <div class="col-md-2 col-sm-3 col-xs-6">
+          <q-select outlined :label="$t('technical_task.state')" v-model='item.state' :options='[{"label":"подготовка","value":"preparation","color":""},{"label":"согласование","value":"approval","color":""},{"label":"подписано","value":"signed","color":""},{"label":"получены оригиналы","value":"original_received","color":""}]'   :readonly='false'  class='q-mb-sm col-md-2 col-sm-3 col-xs-6' />
+      </div>
+      </div>
+      
+      <div class="row q-col-gutter-md q-mb-sm">
       <div class="col-md-2 col-sm-3 col-xs-6">
           <comp-fld-ref-search outlined pgMethod="contract_list" :label="$t('technical_task.contract_id')" :item='item.contract_title' :itemId='item.contract_id' :ext='{"avatar":"image/contract.svg","isClearable":"true","pathUrl":"/contract"}' @update="v=> item.contract_id = v.id" @clear="item.contract_id = null" :readonly='false'  class='q-mb-sm col-md-2 col-sm-3 col-xs-6' />
       </div>
       <div class="col-md-2 col-sm-3 col-xs-6">
           <comp-fld-date outlined :label="$t('technical_task.date')" :date-string="$utils.formatPgDate(item.date)" @update="v=> item.date = v" :readonly='false'  class='q-mb-sm col-md-2 col-sm-3 col-xs-6' />
       </div>
-      </div>
-      
-      <div class="row q-col-gutter-md q-mb-sm">
       <div class="col-md-4 col-sm-6 col-xs-12">
-          <q-input outlined type='text' v-model="item.description" :label="$t('technical_task.description')" autogrow :readonly='false'  class='q-mb-sm col-6' />
+          <q-input outlined type='text' v-model="item.description" :label="$t('technical_task.description')" autogrow :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
       </div>
       </div>
       
@@ -34,14 +43,8 @@
       </div>
       
       <div class="row q-col-gutter-md q-mb-sm">
-      <div class="col-md-2 col-sm-3 col-xs-6">
-          <q-select outlined :label="$t('technical_task.state')" v-model='item.state' :options='[{"label":"подготовка","value":"preparation","color":""},{"label":"согласование","value":"approval","color":""},{"label":"подписан","value":"signed","color":""}]'   :readonly='false'  class='q-mb-sm col-md-2 col-sm-3 col-xs-6' />
-      </div>
-      </div>
-      
-      <div class="row q-col-gutter-md q-mb-sm">
       <div class="col-md-4 col-sm-6 col-xs-12">
-          <q-input outlined type='number' v-model="item.amount" :label="$t('technical_task.amount')" :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
+          <invoice-list-ref-list-widget v-if='item.id != -1' :id='item.id' :readonly='false'/>
       </div>
       </div>
       
@@ -58,11 +61,11 @@
 </template>
 
 <script>
-
+	import invoiceListRefListWidget from './comp/invoiceListRefListWidget.vue'
     import currentUserMixin from '../../../app/mixins/currentUser'
     export default {
         props: ['id', 'isOpenInDialog'],
-        components: {},
+        components: {invoiceListRefListWidget},
         mixins: [currentUserMixin,],
         computed: {
             docUrl: function() {
@@ -74,14 +77,14 @@
                 item: null,
                 flds: [
                         {name: 'title', label: 'название',  required: true},
+                        {name: 'number', label: 'номер'},
+                        {name: 'amount', label: 'сумма'},
+                        {name: 'state', label: 'статус'},
                         {name: 'contract_id', label: 'договор'},
                         {name: 'date', label: 'дата'},
-                        {name: 'number', label: 'номер'},
                         {name: 'description', label: 'описание'},
                         {name: 'draft', label: 'черновик'},
                         {name: 'signed', label: 'подписанный'},
-                        {name: 'state', label: 'статус'},
-                        {name: 'amount', label: 'сумма'},
                 ],
                 optionsFlds: [],
                 
@@ -95,7 +98,7 @@
             resultModify(res) {
                 
 				if (res.state) {
-                    let arr = [{"label":"подготовка","value":"preparation","color":""},{"label":"согласование","value":"approval","color":""},{"label":"подписан","value":"signed","color":""}]
+                    let arr = [{"label":"подготовка","value":"preparation","color":""},{"label":"согласование","value":"approval","color":""},{"label":"подписано","value":"signed","color":""},{"label":"получены оригиналы","value":"original_received","color":""}]
                     let state_item = arr.find(v => v.value === res.state)
                     if (state_item) res.state = {value: res.state, label: state_item.label}
                     }

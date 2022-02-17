@@ -143,14 +143,14 @@
 </template>
 
 <script>
+	import compExecutor from './comp/executor.vue'
+	import compCustomer from './comp/customer.vue'
+	import compResult from './comp/result.vue'
 	import taskListRefListWidget from './comp/taskListRefListWidget.vue'
 	import customerTaskListRefListWidget from './comp/customerTaskListRefListWidget.vue'
 	import ftListRefListWidget from './comp/ftListRefListWidget.vue'
 	import compCustomerAgent from './comp/customerAgent.vue'
 	import compRelation from './comp/relation.vue'
-	import compExecutor from './comp/executor.vue'
-	import compCustomer from './comp/customer.vue'
-	import compResult from './comp/result.vue'
     import currentUserMixin from '../../../app/mixins/currentUser'
     export default {
         props: ['id', 'isOpenInDialog'],

@@ -6,14 +6,14 @@ tableName ="technical_task"
 fields = [
 	{name="id",			type="serial"},
 	{name="title",					type="char",	size=150, 	ext="not null",	 comment="название"},
+	{name="number",					type="int",	 comment="номер"},
+	{name="amount",					type="int",	 comment="сумма"},
+	{name="state",					type="char",	size=30,	 comment="статус"},
 	{name="contract_id",					type="int",	 comment="договор"},
 	{name="date",					type="timestamp",	 comment="дата"},
-	{name="number",					type="int",	 comment="номер"},
 	{name="description",					type="text",	 comment="описание"},
 	{name="draft",					type="jsonb",	 comment="черновик"},
 	{name="signed",					type="jsonb",	 comment="подписанный"},
-	{name="state",					type="char",	size=30,	 comment="статус"},
-	{name="amount",					type="int",	 comment="сумма"},
 	{name="search_text",			type="text",	comment="колонка для поиска"},
 	{name="options",				type="jsonb",	comment="разные дополнительные параметры"},
 	{name="created_at",				type="timestamp",	ext="with time zone"},
@@ -44,13 +44,13 @@ methods = [
 
 alterScripts = [
 	"alter table technical_task add column if not exists title CHARACTER VARYING(150);",
+	"alter table technical_task add column if not exists number int;",
+	"alter table technical_task add column if not exists amount int;",
+	"alter table technical_task add column if not exists state CHARACTER VARYING(30);",
 	"alter table technical_task add column if not exists contract_id int;",
 	"alter table technical_task add column if not exists date timestamp;",
-	"alter table technical_task add column if not exists number int;",
 	"alter table technical_task add column if not exists description text;",
 	"alter table technical_task add column if not exists draft jsonb;",
 	"alter table technical_task add column if not exists signed jsonb;",
-	"alter table technical_task add column if not exists state CHARACTER VARYING(30);",
-	"alter table technical_task add column if not exists amount int;",
 	"alter table technical_task add column if not exists search_text text;"
 ]

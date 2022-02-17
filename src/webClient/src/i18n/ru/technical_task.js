@@ -1,15 +1,15 @@
 
 export default {
- 		title: 'название',
- 		date: 'дата',
- 		description: 'описание',
- 		draft: 'черновик',
- 		signed: 'подписанный',
- 		amount: 'сумма',
- 		name_plural: 'Технические задания',
  		name_plural_deleted: 'удаленные Технические задания',
- 		contract_id: 'договор',
+ 		title: 'название',
  		number: 'номер',
+ 		amount: 'сумма',
  		state: 'статус',
+ 		date: 'дата',
+ 		draft: 'черновик',
  		name: 'техническое задание',
+ 		name_plural: 'Технические задания',
+ 		contract_id: 'договор',
+ 		description: 'описание',
+ 		signed: 'подписанный',
 }
