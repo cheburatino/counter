@@ -100,6 +100,9 @@
 								{icon: '', text: 'Роли специалистов в делах', url: '/ctlg_work_specialist_role', roles: []},
 								{icon: '', text: 'Статусы задач заказчиков', url: '/ctlg_customer_task_state', roles: []},
 								{icon: '', text: 'Статусы багов', url: '/ctlg_bug_state', roles: []},
+								{icon: '', text: 'Статусы договоров', url: '/ctlg_contract_state', roles: []},
+								{icon: '', text: 'Статусы технических заданий', url: '/ctlg_technical_task_state', roles: []},
+								{icon: '', text: 'Статусы счетов', url: '/ctlg_invoice_state', roles: []},
 ],},
 
                 ],

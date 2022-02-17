@@ -17,7 +17,7 @@
           <q-input outlined type='number' v-model="item.amount" :label="$t('technical_task.amount')" :readonly='false'  class='q-mb-sm col-md-2 col-sm-3 col-xs-6' />
       </div>
       <div class="col-md-2 col-sm-3 col-xs-6">
-          <q-select outlined :label="$t('technical_task.state')" v-model='item.state' :options='[{"label":"подготовка","value":"preparation","color":""},{"label":"согласование","value":"approval","color":""},{"label":"подписано","value":"signed","color":""},{"label":"получены оригиналы","value":"original_received","color":""}]'   :readonly='false'  class='q-mb-sm col-md-2 col-sm-3 col-xs-6' />
+          <comp-fld-ref-search outlined pgMethod="ctlg_technical_task_state_list" :label="$t('technical_task.state_id')" :item='item.state_title' :itemId='item.state_id' :ext='{"avatar":"image/catalog.svg","isClearable":"true","pathUrl":"/ctlg_technical_task_state"}' @update="v=> item.state_id = v.id" @clear="item.state_id = null" :readonly='false'  class='q-mb-sm col-md-2 col-sm-3 col-xs-6' />
       </div>
       </div>
       
@@ -79,7 +79,7 @@
                         {name: 'title', label: 'название',  required: true},
                         {name: 'number', label: 'номер'},
                         {name: 'amount', label: 'сумма'},
-                        {name: 'state', label: 'статус'},
+                        {name: 'state_id', label: 'статус'},
                         {name: 'contract_id', label: 'договор'},
                         {name: 'date', label: 'дата'},
                         {name: 'description', label: 'описание'},
@@ -97,20 +97,13 @@
           
             resultModify(res) {
                 
-				if (res.state) {
-                    let arr = [{"label":"подготовка","value":"preparation","color":""},{"label":"согласование","value":"approval","color":""},{"label":"подписано","value":"signed","color":""},{"label":"получены оригиналы","value":"original_received","color":""}]
-                    let state_item = arr.find(v => v.value === res.state)
-                    if (state_item) res.state = {value: res.state, label: state_item.label}
-                    }
-			
                 return res
             },
             save() {
                 
                 this.$utils.saveItem.call(this, {
                     method: 'technical_task_update',
-                    itemForSaveMod: {state: this.item.state ? this.item.state.value : null,
-},
+                    itemForSaveMod: {},
                     resultModify: this.resultModify,
                 })
             },

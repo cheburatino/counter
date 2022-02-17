@@ -23,8 +23,9 @@ BEGIN
     END IF;
 
     with t1 as (select * from contract where id = (params ->> 'id')::int),
-		t2 as (select t1.*, c.title as counterparty_title from t1 left join counterparty c on c.id = t1.counterparty_id)
- 	select row_to_json(t2.*)::jsonb into result from t2;
+		t2 as (select t1.*, c.title as state_title from t1 left join ctlg_contract_state c on c.id = t1.state_id),
+		t3 as (select t2.*, c.title as counterparty_title from t2 left join counterparty c on c.id = t2.counterparty_id)
+ 	select row_to_json(t3.*)::jsonb into result from t3;
 
     -- случай когда записи с таким id не найдено
     IF result ->> 'id' ISNULL

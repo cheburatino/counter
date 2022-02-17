@@ -14,7 +14,7 @@
           <comp-fld-date outlined :label="$t('contract.date')" :date-string="$utils.formatPgDate(item.date)" @update="v=> item.date = v" :readonly='false'  class='q-mb-sm col-md-2 col-sm-3 col-xs-6' />
       </div>
       <div class="col-md-2 col-sm-3 col-xs-6">
-          <q-select outlined :label="$t('contract.state')" v-model='item.state' :options='[{"label":"подготовка","value":"preparation","color":""},{"label":"согласование","value":"approval","color":""},{"label":"подписан","value":"signed","color":""},{"label":"получены оригиналы","value":"original_received","color":""}]'   :readonly='false'  class='q-mb-sm col-md-2 col-sm-3 col-xs-6' />
+          <comp-fld-ref-search outlined pgMethod="ctlg_contract_state_list" :label="$t('contract.state_id')" :item='item.state_title' :itemId='item.state_id' :ext='{"avatar":"image/catalog.svg","isClearable":"true","pathUrl":"/ctlg_contract_state"}' @update="v=> item.state_id = v.id" @clear="item.state_id = null" :readonly='false'  class='q-mb-sm col-md-2 col-sm-3 col-xs-6' />
       </div>
       </div>
       
@@ -72,7 +72,7 @@
                 flds: [
                         {name: 'title', label: 'название',  required: true},
                         {name: 'date', label: 'дата'},
-                        {name: 'state', label: 'статус'},
+                        {name: 'state_id', label: 'статус'},
                         {name: 'counterparty_id', label: 'контрагент'},
                         {name: 'description', label: 'описание'},
                         {name: 'draft', label: 'черновик'},
@@ -89,20 +89,13 @@
           
             resultModify(res) {
                 
-				if (res.state) {
-                    let arr = [{"label":"подготовка","value":"preparation","color":""},{"label":"согласование","value":"approval","color":""},{"label":"подписан","value":"signed","color":""},{"label":"получены оригиналы","value":"original_received","color":""}]
-                    let state_item = arr.find(v => v.value === res.state)
-                    if (state_item) res.state = {value: res.state, label: state_item.label}
-                    }
-			
                 return res
             },
             save() {
                 
                 this.$utils.saveItem.call(this, {
                     method: 'contract_update',
-                    itemForSaveMod: {state: this.item.state ? this.item.state.value : null,
-},
+                    itemForSaveMod: {},
                     resultModify: this.resultModify,
                 })
             },

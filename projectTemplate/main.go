@@ -9,17 +9,20 @@ import (
 	"github.com/cheburatino/electron_is/projectTemplate/docs/contract"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/counterparty"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/ctlgBugState"
+	"github.com/cheburatino/electron_is/projectTemplate/docs/ctlgContractState"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/ctlgCustomerTaskState"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/ctlgDigitalSolutionSpecialistRole"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/ctlgDigitalSolutionState"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/ctlgElectronSkill"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/ctlgFunctionalRequirementSpecialistRole"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/ctlgFunctionalRequirementState"
+	"github.com/cheburatino/electron_is/projectTemplate/docs/ctlgInvoiceState"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/ctlgRequestPriority"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/ctlgRequestState"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/ctlgTaskRole"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/ctlgTaskState"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/ctlgTaskType"
+	"github.com/cheburatino/electron_is/projectTemplate/docs/ctlgTechnicalTaskState"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/ctlgTimeType"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/ctlgWorkSpecialistRole"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/ctlgWorkState"
@@ -84,6 +87,9 @@ func getProject() t.ProjectType {
 		ctlgWorkSpecialistRole.GetDoc(p),
 		ctlgBugState.GetDoc(p),
 		ctlgCustomerTaskState.GetDoc(p),
+		ctlgContractState.GetDoc(p),
+		ctlgTechnicalTaskState.GetDoc(p),
+		ctlgInvoiceState.GetDoc(p),
 		meeting.GetDoc(p),
 		contract.GetDoc(p),
 		technicalTask.GetDoc(p),
@@ -167,6 +173,9 @@ func getProject() t.ProjectType {
 			{Text: "Роли специалистов в делах", Url: "ctlg_work_specialist_role"},
 			{Text: "Статусы задач заказчиков", Url: "ctlg_customer_task_state"},
 			{Text: "Статусы багов", Url: "ctlg_bug_state"},
+			{Text: "Статусы договоров", Url: "ctlg_contract_state"},
+			{Text: "Статусы технических заданий", Url: "ctlg_technical_task_state"},
+			{Text: "Статусы счетов", Url: "ctlg_invoice_state"},
 		}},
 	}
 	p.FillSideMenu()

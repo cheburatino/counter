@@ -46,13 +46,13 @@ BEGIN
         END IF;
         
 
-        EXECUTE ('INSERT INTO technical_task (title, number, amount, state, contract_id, date, description, draft, signed, options) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)  RETURNING *;')
+        EXECUTE ('INSERT INTO technical_task (title, number, amount, state_id, contract_id, date, description, draft, signed, options) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)  RETURNING *;')
 		INTO technical_taskRow
 		USING
 			(params ->> 'title')::text,
 			(params ->> 'number')::int,
 			(params ->> 'amount')::int,
-			(params ->> 'state')::text,
+			(params ->> 'state_id')::int,
 			(params ->> 'contract_id')::int,
 			(params ->> 'date')::timestamp,
 			(params ->> 'description')::text,
@@ -67,7 +67,7 @@ BEGIN
 			['title', 'title', 'text'],
 			['number', 'number', 'number'],
 			['amount', 'amount', 'number'],
-			['state', 'state', 'text'],
+			['state_id', 'state_id', 'number'],
 			['contract_id', 'contract_id', 'number'],
 			['date', 'date', 'timestamp'],
 			['description', 'description', 'text'],

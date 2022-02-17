@@ -163,35 +163,6 @@ const notifyError = (msg) => {
 }
 
 
-const i18n_contract_state = (v) => {
-	const d = {
-		preparation: 'подготовка',
-		approval: 'согласование',
-		signed: 'подписан',
-		original_received: 'получены оригиналы'
-	}
-	return Array.isArray(v) ? v.map(v1 => d[v1]) : d[v]
-}
-				
-const i18n_technical_task_state = (v) => {
-	const d = {
-		preparation: 'подготовка',
-		approval: 'согласование',
-		signed: 'подписано',
-		original_received: 'получены оригиналы'
-	}
-	return Array.isArray(v) ? v.map(v1 => d[v1]) : d[v]
-}
-				
-const i18n_invoice_state = (v) => {
-	const d = {
-		planned: 'запланирован',
-		transferred: 'выставлен',
-		paid: 'оплачен'
-	}
-	return Array.isArray(v) ? v.map(v1 => d[v1]) : d[v]
-}
-				
 
 export default {
   postApiRequest,
@@ -207,10 +178,7 @@ export default {
   notifySuccess,
   notifyError,
   _,
-  i18n_contract_state,
-	i18n_technical_task_state,
-	i18n_invoice_state,
-	
+  
 }
 
 const getHttpHeaders = () => {

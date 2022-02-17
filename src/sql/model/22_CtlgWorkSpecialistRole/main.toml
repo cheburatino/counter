@@ -26,9 +26,9 @@ triggers = [
 
 
 methods = [
+	"ctlg_work_specialist_role_list",
 	"ctlg_work_specialist_role_update",
 	"ctlg_work_specialist_role_get_by_id",
-	"ctlg_work_specialist_role_list",
 	"ctlg_work_specialist_role_trigger_before",
 	"ctlg_work_specialist_role_trigger_after"
 ]

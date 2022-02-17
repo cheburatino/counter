@@ -44,12 +44,12 @@ BEGIN
         END IF;
         
 
-        EXECUTE ('INSERT INTO contract (title, date, state, counterparty_id, description, draft, signed, options) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)  RETURNING *;')
+        EXECUTE ('INSERT INTO contract (title, date, state_id, counterparty_id, description, draft, signed, options) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)  RETURNING *;')
 		INTO contractRow
 		USING
 			(params ->> 'title')::text,
 			(params ->> 'date')::timestamp,
-			coalesce((params ->> 'state')::text, 'preparation')::text,
+			(params ->> 'state_id')::int,
 			(params ->> 'counterparty_id')::int,
 			(params ->> 'description')::text,
 			(params -> 'draft')::jsonb,
@@ -62,7 +62,7 @@ BEGIN
         updateValue = '' || update_str_from_json(params, ARRAY [
 			['title', 'title', 'text'],
 			['date', 'date', 'timestamp'],
-			['state', 'state', 'text'],
+			['state_id', 'state_id', 'number'],
 			['counterparty_id', 'counterparty_id', 'number'],
 			['description', 'description', 'text'],
 			['draft', 'draft', 'jsonb'],
