@@ -22,14 +22,17 @@
       </div>
       
       <div class="row q-col-gutter-md q-mb-sm">
-      <div class="col-md-2 col-sm-3 col-xs-6">
-          <comp-fld-ref-search outlined pgMethod="contract_list" :label="$t('technical_task.contract_id')" :item='item.contract_title' :itemId='item.contract_id' :ext='{"avatar":"image/contract.svg","isClearable":"true","pathUrl":"/contract"}' @update="v=> item.contract_id = v.id" @clear="item.contract_id = null" :readonly='false'  class='q-mb-sm col-md-2 col-sm-3 col-xs-6' />
-      </div>
-      <div class="col-md-2 col-sm-3 col-xs-6">
-          <comp-fld-date outlined :label="$t('technical_task.date')" :date-string="$utils.formatPgDate(item.date)" @update="v=> item.date = v" :readonly='false'  class='q-mb-sm col-md-2 col-sm-3 col-xs-6' />
+      <div class="col-md-4 col-sm-6 col-xs-12">
+          <comp-fld-date outlined :label="$t('technical_task.date')" :date-string="$utils.formatPgDate(item.date)" @update="v=> item.date = v" :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
       </div>
       <div class="col-md-4 col-sm-6 col-xs-12">
-          <q-input outlined type='text' v-model="item.description" :label="$t('technical_task.description')" autogrow :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
+          <comp-fld-ref-search outlined pgMethod="contract_list" :label="$t('technical_task.contract_id')" :item='item.contract_title' :itemId='item.contract_id' :ext='{"avatar":"image/contract.svg","isClearable":"true","pathUrl":"/contract"}' @update="v=> item.contract_id = v.id" @clear="item.contract_id = null" :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
+      </div>
+      </div>
+      
+      <div class="row q-col-gutter-md q-mb-sm">
+      <div class="col-md-8 col-sm-12 col-xs-12">
+          <q-input outlined type='text' v-model="item.description" :label="$t('technical_task.description')" autogrow :readonly='false'  class='q-mb-sm col-md-8 col-sm-12 col-xs-12' />
       </div>
       </div>
       
@@ -43,6 +46,9 @@
       </div>
       
       <div class="row q-col-gutter-md q-mb-sm">
+      <div class="col-md-4 col-sm-6 col-xs-12">
+          <functional-requirement-list-ref-list-widget v-if='item.id != -1' :id='item.id' :readonly='false'/>
+      </div>
       <div class="col-md-4 col-sm-6 col-xs-12">
           <invoice-list-ref-list-widget v-if='item.id != -1' :id='item.id' :readonly='false'/>
       </div>
@@ -62,10 +68,11 @@
 
 <script>
 	import invoiceListRefListWidget from './comp/invoiceListRefListWidget.vue'
+	import functionalRequirementListRefListWidget from './comp/functionalRequirementListRefListWidget.vue'
     import currentUserMixin from '../../../app/mixins/currentUser'
     export default {
         props: ['id', 'isOpenInDialog'],
-        components: {invoiceListRefListWidget},
+        components: {functionalRequirementListRefListWidget, invoiceListRefListWidget},
         mixins: [currentUserMixin,],
         computed: {
             docUrl: function() {
@@ -80,8 +87,8 @@
                         {name: 'number', label: 'номер'},
                         {name: 'amount', label: 'сумма'},
                         {name: 'state_id', label: 'статус'},
+                        {name: 'date', label: 'дата ТЗ'},
                         {name: 'contract_id', label: 'договор'},
-                        {name: 'date', label: 'дата'},
                         {name: 'description', label: 'описание'},
                         {name: 'draft', label: 'черновик'},
                         {name: 'signed', label: 'подписанный'},

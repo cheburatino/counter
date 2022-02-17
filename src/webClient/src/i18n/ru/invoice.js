@@ -2,12 +2,12 @@
 export default {
  		total_amount: 'сумма',
  		state_id: 'статус',
- 		date_transfer: 'дата выставления',
- 		name: 'счёт',
- 		name_plural: 'Счета',
- 		title: 'название',
- 		date_paid: 'дата оплаты',
- 		name_plural_deleted: 'удаленные Счета',
  		technical_task_id: 'техническое задание',
  		date_plan_paid: 'планируемая дата оплаты',
+ 		date_transfer: 'дата выставления',
+ 		date_paid: 'дата оплаты',
+ 		title: 'название',
+ 		name_plural: 'Счета',
+ 		name_plural_deleted: 'удаленные Счета',
+ 		name: 'счёт',
 }

@@ -36,6 +36,7 @@ BEGIN
     
     
     
+    
 
     if (params ->> 'id')::int = -1 then
         -- проверика наличия обязательных параметров
@@ -46,15 +47,15 @@ BEGIN
         END IF;
         
 
-        EXECUTE ('INSERT INTO technical_task (title, number, amount, state_id, contract_id, date, description, draft, signed, options) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)  RETURNING *;')
+        EXECUTE ('INSERT INTO technical_task (title, number, amount, state_id, date, contract_id, description, draft, signed, options) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)  RETURNING *;')
 		INTO technical_taskRow
 		USING
 			(params ->> 'title')::text,
 			(params ->> 'number')::int,
 			(params ->> 'amount')::int,
 			(params ->> 'state_id')::int,
-			(params ->> 'contract_id')::int,
 			(params ->> 'date')::timestamp,
+			(params ->> 'contract_id')::int,
 			(params ->> 'description')::text,
 			(params -> 'draft')::jsonb,
 			(params -> 'signed')::jsonb,
@@ -68,8 +69,8 @@ BEGIN
 			['number', 'number', 'number'],
 			['amount', 'amount', 'number'],
 			['state_id', 'state_id', 'number'],
-			['contract_id', 'contract_id', 'number'],
 			['date', 'date', 'timestamp'],
+			['contract_id', 'contract_id', 'number'],
 			['description', 'description', 'text'],
 			['draft', 'draft', 'jsonb'],
 			['signed', 'signed', 'jsonb'],

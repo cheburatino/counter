@@ -34,6 +34,7 @@ BEGIN
 		['notQuoted', 'state_id', 'doc.state_id'],
 		['notQuoted', 'request_id', 'doc.request_id'],
 		['notQuoted', 'digital_solution_id', 'doc.digital_solution_id'],
+		['notQuoted', 'technical_task_id', 'doc.technical_task_id'],
 		['notQuoted', 'system_id', 'doc.system_id']
     ]);
 
