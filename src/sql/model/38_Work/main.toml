@@ -1,0 +1,44 @@
+docType = "Work"
+tableComment = "дело"
+
+tableName ="work"
+
+fields = [
+	{name="id",			type="serial"},
+	{name="title",					type="char",	size=150, 	ext="not null",	 comment="название"},
+	{name="state_id",					type="int",	 comment="статус"},
+	{name="description",					type="text",	 comment="описание"},
+	{name="search_text",			type="text",	comment="колонка для поиска"},
+	{name="options",				type="jsonb",	comment="разные дополнительные параметры"},
+	{name="created_at",				type="timestamp",	ext="with time zone"},
+	{name="updated_at",				type="timestamp",	ext="with time zone"},
+	{name="deleted",				type="bool",	ext="not null default false"}
+]
+
+fkConstraints = [
+	{name="work_title_already_exist", ext="UNIQUE (title)"},
+	{fld="state_id", ref="ctlg_work_state", fk="id"}
+]
+
+triggers = [
+	{name="work_created", when="before insert or update", ref="for each row", funcName="builtin_fld_update"},
+	{name="work_trigger_before", when="before insert or update", ref="for each row", funcName="work_trigger_before"},
+	{name="work_trigger_after", when="after insert or update", ref="for each row", funcName="work_trigger_after"}
+]
+
+
+
+methods = [
+	"work_update",
+	"work_get_by_id",
+	"work_list",
+	"work_trigger_before",
+	"work_trigger_after"
+]
+
+alterScripts = [
+	"alter table work add column if not exists title CHARACTER VARYING(150);",
+	"alter table work add column if not exists state_id int;",
+	"alter table work add column if not exists description text;",
+	"alter table work add column if not exists search_text text;"
+]

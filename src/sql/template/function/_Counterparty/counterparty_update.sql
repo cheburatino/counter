@@ -27,6 +27,9 @@ BEGIN
 
     
     
+    
+    
+    
 
     if (params ->> 'id')::int = -1 then
         -- проверика наличия обязательных параметров
@@ -37,10 +40,13 @@ BEGIN
         END IF;
         
 
-        EXECUTE ('INSERT INTO counterparty (title, options) VALUES ($1, $2)  RETURNING *;')
+        EXECUTE ('INSERT INTO counterparty (title, company_id, description, requisites, options) VALUES ($1, $2, $3, $4, $5)  RETURNING *;')
 		INTO counterpartyRow
 		USING
 			(params ->> 'title')::text,
+			(params ->> 'company_id')::int,
+			(params ->> 'description')::text,
+			(params ->> 'requisites')::text,
 			coalesce(params -> 'options', '{}')::jsonb;
 
         
@@ -48,6 +54,9 @@ BEGIN
     else
         updateValue = '' || update_str_from_json(params, ARRAY [
 			['title', 'title', 'text'],
+			['company_id', 'company_id', 'number'],
+			['description', 'description', 'text'],
+			['requisites', 'requisites', 'text'],
             ['options', 'options', 'jsonb'],
             ['deleted', 'deleted', 'bool']
             ]);

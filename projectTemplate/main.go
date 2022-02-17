@@ -42,6 +42,7 @@ import (
 	"github.com/cheburatino/electron_is/projectTemplate/docs/systemCustomerAgentLink"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/task"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/taskSpecialistLink"
+	"github.com/cheburatino/electron_is/projectTemplate/docs/technicalTask"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/time"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/work"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/workSpecialistLink"
@@ -85,6 +86,7 @@ func getProject() t.ProjectType {
 		ctlgCustomerTaskState.GetDoc(p),
 		meeting.GetDoc(p),
 		contract.GetDoc(p),
+		technicalTask.GetDoc(p),
 		counterparty.GetDoc(p),
 		company.GetDoc(p),
 		man.GetDoc(p),
@@ -145,9 +147,10 @@ func getProject() t.ProjectType {
 		//{DocName: "time", Roles: []string{utils.RoleAdmin}},
 		{DocName: "company", Roles: []string{utils.RoleAdmin}},
 		//{DocName: "man", Roles: []string{utils.RoleAdmin}},
-		//{DocName: "counterparty", Roles: []string{utils.RoleAdmin}},
-		//{DocName: "contract", Roles: []string{utils.RoleAdmin}},
-		//{DocName: "invoice", Roles: []string{utils.RoleAdmin}},
+		{DocName: "counterparty", Roles: []string{utils.RoleAdmin}},
+		{DocName: "contract", Roles: []string{utils.RoleAdmin}},
+		{DocName: "technical_task", Roles: []string{utils.RoleAdmin}},
+		{DocName: "invoice", Roles: []string{utils.RoleAdmin}},
 		//{DocName: "news_from_dima", Roles: []string{utils.RoleAdmin}},
 		{Text: "Справочники", Icon: "image/catalog.svg", IsFolder: true, Roles: []string{utils.RoleAdmin}, LinkList: []t.VueMenu{
 			{Url: "users", Text: "Пользователи", Icon: "image/user.svg"},

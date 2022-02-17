@@ -22,8 +22,9 @@ BEGIN
         RETURN checkMsg;
     END IF;
 
-    with t1 as (select * from counterparty where id = (params ->> 'id')::int)
- 	select row_to_json(t1.*)::jsonb into result from t1;
+    with t1 as (select * from counterparty where id = (params ->> 'id')::int),
+		t2 as (select t1.*, c.title as company_title from t1 left join company c on c.id = t1.company_id)
+ 	select row_to_json(t2.*)::jsonb into result from t2;
 
     -- случай когда записи с таким id не найдено
     IF result ->> 'id' ISNULL

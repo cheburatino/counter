@@ -19,21 +19,12 @@
       </div>
       
       <div class="row q-col-gutter-md q-mb-sm">
-      <div class="col-3">
-          <comp-fld-ref-search outlined pgMethod="system_list" :label="$t('invoice.system_id')" :item='item.system_title' :itemId='item.system_id' :ext='{}' @update="v=> item.system_id = v.id" @clear="item.system_id = null" :readonly='false'  class='q-mb-sm col-3' />
-      </div>
-      <div class="col-3">
-          <comp-fld-ref-search outlined pgMethod="counterparty_list" :label="$t('invoice.payer_id')" :item='item.payer_title' :itemId='item.payer_id' :ext='{}' @update="v=> item.payer_id = v.id" @clear="item.payer_id = null" :readonly='false'  class='q-mb-sm col-3' />
-      </div>
-      <div class="col-3">
-          <comp-fld-ref-search outlined pgMethod="counterparty_list" :label="$t('invoice.recipient_id')" :item='item.recipient_title' :itemId='item.recipient_id' :ext='{}' @update="v=> item.recipient_id = v.id" @clear="item.recipient_id = null" :readonly='false'  class='q-mb-sm col-3' />
+      <div class="col-md-4 col-sm-6 col-xs-12">
+          <comp-fld-ref-search outlined pgMethod="technical_task_list" :label="$t('invoice.technical_task_id')" :item='item.technical_task_title' :itemId='item.technical_task_id' :ext='{"avatar":"image/technical_task.svg","isClearable":"true","pathUrl":"/technical_task"}' @update="v=> item.technical_task_id = v.id" @clear="item.technical_task_id = null" :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
       </div>
       </div>
       
       <div class="row q-col-gutter-md q-mb-sm">
-      <div class="col-md-2 col-sm-3 col-xs-6">
-          <comp-fld-date outlined :label="$t('invoice.date_plan_transfer')" :date-string="$utils.formatPgDate(item.date_plan_transfer)" @update="v=> item.date_plan_transfer = v" :readonly='false'  class='q-mb-sm col-md-2 col-sm-3 col-xs-6' />
-      </div>
       <div class="col-md-2 col-sm-3 col-xs-6">
           <comp-fld-date outlined :label="$t('invoice.date_plan_paid')" :date-string="$utils.formatPgDate(item.date_plan_paid)" @update="v=> item.date_plan_paid = v" :readonly='false'  class='q-mb-sm col-md-2 col-sm-3 col-xs-6' />
       </div>
@@ -76,10 +67,7 @@
                         {name: 'title', label: 'название',  required: true},
                         {name: 'total_amount', label: 'сумма'},
                         {name: 'state', label: 'статус'},
-                        {name: 'system_id', label: 'система'},
-                        {name: 'payer_id', label: 'плательщик'},
-                        {name: 'recipient_id', label: 'получатель'},
-                        {name: 'date_plan_transfer', label: 'планируемая дата выставления'},
+                        {name: 'technical_task_id', label: 'техническое задание'},
                         {name: 'date_plan_paid', label: 'планируемая дата оплаты'},
                         {name: 'date_transfer', label: 'дата выставления'},
                         {name: 'date_paid', label: 'дата оплаты'},

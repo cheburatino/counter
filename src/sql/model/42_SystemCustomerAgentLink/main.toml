@@ -1,0 +1,48 @@
+docType = "SystemCustomerAgentLink"
+tableComment = "связь системы и представителя заказчика"
+
+tableName ="system_customer_agent_link"
+
+fields = [
+	{name="id",			type="serial"},
+	{name="system_id",					type="int",	 comment="система"},
+	{name="customer_agent_id",					type="int",	 comment="представитель заказчика"},
+	{name="description",					type="text",	 comment="описание"},
+	{name="author_id",					type="int",	 comment="автор"},
+	{name="search_text",			type="text",	comment="колонка для поиска"},
+	{name="options",				type="jsonb",	comment="разные дополнительные параметры"},
+	{name="created_at",				type="timestamp",	ext="with time zone"},
+	{name="updated_at",				type="timestamp",	ext="with time zone"},
+	{name="deleted",				type="bool",	ext="not null default false"}
+]
+
+fkConstraints = [
+	{fld="system_id", ref="system", fk="id"},
+	{fld="customer_agent_id", ref="man", fk="id"},
+	{fld="author_id", ref="man", fk="id"},
+	{name="system_customer_agent_link_already_exist", ext="UNIQUE (system_id, customer_agent_id)"},
+]
+
+triggers = [
+	{name="system_customer_agent_link_created", when="before insert or update", ref="for each row", funcName="builtin_fld_update"},
+	{name="system_customer_agent_link_trigger_before", when="before insert or update", ref="for each row", funcName="system_customer_agent_link_trigger_before"},
+	{name="system_customer_agent_link_trigger_after", when="after insert or update", ref="for each row", funcName="system_customer_agent_link_trigger_after"}
+]
+
+
+
+methods = [
+	"system_customer_agent_link_update",
+	"system_customer_agent_link_get_by_id",
+	"system_customer_agent_link_list",
+	"system_customer_agent_link_trigger_before",
+	"system_customer_agent_link_trigger_after"
+]
+
+alterScripts = [
+	"alter table system_customer_agent_link add column if not exists system_id int;",
+	"alter table system_customer_agent_link add column if not exists customer_agent_id int;",
+	"alter table system_customer_agent_link add column if not exists description text;",
+	"alter table system_customer_agent_link add column if not exists author_id int;",
+	"alter table system_customer_agent_link add column if not exists search_text text;"
+]

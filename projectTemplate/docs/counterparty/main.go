@@ -21,6 +21,9 @@ func GetDoc(project *t.ProjectType) t.DocType {
 		PathPrefix: "docs",
 		Flds: []t.FldType{
 			t.GetFldTitle(),
+			t.GetFldRef("company_id", "компания", "company", [][]int{{1, 2}}, "isShowLink", "isClearable"),
+			t.GetFldString("description", "описание", 0, [][]int{{2, 1}}, "col-8"),
+			t.GetFldString("requisites", "реквизиты", 0, [][]int{{3, 1}}, "col-8"),
 		},
 		Vue: t.DocVue{
 			RouteName:      name,

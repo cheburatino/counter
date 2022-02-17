@@ -77,6 +77,14 @@
 									{icon: 'image/bug.png', text: 'i18n_menu.bug', url: '/bug', roles: ['admin', 'customer', 'specialist']},
 
 									{icon: 'image/company.svg', text: 'i18n_menu.company', url: '/company', roles: ['admin']},
+
+									{icon: 'image/counterparty.svg', text: 'i18n_menu.counterparty', url: '/counterparty', roles: ['admin']},
+
+									{icon: 'image/contract.svg', text: 'i18n_menu.contract', url: '/contract', roles: ['admin']},
+
+									{icon: 'image/technical_task.svg', text: 'i18n_menu.technical_task', url: '/technical_task', roles: ['admin']},
+
+									{icon: 'image/invoice.svg', text: 'i18n_menu.invoice', url: '/invoice', roles: ['admin']},
 {isFolder: true, icon: 'image/catalog.svg', text: 'Справочники', roles: ['admin'], linkList: 								[
 								{icon: 'image/user.svg', text: 'Пользователи', url: '/users', roles: []},
 								{icon: '', text: 'Статусы запросов', url: '/ctlg_request_state', roles: []},

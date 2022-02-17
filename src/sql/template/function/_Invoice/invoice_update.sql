@@ -33,9 +33,6 @@ BEGIN
     
     
     
-    
-    
-    
 
     if (params ->> 'id')::int = -1 then
         -- проверика наличия обязательных параметров
@@ -46,16 +43,13 @@ BEGIN
         END IF;
         
 
-        EXECUTE ('INSERT INTO invoice (title, total_amount, state, system_id, payer_id, recipient_id, date_plan_transfer, date_plan_paid, date_transfer, date_paid, options) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)  RETURNING *;')
+        EXECUTE ('INSERT INTO invoice (title, total_amount, state, technical_task_id, date_plan_paid, date_transfer, date_paid, options) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)  RETURNING *;')
 		INTO invoiceRow
 		USING
 			(params ->> 'title')::text,
 			(params ->> 'total_amount')::int,
 			(params ->> 'state')::text,
-			(params ->> 'system_id')::int,
-			(params ->> 'payer_id')::int,
-			(params ->> 'recipient_id')::int,
-			(params ->> 'date_plan_transfer')::timestamp,
+			(params ->> 'technical_task_id')::int,
 			(params ->> 'date_plan_paid')::timestamp,
 			(params ->> 'date_transfer')::timestamp,
 			(params ->> 'date_paid')::timestamp,
@@ -68,10 +62,7 @@ BEGIN
 			['title', 'title', 'text'],
 			['total_amount', 'total_amount', 'number'],
 			['state', 'state', 'text'],
-			['system_id', 'system_id', 'number'],
-			['payer_id', 'payer_id', 'number'],
-			['recipient_id', 'recipient_id', 'number'],
-			['date_plan_transfer', 'date_plan_transfer', 'timestamp'],
+			['technical_task_id', 'technical_task_id', 'number'],
 			['date_plan_paid', 'date_plan_paid', 'timestamp'],
 			['date_transfer', 'date_transfer', 'timestamp'],
 			['date_paid', 'date_paid', 'timestamp'],

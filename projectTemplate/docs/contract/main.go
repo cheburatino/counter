@@ -21,6 +21,16 @@ func GetDoc(project *t.ProjectType) t.DocType {
 		PathPrefix: "docs",
 		Flds: []t.FldType{
 			t.GetFldTitle(),
+			t.GetFldDate("date", "дата", [][]int{{1, 2}}),
+			t.GetFldString("description", "описание", 0, [][]int{{2, 1}}, "col-8"),
+			t.GetFldFiles("draft", "черновик", [][]int{{3, 1}}, t.FldVueFilesParams{}),
+			t.GetFldFiles("signed", "подписанный", [][]int{{3, 2}}, t.FldVueFilesParams{}),
+			t.GetFldRef("counterparty_id", "контрагент", "counterparty", [][]int{{4, 1}}, "isShowLink", "isClearable"),
+			t.GetFldSelectString("state", "статус", 30, [][]int{{5, 1}}, []t.FldVueOptionsItem{
+				{Label: "подготовка", Value: "preparation"},
+				{Label: "согласование", Value: "approval"},
+				{Label: "подписан", Value: "signed"},
+			}, "col-2"),
 		},
 		Vue: t.DocVue{
 			RouteName:      name,

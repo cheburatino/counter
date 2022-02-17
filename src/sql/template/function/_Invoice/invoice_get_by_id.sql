@@ -23,10 +23,8 @@ BEGIN
     END IF;
 
     with t1 as (select * from invoice where id = (params ->> 'id')::int),
-		t2 as (select t1.*, c.title as system_title from t1 left join system c on c.id = t1.system_id),
-		t3 as (select t2.*, c.title as payer_title from t2 left join counterparty c on c.id = t2.payer_id),
-		t4 as (select t3.*, c.title as recipient_title from t3 left join counterparty c on c.id = t3.recipient_id)
- 	select row_to_json(t4.*)::jsonb into result from t4;
+		t2 as (select t1.*, c.title as technical_task_title from t1 left join technical_task c on c.id = t1.technical_task_id)
+ 	select row_to_json(t2.*)::jsonb into result from t2;
 
     -- случай когда записи с таким id не найдено
     IF result ->> 'id' ISNULL
