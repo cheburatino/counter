@@ -57,9 +57,9 @@ func GetDoc(project *t.ProjectType) t.DocType {
 				{FldName: "digital_solution_id", IsRef: true, RefTable: "digital_solution"},
 			},
 		},
-		Templates:   map[string]*t.DocTemplate{
-			"sql_function_list.sql": {},
-		},
+		//Templates:   map[string]*t.DocTemplate{
+		//	"sql_function_list.sql": {},
+		//},
 		IsBaseTemplates: t.DocIsBaseTemplates{true, true},
 		Sql: t.DocSql{
 			IsSearchText:    true,

@@ -22,8 +22,8 @@ func GetDoc(project *t.ProjectType) t.DocType {
 		Flds: []t.FldType{
 			t.GetFldTitle(),
 			t.GetFldDate("date", "дата подписи", [][]int{{1, 2}}, "col-2"),
-			t.GetFldRef("state_id", "статус", "ctlg_completion_act_state", [][]int{{1, 3}}, "col-2", "isShowLink", "isClearable").SetDefault("1"),
-			t.GetFldRef("technical_task_id", "техническое задание", "technical_task", [][]int{{2, 1}}),
+			t.GetFldRef("state_id", "статус", "ctlg_completion_act_state", [][]int{{1, 3}}, "col-2", "isClearable").SetDefault("1"),
+			t.GetFldRef("technical_task_id", "техническое задание", "technical_task", [][]int{{2, 1}}, "isSHowLink", "isClearable"),
 		},
 		Vue: t.DocVue{
 			RouteName:      name,

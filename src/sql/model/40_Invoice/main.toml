@@ -6,7 +6,7 @@ tableName ="invoice"
 fields = [
 	{name="id",			type="serial"},
 	{name="title",					type="char",	size=150, 	ext="not null",	 comment="название"},
-	{name="amount",					type="int",	 comment="размер платежа"},
+	{name="amount",					type="int",	 comment="сумма"},
 	{name="state_id",					type="int", 	ext=" default 1",	 comment="статус"},
 	{name="technical_task_id",					type="int",	 comment="техническое задание"},
 	{name="date_transfer",					type="timestamp",	 comment="дата выставления"},

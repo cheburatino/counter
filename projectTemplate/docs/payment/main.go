@@ -21,7 +21,7 @@ func GetDoc(project *t.ProjectType) t.DocType {
 		PathPrefix: "docs",
 		Flds: []t.FldType{
 			t.GetFldTitle("col-2"),
-			t.GetFldInt("amount", "сумма", [][]int{{1, 2}}, "col-2"),
+			t.GetFldInt("amount", "размер платежа", [][]int{{1, 2}}, "col-2"),
 			t.GetFldDate("payment_date", "дата платежа", [][]int{{1, 3}}, "col-2"),
 			t.GetFldDate("payment_receipt_date", "дата поступления платежа", [][]int{{1, 4}}, "col-2"),
 			t.GetFldRef("invoice_id", "счёт", "invoice", [][]int{{2, 1}}, "isShowLink", "isClearable"),

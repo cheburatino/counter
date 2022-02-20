@@ -65,7 +65,7 @@
                 item: null,
                 flds: [
                         {name: 'title', label: 'название',  required: true},
-                        {name: 'amount', label: 'сумма'},
+                        {name: 'amount', label: 'размер платежа'},
                         {name: 'payment_date', label: 'дата платежа'},
                         {name: 'payment_receipt_date', label: 'дата поступления платежа'},
                         {name: 'invoice_id', label: 'счёт'},

@@ -6,7 +6,7 @@ tableName ="payment"
 fields = [
 	{name="id",			type="serial"},
 	{name="title",					type="char",	size=150, 	ext="not null",	 comment="название"},
-	{name="amount",					type="int",	 comment="сумма"},
+	{name="amount",					type="int",	 comment="размер платежа"},
 	{name="payment_date",					type="timestamp",	 comment="дата платежа"},
 	{name="payment_receipt_date",					type="timestamp",	 comment="дата поступления платежа"},
 	{name="invoice_id",					type="int",	 comment="счёт"},

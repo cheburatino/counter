@@ -71,7 +71,7 @@
                 item: null,
                 flds: [
                         {name: 'title', label: 'название',  required: true},
-                        {name: 'amount', label: 'размер платежа'},
+                        {name: 'amount', label: 'сумма'},
                         {name: 'state_id', label: 'статус'},
                         {name: 'technical_task_id', label: 'техническое задание'},
                         {name: 'date_transfer', label: 'дата выставления'},

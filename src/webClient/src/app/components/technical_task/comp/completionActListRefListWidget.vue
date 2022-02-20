@@ -13,7 +13,7 @@
                 <router-link :to="'/completion_act/' + v.id" style="cursor: pointer">
                     <q-item-section avatar>
                         <q-avatar rounded>
-                            <img src="image/functional_requirement.svg" alt="">
+                            <img src="image/completion_act.png" alt="">
                         </q-avatar>
                     </q-item-section>
                 </router-link>
