@@ -23,13 +23,22 @@
           <comp-fld-ref-search outlined pgMethod="technical_task_list" :label="$t('invoice.technical_task_id')" :item='item.technical_task_title' :itemId='item.technical_task_id' :ext='{"avatar":"image/technical_task.svg","isClearable":"true","pathUrl":"/technical_task"}' @update="v=> item.technical_task_id = v.id" @clear="item.technical_task_id = null" :readonly='false'  class='q-mb-sm col-md-2 col-sm-3 col-xs-6' />
       </div>
       <div class="col-md-2 col-sm-3 col-xs-6">
-          <comp-fld-date outlined :label="$t('invoice.date_plan_paid')" :date-string="$utils.formatPgDate(item.date_plan_paid)" @update="v=> item.date_plan_paid = v" :readonly='false'  class='q-mb-sm col-md-2 col-sm-3 col-xs-6' />
-      </div>
-      <div class="col-md-2 col-sm-3 col-xs-6">
           <comp-fld-date outlined :label="$t('invoice.date_transfer')" :date-string="$utils.formatPgDate(item.date_transfer)" @update="v=> item.date_transfer = v" :readonly='false'  class='q-mb-sm col-md-2 col-sm-3 col-xs-6' />
       </div>
       <div class="col-md-2 col-sm-3 col-xs-6">
+          <comp-fld-date outlined :label="$t('invoice.date_plan_paid')" :date-string="$utils.formatPgDate(item.date_plan_paid)" @update="v=> item.date_plan_paid = v" :readonly='false'  class='q-mb-sm col-md-2 col-sm-3 col-xs-6' />
+      </div>
+      <div class="col-md-2 col-sm-3 col-xs-6">
           <comp-fld-date outlined :label="$t('invoice.date_paid')" :date-string="$utils.formatPgDate(item.date_paid)" @update="v=> item.date_paid = v" :readonly='false'  class='q-mb-sm col-md-2 col-sm-3 col-xs-6' />
+      </div>
+      </div>
+      
+      <div class="row q-col-gutter-md q-mb-sm">
+      <div class="col-md-4 col-sm-6 col-xs-12">
+          <comp-fld-files v-if="this.id != 'new'" fldName='invoice_file' :label="$t('invoice.invoice_file')" :fld='item.invoice_file' :ext = '{tableName: "invoice", tableId: this.id}' @update="v=> item.invoice_file = v" :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
+      </div>
+      <div class="col-md-4 col-sm-6 col-xs-12">
+          <payment-list-ref-list-widget v-if='item.id != -1' :id='item.id' :readonly='false'/>
       </div>
       </div>
       
@@ -46,11 +55,11 @@
 </template>
 
 <script>
-
+	import paymentListRefListWidget from './comp/paymentListRefListWidget.vue'
     import currentUserMixin from '../../../app/mixins/currentUser'
     export default {
         props: ['id', 'isOpenInDialog'],
-        components: {},
+        components: {paymentListRefListWidget},
         mixins: [currentUserMixin,],
         computed: {
             docUrl: function() {
@@ -62,12 +71,13 @@
                 item: null,
                 flds: [
                         {name: 'title', label: 'название',  required: true},
-                        {name: 'amount', label: 'сумма'},
+                        {name: 'amount', label: 'размер платежа'},
                         {name: 'state_id', label: 'статус'},
                         {name: 'technical_task_id', label: 'техническое задание'},
-                        {name: 'date_plan_paid', label: 'планируемая дата оплаты'},
                         {name: 'date_transfer', label: 'дата выставления'},
-                        {name: 'date_paid', label: 'дата оплаты'},
+                        {name: 'date_plan_paid', label: 'планируемая дата оплаты'},
+                        {name: 'date_paid', label: 'дата получения оплаты'},
+                        {name: 'invoice_file', label: 'счёт'},
                 ],
                 optionsFlds: [],
                 

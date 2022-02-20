@@ -21,12 +21,13 @@ func GetDoc(project *t.ProjectType) t.DocType {
 		PathPrefix: "docs",
 		Flds: []t.FldType{
 			t.GetFldTitle(),
-			t.GetFldInt("amount", "сумма", [][]int{{1, 2}}, "col-2"),
-			t.GetFldRef("state_id", "статус", "ctlg_invoice_state", [][]int{{1, 3}}, "col-2", "isShowLink", "isClearable"),
+			t.GetFldInt("amount", "размер платежа", [][]int{{1, 2}}, "col-2"),
+			t.GetFldRef("state_id", "статус", "ctlg_invoice_state", [][]int{{1, 3}}, "col-2", "isShowLink", "isClearable").SetDefault("1"),
 			t.GetFldRef("technical_task_id", "техническое задание", "technical_task", [][]int{{2, 1}}, "col-2", "isShowLink", "isClearable"),
-			t.GetFldDate("date_plan_paid", "планируемая дата оплаты", [][]int{{2, 2}}, "col-2"),
-			t.GetFldDate("date_transfer", "дата выставления", [][]int{{2, 3}}, "col-2"),
-			t.GetFldDate("date_paid", "дата оплаты", [][]int{{2, 4}}, "col-2"),
+			t.GetFldDate("date_transfer", "дата выставления", [][]int{{2, 2}}, "col-2"),
+			t.GetFldDate("date_plan_paid", "планируемая дата оплаты", [][]int{{2, 3}}, "col-2"),
+			t.GetFldDate("date_paid", "дата получения оплаты", [][]int{{2, 4}}, "col-2"),
+			t.GetFldFiles("invoice_file", "счёт", [][]int{{3, 1}}, t.FldVueFilesParams{}),
 		},
 		Vue: t.DocVue{
 			RouteName:      name,
@@ -67,6 +68,21 @@ func GetDoc(project *t.ProjectType) t.DocType {
 			`
 		},
 	}
+
+	doc.AddFld(t.GetFldVueCompositionRefList(&doc, t.VueCompRefListWidgetParams{
+		Label:      "платежи",              // название списка, которе выводится на экране
+		FldName:    "payment_list",           // название поля. Любое, в формате snake_case. На основе этого названия формируется название компоненты во vue.
+		TableName:  "payment",                // название связанной таблицы, из которой будут выгружаться записи
+		RefFldName: "invoice_id", // название поля в связанной таблицы, по которому осуществляется связь
+		Avatar:     "image/payment.png",      // иконка, которая выводится в списке
+		NewFlds: []t.FldType{
+			t.GetFldString("title", "название", 300, [][]int{{1, 1}}).SetIsRequired(),
+		}, // список полей, которые заполняются при добавлении новой записи
+		TitleTemplate: `
+                <q-item-label>{{v.title}}</q-item-label>
+                <q-item-label caption>Размер: {{v.amount}}</q-item-label>
+            `, // шаблон для названия в списке (vue синтаксис)
+	}, [][]int{{3, 2}}, "col-4"))
 
 	return doc
 }

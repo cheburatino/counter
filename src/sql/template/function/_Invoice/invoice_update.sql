@@ -33,6 +33,8 @@ BEGIN
     
     
     
+    
+    
 
     if (params ->> 'id')::int = -1 then
         -- проверика наличия обязательных параметров
@@ -43,16 +45,17 @@ BEGIN
         END IF;
         
 
-        EXECUTE ('INSERT INTO invoice (title, amount, state_id, technical_task_id, date_plan_paid, date_transfer, date_paid, options) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)  RETURNING *;')
+        EXECUTE ('INSERT INTO invoice (title, amount, state_id, technical_task_id, date_transfer, date_plan_paid, date_paid, invoice_file, options) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)  RETURNING *;')
 		INTO invoiceRow
 		USING
 			(params ->> 'title')::text,
 			(params ->> 'amount')::int,
-			(params ->> 'state_id')::int,
+			coalesce((params ->> 'state_id')::int, 1)::int,
 			(params ->> 'technical_task_id')::int,
-			(params ->> 'date_plan_paid')::timestamp,
 			(params ->> 'date_transfer')::timestamp,
+			(params ->> 'date_plan_paid')::timestamp,
 			(params ->> 'date_paid')::timestamp,
+			(params -> 'invoice_file')::jsonb,
 			coalesce(params -> 'options', '{}')::jsonb;
 
         
@@ -63,9 +66,10 @@ BEGIN
 			['amount', 'amount', 'number'],
 			['state_id', 'state_id', 'number'],
 			['technical_task_id', 'technical_task_id', 'number'],
-			['date_plan_paid', 'date_plan_paid', 'timestamp'],
 			['date_transfer', 'date_transfer', 'timestamp'],
+			['date_plan_paid', 'date_plan_paid', 'timestamp'],
 			['date_paid', 'date_paid', 'timestamp'],
+			['invoice_file', 'invoice_file', 'jsonb'],
             ['options', 'options', 'jsonb'],
             ['deleted', 'deleted', 'bool']
             ]);

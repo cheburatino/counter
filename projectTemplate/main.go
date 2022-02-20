@@ -6,9 +6,11 @@ import (
 	"github.com/cheburatino/electron_is/projectTemplate/docs/comment"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/company"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/companyManLink"
+	"github.com/cheburatino/electron_is/projectTemplate/docs/completionAct"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/contract"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/counterparty"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/ctlgBugState"
+	"github.com/cheburatino/electron_is/projectTemplate/docs/ctlgCompletionActState"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/ctlgContractState"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/ctlgCustomerTaskState"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/ctlgDigitalSolutionSpecialistRole"
@@ -38,6 +40,7 @@ import (
 	"github.com/cheburatino/electron_is/projectTemplate/docs/man"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/meeting"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/newsFromDima"
+	"github.com/cheburatino/electron_is/projectTemplate/docs/payment"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/request"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/requestCustomerAgentLink"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/sprint"
@@ -89,6 +92,7 @@ func getProject() t.ProjectType {
 		ctlgCustomerTaskState.GetDoc(p),
 		ctlgContractState.GetDoc(p),
 		ctlgTechnicalTaskState.GetDoc(p),
+		ctlgCompletionActState.GetDoc(p),
 		ctlgInvoiceState.GetDoc(p),
 		meeting.GetDoc(p),
 		contract.GetDoc(p),
@@ -101,6 +105,8 @@ func getProject() t.ProjectType {
 		digitalSolution.GetDoc(p),
 		functionalRequirement.GetDoc(p),
 		invoice.GetDoc(p),
+		payment.GetDoc(p),
+		completionAct.GetDoc(p),
 		sprint.GetDoc(p),
 		task.GetDoc(p),
 		work.GetDoc(p),
@@ -156,7 +162,9 @@ func getProject() t.ProjectType {
 		{DocName: "counterparty", Roles: []string{utils.RoleAdmin}},
 		{DocName: "contract", Roles: []string{utils.RoleAdmin}},
 		{DocName: "technical_task", Roles: []string{utils.RoleAdmin}},
+		{DocName: "completion_act", Roles: []string{utils.RoleAdmin}},
 		{DocName: "invoice", Roles: []string{utils.RoleAdmin}},
+		{DocName: "payment", Roles: []string{utils.RoleAdmin}},
 		//{DocName: "news_from_dima", Roles: []string{utils.RoleAdmin}},
 		{Text: "Справочники", Icon: "image/catalog.svg", IsFolder: true, Roles: []string{utils.RoleAdmin}, LinkList: []t.VueMenu{
 			{Url: "users", Text: "Пользователи", Icon: "image/user.svg"},
@@ -175,6 +183,7 @@ func getProject() t.ProjectType {
 			{Text: "Статусы багов", Url: "ctlg_bug_state"},
 			{Text: "Статусы договоров", Url: "ctlg_contract_state"},
 			{Text: "Статусы технических заданий", Url: "ctlg_technical_task_state"},
+			{Text: "Статусы актов", Url: "ctlg_completion_act_state"},
 			{Text: "Статусы счетов", Url: "ctlg_invoice_state"},
 		}},
 	}

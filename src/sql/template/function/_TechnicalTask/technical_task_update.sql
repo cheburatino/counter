@@ -37,6 +37,7 @@ BEGIN
     
     
     
+    
 
     if (params ->> 'id')::int = -1 then
         -- проверика наличия обязательных параметров
@@ -53,7 +54,7 @@ BEGIN
 			(params ->> 'title')::text,
 			(params ->> 'number')::int,
 			(params ->> 'amount')::int,
-			(params ->> 'state_id')::int,
+			coalesce((params ->> 'state_id')::int, 1)::int,
 			(params ->> 'date')::timestamp,
 			(params ->> 'contract_id')::int,
 			(params ->> 'description')::text,

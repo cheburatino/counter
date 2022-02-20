@@ -49,7 +49,7 @@ BEGIN
 		USING
 			(params ->> 'title')::text,
 			(params ->> 'date')::timestamp,
-			(params ->> 'state_id')::int,
+			coalesce((params ->> 'state_id')::int, 1)::int,
 			(params ->> 'counterparty_id')::int,
 			(params ->> 'description')::text,
 			(params -> 'draft')::jsonb,

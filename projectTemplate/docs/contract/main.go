@@ -22,7 +22,7 @@ func GetDoc(project *t.ProjectType) t.DocType {
 		Flds: []t.FldType{
 			t.GetFldTitle(),
 			t.GetFldDate("date", "дата", [][]int{{1, 2}}, "col-2"),
-			t.GetFldRef("state_id", "статус", "ctlg_contract_state", [][]int{{1, 3}}, "col-2", "isShowLink", "isClearable"),
+			t.GetFldRef("state_id", "статус", "ctlg_contract_state", [][]int{{1, 3}}, "col-2", "isShowLink", "isClearable").SetDefault("1"),
 			t.GetFldRef("counterparty_id", "контрагент", "counterparty", [][]int{{2, 1}}, "isShowLink", "isClearable"),
 			t.GetFldString("description", "описание", 0, [][]int{{2, 2}}),
 			t.GetFldFiles("draft", "черновик", [][]int{{3, 1}}, t.FldVueFilesParams{}),

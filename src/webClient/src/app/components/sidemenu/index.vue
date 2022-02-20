@@ -84,7 +84,11 @@
 
 									{icon: 'image/technical_task.svg', text: 'i18n_menu.technical_task', url: '/technical_task', roles: ['admin']},
 
+									{icon: 'image/completion_act.png', text: 'i18n_menu.completion_act', url: '/completion_act', roles: ['admin']},
+
 									{icon: 'image/invoice.svg', text: 'i18n_menu.invoice', url: '/invoice', roles: ['admin']},
+
+									{icon: 'image/payment.png', text: 'i18n_menu.payment', url: '/payment', roles: ['admin']},
 {isFolder: true, icon: 'image/catalog.svg', text: 'Справочники', roles: ['admin'], linkList: 								[
 								{icon: 'image/user.svg', text: 'Пользователи', url: '/users', roles: []},
 								{icon: '', text: 'Статусы запросов', url: '/ctlg_request_state', roles: []},
@@ -102,6 +106,7 @@
 								{icon: '', text: 'Статусы багов', url: '/ctlg_bug_state', roles: []},
 								{icon: '', text: 'Статусы договоров', url: '/ctlg_contract_state', roles: []},
 								{icon: '', text: 'Статусы технических заданий', url: '/ctlg_technical_task_state', roles: []},
+								{icon: '', text: 'Статусы актов', url: '/ctlg_completion_act_state', roles: []},
 								{icon: '', text: 'Статусы счетов', url: '/ctlg_invoice_state', roles: []},
 ],},
 
