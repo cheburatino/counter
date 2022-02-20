@@ -25,6 +25,7 @@ import (
 	"github.com/cheburatino/electron_is/projectTemplate/docs/ctlgTaskState"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/ctlgTaskType"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/ctlgTechnicalTaskState"
+	"github.com/cheburatino/electron_is/projectTemplate/docs/ctlgTechnicalTaskWorkState"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/ctlgTimeType"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/ctlgWorkSpecialistRole"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/ctlgWorkState"
@@ -92,6 +93,7 @@ func getProject() t.ProjectType {
 		ctlgCustomerTaskState.GetDoc(p),
 		ctlgContractState.GetDoc(p),
 		ctlgTechnicalTaskState.GetDoc(p),
+		ctlgTechnicalTaskWorkState.GetDoc(p),
 		ctlgCompletionActState.GetDoc(p),
 		ctlgInvoiceState.GetDoc(p),
 		meeting.GetDoc(p),
@@ -183,6 +185,7 @@ func getProject() t.ProjectType {
 			{Text: "Статусы багов", Url: "ctlg_bug_state"},
 			{Text: "Статусы договоров", Url: "ctlg_contract_state"},
 			{Text: "Статусы технических заданий", Url: "ctlg_technical_task_state"},
+			{Text: "Статусы работ по ТЗ", Url: "ctlg_technical_task_work_state"},
 			{Text: "Статусы актов", Url: "ctlg_completion_act_state"},
 			{Text: "Статусы счетов", Url: "ctlg_invoice_state"},
 		}},

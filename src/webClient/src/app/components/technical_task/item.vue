@@ -7,23 +7,26 @@
       <!--  поля формы    -->
       
       <div class="row q-col-gutter-md q-mb-sm">
-      <div class="col-3">
-          <q-input outlined type='text' v-model="item.title" :label="$t('technical_task.title')" autogrow :readonly='false'  class='q-mb-sm col-3' />
+      <div class="col-md-4 col-sm-6 col-xs-12">
+          <q-input outlined type='text' v-model="item.title" :label="$t('technical_task.title')" autogrow :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
       </div>
+      <div class="col-md-2 col-sm-3 col-xs-6">
+          <comp-fld-ref-search outlined pgMethod="ctlg_technical_task_state_list" :label="$t('technical_task.state_id')" :item='item.state_title' :itemId='item.state_id' :ext='{"isClearable":"true"}' @update="v=> item.state_id = v.id" @clear="item.state_id = null" :readonly='false'  class='q-mb-sm col-md-2 col-sm-3 col-xs-6' />
+      </div>
+      <div class="col-md-2 col-sm-3 col-xs-6">
+          <comp-fld-ref-search outlined pgMethod="ctlg_technical_task_work_state_list" :label="$t('technical_task.work_state_id')" :item='item.work_state_title' :itemId='item.work_state_id' :ext='{"isClearable":"true"}' @update="v=> item.work_state_id = v.id" @clear="item.work_state_id = null" :readonly='false'  class='q-mb-sm col-md-2 col-sm-3 col-xs-6' />
+      </div>
+      </div>
+      
+      <div class="row q-col-gutter-md q-mb-sm">
       <div class="col-md-1 col-sm-2 col-xs-6">
           <q-input outlined type='number' v-model="item.number" :label="$t('technical_task.number')" :readonly='false'  class='q-mb-sm col-md-1 col-sm-2 col-xs-6' />
       </div>
       <div class="col-md-1 col-sm-2 col-xs-6">
           <q-input outlined type='number' v-model="item.amount" :label="$t('technical_task.amount')" :readonly='false'  class='q-mb-sm col-md-1 col-sm-2 col-xs-6' />
       </div>
-      <div class="col-3">
-          <comp-fld-ref-search outlined pgMethod="ctlg_technical_task_state_list" :label="$t('technical_task.state_id')" :item='item.state_title' :itemId='item.state_id' :ext='{"isClearable":"true"}' @update="v=> item.state_id = v.id" @clear="item.state_id = null" :readonly='false'  class='q-mb-sm col-3' />
-      </div>
-      </div>
-      
-      <div class="row q-col-gutter-md q-mb-sm">
-      <div class="col-md-4 col-sm-6 col-xs-12">
-          <comp-fld-date outlined :label="$t('technical_task.date')" :date-string="$utils.formatPgDate(item.date)" @update="v=> item.date = v" :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
+      <div class="col-md-2 col-sm-3 col-xs-6">
+          <comp-fld-date outlined :label="$t('technical_task.date')" :date-string="$utils.formatPgDate(item.date)" @update="v=> item.date = v" :readonly='false'  class='q-mb-sm col-md-2 col-sm-3 col-xs-6' />
       </div>
       <div class="col-md-4 col-sm-6 col-xs-12">
           <comp-fld-ref-search outlined pgMethod="contract_list" :label="$t('technical_task.contract_id')" :item='item.contract_title' :itemId='item.contract_id' :ext='{"avatar":"image/contract.svg","isClearable":"true","pathUrl":"/contract"}' @update="v=> item.contract_id = v.id" @clear="item.contract_id = null" :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
@@ -37,19 +40,16 @@
       </div>
       
       <div class="row q-col-gutter-md q-mb-sm">
-      <div class="col-md-4 col-sm-6 col-xs-12">
-          <comp-fld-files v-if="this.id != 'new'" fldName='draft' :label="$t('technical_task.draft')" :fld='item.draft' :ext = '{tableName: "technical_task", tableId: this.id}' @update="v=> item.draft = v" :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
+      <div class="col-md-2 col-sm-3 col-xs-6">
+          <comp-fld-files v-if="this.id != 'new'" fldName='draft' :label="$t('technical_task.draft')" :fld='item.draft' :ext = '{tableName: "technical_task", tableId: this.id}' @update="v=> item.draft = v" :readonly='false'  class='q-mb-sm col-md-2 col-sm-3 col-xs-6' />
       </div>
-      <div class="col-md-4 col-sm-6 col-xs-12">
-          <comp-fld-files v-if="this.id != 'new'" fldName='signed' :label="$t('technical_task.signed')" :fld='item.signed' :ext = '{tableName: "technical_task", tableId: this.id}' @update="v=> item.signed = v" :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
+      <div class="col-md-2 col-sm-3 col-xs-6">
+          <comp-fld-files v-if="this.id != 'new'" fldName='signed' :label="$t('technical_task.signed')" :fld='item.signed' :ext = '{tableName: "technical_task", tableId: this.id}' @update="v=> item.signed = v" :readonly='false'  class='q-mb-sm col-md-2 col-sm-3 col-xs-6' />
       </div>
-      </div>
-      
-      <div class="row q-col-gutter-md q-mb-sm">
-      <div class="col-md-4 col-sm-6 col-xs-12">
+      <div class="col-md-2 col-sm-3 col-xs-6">
           <completion-act-list-ref-list-widget v-if='item.id != -1' :id='item.id' :readonly='false'/>
       </div>
-      <div class="col-md-4 col-sm-6 col-xs-12">
+      <div class="col-md-2 col-sm-3 col-xs-6">
           <invoice-list-ref-list-widget v-if='item.id != -1' :id='item.id' :readonly='false'/>
       </div>
       </div>
@@ -91,14 +91,15 @@
                 item: null,
                 flds: [
                         {name: 'title', label: 'название',  required: true},
+                        {name: 'state_id', label: 'статус'},
+                        {name: 'work_state_id', label: 'статус работ по ТЗ'},
                         {name: 'number', label: 'номер'},
                         {name: 'amount', label: 'сумма'},
-                        {name: 'state_id', label: 'статус'},
-                        {name: 'date', label: 'дата ТЗ'},
+                        {name: 'date', label: 'дата подписания ТЗ'},
                         {name: 'contract_id', label: 'договор'},
                         {name: 'description', label: 'описание'},
                         {name: 'draft', label: 'черновик'},
-                        {name: 'signed', label: 'подписанный'},
+                        {name: 'signed', label: 'подписанное'},
                 ],
                 optionsFlds: [],
                 

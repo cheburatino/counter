@@ -20,17 +20,19 @@ func GetDoc(project *t.ProjectType) t.DocType {
 		NameRu:     name_ru,
 		PathPrefix: "docs",
 		Flds: []t.FldType{
-			t.GetFldTitle("col-3"),
-			t.GetFldInt("number", "номер", [][]int{{1, 2}}, "col-1"),
-			t.GetFldInt("amount", "сумма", [][]int{{1, 3}}, "col-1"),
-			t.GetFldRef("state_id", "статус", "ctlg_technical_task_state", [][]int{{1, 4}}, "col-3", "isClearable").SetDefault("1"),
-			t.GetFldDate("date", "дата ТЗ", [][]int{{2, 1}}),
-			t.GetFldRef("contract_id", "договор", "contract", [][]int{{2, 2}}, "isShowLink", "isClearable"),
+			t.GetFldTitle(),
+			t.GetFldRef("state_id", "статус", "ctlg_technical_task_state", [][]int{{1, 2}}, "col-2", "isClearable").SetDefault("1"),
+			t.GetFldRef("work_state_id", "статус работ по ТЗ", "ctlg_technical_task_work_state", [][]int{{1, 3}}, "col-2", "isClearable").SetDefault("1"),
+			t.GetFldInt("number", "номер", [][]int{{2, 1}}, "col-1"),
+			t.GetFldInt("amount", "сумма", [][]int{{2, 2}}, "col-1"),
+			t.GetFldDate("date", "дата подписания ТЗ", [][]int{{2, 3}}, "col-2"),
+			t.GetFldRef("contract_id", "договор", "contract", [][]int{{2, 4}}, "isShowLink", "isClearable"),
 			t.GetFldString("description", "описание", 0, [][]int{{3, 1}}, "col-8"),
-			t.GetFldFiles("draft", "черновик", [][]int{{4, 1}}, t.FldVueFilesParams{}),
-			t.GetFldFiles("signed", "подписанный", [][]int{{4, 2}}, t.FldVueFilesParams{}),
+			t.GetFldFiles("draft", "черновик", [][]int{{4, 1}}, t.FldVueFilesParams{}, "col-2"),
+			t.GetFldFiles("signed", "подписанное", [][]int{{4, 2}}, t.FldVueFilesParams{}, "col-2"),
+			// контрол актов {{4, 3}}
+			// контрол счетов {{4, 4}}
 			// контрол ФТ {{5, 1}}
-			// контрол счетов {{5, 2}}
 		},
 		Vue: t.DocVue{
 			RouteName:      name,
@@ -70,7 +72,7 @@ func GetDoc(project *t.ProjectType) t.DocType {
                 <q-item-label>{{v.title}}</q-item-label>
                 <q-item-label caption><q-badge color="orange">{{v.options.title.state_title}}</q-badge></q-item-label>
             `, // шаблон для названия в списке (vue синтаксис)
-	}, [][]int{{5, 1}}, "col-4"))
+	}, [][]int{{4, 3}}, "col-2"))
 
 	doc.AddFld(t.GetFldVueCompositionRefList(&doc, t.VueCompRefListWidgetParams{
 		Label:      "счета",           // название списка, которе выводится на экране
@@ -85,7 +87,7 @@ func GetDoc(project *t.ProjectType) t.DocType {
                 <q-item-label>{{v.title}}</q-item-label>
                 <q-item-label caption><q-badge color="orange">{{v.options.title.state_title}}</q-badge></q-item-label>
             `, // шаблон для названия в списке (vue синтаксис)
-	}, [][]int{{5, 2}}, "col-4"))
+	}, [][]int{{4, 4}}, "col-2"))
 
 	doc.AddFld(t.GetFldVueCompositionRefList(&doc, t.VueCompRefListWidgetParams{
 		Label:      "функциональные требования",           // название списка, которе выводится на экране
@@ -100,7 +102,7 @@ func GetDoc(project *t.ProjectType) t.DocType {
                 <q-item-label>{{v.title}}</q-item-label>
                 <q-item-label caption><q-badge color="orange">{{v.options.title.state_title}}</q-badge></q-item-label>
             `, // шаблон для названия в списке (vue синтаксис)
-	}, [][]int{{6, 1}}, "col-4"))
+	}, [][]int{{5, 1}}, "col-4"))
 
 	return doc
 }
