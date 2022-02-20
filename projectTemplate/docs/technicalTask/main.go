@@ -22,8 +22,8 @@ func GetDoc(project *t.ProjectType) t.DocType {
 		Flds: []t.FldType{
 			t.GetFldTitle("col-3"),
 			t.GetFldInt("number", "номер", [][]int{{1, 2}}, "col-1"),
-			t.GetFldInt("amount", "сумма", [][]int{{1, 3}}, "col-2"),
-			t.GetFldRef("state_id", "статус", "ctlg_technical_task_state", [][]int{{1, 4}}, "col-2", "isShowLink", "isClearable"),
+			t.GetFldInt("amount", "сумма", [][]int{{1, 3}}, "col-1"),
+			t.GetFldRef("state_id", "статус", "ctlg_technical_task_state", [][]int{{1, 4}}, "col-3", "isClearable"),
 			t.GetFldDate("date", "дата ТЗ", [][]int{{2, 1}}),
 			t.GetFldRef("contract_id", "договор", "contract", [][]int{{2, 2}}, "isShowLink", "isClearable"),
 			t.GetFldString("description", "описание", 0, [][]int{{3, 1}}, "col-8"),

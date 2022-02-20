@@ -43,11 +43,11 @@ BEGIN
         END IF;
         
 
-        EXECUTE ('INSERT INTO invoice (title, total_amount, state_id, technical_task_id, date_plan_paid, date_transfer, date_paid, options) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)  RETURNING *;')
+        EXECUTE ('INSERT INTO invoice (title, amount, state_id, technical_task_id, date_plan_paid, date_transfer, date_paid, options) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)  RETURNING *;')
 		INTO invoiceRow
 		USING
 			(params ->> 'title')::text,
-			(params ->> 'total_amount')::int,
+			(params ->> 'amount')::int,
 			(params ->> 'state_id')::int,
 			(params ->> 'technical_task_id')::int,
 			(params ->> 'date_plan_paid')::timestamp,
@@ -60,7 +60,7 @@ BEGIN
     else
         updateValue = '' || update_str_from_json(params, ARRAY [
 			['title', 'title', 'text'],
-			['total_amount', 'total_amount', 'number'],
+			['amount', 'amount', 'number'],
 			['state_id', 'state_id', 'number'],
 			['technical_task_id', 'technical_task_id', 'number'],
 			['date_plan_paid', 'date_plan_paid', 'timestamp'],

@@ -11,7 +11,7 @@
           <q-input outlined type='text' v-model="item.title" :label="$t('invoice.title')" autogrow :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
       </div>
       <div class="col-md-2 col-sm-3 col-xs-6">
-          <q-input outlined type='number' v-model="item.total_amount" :label="$t('invoice.total_amount')" :readonly='false'  class='q-mb-sm col-md-2 col-sm-3 col-xs-6' />
+          <q-input outlined type='number' v-model="item.amount" :label="$t('invoice.amount')" :readonly='false'  class='q-mb-sm col-md-2 col-sm-3 col-xs-6' />
       </div>
       <div class="col-md-2 col-sm-3 col-xs-6">
           <comp-fld-ref-search outlined pgMethod="ctlg_invoice_state_list" :label="$t('invoice.state_id')" :item='item.state_title' :itemId='item.state_id' :ext='{"avatar":"image/catalog.svg","isClearable":"true","pathUrl":"/ctlg_invoice_state"}' @update="v=> item.state_id = v.id" @clear="item.state_id = null" :readonly='false'  class='q-mb-sm col-md-2 col-sm-3 col-xs-6' />
@@ -62,7 +62,7 @@
                 item: null,
                 flds: [
                         {name: 'title', label: 'название',  required: true},
-                        {name: 'total_amount', label: 'сумма'},
+                        {name: 'amount', label: 'сумма'},
                         {name: 'state_id', label: 'статус'},
                         {name: 'technical_task_id', label: 'техническое задание'},
                         {name: 'date_plan_paid', label: 'планируемая дата оплаты'},

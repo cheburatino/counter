@@ -13,11 +13,11 @@
       <div class="col-md-1 col-sm-2 col-xs-6">
           <q-input outlined type='number' v-model="item.number" :label="$t('technical_task.number')" :readonly='false'  class='q-mb-sm col-md-1 col-sm-2 col-xs-6' />
       </div>
-      <div class="col-md-2 col-sm-3 col-xs-6">
-          <q-input outlined type='number' v-model="item.amount" :label="$t('technical_task.amount')" :readonly='false'  class='q-mb-sm col-md-2 col-sm-3 col-xs-6' />
+      <div class="col-md-1 col-sm-2 col-xs-6">
+          <q-input outlined type='number' v-model="item.amount" :label="$t('technical_task.amount')" :readonly='false'  class='q-mb-sm col-md-1 col-sm-2 col-xs-6' />
       </div>
-      <div class="col-md-2 col-sm-3 col-xs-6">
-          <comp-fld-ref-search outlined pgMethod="ctlg_technical_task_state_list" :label="$t('technical_task.state_id')" :item='item.state_title' :itemId='item.state_id' :ext='{"avatar":"image/catalog.svg","isClearable":"true","pathUrl":"/ctlg_technical_task_state"}' @update="v=> item.state_id = v.id" @clear="item.state_id = null" :readonly='false'  class='q-mb-sm col-md-2 col-sm-3 col-xs-6' />
+      <div class="col-3">
+          <comp-fld-ref-search outlined pgMethod="ctlg_technical_task_state_list" :label="$t('technical_task.state_id')" :item='item.state_title' :itemId='item.state_id' :ext='{"isClearable":"true"}' @update="v=> item.state_id = v.id" @clear="item.state_id = null" :readonly='false'  class='q-mb-sm col-3' />
       </div>
       </div>
       

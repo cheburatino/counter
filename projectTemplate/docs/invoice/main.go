@@ -21,7 +21,7 @@ func GetDoc(project *t.ProjectType) t.DocType {
 		PathPrefix: "docs",
 		Flds: []t.FldType{
 			t.GetFldTitle(),
-			t.GetFldInt("total_amount", "сумма", [][]int{{1, 2}}, "col-2"),
+			t.GetFldInt("amount", "сумма", [][]int{{1, 2}}, "col-2"),
 			t.GetFldRef("state_id", "статус", "ctlg_invoice_state", [][]int{{1, 3}}, "col-2", "isShowLink", "isClearable"),
 			t.GetFldRef("technical_task_id", "техническое задание", "technical_task", [][]int{{2, 1}}, "col-2", "isShowLink", "isClearable"),
 			t.GetFldDate("date_plan_paid", "планируемая дата оплаты", [][]int{{2, 2}}, "col-2"),
@@ -52,6 +52,21 @@ func GetDoc(project *t.ProjectType) t.DocType {
 	}
 
 	doc.Init()
+
+	doc.Vue.TmplFuncs = map[string]func(t.DocType) string{
+		// шаблон названия в списке
+		"PrintListRowLabel": func(docType t.DocType) string {
+			return `
+				 <q-item-section>
+				    <q-item-label lines="1">{{item.title}}</q-item-label>
+					<q-item-label caption>
+						<q-item-label caption><q-badge color="orange">{{item.options.title.state_title}}</q-badge></q-item-label>
+						<q-item-label caption>Сумма: {{item.amount}}</q-item-label>
+					</q-item-label>
+				 </q-item-section>
+			`
+		},
+	}
 
 	return doc
 }

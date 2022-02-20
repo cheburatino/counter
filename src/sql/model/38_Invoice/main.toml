@@ -6,7 +6,7 @@ tableName ="invoice"
 fields = [
 	{name="id",			type="serial"},
 	{name="title",					type="char",	size=150, 	ext="not null",	 comment="название"},
-	{name="total_amount",					type="int",	 comment="сумма"},
+	{name="amount",					type="int",	 comment="сумма"},
 	{name="state_id",					type="int",	 comment="статус"},
 	{name="technical_task_id",					type="int",	 comment="техническое задание"},
 	{name="date_plan_paid",					type="timestamp",	 comment="планируемая дата оплаты"},
@@ -43,7 +43,7 @@ methods = [
 
 alterScripts = [
 	"alter table invoice add column if not exists title CHARACTER VARYING(150);",
-	"alter table invoice add column if not exists total_amount int;",
+	"alter table invoice add column if not exists amount int;",
 	"alter table invoice add column if not exists state_id int;",
 	"alter table invoice add column if not exists technical_task_id int;",
 	"alter table invoice add column if not exists date_plan_paid timestamp;",
