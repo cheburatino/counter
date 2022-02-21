@@ -60,7 +60,7 @@ func GetDoc(project *t.ProjectType) t.DocType {
 	doc.Init()
 
 	doc.AddFld(t.GetFldVueCompositionRefList(&doc, t.VueCompRefListWidgetParams{
-		Label:      "акты",           				 // название списка, которе выводится на экране
+		Label:      "акт",           				 // название списка, которе выводится на экране
 		FldName:    "completion_act_list",           // название поля. Любое, в формате snake_case. На основе этого названия формируется название компоненты во vue.
 		TableName:  "completion_act",                // название связанной таблицы, из которой будут выгружаться записи
 		RefFldName: "technical_task_id", 			 // название поля в связанной таблицы, по которому осуществляется связь

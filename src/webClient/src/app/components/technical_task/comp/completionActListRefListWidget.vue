@@ -1,11 +1,11 @@
 <template>
     <div>
         <q-bar class="bg-secondary text-white shadow-2">
-            <div>акты <span v-if="deleted">удаленные</span></div>
+            <div>акт <span v-if="deleted">удаленные</span></div>
             <q-space />
             <q-btn icon="add" v-if="!readonly" round flat @click="add"><q-tooltip>Добавить</q-tooltip></q-btn>
-            <q-btn v-if="deleted && !readonly" icon="delete" round flat @click="reload(false)"><q-tooltip>активные акты</q-tooltip></q-btn>
-            <q-btn v-if="!deleted && !readonly" icon="delete_outline" round flat @click="reload(true)"><q-tooltip>удаленные акты</q-tooltip></q-btn>
+            <q-btn v-if="deleted && !readonly" icon="delete" round flat @click="reload(false)"><q-tooltip>активные акт</q-tooltip></q-btn>
+            <q-btn v-if="!deleted && !readonly" icon="delete_outline" round flat @click="reload(true)"><q-tooltip>удаленные акт</q-tooltip></q-btn>
         </q-bar>
 
         <q-list bordered separator>
