@@ -33,9 +33,9 @@ triggers = [
 
 
 methods = [
+	"payment_list",
 	"payment_update",
 	"payment_get_by_id",
-	"payment_list",
 	"payment_trigger_before",
 	"payment_trigger_after"
 ]

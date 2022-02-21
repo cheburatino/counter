@@ -24,6 +24,15 @@
       </div>
       </div>
       
+      <div class="row q-col-gutter-md q-mb-sm">
+      <div class="col-md-4 col-sm-6 col-xs-12">
+          <comp-fld-files v-if="this.id != 'new'" fldName='draft' :label="$t('completion_act.draft')" :fld='item.draft' :ext = '{tableName: "completion_act", tableId: this.id}' @update="v=> item.draft = v" :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
+      </div>
+      <div class="col-md-4 col-sm-6 col-xs-12">
+          <comp-fld-files v-if="this.id != 'new'" fldName='signed' :label="$t('completion_act.signed')" :fld='item.signed' :ext = '{tableName: "completion_act", tableId: this.id}' @update="v=> item.signed = v" :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
+      </div>
+      </div>
+      
 
       <!--  кнопки   -->
       <comp-item-btn-save v-if="!isOpenInDialog" @save="save" :readonly="false" @cancel="$router.push(docUrl)"/>
@@ -56,6 +65,8 @@
                         {name: 'date', label: 'дата подписи'},
                         {name: 'state_id', label: 'статус'},
                         {name: 'technical_task_id', label: 'техническое задание'},
+                        {name: 'draft', label: 'черновик'},
+                        {name: 'signed', label: 'подписанный'},
                 ],
                 optionsFlds: [],
                 
