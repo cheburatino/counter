@@ -22,11 +22,14 @@
 		</router-link>
 	
         
-        <q-item-section>
-          <q-item-label lines="1" >{{item.title}}</q-item-label>
-          
-        </q-item-section>
-	
+				 <q-item-section>
+				    <q-item-label lines="1">{{item.title}}</q-item-label>
+					<q-item-label caption>
+						<q-item-label caption><q-badge color="orange">{{item.options.title.state_title}}</q-badge> <q-badge>{{item.options.title.system_title}}</q-badge></q-item-label>
+						<q-item-label caption>ТЗ: {{item.options.title.technical_task_title}}</q-item-label>
+					</q-item-label>
+				 </q-item-section>
+			
         <q-item-section top side>
           <comp-item-dropdown-btn :item="item" itemProp="title" :is-edit="true" :is-delete="!(false || false)" fkProp=""
                                   pg-method="completion_act_update"
