@@ -26,9 +26,9 @@ triggers = [
 
 
 methods = [
+	"ctlg_electron_skill_list",
 	"ctlg_electron_skill_update",
 	"ctlg_electron_skill_get_by_id",
-	"ctlg_electron_skill_list",
 	"ctlg_electron_skill_trigger_before",
 	"ctlg_electron_skill_trigger_after"
 ]

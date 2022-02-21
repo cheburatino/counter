@@ -26,9 +26,9 @@ triggers = [
 
 
 methods = [
-	"ctlg_task_role_get_by_id",
 	"ctlg_task_role_list",
 	"ctlg_task_role_update",
+	"ctlg_task_role_get_by_id",
 	"ctlg_task_role_trigger_before",
 	"ctlg_task_role_trigger_after"
 ]
