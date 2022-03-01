@@ -1,6 +1,5 @@
 
 export default {
- 		author_id: 'автор',
  		role_id: 'роль',
  		name: 'участник дела',
  		name_plural: 'Участники дел',
@@ -8,4 +7,5 @@ export default {
  		work_id: 'дело',
  		specialist_id: 'специалист',
  		description: 'описание',
+ 		author_id: 'автор',
 }
