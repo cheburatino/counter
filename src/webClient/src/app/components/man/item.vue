@@ -29,7 +29,7 @@
       
       <div class="row q-col-gutter-md q-mb-sm">
       <div class="col-md-4 col-sm-6 col-xs-12">
-          <comp-fld-ref-search outlined pgMethod="user_list" :label="$t('man.user_table_id')" :item='item.user_table_title' :itemId='item.user_table_id' :ext='{"avatar":"image/users.svg","isClearable":"true","pathUrl":"/users"}' @update="v=> item.user_table_id = v.id" @clear="item.user_table_id = null" :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
+          <comp-fld-ref-search outlined pgMethod="user_list" :label="$t('man.user_table_id')" :item='item.user_table_title' :itemId='item.user_table_id' :ext='{"avatar":"https://image.flaticon.com/icons/svg/423/423063.svg","isClearable":"true","pathUrl":"/users"}' @update="v=> item.user_table_id = v.id" @clear="item.user_table_id = null" :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
       </div>
       </div>
       

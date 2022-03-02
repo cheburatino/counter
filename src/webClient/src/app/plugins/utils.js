@@ -142,10 +142,6 @@ const formatPgDate = (d) => {
   return d ? moment(d, 'YYYY-MM-DDTHH:mm:ss').format('DD-MM-YYYY') : null
 }
 
-const formatNumber = (v, digits) => {
-  if (digits === undefined) digits = 2
-  return new Intl.NumberFormat('ru-RU', {maximumFractionDigits: digits}).format(v)
-}
 const notifySuccess = (msg) => {
   Notify.create({
     color: 'positive',
@@ -174,7 +170,6 @@ export default {
   updateUrlQuery,
   formatPgDateTime,
   formatPgDate,
-  formatNumber,
   notifySuccess,
   notifyError,
   _,

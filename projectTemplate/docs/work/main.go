@@ -23,6 +23,7 @@ func GetDoc(project *t.ProjectType) t.DocType {
 			t.GetFldTitle(),
 			t.GetFldRef("state_id", "статус", "ctlg_work_state", [][]int{{1, 2}}),
 			t.GetFldString("description", "описание", 0, [][]int{{2, 1}}, "col-8"),
+			t.GetFldJsonbCompositionWithoutFld([][]int{{3, 1}}, "", "comp-specialist", ":currentUser='currentUser'"),
 		},
 		Vue: t.DocVue{
 			RouteName:      name,
@@ -43,6 +44,9 @@ func GetDoc(project *t.ProjectType) t.DocType {
 
 	// создаем стандартные методы sql "list", "update", "get_by_id" с возможностью ограничения по ролям
 	doc.Sql.FillBaseMethods(doc.Name)
+
+	doc.AddVueComposition("docItem", "specialist")
+
 
 	doc.Vue.I18n = map[string]string{
 		"listTitle":        utils.UpperCaseFirst(name_ru_plural),

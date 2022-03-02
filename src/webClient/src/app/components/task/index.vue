@@ -1,21 +1,20 @@
 
 
 <template>
-  хуйня
   <q-page :padding="!isOpenInDialog">
     <comp-breadcrumb class="text-capitalize" v-if="!isOpenInDialog" :list="[{label: $t('task.name_plural'), docType:'task'}]"/>
     <!-- фильтры   -->
-    <div class="row q-mt-sm q-col-gutter-sm">
-        <div class=" col-md-2 col-sm-4 col-xs-6">
-          <comp-fld-ref-search dense outlined pgMethod="ctlg_task_state_list" label="" :item='filterCtlgTaskStateTitle' :itemId='filterCtlgTaskStateId' :ext='{isClearable: true}'  @update="updateFilterCtlgTaskState" @clear="updateFilterCtlgTaskState"  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
-        </div>
-        <div class=" col-md-2 col-sm-4 col-xs-6">
-          <comp-fld-ref-search dense outlined pgMethod="system_list" label="" :item='filterSystemTitle' :itemId='filterSystemId' :ext='{isClearable: true}'  @update="updateFilterSystem" @clear="updateFilterSystem"  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
-        </div>
-        <div class=" col-md-2 col-sm-4 col-xs-6">
-          <comp-fld-ref-search dense outlined pgMethod="digital_solution_list" label="" :item='filterDigitalSolutionTitle' :itemId='filterDigitalSolutionId' :ext='{isClearable: true}'  @update="updateFilterDigitalSolution" @clear="updateFilterDigitalSolution"  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
-        </div>
-    </div>
+<!--    <div class="row q-mt-sm q-col-gutter-sm">-->
+<!--        <div class=" col-md-2 col-sm-4 col-xs-6">-->
+<!--          <comp-fld-ref-search dense outlined pgMethod="ctlg_task_state_list" label="" :item='filterCtlgTaskStateTitle' :itemId='filterCtlgTaskStateId' :ext='{isClearable: true}'  @update="updateFilterCtlgTaskState" @clear="updateFilterCtlgTaskState"  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />-->
+<!--        </div>-->
+<!--        <div class=" col-md-2 col-sm-4 col-xs-6">-->
+<!--          <comp-fld-ref-search dense outlined pgMethod="system_list" label="" :item='filterSystemTitle' :itemId='filterSystemId' :ext='{isClearable: true}'  @update="updateFilterSystem" @clear="updateFilterSystem"  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />-->
+<!--        </div>-->
+<!--        <div class=" col-md-2 col-sm-4 col-xs-6">-->
+<!--          <comp-fld-ref-search dense outlined pgMethod="digital_solution_list" label="" :item='filterDigitalSolutionTitle' :itemId='filterDigitalSolutionId' :ext='{isClearable: true}'  @update="updateFilterDigitalSolution" @clear="updateFilterDigitalSolution"  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />-->
+<!--        </div>-->
+<!--    </div>-->
 
     <comp-doc-list ref="docList" :listTitle="$t('task.name_plural')" :listDeletedTitle="$t('task.name_plural_deleted')" pg-method="task_list"
                    :list-sort-data="listSortData" :list-filter-data="listFilterData"
@@ -23,6 +22,20 @@
                    :ext="ext" 
                    search-fld-name="search_text" :readonly="false">
 
+      <template #addFilterSlot>
+        <div style="display: flex; width: 100%; justify-content: space-between;">
+          <q-input
+              id="sqlInput"
+              @keydown="keydownHandler"
+              style="width: 100%;"
+              filled
+              v-model="sqlRest"
+              label="Условия фильтра"
+              input-class="text-left"
+          />
+<!--          <q-btn push color="white" text-color="primary" label="Push" @click="sqlRestBtnClickHandler" />-->
+        </div>
+      </template>
 
       <template #listItem="{item}">
         
@@ -76,9 +89,35 @@
         filterSystemId: null,
         filterDigitalSolutionTitle: null,
         filterDigitalSolutionId: null,
+        sqlRest: 'state_id != 4',
+        sqlRestList: [],
+        active: true
       }
     },
     methods: {
+      sqlRestBtnClickHandler() {
+        // let sqlRestParams = {
+        //   where_param: this.sqlRest
+        // }
+        // let sqlRestParams = {page: 1, per_page: 10, deleted: false, order_by: "created_at desc", where_param: this.sqlRest.toString().trim()}
+        // this.$utils.postCallPgMethod({ method: 'task_list', params: Object.assign(sqlRestParams) }).subscribe(res => {
+        //   console.log(res.result)
+        //   this.sqlRestList = res.result
+        // })
+        this.$refs.docList.changeItemList({'where_param': this.sqlRest ? this.sqlRest : null})
+
+      },
+      keydownHandler(e) {
+        if (e.keyCode == 13) {
+          this.sqlRestBtnClickHandler()
+        }
+      },
+      routOnTask(id) {
+        console.log(window.location)
+        console.log(id)
+        window.location.href = `${window.location.origin}${window.location.pathname}/${id}`
+
+      },
       updateFilterCtlgTaskState(v) {
         this.$refs.docList.changeItemList({'state': v ? v.id : null})
         if (v) {
@@ -104,6 +143,13 @@
         }
       },
     },
+    // watch: {
+    //   sqlRest(v) {
+    //     if (v.length === 0 || v.length > 3) {
+    //       this.$refs.docList.changeItemList({'where_param': this.sqlRest ? this.sqlRest : null})
+    //     }
+    //   }
+    // },
     mounted() {
     // извлекаем параметры фильтрации из url
       const urlParams = new URLSearchParams(window.location.search)
@@ -119,6 +165,9 @@
         let id = +urlParams.get('digital_solution_id')
         if (id) this.updateFilterDigitalSolution({id})
       }
+
+      this.sqlRestBtnClickHandler()
+
     }
   }
 </script>

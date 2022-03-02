@@ -5,13 +5,13 @@
     <comp-breadcrumb class="text-capitalize" v-if="!isOpenInDialog" :list="[{label: $t('functional_requirement.name_plural'), docType:'functional_requirement'}]"/>
     <!-- фильтры   -->
     <div class="row q-mt-sm q-col-gutter-sm">
-        <div class=" col-md-2 col-sm-4 col-xs-6">
+        <div class="">
           <comp-fld-ref-search dense outlined pgMethod="ctlg_functional_requirement_state_list" label="" :item='filterCtlgFunctionalRequirementStateTitle' :itemId='filterCtlgFunctionalRequirementStateId' :ext='{isClearable: true}'  @update="updateFilterCtlgFunctionalRequirementState" @clear="updateFilterCtlgFunctionalRequirementState"  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
         </div>
-        <div class=" col-md-2 col-sm-4 col-xs-6">
+        <div class="">
           <comp-fld-ref-search dense outlined pgMethod="system_list" label="" :item='filterSystemTitle' :itemId='filterSystemId' :ext='{isClearable: true}'  @update="updateFilterSystem" @clear="updateFilterSystem"  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
         </div>
-        <div class=" col-md-2 col-sm-4 col-xs-6">
+        <div class="">
           <comp-fld-ref-search dense outlined pgMethod="digital_solution_list" label="" :item='filterDigitalSolutionTitle' :itemId='filterDigitalSolutionId' :ext='{isClearable: true}'  @update="updateFilterDigitalSolution" @clear="updateFilterDigitalSolution"  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
         </div>
     </div>
@@ -66,7 +66,7 @@
       return {
         listSortData: [
           {value: 'created_at', title: 'Дата'},
-          {value: 'title', title: 'Название'},
+          {value: 'title', title: 'Название'}
         ],
         listFilterData: [
           {value: {deleted: false}, title: 'Активные'},

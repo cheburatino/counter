@@ -53,7 +53,7 @@
       return {
         listSortData: [
           {value: 'created_at', title: 'Дата'},
-          {value: 'title', title: 'Название'},
+          {value: 'title', title: 'Название'}
         ],
         listFilterData: [
           {value: {deleted: false}, title: 'Активные'},

@@ -11,7 +11,7 @@
         <q-banner class="bg-grey-3">
           <template v-slot:avatar>
             <q-avatar rounded>
-              <img src="image/waitingAuth.png">
+              <img src="https://image.flaticon.com/icons/svg/197/197729.svg">
             </q-avatar>
           </template>
           Ожидаем подтверждения Вашей авторизации
