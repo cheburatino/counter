@@ -6,20 +6,26 @@ import (
 	"github.com/cheburatino/electron_is/projectTemplate/docs/comment"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/company"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/companyManLink"
+	"github.com/cheburatino/electron_is/projectTemplate/docs/completionAct"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/contract"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/counterparty"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/ctlgBugState"
+	"github.com/cheburatino/electron_is/projectTemplate/docs/ctlgCompletionActState"
+	"github.com/cheburatino/electron_is/projectTemplate/docs/ctlgContractState"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/ctlgCustomerTaskState"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/ctlgDigitalSolutionSpecialistRole"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/ctlgDigitalSolutionState"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/ctlgElectronSkill"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/ctlgFunctionalRequirementSpecialistRole"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/ctlgFunctionalRequirementState"
+	"github.com/cheburatino/electron_is/projectTemplate/docs/ctlgInvoiceState"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/ctlgRequestPriority"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/ctlgRequestState"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/ctlgTaskRole"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/ctlgTaskState"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/ctlgTaskType"
+	"github.com/cheburatino/electron_is/projectTemplate/docs/ctlgTechnicalTaskState"
+	"github.com/cheburatino/electron_is/projectTemplate/docs/ctlgTechnicalTaskWorkState"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/ctlgTimeType"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/ctlgWorkSpecialistRole"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/ctlgWorkState"
@@ -35,12 +41,15 @@ import (
 	"github.com/cheburatino/electron_is/projectTemplate/docs/man"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/meeting"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/newsFromDima"
+	"github.com/cheburatino/electron_is/projectTemplate/docs/payment"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/request"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/requestCustomerAgentLink"
+	"github.com/cheburatino/electron_is/projectTemplate/docs/sprint"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/system"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/systemCustomerAgentLink"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/task"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/taskSpecialistLink"
+	"github.com/cheburatino/electron_is/projectTemplate/docs/technicalTask"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/time"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/work"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/workSpecialistLink"
@@ -82,8 +91,14 @@ func getProject() t.ProjectType {
 		ctlgWorkSpecialistRole.GetDoc(p),
 		ctlgBugState.GetDoc(p),
 		ctlgCustomerTaskState.GetDoc(p),
+		ctlgContractState.GetDoc(p),
+		ctlgTechnicalTaskState.GetDoc(p),
+		ctlgTechnicalTaskWorkState.GetDoc(p),
+		ctlgCompletionActState.GetDoc(p),
+		ctlgInvoiceState.GetDoc(p),
 		meeting.GetDoc(p),
 		contract.GetDoc(p),
+		technicalTask.GetDoc(p),
 		counterparty.GetDoc(p),
 		company.GetDoc(p),
 		man.GetDoc(p),
@@ -92,6 +107,9 @@ func getProject() t.ProjectType {
 		digitalSolution.GetDoc(p),
 		functionalRequirement.GetDoc(p),
 		invoice.GetDoc(p),
+		payment.GetDoc(p),
+		completionAct.GetDoc(p),
+		sprint.GetDoc(p),
 		task.GetDoc(p),
 		work.GetDoc(p),
 		customerTask.GetDoc(p),
@@ -114,7 +132,7 @@ func getProject() t.ProjectType {
 	}
 
 	// названием базы маленькими буквами, без пробелов
-	p.Config.Postgres = t.PostrgesConfig{"electron_is", 5646, "ktulhu77", "Europe/Moscow", "12"}
+	p.Config.Postgres = t.PostrgesConfig{DbName: "electron_is", Port: 5646, Password: "ktulhu77", TimeZone: "Europe/Moscow", Version: "12"}
 	p.Config.WebServer = t.WebServerConfig{3091, "https://system.i-electron.ru", "/home/deploy/electron_is", "212.193.59.40", "root", 22}
 	p.Config.Email = t.EmailConfig{"system@i-electron.ru", "Insys12332112", "smtp.yandex.ru", 465, "Electron", false}
 	p.Config.Logo = "image/electron_logo.png"
@@ -130,22 +148,26 @@ func getProject() t.ProjectType {
 
 	// боковое меню для Vue
 	p.Vue.Menu = []t.VueMenu{
+		{DocName: "sprint", Roles: []string{utils.RoleAdmin, ROLE_SPECIALIST, ROLE_CUSTOMER}},
 		{DocName: "system", Roles: []string{utils.RoleAdmin, ROLE_SPECIALIST, ROLE_CUSTOMER}},
 		{DocName: "request", Roles: []string{utils.RoleAdmin, ROLE_SPECIALIST, ROLE_CUSTOMER}},
 		{DocName: "functional_requirement", Roles: []string{utils.RoleAdmin, ROLE_SPECIALIST, ROLE_CUSTOMER}},
-		{DocName: "digital_solution", Roles: []string{utils.RoleAdmin, ROLE_SPECIALIST, ROLE_CUSTOMER}},
+		//{DocName: "digital_solution", Roles: []string{utils.RoleAdmin, ROLE_SPECIALIST, ROLE_CUSTOMER}},
 		{DocName: "task", Roles: []string{utils.RoleAdmin, ROLE_SPECIALIST}},
-		{DocName: "work", Roles: []string{utils.RoleAdmin, ROLE_SPECIALIST}},
-		{DocName: "customer_task", Roles: []string{utils.RoleAdmin, ROLE_CUSTOMER, ROLE_SPECIALIST}},
 		{DocName: "bug", Roles: []string{utils.RoleAdmin, ROLE_CUSTOMER, ROLE_SPECIALIST}},
-		{DocName: "meeting", Roles: []string{utils.RoleAdmin, ROLE_SPECIALIST}},
-		{DocName: "time", Roles: []string{utils.RoleAdmin}},
+		//{DocName: "work", Roles: []string{utils.RoleAdmin, ROLE_SPECIALIST}},
+		//{DocName: "customer_task", Roles: []string{utils.RoleAdmin, ROLE_CUSTOMER, ROLE_SPECIALIST}},
+		//{DocName: "meeting", Roles: []string{utils.RoleAdmin, ROLE_SPECIALIST}},
+		//{DocName: "time", Roles: []string{utils.RoleAdmin}},
 		{DocName: "company", Roles: []string{utils.RoleAdmin}},
-		{DocName: "man", Roles: []string{utils.RoleAdmin}},
+		//{DocName: "man", Roles: []string{utils.RoleAdmin}},
 		{DocName: "counterparty", Roles: []string{utils.RoleAdmin}},
 		{DocName: "contract", Roles: []string{utils.RoleAdmin}},
+		{DocName: "technical_task", Roles: []string{utils.RoleAdmin}},
+		{DocName: "completion_act", Roles: []string{utils.RoleAdmin}},
 		{DocName: "invoice", Roles: []string{utils.RoleAdmin}},
-		{DocName: "news_from_dima", Roles: []string{utils.RoleAdmin}},
+		{DocName: "payment", Roles: []string{utils.RoleAdmin}},
+		//{DocName: "news_from_dima", Roles: []string{utils.RoleAdmin}},
 		{Text: "Справочники", Icon: "image/catalog.svg", IsFolder: true, Roles: []string{utils.RoleAdmin}, LinkList: []t.VueMenu{
 			{Url: "users", Text: "Пользователи", Icon: "image/user.svg"},
 			{Text: "Статусы запросов", Url: "ctlg_request_state"},
@@ -161,6 +183,11 @@ func getProject() t.ProjectType {
 			{Text: "Роли специалистов в делах", Url: "ctlg_work_specialist_role"},
 			{Text: "Статусы задач заказчиков", Url: "ctlg_customer_task_state"},
 			{Text: "Статусы багов", Url: "ctlg_bug_state"},
+			{Text: "Статусы договоров", Url: "ctlg_contract_state"},
+			{Text: "Статусы технических заданий", Url: "ctlg_technical_task_state"},
+			{Text: "Статусы работ по ТЗ", Url: "ctlg_technical_task_work_state"},
+			{Text: "Статусы актов", Url: "ctlg_completion_act_state"},
+			{Text: "Статусы счетов", Url: "ctlg_invoice_state"},
 		}},
 	}
 	p.FillSideMenu()

@@ -5,26 +5,24 @@ $$
 DECLARE
         r record;
 	stateTitle TEXT;
-	customerTitle TEXT;
 	systemTitle TEXT;
+	technicalTaskTitle TEXT;
 	requestTitle TEXT;
-	digitalSolutionTitle TEXT;
 
        searchTxtVar TEXT := '';
 BEGIN
 
         -- заполняем ref поля
 		select title into stateTitle from ctlg_functional_requirement_state where id = new.state_id;
-		select title into customerTitle from company where id = new.customer_id;
 		select title into systemTitle from system where id = new.system_id;
+		select title into technicalTaskTitle from technical_task where id = new.technical_task_id;
 		select title into requestTitle from request where id = new.request_id;
-		select title into digitalSolutionTitle from digital_solution where id = new.digital_solution_id;
         
         -- заполняем options.title
-        NEW.options = coalesce(OLD.options, '{}'::jsonb) || NEW.options || jsonb_build_object('title', jsonb_build_object('title', new.title, 'state_title', stateTitle, 'customer_title', customerTitle, 'system_title', systemTitle, 'request_title', requestTitle, 'digital_solution_title', digitalSolutionTitle));
+        NEW.options = coalesce(OLD.options, '{}'::jsonb) || NEW.options || jsonb_build_object('title', jsonb_build_object('title', new.title, 'state_title', stateTitle, 'system_title', systemTitle, 'technical_task_title', technicalTaskTitle, 'request_title', requestTitle));
         -- заполняем search_text
         
-        NEW.search_text = concat(new.title, ' ', stateTitle, ' ', customerTitle, ' ', systemTitle, ' ', requestTitle, ' ', digitalSolutionTitle, ' ', searchTxtVar);
+        NEW.search_text = concat(new.title, ' ', stateTitle, ' ', systemTitle, ' ', technicalTaskTitle, ' ', requestTitle, ' ', searchTxtVar);
 
         
 

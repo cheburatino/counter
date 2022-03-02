@@ -40,12 +40,6 @@ BEGIN
     
     
     
-    
-    
-    
-    
-    
-    
 
     if (params ->> 'id')::int = -1 then
         -- проверика наличия обязательных параметров
@@ -56,19 +50,22 @@ BEGIN
         END IF;
         
 
-        EXECUTE ('INSERT INTO bug (title, state_id, description, files, images, customer_id, system_id, digital_solution_id, functional_requirement_id, result, options) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)  RETURNING *;')
+        EXECUTE ('INSERT INTO bug (title, paused, state_id, system_id, functional_requirement_id, plan_end_date, fact_end_date, description, files, images, result, result_files, result_images, options) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14)  RETURNING *;')
 		INTO bugRow
 		USING
 			(params ->> 'title')::text,
+			(params ->> 'paused')::bool,
 			(params ->> 'state_id')::int,
+			(params ->> 'system_id')::int,
+			(params ->> 'functional_requirement_id')::int,
+			(params ->> 'plan_end_date')::timestamp,
+			(params ->> 'fact_end_date')::timestamp,
 			(params ->> 'description')::text,
 			(params -> 'files')::jsonb,
 			(params -> 'images')::jsonb,
-			(params ->> 'customer_id')::int,
-			(params ->> 'system_id')::int,
-			(params ->> 'digital_solution_id')::int,
-			(params ->> 'functional_requirement_id')::int,
 			(params ->> 'result')::text,
+			(params -> 'result_files')::jsonb,
+			(params -> 'result_images')::jsonb,
 			coalesce(params -> 'options', '{}')::jsonb;
 
         
@@ -76,15 +73,18 @@ BEGIN
     else
         updateValue = '' || update_str_from_json(params, ARRAY [
 			['title', 'title', 'text'],
+			['paused', 'paused', 'bool'],
 			['state_id', 'state_id', 'number'],
+			['system_id', 'system_id', 'number'],
+			['functional_requirement_id', 'functional_requirement_id', 'number'],
+			['plan_end_date', 'plan_end_date', 'timestamp'],
+			['fact_end_date', 'fact_end_date', 'timestamp'],
 			['description', 'description', 'text'],
 			['files', 'files', 'jsonb'],
 			['images', 'images', 'jsonb'],
-			['customer_id', 'customer_id', 'number'],
-			['system_id', 'system_id', 'number'],
-			['digital_solution_id', 'digital_solution_id', 'number'],
-			['functional_requirement_id', 'functional_requirement_id', 'number'],
 			['result', 'result', 'text'],
+			['result_files', 'result_files', 'jsonb'],
+			['result_images', 'result_images', 'jsonb'],
             ['options', 'options', 'jsonb'],
             ['deleted', 'deleted', 'bool']
             ]);

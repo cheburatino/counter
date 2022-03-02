@@ -142,8 +142,10 @@ const formatPgDate = (d) => {
   return d ? moment(d, 'YYYY-MM-DDTHH:mm:ss').format('DD-MM-YYYY') : null
 }
 
-const formatNumber = (v) => new Intl.NumberFormat('ru-RU', {maximumFractionDigits: 2}).format(v)
-
+const formatNumber = (v, digits) => {
+  if (digits === undefined) digits = 2
+  return new Intl.NumberFormat('ru-RU', {maximumFractionDigits: digits}).format(v)
+}
 const notifySuccess = (msg) => {
   Notify.create({
     color: 'positive',
@@ -161,15 +163,6 @@ const notifyError = (msg) => {
 }
 
 
-const i18n_invoice_state = (v) => {
-	const d = {
-		planned: 'запланирован',
-		transferred: 'выставлен',
-		paid: 'оплачен'
-	}
-	return Array.isArray(v) ? v.map(v1 => d[v1]) : d[v]
-}
-				
 
 export default {
   postApiRequest,
@@ -185,8 +178,7 @@ export default {
   notifySuccess,
   notifyError,
   _,
-  i18n_invoice_state,
-	
+  
 }
 
 const getHttpHeaders = () => {

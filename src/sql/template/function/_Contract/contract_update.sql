@@ -27,6 +27,13 @@ BEGIN
 
     
     
+    
+    
+    
+    
+    
+    
+    
 
     if (params ->> 'id')::int = -1 then
         -- проверика наличия обязательных параметров
@@ -37,10 +44,16 @@ BEGIN
         END IF;
         
 
-        EXECUTE ('INSERT INTO contract (title, options) VALUES ($1, $2)  RETURNING *;')
+        EXECUTE ('INSERT INTO contract (title, date, state_id, counterparty_id, description, draft, signed, options) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)  RETURNING *;')
 		INTO contractRow
 		USING
 			(params ->> 'title')::text,
+			(params ->> 'date')::timestamp,
+			coalesce((params ->> 'state_id')::int, 1)::int,
+			(params ->> 'counterparty_id')::int,
+			(params ->> 'description')::text,
+			(params -> 'draft')::jsonb,
+			(params -> 'signed')::jsonb,
 			coalesce(params -> 'options', '{}')::jsonb;
 
         
@@ -48,6 +61,12 @@ BEGIN
     else
         updateValue = '' || update_str_from_json(params, ARRAY [
 			['title', 'title', 'text'],
+			['date', 'date', 'timestamp'],
+			['state_id', 'state_id', 'number'],
+			['counterparty_id', 'counterparty_id', 'number'],
+			['description', 'description', 'text'],
+			['draft', 'draft', 'jsonb'],
+			['signed', 'signed', 'jsonb'],
             ['options', 'options', 'jsonb'],
             ['deleted', 'deleted', 'bool']
             ]);

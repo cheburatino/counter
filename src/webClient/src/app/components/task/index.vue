@@ -1,6 +1,7 @@
 
 
 <template>
+  хуйня
   <q-page :padding="!isOpenInDialog">
     <comp-breadcrumb class="text-capitalize" v-if="!isOpenInDialog" :list="[{label: $t('task.name_plural'), docType:'task'}]"/>
     <!-- фильтры   -->

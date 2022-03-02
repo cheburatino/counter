@@ -10,6 +10,36 @@
       <div class="col-md-4 col-sm-6 col-xs-12">
           <q-input outlined type='text' v-model="item.title" :label="$t('contract.title')" autogrow :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
       </div>
+      <div class="col-md-2 col-sm-3 col-xs-6">
+          <comp-fld-date outlined :label="$t('contract.date')" :date-string="$utils.formatPgDate(item.date)" @update="v=> item.date = v" :readonly='false'  class='q-mb-sm col-md-2 col-sm-3 col-xs-6' />
+      </div>
+      <div class="col-md-2 col-sm-3 col-xs-6">
+          <comp-fld-ref-search outlined pgMethod="ctlg_contract_state_list" :label="$t('contract.state_id')" :item='item.state_title' :itemId='item.state_id' :ext='{"isClearable":"true"}' @update="v=> item.state_id = v.id" @clear="item.state_id = null" :readonly='false'  class='q-mb-sm col-md-2 col-sm-3 col-xs-6' />
+      </div>
+      </div>
+      
+      <div class="row q-col-gutter-md q-mb-sm">
+      <div class="col-md-4 col-sm-6 col-xs-12">
+          <comp-fld-ref-search outlined pgMethod="counterparty_list" :label="$t('contract.counterparty_id')" :item='item.counterparty_title' :itemId='item.counterparty_id' :ext='{"avatar":"image/counterparty.svg","isClearable":"true","pathUrl":"/counterparty"}' @update="v=> item.counterparty_id = v.id" @clear="item.counterparty_id = null" :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
+      </div>
+      <div class="col-md-4 col-sm-6 col-xs-12">
+          <q-input outlined type='text' v-model="item.description" :label="$t('contract.description')" autogrow :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
+      </div>
+      </div>
+      
+      <div class="row q-col-gutter-md q-mb-sm">
+      <div class="col-md-4 col-sm-6 col-xs-12">
+          <comp-fld-files v-if="this.id != 'new'" fldName='draft' :label="$t('contract.draft')" :fld='item.draft' :ext = '{tableName: "contract", tableId: this.id}' @update="v=> item.draft = v" :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
+      </div>
+      <div class="col-md-4 col-sm-6 col-xs-12">
+          <comp-fld-files v-if="this.id != 'new'" fldName='signed' :label="$t('contract.signed')" :fld='item.signed' :ext = '{tableName: "contract", tableId: this.id}' @update="v=> item.signed = v" :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
+      </div>
+      </div>
+      
+      <div class="row q-col-gutter-md q-mb-sm">
+      <div class="col-md-4 col-sm-6 col-xs-12">
+          <technical-task-list-ref-list-widget v-if='item.id != -1' :id='item.id' :readonly='false'/>
+      </div>
       </div>
       
 
@@ -25,11 +55,11 @@
 </template>
 
 <script>
-
+	import technicalTaskListRefListWidget from './comp/technicalTaskListRefListWidget.vue'
     import currentUserMixin from '../../../app/mixins/currentUser'
     export default {
         props: ['id', 'isOpenInDialog'],
-        components: {},
+        components: {technicalTaskListRefListWidget},
         mixins: [currentUserMixin,],
         computed: {
             docUrl: function() {
@@ -41,6 +71,12 @@
                 item: null,
                 flds: [
                         {name: 'title', label: 'название',  required: true},
+                        {name: 'date', label: 'дата'},
+                        {name: 'state_id', label: 'статус'},
+                        {name: 'counterparty_id', label: 'контрагент'},
+                        {name: 'description', label: 'описание'},
+                        {name: 'draft', label: 'черновик'},
+                        {name: 'signed', label: 'подписанный'},
                 ],
                 optionsFlds: [],
                 

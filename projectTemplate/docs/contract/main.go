@@ -21,6 +21,12 @@ func GetDoc(project *t.ProjectType) t.DocType {
 		PathPrefix: "docs",
 		Flds: []t.FldType{
 			t.GetFldTitle(),
+			t.GetFldDate("date", "дата", [][]int{{1, 2}}, "col-2"),
+			t.GetFldRef("state_id", "статус", "ctlg_contract_state", [][]int{{1, 3}}, "col-2", "isClearable").SetDefault("1"),
+			t.GetFldRef("counterparty_id", "контрагент", "counterparty", [][]int{{2, 1}}, "isShowLink", "isClearable"),
+			t.GetFldString("description", "описание", 0, [][]int{{2, 2}}),
+			t.GetFldFiles("draft", "черновик", [][]int{{3, 1}}, t.FldVueFilesParams{}),
+			t.GetFldFiles("signed", "подписанный", [][]int{{3, 2}}, t.FldVueFilesParams{}),
 		},
 		Vue: t.DocVue{
 			RouteName:      name,
@@ -46,6 +52,21 @@ func GetDoc(project *t.ProjectType) t.DocType {
 	}
 
 	doc.Init()
+
+	doc.AddFld(t.GetFldVueCompositionRefList(&doc, t.VueCompRefListWidgetParams{
+		Label:      "технические задания",              // название списка, которе выводится на экране
+		FldName:    "technical_task_list",           // название поля. Любое, в формате snake_case. На основе этого названия формируется название компоненты во vue.
+		TableName:  "technical_task",                // название связанной таблицы, из которой будут выгружаться записи
+		RefFldName: "contract_id", // название поля в связанной таблицы, по которому осуществляется связь
+		Avatar:     "image/technical_task.svg",      // иконка, которая выводится в списке
+		NewFlds: []t.FldType{
+			t.GetFldString("title", "название", 300, [][]int{{1, 1}}).SetIsRequired(),
+		}, // список полей, которые заполняются при добавлении новой записи
+		TitleTemplate: `
+                <q-item-label>{{v.title}}</q-item-label>
+                <q-item-label caption><q-badge color="orange">{{v.options.title.state_title}}</q-badge></q-item-label>
+            `, // шаблон для названия в списке (vue синтаксис)
+	}, [][]int{{4, 1}}, "col-4"))
 
 	return doc
 }

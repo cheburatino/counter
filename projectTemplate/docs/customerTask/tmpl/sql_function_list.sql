@@ -34,7 +34,9 @@ BEGIN
 		['notQuoted', 'state_id', 'doc.state_id'],
 		['notQuoted', 'digital_solution_id', 'doc.digital_solution_id'],
 		['notQuoted', 'company_id', 'doc.company_id'],
-		['notQuoted', 'author_id', 'doc.author_id']
+		['notQuoted', 'author_id', 'doc.author_id'],
+		['notQuoted', 'functional_requirement_id', 'doc.functional_requirement_id'],
+		['notQuoted', 'bug_id', 'doc.bug_id']
     ]);
 
     -- для admin ограничений нет

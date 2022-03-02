@@ -47,10 +47,6 @@ BEGIN
     
     
     
-    
-    
-    
-    
 
     if (params ->> 'id')::int = -1 then
         -- проверика наличия обязательных параметров
@@ -61,25 +57,30 @@ BEGIN
         END IF;
         
 
-        EXECUTE ('INSERT INTO task (title, type_id, state_id, description, files, images, customer_id, request_id, system_id, digital_solution_id, functional_requirement_id, bug_id, plan_start_date, plan_end_date, result, priority, options) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17)  RETURNING *;')
+        EXECUTE ('INSERT INTO task (title, type_id, needs_discusion, state_id, system_id, sprint_id, functional_requirement_id, bug_id, estimate, worked_time, plan_end_date, fact_end_date, description, files, images, process, process_files, process_images, result, result_files, result_images, options) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21, $22)  RETURNING *;')
 		INTO taskRow
 		USING
 			(params ->> 'title')::text,
 			(params ->> 'type_id')::int,
+			coalesce((params ->> 'needs_discusion')::bool, false)::bool,
 			coalesce((params ->> 'state_id')::int, 1)::int,
+			(params ->> 'system_id')::int,
+			(params ->> 'sprint_id')::int,
+			(params ->> 'functional_requirement_id')::int,
+			(params ->> 'bug_id')::int,
+			(params ->> 'estimate')::int,
+			(params ->> 'worked_time')::int,
+			(params ->> 'plan_end_date')::timestamp,
+			(params ->> 'fact_end_date')::timestamp,
 			(params ->> 'description')::text,
 			(params -> 'files')::jsonb,
 			(params -> 'images')::jsonb,
-			(params ->> 'customer_id')::int,
-			(params ->> 'request_id')::int,
-			(params ->> 'system_id')::int,
-			(params ->> 'digital_solution_id')::int,
-			(params ->> 'functional_requirement_id')::int,
-			(params ->> 'bug_id')::int,
-			(params ->> 'plan_start_date')::timestamp,
-			(params ->> 'plan_end_date')::timestamp,
+			(params ->> 'process')::text,
+			(params -> 'process_files')::jsonb,
+			(params -> 'process_images')::jsonb,
 			(params ->> 'result')::text,
-			(params ->> 'priority')::int,
+			(params -> 'result_files')::jsonb,
+			(params -> 'result_images')::jsonb,
 			coalesce(params -> 'options', '{}')::jsonb;
 
         
@@ -88,20 +89,25 @@ BEGIN
         updateValue = '' || update_str_from_json(params, ARRAY [
 			['title', 'title', 'text'],
 			['type_id', 'type_id', 'number'],
+			['needs_discusion', 'needs_discusion', 'bool'],
 			['state_id', 'state_id', 'number'],
+			['system_id', 'system_id', 'number'],
+			['sprint_id', 'sprint_id', 'number'],
+			['functional_requirement_id', 'functional_requirement_id', 'number'],
+			['bug_id', 'bug_id', 'number'],
+			['estimate', 'estimate', 'number'],
+			['worked_time', 'worked_time', 'number'],
+			['plan_end_date', 'plan_end_date', 'timestamp'],
+			['fact_end_date', 'fact_end_date', 'timestamp'],
 			['description', 'description', 'text'],
 			['files', 'files', 'jsonb'],
 			['images', 'images', 'jsonb'],
-			['customer_id', 'customer_id', 'number'],
-			['request_id', 'request_id', 'number'],
-			['system_id', 'system_id', 'number'],
-			['digital_solution_id', 'digital_solution_id', 'number'],
-			['functional_requirement_id', 'functional_requirement_id', 'number'],
-			['bug_id', 'bug_id', 'number'],
-			['plan_start_date', 'plan_start_date', 'timestamp'],
-			['plan_end_date', 'plan_end_date', 'timestamp'],
+			['process', 'process', 'text'],
+			['process_files', 'process_files', 'jsonb'],
+			['process_images', 'process_images', 'jsonb'],
 			['result', 'result', 'text'],
-			['priority', 'priority', 'number'],
+			['result_files', 'result_files', 'jsonb'],
+			['result_images', 'result_images', 'jsonb'],
             ['options', 'options', 'jsonb'],
             ['deleted', 'deleted', 'bool']
             ]);

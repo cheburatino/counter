@@ -10,11 +10,8 @@ BEGIN
 IF (TG_OP = 'UPDATE') THEN
 -- при смене названия обновляем все ссылающиеся записи, чтобы там переписалось новое название
 if new.title != old.title then
- for r in select * from invoice where payer_id = new.id loop
- update invoice set updated_at=now() where id = r.id;
- end loop;
- for r in select * from invoice where recipient_id = new.id loop
- update invoice set updated_at=now() where id = r.id;
+ for r in select * from contract where counterparty_id = new.id loop
+ update contract set updated_at=now() where id = r.id;
  end loop;
 
  end if;
