@@ -1,12 +1,12 @@
 
 export default {
- 		title: 'title',
- 		state_id: 'state ',
- 		technical_task_id: 'technical task ',
+ 		date: 'date',
+ 		draft: 'draft',
  		name: 'completion act',
  		name_plural_deleted: 'deleted completion act',
- 		draft: 'draft',
+ 		title: 'title',
  		signed: 'signed',
  		name_plural: 'completion act',
- 		date: 'date',
+ 		state_id: 'state ',
+ 		technical_task_id: 'technical task ',
 }

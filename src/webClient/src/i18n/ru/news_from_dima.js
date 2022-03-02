@@ -1,12 +1,12 @@
 
 export default {
- 		name_plural: 'Новости от Димы',
- 		familiarized: 'ознакомился',
- 		file: 'файлы',
- 		image: 'картинки',
- 		name: 'новость от Димы',
  		title: 'название',
- 		description: 'описание',
+ 		image: 'картинки',
  		conclusion: 'выводы',
+ 		name: 'новость от Димы',
+ 		name_plural: 'Новости от Димы',
+ 		description: 'описание',
+ 		file: 'файлы',
  		name_plural_deleted: 'удаленные Новости от Димы',
+ 		familiarized: 'ознакомился',
 }
