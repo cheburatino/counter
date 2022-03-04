@@ -9,8 +9,9 @@ type Postgres struct {
 }
 
 type GraylogConfig struct {
-	Host string
-	Port int
+	Host    string
+	Port    int
+	AppName string
 }
 
 type WebServer struct {
@@ -19,18 +20,11 @@ type WebServer struct {
 	Url    string
 }
 type EmailConfig struct {
-	Sender     string // email отправителя
-	Password   string
-	Host       string
-	Port       int64
-	SenderName string //название отправителя
-	SenderLogo string
+	Sender                string // email отправителя
+	Password              string
+	Host                  string
+	Port                  int64
+	SenderName            string //название отправителя
+	SenderLogo            string
 	IsSendWithEmptySender bool // признак что не прописывать отправителя
 }
-
-
-
-
-
-
-

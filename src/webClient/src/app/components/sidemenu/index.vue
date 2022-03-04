@@ -109,6 +109,7 @@
 								{icon: '', text: 'Статусы работ по ТЗ', url: '/ctlg_technical_task_work_state', roles: []},
 								{icon: '', text: 'Статусы актов', url: '/ctlg_completion_act_state', roles: []},
 								{icon: '', text: 'Статусы счетов', url: '/ctlg_invoice_state', roles: []},
+								{icon: '', text: 'Фильтры', url: '/ctlg_filter', roles: []},
 ],},
 
                 ],

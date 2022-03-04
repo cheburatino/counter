@@ -138,8 +138,8 @@ const formatPgDateTime = (d) => {
   return d ? moment(d, 'YYYY-MM-DDTHH:mm:ss').format('DD-MM-YYYY HH:mm') : null
 }
 
-const formatPgDate = (d) => {
-  return d ? moment(d, 'YYYY-MM-DDTHH:mm:ss').format('DD-MM-YYYY') : null
+const formatPgDate = (d, formatStr) => {
+  return d ? moment(d, 'YYYY-MM-DDTHH:mm:ss').locale('ru').format(formatStr ? formatStr :'DD-MM-YYYY') : null
 }
 
 const formatNumber = (v, digits) => {
@@ -163,6 +163,14 @@ const notifyError = (msg) => {
 }
 
 
+const i18n_ctlg_filter_index = (v) => {
+	const d = {
+		task: 'задачи',
+		functional_requirement: 'функциональные требования'
+	}
+	return Array.isArray(v) ? v.map(v1 => d[v1]) : d[v]
+}
+				
 
 export default {
   postApiRequest,
@@ -178,7 +186,8 @@ export default {
   notifySuccess,
   notifyError,
   _,
-  
+  i18n_ctlg_filter_index,
+	
 }
 
 const getHttpHeaders = () => {

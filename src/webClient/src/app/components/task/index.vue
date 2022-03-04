@@ -23,7 +23,7 @@
                    search-fld-name="search_text" :readonly="false">
 
       <template #addFilterSlot>
-        <div style="display: flex; width: 100%; justify-content: space-between;">
+        <div style="display: flex; width: 100%; justify-content: space-between; flex-wrap: wrap;">
           <q-input
               id="sqlInput"
               @keydown="keydownHandler"
@@ -33,6 +33,7 @@
               label="Условия фильтра"
               input-class="text-left"
           />
+          <q-btn color="black" label="Front" @click="() => this.sqlRest = this.sqlRest + ' and (state_id = 1 or state_id = 2) and type_id = 2'" />
 <!--          <q-btn push color="white" text-color="primary" label="Push" @click="sqlRestBtnClickHandler" />-->
         </div>
       </template>

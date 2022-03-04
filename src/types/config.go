@@ -1,10 +1,10 @@
 package types
 
 import (
+	"fmt"
 	"github.com/pelletier/go-toml"
 	"os"
 	"strconv"
-	"fmt"
 )
 
 type Config struct {
@@ -15,9 +15,6 @@ type Config struct {
 	Graylog GraylogConfig
 
 	Email EmailConfig
-	
-	
-	
 }
 
 func ReadConfigFile(path string) (c *Config, err error) {
@@ -86,6 +83,9 @@ func ReadConfigFile(path string) (c *Config, err error) {
 		if tree.Has("graylog.port") {
 			c.Graylog.Port = int(tree.Get("graylog.port").(int64))
 		}
+		if tree.Has("graylog.appName") {
+			c.Graylog.AppName = tree.Get("graylog.appName").(string)
+		}
 	}
 
 	if tree.Has("email") {
@@ -122,11 +122,6 @@ func ReadConfigFile(path string) (c *Config, err error) {
 			c.Email.IsSendWithEmptySender = tree.Get("email.isSendWithEmptySender").(bool)
 		}
 	}
-	
-
-	
-
-	
 
 	return
 }
