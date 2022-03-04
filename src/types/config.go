@@ -15,9 +15,6 @@ type Config struct {
 	Graylog GraylogConfig
 
 	Email EmailConfig
-
-
-
 }
 
 func ReadConfigFile(path string) (c *Config, err error) {
@@ -126,10 +123,5 @@ func ReadConfigFile(path string) (c *Config, err error) {
 		}
 	}
 
-
-
-
-
-
-return
+	return
 }

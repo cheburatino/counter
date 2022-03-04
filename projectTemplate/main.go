@@ -16,6 +16,7 @@ import (
 	"github.com/cheburatino/electron_is/projectTemplate/docs/ctlgDigitalSolutionSpecialistRole"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/ctlgDigitalSolutionState"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/ctlgElectronSkill"
+	ctlgFilter "github.com/cheburatino/electron_is/projectTemplate/docs/ctlgFilters"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/ctlgFunctionalRequirementSpecialistRole"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/ctlgFunctionalRequirementState"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/ctlgInvoiceState"
@@ -96,6 +97,7 @@ func getProject() t.ProjectType {
 		ctlgTechnicalTaskWorkState.GetDoc(p),
 		ctlgCompletionActState.GetDoc(p),
 		ctlgInvoiceState.GetDoc(p),
+		ctlgFilter.GetDoc(p),
 		meeting.GetDoc(p),
 		contract.GetDoc(p),
 		technicalTask.GetDoc(p),
@@ -188,6 +190,7 @@ func getProject() t.ProjectType {
 			{Text: "Статусы работ по ТЗ", Url: "ctlg_technical_task_work_state"},
 			{Text: "Статусы актов", Url: "ctlg_completion_act_state"},
 			{Text: "Статусы счетов", Url: "ctlg_invoice_state"},
+			{Text: "Фильтры", Url: "ctlg_filter"},
 		}},
 	}
 	p.FillSideMenu()

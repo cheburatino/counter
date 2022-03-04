@@ -9,6 +9,9 @@ BEGIN
 IF (TG_OP = 'UPDATE') THEN
 -- при смене имени и аватарки обновляем все ссылающиеся записи, чтобы там переписалось новое название
 if new.fullname != old.fullname OR new.avatar != old.avatar then
+ for r in select * from ctlg_filter where user_table_id = new.id loop
+ update ctlg_filter set updated_at=now() where id = r.id;
+ end loop;
  for r in select * from man where user_table_id = new.id loop
  update man set updated_at=now() where id = r.id;
  end loop;

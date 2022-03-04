@@ -143,6 +143,7 @@
 </template>
 
 <script>
+	import compCustomer from './comp/customer.vue'
 	import compResult from './comp/result.vue'
 	import taskListRefListWidget from './comp/taskListRefListWidget.vue'
 	import customerTaskListRefListWidget from './comp/customerTaskListRefListWidget.vue'
@@ -150,11 +151,10 @@
 	import compCustomerAgent from './comp/customerAgent.vue'
 	import compRelation from './comp/relation.vue'
 	import compExecutor from './comp/executor.vue'
-	import compCustomer from './comp/customer.vue'
     import currentUserMixin from '../../../app/mixins/currentUser'
     export default {
         props: ['id', 'isOpenInDialog'],
-        components: {compCustomer, compResult, taskListRefListWidget, customerTaskListRefListWidget, ftListRefListWidget, compCustomerAgent, compRelation, compExecutor},
+        components: {ftListRefListWidget, compCustomerAgent, compRelation, compExecutor, compCustomer, compResult, taskListRefListWidget, customerTaskListRefListWidget},
         mixins: [currentUserMixin,],
         computed: {
             docUrl: function() {
