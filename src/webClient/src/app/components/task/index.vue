@@ -19,11 +19,11 @@
     <comp-doc-list ref="docList" :listTitle="$t('task.name_plural')" :listDeletedTitle="$t('task.name_plural_deleted')" pg-method="task_list"
                    :list-sort-data="listSortData" :list-filter-data="listFilterData"
                    :newDocUrl="currentUrl + 'new'"
-                   :ext="ext" 
+                   :ext="ext"
                    search-fld-name="search_text" :readonly="false">
 
       <template #addFilterSlot>
-        <div style="display: flex; width: 100%; justify-content: space-between;">
+        <div style="display: flex; width: 100%; justify-content: space-between; flex-wrap: wrap;">
           <q-input
               id="sqlInput"
               @keydown="keydownHandler"
@@ -33,12 +33,13 @@
               label="Условия фильтра"
               input-class="text-left"
           />
+          <q-btn color="black" label="Front" @click="() => this.sqlRest = this.sqlRest + ' and (state_id = 1 or state_id = 2) and type_id = 2'" />
 <!--          <q-btn push color="white" text-color="primary" label="Push" @click="sqlRestBtnClickHandler" />-->
         </div>
       </template>
 
       <template #listItem="{item}">
-        
+
 		<router-link :to="currentUrl + item.id" style="cursor: pointer">
 			<q-item-section avatar>
 			  <q-avatar rounded>
@@ -46,13 +47,13 @@
 			  </q-avatar>
 			</q-item-section>
 		</router-link>
-	
-        
+
+
 				 <q-item-section>
 				    <q-item-label lines="1">{{item.title}}</q-item-label>
 					<q-item-label caption><q-badge color="orange">{{item.options.title.state_title}}</q-badge> <q-badge>{{item.options.title.system_title}}</q-badge></q-item-label>
 				 </q-item-section>
-			
+
         <q-item-section top side>
           <comp-item-dropdown-btn :item="item" itemProp="title" :is-edit="true" :is-delete="!(false || false)" fkProp=""
                                   pg-method="task_update"
@@ -109,6 +110,8 @@
       },
       keydownHandler(e) {
         if (e.keyCode == 13) {
+          console.log('id: ', this.currentUser.id)
+          // console.log('currentUserMixin: ', currentUserMixin)
           this.sqlRestBtnClickHandler()
         }
       },

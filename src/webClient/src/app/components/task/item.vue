@@ -13,11 +13,11 @@
       <div class="col-md-2 col-sm-3 col-xs-6">
           <comp-fld-ref-search outlined pgMethod="ctlg_task_type_list" :label="$t('task.type_id')" :item='item.type_title' :itemId='item.type_id' :ext='{}' @update="v=> item.type_id = v.id" @clear="item.type_id = null" :readonly='false'  class='q-mb-sm col-md-2 col-sm-3 col-xs-6' />
       </div>
-      <div class="col-1">
-          <q-checkbox :label="$t('task.needs_discusion')" v-model='item.needs_discusion' :disable='false' :false-value='false' indeterminate-value='some'  class='q-mb-sm col-1' />
+      <div class="col-md-1 col-sm-2 col-xs-6">
+          <q-checkbox :label="$t('task.needs_discusion')" v-model='item.needs_discusion' :disable='false' :false-value='false' indeterminate-value='some'  class='q-mb-sm col-md-1 col-sm-2 col-xs-6' />
       </div>
-      <div class="col-1">
-          <comp-fld-ref-search outlined pgMethod="ctlg_task_state_list" :label="$t('task.state_id')" :item='item.state_title' :itemId='item.state_id' :ext='{}' @update="v=> item.state_id = v.id" @clear="item.state_id = null" :readonly='false'  class='q-mb-sm col-1' />
+      <div class="col-md-1 col-sm-2 col-xs-6">
+          <comp-fld-ref-search outlined pgMethod="ctlg_task_state_list" :label="$t('task.state_id')" :item='item.state_title' :itemId='item.state_id' :ext='{}' @update="v=> item.state_id = v.id" @clear="item.state_id = null" :readonly='false'  class='q-mb-sm col-md-1 col-sm-2 col-xs-6' />
       </div>
       </div>
       

@@ -19,11 +19,11 @@
       </div>
       
       <div class="row q-col-gutter-md q-mb-sm">
-      <div class="col-1">
-          <q-input outlined type='number' v-model="item.number" :label="$t('technical_task.number')" :readonly='false'  class='q-mb-sm col-1' />
+      <div class="col-md-1 col-sm-2 col-xs-6">
+          <q-input outlined type='number' v-model="item.number" :label="$t('technical_task.number')" :readonly='false'  class='q-mb-sm col-md-1 col-sm-2 col-xs-6' />
       </div>
-      <div class="col-1">
-          <q-input outlined type='number' v-model="item.amount" :label="$t('technical_task.amount')" :readonly='false'  class='q-mb-sm col-1' />
+      <div class="col-md-1 col-sm-2 col-xs-6">
+          <q-input outlined type='number' v-model="item.amount" :label="$t('technical_task.amount')" :readonly='false'  class='q-mb-sm col-md-1 col-sm-2 col-xs-6' />
       </div>
       <div class="col-md-2 col-sm-3 col-xs-6">
           <comp-fld-date outlined :label="$t('technical_task.date')" :date-string="$utils.formatPgDate(item.date)" @update="v=> item.date = v" :readonly='false'  class='q-mb-sm col-md-2 col-sm-3 col-xs-6' />
@@ -73,9 +73,9 @@
 </template>
 
 <script>
-	import completionActListRefListWidget from './comp/completionActListRefListWidget.vue'
 	import invoiceListRefListWidget from './comp/invoiceListRefListWidget.vue'
 	import functionalRequirementListRefListWidget from './comp/functionalRequirementListRefListWidget.vue'
+	import completionActListRefListWidget from './comp/completionActListRefListWidget.vue'
     import currentUserMixin from '../../../app/mixins/currentUser'
     export default {
         props: ['id', 'isOpenInDialog'],

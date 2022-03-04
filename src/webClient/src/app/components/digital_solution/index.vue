@@ -5,10 +5,10 @@
     <comp-breadcrumb class="text-capitalize" v-if="!isOpenInDialog" :list="[{label: $t('digital_solution.name_plural'), docType:'digital_solution'}]"/>
     <!-- фильтры   -->
     <div class="row q-mt-sm q-col-gutter-sm">
-        <div class="">
+        <div class=" col-md-2 col-sm-4 col-xs-6">
           <comp-fld-ref-search dense outlined pgMethod="ctlg_digital_solution_state_list" label="" :item='filterCtlgDigitalSolutionStateTitle' :itemId='filterCtlgDigitalSolutionStateId' :ext='{isClearable: true}'  @update="updateFilterCtlgDigitalSolutionState" @clear="updateFilterCtlgDigitalSolutionState"  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
         </div>
-        <div class="">
+        <div class=" col-md-2 col-sm-4 col-xs-6">
           <comp-fld-ref-search dense outlined pgMethod="system_list" label="" :item='filterSystemTitle' :itemId='filterSystemId' :ext='{isClearable: true}'  @update="updateFilterSystem" @clear="updateFilterSystem"  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
         </div>
     </div>
@@ -60,7 +60,7 @@
       return {
         listSortData: [
           {value: 'created_at', title: 'Дата'},
-          {value: 'title', title: 'Название'}
+          {value: 'title', title: 'Название'},
         ],
         listFilterData: [
           {value: {deleted: false}, title: 'Активные'},
