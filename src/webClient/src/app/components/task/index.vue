@@ -33,7 +33,15 @@
               label="Условия фильтра"
               input-class="text-left"
           />
-          <q-btn color="black" label="Front" @click="() => this.sqlRest = this.sqlRest + ' and (state_id = 1 or state_id = 2) and type_id = 2'" />
+          <div style="display: flex; justify-content: space-between; width: 100%; padding: 5px;">
+            <div>
+              <q-btn v-for="item in filterList" :key="item.id" color="white" style="margin-right: 5px; margin-bottom: 5px;" text-color="primary" :label="item.title" @click="filterStringAssembly(item.where_str)" @mousedown="mousedownOnFilter" @mouseup="mouseupOnFilter(item)" @dblclick="dblClickOnFilter(item)" />
+            </div>
+            <div>
+              <q-btn color="black" text-color="primary" label="+" @click="openCreateFilterModal" />
+            </div>
+
+          </div>
 <!--          <q-btn push color="white" text-color="primary" label="Push" @click="sqlRestBtnClickHandler" />-->
         </div>
       </template>
@@ -63,6 +71,74 @@
       </template>
 
     </comp-doc-list>
+    <q-dialog v-model="isCreateFilterModal" transition-show="rotate" transition-hide="rotate" persistent>
+      <q-card style="min-width: 350px">
+        <q-card-section>
+          <div class="text-h6">Добавление нового фильтра</div>
+        </q-card-section>
+
+        <q-card-section>
+          <div class="text-h8">Название фильтра:</div>
+        </q-card-section>
+
+        <q-card-section class="q-pt-none">
+          <q-input dense v-model="newFilterTitle" autofocus @keyup.enter="closeCreateFilterModal" />
+        </q-card-section>
+
+        <q-card-section>
+          <div class="text-h8">Условия фильтра:</div>
+        </q-card-section>
+
+        <q-card-section class="q-pt-none">
+          <q-input dense v-model="newFilterСondition" autofocus @keyup.enter="closeCreateFilterModal" />
+        </q-card-section>
+
+        <q-card-actions align="right" class="text-primary">
+          <q-btn flat label="Cancel" v-close-popup />
+          <q-btn flat label="Add filter" @click="createFilter" />
+        </q-card-actions>
+      </q-card>
+    </q-dialog>
+    <q-dialog v-model="isEditFilterModal" transition-show="rotate" transition-hide="rotate" persistent>
+      <q-card style="min-width: 350px">
+        <q-card-section>
+          <div class="text-h6">Редактирование фильтра</div>
+        </q-card-section>
+
+        <q-card-section>
+          <div class="text-h8">Название фильтра:</div>
+        </q-card-section>
+
+        <q-card-section class="q-pt-none">
+          <q-input dense v-model="editFilterTitle" autofocus @keyup.enter="() => this.isEditFilterModal = false" />
+        </q-card-section>
+
+        <q-card-section>
+          <div class="text-h8">Условия фильтра:</div>
+        </q-card-section>
+
+        <q-card-section class="q-pt-none">
+          <q-input dense v-model="editFilterСondition" autofocus @keyup.enter="() => this.isEditFilterModal = false" />
+        </q-card-section>
+
+        <q-card-actions align="right" class="text-primary">
+          <q-btn flat label="Cancel" v-close-popup />
+          <q-btn flat label="Edit filter" @click="editFilter" />
+        </q-card-actions>
+      </q-card>
+    </q-dialog>
+    <q-dialog v-model="isDeleteFilterModal" transition-show="rotate" transition-hide="rotate" persistent>
+      <q-card>
+        <q-card-section class="row items-center">
+          <span class="q-ml-sm">Хотите удалить фильтр "{{curFilter.title}}"?</span>
+        </q-card-section>
+
+        <q-card-actions align="right">
+          <q-btn flat label="Cancel" color="primary" v-close-popup />
+          <q-btn flat label="Delete" color="primary" @click="deleteFilter" />
+        </q-card-actions>
+      </q-card>
+    </q-dialog>
   </q-page>
 </template>
 
@@ -92,10 +168,117 @@
         filterDigitalSolutionId: null,
         sqlRest: 'state_id != 4',
         sqlRestList: [],
-        active: true
+        active: true,
+        isCreateFilterModal: false,
+        newFilterTitle: '',
+        newFilterСondition: '',
+        filterList: [],
+        ismousedownOnFilter: false,
+        mouseFlag: false,
+        isDeleteFilterModal: false,
+        curFilter: '',
+        filterLoading: false,
+        isEditFilterModal: false,
+        editFilterTitle: '',
+        editFilterСondition: ''
+
       }
     },
     methods: {
+      dblClickOnFilter(item) {
+        this.curFilter = item
+        this.isEditFilterModal = true
+        this.editFilterTitle = item.title
+        this.editFilterСondition = item.where_str
+      },
+      mousedownOnFilter() {
+        if (this.filterLoading) return
+        this.filterLoading = true
+        this.mouseFlag = false
+        setTimeout(() => {
+          this.mouseFlag = true
+          this.filterLoading = false
+        }, 1500)
+      },
+      mouseupOnFilter(item) {
+        if (!this.mouseFlag) return
+        this.isDeleteFilterModal = true
+        this.curFilter = item
+      },
+      filterStringAssembly(where_str) {
+        if (this.mouseFlag) return
+        this.sqlRest = where_str
+      },
+      createFilter() {
+        this.$utils.postCallPgMethod({
+          method: 'ctlg_filter_update',
+          params: {
+            id: -1,
+            title: this.newFilterTitle,
+            index: 'task',
+            where_str: this.newFilterСondition,
+            user_table_id: this.currentUser.id
+          }
+        }).subscribe(v => {
+          if (v.ok) {
+            this.loadFilterList()
+            this.closeCreateFilterModal()
+          }
+        })
+      },
+      deleteFilter() {
+        this.$utils.postCallPgMethod({
+          method: 'ctlg_filter_update',
+          params: {
+            id: this.curFilter.id,
+            deleted: true,
+          }
+        }).subscribe(v => {
+          if (v.ok) {
+            this.loadFilterList()
+            this.isDeleteFilterModal = false
+          }
+        })
+      },
+      editFilter() {
+        this.$utils.postCallPgMethod({
+          method: 'ctlg_filter_update',
+          params: {
+            id: this.curFilter.id,
+            title: this.editFilterTitle,
+            index: 'task',
+            where_str: this.editFilterСondition,
+            user_table_id: this.currentUser.id
+          }
+        }).subscribe(v => {
+          if (v.ok) {
+            this.loadFilterList()
+            this.isEditFilterModal = false
+          }
+        })
+      },
+      loadFilterList() {
+        this.$utils.postCallPgMethod({
+          method: 'ctlg_filter_list',
+          params: {
+            user_table_id: this.currentUser.id,
+            index: 'task',
+          }
+        }).subscribe(v => {
+          if (v.ok) {
+            console.log('filterList: ', v.result)
+            this.filterList = v.result
+          }
+        })
+      },
+      openCreateFilterModal() {
+        this.isCreateFilterModal = true
+      },
+      closeCreateFilterModal() {
+        this.isCreateFilterModal = false
+        this.newFilterTitle = ''
+        this.newFilterСondition = ''
+      },
       sqlRestBtnClickHandler() {
         // let sqlRestParams = {
         //   where_param: this.sqlRest
@@ -168,6 +351,7 @@
       }
 
       this.sqlRestBtnClickHandler()
+      this.loadFilterList()
 
     }
   }

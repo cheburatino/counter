@@ -28,3 +28,8 @@ type EmailConfig struct {
 	SenderLogo            string
 	IsSendWithEmptySender bool // признак что не прописывать отправителя
 }
+
+
+
+
+

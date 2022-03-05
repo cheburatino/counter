@@ -4,10 +4,10 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
+	"github.com/gin-gonic/gin"
 	"github.com/cheburatino/electron_is/src/pg"
 	"github.com/cheburatino/electron_is/src/types"
 	"github.com/cheburatino/electron_is/src/utils"
-	"github.com/gin-gonic/gin"
 	"github.com/tidwall/gjson"
 	"net/http"
 	"strings"
@@ -34,16 +34,16 @@ type (
 var (
 	pgFuncCache = map[string]pgFuncCacheType{}
 	pgFuncList  = []PgMethod{
-		PgMethod{"user_update", []string{"admin"}, nil, nil},
+		PgMethod{"user_update", []string{"admin",}, nil, nil},
 		PgMethod{"user_list", []string{}, nil, nil},
 		PgMethod{"user_get_by_id", []string{}, nil, BeforeHookAddUserId},
 		PgMethod{"user_get_by_id_for_ui", []string{}, nil, BeforeHookAddUserId},
 		PgMethod{"current_user_update", []string{}, nil, BeforeHookAddUserId},
 		PgMethod{"current_user_get_auth_providers", []string{}, nil, BeforeHookAddUserId},
-
+		
+		PgMethod{"ctlg_electron_skill_list", []string{}, nil, BeforeHookAddUserId},
 		PgMethod{"ctlg_electron_skill_update", []string{}, nil, BeforeHookAddUserId},
 		PgMethod{"ctlg_electron_skill_get_by_id", []string{}, nil, BeforeHookAddUserId},
-		PgMethod{"ctlg_electron_skill_list", []string{}, nil, BeforeHookAddUserId},
 		PgMethod{"ctlg_request_state_list", []string{}, nil, BeforeHookAddUserId},
 		PgMethod{"ctlg_request_state_update", []string{}, nil, BeforeHookAddUserId},
 		PgMethod{"ctlg_request_state_get_by_id", []string{}, nil, BeforeHookAddUserId},
@@ -68,24 +68,24 @@ var (
 		PgMethod{"ctlg_task_type_list", []string{}, nil, BeforeHookAddUserId},
 		PgMethod{"ctlg_task_type_update", []string{}, nil, BeforeHookAddUserId},
 		PgMethod{"ctlg_task_type_get_by_id", []string{}, nil, BeforeHookAddUserId},
+		PgMethod{"ctlg_task_state_get_by_id", []string{}, nil, BeforeHookAddUserId},
 		PgMethod{"ctlg_task_state_list", []string{}, nil, BeforeHookAddUserId},
 		PgMethod{"ctlg_task_state_update", []string{}, nil, BeforeHookAddUserId},
-		PgMethod{"ctlg_task_state_get_by_id", []string{}, nil, BeforeHookAddUserId},
-		PgMethod{"ctlg_task_role_list", []string{}, nil, BeforeHookAddUserId},
 		PgMethod{"ctlg_task_role_update", []string{}, nil, BeforeHookAddUserId},
 		PgMethod{"ctlg_task_role_get_by_id", []string{}, nil, BeforeHookAddUserId},
+		PgMethod{"ctlg_task_role_list", []string{}, nil, BeforeHookAddUserId},
 		PgMethod{"ctlg_work_state_list", []string{}, nil, BeforeHookAddUserId},
 		PgMethod{"ctlg_work_state_update", []string{}, nil, BeforeHookAddUserId},
 		PgMethod{"ctlg_work_state_get_by_id", []string{}, nil, BeforeHookAddUserId},
 		PgMethod{"ctlg_work_specialist_role_list", []string{}, nil, BeforeHookAddUserId},
 		PgMethod{"ctlg_work_specialist_role_update", []string{}, nil, BeforeHookAddUserId},
 		PgMethod{"ctlg_work_specialist_role_get_by_id", []string{}, nil, BeforeHookAddUserId},
-		PgMethod{"ctlg_bug_state_get_by_id", []string{}, nil, BeforeHookAddUserId},
 		PgMethod{"ctlg_bug_state_list", []string{}, nil, BeforeHookAddUserId},
 		PgMethod{"ctlg_bug_state_update", []string{}, nil, BeforeHookAddUserId},
+		PgMethod{"ctlg_bug_state_get_by_id", []string{}, nil, BeforeHookAddUserId},
+		PgMethod{"ctlg_customer_task_state_get_by_id", []string{}, nil, BeforeHookAddUserId},
 		PgMethod{"ctlg_customer_task_state_list", []string{}, nil, BeforeHookAddUserId},
 		PgMethod{"ctlg_customer_task_state_update", []string{}, nil, BeforeHookAddUserId},
-		PgMethod{"ctlg_customer_task_state_get_by_id", []string{}, nil, BeforeHookAddUserId},
 		PgMethod{"ctlg_contract_state_list", []string{}, nil, BeforeHookAddUserId},
 		PgMethod{"ctlg_contract_state_update", []string{}, nil, BeforeHookAddUserId},
 		PgMethod{"ctlg_contract_state_get_by_id", []string{}, nil, BeforeHookAddUserId},
@@ -110,9 +110,9 @@ var (
 		PgMethod{"contract_list", []string{}, nil, BeforeHookAddUserId},
 		PgMethod{"contract_update", []string{}, nil, BeforeHookAddUserId},
 		PgMethod{"contract_get_by_id", []string{}, nil, BeforeHookAddUserId},
+		PgMethod{"technical_task_get_by_id", []string{}, nil, BeforeHookAddUserId},
 		PgMethod{"technical_task_list", []string{}, nil, BeforeHookAddUserId},
 		PgMethod{"technical_task_update", []string{}, nil, BeforeHookAddUserId},
-		PgMethod{"technical_task_get_by_id", []string{}, nil, BeforeHookAddUserId},
 		PgMethod{"counterparty_list", []string{}, nil, BeforeHookAddUserId},
 		PgMethod{"counterparty_update", []string{}, nil, BeforeHookAddUserId},
 		PgMethod{"counterparty_get_by_id", []string{}, nil, BeforeHookAddUserId},
@@ -129,10 +129,10 @@ var (
 		PgMethod{"request_list", []string{}, nil, BeforeHookAddUserId},
 		PgMethod{"request_update", []string{}, nil, BeforeHookAddUserId},
 		PgMethod{"request_get_by_id", []string{}, nil, BeforeHookAddUserId},
-		PgMethod{"digital_solution_get_by_id", []string{}, nil, BeforeHookAddUserId},
 		PgMethod{"digital_solution_get_specialist_role", []string{}, nil, BeforeHookAddUserId},
 		PgMethod{"digital_solution_list", []string{}, nil, BeforeHookAddUserId},
 		PgMethod{"digital_solution_update", []string{}, nil, BeforeHookAddUserId},
+		PgMethod{"digital_solution_get_by_id", []string{}, nil, BeforeHookAddUserId},
 		PgMethod{"functional_requirement_list", []string{}, nil, BeforeHookAddUserId},
 		PgMethod{"functional_requirement_update", []string{}, nil, BeforeHookAddUserId},
 		PgMethod{"functional_requirement_get_by_id", []string{}, nil, BeforeHookAddUserId},
@@ -148,14 +148,14 @@ var (
 		PgMethod{"sprint_list", []string{}, nil, BeforeHookAddUserId},
 		PgMethod{"sprint_update", []string{}, nil, BeforeHookAddUserId},
 		PgMethod{"sprint_get_by_id", []string{}, nil, BeforeHookAddUserId},
-		PgMethod{"task_get_specialist", []string{}, nil, BeforeHookAddUserId},
 		PgMethod{"task_get_specialist_role", []string{}, nil, BeforeHookAddUserId},
 		PgMethod{"task_list", []string{}, nil, BeforeHookAddUserId},
 		PgMethod{"task_update", []string{}, nil, BeforeHookAddUserId},
 		PgMethod{"task_get_by_id", []string{}, nil, BeforeHookAddUserId},
-		PgMethod{"work_list", []string{}, nil, BeforeHookAddUserId},
+		PgMethod{"task_get_specialist", []string{}, nil, BeforeHookAddUserId},
 		PgMethod{"work_update", []string{}, nil, BeforeHookAddUserId},
 		PgMethod{"work_get_by_id", []string{}, nil, BeforeHookAddUserId},
+		PgMethod{"work_list", []string{}, nil, BeforeHookAddUserId},
 		PgMethod{"customer_task_list", []string{}, nil, BeforeHookAddUserId},
 		PgMethod{"customer_task_update", []string{}, nil, BeforeHookAddUserId},
 		PgMethod{"customer_task_get_by_id", []string{}, nil, BeforeHookAddUserId},
@@ -177,15 +177,15 @@ var (
 		PgMethod{"digital_solution_specialist_link_list", []string{}, nil, BeforeHookAddUserId},
 		PgMethod{"digital_solution_specialist_link_update", []string{}, nil, BeforeHookAddUserId},
 		PgMethod{"digital_solution_specialist_link_get_by_id", []string{}, nil, BeforeHookAddUserId},
-		PgMethod{"functional_requirement_specialist_link_list", []string{}, nil, BeforeHookAddUserId},
 		PgMethod{"functional_requirement_specialist_link_update", []string{}, nil, BeforeHookAddUserId},
 		PgMethod{"functional_requirement_specialist_link_get_by_id", []string{}, nil, BeforeHookAddUserId},
+		PgMethod{"functional_requirement_specialist_link_list", []string{}, nil, BeforeHookAddUserId},
+		PgMethod{"digital_solution_customer_agent_link_get_by_id", []string{}, nil, BeforeHookAddUserId},
 		PgMethod{"digital_solution_customer_agent_link_list", []string{}, nil, BeforeHookAddUserId},
 		PgMethod{"digital_solution_customer_agent_link_update", []string{}, nil, BeforeHookAddUserId},
-		PgMethod{"digital_solution_customer_agent_link_get_by_id", []string{}, nil, BeforeHookAddUserId},
+		PgMethod{"customer_task_customer_agent_link_get_by_id", []string{}, nil, BeforeHookAddUserId},
 		PgMethod{"customer_task_customer_agent_link_list", []string{}, nil, BeforeHookAddUserId},
 		PgMethod{"customer_task_customer_agent_link_update", []string{}, nil, BeforeHookAddUserId},
-		PgMethod{"customer_task_customer_agent_link_get_by_id", []string{}, nil, BeforeHookAddUserId},
 		PgMethod{"bug_customer_agent_link_list", []string{}, nil, BeforeHookAddUserId},
 		PgMethod{"bug_customer_agent_link_update", []string{}, nil, BeforeHookAddUserId},
 		PgMethod{"bug_customer_agent_link_get_by_id", []string{}, nil, BeforeHookAddUserId},
@@ -195,18 +195,18 @@ var (
 		PgMethod{"work_task_link_list", []string{}, nil, BeforeHookAddUserId},
 		PgMethod{"work_task_link_update", []string{}, nil, BeforeHookAddUserId},
 		PgMethod{"work_task_link_get_by_id", []string{}, nil, BeforeHookAddUserId},
+		PgMethod{"company_man_link_get_by_id", []string{}, nil, BeforeHookAddUserId},
 		PgMethod{"company_man_link_list", []string{}, nil, BeforeHookAddUserId},
 		PgMethod{"company_man_link_update", []string{}, nil, BeforeHookAddUserId},
-		PgMethod{"company_man_link_get_by_id", []string{}, nil, BeforeHookAddUserId},
 		PgMethod{"time_list", []string{}, nil, BeforeHookAddUserId},
 		PgMethod{"time_update", []string{}, nil, BeforeHookAddUserId},
 		PgMethod{"time_get_by_id", []string{}, nil, BeforeHookAddUserId},
+		PgMethod{"comment_update", []string{}, nil, BeforeHookAddUserId},
 		PgMethod{"comment_get_by_id", []string{}, nil, BeforeHookAddUserId},
 		PgMethod{"comment_list", []string{}, nil, BeforeHookAddUserId},
-		PgMethod{"comment_update", []string{}, nil, BeforeHookAddUserId},
+		PgMethod{"news_from_dima_list", []string{}, nil, BeforeHookAddUserId},
 		PgMethod{"news_from_dima_update", []string{}, nil, BeforeHookAddUserId},
 		PgMethod{"news_from_dima_get_by_id", []string{}, nil, BeforeHookAddUserId},
-		PgMethod{"news_from_dima_list", []string{}, nil, BeforeHookAddUserId},
 	}
 )
 
@@ -378,7 +378,7 @@ func BeforeHookAddUserId(c *gin.Context, p interface{}) error {
 	return nil
 }
 
-func processPgErrorMsg(err error) string {
+func processPgErrorMsg (err error) string  {
 
 	return err.Error()
 }
