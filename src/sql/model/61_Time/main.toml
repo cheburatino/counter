@@ -35,9 +35,9 @@ triggers = [
 
 
 methods = [
+	"time_get_by_id",
 	"time_list",
 	"time_update",
-	"time_get_by_id",
 	"time_trigger_before",
 	"time_trigger_after"
 ]
