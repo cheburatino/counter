@@ -208,6 +208,7 @@
       filterStringAssembly(where_str) {
         if (this.mouseFlag) return
         this.sqlRest = where_str
+        this.sqlRestBtnClickHandler()
       },
       createFilter() {
         this.$utils.postCallPgMethod({
