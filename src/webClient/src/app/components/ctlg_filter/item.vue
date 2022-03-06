@@ -14,7 +14,7 @@
           <comp-fld-ref-search outlined pgMethod="user_list" :label="$t('ctlg_filter.user_table_id')" :item='item.user_table_title' :itemId='item.user_table_id' :ext='{}' @update="v=> item.user_table_id = v.id" @clear="item.user_table_id = null" :readonly='false'  class='q-mb-sm col-md-2 col-sm-3 col-xs-6' />
       </div>
       <div class="col-md-2 col-sm-3 col-xs-6">
-          <q-select outlined :label="$t('ctlg_filter.index')" v-model='item.index' :options='[{"label":"задачи","value":"task","color":""},{"label":"функциональные требования","value":"functional_requirement","color":""}]'   :readonly='false'  class='q-mb-sm col-md-2 col-sm-3 col-xs-6' />
+          <q-checkbox :label="$t('ctlg_filter.is_default')" v-model='item.is_default' :disable='false' :false-value='false' indeterminate-value='some'  class='q-mb-sm col-md-2 col-sm-3 col-xs-6' />
       </div>
       </div>
       
@@ -55,6 +55,7 @@
                         {name: 'title', label: 'название',  required: true},
                         {name: 'user_table_id', label: 'пользователь'},
                         {name: 'index', label: 'список'},
+                        {name: 'is_default', label: 'по умолчанию'},
                         {name: 'where_str', label: 'условия фильтра'},
                 ],
                 optionsFlds: [],

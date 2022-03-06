@@ -20,6 +20,7 @@ import (
 	"github.com/cheburatino/electron_is/projectTemplate/docs/ctlgFunctionalRequirementSpecialistRole"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/ctlgFunctionalRequirementState"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/ctlgInvoiceState"
+	"github.com/cheburatino/electron_is/projectTemplate/docs/ctlgOrderBy"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/ctlgRequestPriority"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/ctlgRequestState"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/ctlgTaskRole"
@@ -98,6 +99,7 @@ func getProject() t.ProjectType {
 		ctlgCompletionActState.GetDoc(p),
 		ctlgInvoiceState.GetDoc(p),
 		ctlgFilter.GetDoc(p),
+		ctlgOrderBy.GetDoc(p),
 		meeting.GetDoc(p),
 		contract.GetDoc(p),
 		technicalTask.GetDoc(p),
@@ -191,6 +193,7 @@ func getProject() t.ProjectType {
 			{Text: "Статусы актов", Url: "ctlg_completion_act_state"},
 			{Text: "Статусы счетов", Url: "ctlg_invoice_state"},
 			{Text: "Фильтры", Url: "ctlg_filter"},
+			{Text: "Сортировки", Url: "ctlg_order_by"},
 		}},
 	}
 	p.FillSideMenu()

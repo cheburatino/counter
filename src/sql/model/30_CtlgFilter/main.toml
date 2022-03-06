@@ -8,6 +8,7 @@ fields = [
 	{name="title",					type="char",	size=150, 	ext="not null",	 comment="название"},
 	{name="user_table_id",					type="int",	 comment="пользователь"},
 	{name="index",					type="char",	size=20,	 comment="список"},
+	{name="is_default",					type="bool", 	ext=" default false",	 comment="по умолчанию"},
 	{name="where_str",					type="text",	 comment="условия фильтра"},
 	{name="search_text",			type="text",	comment="колонка для поиска"},
 	{name="options",				type="jsonb",	comment="разные дополнительные параметры"},
@@ -41,6 +42,7 @@ alterScripts = [
 	"alter table ctlg_filter add column if not exists title CHARACTER VARYING(150);",
 	"alter table ctlg_filter add column if not exists user_table_id int;",
 	"alter table ctlg_filter add column if not exists index CHARACTER VARYING(20);",
+	"alter table ctlg_filter add column if not exists is_default bool;",
 	"alter table ctlg_filter add column if not exists where_str text;",
 	"alter table ctlg_filter add column if not exists search_text text;"
 ]

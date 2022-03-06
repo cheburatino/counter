@@ -25,6 +25,7 @@ func GetDoc(project *t.ProjectType) t.DocType {
 			t.GetFldSelectString("index", "список", 20, [][]int{{1, 3}}, []t.FldVueOptionsItem{
 				{Value: "task", Label: "задачи"},
 				{Value: "functional_requirement", Label: "функциональные требования"}}, "col-2"),
+			t.GetFldCheckbox("is_default", "по умолчанию", [][]int{{1, 3}}, "col-2").SetDefault("false"),
 			t.GetFldString("where_str", "условия фильтра", 0, [][]int{{2, 1}}, "col-8"),
 		},
 		Vue: t.DocVue{
