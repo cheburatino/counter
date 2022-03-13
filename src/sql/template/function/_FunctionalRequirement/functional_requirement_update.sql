@@ -43,14 +43,6 @@ BEGIN
     
     
     
-    
-    
-    
-    
-    
-    
-    
-    
 
     if (params ->> 'id')::int = -1 then
         -- проверика наличия обязательных параметров
@@ -61,32 +53,24 @@ BEGIN
         END IF;
         
 
-        EXECUTE ('INSERT INTO functional_requirement (title, paused, state_id, system_id, technical_task_id, request_id, plan_end_date, fact_end_date, customer_priority, internal_priority, description, files, images, benefit, description_for_dev, files_for_dev, images_for_dev, result, result_file, result_image, analisys_estimate, frontend_estimate, backend_estimate, options) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21, $22, $23, $24)  RETURNING *;')
+        EXECUTE ('INSERT INTO functional_requirement (title, system_id, state_id, digital_solution_id, plan_end_date, fact_end_date, description, description_files, description_images, description_for_dev, files_for_dev, images_for_dev, result, result_files, result_images, options) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16)  RETURNING *;')
 		INTO functional_requirementRow
 		USING
 			(params ->> 'title')::text,
-			coalesce((params ->> 'paused')::bool, false)::bool,
-			coalesce((params ->> 'state_id')::int, 1)::int,
 			(params ->> 'system_id')::int,
-			(params ->> 'technical_task_id')::int,
-			(params ->> 'request_id')::int,
+			coalesce((params ->> 'state_id')::int, 1)::int,
+			(params ->> 'digital_solution_id')::int,
 			(params ->> 'plan_end_date')::timestamp,
 			(params ->> 'fact_end_date')::timestamp,
-			(params ->> 'customer_priority')::int,
-			(params ->> 'internal_priority')::int,
 			(params ->> 'description')::text,
-			(params -> 'files')::jsonb,
-			(params -> 'images')::jsonb,
-			(params ->> 'benefit')::text,
+			(params -> 'description_files')::jsonb,
+			(params -> 'description_images')::jsonb,
 			(params ->> 'description_for_dev')::text,
 			(params -> 'files_for_dev')::jsonb,
 			(params -> 'images_for_dev')::jsonb,
 			(params ->> 'result')::text,
-			(params -> 'result_file')::jsonb,
-			(params -> 'result_image')::jsonb,
-			(params ->> 'analisys_estimate')::int,
-			(params ->> 'frontend_estimate')::int,
-			(params ->> 'backend_estimate')::int,
+			(params -> 'result_files')::jsonb,
+			(params -> 'result_images')::jsonb,
 			coalesce(params -> 'options', '{}')::jsonb;
 
         
@@ -94,28 +78,20 @@ BEGIN
     else
         updateValue = '' || update_str_from_json(params, ARRAY [
 			['title', 'title', 'text'],
-			['paused', 'paused', 'bool'],
-			['state_id', 'state_id', 'number'],
 			['system_id', 'system_id', 'number'],
-			['technical_task_id', 'technical_task_id', 'number'],
-			['request_id', 'request_id', 'number'],
+			['state_id', 'state_id', 'number'],
+			['digital_solution_id', 'digital_solution_id', 'number'],
 			['plan_end_date', 'plan_end_date', 'timestamp'],
 			['fact_end_date', 'fact_end_date', 'timestamp'],
-			['customer_priority', 'customer_priority', 'number'],
-			['internal_priority', 'internal_priority', 'number'],
 			['description', 'description', 'text'],
-			['files', 'files', 'jsonb'],
-			['images', 'images', 'jsonb'],
-			['benefit', 'benefit', 'text'],
+			['description_files', 'description_files', 'jsonb'],
+			['description_images', 'description_images', 'jsonb'],
 			['description_for_dev', 'description_for_dev', 'text'],
 			['files_for_dev', 'files_for_dev', 'jsonb'],
 			['images_for_dev', 'images_for_dev', 'jsonb'],
 			['result', 'result', 'text'],
-			['result_file', 'result_file', 'jsonb'],
-			['result_image', 'result_image', 'jsonb'],
-			['analisys_estimate', 'analisys_estimate', 'number'],
-			['frontend_estimate', 'frontend_estimate', 'number'],
-			['backend_estimate', 'backend_estimate', 'number'],
+			['result_files', 'result_files', 'jsonb'],
+			['result_images', 'result_images', 'jsonb'],
             ['options', 'options', 'jsonb'],
             ['deleted', 'deleted', 'bool']
             ]);

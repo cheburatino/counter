@@ -20,31 +20,23 @@ func GetDoc(project *t.ProjectType) t.DocType {
 		NameRu:     name_ru,
 		PathPrefix: "docs",
 		Flds: []t.FldType{
-			t.GetFldTitle().SetReadonly("currentUser.role?.includes(`customer`)"),
-			t.GetFldCheckbox("paused", "на паузе", [][]int{{1, 2}}, "col-2").SetDefault("false"),
-			t.GetFldRef("state_id", "статус", "ctlg_functional_requirement_state", [][]int{{1, 3}}, "col-2").SetDefault("1").SetReadonly("currentUser.role?.includes(`customer`)"),
-			t.GetFldRef("system_id", "система", "system", [][]int{{2, 1}}, "col-2", "isShowLink", "isClearable").SetReadonly("currentUser.role?.includes(`customer`)"),
-			t.GetFldRef("technical_task_id", "техническое задание", "technical_task", [][]int{{2, 2}}, "col-2", "isShowLink", "isClearable"),
-			t.GetFldRef("request_id", "запрос", "request", [][]int{{2, 3}}, "isShowLink", "isClearable").SetReadonly("currentUser.role?.includes(`customer`)"),
-			t.GetFldDate("plan_end_date", "плановая дата завершения", [][]int{{3, 1}}, "col-2").SetReadonly("currentUser.role?.includes(`customer`)"),
-			t.GetFldDate("fact_end_date", "фактическая дата завершения", [][]int{{3, 2}}, "col-2").SetReadonly("currentUser.role?.includes(`customer`)"),
-			t.GetFldInt("customer_priority", "приоритет заказчика", [][]int{{3, 3}}, "col-2").SetReadonly("currentUser.role?.includes(`customer`)"),
-			t.GetFldInt("internal_priority", "внутренний приоритет", [][]int{{3, 4}}, "col-2").SetVif("currentUser.role?.includes(`admin`)"),
-			t.GetFldString("description", "описание", 0, [][]int{{4, 1}}, "col-8").SetReadonly("currentUser.role?.includes(`customer`)"),
-			t.GetFldFiles("files", "файлы", [][]int{{5, 1}}, t.FldVueFilesParams{}).SetReadonly("currentUser.role?.includes(`customer`)"),
-			t.GetFldImgList("images", "изображения", [][]int{{5, 2}}, t.FldVueImgParams{}).SetReadonly("currentUser.role?.includes(`customer`)"),
-			t.GetFldString("benefit", "польза", 0, [][]int{{6, 1}}, "col-8"),
-			t.GetFldString("description_for_dev", "описание для разработки", 0, [][]int{{7, 1}}, "col-8").SetVif("!currentUser.role?.includes(`customer`)"),
-			t.GetFldFiles("files_for_dev", "файлы для разработки", [][]int{{8, 1}}, t.FldVueFilesParams{}),
-			t.GetFldImgList("images_for_dev", "изображения для разработки", [][]int{{8, 2}}, t.FldVueImgParams{}).SetReadonly("currentUser.role?.includes(`customer`)"),
-			// Задачи. Описание контрола после doc.Init {{9, 1}}
-			// Баги. Описание контрола после doc.Init {{9, 2}}
-			t.GetFldString("result", "результат", 0, [][]int{{10, 1}}, "col-8").SetReadonly("currentUser.role?.includes(`customer`)"),
-			t.GetFldFiles("result_file", "файлы результата", [][]int{{11, 1}}, t.FldVueFilesParams{}),
-			t.GetFldImgList("result_image", "изображения результата", [][]int{{11, 2}}, t.FldVueImgParams{}),
-			t.GetFldInt("analisys_estimate", "оценка анализа", [][]int{{12, 1}}, "col-3"),
-			t.GetFldInt("frontend_estimate", "оценка фронт", [][]int{{12, 2}}, "col-3"),
-			t.GetFldInt("backend_estimate", "оценка бэк", [][]int{{12, 3}}, "col-3"),
+			t.GetFldTitle(),
+			t.GetFldRef("system_id", "система", "system", [][]int{{1, 2}}, "col-2", "isShowLink", "isClearable"),
+			t.GetFldRef("state_id", "статус", "ctlg_functional_requirement_state", [][]int{{1, 3}}, "col-2").SetDefault("1"),
+			t.GetFldRef("digital_solution_id", "цифровое решение", "digital_solution", [][]int{{2, 1}}, "isShowLink", "isClearable"),
+			t.GetFldDate("plan_end_date", "плановая дата завершения", [][]int{{2, 2}}, "col-2"),
+			t.GetFldDate("fact_end_date", "фактическая дата завершения", [][]int{{2, 3}}, "col-2"),
+			t.GetFldString("description", "описание", 0, [][]int{{3, 1}}, "col-8"),
+			t.GetFldFiles("description_files", "файлы описания", [][]int{{4, 1}}, t.FldVueFilesParams{}),
+			t.GetFldImgList("description_images", "изображения описания", [][]int{{4, 2}}, t.FldVueImgParams{}),
+			t.GetFldString("description_for_dev", "описание для разработки", 0, [][]int{{5, 1}}, "col-8"),
+			t.GetFldFiles("files_for_dev", "файлы для разработки", [][]int{{6, 1}}, t.FldVueFilesParams{}),
+			t.GetFldImgList("images_for_dev", "изображения для разработки", [][]int{{6, 2}}, t.FldVueImgParams{}),
+			// Задачи. Описание контрола после doc.Init {{7, 1}}
+			// Баги. Описание контрола после doc.Init {{7, 2}}
+			t.GetFldString("result", "результат", 0, [][]int{{8, 1}}, "col-8"),
+			t.GetFldFiles("result_files", "файлы результата", [][]int{{9, 1}}, t.FldVueFilesParams{}),
+			t.GetFldImgList("result_images", "изображения результата", [][]int{{9, 2}}, t.FldVueImgParams{}),
 		},
 		Vue: t.DocVue{
 			RouteName:      name,
@@ -57,9 +49,7 @@ func GetDoc(project *t.ProjectType) t.DocType {
 				{FldName: "digital_solution_id", IsRef: true, RefTable: "digital_solution"},
 			},
 		},
-		//Templates:   map[string]*t.DocTemplate{
-		//	"sql_function_list.sql": {},
-		//},
+		//Templates:   map[string]*t.DocTemplate{},
 		IsBaseTemplates: t.DocIsBaseTemplates{true, true},
 		Sql: t.DocSql{
 			IsSearchText:    true,
@@ -107,7 +97,7 @@ func GetDoc(project *t.ProjectType) t.DocType {
                <q-item-label>{{v.title}}</q-item-label>
                <q-item-label caption><q-badge color="orange">{{v.options.title.state_title}}</q-badge></q-item-label>
            `, // шаблон для названия в списке (vue синтаксис)
-	}, [][]int{{9, 1}}, "col-4").SetVif("currentUser.role?.includes(`admin`)"))
+	}, [][]int{{7, 1}}, "col-4").SetVif("currentUser.role?.includes(`admin`)"))
 
 	doc.AddFld(t.GetFldVueCompositionRefList(&doc, t.VueCompRefListWidgetParams{
 		Label:      "баги",                  // название списка, которе выводится на экране
@@ -122,7 +112,7 @@ func GetDoc(project *t.ProjectType) t.DocType {
                <q-item-label>{{v.title}}</q-item-label>
                <q-item-label caption><q-badge color="orange">{{v.options.title.state_title}}</q-badge></q-item-label>
            `, // шаблон для названия в списке (vue синтаксис)
-	}, [][]int{{9, 2}}, "col-4"))
+	}, [][]int{{7, 2}}, "col-4"))
 
 	return doc
 }

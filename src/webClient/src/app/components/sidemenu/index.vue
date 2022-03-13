@@ -72,6 +72,8 @@
 
 									{icon: 'image/digital_solution.svg', text: 'i18n_menu.digital_solution', url: '/digital_solution', roles: ['admin', 'specialist', 'customer']},
 
+									{icon: 'image/model.svg', text: 'i18n_menu.model', url: '/model', roles: ['admin', 'specialist', 'customer']},
+
 									{icon: 'image/functional_requirement.svg', text: 'i18n_menu.functional_requirement', url: '/functional_requirement', roles: ['admin', 'specialist', 'customer']},
 
 									{icon: 'image/task.svg', text: 'i18n_menu.task', url: '/task', roles: ['admin', 'specialist']},
@@ -94,7 +96,8 @@
 {isFolder: true, icon: 'image/catalog.svg', text: 'Справочники', roles: ['admin'], linkList: 								[
 								{icon: 'image/user.svg', text: 'Пользователи', url: '/users', roles: []},
 								{icon: '', text: 'Статусы запросов', url: '/ctlg_request_state', roles: []},
-								{icon: '', text: 'Приоритеты запросов', url: '/ctlg_request_priority', roles: []},
+								{icon: '', text: 'Статусы моделей', url: '/ctlg_model_state', roles: []},
+								{icon: '', text: 'Типы моделей', url: '/ctlg_model_type', roles: []},
 								{icon: '', text: 'Статусы функциональных требований', url: '/ctlg_functional_requirement_state', roles: []},
 								{icon: '', text: 'Роли специалистов в функциональных требованиях', url: '/ctlg_functional_requirement_specialist_role', roles: []},
 								{icon: '', text: 'Статусы цифровых решений', url: '/ctlg_digital_solution_state', roles: []},
@@ -104,7 +107,6 @@
 								{icon: '', text: 'Роли в задачах', url: '/ctlg_task_role', roles: []},
 								{icon: '', text: 'Статусы дел', url: '/ctlg_work_state', roles: []},
 								{icon: '', text: 'Роли специалистов в делах', url: '/ctlg_work_specialist_role', roles: []},
-								{icon: '', text: 'Статусы задач заказчиков', url: '/ctlg_customer_task_state', roles: []},
 								{icon: '', text: 'Статусы багов', url: '/ctlg_bug_state', roles: []},
 								{icon: '', text: 'Статусы договоров', url: '/ctlg_contract_state', roles: []},
 								{icon: '', text: 'Статусы технических заданий', url: '/ctlg_technical_task_state', roles: []},

@@ -16,6 +16,9 @@ if new.title != old.title then
  for r in select * from digital_solution where system_id = new.id loop
  update digital_solution set updated_at=now() where id = r.id;
  end loop;
+ for r in select * from model where system_id = new.id loop
+ update model set updated_at=now() where id = r.id;
+ end loop;
  for r in select * from functional_requirement where system_id = new.id loop
  update functional_requirement set updated_at=now() where id = r.id;
  end loop;

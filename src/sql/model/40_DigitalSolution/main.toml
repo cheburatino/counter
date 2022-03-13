@@ -6,18 +6,16 @@ tableName ="digital_solution"
 fields = [
 	{name="id",			type="serial"},
 	{name="title",					type="char",	size=150, 	ext="not null",	 comment="название"},
+	{name="system_id",					type="int",	 comment="система"},
 	{name="state_id",					type="int", 	ext=" default 1",	 comment="статус"},
 	{name="description",					type="text",	 comment="описание"},
-	{name="files",					type="jsonb",	 comment="файлы"},
-	{name="images",					type="jsonb",	 comment="изображения"},
-	{name="customer_id",					type="int",	 comment="заказчик"},
-	{name="system_id",					type="int",	 comment="система"},
-	{name="date_plan_start_modeling",					type="timestamp",	 comment="планируемая дата начала моделирования"},
-	{name="date_plan_end_modeling",					type="timestamp",	 comment="планируемая дата завершения моделирования"},
-	{name="model",					type="text",	 comment="описание модели"},
-	{name="date_plan_start_realization",					type="timestamp",	 comment="планируемая дата начала реализации"},
-	{name="date_plan_end_realization",					type="timestamp",	 comment="планируемая дата завершения реализации"},
+	{name="description_files",					type="jsonb",	 comment="файлы описания"},
+	{name="description_images",					type="jsonb",	 comment="изображения описания"},
+	{name="plan_date_end",					type="timestamp",	 comment="планируемая дата завершения"},
+	{name="fact_date_end",					type="timestamp",	 comment="фактическая дата завершения"},
 	{name="result",					type="text",	 comment="результат"},
+	{name="result_files",					type="jsonb",	 comment="файлы результата"},
+	{name="result_images",					type="jsonb",	 comment="изображения результата"},
 	{name="search_text",			type="text",	comment="колонка для поиска"},
 	{name="options",				type="jsonb",	comment="разные дополнительные параметры"},
 	{name="created_at",				type="timestamp",	ext="with time zone"},
@@ -27,9 +25,8 @@ fields = [
 
 fkConstraints = [
 	{name="digital_solution_title_already_exist", ext="UNIQUE (title)"},
-	{fld="state_id", ref="ctlg_digital_solution_state", fk="id"},
-	{fld="customer_id", ref="company", fk="id"},
-	{fld="system_id", ref="system", fk="id"}
+	{fld="system_id", ref="system", fk="id"},
+	{fld="state_id", ref="ctlg_digital_solution_state", fk="id"}
 ]
 
 triggers = [
@@ -41,27 +38,24 @@ triggers = [
 
 
 methods = [
-	"digital_solution_get_specialist_role",
+	"digital_solution_get_by_id",
 	"digital_solution_list",
 	"digital_solution_update",
-	"digital_solution_get_by_id",
 	"digital_solution_trigger_before",
 	"digital_solution_trigger_after"
 ]
 
 alterScripts = [
 	"alter table digital_solution add column if not exists title CHARACTER VARYING(150);",
+	"alter table digital_solution add column if not exists system_id int;",
 	"alter table digital_solution add column if not exists state_id int;",
 	"alter table digital_solution add column if not exists description text;",
-	"alter table digital_solution add column if not exists files jsonb;",
-	"alter table digital_solution add column if not exists images jsonb;",
-	"alter table digital_solution add column if not exists customer_id int;",
-	"alter table digital_solution add column if not exists system_id int;",
-	"alter table digital_solution add column if not exists date_plan_start_modeling timestamp;",
-	"alter table digital_solution add column if not exists date_plan_end_modeling timestamp;",
-	"alter table digital_solution add column if not exists model text;",
-	"alter table digital_solution add column if not exists date_plan_start_realization timestamp;",
-	"alter table digital_solution add column if not exists date_plan_end_realization timestamp;",
+	"alter table digital_solution add column if not exists description_files jsonb;",
+	"alter table digital_solution add column if not exists description_images jsonb;",
+	"alter table digital_solution add column if not exists plan_date_end timestamp;",
+	"alter table digital_solution add column if not exists fact_date_end timestamp;",
 	"alter table digital_solution add column if not exists result text;",
+	"alter table digital_solution add column if not exists result_files jsonb;",
+	"alter table digital_solution add column if not exists result_images jsonb;",
 	"alter table digital_solution add column if not exists search_text text;"
 ]

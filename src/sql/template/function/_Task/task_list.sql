@@ -37,9 +37,10 @@ BEGIN
         ['notQuoted', 'request_id', 'doc.request_id'],
         ['notQuoted', 'system_id', 'doc.system_id'],
         ['notQuoted', 'digital_solution_id', 'doc.digital_solution_id'],
+        ['notQuoted', 'model_id', 'doc.model_id'],
         ['notQuoted', 'functional_requirement_id', 'doc.functional_requirement_id'],
         ['notQuoted', 'bug_id', 'doc.bug_id']
-        ]);
+    ]);
 
     -- добавляем в фильтр условия из where на клиенте
     if params->>'where_param' notnull

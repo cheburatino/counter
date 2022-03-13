@@ -41,18 +41,6 @@ BEGIN
     
     
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
 
     if (params ->> 'id')::int = -1 then
         -- проверика наличия обязательных параметров
@@ -63,22 +51,20 @@ BEGIN
         END IF;
         
 
-        EXECUTE ('INSERT INTO digital_solution (title, state_id, description, files, images, customer_id, system_id, date_plan_start_modeling, date_plan_end_modeling, model, date_plan_start_realization, date_plan_end_realization, result, options) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14)  RETURNING *;')
+        EXECUTE ('INSERT INTO digital_solution (title, system_id, state_id, description, description_files, description_images, plan_date_end, fact_date_end, result, result_files, result_images, options) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)  RETURNING *;')
 		INTO digital_solutionRow
 		USING
 			(params ->> 'title')::text,
+			(params ->> 'system_id')::int,
 			coalesce((params ->> 'state_id')::int, 1)::int,
 			(params ->> 'description')::text,
-			(params -> 'files')::jsonb,
-			(params -> 'images')::jsonb,
-			(params ->> 'customer_id')::int,
-			(params ->> 'system_id')::int,
-			(params ->> 'date_plan_start_modeling')::timestamp,
-			(params ->> 'date_plan_end_modeling')::timestamp,
-			(params ->> 'model')::text,
-			(params ->> 'date_plan_start_realization')::timestamp,
-			(params ->> 'date_plan_end_realization')::timestamp,
+			(params -> 'description_files')::jsonb,
+			(params -> 'description_images')::jsonb,
+			(params ->> 'plan_date_end')::timestamp,
+			(params ->> 'fact_date_end')::timestamp,
 			(params ->> 'result')::text,
+			(params -> 'result_files')::jsonb,
+			(params -> 'result_images')::jsonb,
 			coalesce(params -> 'options', '{}')::jsonb;
 
         
@@ -86,18 +72,16 @@ BEGIN
     else
         updateValue = '' || update_str_from_json(params, ARRAY [
 			['title', 'title', 'text'],
+			['system_id', 'system_id', 'number'],
 			['state_id', 'state_id', 'number'],
 			['description', 'description', 'text'],
-			['files', 'files', 'jsonb'],
-			['images', 'images', 'jsonb'],
-			['customer_id', 'customer_id', 'number'],
-			['system_id', 'system_id', 'number'],
-			['date_plan_start_modeling', 'date_plan_start_modeling', 'timestamp'],
-			['date_plan_end_modeling', 'date_plan_end_modeling', 'timestamp'],
-			['model', 'model', 'text'],
-			['date_plan_start_realization', 'date_plan_start_realization', 'timestamp'],
-			['date_plan_end_realization', 'date_plan_end_realization', 'timestamp'],
+			['description_files', 'description_files', 'jsonb'],
+			['description_images', 'description_images', 'jsonb'],
+			['plan_date_end', 'plan_date_end', 'timestamp'],
+			['fact_date_end', 'fact_date_end', 'timestamp'],
 			['result', 'result', 'text'],
+			['result_files', 'result_files', 'jsonb'],
+			['result_images', 'result_images', 'jsonb'],
             ['options', 'options', 'jsonb'],
             ['deleted', 'deleted', 'bool']
             ]);
