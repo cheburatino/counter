@@ -31,11 +31,14 @@
       </div>
       
       <div class="row q-col-gutter-md q-mb-sm">
-      <div class="col-3">
-          <comp-fld-ref-search outlined pgMethod="model_list" :label="$t('task.model_id')" :item='item.model_title' :itemId='item.model_id' :ext='{"avatar":"image/model.svg","isClearable":"true","pathUrl":"/model"}' @update="v=> item.model_id = v.id" @clear="item.model_id = null" :readonly='false'  class='q-mb-sm col-3' />
+      <div class="col-md-2 col-sm-3 col-xs-6">
+          <comp-fld-ref-search outlined pgMethod="man_list" :label="$t('task.executor_id')" :item='item.executor_title' :itemId='item.executor_id' :ext='{"avatar":"image/man.svg","isClearable":"true","pathUrl":"/man"}' @update="v=> item.executor_id = v.id" @clear="item.executor_id = null" :readonly='false'  class='q-mb-sm col-md-2 col-sm-3 col-xs-6' />
       </div>
-      <div class="col-3">
-          <comp-fld-ref-search outlined pgMethod="functional_requirement_list" :label="$t('task.functional_requirement_id')" :item='item.functional_requirement_title' :itemId='item.functional_requirement_id' :ext='{"avatar":"image/functional_requirement.svg","isClearable":"true","pathUrl":"/functional_requirement"}' @update="v=> item.functional_requirement_id = v.id" @clear="item.functional_requirement_id = null" :readonly='false'  class='q-mb-sm col-3' />
+      <div class="col-md-2 col-sm-3 col-xs-6">
+          <comp-fld-ref-search outlined pgMethod="model_list" :label="$t('task.model_id')" :item='item.model_title' :itemId='item.model_id' :ext='{"avatar":"image/model.svg","isClearable":"true","pathUrl":"/model"}' @update="v=> item.model_id = v.id" @clear="item.model_id = null" :readonly='false'  class='q-mb-sm col-md-2 col-sm-3 col-xs-6' />
+      </div>
+      <div class="col-md-2 col-sm-3 col-xs-6">
+          <comp-fld-ref-search outlined pgMethod="functional_requirement_list" :label="$t('task.functional_requirement_id')" :item='item.functional_requirement_title' :itemId='item.functional_requirement_id' :ext='{"avatar":"image/functional_requirement.svg","isClearable":"true","pathUrl":"/functional_requirement"}' @update="v=> item.functional_requirement_id = v.id" @clear="item.functional_requirement_id = null" :readonly='false'  class='q-mb-sm col-md-2 col-sm-3 col-xs-6' />
       </div>
       <div class="col-md-2 col-sm-3 col-xs-6">
           <comp-fld-ref-search outlined pgMethod="bug_list" :label="$t('task.bug_id')" :item='item.bug_title' :itemId='item.bug_id' :ext='{"avatar":"image/bug.png","isClearable":"true","pathUrl":"/bug"}' @update="v=> item.bug_id = v.id" @clear="item.bug_id = null" :readonly='false'  class='q-mb-sm col-md-2 col-sm-3 col-xs-6' />
@@ -146,6 +149,7 @@
                         {name: 'state_id', label: 'статус'},
                         {name: 'system_id', label: 'система'},
                         {name: 'digital_solution_id', label: 'цифровое решение'},
+                        {name: 'executor_id', label: 'исполнитель'},
                         {name: 'model_id', label: 'модель'},
                         {name: 'functional_requirement_id', label: 'функциональное требование'},
                         {name: 'bug_id', label: 'баг'},

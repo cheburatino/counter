@@ -95,10 +95,10 @@
 </template>
 
 <script>
-	import ftListRefListWidget from './comp/ftListRefListWidget.vue'
 	import bugListRefListWidget from './comp/bugListRefListWidget.vue'
 	import taskListRefListWidget from './comp/taskListRefListWidget.vue'
 	import modelListRefListWidget from './comp/modelListRefListWidget.vue'
+	import ftListRefListWidget from './comp/ftListRefListWidget.vue'
     import currentUserMixin from '../../../app/mixins/currentUser'
     export default {
         props: ['id', 'isOpenInDialog'],

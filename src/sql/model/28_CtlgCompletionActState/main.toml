@@ -26,9 +26,9 @@ triggers = [
 
 
 methods = [
-	"ctlg_completion_act_state_list",
 	"ctlg_completion_act_state_update",
 	"ctlg_completion_act_state_get_by_id",
+	"ctlg_completion_act_state_list",
 	"ctlg_completion_act_state_trigger_before",
 	"ctlg_completion_act_state_trigger_after"
 ]
