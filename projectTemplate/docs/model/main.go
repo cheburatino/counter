@@ -71,7 +71,9 @@ func GetDoc(project *t.ProjectType) t.DocType {
 		}, // список полей, которые заполняются при добавлении новой записи
 		TitleTemplate: `
                 <q-item-label>{{v.title}}</q-item-label>
-                <q-item-label caption><q-badge color="orange">{{v.options.title.state_title}}</q-badge></q-item-label>
+                <q-item-label caption>
+					<q-badge color="orange">{{v.options.title.state_title}}</q-badge> <q-badge color="green-4">{{v.options.title.executor_title}}</q-badge> <q-badge color="info">{{v.plan_end_date}}</q-badge>
+				</q-item-label>
             `, // шаблон для названия в списке (vue синтаксис)
 	}, [][]int{{5, 1}}, "col-4"))
 

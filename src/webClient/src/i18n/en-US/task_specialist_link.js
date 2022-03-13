@@ -1,5 +1,6 @@
 
 export default {
+ 		description: 'description',
  		author_id: 'author ',
  		name: 'task specialist link',
  		name_plural: 'task specialist link',
@@ -7,5 +8,4 @@ export default {
  		task_id: 'task ',
  		specialist_id: 'specialist ',
  		role_id: 'role ',
- 		description: 'description',
 }

@@ -100,8 +100,7 @@ func GetDoc(project *t.ProjectType) t.DocType {
 				 <q-item-section>
 				    <q-item-label lines="1">{{item.title}}</q-item-label>
 					<q-item-label caption>
-						<q-item-label caption><q-badge color="orange">{{item.options.title.state_title}}</q-badge> <q-badge>{{item.options.title.system_title}}</q-badge></q-item-label>
-						<q-item-label caption>Плановая дата завершения: {{item.plan_end_date}}</q-item-label>
+						<q-item-label caption><q-badge color="orange">{{item.options.title.state_title}}</q-badge> <q-badge color="primary">{{item.options.title.system_title}}</q-badge> <q-badge color="light-blue-3">{{item.options.title.executor_title}}</q-badge> <q-badge color="yellow-5">{{item.options.title.digital_solution_title}}</q-badge> <q-badge color="info">{{item.plan_end_date}}</q-badge></q-item-label>
 					</q-item-label>
 				 </q-item-section>
 			`
