@@ -70,6 +70,8 @@
 
 									{icon: 'image/request.svg', text: 'i18n_menu.request', url: '/request', roles: ['admin', 'specialist', 'customer']},
 
+									{icon: 'image/digital_solution.svg', text: 'i18n_menu.digital_solution', url: '/digital_solution', roles: ['admin', 'specialist', 'customer']},
+
 									{icon: 'image/functional_requirement.svg', text: 'i18n_menu.functional_requirement', url: '/functional_requirement', roles: ['admin', 'specialist', 'customer']},
 
 									{icon: 'image/task.svg', text: 'i18n_menu.task', url: '/task', roles: ['admin', 'specialist']},
