@@ -1,4 +1,4 @@
--- создание статус функционального требования
+-- создание статус функциональности
 
 DROP FUNCTION IF EXISTS ctlg_functional_requirement_state_update(params JSONB);
 CREATE OR REPLACE FUNCTION ctlg_functional_requirement_state_update(params JSONB)

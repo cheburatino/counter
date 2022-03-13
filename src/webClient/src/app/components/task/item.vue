@@ -151,7 +151,7 @@
                         {name: 'digital_solution_id', label: 'цифровое решение'},
                         {name: 'executor_id', label: 'исполнитель'},
                         {name: 'model_id', label: 'модель'},
-                        {name: 'functional_requirement_id', label: 'функциональное требование'},
+                        {name: 'functional_requirement_id', label: 'функциональность'},
                         {name: 'bug_id', label: 'баг'},
                         {name: 'sprint_id', label: 'спринт'},
                         {name: 'estimate', label: 'оценка'},

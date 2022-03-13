@@ -13,7 +13,7 @@ fields = [
 	{name="digital_solution_id",					type="int",	 comment="цифровое решение"},
 	{name="executor_id",					type="int",	 comment="исполнитель"},
 	{name="model_id",					type="int",	 comment="модель"},
-	{name="functional_requirement_id",					type="int",	 comment="функциональное требование"},
+	{name="functional_requirement_id",					type="int",	 comment="функциональность"},
 	{name="bug_id",					type="int",	 comment="баг"},
 	{name="sprint_id",					type="int",	 comment="спринт"},
 	{name="estimate",					type="int",	 comment="оценка"},
@@ -57,11 +57,11 @@ triggers = [
 
 
 methods = [
-	"task_update",
-	"task_get_by_id",
 	"task_get_specialist",
 	"task_get_specialist_role",
 	"task_list",
+	"task_update",
+	"task_get_by_id",
 	"task_trigger_before",
 	"task_trigger_after"
 ]

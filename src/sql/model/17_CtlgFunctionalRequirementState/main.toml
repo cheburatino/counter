@@ -1,5 +1,5 @@
 docType = "CtlgFunctionalRequirementState"
-tableComment = "статус функционального требования"
+tableComment = "статус функциональности"
 
 tableName ="ctlg_functional_requirement_state"
 

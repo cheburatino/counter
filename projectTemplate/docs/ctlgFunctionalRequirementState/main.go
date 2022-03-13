@@ -7,8 +7,8 @@ import (
 
 const (
 	name            = "ctlg_functional_requirement_state"
-	name_ru         = "статус функционального требования"
-	name_ru_plural  = "статусы функциональных требований"
+	name_ru         = "статус функциональности"
+	name_ru_plural  = "статусы функциональностей"
 	menu_icon       = "image/catalog.svg"
 	breadcrumb_icon = "fas fa-list-ul"
 )
