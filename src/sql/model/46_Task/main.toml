@@ -10,11 +10,12 @@ fields = [
 	{name="needs_discusion",					type="bool", 	ext=" default false",	 comment="требует обсуждения"},
 	{name="state_id",					type="int", 	ext=" default 1",	 comment="статус"},
 	{name="system_id",					type="int",	 comment="система"},
-	{name="sprint_id",					type="int",	 comment="спринт"},
+	{name="digital_solution_id",					type="int",	 comment="цифровое решение"},
 	{name="functional_requirement_id",					type="int",	 comment="функциональное требование"},
 	{name="bug_id",					type="int",	 comment="баг"},
-	{name="estimate",					type="int",	 comment="оценка времени (минут)"},
-	{name="worked_time",					type="int",	 comment="затраченно времени (минут)"},
+	{name="sprint_id",					type="int",	 comment="спринт"},
+	{name="estimate",					type="int",	 comment="оценка"},
+	{name="worked_time",					type="int",	 comment="затраченно"},
 	{name="plan_end_date",					type="timestamp",	 comment="плановая дата завершения"},
 	{name="fact_end_date",					type="timestamp",	 comment="фактическая дата завершения"},
 	{name="description",					type="text",	 comment="описание"},
@@ -37,9 +38,10 @@ fkConstraints = [
 	{fld="type_id", ref="ctlg_task_type", fk="id"},
 	{fld="state_id", ref="ctlg_task_state", fk="id"},
 	{fld="system_id", ref="system", fk="id"},
-	{fld="sprint_id", ref="sprint", fk="id"},
+	{fld="digital_solution_id", ref="digital_solution", fk="id"},
 	{fld="functional_requirement_id", ref="functional_requirement", fk="id"},
-	{fld="bug_id", ref="bug", fk="id"}
+	{fld="bug_id", ref="bug", fk="id"},
+	{fld="sprint_id", ref="sprint", fk="id"}
 ]
 
 triggers = [
@@ -51,11 +53,11 @@ triggers = [
 
 
 methods = [
-	"task_get_by_id",
 	"task_get_specialist",
 	"task_get_specialist_role",
 	"task_list",
 	"task_update",
+	"task_get_by_id",
 	"task_trigger_before",
 	"task_trigger_after"
 ]
@@ -66,9 +68,10 @@ alterScripts = [
 	"alter table task add column if not exists needs_discusion bool;",
 	"alter table task add column if not exists state_id int;",
 	"alter table task add column if not exists system_id int;",
-	"alter table task add column if not exists sprint_id int;",
+	"alter table task add column if not exists digital_solution_id int;",
 	"alter table task add column if not exists functional_requirement_id int;",
 	"alter table task add column if not exists bug_id int;",
+	"alter table task add column if not exists sprint_id int;",
 	"alter table task add column if not exists estimate int;",
 	"alter table task add column if not exists worked_time int;",
 	"alter table task add column if not exists plan_end_date timestamp;",
