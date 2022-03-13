@@ -7,7 +7,7 @@ fields = [
 	{name="id",			type="serial"},
 	{name="title",					type="char",	size=150, 	ext="not null",	 comment="название"},
 	{name="type_id",					type="int",	 comment="тип"},
-	{name="state_id",					type="int",	 comment="статус"},
+	{name="state_id",					type="int", 	ext=" default 1",	 comment="статус"},
 	{name="system_id",					type="int",	 comment="система"},
 	{name="digital_solution_id",					type="int",	 comment="цифровое решение"},
 	{name="plan_end_date",					type="timestamp",	 comment="планируемая дата завершения"},
@@ -42,9 +42,9 @@ triggers = [
 
 
 methods = [
-	"model_list",
 	"model_update",
 	"model_get_by_id",
+	"model_list",
 	"model_trigger_before",
 	"model_trigger_after"
 ]

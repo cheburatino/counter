@@ -39,6 +39,7 @@ BEGIN
     
     
     
+    
 
     if (params ->> 'id')::int = -1 then
         -- проверика наличия обязательных параметров
@@ -54,7 +55,7 @@ BEGIN
 		USING
 			(params ->> 'title')::text,
 			(params ->> 'type_id')::int,
-			(params ->> 'state_id')::int,
+			coalesce((params ->> 'state_id')::int, 1)::int,
 			(params ->> 'system_id')::int,
 			(params ->> 'digital_solution_id')::int,
 			(params ->> 'plan_end_date')::timestamp,
