@@ -1,6 +1,5 @@
 
 export default {
- 		title: 'title',
  		user_table_id: 'user table ',
  		index: 'index',
  		is_default: 'is default',
@@ -8,4 +7,5 @@ export default {
  		name: 'ctlg order by',
  		name_plural: 'ctlg order by',
  		name_plural_deleted: 'deleted ctlg order by',
+ 		title: 'title',
 }

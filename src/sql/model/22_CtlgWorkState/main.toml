@@ -26,9 +26,9 @@ triggers = [
 
 
 methods = [
-	"ctlg_work_state_list",
 	"ctlg_work_state_update",
 	"ctlg_work_state_get_by_id",
+	"ctlg_work_state_list",
 	"ctlg_work_state_trigger_before",
 	"ctlg_work_state_trigger_after"
 ]
