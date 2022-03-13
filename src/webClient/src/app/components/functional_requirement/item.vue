@@ -1,7 +1,7 @@
 <template>
   <q-page padding>
 
-    <comp-breadcrumb v-if="!isOpenInDialog" :list="[{label:'Функциональные требования', to:'/functional_requirement',  docType: 'functional_requirement'},  {label: item ? (item.title ? item.title : 'Редактирование') : '',  docType: 'edit'}]"/>
+    <comp-breadcrumb v-if="!isOpenInDialog" :list="[{label:'Функциональности', to:'/functional_requirement',  docType: 'functional_requirement'},  {label: item ? (item.title ? item.title : 'Редактирование') : '',  docType: 'edit'}]"/>
 
     <div v-if="item" class="q-mt-sm">
       <!--  поля формы    -->
@@ -109,7 +109,7 @@
     import currentUserMixin from '../../../app/mixins/currentUser'
     export default {
         props: ['id', 'isOpenInDialog'],
-        components: {taskListRefListWidget, bugListRefListWidget},
+        components: {bugListRefListWidget, taskListRefListWidget},
         mixins: [currentUserMixin,],
         computed: {
             docUrl: function() {

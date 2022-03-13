@@ -1,5 +1,5 @@
 docType = "FunctionalRequirement"
-tableComment = "функциональное требование"
+tableComment = "функциональность"
 
 tableName ="functional_requirement"
 

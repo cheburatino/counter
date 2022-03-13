@@ -7,8 +7,8 @@ import (
 
 const (
 	name            = "functional_requirement"
-	name_ru         = "функциональное требование"
-	name_ru_plural  = "функциональные требования"
+	name_ru         = "функциональность"
+	name_ru_plural  = "функциональности"
 	menu_icon       = "image/functional_requirement.svg"
 	breadcrumb_icon = "fas fa-square-root-alt"
 )

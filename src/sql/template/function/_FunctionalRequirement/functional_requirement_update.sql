@@ -1,4 +1,4 @@
--- создание функциональное требование
+-- создание функциональность
 
 DROP FUNCTION IF EXISTS functional_requirement_update(params JSONB);
 CREATE OR REPLACE FUNCTION functional_requirement_update(params JSONB)

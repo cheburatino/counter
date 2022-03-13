@@ -26,9 +26,9 @@ triggers = [
 
 
 methods = [
-	"ctlg_model_type_get_by_id",
 	"ctlg_model_type_list",
 	"ctlg_model_type_update",
+	"ctlg_model_type_get_by_id",
 	"ctlg_model_type_trigger_before",
 	"ctlg_model_type_trigger_after"
 ]
