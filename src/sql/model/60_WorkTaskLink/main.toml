@@ -30,9 +30,9 @@ triggers = [
 
 
 methods = [
+	"work_task_link_list",
 	"work_task_link_update",
 	"work_task_link_get_by_id",
-	"work_task_link_list",
 	"work_task_link_trigger_before",
 	"work_task_link_trigger_after"
 ]

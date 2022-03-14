@@ -1,7 +1,7 @@
 <template>
   <q-page padding>
 
-    <comp-breadcrumb v-if="!isOpenInDialog" :list="[{label:'Функциональности', to:'/functional_requirement',  docType: 'functional_requirement'},  {label: item ? (item.title ? item.title : 'Редактирование') : '',  docType: 'edit'}]"/>
+    <comp-breadcrumb v-if="!isOpenInDialog" :list="[{label:'Функциональность', to:'/functional_requirement',  docType: 'functional_requirement'},  {label: item ? (item.title ? item.title : 'Редактирование') : '',  docType: 'edit'}]"/>
 
     <div v-if="item" class="q-mt-sm">
       <!--  поля формы    -->
@@ -42,21 +42,6 @@
       </div>
       <div class="col-md-4 col-sm-6 col-xs-12">
           <comp-fld-img-list v-if="this.id != 'new'" :label="$t('functional_requirement.description_images')" :fld='item.description_images' :ext = '{tableName: "functional_requirement", tableId: this.id, fldName: "description_images"}' @update="v=> item.description_images = v" :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
-      </div>
-      </div>
-      
-      <div class="row q-col-gutter-md q-mb-sm">
-      <div class="col-md-8 col-sm-12 col-xs-12">
-          <q-input outlined type='text' v-model="item.description_for_dev" :label="$t('functional_requirement.description_for_dev')" autogrow :readonly='false'  class='q-mb-sm col-md-8 col-sm-12 col-xs-12' />
-      </div>
-      </div>
-      
-      <div class="row q-col-gutter-md q-mb-sm">
-      <div class="col-md-4 col-sm-6 col-xs-12">
-          <comp-fld-files v-if="this.id != 'new'" fldName='files_for_dev' :label="$t('functional_requirement.files_for_dev')" :fld='item.files_for_dev' :ext = '{tableName: "functional_requirement", tableId: this.id}' @update="v=> item.files_for_dev = v" :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
-      </div>
-      <div class="col-md-4 col-sm-6 col-xs-12">
-          <comp-fld-img-list v-if="this.id != 'new'" :label="$t('functional_requirement.images_for_dev')" :fld='item.images_for_dev' :ext = '{tableName: "functional_requirement", tableId: this.id, fldName: "images_for_dev"}' @update="v=> item.images_for_dev = v" :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
       </div>
       </div>
       
@@ -104,8 +89,8 @@
 </template>
 
 <script>
-	import bugListRefListWidget from './comp/bugListRefListWidget.vue'
 	import taskListRefListWidget from './comp/taskListRefListWidget.vue'
+	import bugListRefListWidget from './comp/bugListRefListWidget.vue'
     import currentUserMixin from '../../../app/mixins/currentUser'
     export default {
         props: ['id', 'isOpenInDialog'],
@@ -129,9 +114,6 @@
                         {name: 'description', label: 'описание'},
                         {name: 'description_files', label: 'файлы описания'},
                         {name: 'description_images', label: 'изображения описания'},
-                        {name: 'description_for_dev', label: 'описание для разработки'},
-                        {name: 'files_for_dev', label: 'файлы для разработки'},
-                        {name: 'images_for_dev', label: 'изображения для разработки'},
                         {name: 'result', label: 'результат'},
                         {name: 'result_files', label: 'файлы результата'},
                         {name: 'result_images', label: 'изображения результата'},

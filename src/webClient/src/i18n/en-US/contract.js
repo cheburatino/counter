@@ -1,13 +1,13 @@
 
 export default {
- 		name_plural: 'contract',
- 		state_id: 'state ',
  		description: 'description',
- 		signed: 'signed',
+ 		draft: 'draft',
  		name: 'contract',
+ 		name_plural: 'contract',
  		name_plural_deleted: 'deleted contract',
+ 		counterparty_id: 'counterparty ',
+ 		signed: 'signed',
  		title: 'title',
  		date: 'date',
- 		counterparty_id: 'counterparty ',
- 		draft: 'draft',
+ 		state_id: 'state ',
 }

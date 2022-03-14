@@ -44,16 +44,16 @@
       
       <div class="row q-col-gutter-md q-mb-sm">
       <div class="col-md-4 col-sm-6 col-xs-12">
-          <task-list-ref-list-widget v-if='item.id != -1' :id='item.id' :readonly='false'/>
+          <model-list-ref-list-widget v-if='item.id != -1' :id='item.id' :readonly='false'/>
       </div>
       <div class="col-md-4 col-sm-6 col-xs-12">
-          <model-list-ref-list-widget v-if='item.id != -1' :id='item.id' :readonly='false'/>
+          <functionality-list-ref-list-widget v-if='item.id != -1' :id='item.id' :readonly='false'/>
       </div>
       </div>
       
       <div class="row q-col-gutter-md q-mb-sm">
       <div class="col-md-4 col-sm-6 col-xs-12">
-          <ft-list-ref-list-widget v-if='item.id != -1' :id='item.id' :readonly='false'/>
+          <task-list-ref-list-widget v-if='item.id != -1' :id='item.id' :readonly='false'/>
       </div>
       <div class="col-md-4 col-sm-6 col-xs-12">
           <bug-list-ref-list-widget v-if='item.id != -1' :id='item.id' :readonly='false'/>
@@ -96,13 +96,13 @@
 
 <script>
 	import taskListRefListWidget from './comp/taskListRefListWidget.vue'
-	import modelListRefListWidget from './comp/modelListRefListWidget.vue'
-	import ftListRefListWidget from './comp/ftListRefListWidget.vue'
 	import bugListRefListWidget from './comp/bugListRefListWidget.vue'
+	import modelListRefListWidget from './comp/modelListRefListWidget.vue'
+	import functionalityListRefListWidget from './comp/functionalityListRefListWidget.vue'
     import currentUserMixin from '../../../app/mixins/currentUser'
     export default {
         props: ['id', 'isOpenInDialog'],
-        components: {taskListRefListWidget, modelListRefListWidget, ftListRefListWidget, bugListRefListWidget},
+        components: {modelListRefListWidget, functionalityListRefListWidget, taskListRefListWidget, bugListRefListWidget},
         mixins: [currentUserMixin,],
         computed: {
             docUrl: function() {

@@ -119,7 +119,6 @@
 </template>
 
 <script>
-	import ftListRefListWidget from './comp/ftListRefListWidget.vue'
 	import compExecutor from './comp/executor.vue'
 	import compCustomer from './comp/customer.vue'
 	import compCustomerAgent from './comp/customerAgent.vue'
@@ -127,12 +126,13 @@
 	import requestListRefListWidget from './comp/requestListRefListWidget.vue'
 	import taskListRefListWidget from './comp/taskListRefListWidget.vue'
 	import customerTaskListRefListWidget from './comp/customerTaskListRefListWidget.vue'
+	import ftListRefListWidget from './comp/ftListRefListWidget.vue'
 	import digitalSolutionListRefListWidget from './comp/digitalSolutionListRefListWidget.vue'
 	import bugListRefListWidget from './comp/bugListRefListWidget.vue'
     import currentUserMixin from '../../../app/mixins/currentUser'
     export default {
         props: ['id', 'isOpenInDialog'],
-        components: {taskListRefListWidget, customerTaskListRefListWidget, digitalSolutionListRefListWidget, bugListRefListWidget, compExecutor, compCustomer, compCustomerAgent, compRelation, requestListRefListWidget, ftListRefListWidget},
+        components: {compCustomerAgent, compRelation, requestListRefListWidget, compExecutor, compCustomer, ftListRefListWidget, digitalSolutionListRefListWidget, bugListRefListWidget, taskListRefListWidget, customerTaskListRefListWidget},
         mixins: [currentUserMixin,],
         computed: {
             docUrl: function() {

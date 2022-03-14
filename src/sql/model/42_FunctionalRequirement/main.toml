@@ -14,9 +14,6 @@ fields = [
 	{name="description",					type="text",	 comment="описание"},
 	{name="description_files",					type="jsonb",	 comment="файлы описания"},
 	{name="description_images",					type="jsonb",	 comment="изображения описания"},
-	{name="description_for_dev",					type="text",	 comment="описание для разработки"},
-	{name="files_for_dev",					type="jsonb",	 comment="файлы для разработки"},
-	{name="images_for_dev",					type="jsonb",	 comment="изображения для разработки"},
 	{name="result",					type="text",	 comment="результат"},
 	{name="result_files",					type="jsonb",	 comment="файлы результата"},
 	{name="result_images",					type="jsonb",	 comment="изображения результата"},
@@ -43,9 +40,9 @@ triggers = [
 
 
 methods = [
-	"functional_requirement_get_by_id",
 	"functional_requirement_list",
 	"functional_requirement_update",
+	"functional_requirement_get_by_id",
 	"functional_requirement_trigger_before",
 	"functional_requirement_trigger_after"
 ]
@@ -60,9 +57,6 @@ alterScripts = [
 	"alter table functional_requirement add column if not exists description text;",
 	"alter table functional_requirement add column if not exists description_files jsonb;",
 	"alter table functional_requirement add column if not exists description_images jsonb;",
-	"alter table functional_requirement add column if not exists description_for_dev text;",
-	"alter table functional_requirement add column if not exists files_for_dev jsonb;",
-	"alter table functional_requirement add column if not exists images_for_dev jsonb;",
 	"alter table functional_requirement add column if not exists result text;",
 	"alter table functional_requirement add column if not exists result_files jsonb;",
 	"alter table functional_requirement add column if not exists result_images jsonb;",

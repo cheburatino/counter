@@ -8,7 +8,7 @@ import (
 const (
 	name            = "functional_requirement"
 	name_ru         = "функциональность"
-	name_ru_plural  = "функциональности"
+	name_ru_plural  = "функциональность"
 	menu_icon       = "image/functional_requirement.svg"
 	breadcrumb_icon = "fas fa-square-root-alt"
 )
@@ -29,14 +29,14 @@ func GetDoc(project *t.ProjectType) t.DocType {
 			t.GetFldString("description", "описание", 0, [][]int{{3, 1}}, "col-8"),
 			t.GetFldFiles("description_files", "файлы описания", [][]int{{4, 1}}, t.FldVueFilesParams{}),
 			t.GetFldImgList("description_images", "изображения описания", [][]int{{4, 2}}, t.FldVueImgParams{}),
-			t.GetFldString("description_for_dev", "описание для разработки", 0, [][]int{{5, 1}}, "col-8"),
-			t.GetFldFiles("files_for_dev", "файлы для разработки", [][]int{{6, 1}}, t.FldVueFilesParams{}),
-			t.GetFldImgList("images_for_dev", "изображения для разработки", [][]int{{6, 2}}, t.FldVueImgParams{}),
-			// Задачи. Описание контрола после doc.Init {{7, 1}}
-			// Баги. Описание контрола после doc.Init {{7, 2}}
-			t.GetFldString("result", "результат", 0, [][]int{{8, 1}}, "col-8"),
-			t.GetFldFiles("result_files", "файлы результата", [][]int{{9, 1}}, t.FldVueFilesParams{}),
-			t.GetFldImgList("result_images", "изображения результата", [][]int{{9, 2}}, t.FldVueImgParams{}),
+			//t.GetFldString("description_for_dev", "описание для разработки", 0, [][]int{{5, 1}}, "col-8"),
+			//t.GetFldFiles("files_for_dev", "файлы для разработки", [][]int{{6, 1}}, t.FldVueFilesParams{}),
+			//t.GetFldImgList("images_for_dev", "изображения для разработки", [][]int{{6, 2}}, t.FldVueImgParams{}),
+			// Задачи. Описание контрола после doc.Init {{5, 1}}
+			// Баги. Описание контрола после doc.Init {{5, 2}}
+			t.GetFldString("result", "результат", 0, [][]int{{6, 1}}, "col-8"),
+			t.GetFldFiles("result_files", "файлы результата", [][]int{{7, 1}}, t.FldVueFilesParams{}),
+			t.GetFldImgList("result_images", "изображения результата", [][]int{{7, 2}}, t.FldVueImgParams{}),
 		},
 		Vue: t.DocVue{
 			RouteName:      name,
@@ -97,7 +97,7 @@ func GetDoc(project *t.ProjectType) t.DocType {
                <q-item-label>{{v.title}}</q-item-label>
                <q-item-label caption><q-badge color="orange">{{v.options.title.state_title}}</q-badge></q-item-label>
            `, // шаблон для названия в списке (vue синтаксис)
-	}, [][]int{{7, 1}}, "col-4").SetVif("currentUser.role?.includes(`admin`)"))
+	}, [][]int{{5, 1}}, "col-4").SetVif("currentUser.role?.includes(`admin`)"))
 
 	doc.AddFld(t.GetFldVueCompositionRefList(&doc, t.VueCompRefListWidgetParams{
 		Label:      "баги",                  // название списка, которе выводится на экране
@@ -112,7 +112,7 @@ func GetDoc(project *t.ProjectType) t.DocType {
                <q-item-label>{{v.title}}</q-item-label>
                <q-item-label caption><q-badge color="orange">{{v.options.title.state_title}}</q-badge></q-item-label>
            `, // шаблон для названия в списке (vue синтаксис)
-	}, [][]int{{7, 2}}, "col-4"))
+	}, [][]int{{5, 2}}, "col-4"))
 
 	return doc
 }
