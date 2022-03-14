@@ -119,20 +119,20 @@
 </template>
 
 <script>
-	import compExecutor from './comp/executor.vue'
-	import compRelation from './comp/relation.vue'
-	import requestListRefListWidget from './comp/requestListRefListWidget.vue'
 	import digitalSolutionListRefListWidget from './comp/digitalSolutionListRefListWidget.vue'
 	import bugListRefListWidget from './comp/bugListRefListWidget.vue'
-	import compCustomer from './comp/customer.vue'
-	import compCustomerAgent from './comp/customerAgent.vue'
-	import taskListRefListWidget from './comp/taskListRefListWidget.vue'
+	import compExecutor from './comp/executor.vue'
 	import customerTaskListRefListWidget from './comp/customerTaskListRefListWidget.vue'
 	import ftListRefListWidget from './comp/ftListRefListWidget.vue'
+	import taskListRefListWidget from './comp/taskListRefListWidget.vue'
+	import requestListRefListWidget from './comp/requestListRefListWidget.vue'
+	import compCustomer from './comp/customer.vue'
+	import compCustomerAgent from './comp/customerAgent.vue'
+	import compRelation from './comp/relation.vue'
     import currentUserMixin from '../../../app/mixins/currentUser'
     export default {
         props: ['id', 'isOpenInDialog'],
-        components: {compCustomerAgent, taskListRefListWidget, customerTaskListRefListWidget, ftListRefListWidget, bugListRefListWidget, compCustomer, compRelation, requestListRefListWidget, digitalSolutionListRefListWidget, compExecutor},
+        components: {compExecutor, customerTaskListRefListWidget, ftListRefListWidget, digitalSolutionListRefListWidget, bugListRefListWidget, compCustomer, compCustomerAgent, compRelation, taskListRefListWidget, requestListRefListWidget},
         mixins: [currentUserMixin,],
         computed: {
             docUrl: function() {

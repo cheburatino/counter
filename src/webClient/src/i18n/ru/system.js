@@ -1,12 +1,12 @@
 
 export default {
- 		name: 'система',
- 		name_plural_deleted: 'удаленные Системы',
+ 		title: 'название',
  		state: 'статус',
  		description: 'описание',
- 		images: 'изображения',
- 		customer_id: 'заказчик',
- 		name_plural: 'Системы',
- 		title: 'название',
  		files: 'файлы',
+ 		images: 'изображения',
+ 		name_plural_deleted: 'удаленные Системы',
+ 		name_plural: 'Системы',
+ 		customer_id: 'заказчик',
+ 		name: 'система',
 }
