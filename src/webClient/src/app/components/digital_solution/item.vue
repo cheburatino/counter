@@ -92,9 +92,9 @@
 </template>
 
 <script>
-	import taskListRefListWidget from './comp/taskListRefListWidget.vue'
 	import modelListRefListWidget from './comp/modelListRefListWidget.vue'
 	import functionalityListRefListWidget from './comp/functionalityListRefListWidget.vue'
+	import taskListRefListWidget from './comp/taskListRefListWidget.vue'
     import currentUserMixin from '../../../app/mixins/currentUser'
     export default {
         props: ['id', 'isOpenInDialog'],

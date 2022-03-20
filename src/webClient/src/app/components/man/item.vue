@@ -8,6 +8,12 @@
       
       <div class="row q-col-gutter-md q-mb-sm">
       <div class="col-md-4 col-sm-6 col-xs-12">
+          <q-input outlined type='text' v-model="item.title" :label="$t('man.title')" autogrow :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
+      </div>
+      </div>
+      
+      <div class="row q-col-gutter-md q-mb-sm">
+      <div class="col-md-2 col-sm-3 col-xs-6">
           <q-input outlined type='text' v-model="item.last_name" :label="$t('man.last_name')"  :readonly='false'  class='q-mb-sm col-md-2 col-sm-3 col-xs-6' />
       </div>
       <div class="col-md-2 col-sm-3 col-xs-6">
@@ -15,6 +21,9 @@
       </div>
       <div class="col-md-2 col-sm-3 col-xs-6">
           <q-input outlined type='text' v-model="item.middle_name" :label="$t('man.middle_name')"  :readonly='false'  class='q-mb-sm col-md-2 col-sm-3 col-xs-6' />
+      </div>
+      <div class="col-md-2 col-sm-3 col-xs-6">
+          <comp-fld-ref-search outlined pgMethod="user_list" :label="$t('man.user_table_id')" :item='item.user_table_title' :itemId='item.user_table_id' :ext='{"avatar":"image/users.svg","isClearable":"true","pathUrl":"/users"}' @update="v=> item.user_table_id = v.id" @clear="item.user_table_id = null" :readonly='false'  class='q-mb-sm col-md-2 col-sm-3 col-xs-6' />
       </div>
       </div>
       
@@ -24,12 +33,6 @@
       </div>
       <div class="col-md-4 col-sm-6 col-xs-12">
           <q-input outlined type='text' v-model="item.position" :label="$t('man.position')" autogrow :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
-      </div>
-      </div>
-      
-      <div class="row q-col-gutter-md q-mb-sm">
-      <div class="col-md-4 col-sm-6 col-xs-12">
-          <comp-fld-ref-search outlined pgMethod="user_list" :label="$t('man.user_table_id')" :item='item.user_table_title' :itemId='item.user_table_id' :ext='{"avatar":"image/users.svg","isClearable":"true","pathUrl":"/users"}' @update="v=> item.user_table_id = v.id" @clear="item.user_table_id = null" :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
       </div>
       </div>
       
@@ -65,9 +68,9 @@
                         {name: 'last_name', label: 'фамилия'},
                         {name: 'first_name', label: 'имя'},
                         {name: 'middle_name', label: 'отчество'},
+                        {name: 'user_table_id', label: 'пользователь'},
                         {name: 'company_id', label: 'компания'},
                         {name: 'position', label: 'должность'},
-                        {name: 'user_table_id', label: 'пользователь'},
                 ],
                 optionsFlds: [],
                 

@@ -43,16 +43,16 @@ BEGIN
         END IF;
         
 
-        EXECUTE ('INSERT INTO man (title, last_name, first_name, middle_name, company_id, position, user_table_id, options) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)  RETURNING *;')
+        EXECUTE ('INSERT INTO man (title, last_name, first_name, middle_name, user_table_id, company_id, position, options) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)  RETURNING *;')
 		INTO manRow
 		USING
 			(params ->> 'title')::text,
 			(params ->> 'last_name')::text,
 			(params ->> 'first_name')::text,
 			(params ->> 'middle_name')::text,
+			(params ->> 'user_table_id')::int,
 			(params ->> 'company_id')::int,
 			(params ->> 'position')::text,
-			(params ->> 'user_table_id')::int,
 			coalesce(params -> 'options', '{}')::jsonb;
 
         
@@ -63,9 +63,9 @@ BEGIN
 			['last_name', 'last_name', 'text'],
 			['first_name', 'first_name', 'text'],
 			['middle_name', 'middle_name', 'text'],
+			['user_table_id', 'user_table_id', 'number'],
 			['company_id', 'company_id', 'number'],
 			['position', 'position', 'text'],
-			['user_table_id', 'user_table_id', 'number'],
             ['options', 'options', 'jsonb'],
             ['deleted', 'deleted', 'bool']
             ]);

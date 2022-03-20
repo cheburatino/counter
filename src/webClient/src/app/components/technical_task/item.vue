@@ -79,7 +79,7 @@
     import currentUserMixin from '../../../app/mixins/currentUser'
     export default {
         props: ['id', 'isOpenInDialog'],
-        components: {functionalRequirementListRefListWidget, completionActListRefListWidget, invoiceListRefListWidget},
+        components: {completionActListRefListWidget, invoiceListRefListWidget, functionalRequirementListRefListWidget},
         mixins: [currentUserMixin,],
         computed: {
             docUrl: function() {
