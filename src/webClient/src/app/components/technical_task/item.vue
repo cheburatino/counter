@@ -73,13 +73,13 @@
 </template>
 
 <script>
+	import functionalRequirementListRefListWidget from './comp/functionalRequirementListRefListWidget.vue'
 	import completionActListRefListWidget from './comp/completionActListRefListWidget.vue'
 	import invoiceListRefListWidget from './comp/invoiceListRefListWidget.vue'
-	import functionalRequirementListRefListWidget from './comp/functionalRequirementListRefListWidget.vue'
     import currentUserMixin from '../../../app/mixins/currentUser'
     export default {
         props: ['id', 'isOpenInDialog'],
-        components: {completionActListRefListWidget, invoiceListRefListWidget, functionalRequirementListRefListWidget},
+        components: {invoiceListRefListWidget, functionalRequirementListRefListWidget, completionActListRefListWidget},
         mixins: [currentUserMixin,],
         computed: {
             docUrl: function() {

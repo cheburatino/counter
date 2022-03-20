@@ -25,7 +25,7 @@ func GetDoc(project *t.ProjectType) t.DocType {
 			t.GetFldRef("state_id", "статус", "ctlg_development_task_state", [][]int{{1, 3}}, "col-2"),
 			t.GetFldRef("digital_solution_id", "цифровое решение", "digital_solution", [][]int{{2, 1}}, "isShowLink", "isClearable"),
 			t.GetFldRef("responsible_id", "ответственный", "man", [][]int{{2, 2}}, "isShowLink", "isClearable", `ext: {"company_id": 1}`),
-			t.GetFldRef("sprint_id", "спринт", "sprint", [][]int{{3, 1}}, "col-2", "isShowLink", "isClearable").SetReadonly("item.state_id = 1"),
+			t.GetFldRef("sprint_id", "спринт", "sprint", [][]int{{3, 1}}, "col-2", "isShowLink", "isClearable").SetReadonly("item.state_id == 1"),
 			t.GetFldInt("estimate", "оценка", [][]int{{3, 2}}, "col-1"),
 			t.GetFldInt("internal_priority", "приоритет", [][]int{{3, 3}}, "col-1"),
 			t.GetFldDate("plan_end_date", "плановая дата завершения", [][]int{{3, 4}}, "col-2"),

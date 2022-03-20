@@ -29,7 +29,7 @@
       
       <div class="row q-col-gutter-md q-mb-sm">
       <div class="col-md-2 col-sm-3 col-xs-6">
-          <comp-fld-ref-search outlined pgMethod="sprint_list" :label="$t('development_task.sprint_id')" :item='item.sprint_title' :itemId='item.sprint_id' :ext='{"avatar":"image/sprint.svg","isClearable":"true","pathUrl":"/sprint"}' @update="v=> item.sprint_id = v.id" @clear="item.sprint_id = null" :readonly='item.state_id = 1'  class='q-mb-sm col-md-2 col-sm-3 col-xs-6' />
+          <comp-fld-ref-search outlined pgMethod="sprint_list" :label="$t('development_task.sprint_id')" :item='item.sprint_title' :itemId='item.sprint_id' :ext='{"avatar":"image/sprint.svg","isClearable":"true","pathUrl":"/sprint"}' @update="v=> item.sprint_id = v.id" @clear="item.sprint_id = null" :readonly='item.state_id == 1'  class='q-mb-sm col-md-2 col-sm-3 col-xs-6' />
       </div>
       <div class="col-md-1 col-sm-2 col-xs-6">
           <q-input outlined type='number' v-model="item.estimate" :label="$t('development_task.estimate')" :readonly='false'  class='q-mb-sm col-md-1 col-sm-2 col-xs-6' />
