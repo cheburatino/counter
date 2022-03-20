@@ -4,9 +4,9 @@ export default {
  		task_id: 'задача',
  		digital_solution_id: 'цифровое решение',
  		name: 'время',
- 		specialist_id: 'специалист',
- 		title: 'название',
- 		minute: 'кол-во минут',
  		name_plural: 'Время',
+ 		title: 'название',
  		name_plural_deleted: 'удаленные Время',
+ 		minute: 'кол-во минут',
+ 		specialist_id: 'специалист',
 }

@@ -19,11 +19,17 @@
       </div>
       
       <div class="row q-col-gutter-md q-mb-sm">
-      <div class="col-md-4 col-sm-6 col-xs-12">
-          <comp-fld-date outlined :label="$t('digital_solution.plan_date_end')" :date-string="$utils.formatPgDate(item.plan_date_end)" @update="v=> item.plan_date_end = v" :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
+      <div class="col-md-2 col-sm-3 col-xs-6">
+          <q-input outlined type='number' v-model="item.internal_priority" :label="$t('digital_solution.internal_priority')" :readonly='false'  class='q-mb-sm col-md-2 col-sm-3 col-xs-6' />
       </div>
-      <div class="col-md-4 col-sm-6 col-xs-12">
-          <comp-fld-date outlined :label="$t('digital_solution.fact_date_end')" :date-string="$utils.formatPgDate(item.fact_date_end)" @update="v=> item.fact_date_end = v" :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
+      <div class="col-md-2 col-sm-3 col-xs-6">
+          <q-input outlined type='number' v-model="item.customer_priority" :label="$t('digital_solution.customer_priority')" :readonly='false'  class='q-mb-sm col-md-2 col-sm-3 col-xs-6' />
+      </div>
+      <div class="col-md-2 col-sm-3 col-xs-6">
+          <comp-fld-date outlined :label="$t('digital_solution.plan_date_end')" :date-string="$utils.formatPgDate(item.plan_date_end)" @update="v=> item.plan_date_end = v" :readonly='false'  class='q-mb-sm col-md-2 col-sm-3 col-xs-6' />
+      </div>
+      <div class="col-md-2 col-sm-3 col-xs-6">
+          <comp-fld-date outlined :label="$t('digital_solution.fact_date_end')" :date-string="$utils.formatPgDate(item.fact_date_end)" @update="v=> item.fact_date_end = v" :readonly='false'  class='q-mb-sm col-md-2 col-sm-3 col-xs-6' />
       </div>
       </div>
       
@@ -105,6 +111,8 @@
                         {name: 'title', label: 'название',  required: true},
                         {name: 'system_id', label: 'система'},
                         {name: 'state_id', label: 'статус'},
+                        {name: 'internal_priority', label: 'внутренний приоритет'},
+                        {name: 'customer_priority', label: 'приоритет заказчика'},
                         {name: 'plan_date_end', label: 'планируемая дата завершения'},
                         {name: 'fact_date_end', label: 'фактическая дата завершения'},
                         {name: 'description', label: 'описание'},

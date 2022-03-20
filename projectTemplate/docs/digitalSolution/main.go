@@ -23,8 +23,10 @@ func GetDoc(project *t.ProjectType) t.DocType {
 			t.GetFldTitle(),
 			t.GetFldRef("system_id", "система", "system", [][]int{{1, 2}}, "col-2", "isShowLink", "isClearable"),
 			t.GetFldRef("state_id", "статус", "ctlg_digital_solution_state", [][]int{{1, 3}}, "col-2").SetDefault("1"),
-			t.GetFldDate("plan_date_end", "планируемая дата завершения", [][]int{{2, 1}}),
-			t.GetFldDate("fact_date_end", "фактическая дата завершения", [][]int{{2, 2}}),
+			t.GetFldInt("internal_priority", "внутренний приоритет", [][]int{{2, 1}}, "col-2"),
+			t.GetFldInt("customer_priority", "приоритет заказчика", [][]int{{2, 2}}, "col-2"),
+			t.GetFldDate("plan_date_end", "планируемая дата завершения", [][]int{{2, 3}}, "col-2"),
+			t.GetFldDate("fact_date_end", "фактическая дата завершения", [][]int{{2, 4}}, "col-2"),
 			t.GetFldString("description", "описание", 0, [][]int{{3, 1}}, "col-8"),
 			t.GetFldFiles("description_files", "файлы описания", [][]int{{4, 1}}, t.FldVueFilesParams{}),
 			t.GetFldImgList("description_images", "изображения описания", [][]int{{4, 2}}, t.FldVueImgParams{}),
@@ -71,14 +73,14 @@ func GetDoc(project *t.ProjectType) t.DocType {
 			return `
 				 <q-item-section>
 				    <q-item-label lines="1">{{item.title}}</q-item-label>
-					<q-item-label caption><q-badge>{{item.options.title.system_title}}</q-badge> <q-badge color="orange">{{item.options.title.state_title}}</q-badge></q-item-label>
+					<q-item-label caption><q-badge color="light-blue">{{item.internal_priority}}</q-badge> <q-badge color="primary">{{item.options.title.system_title}}</q-badge> <q-badge color="orange">{{item.options.title.state_title}}</q-badge> <q-badge v-if="item.customer_priority" color="light-green-5">CP: {{item.customer_priority}}</q-badge></q-item-label>
 				 </q-item-section>
 			`
 		},
 	}
 
 	doc.AddFld(t.GetFldVueCompositionRefList(&doc, t.VueCompRefListWidgetParams{
-		Label:      "задачи на разработку",              // название списка, которе выводится на экране
+		Label:      "задачи на разработку",            // название списка, которе выводится на экране
 		FldName:    "development_task_list",           // название поля. Любое, в формате snake_case. На основе этого названия формируется название компоненты во vue.
 		TableName:  "development_task",                // название связанной таблицы, из которой будут выгружаться записи
 		RefFldName: "digital_solution_id", // название поля в связанной таблицы, по которому осуществляется связь

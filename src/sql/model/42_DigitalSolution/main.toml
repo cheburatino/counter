@@ -8,6 +8,8 @@ fields = [
 	{name="title",					type="char",	size=150, 	ext="not null",	 comment="название"},
 	{name="system_id",					type="int",	 comment="система"},
 	{name="state_id",					type="int", 	ext=" default 1",	 comment="статус"},
+	{name="internal_priority",					type="int",	 comment="внутренний приоритет"},
+	{name="customer_priority",					type="int",	 comment="приоритет заказчика"},
 	{name="plan_date_end",					type="timestamp",	 comment="планируемая дата завершения"},
 	{name="fact_date_end",					type="timestamp",	 comment="фактическая дата завершения"},
 	{name="description",					type="text",	 comment="описание"},
@@ -38,9 +40,9 @@ triggers = [
 
 
 methods = [
+	"digital_solution_get_by_id",
 	"digital_solution_list",
 	"digital_solution_update",
-	"digital_solution_get_by_id",
 	"digital_solution_trigger_before",
 	"digital_solution_trigger_after"
 ]
@@ -49,6 +51,8 @@ alterScripts = [
 	"alter table digital_solution add column if not exists title CHARACTER VARYING(150);",
 	"alter table digital_solution add column if not exists system_id int;",
 	"alter table digital_solution add column if not exists state_id int;",
+	"alter table digital_solution add column if not exists internal_priority int;",
+	"alter table digital_solution add column if not exists customer_priority int;",
 	"alter table digital_solution add column if not exists plan_date_end timestamp;",
 	"alter table digital_solution add column if not exists fact_date_end timestamp;",
 	"alter table digital_solution add column if not exists description text;",
