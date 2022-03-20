@@ -22,11 +22,13 @@
 		</router-link>
 	
         
-        <q-item-section>
-          <q-item-label lines="1" >{{item.title}}</q-item-label>
-          
-        </q-item-section>
-	
+				 <q-item-section>
+				    <q-item-label lines="1">{{item.title}}</q-item-label>
+					<q-item-label caption>
+						<q-item-label caption><q-badge color="primary">{{item.options.title.digital_solution_title}}</q-badge> <q-badge color="orange">{{item.options.title.state_title}}</q-badge> <q-badge color="info">{{item.options.title.sprint_title}} спринт</q-badge></q-item-label>
+					</q-item-label>
+				 </q-item-section>
+			
         <q-item-section top side>
           <comp-item-dropdown-btn :item="item" itemProp="title" :is-edit="true" :is-delete="!(false || false)" fkProp=""
                                   pg-method="development_task_update"
