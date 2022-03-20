@@ -20,7 +20,7 @@
                 <q-item-section>
                     
                 <q-item-label>{{v.title}}</q-item-label>
-                <q-item-label caption><q-badge color="orange">{{v.options.title.state_title}}</q-badge></q-item-label>
+                <q-item-label caption><q-badge color="orange">{{v.options.title.state_title}}</q-badge> <q-badge color="info">{{v.options.title.type_title}}</q-badge></q-item-label>
             
                 </q-item-section>
                  <q-item-section side v-if="!readonly">

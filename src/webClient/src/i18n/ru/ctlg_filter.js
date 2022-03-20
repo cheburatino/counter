@@ -1,5 +1,6 @@
 
 export default {
+ 		name: 'фильтр',
  		name_plural: 'Фильтры',
  		name_plural_deleted: 'удаленные Фильтры',
  		title: 'название',
@@ -7,5 +8,4 @@ export default {
  		index: 'список',
  		is_default: 'по умолчанию',
  		where_str: 'условия фильтра',
- 		name: 'фильтр',
 }
