@@ -36,6 +36,12 @@ BEGIN
     ]);
 
     
+	-- показ только специалистов Электрона
+    if (params->>'company_id')::int notnull
+    then
+        whereStr = format('%s and company_id = %s', whereStr, (params->>'company_id')::int);
+    end if;
+				
 
     -- финальная сборка строки с условиями выборки (build_query_part_for_list - функция из папки base)
     condQueryStr = '' || whereStr || build_query_part_for_list(params);

@@ -27,7 +27,7 @@ func GetDoc(project *t.ProjectType) t.DocType {
 			t.GetFldRef("system_id", "система", "system", [][]int{{2, 2}}, "col-2", "isShowLink", "isClearable"),
 			t.GetFldRef("digital_solution_id", "цифровое решение", "digital_solution", [][]int{{2, 3}}, "col-2", "isShowLink", "isClearable"),
 			t.GetFldRef("development_task_id", "задача на разработку", "development_task", [][]int{{2, 4}}, "col-2", "isShowLink", "isClearable"),
-			t.GetFldRef("executor_id", "исполнитель", "man", [][]int{{3, 1}}, "col-2", "isShowLink", "isClearable"),
+			t.GetFldRef("executor_id", "исполнитель", "man", [][]int{{3, 1}}, "col-2", "isShowLink", "isClearable", `ext: {"company_id": 1}`),
 			t.GetFldInt("estimate", "оценка", [][]int{{3, 2}}, "col-1"),
 			t.GetFldInt("worked_time", "затрачено", [][]int{{3, 3}}, "col-1"),
 			t.GetFldDate("plan_end_date", "плановая дата завершения", [][]int{{3, 4}}, "col-2"),

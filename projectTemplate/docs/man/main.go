@@ -41,6 +41,15 @@ func GetDoc(project *t.ProjectType) t.DocType {
 			IsSearchText:    true,
 			IsBeforeTrigger: true,
 			IsAfterTrigger:  true,
+			Hooks: t.DocSqlHooks{
+				ListAfterBuildWhere: []string{`
+	-- показ только специалистов Электрона
+    if (params->>'company_id')::int notnull
+    then
+        whereStr = format('%s and company_id = %s', whereStr, (params->>'company_id')::int);
+    end if;
+				`},
+			},
 		},
 	}
 	// создаем стандартные методы sql "list", "update", "get_by_id" с возможностью ограничения по ролям
