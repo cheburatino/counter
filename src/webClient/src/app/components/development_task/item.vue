@@ -85,6 +85,13 @@
       <q-btn v-else color="secondary" :label="$t('message.save')" class="q-mr-sm" @click="save"/>
 
         
+            
+        <!-- кнопка сохранения, которая закреплена в углу экрана     -->
+	<q-page-sticky position="bottom-right" :offset="[18, 18]">
+	<q-btn size="sm" fab icon="save" color="primary" @click="save">
+	<q-tooltip>Сохранить</q-tooltip>
+	</q-btn>
+	</q-page-sticky>
 
     </div>
   </q-page>

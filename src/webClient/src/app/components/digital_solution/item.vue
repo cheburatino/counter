@@ -19,6 +19,15 @@
       </div>
       
       <div class="row q-col-gutter-md q-mb-sm">
+      <div class="col-md-4 col-sm-6 col-xs-12">
+          <comp-fld-date outlined :label="$t('digital_solution.plan_date_end')" :date-string="$utils.formatPgDate(item.plan_date_end)" @update="v=> item.plan_date_end = v" :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
+      </div>
+      <div class="col-md-4 col-sm-6 col-xs-12">
+          <comp-fld-date outlined :label="$t('digital_solution.fact_date_end')" :date-string="$utils.formatPgDate(item.fact_date_end)" @update="v=> item.fact_date_end = v" :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
+      </div>
+      </div>
+      
+      <div class="row q-col-gutter-md q-mb-sm">
       <div class="col-md-8 col-sm-12 col-xs-12">
           <q-input outlined type='text' v-model="item.description" :label="$t('digital_solution.description')" autogrow :readonly='false'  class='q-mb-sm col-md-8 col-sm-12 col-xs-12' />
       </div>
@@ -35,23 +44,8 @@
       
       <div class="row q-col-gutter-md q-mb-sm">
       <div class="col-md-4 col-sm-6 col-xs-12">
-          <comp-fld-date outlined :label="$t('digital_solution.plan_date_end')" :date-string="$utils.formatPgDate(item.plan_date_end)" @update="v=> item.plan_date_end = v" :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
+          <development-task-list-ref-list-widget v-if='item.id != -1' :id='item.id' :readonly='false'/>
       </div>
-      <div class="col-md-4 col-sm-6 col-xs-12">
-          <comp-fld-date outlined :label="$t('digital_solution.fact_date_end')" :date-string="$utils.formatPgDate(item.fact_date_end)" @update="v=> item.fact_date_end = v" :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
-      </div>
-      </div>
-      
-      <div class="row q-col-gutter-md q-mb-sm">
-      <div class="col-md-4 col-sm-6 col-xs-12">
-          <model-list-ref-list-widget v-if='item.id != -1' :id='item.id' :readonly='false'/>
-      </div>
-      <div class="col-md-4 col-sm-6 col-xs-12">
-          <functionality-list-ref-list-widget v-if='item.id != -1' :id='item.id' :readonly='false'/>
-      </div>
-      </div>
-      
-      <div class="row q-col-gutter-md q-mb-sm">
       <div class="col-md-4 col-sm-6 col-xs-12">
           <task-list-ref-list-widget v-if='item.id != -1' :id='item.id' :readonly='false'/>
       </div>
@@ -92,13 +86,12 @@
 </template>
 
 <script>
-	import modelListRefListWidget from './comp/modelListRefListWidget.vue'
-	import functionalityListRefListWidget from './comp/functionalityListRefListWidget.vue'
+	import developmentTaskListRefListWidget from './comp/developmentTaskListRefListWidget.vue'
 	import taskListRefListWidget from './comp/taskListRefListWidget.vue'
     import currentUserMixin from '../../../app/mixins/currentUser'
     export default {
         props: ['id', 'isOpenInDialog'],
-        components: {modelListRefListWidget, functionalityListRefListWidget, taskListRefListWidget},
+        components: {taskListRefListWidget, developmentTaskListRefListWidget},
         mixins: [currentUserMixin,],
         computed: {
             docUrl: function() {
@@ -112,11 +105,11 @@
                         {name: 'title', label: 'название',  required: true},
                         {name: 'system_id', label: 'система'},
                         {name: 'state_id', label: 'статус'},
+                        {name: 'plan_date_end', label: 'планируемая дата завершения'},
+                        {name: 'fact_date_end', label: 'фактическая дата завершения'},
                         {name: 'description', label: 'описание'},
                         {name: 'description_files', label: 'файлы описания'},
                         {name: 'description_images', label: 'изображения описания'},
-                        {name: 'plan_date_end', label: 'планируемая дата завершения'},
-                        {name: 'fact_date_end', label: 'фактическая дата завершения'},
                         {name: 'result', label: 'результат'},
                         {name: 'result_files', label: 'файлы результата'},
                         {name: 'result_images', label: 'изображения результата'},

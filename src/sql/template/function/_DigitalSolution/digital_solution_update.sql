@@ -39,7 +39,6 @@ BEGIN
     
     
     
-    
 
     if (params ->> 'id')::int = -1 then
         -- проверика наличия обязательных параметров
@@ -50,17 +49,17 @@ BEGIN
         END IF;
         
 
-        EXECUTE ('INSERT INTO digital_solution (title, system_id, state_id, description, description_files, description_images, plan_date_end, fact_date_end, result, result_files, result_images, options) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)  RETURNING *;')
+        EXECUTE ('INSERT INTO digital_solution (title, system_id, state_id, plan_date_end, fact_date_end, description, description_files, description_images, result, result_files, result_images, options) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)  RETURNING *;')
 		INTO digital_solutionRow
 		USING
 			(params ->> 'title')::text,
 			(params ->> 'system_id')::int,
 			coalesce((params ->> 'state_id')::int, 1)::int,
+			(params ->> 'plan_date_end')::timestamp,
+			(params ->> 'fact_date_end')::timestamp,
 			(params ->> 'description')::text,
 			(params -> 'description_files')::jsonb,
 			(params -> 'description_images')::jsonb,
-			(params ->> 'plan_date_end')::timestamp,
-			(params ->> 'fact_date_end')::timestamp,
 			(params ->> 'result')::text,
 			(params -> 'result_files')::jsonb,
 			(params -> 'result_images')::jsonb,
@@ -73,11 +72,11 @@ BEGIN
 			['title', 'title', 'text'],
 			['system_id', 'system_id', 'number'],
 			['state_id', 'state_id', 'number'],
+			['plan_date_end', 'plan_date_end', 'timestamp'],
+			['fact_date_end', 'fact_date_end', 'timestamp'],
 			['description', 'description', 'text'],
 			['description_files', 'description_files', 'jsonb'],
 			['description_images', 'description_images', 'jsonb'],
-			['plan_date_end', 'plan_date_end', 'timestamp'],
-			['fact_date_end', 'fact_date_end', 'timestamp'],
 			['result', 'result', 'text'],
 			['result_files', 'result_files', 'jsonb'],
 			['result_images', 'result_images', 'jsonb'],

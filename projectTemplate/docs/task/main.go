@@ -75,14 +75,6 @@ func GetDoc(project *t.ProjectType) t.DocType {
 
 	doc.Vue.AddFixedSaveBtn()
 
-	//doc.AddVueComposition("docItem", "executor")
-	//doc.AddVueComposition("docItem", "specialist")
-	//doc.AddVueComposition("docItem", "work")
-	//doc.AddVueComposition("docItem", "customer")
-	//doc.AddVueComposition("docItem", "relation")
-	//doc.AddVueComposition("docItem", "date")
-	//doc.AddVueComposition("docItem", "result")
-
 	doc.Vue.I18n = map[string]string{
 		"listTitle":        utils.UpperCaseFirst(name_ru_plural),
 		"listDeletedTitle": "Удаленные " + name_ru_plural,
