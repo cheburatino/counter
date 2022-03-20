@@ -20,7 +20,8 @@ func GetDoc(project *t.ProjectType) t.DocType {
 		NameRu:     name_ru,
 		PathPrefix: "docs",
 		Flds: []t.FldType{
-			t.GetFldTitleComputed("ltrim(rtrim(format('%s %s %s', new.last_name, new.first_name, new.middle_name)))").SetIsHide(),
+			//t.GetFldTitleComputed("ltrim(rtrim(format('%s %s %s', new.last_name, new.first_name, new.middle_name)))").SetIsHide(),
+			t.GetFldTitle(),
 			t.GetFldString("last_name", "фамилия", 30, [][]int{{1, 1}}, "col-2"),
 			t.GetFldString("first_name", "имя", 30, [][]int{{1, 2}}, "col-2"),
 			t.GetFldString("middle_name", "отчество", 30, [][]int{{1, 3}}, "col-2"),

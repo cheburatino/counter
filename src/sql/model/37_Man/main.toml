@@ -5,7 +5,7 @@ tableName ="man"
 
 fields = [
 	{name="id",			type="serial"},
-	{name="title",					type="text",	 comment="название"},
+	{name="title",					type="char",	size=150, 	ext="not null",	 comment="название"},
 	{name="last_name",					type="char",	size=30,	 comment="фамилия"},
 	{name="first_name",					type="char",	size=30,	 comment="имя"},
 	{name="middle_name",					type="char",	size=30,	 comment="отчество"},
@@ -20,6 +20,7 @@ fields = [
 ]
 
 fkConstraints = [
+	{name="man_title_already_exist", ext="UNIQUE (title)"},
 	{fld="company_id", ref="company", fk="id"},
 {fld="user_table_id", ref="\"user\"", fk="id"}
 ]
@@ -33,15 +34,15 @@ triggers = [
 
 
 methods = [
-	"man_list",
 	"man_update",
 	"man_get_by_id",
+	"man_list",
 	"man_trigger_before",
 	"man_trigger_after"
 ]
 
 alterScripts = [
-	"alter table man add column if not exists title text;",
+	"alter table man add column if not exists title CHARACTER VARYING(150);",
 	"alter table man add column if not exists last_name CHARACTER VARYING(30);",
 	"alter table man add column if not exists first_name CHARACTER VARYING(30);",
 	"alter table man add column if not exists middle_name CHARACTER VARYING(30);",

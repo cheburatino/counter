@@ -40,6 +40,12 @@ BEGIN
     
     
     
+    
+    
+    
+    
+    
+    
 
     if (params ->> 'id')::int = -1 then
         -- проверика наличия обязательных параметров
@@ -50,18 +56,24 @@ BEGIN
         END IF;
         
 
-        EXECUTE ('INSERT INTO functional_requirement (title, system_id, state_id, digital_solution_id, plan_end_date, fact_end_date, description, description_files, description_images, result, result_files, result_images, options) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13)  RETURNING *;')
+        EXECUTE ('INSERT INTO functional_requirement (title, state_id, system_id, digital_solution_id, sprint_id, estimate, worked_time, plan_end_date, fact_end_date, description, description_files, description_images, description_for_dev, files_for_dev, images_for_dev, result, result_files, result_images, options) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19)  RETURNING *;')
 		INTO functional_requirementRow
 		USING
 			(params ->> 'title')::text,
-			(params ->> 'system_id')::int,
 			coalesce((params ->> 'state_id')::int, 1)::int,
+			(params ->> 'system_id')::int,
 			(params ->> 'digital_solution_id')::int,
+			(params ->> 'sprint_id')::int,
+			(params ->> 'estimate')::int,
+			(params ->> 'worked_time')::int,
 			(params ->> 'plan_end_date')::timestamp,
 			(params ->> 'fact_end_date')::timestamp,
 			(params ->> 'description')::text,
 			(params -> 'description_files')::jsonb,
 			(params -> 'description_images')::jsonb,
+			(params ->> 'description_for_dev')::text,
+			(params -> 'files_for_dev')::jsonb,
+			(params -> 'images_for_dev')::jsonb,
 			(params ->> 'result')::text,
 			(params -> 'result_files')::jsonb,
 			(params -> 'result_images')::jsonb,
@@ -72,14 +84,20 @@ BEGIN
     else
         updateValue = '' || update_str_from_json(params, ARRAY [
 			['title', 'title', 'text'],
-			['system_id', 'system_id', 'number'],
 			['state_id', 'state_id', 'number'],
+			['system_id', 'system_id', 'number'],
 			['digital_solution_id', 'digital_solution_id', 'number'],
+			['sprint_id', 'sprint_id', 'number'],
+			['estimate', 'estimate', 'number'],
+			['worked_time', 'worked_time', 'number'],
 			['plan_end_date', 'plan_end_date', 'timestamp'],
 			['fact_end_date', 'fact_end_date', 'timestamp'],
 			['description', 'description', 'text'],
 			['description_files', 'description_files', 'jsonb'],
 			['description_images', 'description_images', 'jsonb'],
+			['description_for_dev', 'description_for_dev', 'text'],
+			['files_for_dev', 'files_for_dev', 'jsonb'],
+			['images_for_dev', 'images_for_dev', 'jsonb'],
 			['result', 'result', 'text'],
 			['result_files', 'result_files', 'jsonb'],
 			['result_images', 'result_images', 'jsonb'],

@@ -21,22 +21,25 @@ func GetDoc(project *t.ProjectType) t.DocType {
 		PathPrefix: "docs",
 		Flds: []t.FldType{
 			t.GetFldTitle(),
-			t.GetFldRef("system_id", "система", "system", [][]int{{1, 2}}, "col-2", "isShowLink", "isClearable"),
-			t.GetFldRef("state_id", "статус", "ctlg_functional_requirement_state", [][]int{{1, 3}}, "col-2").SetDefault("1"),
-			t.GetFldRef("digital_solution_id", "цифровое решение", "digital_solution", [][]int{{2, 1}}, "isShowLink", "isClearable"),
-			t.GetFldDate("plan_end_date", "плановая дата завершения", [][]int{{2, 2}}, "col-2"),
-			t.GetFldDate("fact_end_date", "фактическая дата завершения", [][]int{{2, 3}}, "col-2"),
-			t.GetFldString("description", "описание", 0, [][]int{{3, 1}}, "col-8"),
-			t.GetFldFiles("description_files", "файлы описания", [][]int{{4, 1}}, t.FldVueFilesParams{}),
-			t.GetFldImgList("description_images", "изображения описания", [][]int{{4, 2}}, t.FldVueImgParams{}),
-			//t.GetFldString("description_for_dev", "описание для разработки", 0, [][]int{{5, 1}}, "col-8"),
-			//t.GetFldFiles("files_for_dev", "файлы для разработки", [][]int{{6, 1}}, t.FldVueFilesParams{}),
-			//t.GetFldImgList("images_for_dev", "изображения для разработки", [][]int{{6, 2}}, t.FldVueImgParams{}),
-			// Задачи. Описание контрола после doc.Init {{5, 1}}
-			// Баги. Описание контрола после doc.Init {{5, 2}}
-			t.GetFldString("result", "результат", 0, [][]int{{6, 1}}, "col-8"),
-			t.GetFldFiles("result_files", "файлы результата", [][]int{{7, 1}}, t.FldVueFilesParams{}),
-			t.GetFldImgList("result_images", "изображения результата", [][]int{{7, 2}}, t.FldVueImgParams{}),
+			t.GetFldRef("state_id", "статус", "ctlg_functional_requirement_state", [][]int{{1, 2}}, "col-4").SetDefault("1"),
+			t.GetFldRef("system_id", "система", "system", [][]int{{2, 1}}, "col-4", "isShowLink", "isClearable"),
+			t.GetFldRef("digital_solution_id", "цифровое решение", "digital_solution", [][]int{{2, 2}}, "isShowLink", "isClearable"),
+			t.GetFldRef("sprint_id", "спринт", "sprint", [][]int{{3, 1}}, "col-2"),
+			t.GetFldInt("estimate", "оценка", [][]int{{3, 2}}, "col-1"),
+			t.GetFldInt("worked_time", "затрачено", [][]int{{3, 3}}, "col-1"),
+			t.GetFldDate("plan_end_date", "плановая дата завершения", [][]int{{3, 4}}, "col-2"),
+			t.GetFldDate("fact_end_date", "фактическая дата завершения", [][]int{{3, 5}}, "col-2"),
+			t.GetFldString("description", "описание", 0, [][]int{{4, 1}}, "col-8"),
+			t.GetFldFiles("description_files", "файлы описания", [][]int{{5, 1}}, t.FldVueFilesParams{}),
+			t.GetFldImgList("description_images", "изображения описания", [][]int{{5, 2}}, t.FldVueImgParams{}),
+			t.GetFldString("description_for_dev", "описание для разработки", 0, [][]int{{6, 1}}, "col-8"),
+			t.GetFldFiles("files_for_dev", "файлы для разработки", [][]int{{7, 1}}, t.FldVueFilesParams{}),
+			t.GetFldImgList("images_for_dev", "изображения для разработки", [][]int{{7, 2}}, t.FldVueImgParams{}),
+			// Задачи {{8, 1}}
+			// Баги {{8, 2}}
+			t.GetFldString("result", "результат", 0, [][]int{{9, 1}}, "col-8"),
+			t.GetFldFiles("result_files", "файлы результата", [][]int{{10, 1}}, t.FldVueFilesParams{}),
+			t.GetFldImgList("result_images", "изображения результата", [][]int{{10, 2}}, t.FldVueImgParams{}),
 		},
 		Vue: t.DocVue{
 			RouteName:      name,
@@ -97,7 +100,7 @@ func GetDoc(project *t.ProjectType) t.DocType {
                <q-item-label>{{v.title}}</q-item-label>
                <q-item-label caption><q-badge color="orange">{{v.options.title.state_title}}</q-badge></q-item-label>
            `, // шаблон для названия в списке (vue синтаксис)
-	}, [][]int{{5, 1}}, "col-4").SetVif("currentUser.role?.includes(`admin`)"))
+	}, [][]int{{8, 1}}, "col-4").SetVif("currentUser.role?.includes(`admin`)"))
 
 	doc.AddFld(t.GetFldVueCompositionRefList(&doc, t.VueCompRefListWidgetParams{
 		Label:      "баги",                  // название списка, которе выводится на экране
@@ -112,7 +115,7 @@ func GetDoc(project *t.ProjectType) t.DocType {
                <q-item-label>{{v.title}}</q-item-label>
                <q-item-label caption><q-badge color="orange">{{v.options.title.state_title}}</q-badge></q-item-label>
            `, // шаблон для названия в списке (vue синтаксис)
-	}, [][]int{{5, 2}}, "col-4"))
+	}, [][]int{{8, 2}}, "col-4"))
 
 	return doc
 }

@@ -35,6 +35,12 @@ BEGIN
     
 
     if (params ->> 'id')::int = -1 then
+        -- проверика наличия обязательных параметров
+        checkMsg = check_required_params(params, ARRAY ['title']);
+        IF checkMsg IS NOT NULL
+        THEN
+            RETURN checkMsg;
+        END IF;
         
 
         EXECUTE ('INSERT INTO man (title, last_name, first_name, middle_name, company_id, position, user_table_id, options) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)  RETURNING *;')

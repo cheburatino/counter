@@ -10,6 +10,9 @@ fields = [
 	{name="state_id",					type="int", 	ext=" default 1",	 comment="статус"},
 	{name="system_id",					type="int",	 comment="система"},
 	{name="digital_solution_id",					type="int",	 comment="цифровое решение"},
+	{name="sprint_id",					type="int",	 comment="спринт"},
+	{name="estimate",					type="int",	 comment="оценка"},
+	{name="worked_time",					type="int",	 comment="затрачено"},
 	{name="plan_end_date",					type="timestamp",	 comment="планируемая дата завершения"},
 	{name="fact_end_date",					type="timestamp",	 comment="фактическая дата завершения"},
 	{name="description",					type="text",	 comment="описание"},
@@ -30,7 +33,8 @@ fkConstraints = [
 	{fld="type_id", ref="ctlg_model_type", fk="id"},
 	{fld="state_id", ref="ctlg_model_state", fk="id"},
 	{fld="system_id", ref="system", fk="id"},
-	{fld="digital_solution_id", ref="digital_solution", fk="id"}
+	{fld="digital_solution_id", ref="digital_solution", fk="id"},
+	{fld="sprint_id", ref="sprint", fk="id"}
 ]
 
 triggers = [
@@ -42,9 +46,9 @@ triggers = [
 
 
 methods = [
+	"model_get_by_id",
 	"model_list",
 	"model_update",
-	"model_get_by_id",
 	"model_trigger_before",
 	"model_trigger_after"
 ]
@@ -55,6 +59,9 @@ alterScripts = [
 	"alter table model add column if not exists state_id int;",
 	"alter table model add column if not exists system_id int;",
 	"alter table model add column if not exists digital_solution_id int;",
+	"alter table model add column if not exists sprint_id int;",
+	"alter table model add column if not exists estimate int;",
+	"alter table model add column if not exists worked_time int;",
 	"alter table model add column if not exists plan_end_date timestamp;",
 	"alter table model add column if not exists fact_end_date timestamp;",
 	"alter table model add column if not exists description text;",

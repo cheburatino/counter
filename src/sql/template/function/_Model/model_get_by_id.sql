@@ -26,8 +26,9 @@ BEGIN
 		t2 as (select t1.*, c.title as type_title from t1 left join ctlg_model_type c on c.id = t1.type_id),
 		t3 as (select t2.*, c.title as state_title from t2 left join ctlg_model_state c on c.id = t2.state_id),
 		t4 as (select t3.*, c.title as system_title from t3 left join system c on c.id = t3.system_id),
-		t5 as (select t4.*, c.title as digital_solution_title from t4 left join digital_solution c on c.id = t4.digital_solution_id)
- 	select row_to_json(t5.*)::jsonb into result from t5;
+		t5 as (select t4.*, c.title as digital_solution_title from t4 left join digital_solution c on c.id = t4.digital_solution_id),
+		t6 as (select t5.*, c.title as sprint_title from t5 left join sprint c on c.id = t5.sprint_id)
+ 	select row_to_json(t6.*)::jsonb into result from t6;
 
     -- случай когда записи с таким id не найдено
     IF result ->> 'id' ISNULL

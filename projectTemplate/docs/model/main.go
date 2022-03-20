@@ -23,17 +23,20 @@ func GetDoc(project *t.ProjectType) t.DocType {
 			t.GetFldTitle(),
 			t.GetFldRef("type_id", "тип", "ctlg_model_type", [][]int{{1 ,2}}, "col-2"),
 			t.GetFldRef("state_id", "статус", "ctlg_model_state", [][]int{{1, 3}}, "col-2").SetDefault("1"),
-			t.GetFldRef("system_id", "система", "system", [][]int{{2, 1}}, "col-2", "isShowLink", "isClearable"),
-			t.GetFldRef("digital_solution_id", "цифровое решение", "digital_solution", [][]int{{2, 2}}, "col-2", "isShowLink", "isClearable"),
-			t.GetFldDate("plan_end_date", "планируемая дата завершения", [][]int{{2, 3}}, "col-2"),
-			t.GetFldDate("fact_end_date", "фактическая дата завершения", [][]int{{2, 4}}, "col-2"),
-			t.GetFldString("description", "описание", 0, [][]int{{3, 1}}, "col-8"),
-			t.GetFldFiles("description_files", "файлы описания", [][]int{{4, 1}}, t.FldVueFilesParams{}),
-			t.GetFldImgList("description_images", "изображения описания", [][]int{{4, 2}}, t.FldVueImgParams{}),
-			// Задачи {{5, 1}}
-			t.GetFldString("result", "результат", 0, [][]int{{6, 1}}, "col-8"),
-			t.GetFldFiles("result_files", "файлы результата", [][]int{{7, 1}}, t.FldVueFilesParams{}),
-			t.GetFldImgList("result_images", "изображения результата", [][]int{{7, 2}}, t.FldVueImgParams{}),
+			t.GetFldRef("system_id", "система", "system", [][]int{{2, 1}}, "isShowLink", "isClearable"),
+			t.GetFldRef("digital_solution_id", "цифровое решение", "digital_solution", [][]int{{2, 2}}, "isShowLink", "isClearable"),
+			t.GetFldRef("sprint_id", "спринт", "sprint", [][]int{{3, 1}}, "col-2", "isShowLink", "isClearable"),
+			t.GetFldInt("estimate", "оценка", [][]int{{3, 2}}, "col-1"),
+			t.GetFldInt("worked_time", "затрачено", [][]int{{3, 3}}, "col-1"),
+			t.GetFldDate("plan_end_date", "планируемая дата завершения", [][]int{{3, 4}}, "col-2"),
+			t.GetFldDate("fact_end_date", "фактическая дата завершения", [][]int{{3, 5}}, "col-2"),
+			t.GetFldString("description", "описание", 0, [][]int{{4, 1}}, "col-8"),
+			t.GetFldFiles("description_files", "файлы описания", [][]int{{5, 1}}, t.FldVueFilesParams{}),
+			t.GetFldImgList("description_images", "изображения описания", [][]int{{5, 2}}, t.FldVueImgParams{}),
+			// Задачи {{6, 1}}
+			t.GetFldString("result", "результат", 0, [][]int{{7, 1}}, "col-8"),
+			t.GetFldFiles("result_files", "файлы результата", [][]int{{8, 1}}, t.FldVueFilesParams{}),
+			t.GetFldImgList("result_images", "изображения результата", [][]int{{8, 2}}, t.FldVueImgParams{}),
 		},
 		Vue: t.DocVue{
 			RouteName:      name,
@@ -75,7 +78,7 @@ func GetDoc(project *t.ProjectType) t.DocType {
 					<q-badge color="orange">{{v.options.title.state_title}}</q-badge> <q-badge color="green-4">{{v.options.title.executor_title}}</q-badge> <q-badge color="info">{{v.plan_end_date}}</q-badge>
 				</q-item-label>
             `, // шаблон для названия в списке (vue синтаксис)
-	}, [][]int{{5, 1}}, "col-4"))
+	}, [][]int{{6, 1}}, "col-4"))
 
 	return doc
 }

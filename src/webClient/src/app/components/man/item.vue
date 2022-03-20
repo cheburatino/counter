@@ -61,7 +61,7 @@
             return {
                 item: null,
                 flds: [
-                        {name: 'title', label: 'название'},
+                        {name: 'title', label: 'название',  required: true},
                         {name: 'last_name', label: 'фамилия'},
                         {name: 'first_name', label: 'имя'},
                         {name: 'middle_name', label: 'отчество'},
