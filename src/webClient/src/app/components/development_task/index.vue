@@ -25,7 +25,7 @@
 				 <q-item-section>
 				    <q-item-label lines="1">{{item.title}}</q-item-label>
 					<q-item-label caption>
-						<q-item-label caption><q-badge color="blue-grey-3">{{item.internal_priority}}</q-badge> <q-badge color="orange">{{item.options.title.state_title}}</q-badge> <q-badge color="primary">{{item.options.title.digital_solution_title}}</q-badge> <q-badge v-if="sprint_id" color="info">{{item.options.title.sprint_title}} спринт</q-badge> <q-badge color="positive">{{item.options.title.responsible_title}}</q-badge></q-item-label>
+						<q-item-label caption><q-badge color="blue-grey-3">{{item.internal_priority}}</q-badge> <q-badge color="orange">{{item.options.title.state_title}}</q-badge> <q-badge color="primary">{{item.options.title.digital_solution_title}}</q-badge> <q-badge v-if="item.sprint_id" color="info">{{item.options.title.sprint_title}} спринт</q-badge> <q-badge color="positive">{{item.options.title.responsible_title}}</q-badge></q-item-label>
 						<q-item-label caption>Плановая дата завершения: {{$utils.formatPgDate(item.plan_end_date)}}</q-item-label>
 						<q-item-label v-if="item.fact_end_date" caption>Фактическая дата завершения: {{$utils.formatPgDate(item.fact_end_date)}}</q-item-label>
 					</q-item-label>
