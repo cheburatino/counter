@@ -1,12 +1,12 @@
 
 export default {
- 		name_plural_deleted: 'удаленные Время',
- 		minute: 'кол-во минут',
  		type_id: 'тип времени',
  		task_id: 'задача',
  		digital_solution_id: 'цифровое решение',
  		name: 'время',
- 		name_plural: 'Время',
- 		title: 'название',
  		specialist_id: 'специалист',
+ 		title: 'название',
+ 		minute: 'кол-во минут',
+ 		name_plural: 'Время',
+ 		name_plural_deleted: 'удаленные Время',
 }

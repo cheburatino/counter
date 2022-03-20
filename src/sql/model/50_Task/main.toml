@@ -14,7 +14,7 @@ fields = [
 	{name="development_task_id",					type="int",	 comment="задача на разработку"},
 	{name="executor_id",					type="int",	 comment="исполнитель"},
 	{name="estimate",					type="int",	 comment="оценка"},
-	{name="worked_time",					type="int",	 comment="затрачено"},
+	{name="specialist_priority",					type="int",	 comment="приоритет"},
 	{name="plan_end_date",					type="timestamp",	 comment="плановая дата завершения"},
 	{name="fact_end_date",					type="timestamp",	 comment="фактическая дата завершения"},
 	{name="description",					type="text",	 comment="описание"},
@@ -51,11 +51,11 @@ triggers = [
 
 
 methods = [
-	"task_get_specialist_role",
 	"task_list",
 	"task_update",
 	"task_get_by_id",
 	"task_get_specialist",
+	"task_get_specialist_role",
 	"task_trigger_before",
 	"task_trigger_after"
 ]
@@ -70,7 +70,7 @@ alterScripts = [
 	"alter table task add column if not exists development_task_id int;",
 	"alter table task add column if not exists executor_id int;",
 	"alter table task add column if not exists estimate int;",
-	"alter table task add column if not exists worked_time int;",
+	"alter table task add column if not exists specialist_priority int;",
 	"alter table task add column if not exists plan_end_date timestamp;",
 	"alter table task add column if not exists fact_end_date timestamp;",
 	"alter table task add column if not exists description text;",

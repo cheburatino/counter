@@ -57,7 +57,7 @@ BEGIN
         END IF;
         
 
-        EXECUTE ('INSERT INTO task (title, needs_discussion, state_id, type_id, system_id, digital_solution_id, development_task_id, executor_id, estimate, worked_time, plan_end_date, fact_end_date, description, files, images, process, process_files, process_images, result, result_files, result_images, options) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21, $22)  RETURNING *;')
+        EXECUTE ('INSERT INTO task (title, needs_discussion, state_id, type_id, system_id, digital_solution_id, development_task_id, executor_id, estimate, specialist_priority, plan_end_date, fact_end_date, description, files, images, process, process_files, process_images, result, result_files, result_images, options) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21, $22)  RETURNING *;')
 		INTO taskRow
 		USING
 			(params ->> 'title')::text,
@@ -69,7 +69,7 @@ BEGIN
 			(params ->> 'development_task_id')::int,
 			(params ->> 'executor_id')::int,
 			(params ->> 'estimate')::int,
-			(params ->> 'worked_time')::int,
+			(params ->> 'specialist_priority')::int,
 			(params ->> 'plan_end_date')::timestamp,
 			(params ->> 'fact_end_date')::timestamp,
 			(params ->> 'description')::text,
@@ -96,7 +96,7 @@ BEGIN
 			['development_task_id', 'development_task_id', 'number'],
 			['executor_id', 'executor_id', 'number'],
 			['estimate', 'estimate', 'number'],
-			['worked_time', 'worked_time', 'number'],
+			['specialist_priority', 'specialist_priority', 'number'],
 			['plan_end_date', 'plan_end_date', 'timestamp'],
 			['fact_end_date', 'fact_end_date', 'timestamp'],
 			['description', 'description', 'text'],

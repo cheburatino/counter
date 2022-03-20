@@ -29,7 +29,7 @@ func GetDoc(project *t.ProjectType) t.DocType {
 			t.GetFldRef("development_task_id", "задача на разработку", "development_task", [][]int{{2, 4}}, "col-2", "isShowLink", "isClearable"),
 			t.GetFldRef("executor_id", "исполнитель", "man", [][]int{{3, 1}}, "col-2", "isShowLink", "isClearable", `ext: {"company_id": 1}`),
 			t.GetFldInt("estimate", "оценка", [][]int{{3, 2}}, "col-1"),
-			t.GetFldInt("worked_time", "затрачено", [][]int{{3, 3}}, "col-1"),
+			t.GetFldInt("specialist_priority", "приоритет", [][]int{{3, 3}}, "col-1"),
 			t.GetFldDate("plan_end_date", "плановая дата завершения", [][]int{{3, 4}}, "col-2"),
 			t.GetFldDate("fact_end_date", "фактическая дата завершения", [][]int{{3, 5}}, "col-2"),
 			t.GetFldString("description", "описание", 0, [][]int{{4, 1}}, "col-8"),

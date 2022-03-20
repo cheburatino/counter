@@ -46,9 +46,9 @@ triggers = [
 
 
 methods = [
-	"functional_requirement_list",
 	"functional_requirement_update",
 	"functional_requirement_get_by_id",
+	"functional_requirement_list",
 	"functional_requirement_trigger_before",
 	"functional_requirement_trigger_after"
 ]

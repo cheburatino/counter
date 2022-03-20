@@ -42,6 +42,7 @@ BEGIN
     
     
     
+    
 
     if (params ->> 'id')::int = -1 then
         -- проверика наличия обязательных параметров
@@ -52,7 +53,7 @@ BEGIN
         END IF;
         
 
-        EXECUTE ('INSERT INTO development_task (title, type_id, state_id, digital_solution_id, responsible_id, sprint_id, extimate, plan_end_date, fact_end_date, describtion, description_files, describtion_images, result, result_files, result_images, options) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16)  RETURNING *;')
+        EXECUTE ('INSERT INTO development_task (title, type_id, state_id, digital_solution_id, responsible_id, sprint_id, estimate, internal_priority, plan_end_date, fact_end_date, description, description_files, description_images, result, result_files, result_images, options) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17)  RETURNING *;')
 		INTO development_taskRow
 		USING
 			(params ->> 'title')::text,
@@ -61,12 +62,13 @@ BEGIN
 			(params ->> 'digital_solution_id')::int,
 			(params ->> 'responsible_id')::int,
 			(params ->> 'sprint_id')::int,
-			(params ->> 'extimate')::int,
+			(params ->> 'estimate')::int,
+			(params ->> 'internal_priority')::int,
 			(params ->> 'plan_end_date')::timestamp,
 			(params ->> 'fact_end_date')::timestamp,
-			(params ->> 'describtion')::text,
+			(params ->> 'description')::text,
 			(params -> 'description_files')::jsonb,
-			(params -> 'describtion_images')::jsonb,
+			(params -> 'description_images')::jsonb,
 			(params ->> 'result')::text,
 			(params -> 'result_files')::jsonb,
 			(params -> 'result_images')::jsonb,
@@ -82,12 +84,13 @@ BEGIN
 			['digital_solution_id', 'digital_solution_id', 'number'],
 			['responsible_id', 'responsible_id', 'number'],
 			['sprint_id', 'sprint_id', 'number'],
-			['extimate', 'extimate', 'number'],
+			['estimate', 'estimate', 'number'],
+			['internal_priority', 'internal_priority', 'number'],
 			['plan_end_date', 'plan_end_date', 'timestamp'],
 			['fact_end_date', 'fact_end_date', 'timestamp'],
-			['describtion', 'describtion', 'text'],
+			['description', 'description', 'text'],
 			['description_files', 'description_files', 'jsonb'],
-			['describtion_images', 'describtion_images', 'jsonb'],
+			['description_images', 'description_images', 'jsonb'],
 			['result', 'result', 'text'],
 			['result_files', 'result_files', 'jsonb'],
 			['result_images', 'result_images', 'jsonb'],

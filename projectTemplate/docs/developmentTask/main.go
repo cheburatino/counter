@@ -20,18 +20,19 @@ func GetDoc(project *t.ProjectType) t.DocType {
 		NameRu:     name_ru,
 		PathPrefix: "docs",
 		Flds: []t.FldType{
-			t.GetFldTitle(),
+			t.GetFldTitle().SetIsNotUniq(),
 			t.GetFldRef("type_id", "тип", "ctlg_development_task_type", [][]int{{1, 2}}, "col-2"),
 			t.GetFldRef("state_id", "статус", "ctlg_development_task_state", [][]int{{1, 3}}, "col-2"),
 			t.GetFldRef("digital_solution_id", "цифровое решение", "digital_solution", [][]int{{2, 1}}, "isShowLink", "isClearable"),
 			t.GetFldRef("responsible_id", "ответственный", "man", [][]int{{2, 2}}, "isShowLink", "isClearable", `ext: {"company_id": 1}`),
-			t.GetFldRef("sprint_id", "спринт", "sprint", [][]int{{3, 1}}, "col-2", "isShowLink", "isClearable"),
-			t.GetFldInt("extimate", "оценка", [][]int{{3, 2}}, "col-2"),
-			t.GetFldDate("plan_end_date", "плановая дата завершения", [][]int{{3, 3}}, "col-2"),
-			t.GetFldDate("fact_end_date", "фактическая дата завершения", [][]int{{3, 4}}, "col-2"),
-			t.GetFldString("describtion", "описание", 0, [][]int{{4, 1}}, "col-8"),
+			t.GetFldRef("sprint_id", "спринт", "sprint", [][]int{{3, 1}}, "col-2", "isShowLink", "isClearable").SetReadonly("item.state_id = 1"),
+			t.GetFldInt("estimate", "оценка", [][]int{{3, 2}}, "col-1"),
+			t.GetFldInt("internal_priority", "приоритет", [][]int{{3, 3}}, "col-1"),
+			t.GetFldDate("plan_end_date", "плановая дата завершения", [][]int{{3, 4}}, "col-2"),
+			t.GetFldDate("fact_end_date", "фактическая дата завершения", [][]int{{3, 5}}, "col-2"),
+			t.GetFldString("description", "описание", 0, [][]int{{4, 1}}, "col-8"),
 			t.GetFldFiles("description_files", "файлы описания", [][]int{{5, 1}}, t.FldVueFilesParams{}),
-			t.GetFldImgList("describtion_images", "изображения описания", [][]int{{5, 2}}, t.FldVueImgParams{}),
+			t.GetFldImgList("description_images", "изображения описания", [][]int{{5, 2}}, t.FldVueImgParams{}),
 			// Задачи {{6, 1}}
 			t.GetFldString("result", "результат", 0, [][]int{{7, 1}}, "col-8"),
 			t.GetFldFiles("result_files", "файлы результата", [][]int{{8, 1}}, t.FldVueFilesParams{}),
@@ -71,7 +72,7 @@ func GetDoc(project *t.ProjectType) t.DocType {
 				 <q-item-section>
 				    <q-item-label lines="1">{{item.title}}</q-item-label>
 					<q-item-label caption>
-						<q-item-label caption><q-badge color="primary">{{item.options.title.digital_solution_title}}</q-badge> <q-badge color="orange">{{item.options.title.state_title}}</q-badge> <q-badge v-if="sprint_id" color="info">{{item.options.title.sprint_title}} спринт</q-badge> <q-badge color="positive">{{item.options.title.responsible_title}}</q-badge></q-item-label>
+						<q-item-label caption><q-badge color="blue-grey-3">{{item.internal_priority}}</q-badge> <q-badge color="orange">{{item.options.title.state_title}}</q-badge> <q-badge color="primary">{{item.options.title.digital_solution_title}}</q-badge> <q-badge v-if="sprint_id" color="info">{{item.options.title.sprint_title}} спринт</q-badge> <q-badge color="positive">{{item.options.title.responsible_title}}</q-badge></q-item-label>
 						<q-item-label caption>Плановая дата завершения: {{$utils.formatPgDate(item.plan_end_date)}}</q-item-label>
 						<q-item-label v-if="item.fact_end_date" caption>Фактическая дата завершения: {{$utils.formatPgDate(item.fact_end_date)}}</q-item-label>
 					</q-item-label>

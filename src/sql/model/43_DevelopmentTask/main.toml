@@ -11,12 +11,13 @@ fields = [
 	{name="digital_solution_id",					type="int",	 comment="цифровое решение"},
 	{name="responsible_id",					type="int",	 comment="ответственный"},
 	{name="sprint_id",					type="int",	 comment="спринт"},
-	{name="extimate",					type="int",	 comment="оценка"},
+	{name="estimate",					type="int",	 comment="оценка"},
+	{name="internal_priority",					type="int",	 comment="приоритет"},
 	{name="plan_end_date",					type="timestamp",	 comment="плановая дата завершения"},
 	{name="fact_end_date",					type="timestamp",	 comment="фактическая дата завершения"},
-	{name="describtion",					type="text",	 comment="описание"},
+	{name="description",					type="text",	 comment="описание"},
 	{name="description_files",					type="jsonb",	 comment="файлы описания"},
-	{name="describtion_images",					type="jsonb",	 comment="изображения описания"},
+	{name="description_images",					type="jsonb",	 comment="изображения описания"},
 	{name="result",					type="text",	 comment="результат"},
 	{name="result_files",					type="jsonb",	 comment="файлы результата"},
 	{name="result_images",					type="jsonb",	 comment="изображения результата"},
@@ -28,7 +29,6 @@ fields = [
 ]
 
 fkConstraints = [
-	{name="development_task_title_already_exist", ext="UNIQUE (title)"},
 	{fld="type_id", ref="ctlg_development_task_type", fk="id"},
 	{fld="state_id", ref="ctlg_development_task_state", fk="id"},
 	{fld="digital_solution_id", ref="digital_solution", fk="id"},
@@ -45,9 +45,9 @@ triggers = [
 
 
 methods = [
-	"development_task_list",
 	"development_task_update",
 	"development_task_get_by_id",
+	"development_task_list",
 	"development_task_trigger_before",
 	"development_task_trigger_after"
 ]
@@ -59,12 +59,13 @@ alterScripts = [
 	"alter table development_task add column if not exists digital_solution_id int;",
 	"alter table development_task add column if not exists responsible_id int;",
 	"alter table development_task add column if not exists sprint_id int;",
-	"alter table development_task add column if not exists extimate int;",
+	"alter table development_task add column if not exists estimate int;",
+	"alter table development_task add column if not exists internal_priority int;",
 	"alter table development_task add column if not exists plan_end_date timestamp;",
 	"alter table development_task add column if not exists fact_end_date timestamp;",
-	"alter table development_task add column if not exists describtion text;",
+	"alter table development_task add column if not exists description text;",
 	"alter table development_task add column if not exists description_files jsonb;",
-	"alter table development_task add column if not exists describtion_images jsonb;",
+	"alter table development_task add column if not exists description_images jsonb;",
 	"alter table development_task add column if not exists result text;",
 	"alter table development_task add column if not exists result_files jsonb;",
 	"alter table development_task add column if not exists result_images jsonb;",

@@ -29,10 +29,13 @@
       
       <div class="row q-col-gutter-md q-mb-sm">
       <div class="col-md-2 col-sm-3 col-xs-6">
-          <comp-fld-ref-search outlined pgMethod="sprint_list" :label="$t('development_task.sprint_id')" :item='item.sprint_title' :itemId='item.sprint_id' :ext='{"avatar":"image/sprint.svg","isClearable":"true","pathUrl":"/sprint"}' @update="v=> item.sprint_id = v.id" @clear="item.sprint_id = null" :readonly='false'  class='q-mb-sm col-md-2 col-sm-3 col-xs-6' />
+          <comp-fld-ref-search outlined pgMethod="sprint_list" :label="$t('development_task.sprint_id')" :item='item.sprint_title' :itemId='item.sprint_id' :ext='{"avatar":"image/sprint.svg","isClearable":"true","pathUrl":"/sprint"}' @update="v=> item.sprint_id = v.id" @clear="item.sprint_id = null" :readonly='item.state_id = 1'  class='q-mb-sm col-md-2 col-sm-3 col-xs-6' />
       </div>
-      <div class="col-md-2 col-sm-3 col-xs-6">
-          <q-input outlined type='number' v-model="item.extimate" :label="$t('development_task.extimate')" :readonly='false'  class='q-mb-sm col-md-2 col-sm-3 col-xs-6' />
+      <div class="col-md-1 col-sm-2 col-xs-6">
+          <q-input outlined type='number' v-model="item.estimate" :label="$t('development_task.estimate')" :readonly='false'  class='q-mb-sm col-md-1 col-sm-2 col-xs-6' />
+      </div>
+      <div class="col-md-1 col-sm-2 col-xs-6">
+          <q-input outlined type='number' v-model="item.internal_priority" :label="$t('development_task.internal_priority')" :readonly='false'  class='q-mb-sm col-md-1 col-sm-2 col-xs-6' />
       </div>
       <div class="col-md-2 col-sm-3 col-xs-6">
           <comp-fld-date outlined :label="$t('development_task.plan_end_date')" :date-string="$utils.formatPgDate(item.plan_end_date)" @update="v=> item.plan_end_date = v" :readonly='false'  class='q-mb-sm col-md-2 col-sm-3 col-xs-6' />
@@ -44,7 +47,7 @@
       
       <div class="row q-col-gutter-md q-mb-sm">
       <div class="col-md-8 col-sm-12 col-xs-12">
-          <q-input outlined type='text' v-model="item.describtion" :label="$t('development_task.describtion')" autogrow :readonly='false'  class='q-mb-sm col-md-8 col-sm-12 col-xs-12' />
+          <q-input outlined type='text' v-model="item.description" :label="$t('development_task.description')" autogrow :readonly='false'  class='q-mb-sm col-md-8 col-sm-12 col-xs-12' />
       </div>
       </div>
       
@@ -53,7 +56,7 @@
           <comp-fld-files v-if="this.id != 'new'" fldName='description_files' :label="$t('development_task.description_files')" :fld='item.description_files' :ext = '{tableName: "development_task", tableId: this.id}' @update="v=> item.description_files = v" :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
       </div>
       <div class="col-md-4 col-sm-6 col-xs-12">
-          <comp-fld-img-list v-if="this.id != 'new'" :label="$t('development_task.describtion_images')" :fld='item.describtion_images' :ext = '{tableName: "development_task", tableId: this.id, fldName: "describtion_images"}' @update="v=> item.describtion_images = v" :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
+          <comp-fld-img-list v-if="this.id != 'new'" :label="$t('development_task.description_images')" :fld='item.description_images' :ext = '{tableName: "development_task", tableId: this.id, fldName: "description_images"}' @update="v=> item.description_images = v" :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
       </div>
       </div>
       
@@ -119,12 +122,13 @@
                         {name: 'digital_solution_id', label: 'цифровое решение'},
                         {name: 'responsible_id', label: 'ответственный'},
                         {name: 'sprint_id', label: 'спринт'},
-                        {name: 'extimate', label: 'оценка'},
+                        {name: 'estimate', label: 'оценка'},
+                        {name: 'internal_priority', label: 'приоритет'},
                         {name: 'plan_end_date', label: 'плановая дата завершения'},
                         {name: 'fact_end_date', label: 'фактическая дата завершения'},
-                        {name: 'describtion', label: 'описание'},
+                        {name: 'description', label: 'описание'},
                         {name: 'description_files', label: 'файлы описания'},
-                        {name: 'describtion_images', label: 'изображения описания'},
+                        {name: 'description_images', label: 'изображения описания'},
                         {name: 'result', label: 'результат'},
                         {name: 'result_files', label: 'файлы результата'},
                         {name: 'result_images', label: 'изображения результата'},
