@@ -1,0 +1,21 @@
+
+export default {
+ 		type_id: 'type ',
+ 		responsible_id: 'responsible ',
+ 		describtion: 'describtion',
+ 		result_files: 'result files',
+ 		name_plural: 'development task',
+ 		title: 'title',
+ 		sprint_id: 'sprint ',
+ 		description_files: 'description files',
+ 		result_images: 'result images',
+ 		state_id: 'state ',
+ 		plan_end_date: 'plan end date',
+ 		result: 'result',
+ 		name: 'development task',
+ 		name_plural_deleted: 'deleted development task',
+ 		digital_solution_id: 'digital solution ',
+ 		extimate: 'extimate',
+ 		fact_end_date: 'fact end date',
+ 		describtion_images: 'describtion images',
+}

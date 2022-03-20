@@ -1,0 +1,21 @@
+
+export default {
+ 		state_id: 'статус',
+ 		digital_solution_id: 'цифровое решение',
+ 		result: 'результат',
+ 		name_plural: 'Задачи по разработке',
+ 		title: 'название',
+ 		extimate: 'оценка',
+ 		plan_end_date: 'плановая дата завершения',
+ 		describtion: 'описание',
+ 		result_files: 'файлы результата',
+ 		type_id: 'тип',
+ 		responsible_id: 'ответственный',
+ 		sprint_id: 'спринт',
+ 		describtion_images: 'изображения описания',
+ 		name: 'задача по разработке',
+ 		name_plural_deleted: 'удаленные Задачи по разработке',
+ 		fact_end_date: 'фактическая дата завершения',
+ 		description_files: 'файлы описания',
+ 		result_images: 'изображения результата',
+}

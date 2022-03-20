@@ -72,6 +72,8 @@
 
 									{icon: 'image/digital_solution.svg', text: 'i18n_menu.digital_solution', url: '/digital_solution', roles: ['admin', 'specialist', 'customer']},
 
+									{icon: 'image/development_task.png', text: 'i18n_menu.development_task', url: '/development_task', roles: ['admin', 'specialist', 'customer']},
+
 									{icon: 'image/model.svg', text: 'i18n_menu.model', url: '/model', roles: ['admin', 'specialist', 'customer']},
 
 									{icon: 'image/functional_requirement.svg', text: 'i18n_menu.functional_requirement', url: '/functional_requirement', roles: ['admin', 'specialist', 'customer']},
@@ -95,13 +97,8 @@
 									{icon: 'image/payment.png', text: 'i18n_menu.payment', url: '/payment', roles: ['admin']},
 {isFolder: true, icon: 'image/catalog.svg', text: 'Справочники', roles: ['admin'], linkList: 								[
 								{icon: 'image/user.svg', text: 'Пользователи', url: '/users', roles: []},
-								{icon: '', text: 'Статусы запросов', url: '/ctlg_request_state', roles: []},
-								{icon: '', text: 'Статусы моделей', url: '/ctlg_model_state', roles: []},
-								{icon: '', text: 'Типы моделей', url: '/ctlg_model_type', roles: []},
-								{icon: '', text: 'Статусы функциональных требований', url: '/ctlg_functional_requirement_state', roles: []},
-								{icon: '', text: 'Роли специалистов в функциональных требованиях', url: '/ctlg_functional_requirement_specialist_role', roles: []},
-								{icon: '', text: 'Статусы цифровых решений', url: '/ctlg_digital_solution_state', roles: []},
-								{icon: '', text: 'Роли специалистов в цифровых решениях', url: '/ctlg_digital_solution_specialist_role', roles: []},
+								{icon: '', text: 'Статусы задач на разработку', url: '/ctlg_development_task_state', roles: []},
+								{icon: '', text: 'Типы задач на разработку', url: '/ctlg_development_task_type', roles: []},
 								{icon: '', text: 'Типы задач', url: '/ctlg_task_type', roles: []},
 								{icon: '', text: 'Статусы задач', url: '/ctlg_task_state', roles: []},
 								{icon: '', text: 'Роли в задачах', url: '/ctlg_task_role', roles: []},

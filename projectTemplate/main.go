@@ -12,6 +12,8 @@ import (
 	"github.com/cheburatino/electron_is/projectTemplate/docs/ctlgBugState"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/ctlgCompletionActState"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/ctlgContractState"
+	"github.com/cheburatino/electron_is/projectTemplate/docs/ctlgDevelopmentTaskState"
+	"github.com/cheburatino/electron_is/projectTemplate/docs/ctlgDevelopmentTaskType"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/ctlgDigitalSolutionSpecialistRole"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/ctlgDigitalSolutionState"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/ctlgFilter"
@@ -32,6 +34,7 @@ import (
 	"github.com/cheburatino/electron_is/projectTemplate/docs/ctlgWorkSpecialistRole"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/ctlgWorkState"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/customerTask"
+	"github.com/cheburatino/electron_is/projectTemplate/docs/developmentTask"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/digitalSolution"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/digitalSolutionCustomerAgentLink"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/digitalSolutionSpecialistLink"
@@ -100,6 +103,8 @@ func getProject() t.ProjectType {
 		ctlgInvoiceState.GetDoc(p),
 		ctlgFilter.GetDoc(p),
 		ctlgOrderBy.GetDoc(p),
+		ctlgDevelopmentTaskState.GetDoc(p),
+		ctlgDevelopmentTaskType.GetDoc(p),
 		meeting.GetDoc(p),
 		contract.GetDoc(p),
 		technicalTask.GetDoc(p),
@@ -109,6 +114,7 @@ func getProject() t.ProjectType {
 		system.GetDoc(p),
 		request.GetDoc(p),
 		digitalSolution.GetDoc(p),
+		developmentTask.GetDoc(p),
 		model.GetDoc(p),
 		functionalRequirement.GetDoc(p),
 		invoice.GetDoc(p),
@@ -156,6 +162,7 @@ func getProject() t.ProjectType {
 		{DocName: "system", Roles: []string{utils.RoleAdmin, ROLE_SPECIALIST, ROLE_CUSTOMER}},
 		{DocName: "request", Roles: []string{utils.RoleAdmin, ROLE_SPECIALIST, ROLE_CUSTOMER}},
 		{DocName: "digital_solution", Roles: []string{utils.RoleAdmin, ROLE_SPECIALIST, ROLE_CUSTOMER}},
+		{DocName: "development_task", Roles: []string{utils.RoleAdmin, ROLE_SPECIALIST, ROLE_CUSTOMER}},
 		{DocName: "model", Roles: []string{utils.RoleAdmin, ROLE_SPECIALIST, ROLE_CUSTOMER}},
 		{DocName: "functional_requirement", Roles: []string{utils.RoleAdmin, ROLE_SPECIALIST, ROLE_CUSTOMER}},
 		{DocName: "task", Roles: []string{utils.RoleAdmin, ROLE_SPECIALIST}},
@@ -174,13 +181,15 @@ func getProject() t.ProjectType {
 		//{DocName: "news_from_dima", Roles: []string{utils.RoleAdmin}},
 		{Text: "Справочники", Icon: "image/catalog.svg", IsFolder: true, Roles: []string{utils.RoleAdmin}, LinkList: []t.VueMenu{
 			{Url: "users", Text: "Пользователи", Icon: "image/user.svg"},
-			{Text: "Статусы запросов", Url: "ctlg_request_state"},
-			{Text: "Статусы моделей", Url: "ctlg_model_state"},
-			{Text: "Типы моделей", Url: "ctlg_model_type"},
-			{Text: "Статусы функциональных требований", Url: "ctlg_functional_requirement_state"},
-			{Text: "Роли специалистов в функциональных требованиях", Url: "ctlg_functional_requirement_specialist_role"},
-			{Text: "Статусы цифровых решений", Url: "ctlg_digital_solution_state"},
-			{Text: "Роли специалистов в цифровых решениях", Url: "ctlg_digital_solution_specialist_role"},
+			//{Text: "Статусы запросов", Url: "ctlg_request_state"},
+			//{Text: "Статусы моделей", Url: "ctlg_model_state"},
+			//{Text: "Типы моделей", Url: "ctlg_model_type"},
+			//{Text: "Статусы функциональных требований", Url: "ctlg_functional_requirement_state"},
+			//{Text: "Роли специалистов в функциональных требованиях", Url: "ctlg_functional_requirement_specialist_role"},
+			//{Text: "Статусы цифровых решений", Url: "ctlg_digital_solution_state"},
+			//{Text: "Роли специалистов в цифровых решениях", Url: "ctlg_digital_solution_specialist_role"},
+			{Text: "Статусы задач на разработку", Url: "ctlg_development_task_state"},
+			{Text: "Типы задач на разработку", Url: "ctlg_development_task_type"},
 			{Text: "Типы задач", Url: "ctlg_task_type"},
 			{Text: "Статусы задач", Url: "ctlg_task_state"},
 			{Text: "Роли в задачах", Url: "ctlg_task_role"},

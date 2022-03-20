@@ -31,11 +31,8 @@
       <div class="col-md-2 col-sm-3 col-xs-6">
           <comp-fld-ref-search outlined pgMethod="sprint_list" :label="$t('model.sprint_id')" :item='item.sprint_title' :itemId='item.sprint_id' :ext='{"avatar":"image/sprint.svg","isClearable":"true","pathUrl":"/sprint"}' @update="v=> item.sprint_id = v.id" @clear="item.sprint_id = null" :readonly='false'  class='q-mb-sm col-md-2 col-sm-3 col-xs-6' />
       </div>
-      <div class="col-md-1 col-sm-2 col-xs-6">
-          <q-input outlined type='number' v-model="item.estimate" :label="$t('model.estimate')" :readonly='false'  class='q-mb-sm col-md-1 col-sm-2 col-xs-6' />
-      </div>
-      <div class="col-md-1 col-sm-2 col-xs-6">
-          <q-input outlined type='number' v-model="item.worked_time" :label="$t('model.worked_time')" :readonly='false'  class='q-mb-sm col-md-1 col-sm-2 col-xs-6' />
+      <div class="col-md-2 col-sm-3 col-xs-6">
+          <q-input outlined type='number' v-model="item.estimate" :label="$t('model.estimate')" :readonly='false'  class='q-mb-sm col-md-2 col-sm-3 col-xs-6' />
       </div>
       <div class="col-md-2 col-sm-3 col-xs-6">
           <comp-fld-date outlined :label="$t('model.plan_end_date')" :date-string="$utils.formatPgDate(item.plan_end_date)" @update="v=> item.plan_end_date = v" :readonly='false'  class='q-mb-sm col-md-2 col-sm-3 col-xs-6' />
@@ -116,7 +113,6 @@
                         {name: 'digital_solution_id', label: 'цифровое решение'},
                         {name: 'sprint_id', label: 'спринт'},
                         {name: 'estimate', label: 'оценка'},
-                        {name: 'worked_time', label: 'затрачено'},
                         {name: 'plan_end_date', label: 'планируемая дата завершения'},
                         {name: 'fact_end_date', label: 'фактическая дата завершения'},
                         {name: 'description', label: 'описание'},

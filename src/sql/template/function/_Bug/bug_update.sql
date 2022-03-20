@@ -40,7 +40,6 @@ BEGIN
     
     
     
-    
 
     if (params ->> 'id')::int = -1 then
         -- проверика наличия обязательных параметров
@@ -51,7 +50,7 @@ BEGIN
         END IF;
         
 
-        EXECUTE ('INSERT INTO bug (title, system_id, state_id, sprint_id, estimate, worked_time, plan_end_date, fact_end_date, description, files, images, result, result_files, result_images, options) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15)  RETURNING *;')
+        EXECUTE ('INSERT INTO bug (title, system_id, state_id, sprint_id, estimate, plan_end_date, fact_end_date, description, files, images, result, result_files, result_images, options) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14)  RETURNING *;')
 		INTO bugRow
 		USING
 			(params ->> 'title')::text,
@@ -59,7 +58,6 @@ BEGIN
 			(params ->> 'state_id')::int,
 			(params ->> 'sprint_id')::int,
 			(params ->> 'estimate')::int,
-			(params ->> 'worked_time')::int,
 			(params ->> 'plan_end_date')::timestamp,
 			(params ->> 'fact_end_date')::timestamp,
 			(params ->> 'description')::text,
@@ -79,7 +77,6 @@ BEGIN
 			['state_id', 'state_id', 'number'],
 			['sprint_id', 'sprint_id', 'number'],
 			['estimate', 'estimate', 'number'],
-			['worked_time', 'worked_time', 'number'],
 			['plan_end_date', 'plan_end_date', 'timestamp'],
 			['fact_end_date', 'fact_end_date', 'timestamp'],
 			['description', 'description', 'text'],

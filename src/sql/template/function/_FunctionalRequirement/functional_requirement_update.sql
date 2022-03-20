@@ -44,8 +44,6 @@ BEGIN
     
     
     
-    
-    
 
     if (params ->> 'id')::int = -1 then
         -- проверика наличия обязательных параметров
@@ -56,7 +54,7 @@ BEGIN
         END IF;
         
 
-        EXECUTE ('INSERT INTO functional_requirement (title, state_id, system_id, digital_solution_id, sprint_id, estimate, worked_time, plan_end_date, fact_end_date, description, description_files, description_images, description_for_dev, files_for_dev, images_for_dev, result, result_files, result_images, options) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19)  RETURNING *;')
+        EXECUTE ('INSERT INTO functional_requirement (title, state_id, system_id, digital_solution_id, sprint_id, estimate, plan_end_date, fact_end_date, description, description_files, description_images, description_for_dev, files_for_dev, images_for_dev, result, result_files, result_images, options) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18)  RETURNING *;')
 		INTO functional_requirementRow
 		USING
 			(params ->> 'title')::text,
@@ -65,7 +63,6 @@ BEGIN
 			(params ->> 'digital_solution_id')::int,
 			(params ->> 'sprint_id')::int,
 			(params ->> 'estimate')::int,
-			(params ->> 'worked_time')::int,
 			(params ->> 'plan_end_date')::timestamp,
 			(params ->> 'fact_end_date')::timestamp,
 			(params ->> 'description')::text,
@@ -89,7 +86,6 @@ BEGIN
 			['digital_solution_id', 'digital_solution_id', 'number'],
 			['sprint_id', 'sprint_id', 'number'],
 			['estimate', 'estimate', 'number'],
-			['worked_time', 'worked_time', 'number'],
 			['plan_end_date', 'plan_end_date', 'timestamp'],
 			['fact_end_date', 'fact_end_date', 'timestamp'],
 			['description', 'description', 'text'],

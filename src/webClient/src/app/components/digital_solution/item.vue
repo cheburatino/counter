@@ -55,9 +55,6 @@
       <div class="col-md-4 col-sm-6 col-xs-12">
           <task-list-ref-list-widget v-if='item.id != -1' :id='item.id' :readonly='false'/>
       </div>
-      <div class="col-md-4 col-sm-6 col-xs-12">
-          <bug-list-ref-list-widget v-if='item.id != -1' :id='item.id' :readonly='false'/>
-      </div>
       </div>
       
       <div class="row q-col-gutter-md q-mb-sm">
@@ -95,14 +92,13 @@
 </template>
 
 <script>
+	import taskListRefListWidget from './comp/taskListRefListWidget.vue'
 	import modelListRefListWidget from './comp/modelListRefListWidget.vue'
 	import functionalityListRefListWidget from './comp/functionalityListRefListWidget.vue'
-	import taskListRefListWidget from './comp/taskListRefListWidget.vue'
-	import bugListRefListWidget from './comp/bugListRefListWidget.vue'
     import currentUserMixin from '../../../app/mixins/currentUser'
     export default {
         props: ['id', 'isOpenInDialog'],
-        components: {modelListRefListWidget, functionalityListRefListWidget, taskListRefListWidget, bugListRefListWidget},
+        components: {modelListRefListWidget, functionalityListRefListWidget, taskListRefListWidget},
         mixins: [currentUserMixin,],
         computed: {
             docUrl: function() {
