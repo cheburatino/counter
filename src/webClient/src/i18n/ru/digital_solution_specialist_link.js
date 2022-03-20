@@ -1,6 +1,5 @@
 
 export default {
- 		description: 'описание',
  		author_id: 'автор',
  		name: 'связь цифрового решения и специалиста',
  		name_plural: 'Связи цифровых решений и специалиста',
@@ -8,4 +7,5 @@ export default {
  		digital_solution_id: 'id цифрового решения',
  		specialist_id: 'специалист',
  		role_id: 'роль',
+ 		description: 'описание',
 }

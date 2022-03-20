@@ -24,7 +24,7 @@ func GetDoc(project *t.ProjectType) t.DocType {
 			t.GetFldRef("state_id", "статус", "ctlg_functional_requirement_state", [][]int{{1, 2}}, "col-4").SetDefault("1"),
 			t.GetFldRef("system_id", "система", "system", [][]int{{2, 1}}, "col-4", "isShowLink", "isClearable"),
 			t.GetFldRef("digital_solution_id", "цифровое решение", "digital_solution", [][]int{{2, 2}}, "isShowLink", "isClearable"),
-			t.GetFldRef("sprint_id", "спринт", "sprint", [][]int{{3, 1}}, "col-2"),
+			t.GetFldRef("sprint_id", "спринт", "sprint", [][]int{{3, 1}}, "col-2", "isShowLink", "isClearable"),
 			t.GetFldInt("estimate", "оценка", [][]int{{3, 2}}, "col-1"),
 			t.GetFldInt("worked_time", "затрачено", [][]int{{3, 3}}, "col-1"),
 			t.GetFldDate("plan_end_date", "плановая дата завершения", [][]int{{3, 4}}, "col-2"),

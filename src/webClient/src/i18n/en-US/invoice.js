@@ -1,14 +1,14 @@
 
 export default {
- 		name_plural: 'invoice',
- 		name_plural_deleted: 'deleted invoice',
- 		date_transfer: 'date transfer',
- 		name: 'invoice',
- 		amount: 'amount',
  		state_id: 'state ',
  		technical_task_id: 'technical task ',
+ 		name_plural: 'invoice',
+ 		name_plural_deleted: 'deleted invoice',
+ 		title: 'title',
  		date_plan_paid: 'date plan pa',
  		date_paid: 'date pa',
  		invoice_file: 'invoice file',
- 		title: 'title',
+ 		name: 'invoice',
+ 		amount: 'amount',
+ 		date_transfer: 'date transfer',
 }

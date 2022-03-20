@@ -6,10 +6,11 @@ tableName ="bug"
 fields = [
 	{name="id",			type="serial"},
 	{name="title",					type="char",	size=150, 	ext="not null",	 comment="название"},
-	{name="paused",					type="bool",	 comment="на паузе"},
-	{name="state_id",					type="int",	 comment="статус"},
 	{name="system_id",					type="int",	 comment="система"},
-	{name="functional_requirement_id",					type="int",	 comment="функциональное требование"},
+	{name="state_id",					type="int",	 comment="статус"},
+	{name="sprint_id",					type="int",	 comment="спринт"},
+	{name="estimate",					type="int",	 comment="оценка"},
+	{name="worked_time",					type="int",	 comment="затрачено"},
 	{name="plan_end_date",					type="timestamp",	 comment="плановая дата завершения"},
 	{name="fact_end_date",					type="timestamp",	 comment="фактическая дата завершения"},
 	{name="description",					type="text",	 comment="описание"},
@@ -27,9 +28,9 @@ fields = [
 
 fkConstraints = [
 	{name="bug_title_already_exist", ext="UNIQUE (title)"},
-	{fld="state_id", ref="ctlg_bug_state", fk="id"},
 	{fld="system_id", ref="system", fk="id"},
-	{fld="functional_requirement_id", ref="functional_requirement", fk="id"}
+	{fld="state_id", ref="ctlg_bug_state", fk="id"},
+	{fld="sprint_id", ref="sprint", fk="id"}
 ]
 
 triggers = [
@@ -41,19 +42,20 @@ triggers = [
 
 
 methods = [
+	"bug_update",
 	"bug_get_by_id",
 	"bug_list",
-	"bug_update",
 	"bug_trigger_before",
 	"bug_trigger_after"
 ]
 
 alterScripts = [
 	"alter table bug add column if not exists title CHARACTER VARYING(150);",
-	"alter table bug add column if not exists paused bool;",
-	"alter table bug add column if not exists state_id int;",
 	"alter table bug add column if not exists system_id int;",
-	"alter table bug add column if not exists functional_requirement_id int;",
+	"alter table bug add column if not exists state_id int;",
+	"alter table bug add column if not exists sprint_id int;",
+	"alter table bug add column if not exists estimate int;",
+	"alter table bug add column if not exists worked_time int;",
 	"alter table bug add column if not exists plan_end_date timestamp;",
 	"alter table bug add column if not exists fact_end_date timestamp;",
 	"alter table bug add column if not exists description text;",

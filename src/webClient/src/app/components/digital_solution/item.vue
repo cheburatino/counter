@@ -95,14 +95,14 @@
 </template>
 
 <script>
-	import bugListRefListWidget from './comp/bugListRefListWidget.vue'
 	import modelListRefListWidget from './comp/modelListRefListWidget.vue'
 	import functionalityListRefListWidget from './comp/functionalityListRefListWidget.vue'
 	import taskListRefListWidget from './comp/taskListRefListWidget.vue'
+	import bugListRefListWidget from './comp/bugListRefListWidget.vue'
     import currentUserMixin from '../../../app/mixins/currentUser'
     export default {
         props: ['id', 'isOpenInDialog'],
-        components: {taskListRefListWidget, bugListRefListWidget, modelListRefListWidget, functionalityListRefListWidget},
+        components: {modelListRefListWidget, functionalityListRefListWidget, taskListRefListWidget, bugListRefListWidget},
         mixins: [currentUserMixin,],
         computed: {
             docUrl: function() {

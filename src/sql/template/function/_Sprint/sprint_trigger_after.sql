@@ -16,8 +16,8 @@ if new.title != old.title then
  for r in select * from functional_requirement where sprint_id = new.id loop
  update functional_requirement set updated_at=now() where id = r.id;
  end loop;
- for r in select * from task where sprint_id = new.id loop
- update task set updated_at=now() where id = r.id;
+ for r in select * from bug where sprint_id = new.id loop
+ update bug set updated_at=now() where id = r.id;
  end loop;
 
  end if;

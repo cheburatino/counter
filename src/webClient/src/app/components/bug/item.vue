@@ -8,10 +8,10 @@
       
       <div class="row q-col-gutter-md q-mb-sm">
       <div class="col-md-4 col-sm-6 col-xs-12">
-          <q-input outlined type='text' v-model="item.title" :label="$t('bug.title')" autogrow :readonly='currentUser.role?.includes(`customer`) && item.state_id != 1'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
+          <q-input outlined type='text' v-model="item.title" :label="$t('bug.title')" autogrow :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
       </div>
       <div class="col-md-2 col-sm-3 col-xs-6">
-          <q-checkbox :label="$t('bug.paused')" v-model='item.paused' :disable='false' :false-value='false' indeterminate-value='some'  class='q-mb-sm col-md-2 col-sm-3 col-xs-6' />
+          <comp-fld-ref-search outlined pgMethod="system_list" :label="$t('bug.system_id')" :item='item.system_title' :itemId='item.system_id' :ext='{"avatar":"image/system.svg","isClearable":"true","pathUrl":"/system"}' @update="v=> item.system_id = v.id" @clear="item.system_id = null" :readonly='currentUser.role?.includes(`customer`)'  class='q-mb-sm col-md-2 col-sm-3 col-xs-6' />
       </div>
       <div class="col-md-2 col-sm-3 col-xs-6">
           <comp-fld-ref-search outlined pgMethod="ctlg_bug_state_list" :label="$t('bug.state_id')" :item='item.state_title' :itemId='item.state_id' :ext='{}' @update="v=> item.state_id = v.id" @clear="item.state_id = null" :readonly='currentUser.role?.includes(`customer`)'  class='q-mb-sm col-md-2 col-sm-3 col-xs-6' />
@@ -20,10 +20,13 @@
       
       <div class="row q-col-gutter-md q-mb-sm">
       <div class="col-md-2 col-sm-3 col-xs-6">
-          <comp-fld-ref-search outlined pgMethod="system_list" :label="$t('bug.system_id')" :item='item.system_title' :itemId='item.system_id' :ext='{"avatar":"image/system.svg","isClearable":"true","pathUrl":"/system"}' @update="v=> item.system_id = v.id" @clear="item.system_id = null" :readonly='currentUser.role?.includes(`customer`)'  class='q-mb-sm col-md-2 col-sm-3 col-xs-6' />
+          <comp-fld-ref-search outlined pgMethod="sprint_list" :label="$t('bug.sprint_id')" :item='item.sprint_title' :itemId='item.sprint_id' :ext='{"avatar":"image/sprint.svg","isClearable":"true","pathUrl":"/sprint"}' @update="v=> item.sprint_id = v.id" @clear="item.sprint_id = null" :readonly='false'  class='q-mb-sm col-md-2 col-sm-3 col-xs-6' />
       </div>
-      <div class="col-md-2 col-sm-3 col-xs-6">
-          <comp-fld-ref-search outlined pgMethod="functional_requirement_list" :label="$t('bug.functional_requirement_id')" :item='item.functional_requirement_title' :itemId='item.functional_requirement_id' :ext='{"avatar":"image/functional_requirement.svg","isClearable":"true","pathUrl":"/functional_requirement"}' @update="v=> item.functional_requirement_id = v.id" @clear="item.functional_requirement_id = null" :readonly='currentUser.role?.includes(`customer`)'  class='q-mb-sm col-md-2 col-sm-3 col-xs-6' />
+      <div class="col-md-1 col-sm-2 col-xs-6">
+          <q-input outlined type='number' v-model="item.estimate" :label="$t('bug.estimate')" :readonly='false'  class='q-mb-sm col-md-1 col-sm-2 col-xs-6' />
+      </div>
+      <div class="col-md-1 col-sm-2 col-xs-6">
+          <q-input outlined type='number' v-model="item.worked_time" :label="$t('bug.worked_time')" :readonly='false'  class='q-mb-sm col-md-1 col-sm-2 col-xs-6' />
       </div>
       <div class="col-md-2 col-sm-3 col-xs-6">
           <comp-fld-date outlined :label="$t('bug.plan_end_date')" :date-string="$utils.formatPgDate(item.plan_end_date)" @update="v=> item.plan_end_date = v" :readonly='false'  class='q-mb-sm col-md-2 col-sm-3 col-xs-6' />
@@ -105,10 +108,11 @@
                 item: null,
                 flds: [
                         {name: 'title', label: 'название',  required: true},
-                        {name: 'paused', label: 'на паузе'},
-                        {name: 'state_id', label: 'статус'},
                         {name: 'system_id', label: 'система'},
-                        {name: 'functional_requirement_id', label: 'функциональное требование'},
+                        {name: 'state_id', label: 'статус'},
+                        {name: 'sprint_id', label: 'спринт'},
+                        {name: 'estimate', label: 'оценка'},
+                        {name: 'worked_time', label: 'затрачено'},
                         {name: 'plan_end_date', label: 'плановая дата завершения'},
                         {name: 'fact_end_date', label: 'фактическая дата завершения'},
                         {name: 'description', label: 'описание'},
