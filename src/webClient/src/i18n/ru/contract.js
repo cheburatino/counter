@@ -1,13 +1,13 @@
 
 export default {
+ 		title: 'название',
+ 		signed: 'подписанный',
  		name_plural: 'Договоры',
  		name_plural_deleted: 'удаленные Договоры',
+ 		date: 'дата',
  		state_id: 'статус',
  		counterparty_id: 'контрагент',
- 		name: 'договор',
- 		title: 'название',
- 		date: 'дата',
  		description: 'описание',
  		draft: 'черновик',
- 		signed: 'подписанный',
+ 		name: 'договор',
 }
