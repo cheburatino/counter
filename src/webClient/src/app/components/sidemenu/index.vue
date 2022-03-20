@@ -64,52 +64,35 @@
                 menuLinks: [
                     // for codeGenerate ##sidemenu_slot1
 
-									{icon: 'image/sprint.svg', text: 'i18n_menu.sprint', url: '/sprint', roles: ['admin', 'specialist', 'customer']},
-
-									{icon: 'image/system.svg', text: 'i18n_menu.system', url: '/system', roles: ['admin', 'specialist', 'customer']},
-
-									{icon: 'image/request.svg', text: 'i18n_menu.request', url: '/request', roles: ['admin', 'specialist', 'customer']},
-
-									{icon: 'image/digital_solution.svg', text: 'i18n_menu.digital_solution', url: '/digital_solution', roles: ['admin', 'specialist', 'customer']},
-
-									{icon: 'image/development_task.png', text: 'i18n_menu.development_task', url: '/development_task', roles: ['admin', 'specialist', 'customer']},
-
-									{icon: 'image/model.svg', text: 'i18n_menu.model', url: '/model', roles: ['admin', 'specialist', 'customer']},
-
-									{icon: 'image/functional_requirement.svg', text: 'i18n_menu.functional_requirement', url: '/functional_requirement', roles: ['admin', 'specialist', 'customer']},
-
 									{icon: 'image/task.svg', text: 'i18n_menu.task', url: '/task', roles: ['admin', 'specialist']},
-
-									{icon: 'image/bug.png', text: 'i18n_menu.bug', url: '/bug', roles: ['admin', 'customer', 'specialist']},
-
-									{icon: 'image/company.svg', text: 'i18n_menu.company', url: '/company', roles: ['admin']},
-
-									{icon: 'image/counterparty.svg', text: 'i18n_menu.counterparty', url: '/counterparty', roles: ['admin']},
-
-									{icon: 'image/contract.svg', text: 'i18n_menu.contract', url: '/contract', roles: ['admin']},
-
-									{icon: 'image/technical_task.svg', text: 'i18n_menu.technical_task', url: '/technical_task', roles: ['admin']},
-
-									{icon: 'image/completion_act.png', text: 'i18n_menu.completion_act', url: '/completion_act', roles: ['admin']},
-
-									{icon: 'image/invoice.svg', text: 'i18n_menu.invoice', url: '/invoice', roles: ['admin']},
-
-									{icon: 'image/payment.png', text: 'i18n_menu.payment', url: '/payment', roles: ['admin']},
+{isFolder: true, icon: 'image/development.png', text: 'Разработка', roles: ['admin'], linkList: 								[
+								{icon: '', text: 'Системы', url: '/system', roles: []},
+								{icon: '', text: 'Цифровые решения', url: '/digital_solution', roles: []},
+								{icon: '', text: 'Задачи на разработку', url: '/development_task', roles: []},
+								{icon: '', text: 'Спринты', url: '/sprint', roles: []},
+],},
+{isFolder: true, icon: 'image/crm.png', text: 'CRM', roles: ['admin'], linkList: 								[
+								{icon: '', text: 'Компании', url: '/company', roles: []},
+								{icon: '', text: 'Контакты', url: '/man', roles: []},
+								{icon: '', text: 'Контрагенты', url: '/counterparty', roles: []},
+								{icon: '', text: 'Договоры', url: '/contract', roles: []},
+								{icon: '', text: 'ТЗ', url: '/technical_task', roles: []},
+								{icon: '', text: 'Акты', url: '/completion_act', roles: []},
+								{icon: '', text: 'Счета', url: '/invoice', roles: []},
+								{icon: '', text: 'Платежи', url: '/payment', roles: []},
+],},
 {isFolder: true, icon: 'image/catalog.svg', text: 'Справочники', roles: ['admin'], linkList: 								[
 								{icon: 'image/user.svg', text: 'Пользователи', url: '/users', roles: []},
-								{icon: '', text: 'Статусы задач на разработку', url: '/ctlg_development_task_state', roles: []},
-								{icon: '', text: 'Типы задач на разработку', url: '/ctlg_development_task_type', roles: []},
-								{icon: '', text: 'Типы задач', url: '/ctlg_task_type', roles: []},
+								{icon: '', text: 'Статусы цифровых решений', url: '/ctlg_digital_solution_state', roles: []},
 								{icon: '', text: 'Статусы задач', url: '/ctlg_task_state', roles: []},
-								{icon: '', text: 'Роли в задачах', url: '/ctlg_task_role', roles: []},
-								{icon: '', text: 'Статусы дел', url: '/ctlg_work_state', roles: []},
-								{icon: '', text: 'Роли специалистов в делах', url: '/ctlg_work_specialist_role', roles: []},
-								{icon: '', text: 'Статусы багов', url: '/ctlg_bug_state', roles: []},
+								{icon: '', text: 'Статусы задач на разработку', url: '/ctlg_development_task_state', roles: []},
 								{icon: '', text: 'Статусы договоров', url: '/ctlg_contract_state', roles: []},
 								{icon: '', text: 'Статусы технических заданий', url: '/ctlg_technical_task_state', roles: []},
 								{icon: '', text: 'Статусы работ по ТЗ', url: '/ctlg_technical_task_work_state', roles: []},
 								{icon: '', text: 'Статусы актов', url: '/ctlg_completion_act_state', roles: []},
 								{icon: '', text: 'Статусы счетов', url: '/ctlg_invoice_state', roles: []},
+								{icon: '', text: 'Типы задач на разработку', url: '/ctlg_development_task_type', roles: []},
+								{icon: '', text: 'Типы задач', url: '/ctlg_task_type', roles: []},
 								{icon: '', text: 'Фильтры', url: '/ctlg_filter', roles: []},
 								{icon: '', text: 'Сортировки', url: '/ctlg_order_by', roles: []},
 ],},
