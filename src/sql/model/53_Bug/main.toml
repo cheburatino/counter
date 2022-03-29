@@ -41,9 +41,9 @@ triggers = [
 
 
 methods = [
+	"bug_list",
 	"bug_update",
 	"bug_get_by_id",
-	"bug_list",
 	"bug_trigger_before",
 	"bug_trigger_after"
 ]

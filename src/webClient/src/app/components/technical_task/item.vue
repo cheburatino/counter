@@ -54,12 +54,6 @@
       </div>
       </div>
       
-      <div class="row q-col-gutter-md q-mb-sm">
-      <div class="col-md-4 col-sm-6 col-xs-12">
-          <functional-requirement-list-ref-list-widget v-if='item.id != -1' :id='item.id' :readonly='false'/>
-      </div>
-      </div>
-      
 
       <!--  кнопки   -->
       <comp-item-btn-save v-if="!isOpenInDialog" @save="save" :readonly="false" @cancel="$router.push(docUrl)"/>
@@ -75,11 +69,10 @@
 <script>
 	import completionActListRefListWidget from './comp/completionActListRefListWidget.vue'
 	import invoiceListRefListWidget from './comp/invoiceListRefListWidget.vue'
-	import functionalRequirementListRefListWidget from './comp/functionalRequirementListRefListWidget.vue'
     import currentUserMixin from '../../../app/mixins/currentUser'
     export default {
         props: ['id', 'isOpenInDialog'],
-        components: {functionalRequirementListRefListWidget, completionActListRefListWidget, invoiceListRefListWidget},
+        components: {invoiceListRefListWidget, completionActListRefListWidget},
         mixins: [currentUserMixin,],
         computed: {
             docUrl: function() {

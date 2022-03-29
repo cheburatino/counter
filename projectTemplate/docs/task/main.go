@@ -47,11 +47,6 @@ func GetDoc(project *t.ProjectType) t.DocType {
 			MenuIcon:       menu_icon,
 			BreadcrumbIcon: breadcrumb_icon,
 			Roles:          []string{},
-			FilterList: []t.VueDocListFilter{
-				{FldName: "state", IsRef: true, RefTable: "ctlg_task_state"},
-				{FldName: "system_id", IsRef: true, RefTable: "system"},
-				{FldName: "digital_solution_id", IsRef: true, RefTable: "digital_solution"},
-			},
 		},
 		Templates: map[string]*t.DocTemplate{
 			"sql_function_list.sql":                {},
