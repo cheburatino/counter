@@ -34,9 +34,9 @@ triggers = [
 
 
 methods = [
+	"contract_get_by_id",
 	"contract_list",
 	"contract_update",
-	"contract_get_by_id",
 	"contract_trigger_before",
 	"contract_trigger_after"
 ]
