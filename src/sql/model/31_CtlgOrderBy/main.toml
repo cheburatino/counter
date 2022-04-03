@@ -31,9 +31,9 @@ triggers = [
 
 
 methods = [
+	"ctlg_order_by_list",
 	"ctlg_order_by_update",
 	"ctlg_order_by_get_by_id",
-	"ctlg_order_by_list",
 	"ctlg_order_by_trigger_before",
 	"ctlg_order_by_trigger_after"
 ]
