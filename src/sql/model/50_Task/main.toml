@@ -6,7 +6,6 @@ tableName ="task"
 fields = [
 	{name="id",			type="serial"},
 	{name="title",					type="char",	size=150, 	ext="not null",	 comment="название"},
-	{name="needs_discussion",					type="bool", 	ext=" default false",	 comment="требует обсуждения"},
 	{name="state_id",					type="int", 	ext=" default 1",	 comment="статус"},
 	{name="type_id",					type="int",	 comment="тип задачи"},
 	{name="system_id",					type="int",	 comment="система"},
@@ -51,18 +50,17 @@ triggers = [
 
 
 methods = [
+	"task_get_by_id",
 	"task_get_specialist",
 	"task_get_specialist_role",
 	"task_list",
 	"task_update",
-	"task_get_by_id",
 	"task_trigger_before",
 	"task_trigger_after"
 ]
 
 alterScripts = [
 	"alter table task add column if not exists title CHARACTER VARYING(150);",
-	"alter table task add column if not exists needs_discussion bool;",
 	"alter table task add column if not exists state_id int;",
 	"alter table task add column if not exists type_id int;",
 	"alter table task add column if not exists system_id int;",

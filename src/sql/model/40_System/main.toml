@@ -6,11 +6,11 @@ tableName ="system"
 fields = [
 	{name="id",			type="serial"},
 	{name="title",					type="char",	size=150, 	ext="not null",	 comment="название"},
+	{name="customer_id",					type="int",	 comment="заказчик"},
 	{name="state",					type="char",	size=50,	 comment="статус"},
 	{name="description",					type="text",	 comment="описание"},
-	{name="files",					type="jsonb",	 comment="файлы"},
 	{name="images",					type="jsonb",	 comment="изображения"},
-	{name="customer_id",					type="int",	 comment="заказчик"},
+	{name="files",					type="jsonb",	 comment="файлы"},
 	{name="search_text",			type="text",	comment="колонка для поиска"},
 	{name="options",				type="jsonb",	comment="разные дополнительные параметры"},
 	{name="created_at",				type="timestamp",	ext="with time zone"},
@@ -32,19 +32,19 @@ triggers = [
 
 
 methods = [
+	"system_get_by_id",
 	"system_list",
 	"system_update",
-	"system_get_by_id",
 	"system_trigger_before",
 	"system_trigger_after"
 ]
 
 alterScripts = [
 	"alter table system add column if not exists title CHARACTER VARYING(150);",
+	"alter table system add column if not exists customer_id int;",
 	"alter table system add column if not exists state CHARACTER VARYING(50);",
 	"alter table system add column if not exists description text;",
-	"alter table system add column if not exists files jsonb;",
 	"alter table system add column if not exists images jsonb;",
-	"alter table system add column if not exists customer_id int;",
+	"alter table system add column if not exists files jsonb;",
 	"alter table system add column if not exists search_text text;"
 ]

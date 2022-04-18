@@ -163,7 +163,6 @@ func getProject() t.ProjectType {
 			{Text: "Системы", Url: "system"},
 			{Text: "Цифровые решения", Url: "digital_solution"},
 			{Text: "Задачи на разработку", Url: "development_task"},
-			{Text: "Спринты", Url: "sprint"},
 		},},
 		{Text: "CRM", Icon: "image/crm.png", IsFolder: true, Roles: []string{utils.RoleAdmin}, LinkList: []t.VueMenu{
 			{Text: "Компании", Url: "company"},

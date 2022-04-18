@@ -69,7 +69,6 @@
 								{icon: '', text: 'Системы', url: '/system', roles: []},
 								{icon: '', text: 'Цифровые решения', url: '/digital_solution', roles: []},
 								{icon: '', text: 'Задачи на разработку', url: '/development_task', roles: []},
-								{icon: '', text: 'Спринты', url: '/sprint', roles: []},
 ],},
 {isFolder: true, icon: 'image/crm.png', text: 'CRM', roles: ['admin'], linkList: 								[
 								{icon: '', text: 'Компании', url: '/company', roles: []},
