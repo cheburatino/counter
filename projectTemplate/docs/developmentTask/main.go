@@ -7,8 +7,8 @@ import (
 
 const (
 	name            = "development_task"
-	name_ru         = "задача по разработке"
-	name_ru_plural  = "задачи по разработке"
+	name_ru         = "задача разработки"
+	name_ru_plural  = "задачи разработки"
 	menu_icon       = "image/development_task.png"
 	breadcrumb_icon = "fas fa-list-ul"
 )

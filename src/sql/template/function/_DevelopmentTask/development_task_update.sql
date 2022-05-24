@@ -1,4 +1,4 @@
--- создание задача по разработке
+-- создание задача разработки
 
 DROP FUNCTION IF EXISTS development_task_update(params JSONB);
 CREATE OR REPLACE FUNCTION development_task_update(params JSONB)

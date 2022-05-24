@@ -91,11 +91,11 @@
       </div>
       
       <div class="row q-col-gutter-md q-mb-sm">
-      <div class="col-3">
-          <comp-fld-date outlined :label="$t('customer_task.plan_start_date')" :date-string="$utils.formatPgDate(item.plan_start_date)" @update="v=> item.plan_start_date = v" :readonly='false'  class='q-mb-sm col-3' />
+      <div class="col-md-3 col-sm-6 col-xs-6">
+          <comp-fld-date outlined :label="$t('customer_task.plan_start_date')" :date-string="$utils.formatPgDate(item.plan_start_date)" @update="v=> item.plan_start_date = v" :readonly='false'  class='q-mb-sm col-md-3 col-sm-6 col-xs-6' />
       </div>
-      <div class="col-3">
-          <comp-fld-date outlined :label="$t('customer_task.plan_end_date')" :date-string="$utils.formatPgDate(item.plan_end_date)" @update="v=> item.plan_end_date = v" :readonly='false'  class='q-mb-sm col-3' />
+      <div class="col-md-3 col-sm-6 col-xs-6">
+          <comp-fld-date outlined :label="$t('customer_task.plan_end_date')" :date-string="$utils.formatPgDate(item.plan_end_date)" @update="v=> item.plan_end_date = v" :readonly='false'  class='q-mb-sm col-md-3 col-sm-6 col-xs-6' />
       </div>
       <div class="col-md-2 col-sm-3 col-xs-6">
           <p>История</p>
@@ -134,11 +134,11 @@
 </template>
 
 <script>
+	import compRelation from './comp/relation.vue'
+	import compDate from './comp/date.vue'
 	import compResult from './comp/result.vue'
 	import compCustomer from './comp/customer.vue'
 	import compCustomerAgent from './comp/customerAgent.vue'
-	import compRelation from './comp/relation.vue'
-	import compDate from './comp/date.vue'
     import currentUserMixin from '../../../app/mixins/currentUser'
     export default {
         props: ['id', 'isOpenInDialog'],

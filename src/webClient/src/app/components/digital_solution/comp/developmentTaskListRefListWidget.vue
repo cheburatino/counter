@@ -1,11 +1,11 @@
 <template>
     <div>
         <q-bar class="bg-secondary text-white shadow-2">
-            <div>задачи на разработку <span v-if="deleted">удаленные</span></div>
+            <div>задачи разработки <span v-if="deleted">удаленные</span></div>
             <q-space />
             <q-btn icon="add" v-if="!readonly" round flat @click="add"><q-tooltip>Добавить</q-tooltip></q-btn>
-            <q-btn v-if="deleted && !readonly" icon="delete" round flat @click="reload(false)"><q-tooltip>активные задачи на разработку</q-tooltip></q-btn>
-            <q-btn v-if="!deleted && !readonly" icon="delete_outline" round flat @click="reload(true)"><q-tooltip>удаленные задачи на разработку</q-tooltip></q-btn>
+            <q-btn v-if="deleted && !readonly" icon="delete" round flat @click="reload(false)"><q-tooltip>активные задачи разработки</q-tooltip></q-btn>
+            <q-btn v-if="!deleted && !readonly" icon="delete_outline" round flat @click="reload(true)"><q-tooltip>удаленные задачи разработки</q-tooltip></q-btn>
         </q-bar>
 
         <q-list bordered separator>

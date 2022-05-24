@@ -1,5 +1,5 @@
 docType = "DevelopmentTask"
-tableComment = "задача по разработке"
+tableComment = "задача разработки"
 
 tableName ="development_task"
 
