@@ -45,9 +45,9 @@ triggers = [
 
 
 methods = [
+	"model_list",
 	"model_update",
 	"model_get_by_id",
-	"model_list",
 	"model_trigger_before",
 	"model_trigger_after"
 ]

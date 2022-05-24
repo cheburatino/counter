@@ -32,7 +32,7 @@
       
       <div class="row q-col-gutter-md q-mb-sm">
       <div class="col-md-2 col-sm-3 col-xs-6">
-          <comp-fld-ref-search outlined pgMethod="man_list" :label="$t('task.executor_id')" :item='item.executor_title' :itemId='item.executor_id' :ext='{"company_id": 1, pathUrl: "/man", avatar: "image/man.svg", isClearable: "true"}' @update="v=> item.executor_id = v.id" @clear="item.executor_id = null" :readonly='false'  class='q-mb-sm col-md-2 col-sm-3 col-xs-6' />
+          <comp-fld-ref-search outlined pgMethod="man_list" :label="$t('task.executor_id')" :item='item.executor_title' :itemId='item.executor_id' :ext='{"company_id": 1, avatar: "image/man.svg", isClearable: "true", pathUrl: "/man"}' @update="v=> item.executor_id = v.id" @clear="item.executor_id = null" :readonly='false'  class='q-mb-sm col-md-2 col-sm-3 col-xs-6' />
       </div>
       <div class="col-md-1 col-sm-2 col-xs-6">
           <q-input outlined type='number' v-model="item.estimate" :label="$t('task.estimate')" :readonly='false'  class='q-mb-sm col-md-1 col-sm-2 col-xs-6' />
