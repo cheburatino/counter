@@ -45,9 +45,9 @@ triggers = [
 
 
 methods = [
-	"development_task_get_by_id",
 	"development_task_list",
 	"development_task_update",
+	"development_task_get_by_id",
 	"development_task_trigger_before",
 	"development_task_trigger_after"
 ]
