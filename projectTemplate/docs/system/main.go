@@ -24,10 +24,10 @@ func GetDoc(project *t.ProjectType) t.DocType {
 			t.GetFldRef("customer_id", "заказчик", "company", [][]int{{1, 2}}, "col-2", "isShowLink", "isClearable"),
 			t.GetFldString("state", "статус", 50, [][]int{{1, 3}}, "col-2"),
 			t.GetFldString("description", "описание", 0, [][]int{{2, 1}}, "col-8"),
-			// Задачи разработки {{3,1}}
-			// Цифровые решения {{3,2}}
-			t.GetFldFiles("files", "файлы", [][]int{{4, 1}}, t.FldVueFilesParams{}),
-			t.GetFldImgList("images", "изображения", [][]int{{4, 2}}, t.FldVueImgParams{}),
+			t.GetFldFiles("files", "файлы", [][]int{{3, 1}}, t.FldVueFilesParams{}),
+			t.GetFldImgList("images", "изображения", [][]int{{3, 2}}, t.FldVueImgParams{}),
+			// Задачи разработки {{4,1}}
+			// Цифровые решения {{4,2}}
 		},
 		Vue: t.DocVue{
 			RouteName:      name,
@@ -84,7 +84,7 @@ func GetDoc(project *t.ProjectType) t.DocType {
                 <q-item-label>{{v.title}}</q-item-label>
                 <q-item-label caption><q-badge color="orange">{{v.options.title.state_title}}</q-badge></q-item-label>
             `, // шаблон для названия в списке (vue синтаксис)
-	}, [][]int{{3, 1}}, "col-4"))
+	}, [][]int{{4, 1}}, "col-4"))
 
 	doc.AddFld(t.GetFldVueCompositionRefList(&doc, t.VueCompRefListWidgetParams{
 		Label:      "цифровые решения",                  // название списка, которе выводится на экране
@@ -99,7 +99,7 @@ func GetDoc(project *t.ProjectType) t.DocType {
                 <q-item-label>{{v.title}}</q-item-label>
                 <q-item-label caption><q-badge color="orange">{{v.options.title.state_title}}</q-badge></q-item-label>
             `, // шаблон для названия в списке (vue синтаксис)
-	}, [][]int{{3, 2}}, "col-4"))
+	}, [][]int{{4, 2}}, "col-4"))
 
 	return doc
 }
