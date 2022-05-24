@@ -9,8 +9,8 @@ fields = [
 	{name="customer_id",					type="int",	 comment="заказчик"},
 	{name="state",					type="char",	size=50,	 comment="статус"},
 	{name="description",					type="text",	 comment="описание"},
-	{name="images",					type="jsonb",	 comment="изображения"},
 	{name="files",					type="jsonb",	 comment="файлы"},
+	{name="images",					type="jsonb",	 comment="изображения"},
 	{name="search_text",			type="text",	comment="колонка для поиска"},
 	{name="options",				type="jsonb",	comment="разные дополнительные параметры"},
 	{name="created_at",				type="timestamp",	ext="with time zone"},
@@ -44,7 +44,7 @@ alterScripts = [
 	"alter table system add column if not exists customer_id int;",
 	"alter table system add column if not exists state CHARACTER VARYING(50);",
 	"alter table system add column if not exists description text;",
-	"alter table system add column if not exists images jsonb;",
 	"alter table system add column if not exists files jsonb;",
+	"alter table system add column if not exists images jsonb;",
 	"alter table system add column if not exists search_text text;"
 ]
