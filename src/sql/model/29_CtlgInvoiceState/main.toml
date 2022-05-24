@@ -26,9 +26,9 @@ triggers = [
 
 
 methods = [
+	"ctlg_invoice_state_list",
 	"ctlg_invoice_state_update",
 	"ctlg_invoice_state_get_by_id",
-	"ctlg_invoice_state_list",
 	"ctlg_invoice_state_trigger_before",
 	"ctlg_invoice_state_trigger_after"
 ]
