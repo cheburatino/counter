@@ -1,12 +1,12 @@
 
 export default {
- 		name_plural_deleted: 'deleted news from dima',
- 		title: 'title',
- 		conclusion: 'conclusion',
- 		name: 'news from dima',
- 		name_plural: 'news from dima',
- 		familiarized: 'familiarized',
  		description: 'description',
+ 		conclusion: 'conclusion',
+ 		name_plural: 'news from dima',
+ 		title: 'title',
+ 		familiarized: 'familiarized',
  		file: 'file',
  		image: 'image',
+ 		name: 'news from dima',
+ 		name_plural_deleted: 'deleted news from dima',
 }

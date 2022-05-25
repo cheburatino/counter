@@ -1,5 +1,6 @@
 
 export default {
+ 		role_id: 'role ',
  		description: 'description',
  		author_id: 'author ',
  		name: 'task specialist link',
@@ -7,5 +8,4 @@ export default {
  		name_plural_deleted: 'deleted task specialist link',
  		task_id: 'task ',
  		specialist_id: 'specialist ',
- 		role_id: 'role ',
 }

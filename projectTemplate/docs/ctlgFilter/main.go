@@ -40,6 +40,12 @@ func GetDoc(project *t.ProjectType) t.DocType {
 			IsSearchText:    true,
 			IsBeforeTrigger: true,
 			IsAfterTrigger:  true,
+			Hooks: t.DocSqlHooks{AfterTriggerAfter: []string{`
+		if new.is_default != old.is_default and new.is_default = true
+    	then
+        	update ctlg_filter set is_default = false where index = new.index and id != new.id;
+   		end if;
+`}},
 		},
 	}
 
