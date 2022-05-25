@@ -23,16 +23,14 @@ func GetDoc(project *t.ProjectType) t.DocType {
 			t.GetFldTitle(),
 			t.GetFldRef("state_id", "статус", "ctlg_technical_task_state", [][]int{{1, 2}}, "col-2", "isClearable").SetDefault("1"),
 			t.GetFldRef("work_state_id", "статус работ по ТЗ", "ctlg_technical_task_work_state", [][]int{{1, 3}}, "col-2", "isClearable").SetDefault("1"),
-			t.GetFldInt("number", "номер", [][]int{{2, 1}}, "col-1"),
+			t.GetFldInt("number", "номер", [][]int{{2, 1}}, "col-1").SetIsRequired(),
 			t.GetFldInt("amount", "сумма", [][]int{{2, 2}}, "col-1"),
 			t.GetFldDate("date", "дата подписания ТЗ", [][]int{{2, 3}}, "col-2"),
 			t.GetFldRef("contract_id", "договор", "contract", [][]int{{2, 4}}, "isShowLink", "isClearable"),
 			t.GetFldString("description", "описание", 0, [][]int{{3, 1}}, "col-8"),
-			t.GetFldFiles("draft", "черновик", [][]int{{4, 1}}, t.FldVueFilesParams{}, "col-2"),
-			t.GetFldFiles("signed", "подписанное", [][]int{{4, 2}}, t.FldVueFilesParams{}, "col-2"),
+			t.GetFldFiles("document", "документ", [][]int{{4, 1}}, t.FldVueFilesParams{}),
+			// контрол счетов {{4, 2}}
 			// контрол актов {{4, 3}}
-			// контрол счетов {{4, 4}}
-			// контрол ФТ {{5, 1}}
 		},
 		Vue: t.DocVue{
 			RouteName:      name,
@@ -46,6 +44,9 @@ func GetDoc(project *t.ProjectType) t.DocType {
 			IsSearchText:    true,
 			IsBeforeTrigger: true,
 			IsAfterTrigger:  true,
+			Hooks: t.DocSqlHooks{BeforeTriggerBefore: []string{`
+			new.number = (select number from technical_task where contract_id = new.contract_id order by number desc limit 1) + 1;
+`}},
 		},
 	}
 
@@ -58,6 +59,21 @@ func GetDoc(project *t.ProjectType) t.DocType {
 	}
 
 	doc.Init()
+
+	doc.AddFld(t.GetFldVueCompositionRefList(&doc, t.VueCompRefListWidgetParams{
+		Label:      "счета",           // название списка, которе выводится на экране
+		FldName:    "invoice_list",           // название поля. Любое, в формате snake_case. На основе этого названия формируется название компоненты во vue.
+		TableName:  "invoice",                // название связанной таблицы, из которой будут выгружаться записи
+		RefFldName: "technical_task_id", 					 // название поля в связанной таблицы, по которому осуществляется связь
+		Avatar:     "image/invoice.svg",      // иконка, которая выводится в списке
+		NewFlds: []t.FldType{
+			t.GetFldString("title", "название", 300, [][]int{{1, 1}}).SetIsRequired(),
+		}, // список полей, которые заполняются при добавлении новой записи
+		TitleTemplate: `
+                <q-item-label>{{v.title}}</q-item-label>
+                <q-item-label caption><q-badge color="orange">{{v.options.title.state_title}}</q-badge></q-item-label>
+            `, // шаблон для названия в списке (vue синтаксис)
+	}, [][]int{{4, 2}}, "col-2"))
 
 	doc.AddFld(t.GetFldVueCompositionRefList(&doc, t.VueCompRefListWidgetParams{
 		Label:      "акт",           				 // название списка, которе выводится на экране
@@ -73,36 +89,6 @@ func GetDoc(project *t.ProjectType) t.DocType {
                 <q-item-label caption><q-badge color="orange">{{v.options.title.state_title}}</q-badge></q-item-label>
             `, // шаблон для названия в списке (vue синтаксис)
 	}, [][]int{{4, 3}}, "col-2"))
-
-	doc.AddFld(t.GetFldVueCompositionRefList(&doc, t.VueCompRefListWidgetParams{
-		Label:      "счета",           // название списка, которе выводится на экране
-		FldName:    "invoice_list",           // название поля. Любое, в формате snake_case. На основе этого названия формируется название компоненты во vue.
-		TableName:  "invoice",                // название связанной таблицы, из которой будут выгружаться записи
-		RefFldName: "technical_task_id", 					 // название поля в связанной таблицы, по которому осуществляется связь
-		Avatar:     "image/invoice.svg",      // иконка, которая выводится в списке
-		NewFlds: []t.FldType{
-			t.GetFldString("title", "название", 300, [][]int{{1, 1}}).SetIsRequired(),
-		}, // список полей, которые заполняются при добавлении новой записи
-		TitleTemplate: `
-                <q-item-label>{{v.title}}</q-item-label>
-                <q-item-label caption><q-badge color="orange">{{v.options.title.state_title}}</q-badge></q-item-label>
-            `, // шаблон для названия в списке (vue синтаксис)
-	}, [][]int{{4, 4}}, "col-2"))
-
-	//doc.AddFld(t.GetFldVueCompositionRefList(&doc, t.VueCompRefListWidgetParams{
-	//	Label:      "функциональные требования",           // название списка, которе выводится на экране
-	//	FldName:    "functional_requirement_list",           // название поля. Любое, в формате snake_case. На основе этого названия формируется название компоненты во vue.
-	//	TableName:  "functional_requirement",                // название связанной таблицы, из которой будут выгружаться записи
-	//	RefFldName: "technical_task_id", 					 // название поля в связанной таблицы, по которому осуществляется связь
-	//	Avatar:     "image/functional_requirement.svg",      // иконка, которая выводится в списке
-	//	NewFlds: []t.FldType{
-	//		t.GetFldString("title", "название", 300, [][]int{{1, 1}}).SetIsRequired(),
-	//	}, // список полей, которые заполняются при добавлении новой записи
-	//	TitleTemplate: `
-    //            <q-item-label>{{v.title}}</q-item-label>
-    //            <q-item-label caption><q-badge color="orange">{{v.options.title.state_title}}</q-badge></q-item-label>
-    //        `, // шаблон для названия в списке (vue синтаксис)
-	//}, [][]int{{5, 1}}, "col-4"))
 
 	return doc
 }

@@ -10,8 +10,11 @@
       <div class="col-md-4 col-sm-6 col-xs-12">
           <q-input outlined type='text' v-model="item.title" :label="$t('task.title')" autogrow :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
       </div>
-      <div class="col-md-4 col-sm-6 col-xs-12">
-          <comp-fld-ref-search outlined pgMethod="ctlg_task_state_list" :label="$t('task.state_id')" :item='item.state_title' :itemId='item.state_id' :ext='{}' @update="v=> item.state_id = v.id" @clear="item.state_id = null" :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
+      <div class="col-md-2 col-sm-3 col-xs-6">
+          <comp-fld-ref-search outlined pgMethod="ctlg_task_state_list" :label="$t('task.state_id')" :item='item.state_title' :itemId='item.state_id' :ext='{}' @update="v=> item.state_id = v.id" @clear="item.state_id = null" :readonly='false'  class='q-mb-sm col-md-2 col-sm-3 col-xs-6' />
+      </div>
+      <div class="col-md-2 col-sm-3 col-xs-6">
+          <q-checkbox :label="$t('task.today')" v-model='item.today' :disable='false' :false-value='false' indeterminate-value='some'  class='q-mb-sm col-md-2 col-sm-3 col-xs-6' />
       </div>
       </div>
       
@@ -32,7 +35,7 @@
       
       <div class="row q-col-gutter-md q-mb-sm">
       <div class="col-md-2 col-sm-3 col-xs-6">
-          <comp-fld-ref-search outlined pgMethod="man_list" :label="$t('task.executor_id')" :item='item.executor_title' :itemId='item.executor_id' :ext='{"company_id": 1, pathUrl: "/man", avatar: "image/man.svg", isClearable: "true"}' @update="v=> item.executor_id = v.id" @clear="item.executor_id = null" :readonly='false'  class='q-mb-sm col-md-2 col-sm-3 col-xs-6' />
+          <comp-fld-ref-search outlined pgMethod="man_list" :label="$t('task.executor_id')" :item='item.executor_title' :itemId='item.executor_id' :ext='{"company_id": 1, isClearable: "true", pathUrl: "/man", avatar: "image/man.svg"}' @update="v=> item.executor_id = v.id" @clear="item.executor_id = null" :readonly='false'  class='q-mb-sm col-md-2 col-sm-3 col-xs-6' />
       </div>
       <div class="col-md-1 col-sm-2 col-xs-6">
           <q-input outlined type='number' v-model="item.estimate" :label="$t('task.estimate')" :readonly='false'  class='q-mb-sm col-md-1 col-sm-2 col-xs-6' />
@@ -130,6 +133,7 @@
                 flds: [
                         {name: 'title', label: 'название',  required: true},
                         {name: 'state_id', label: 'статус'},
+                        {name: 'today', label: 'в работе сегодня'},
                         {name: 'type_id', label: 'тип задачи'},
                         {name: 'system_id', label: 'система'},
                         {name: 'digital_solution_id', label: 'цифровое решение'},

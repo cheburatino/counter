@@ -37,18 +37,17 @@ BEGIN
     
     
     
-    
 
     if (params ->> 'id')::int = -1 then
         -- проверика наличия обязательных параметров
-        checkMsg = check_required_params(params, ARRAY ['title']);
+        checkMsg = check_required_params(params, ARRAY ['title', 'number']);
         IF checkMsg IS NOT NULL
         THEN
             RETURN checkMsg;
         END IF;
         
 
-        EXECUTE ('INSERT INTO technical_task (title, state_id, work_state_id, number, amount, date, contract_id, description, draft, signed, options) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)  RETURNING *;')
+        EXECUTE ('INSERT INTO technical_task (title, state_id, work_state_id, number, amount, date, contract_id, description, document, options) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)  RETURNING *;')
 		INTO technical_taskRow
 		USING
 			(params ->> 'title')::text,
@@ -59,8 +58,7 @@ BEGIN
 			(params ->> 'date')::timestamp,
 			(params ->> 'contract_id')::int,
 			(params ->> 'description')::text,
-			(params -> 'draft')::jsonb,
-			(params -> 'signed')::jsonb,
+			(params -> 'document')::jsonb,
 			coalesce(params -> 'options', '{}')::jsonb;
 
         
@@ -75,8 +73,7 @@ BEGIN
 			['date', 'date', 'timestamp'],
 			['contract_id', 'contract_id', 'number'],
 			['description', 'description', 'text'],
-			['draft', 'draft', 'jsonb'],
-			['signed', 'signed', 'jsonb'],
+			['document', 'document', 'jsonb'],
             ['options', 'options', 'jsonb'],
             ['deleted', 'deleted', 'bool']
             ]);

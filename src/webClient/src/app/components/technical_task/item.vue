@@ -40,17 +40,14 @@
       </div>
       
       <div class="row q-col-gutter-md q-mb-sm">
-      <div class="col-md-2 col-sm-3 col-xs-6">
-          <comp-fld-files v-if="this.id != 'new'" fldName='draft' :label="$t('technical_task.draft')" :fld='item.draft' :ext = '{tableName: "technical_task", tableId: this.id}' @update="v=> item.draft = v" :readonly='false'  class='q-mb-sm col-md-2 col-sm-3 col-xs-6' />
-      </div>
-      <div class="col-md-2 col-sm-3 col-xs-6">
-          <comp-fld-files v-if="this.id != 'new'" fldName='signed' :label="$t('technical_task.signed')" :fld='item.signed' :ext = '{tableName: "technical_task", tableId: this.id}' @update="v=> item.signed = v" :readonly='false'  class='q-mb-sm col-md-2 col-sm-3 col-xs-6' />
-      </div>
-      <div class="col-md-2 col-sm-3 col-xs-6">
-          <completion-act-list-ref-list-widget v-if='item.id != -1' :id='item.id' :readonly='false'/>
+      <div class="col-md-4 col-sm-6 col-xs-12">
+          <comp-fld-files v-if="this.id != 'new'" fldName='document' :label="$t('technical_task.document')" :fld='item.document' :ext = '{tableName: "technical_task", tableId: this.id}' @update="v=> item.document = v" :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
       </div>
       <div class="col-md-2 col-sm-3 col-xs-6">
           <invoice-list-ref-list-widget v-if='item.id != -1' :id='item.id' :readonly='false'/>
+      </div>
+      <div class="col-md-2 col-sm-3 col-xs-6">
+          <completion-act-list-ref-list-widget v-if='item.id != -1' :id='item.id' :readonly='false'/>
       </div>
       </div>
       
@@ -86,13 +83,12 @@
                         {name: 'title', label: 'название',  required: true},
                         {name: 'state_id', label: 'статус'},
                         {name: 'work_state_id', label: 'статус работ по ТЗ'},
-                        {name: 'number', label: 'номер'},
+                        {name: 'number', label: 'номер',  required: true},
                         {name: 'amount', label: 'сумма'},
                         {name: 'date', label: 'дата подписания ТЗ'},
                         {name: 'contract_id', label: 'договор'},
                         {name: 'description', label: 'описание'},
-                        {name: 'draft', label: 'черновик'},
-                        {name: 'signed', label: 'подписанное'},
+                        {name: 'document', label: 'документ'},
                 ],
                 optionsFlds: [],
                 
