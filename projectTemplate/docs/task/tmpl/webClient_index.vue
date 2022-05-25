@@ -86,11 +86,12 @@
              <q-badge class="q-ma-xs" color="orange">{{item.options.title.state_title}}</q-badge>
              <q-badge class="q-ma-xs" color="primary">{{item.options.title.system_title}}</q-badge>
 <!--             <q-badge class="q-ma-xs" v-if="item.development_task_id" color="primary">Разработка: {{item.options.title.development_task_title}}</q-badge>-->
-             <q-badge class="q-ma-xs" v-if="item.digital_solution_id" color="positive">ЦР: {{item.options.title.digital_solution_title}}</q-badge>
+             <q-badge class="q-ma-xs" v-if="item.digital_solution_id" color="purple-3">ЦР: {{item.options.title.digital_solution_title}}</q-badge>
 <!--             <q-badge class="q-ma-xs" color="positive">{{item.options.title.executor_title}}</q-badge>-->
            </q-item-label>
            <q-item-label caption>Плановая дата завершения: {{$utils.formatPgDate(item.plan_end_date)}}</q-item-label>
            <q-item-label v-if="item.fact_end_date" caption>Фактическая дата завершения: {{$utils.formatPgDate(item.fact_end_date)}}</q-item-label>
+           <q-item-label v-if="item.today" caption><q-badge color="positive">На сегодня</q-badge></q-item-label>
 				 </q-item-section>
 			
         <q-item-section top side>
