@@ -103,5 +103,20 @@ func GetDoc(project *t.ProjectType) t.DocType {
             `, // шаблон для названия в списке (vue синтаксис)
 	}, [][]int{{8, 1}}, "col-4"))
 
+	doc.AddFld(t.GetFldVueCompositionRefList(&doc, t.VueCompRefListWidgetParams{
+		Label:      "задачи заказчика",              // название списка, которе выводится на экране
+		FldName:    "customer_task_list",           // название поля. Любое, в формате snake_case. На основе этого названия формируется название компоненты во vue.
+		TableName:  "customer_task",                // название связанной таблицы, из которой будут выгружаться записи
+		RefFldName: "development_task_id", // название поля в связанной таблицы, по которому осуществляется связь
+		Avatar:     "image/customer_task.png",      // иконка, которая выводится в списке
+		NewFlds: []t.FldType{
+			t.GetFldString("title", "название", 300, [][]int{{1, 1}}).SetIsRequired(),
+		}, // список полей, которые заполняются при добавлении новой записи
+		TitleTemplate: `
+                <q-item-label>{{v.title}}</q-item-label>
+                <q-item-label caption><q-badge color="orange">{{v.options.title.state_title}}</q-badge> <q-badge color="info">{{v.options.title.type_title}}</q-badge></q-item-label>
+            `, // шаблон для названия в списке (vue синтаксис)
+	}, [][]int{{8, 2}}, "col-4"))
+
 	return doc
 }

@@ -88,6 +88,9 @@
       <div class="col-md-4 col-sm-6 col-xs-12">
           <task-list-ref-list-widget v-if='item.id != -1' :id='item.id' :readonly='false'/>
       </div>
+      <div class="col-md-4 col-sm-6 col-xs-12">
+          <customer-task-list-ref-list-widget v-if='item.id != -1' :id='item.id' :readonly='false'/>
+      </div>
       </div>
       
       <div class="row q-col-gutter-md q-mb-sm">
@@ -126,10 +129,11 @@
 
 <script>
 	import taskListRefListWidget from './comp/taskListRefListWidget.vue'
+	import customerTaskListRefListWidget from './comp/customerTaskListRefListWidget.vue'
     import currentUserMixin from '../../../app/mixins/currentUser'
     export default {
         props: ['id', 'isOpenInDialog'],
-        components: {taskListRefListWidget},
+        components: {taskListRefListWidget, customerTaskListRefListWidget},
         mixins: [currentUserMixin,],
         computed: {
             docUrl: function() {

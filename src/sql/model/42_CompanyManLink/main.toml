@@ -32,9 +32,9 @@ triggers = [
 
 
 methods = [
-	"company_man_link_list",
 	"company_man_link_update",
 	"company_man_link_get_by_id",
+	"company_man_link_list",
 	"company_man_link_trigger_before",
 	"company_man_link_trigger_after"
 ]

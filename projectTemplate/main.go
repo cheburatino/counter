@@ -31,7 +31,6 @@ import (
 	"github.com/cheburatino/electron_is/projectTemplate/docs/meeting"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/newsFromDima"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/payment"
-	"github.com/cheburatino/electron_is/projectTemplate/docs/request"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/sprint"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/system"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/task"
@@ -83,7 +82,6 @@ func getProject() t.ProjectType {
 		company.GetDoc(p),
 		man.GetDoc(p),
 		system.GetDoc(p),
-		request.GetDoc(p),
 		digitalSolution.GetDoc(p),
 		developmentTask.GetDoc(p),
 		customerTask.GetDoc(p),

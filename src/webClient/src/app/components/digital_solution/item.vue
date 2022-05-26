@@ -10,20 +10,14 @@
       <div class="col-md-4 col-sm-6 col-xs-12">
           <q-input outlined type='text' v-model="item.title" :label="$t('digital_solution.title')" autogrow :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
       </div>
-      <div class="col-md-2 col-sm-3 col-xs-6">
-          <comp-fld-ref-search outlined pgMethod="system_list" :label="$t('digital_solution.system_id')" :item='item.system_title' :itemId='item.system_id' :ext='{"avatar":"image/system.svg","isClearable":"true","pathUrl":"/system"}' @update="v=> item.system_id = v.id" @clear="item.system_id = null" :readonly='false'  class='q-mb-sm col-md-2 col-sm-3 col-xs-6' />
-      </div>
-      <div class="col-md-2 col-sm-3 col-xs-6">
-          <comp-fld-ref-search outlined pgMethod="ctlg_digital_solution_state_list" :label="$t('digital_solution.state_id')" :item='item.state_title' :itemId='item.state_id' :ext='{}' @update="v=> item.state_id = v.id" @clear="item.state_id = null" :readonly='false'  class='q-mb-sm col-md-2 col-sm-3 col-xs-6' />
+      <div class="col-md-4 col-sm-6 col-xs-12">
+          <comp-fld-ref-search outlined pgMethod="ctlg_digital_solution_state_list" :label="$t('digital_solution.state_id')" :item='item.state_title' :itemId='item.state_id' :ext='{}' @update="v=> item.state_id = v.id" @clear="item.state_id = null" :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
       </div>
       </div>
       
       <div class="row q-col-gutter-md q-mb-sm">
-      <div class="col-md-2 col-sm-3 col-xs-6">
-          <q-input outlined type='number' v-model="item.internal_priority" :label="$t('digital_solution.internal_priority')" :readonly='false'  class='q-mb-sm col-md-2 col-sm-3 col-xs-6' />
-      </div>
-      <div class="col-md-2 col-sm-3 col-xs-6">
-          <q-input outlined type='number' v-model="item.customer_priority" :label="$t('digital_solution.customer_priority')" :readonly='false'  class='q-mb-sm col-md-2 col-sm-3 col-xs-6' />
+      <div class="col-md-4 col-sm-6 col-xs-12">
+          <comp-fld-ref-search outlined pgMethod="system_list" :label="$t('digital_solution.system_id')" :item='item.system_title' :itemId='item.system_id' :ext='{"avatar":"image/system.svg","isClearable":"true","pathUrl":"/system"}' @update="v=> item.system_id = v.id" @clear="item.system_id = null" :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
       </div>
       <div class="col-md-2 col-sm-3 col-xs-6">
           <comp-fld-date outlined :label="$t('digital_solution.plan_date_end')" :date-string="$utils.formatPgDate(item.plan_date_end)" @update="v=> item.plan_date_end = v" :readonly='false'  class='q-mb-sm col-md-2 col-sm-3 col-xs-6' />
@@ -109,10 +103,8 @@
                 item: null,
                 flds: [
                         {name: 'title', label: 'название',  required: true},
-                        {name: 'system_id', label: 'система'},
                         {name: 'state_id', label: 'статус'},
-                        {name: 'internal_priority', label: 'внутренний приоритет'},
-                        {name: 'customer_priority', label: 'приоритет заказчика'},
+                        {name: 'system_id', label: 'система'},
                         {name: 'plan_date_end', label: 'планируемая дата завершения'},
                         {name: 'fact_date_end', label: 'фактическая дата завершения'},
                         {name: 'description', label: 'описание'},
