@@ -67,8 +67,11 @@
       </div>
       
       <div class="row q-col-gutter-md q-mb-sm">
-      <div class="col-md-8 col-sm-12 col-xs-12">
-          <q-input outlined type='text' v-model="item.process" :label="$t('development_task.process')" autogrow :readonly='false'  class='q-mb-sm col-md-8 col-sm-12 col-xs-12' />
+      <div class="col-6">
+          <q-input outlined type='text' v-model="item.process" :label="$t('development_task.process')" autogrow :readonly='false'  class='q-mb-sm col-6' />
+      </div>
+      <div class="col-md-2 col-sm-3 col-xs-6">
+          <q-checkbox :label="$t('development_task.is_paused')" v-model='item.is_paused' :disable='false' :false-value='false' indeterminate-value='some'  class='q-mb-sm col-md-2 col-sm-3 col-xs-6' />
       </div>
       </div>
       
@@ -153,6 +156,7 @@
                         {name: 'description_files', label: 'файлы описания'},
                         {name: 'description_images', label: 'изображения описания'},
                         {name: 'process', label: 'процесс'},
+                        {name: 'is_paused', label: 'на паузе'},
                         {name: 'process_files', label: 'файлы результата'},
                         {name: 'process_images', label: 'изображения результата'},
                         {name: 'result', label: 'результат'},

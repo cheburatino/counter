@@ -35,7 +35,8 @@ func GetDoc(project *t.ProjectType) t.DocType {
 			t.GetFldString("description", "описание", 0, [][]int{{4, 1}}, "col-8"),
 			t.GetFldFiles("description_files", "файлы описания", [][]int{{5, 1}}, t.FldVueFilesParams{}),
 			t.GetFldImgList("description_images", "изображения описания", [][]int{{5, 2}}, t.FldVueImgParams{}),
-			t.GetFldString("process", "процесс", 0, [][]int{{6, 1}}, "col-8"),
+			t.GetFldString("process", "процесс", 0, [][]int{{6, 1}}, "col-6"),
+			t.GetFldCheckbox("is_paused", "на паузе", [][]int{{6, 2}}, "col-2").SetDefault("false"),
 			t.GetFldFiles("process_files", "файлы результата", [][]int{{7, 1}}, t.FldVueFilesParams{}),
 			t.GetFldImgList("process_images", "изображения результата", [][]int{{7, 2}}, t.FldVueImgParams{}),
 			// Задачи {{8, 1}}
