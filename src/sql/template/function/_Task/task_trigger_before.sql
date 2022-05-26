@@ -22,6 +22,11 @@ BEGIN
 		select title into developmentTaskTitle from development_task where id = new.development_task_id;
 		select title into executorTitle from man where id = new.executor_id;
         
+		if new.development_task_id notnull
+		then
+            new.system_id = (select system_id from development_task where id = new.development_task_id);
+        end if;
+			
         -- заполняем options.title
         NEW.options = coalesce(OLD.options, '{}'::jsonb) || NEW.options || jsonb_build_object('title', jsonb_build_object('title', new.title, 'state_title', stateTitle, 'type_title', typeTitle, 'system_title', systemTitle, 'digital_solution_title', digitalSolutionTitle, 'development_task_title', developmentTaskTitle, 'executor_title', executorTitle));
         -- заполняем search_text

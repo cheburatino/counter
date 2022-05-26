@@ -5,30 +5,31 @@ $$
 DECLARE
         r record;
 	stateTitle TEXT;
-	customerTitle TEXT;
-	requestTitle TEXT;
 	systemTitle TEXT;
 	digitalSolutionTitle TEXT;
-	functionalRequirementTitle TEXT;
-	bugTitle TEXT;
+	developmentTaskTitle TEXT;
+	responsibleTitle TEXT;
 
        searchTxtVar TEXT := '';
 BEGIN
 
         -- заполняем ref поля
 		select title into stateTitle from ctlg_customer_task_state where id = new.state_id;
-		select title into customerTitle from company where id = new.customer_id;
-		select title into requestTitle from request where id = new.request_id;
 		select title into systemTitle from system where id = new.system_id;
 		select title into digitalSolutionTitle from digital_solution where id = new.digital_solution_id;
-		select title into functionalRequirementTitle from functional_requirement where id = new.functional_requirement_id;
-		select title into bugTitle from bug where id = new.bug_id;
+		select title into developmentTaskTitle from development_task where id = new.development_task_id;
+		select title into responsibleTitle from man where id = new.responsible_id;
         
+		if new.development_task_id notnull
+		then
+            new.system_id = (select system_id from development_task where id = new.development_task_id);
+        end if;
+			
         -- заполняем options.title
-        NEW.options = coalesce(OLD.options, '{}'::jsonb) || NEW.options || jsonb_build_object('title', jsonb_build_object('title', new.title, 'state_title', stateTitle, 'customer_title', customerTitle, 'request_title', requestTitle, 'system_title', systemTitle, 'digital_solution_title', digitalSolutionTitle, 'functional_requirement_title', functionalRequirementTitle, 'bug_title', bugTitle));
+        NEW.options = coalesce(OLD.options, '{}'::jsonb) || NEW.options || jsonb_build_object('title', jsonb_build_object('title', new.title, 'state_title', stateTitle, 'system_title', systemTitle, 'digital_solution_title', digitalSolutionTitle, 'development_task_title', developmentTaskTitle, 'responsible_title', responsibleTitle));
         -- заполняем search_text
         
-        NEW.search_text = concat(new.title, ' ', stateTitle, ' ', customerTitle, ' ', requestTitle, ' ', systemTitle, ' ', digitalSolutionTitle, ' ', functionalRequirementTitle, ' ', bugTitle, ' ', searchTxtVar);
+        NEW.search_text = concat(new.title, ' ', stateTitle, ' ', systemTitle, ' ', digitalSolutionTitle, ' ', developmentTaskTitle, ' ', responsibleTitle, ' ', searchTxtVar);
 
         
 

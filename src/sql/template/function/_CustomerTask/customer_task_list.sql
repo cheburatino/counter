@@ -32,21 +32,13 @@ BEGIN
     whereStr = where_str_build(params, 'doc', ARRAY [
         ['ilike', 'search_text', 'search_text'],
 		['notQuoted', 'state_id', 'doc.state_id'],
+		['notQuoted', 'system_id', 'doc.system_id'],
 		['notQuoted', 'digital_solution_id', 'doc.digital_solution_id'],
-		['notQuoted', 'company_id', 'doc.company_id'],
-		['notQuoted', 'author_id', 'doc.author_id'],
-		['notQuoted', 'functional_requirement_id', 'doc.functional_requirement_id'],
-		['notQuoted', 'bug_id', 'doc.bug_id']
+		['notQuoted', 'development_task_id', 'doc.development_task_id'],
+		['notQuoted', 'responsible_id', 'doc.responsible_id']
     ]);
 
-    -- для admin ограничений нет
-    if is_user_role((params->>'user_id')::int, '{admin}') is not true then
-        -- для сотрудника выбираем только те объекты, к которым у него есть доступ
-        whereStr = whereStr || format(' AND id = ANY(%s) ', quote_literal((select coalesce(array_agg(customer_task_id), '{}') from customer_task_customer_agent_link where customer_agent_id = (select id from man where user_table_id = (params->>'user_id')::int) and deleted=false)));
-    end if;
-
-    -- показываем только активные
-    whereStr = whereStr || ' and state_id != 4';
+    
 
     -- финальная сборка строки с условиями выборки (build_query_part_for_list - функция из папки base)
     condQueryStr = '' || whereStr || build_query_part_for_list(params);

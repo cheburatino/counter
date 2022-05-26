@@ -22,26 +22,22 @@ func GetDoc(project *t.ProjectType) t.DocType {
 		Flds: []t.FldType{
 			t.GetFldTitle(),
 			t.GetFldRef("state_id", "статус", "ctlg_customer_task_state", [][]int{{1, 2}}).SetDefault("1"),
-			t.GetFldSimpleHtml([][]int{{2, 1}}, "", "<p>Дата и время создания: {{item.created_at}}</p>"),
-			t.GetFldSimpleHtml([][]int{{2, 2}}, "", "<p>Дата и время изменения: {{item.updated_at}}</p>"),
-			t.GetFldString("description", "описание", 0, [][]int{{3, 1}}, "col-8"),
-			t.GetFldFiles("files", "файлы", [][]int{{4, 1}}, t.FldVueFilesParams{MaxFileSize: 10000}),
-			t.GetFldImgList("images", "изображения", [][]int{{4, 2}}, t.FldVueImgParams{}),
-			t.GetFldJsonbCompositionWithoutFld([][]int{{5, 1}}, "col-4", "comp-customer"),
-			t.GetFldRef("customer_id", "заказчик", "company", [][]int{{6, 1}}, "isShowLink", "isClearable"),
-			t.GetFldJsonbCompositionWithoutFld([][]int{{6, 2}}, "", "comp-customerAgent", ":currentUser='currentUser'"),
-			t.GetFldJsonbCompositionWithoutFld([][]int{{7, 1}}, "col-4", "comp-relation"),
-			t.GetFldRef("request_id", "запрос", "request", [][]int{{8, 1}}, "isShowLink", "isClearable"),
-			t.GetFldRef("system_id", "система", "system", [][]int{{8, 2}}, "isShowLink", "isClearable"),
-			t.GetFldRef("digital_solution_id", "цифровое решение", "digital_solution", [][]int{{9, 1}}, "isShowLink", "isClearable"),
-			t.GetFldRef("functional_requirement_id", "функциональное требование", "functional_requirement", [][]int{{9, 2}}, "isShowLink", "isClearable"),
-			t.GetFldRef("bug_id", "баг", "bug", [][]int{{10, 1}}, "isShowLink", "isClearable"),
-			t.GetFldJsonbCompositionWithoutFld([][]int{{11, 1}}, "col-4", "comp-date"),
-			t.GetFldDate("plan_start_date", "плановая дата начала", [][]int{{12, 1}}, "col-3"),
-			t.GetFldDate("plan_end_date", "плановая дата завершения", [][]int{{12, 2}}, "col-3"),
-			t.GetFldSimpleHtml([][]int{{12, 3}}, "col-2", "<p>История</p>"),
-			t.GetFldJsonbCompositionWithoutFld([][]int{{13, 1}}, "col-4", "comp-result"),
-			t.GetFldString("result", "результат", 0, [][]int{{14, 1}}, "col-8"),
+			t.GetFldRef("system_id", "система", "system", [][]int{{2, 1}}, "col-2", "isShowLink", "isClearable"),
+			t.GetFldRef("digital_solution_id", "цифровое решение", "digital_solution", [][]int{{2, 2}}, "col-2", "isShowLink", "isClearable"),
+			t.GetFldRef("development_task_id", "задача разработки", "development_task", [][]int{{2, 3}}, "col-2", "isShowLink", "isClearable"),
+			t.GetFldRef("responsible_id", "ответственный", "man", [][]int{{2, 4}}, "col-2", "isShowLink", "isClearable"),
+			t.GetFldDate("plan_start_date", "плановая дата начала", [][]int{{3, 1}}),
+			t.GetFldDate("plan_end_date", "плановая дата завершения", [][]int{{3, 2}}),
+			t.GetFldString("description", "описание", 0, [][]int{{4, 1}}, "col-8"),
+			t.GetFldFiles("description_files", "файлы описания", [][]int{{5, 1}}, t.FldVueFilesParams{}),
+			t.GetFldImgList("description_images", "изображения описания", [][]int{{5, 2}}, t.FldVueImgParams{}),
+			t.GetFldString("process", "процесс", 0, [][]int{{6, 1}}, "col-6"),
+			t.GetFldCheckbox("is_paused", "на паузе", [][]int{{6, 2}}, "col-2"),
+			t.GetFldFiles("process_files", "файлы результата", [][]int{{7, 1}}, t.FldVueFilesParams{}),
+			t.GetFldImgList("process_images", "изображения результата", [][]int{{7, 2}}, t.FldVueImgParams{}),
+			t.GetFldString("result", "результат", 0, [][]int{{8, 1}}, "col-8"),
+			t.GetFldFiles("result_files", "файлы результата", [][]int{{9, 1}}, t.FldVueFilesParams{}),
+			t.GetFldImgList("result_images", "изображения результата", [][]int{{9, 2}}, t.FldVueImgParams{}),
 		},
 		Vue: t.DocVue{
 			RouteName:      name,
@@ -49,25 +45,28 @@ func GetDoc(project *t.ProjectType) t.DocType {
 			BreadcrumbIcon: breadcrumb_icon,
 			Roles:          []string{},
 		},
-		Templates: map[string]*t.DocTemplate{
-			"sql_function_list.sql": {},
-		},
+		//Templates: map[string]*t.DocTemplate{
+		//	"sql_function_list.sql": {},
+		//},
 		IsBaseTemplates: t.DocIsBaseTemplates{true, true},
 		Sql: t.DocSql{
 			IsSearchText:    true,
 			IsBeforeTrigger: true,
 			IsAfterTrigger:  true,
+			Hooks: t.DocSqlHooks{BeforeTriggerBefore: []string{
+				`
+		if new.development_task_id notnull
+		then
+            new.system_id = (select system_id from development_task where id = new.development_task_id);
+        end if;
+			`,
+			}},
 		},
 	}
 	// создаем стандартные методы sql "list", "update", "get_by_id" с возможностью ограничения по ролям
 	doc.Sql.FillBaseMethods(doc.Name)
 	doc.Vue.AddFixedSaveBtn()
 
-	doc.AddVueComposition("docItem", "customer")
-	doc.AddVueComposition("docItem", "customerAgent")
-	doc.AddVueComposition("docItem", "relation")
-	doc.AddVueComposition("docItem", "date")
-	doc.AddVueComposition("docItem", "result")
 
 	doc.Vue.I18n = map[string]string{
 		"listTitle":        utils.UpperCaseFirst(name_ru_plural),

@@ -59,15 +59,15 @@ BEGIN
         END IF;
         
 
-        EXECUTE ('INSERT INTO development_task (title, type_id, state_id, system_id, technical_task_id, digital_solution_id, responsible_id, sprint_id, estimate, internal_priority, plan_end_date, fact_end_date, description, description_files, description_images, process, is_paused, process_files, process_images, result, result_files, result_images, options) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21, $22, $23)  RETURNING *;')
+        EXECUTE ('INSERT INTO development_task (title, type_id, state_id, system_id, digital_solution_id, technical_task_id, responsible_id, sprint_id, estimate, internal_priority, plan_end_date, fact_end_date, description, description_files, description_images, process, is_paused, process_files, process_images, result, result_files, result_images, options) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21, $22, $23)  RETURNING *;')
 		INTO development_taskRow
 		USING
 			(params ->> 'title')::text,
 			(params ->> 'type_id')::int,
 			(params ->> 'state_id')::int,
 			(params ->> 'system_id')::int,
-			(params ->> 'technical_task_id')::int,
 			(params ->> 'digital_solution_id')::int,
+			(params ->> 'technical_task_id')::int,
 			(params ->> 'responsible_id')::int,
 			(params ->> 'sprint_id')::int,
 			(params ->> 'estimate')::int,
@@ -94,8 +94,8 @@ BEGIN
 			['type_id', 'type_id', 'number'],
 			['state_id', 'state_id', 'number'],
 			['system_id', 'system_id', 'number'],
-			['technical_task_id', 'technical_task_id', 'number'],
 			['digital_solution_id', 'digital_solution_id', 'number'],
+			['technical_task_id', 'technical_task_id', 'number'],
 			['responsible_id', 'responsible_id', 'number'],
 			['sprint_id', 'sprint_id', 'number'],
 			['estimate', 'estimate', 'number'],

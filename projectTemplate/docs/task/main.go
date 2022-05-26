@@ -50,10 +50,8 @@ func GetDoc(project *t.ProjectType) t.DocType {
 			Roles:          []string{},
 		},
 		Templates: map[string]*t.DocTemplate{
-			"sql_function_list.sql":                {},
-			"sql_function_get_specialist.sql":      {},
-			"sql_function_get_specialist_role.sql": {},
-			"webClient_index.vue":                  {},
+			"sql_function_list.sql": {},
+			"webClient_index.vue":   {},
 		},
 		IsBaseTemplates: t.DocIsBaseTemplates{true, true},
 		Sql: t.DocSql{
@@ -64,6 +62,14 @@ func GetDoc(project *t.ProjectType) t.DocType {
 				"task_get_specialist":      {Name: "task_get_specialist"},
 				"task_get_specialist_role": {Name: "task_get_specialist_role"},
 			},
+			Hooks: t.DocSqlHooks{BeforeTriggerBefore: []string{
+				`
+		if new.development_task_id notnull
+		then
+            new.system_id = (select system_id from development_task where id = new.development_task_id);
+        end if;
+			`,
+			}},
 		},
 	}
 	// создаем стандартные методы sql "list", "update", "get_by_id" с возможностью ограничения по ролям

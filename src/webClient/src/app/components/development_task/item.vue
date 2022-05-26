@@ -23,10 +23,10 @@
           <comp-fld-ref-search outlined pgMethod="system_list" :label="$t('development_task.system_id')" :item='item.system_title' :itemId='item.system_id' :ext='{"avatar":"image/system.svg","isClearable":"true","pathUrl":"/system"}' @update="v=> item.system_id = v.id" @clear="item.system_id = null" :readonly='false'  class='q-mb-sm col-md-2 col-sm-3 col-xs-6' />
       </div>
       <div class="col-md-2 col-sm-3 col-xs-6">
-          <comp-fld-ref-search outlined pgMethod="technical_task_list" :label="$t('development_task.technical_task_id')" :item='item.technical_task_title' :itemId='item.technical_task_id' :ext='{"avatar":"image/technical_task.svg","isClearable":"true","pathUrl":"/technical_task"}' @update="v=> item.technical_task_id = v.id" @clear="item.technical_task_id = null" :readonly='false'  class='q-mb-sm col-md-2 col-sm-3 col-xs-6' />
+          <comp-fld-ref-search outlined pgMethod="digital_solution_list" :label="$t('development_task.digital_solution_id')" :item='item.digital_solution_title' :itemId='item.digital_solution_id' :ext='{"avatar":"image/digital_solution.svg","isClearable":"true","pathUrl":"/digital_solution"}' @update="v=> item.digital_solution_id = v.id" @clear="item.digital_solution_id = null" :readonly='false'  class='q-mb-sm col-md-2 col-sm-3 col-xs-6' />
       </div>
       <div class="col-md-2 col-sm-3 col-xs-6">
-          <comp-fld-ref-search outlined pgMethod="digital_solution_list" :label="$t('development_task.digital_solution_id')" :item='item.digital_solution_title' :itemId='item.digital_solution_id' :ext='{"avatar":"image/digital_solution.svg","isClearable":"true","pathUrl":"/digital_solution"}' @update="v=> item.digital_solution_id = v.id" @clear="item.digital_solution_id = null" :readonly='false'  class='q-mb-sm col-md-2 col-sm-3 col-xs-6' />
+          <comp-fld-ref-search outlined pgMethod="technical_task_list" :label="$t('development_task.technical_task_id')" :item='item.technical_task_title' :itemId='item.technical_task_id' :ext='{"avatar":"image/technical_task.svg","isClearable":"true","pathUrl":"/technical_task"}' @update="v=> item.technical_task_id = v.id" @clear="item.technical_task_id = null" :readonly='false'  class='q-mb-sm col-md-2 col-sm-3 col-xs-6' />
       </div>
       <div class="col-md-2 col-sm-3 col-xs-6">
           <comp-fld-ref-search outlined pgMethod="man_list" :label="$t('development_task.responsible_id')" :item='item.responsible_title' :itemId='item.responsible_id' :ext='{"company_id": 1, pathUrl: "/man", avatar: "image/man.svg", isClearable: "true"}' @update="v=> item.responsible_id = v.id" @clear="item.responsible_id = null" :readonly='false'  class='q-mb-sm col-md-2 col-sm-3 col-xs-6' />
@@ -144,8 +144,8 @@
                         {name: 'type_id', label: 'тип'},
                         {name: 'state_id', label: 'статус'},
                         {name: 'system_id', label: 'система'},
-                        {name: 'technical_task_id', label: 'техническое задание'},
                         {name: 'digital_solution_id', label: 'цифровое решение'},
+                        {name: 'technical_task_id', label: 'техническое задание'},
                         {name: 'responsible_id', label: 'ответственный'},
                         {name: 'sprint_id', label: 'спринт'},
                         {name: 'estimate', label: 'оценка'},
@@ -157,8 +157,8 @@
                         {name: 'description_images', label: 'изображения описания'},
                         {name: 'process', label: 'процесс'},
                         {name: 'is_paused', label: 'на паузе'},
-                        {name: 'process_files', label: 'файлы результата'},
-                        {name: 'process_images', label: 'изображения результата'},
+                        {name: 'process_files', label: 'файлы процесса'},
+                        {name: 'process_images', label: 'изображения процесса'},
                         {name: 'result', label: 'результат'},
                         {name: 'result_files', label: 'файлы результата'},
                         {name: 'result_images', label: 'изображения результата'},

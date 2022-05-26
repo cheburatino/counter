@@ -44,10 +44,6 @@ BEGIN
     
     
     
-    
-    
-    
-    
 
     if (params ->> 'id')::int = -1 then
         -- проверика наличия обязательных параметров
@@ -58,23 +54,27 @@ BEGIN
         END IF;
         
 
-        EXECUTE ('INSERT INTO customer_task (title, state_id, description, files, images, customer_id, request_id, system_id, digital_solution_id, functional_requirement_id, bug_id, plan_start_date, plan_end_date, result, options) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15)  RETURNING *;')
+        EXECUTE ('INSERT INTO customer_task (title, state_id, system_id, digital_solution_id, development_task_id, responsible_id, plan_start_date, plan_end_date, description, description_files, description_images, process, is_paused, process_files, process_images, result, result_files, result_images, options) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19)  RETURNING *;')
 		INTO customer_taskRow
 		USING
 			(params ->> 'title')::text,
 			coalesce((params ->> 'state_id')::int, 1)::int,
-			(params ->> 'description')::text,
-			(params -> 'files')::jsonb,
-			(params -> 'images')::jsonb,
-			(params ->> 'customer_id')::int,
-			(params ->> 'request_id')::int,
 			(params ->> 'system_id')::int,
 			(params ->> 'digital_solution_id')::int,
-			(params ->> 'functional_requirement_id')::int,
-			(params ->> 'bug_id')::int,
+			(params ->> 'development_task_id')::int,
+			(params ->> 'responsible_id')::int,
 			(params ->> 'plan_start_date')::timestamp,
 			(params ->> 'plan_end_date')::timestamp,
+			(params ->> 'description')::text,
+			(params -> 'description_files')::jsonb,
+			(params -> 'description_images')::jsonb,
+			(params ->> 'process')::text,
+			(params ->> 'is_paused')::bool,
+			(params -> 'process_files')::jsonb,
+			(params -> 'process_images')::jsonb,
 			(params ->> 'result')::text,
+			(params -> 'result_files')::jsonb,
+			(params -> 'result_images')::jsonb,
 			coalesce(params -> 'options', '{}')::jsonb;
 
         
@@ -83,18 +83,22 @@ BEGIN
         updateValue = '' || update_str_from_json(params, ARRAY [
 			['title', 'title', 'text'],
 			['state_id', 'state_id', 'number'],
-			['description', 'description', 'text'],
-			['files', 'files', 'jsonb'],
-			['images', 'images', 'jsonb'],
-			['customer_id', 'customer_id', 'number'],
-			['request_id', 'request_id', 'number'],
 			['system_id', 'system_id', 'number'],
 			['digital_solution_id', 'digital_solution_id', 'number'],
-			['functional_requirement_id', 'functional_requirement_id', 'number'],
-			['bug_id', 'bug_id', 'number'],
+			['development_task_id', 'development_task_id', 'number'],
+			['responsible_id', 'responsible_id', 'number'],
 			['plan_start_date', 'plan_start_date', 'timestamp'],
 			['plan_end_date', 'plan_end_date', 'timestamp'],
+			['description', 'description', 'text'],
+			['description_files', 'description_files', 'jsonb'],
+			['description_images', 'description_images', 'jsonb'],
+			['process', 'process', 'text'],
+			['is_paused', 'is_paused', 'bool'],
+			['process_files', 'process_files', 'jsonb'],
+			['process_images', 'process_images', 'jsonb'],
 			['result', 'result', 'text'],
+			['result_files', 'result_files', 'jsonb'],
+			['result_images', 'result_images', 'jsonb'],
             ['options', 'options', 'jsonb'],
             ['deleted', 'deleted', 'bool']
             ]);
