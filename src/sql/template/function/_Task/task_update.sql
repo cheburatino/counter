@@ -61,7 +61,7 @@ BEGIN
 		INTO taskRow
 		USING
 			(params ->> 'title')::text,
-			coalesce((params ->> 'state_id')::int, 1)::int,
+			coalesce((params ->> 'state_id')::int, 2)::int,
 			coalesce((params ->> 'today')::bool, false)::bool,
 			(params ->> 'type_id')::int,
 			(params ->> 'system_id')::int,
