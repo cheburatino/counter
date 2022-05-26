@@ -38,6 +38,7 @@ BEGIN
     
     
     
+    
 
     if (params ->> 'id')::int = -1 then
         -- проверика наличия обязательных параметров
@@ -48,12 +49,13 @@ BEGIN
         END IF;
         
 
-        EXECUTE ('INSERT INTO meeting (title, datetime, state_id, description, description_files, description_images, notes, notes_files, notes_images, result, result_files, result_images, options) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13)  RETURNING *;')
+        EXECUTE ('INSERT INTO meeting (title, datetime, state_id, place, description, description_files, description_images, notes, notes_files, notes_images, result, result_files, result_images, options) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14)  RETURNING *;')
 		INTO meetingRow
 		USING
 			(params ->> 'title')::text,
 			(params ->> 'datetime')::timestamp,
 			coalesce((params ->> 'state_id')::int, 1)::int,
+			(params ->> 'place')::text,
 			(params ->> 'description')::text,
 			(params -> 'description_files')::jsonb,
 			(params -> 'description_images')::jsonb,
@@ -72,6 +74,7 @@ BEGIN
 			['title', 'title', 'text'],
 			['datetime', 'datetime', 'timestamp'],
 			['state_id', 'state_id', 'number'],
+			['place', 'place', 'text'],
 			['description', 'description', 'text'],
 			['description_files', 'description_files', 'jsonb'],
 			['description_images', 'description_images', 'jsonb'],

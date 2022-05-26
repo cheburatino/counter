@@ -20,6 +20,12 @@
       
       <div class="row q-col-gutter-md q-mb-sm">
       <div class="col-md-8 col-sm-12 col-xs-12">
+          <q-input outlined type='text' v-model="item.place" :label="$t('meeting.place')" autogrow :readonly='false'  class='q-mb-sm col-md-8 col-sm-12 col-xs-12' />
+      </div>
+      </div>
+      
+      <div class="row q-col-gutter-md q-mb-sm">
+      <div class="col-md-8 col-sm-12 col-xs-12">
           <q-input outlined type='text' v-model="item.description" :label="$t('meeting.description')" autogrow :readonly='false'  class='q-mb-sm col-md-8 col-sm-12 col-xs-12' />
       </div>
       </div>
@@ -94,6 +100,7 @@
                         {name: 'title', label: 'название',  required: true},
                         {name: 'datetime', label: 'дата и время'},
                         {name: 'state_id', label: 'статус'},
+                        {name: 'place', label: 'место'},
                         {name: 'description', label: 'описание и темы'},
                         {name: 'description_files', label: 'файлы описания'},
                         {name: 'description_images', label: 'изображения описания'},
