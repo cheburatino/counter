@@ -40,6 +40,7 @@ func GetDoc(project *t.ProjectType) t.DocType {
 			t.GetFldFiles("process_files", "файлы процесса", [][]int{{7, 1}}, t.FldVueFilesParams{}),
 			t.GetFldImgList("process_images", "изображения процесса", [][]int{{7, 2}}, t.FldVueImgParams{}),
 			// Задачи {{8, 1}}
+			// Задачи заказчика {{8, 2}}
 			t.GetFldString("result", "результат", 0, [][]int{{9, 1}}, "col-8"),
 			t.GetFldFiles("result_files", "файлы результата", [][]int{{10, 1}}, t.FldVueFilesParams{}),
 			t.GetFldImgList("result_images", "изображения результата", [][]int{{10, 2}}, t.FldVueImgParams{}),

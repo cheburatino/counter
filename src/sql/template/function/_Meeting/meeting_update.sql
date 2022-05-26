@@ -53,7 +53,7 @@ BEGIN
 		USING
 			(params ->> 'title')::text,
 			(params ->> 'datetime')::timestamp,
-			(params ->> 'state_id')::int,
+			coalesce((params ->> 'state_id')::int, 1)::int,
 			(params ->> 'description')::text,
 			(params -> 'description_files')::jsonb,
 			(params -> 'description_images')::jsonb,

@@ -7,7 +7,7 @@ fields = [
 	{name="id",			type="serial"},
 	{name="title",					type="char",	size=150, 	ext="not null",	 comment="название"},
 	{name="datetime",					type="timestamp",	 comment="дата и время"},
-	{name="state_id",					type="int",	 comment="статус"},
+	{name="state_id",					type="int", 	ext=" default 1",	 comment="статус"},
 	{name="description",					type="text",	 comment="описание и темы"},
 	{name="description_files",					type="jsonb",	 comment="файлы описания"},
 	{name="description_images",					type="jsonb",	 comment="изображения описания"},
@@ -38,9 +38,9 @@ triggers = [
 
 
 methods = [
+	"meeting_list",
 	"meeting_update",
 	"meeting_get_by_id",
-	"meeting_list",
 	"meeting_trigger_before",
 	"meeting_trigger_after"
 ]
