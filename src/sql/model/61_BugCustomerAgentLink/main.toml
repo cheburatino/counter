@@ -32,9 +32,9 @@ triggers = [
 
 
 methods = [
-	"bug_customer_agent_link_update",
 	"bug_customer_agent_link_get_by_id",
 	"bug_customer_agent_link_list",
+	"bug_customer_agent_link_update",
 	"bug_customer_agent_link_trigger_before",
 	"bug_customer_agent_link_trigger_after"
 ]

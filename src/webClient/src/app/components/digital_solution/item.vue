@@ -92,8 +92,8 @@
 </template>
 
 <script>
-	import developmentTaskListRefListWidget from './comp/developmentTaskListRefListWidget.vue'
 	import taskListRefListWidget from './comp/taskListRefListWidget.vue'
+	import developmentTaskListRefListWidget from './comp/developmentTaskListRefListWidget.vue'
     import currentUserMixin from '../../../app/mixins/currentUser'
     export default {
         props: ['id', 'isOpenInDialog'],

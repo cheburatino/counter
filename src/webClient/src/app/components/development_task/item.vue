@@ -29,7 +29,7 @@
           <comp-fld-ref-search outlined pgMethod="digital_solution_list" :label="$t('development_task.digital_solution_id')" :item='item.digital_solution_title' :itemId='item.digital_solution_id' :ext='{"avatar":"image/digital_solution.svg","isClearable":"true","pathUrl":"/digital_solution"}' @update="v=> item.digital_solution_id = v.id" @clear="item.digital_solution_id = null" :readonly='false'  class='q-mb-sm col-md-2 col-sm-3 col-xs-6' />
       </div>
       <div class="col-md-2 col-sm-3 col-xs-6">
-          <comp-fld-ref-search outlined pgMethod="man_list" :label="$t('development_task.responsible_id')" :item='item.responsible_title' :itemId='item.responsible_id' :ext='{"company_id": 1, avatar: "image/man.svg", isClearable: "true", pathUrl: "/man"}' @update="v=> item.responsible_id = v.id" @clear="item.responsible_id = null" :readonly='false'  class='q-mb-sm col-md-2 col-sm-3 col-xs-6' />
+          <comp-fld-ref-search outlined pgMethod="man_list" :label="$t('development_task.responsible_id')" :item='item.responsible_title' :itemId='item.responsible_id' :ext='{"company_id": 1, pathUrl: "/man", avatar: "image/man.svg", isClearable: "true"}' @update="v=> item.responsible_id = v.id" @clear="item.responsible_id = null" :readonly='false'  class='q-mb-sm col-md-2 col-sm-3 col-xs-6' />
       </div>
       </div>
       
