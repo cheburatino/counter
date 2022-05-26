@@ -35,10 +35,13 @@ func GetDoc(project *t.ProjectType) t.DocType {
 			t.GetFldString("description", "описание", 0, [][]int{{4, 1}}, "col-8"),
 			t.GetFldFiles("description_files", "файлы описания", [][]int{{5, 1}}, t.FldVueFilesParams{}),
 			t.GetFldImgList("description_images", "изображения описания", [][]int{{5, 2}}, t.FldVueImgParams{}),
-			// Задачи {{6, 1}}
-			t.GetFldString("result", "результат", 0, [][]int{{7, 1}}, "col-8"),
-			t.GetFldFiles("result_files", "файлы результата", [][]int{{8, 1}}, t.FldVueFilesParams{}),
-			t.GetFldImgList("result_images", "изображения результата", [][]int{{8, 2}}, t.FldVueImgParams{}),
+			t.GetFldString("process", "процесс", 0, [][]int{{6, 1}}, "col-8"),
+			t.GetFldFiles("process_files", "файлы результата", [][]int{{7, 1}}, t.FldVueFilesParams{}),
+			t.GetFldImgList("process_images", "изображения результата", [][]int{{7, 2}}, t.FldVueImgParams{}),
+			// Задачи {{8, 1}}
+			t.GetFldString("result", "результат", 0, [][]int{{9, 1}}, "col-8"),
+			t.GetFldFiles("result_files", "файлы результата", [][]int{{10, 1}}, t.FldVueFilesParams{}),
+			t.GetFldImgList("result_images", "изображения результата", [][]int{{10, 2}}, t.FldVueImgParams{}),
 		},
 		Vue: t.DocVue{
 			RouteName:      name,
@@ -97,7 +100,7 @@ func GetDoc(project *t.ProjectType) t.DocType {
                 <q-item-label>{{v.title}}</q-item-label>
                 <q-item-label caption><q-badge color="orange">{{v.options.title.state_title}}</q-badge> <q-badge color="info">{{v.options.title.type_title}}</q-badge></q-item-label>
             `, // шаблон для названия в списке (vue синтаксис)
-	}, [][]int{{6, 1}}, "col-4"))
+	}, [][]int{{8, 1}}, "col-4"))
 
 	return doc
 }

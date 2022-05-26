@@ -67,6 +67,21 @@
       </div>
       
       <div class="row q-col-gutter-md q-mb-sm">
+      <div class="col-md-8 col-sm-12 col-xs-12">
+          <q-input outlined type='text' v-model="item.process" :label="$t('development_task.process')" autogrow :readonly='false'  class='q-mb-sm col-md-8 col-sm-12 col-xs-12' />
+      </div>
+      </div>
+      
+      <div class="row q-col-gutter-md q-mb-sm">
+      <div class="col-md-4 col-sm-6 col-xs-12">
+          <comp-fld-files v-if="this.id != 'new'" fldName='process_files' :label="$t('development_task.process_files')" :fld='item.process_files' :ext = '{tableName: "development_task", tableId: this.id}' @update="v=> item.process_files = v" :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
+      </div>
+      <div class="col-md-4 col-sm-6 col-xs-12">
+          <comp-fld-img-list v-if="this.id != 'new'" :label="$t('development_task.process_images')" :fld='item.process_images' :ext = '{tableName: "development_task", tableId: this.id, fldName: "process_images"}' @update="v=> item.process_images = v" :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
+      </div>
+      </div>
+      
+      <div class="row q-col-gutter-md q-mb-sm">
       <div class="col-md-4 col-sm-6 col-xs-12">
           <task-list-ref-list-widget v-if='item.id != -1' :id='item.id' :readonly='false'/>
       </div>
@@ -137,6 +152,9 @@
                         {name: 'description', label: 'описание'},
                         {name: 'description_files', label: 'файлы описания'},
                         {name: 'description_images', label: 'изображения описания'},
+                        {name: 'process', label: 'процесс'},
+                        {name: 'process_files', label: 'файлы результата'},
+                        {name: 'process_images', label: 'изображения результата'},
                         {name: 'result', label: 'результат'},
                         {name: 'result_files', label: 'файлы результата'},
                         {name: 'result_images', label: 'изображения результата'},

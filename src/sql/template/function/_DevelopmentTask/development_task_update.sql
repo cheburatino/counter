@@ -45,6 +45,9 @@ BEGIN
     
     
     
+    
+    
+    
 
     if (params ->> 'id')::int = -1 then
         -- проверика наличия обязательных параметров
@@ -55,7 +58,7 @@ BEGIN
         END IF;
         
 
-        EXECUTE ('INSERT INTO development_task (title, type_id, state_id, system_id, technical_task_id, digital_solution_id, responsible_id, sprint_id, estimate, internal_priority, plan_end_date, fact_end_date, description, description_files, description_images, result, result_files, result_images, options) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19)  RETURNING *;')
+        EXECUTE ('INSERT INTO development_task (title, type_id, state_id, system_id, technical_task_id, digital_solution_id, responsible_id, sprint_id, estimate, internal_priority, plan_end_date, fact_end_date, description, description_files, description_images, process, process_files, process_images, result, result_files, result_images, options) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21, $22)  RETURNING *;')
 		INTO development_taskRow
 		USING
 			(params ->> 'title')::text,
@@ -73,6 +76,9 @@ BEGIN
 			(params ->> 'description')::text,
 			(params -> 'description_files')::jsonb,
 			(params -> 'description_images')::jsonb,
+			(params ->> 'process')::text,
+			(params -> 'process_files')::jsonb,
+			(params -> 'process_images')::jsonb,
 			(params ->> 'result')::text,
 			(params -> 'result_files')::jsonb,
 			(params -> 'result_images')::jsonb,
@@ -97,6 +103,9 @@ BEGIN
 			['description', 'description', 'text'],
 			['description_files', 'description_files', 'jsonb'],
 			['description_images', 'description_images', 'jsonb'],
+			['process', 'process', 'text'],
+			['process_files', 'process_files', 'jsonb'],
+			['process_images', 'process_images', 'jsonb'],
 			['result', 'result', 'text'],
 			['result_files', 'result_files', 'jsonb'],
 			['result_images', 'result_images', 'jsonb'],
