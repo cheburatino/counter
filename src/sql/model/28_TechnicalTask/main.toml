@@ -6,7 +6,7 @@ tableName ="technical_task"
 fields = [
 	{name="id",			type="serial"},
 	{name="title",					type="char",	size=150, 	ext="not null",	 comment="название"},
-	{name="state_id",					type="int", 	ext=" default 1",	 comment="статус"},
+	{name="state_id",					type="int", 	ext=" default 1",	 comment="статус документа"},
 	{name="work_state_id",					type="int", 	ext=" default 1",	 comment="статус работ по ТЗ"},
 	{name="amount",					type="int",	 comment="сумма"},
 	{name="date",					type="timestamp",	 comment="дата подписания ТЗ"},

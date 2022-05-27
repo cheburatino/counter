@@ -25,8 +25,8 @@
       <div class="col-md-2 col-sm-3 col-xs-6">
           <comp-fld-date outlined :label="$t('technical_task.date')" :date-string="$utils.formatPgDate(item.date)" @update="v=> item.date = v" :readonly='false'  class='q-mb-sm col-md-2 col-sm-3 col-xs-6' />
       </div>
-      <div class="col-md-4 col-sm-6 col-xs-12">
-          <comp-fld-ref-search outlined pgMethod="contract_list" :label="$t('technical_task.contract_id')" :item='item.contract_title' :itemId='item.contract_id' :ext='{"avatar":"image/contract.svg","isClearable":"true","pathUrl":"/contract"}' @update="v=> item.contract_id = v.id" @clear="item.contract_id = null" :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
+      <div class="col-md-4 col-sm-6 col-xs-12" v-if="item.state_id !== 6">
+          <comp-fld-ref-search outlined pgMethod="contract_list" :label="$t('technical_task.contract_id')" :item='item.contract_title' :itemId='item.contract_id' :ext='{"avatar":"image/contract.svg","isClearable":"true","pathUrl":"/contract"}' @update="v=> item.contract_id = v.id" @clear="item.contract_id = null" :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12'  v-if="item.state_id !== 6" />
       </div>
       </div>
       
@@ -37,8 +37,11 @@
       </div>
       
       <div class="row q-col-gutter-md q-mb-sm">
-      <div class="col-md-4 col-sm-6 col-xs-12">
-          <comp-fld-files v-if="this.id != 'new'" fldName='document' :label="$t('technical_task.document')" :fld='item.document' :ext = '{tableName: "technical_task", tableId: this.id}' @update="v=> item.document = v" :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
+      <div class="col-md-2 col-sm-3 col-xs-6">
+          <comp-fld-files v-if="this.id != 'new'" fldName='document' :label="$t('technical_task.document')" :fld='item.document' :ext = '{tableName: "technical_task", tableId: this.id}' @update="v=> item.document = v" :readonly='false'  class='q-mb-sm col-md-2 col-sm-3 col-xs-6' />
+      </div>
+      <div class="col-md-2 col-sm-3 col-xs-6">
+          <development-task-list-ref-list-widget v-if='item.id != -1' :id='item.id' :readonly='false'/>
       </div>
       <div class="col-md-2 col-sm-3 col-xs-6">
           <invoice-list-ref-list-widget v-if='item.id != -1' :id='item.id' :readonly='false'/>
@@ -61,12 +64,13 @@
 </template>
 
 <script>
+	import developmentTaskListRefListWidget from './comp/developmentTaskListRefListWidget.vue'
 	import invoiceListRefListWidget from './comp/invoiceListRefListWidget.vue'
 	import completionActListRefListWidget from './comp/completionActListRefListWidget.vue'
     import currentUserMixin from '../../../app/mixins/currentUser'
     export default {
         props: ['id', 'isOpenInDialog'],
-        components: {invoiceListRefListWidget, completionActListRefListWidget},
+        components: {developmentTaskListRefListWidget, invoiceListRefListWidget, completionActListRefListWidget},
         mixins: [currentUserMixin,],
         computed: {
             docUrl: function() {
@@ -78,7 +82,7 @@
                 item: null,
                 flds: [
                         {name: 'title', label: 'название',  required: true},
-                        {name: 'state_id', label: 'статус'},
+                        {name: 'state_id', label: 'статус документа'},
                         {name: 'work_state_id', label: 'статус работ по ТЗ'},
                         {name: 'amount', label: 'сумма'},
                         {name: 'date', label: 'дата подписания ТЗ'},

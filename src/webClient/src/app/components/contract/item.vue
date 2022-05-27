@@ -29,14 +29,8 @@
       
       <div class="row q-col-gutter-md q-mb-sm">
       <div class="col-md-4 col-sm-6 col-xs-12">
-          <comp-fld-files v-if="this.id != 'new'" fldName='draft' :label="$t('contract.draft')" :fld='item.draft' :ext = '{tableName: "contract", tableId: this.id}' @update="v=> item.draft = v" :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
+          <comp-fld-files v-if="this.id != 'new'" fldName='document' :label="$t('contract.document')" :fld='item.document' :ext = '{tableName: "contract", tableId: this.id}' @update="v=> item.document = v" :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
       </div>
-      <div class="col-md-4 col-sm-6 col-xs-12">
-          <comp-fld-files v-if="this.id != 'new'" fldName='signed' :label="$t('contract.signed')" :fld='item.signed' :ext = '{tableName: "contract", tableId: this.id}' @update="v=> item.signed = v" :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
-      </div>
-      </div>
-      
-      <div class="row q-col-gutter-md q-mb-sm">
       <div class="col-md-4 col-sm-6 col-xs-12">
           <technical-task-list-ref-list-widget v-if='item.id != -1' :id='item.id' :readonly='false'/>
       </div>
@@ -75,8 +69,7 @@
                         {name: 'state_id', label: 'статус'},
                         {name: 'counterparty_id', label: 'контрагент'},
                         {name: 'description', label: 'описание'},
-                        {name: 'draft', label: 'черновик'},
-                        {name: 'signed', label: 'подписанный'},
+                        {name: 'document', label: 'документ'},
                 ],
                 optionsFlds: [],
                 

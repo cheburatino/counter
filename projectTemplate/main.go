@@ -140,7 +140,7 @@ func getProject() t.ProjectType {
 			{Text: "Статусы задач разработки", Url: "ctlg_development_task_state"},
 			{Text: "Статусы задач заказчиков", Url: "ctlg_customer_task_state"},
 			{Text: "Статусы договоров", Url: "ctlg_contract_state"},
-			{Text: "Статусы технических заданий", Url: "ctlg_technical_task_state"},
+			{Text: "Статусы документов по ТЗ", Url: "ctlg_technical_task_state"},
 			{Text: "Статусы работ по ТЗ", Url: "ctlg_technical_task_work_state"},
 			{Text: "Статусы актов", Url: "ctlg_completion_act_state"},
 			{Text: "Статусы счетов", Url: "ctlg_invoice_state"},

@@ -10,8 +10,7 @@ fields = [
 	{name="state_id",					type="int", 	ext=" default 1",	 comment="статус"},
 	{name="counterparty_id",					type="int",	 comment="контрагент"},
 	{name="description",					type="text",	 comment="описание"},
-	{name="draft",					type="jsonb",	 comment="черновик"},
-	{name="signed",					type="jsonb",	 comment="подписанный"},
+	{name="document",					type="jsonb",	 comment="документ"},
 	{name="search_text",			type="text",	comment="колонка для поиска"},
 	{name="options",				type="jsonb",	comment="разные дополнительные параметры"},
 	{name="created_at",				type="timestamp",	ext="with time zone"},
@@ -34,9 +33,9 @@ triggers = [
 
 
 methods = [
-	"contract_list",
 	"contract_update",
 	"contract_get_by_id",
+	"contract_list",
 	"contract_trigger_before",
 	"contract_trigger_after"
 ]
@@ -47,7 +46,6 @@ alterScripts = [
 	"alter table contract add column if not exists state_id int;",
 	"alter table contract add column if not exists counterparty_id int;",
 	"alter table contract add column if not exists description text;",
-	"alter table contract add column if not exists draft jsonb;",
-	"alter table contract add column if not exists signed jsonb;",
+	"alter table contract add column if not exists document jsonb;",
 	"alter table contract add column if not exists search_text text;"
 ]

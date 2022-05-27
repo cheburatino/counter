@@ -91,7 +91,7 @@
 								{icon: '', text: 'Статусы задач разработки', url: '/ctlg_development_task_state', roles: []},
 								{icon: '', text: 'Статусы задач заказчиков', url: '/ctlg_customer_task_state', roles: []},
 								{icon: '', text: 'Статусы договоров', url: '/ctlg_contract_state', roles: []},
-								{icon: '', text: 'Статусы технических заданий', url: '/ctlg_technical_task_state', roles: []},
+								{icon: '', text: 'Статусы документов по ТЗ', url: '/ctlg_technical_task_state', roles: []},
 								{icon: '', text: 'Статусы работ по ТЗ', url: '/ctlg_technical_task_work_state', roles: []},
 								{icon: '', text: 'Статусы актов', url: '/ctlg_completion_act_state', roles: []},
 								{icon: '', text: 'Статусы счетов', url: '/ctlg_invoice_state', roles: []},
