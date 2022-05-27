@@ -43,9 +43,6 @@ func GetDoc(project *t.ProjectType) t.DocType {
 			IsSearchText:    true,
 			IsBeforeTrigger: true,
 			IsAfterTrigger:  true,
-			Hooks: t.DocSqlHooks{BeforeTriggerBefore: []string{`
-			new.number = (select number from technical_task where contract_id = new.contract_id order by number desc limit 1) + 1;
-`}},
 		},
 	}
 

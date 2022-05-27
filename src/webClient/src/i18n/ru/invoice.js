@@ -1,14 +1,14 @@
 
 export default {
- 		amount: 'сумма',
  		date_transfer: 'дата выставления',
- 		invoice_file: 'счёт',
- 		title: 'название',
- 		state_id: 'статус',
- 		technical_task_id: 'техническое задание',
- 		date_plan_paid: 'планируемая дата оплаты',
  		date_paid: 'дата получения оплаты',
- 		name: 'счёт',
+ 		invoice_file: 'счёт',
  		name_plural: 'Счета',
+ 		amount: 'сумма',
+ 		technical_task_id: 'техническое задание',
+ 		state_id: 'статус',
+ 		date_plan_paid: 'планируемая дата оплаты',
+ 		name: 'счёт',
  		name_plural_deleted: 'удаленные Счета',
+ 		title: 'название',
 }

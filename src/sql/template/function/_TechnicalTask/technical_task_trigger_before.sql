@@ -16,8 +16,6 @@ BEGIN
 		select title into workStateTitle from ctlg_technical_task_work_state where id = new.work_state_id;
 		select title into contractTitle from contract where id = new.contract_id;
         
-			new.number = (select number from technical_task where contract_id = new.contract_id order by number desc limit 1) + 1;
-
         -- заполняем options.title
         NEW.options = coalesce(OLD.options, '{}'::jsonb) || NEW.options || jsonb_build_object('title', jsonb_build_object('title', new.title, 'state_title', stateTitle, 'work_state_title', workStateTitle, 'contract_title', contractTitle));
         -- заполняем search_text
