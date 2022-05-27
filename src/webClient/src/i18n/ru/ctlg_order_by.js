@@ -1,6 +1,5 @@
 
 export default {
- 		title: 'название',
  		user_table_id: 'пользователь',
  		index: 'список',
  		is_default: 'по умолчанию',
@@ -8,4 +7,5 @@ export default {
  		name: 'сортировка',
  		name_plural: 'Сортировки',
  		name_plural_deleted: 'удаленные Сортировки',
+ 		title: 'название',
 }

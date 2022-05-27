@@ -19,11 +19,8 @@
       </div>
       
       <div class="row q-col-gutter-md q-mb-sm">
-      <div class="col-md-1 col-sm-2 col-xs-6">
-          <q-input outlined type='number' v-model="item.number" :label="$t('technical_task.number')" :readonly='false'  class='q-mb-sm col-md-1 col-sm-2 col-xs-6' />
-      </div>
-      <div class="col-md-1 col-sm-2 col-xs-6">
-          <q-input outlined type='number' v-model="item.amount" :label="$t('technical_task.amount')" :readonly='false'  class='q-mb-sm col-md-1 col-sm-2 col-xs-6' />
+      <div class="col-md-2 col-sm-3 col-xs-6">
+          <q-input outlined type='number' v-model="item.amount" :label="$t('technical_task.amount')" :readonly='false'  class='q-mb-sm col-md-2 col-sm-3 col-xs-6' />
       </div>
       <div class="col-md-2 col-sm-3 col-xs-6">
           <comp-fld-date outlined :label="$t('technical_task.date')" :date-string="$utils.formatPgDate(item.date)" @update="v=> item.date = v" :readonly='false'  class='q-mb-sm col-md-2 col-sm-3 col-xs-6' />
@@ -83,7 +80,6 @@
                         {name: 'title', label: 'название',  required: true},
                         {name: 'state_id', label: 'статус'},
                         {name: 'work_state_id', label: 'статус работ по ТЗ'},
-                        {name: 'number', label: 'номер',  required: true},
                         {name: 'amount', label: 'сумма'},
                         {name: 'date', label: 'дата подписания ТЗ'},
                         {name: 'contract_id', label: 'договор'},

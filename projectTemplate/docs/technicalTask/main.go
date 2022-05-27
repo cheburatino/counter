@@ -23,10 +23,9 @@ func GetDoc(project *t.ProjectType) t.DocType {
 			t.GetFldTitle(),
 			t.GetFldRef("state_id", "статус", "ctlg_technical_task_state", [][]int{{1, 2}}, "col-2", "isClearable").SetDefault("1"),
 			t.GetFldRef("work_state_id", "статус работ по ТЗ", "ctlg_technical_task_work_state", [][]int{{1, 3}}, "col-2", "isClearable").SetDefault("1"),
-			t.GetFldInt("number", "номер", [][]int{{2, 1}}, "col-1").SetIsRequired(),
-			t.GetFldInt("amount", "сумма", [][]int{{2, 2}}, "col-1"),
-			t.GetFldDate("date", "дата подписания ТЗ", [][]int{{2, 3}}, "col-2"),
-			t.GetFldRef("contract_id", "договор", "contract", [][]int{{2, 4}}, "isShowLink", "isClearable"),
+			t.GetFldInt("amount", "сумма", [][]int{{2, 1}}, "col-2"),
+			t.GetFldDate("date", "дата подписания ТЗ", [][]int{{2, 2}}, "col-2"),
+			t.GetFldRef("contract_id", "договор", "contract", [][]int{{2, 3}}, "isShowLink", "isClearable"),
 			t.GetFldString("description", "описание", 0, [][]int{{3, 1}}, "col-8"),
 			t.GetFldFiles("document", "документ", [][]int{{4, 1}}, t.FldVueFilesParams{}),
 			// контрол счетов {{4, 2}}

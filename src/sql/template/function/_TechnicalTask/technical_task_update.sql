@@ -36,24 +36,22 @@ BEGIN
     
     
     
-    
 
     if (params ->> 'id')::int = -1 then
         -- проверика наличия обязательных параметров
-        checkMsg = check_required_params(params, ARRAY ['title', 'number']);
+        checkMsg = check_required_params(params, ARRAY ['title']);
         IF checkMsg IS NOT NULL
         THEN
             RETURN checkMsg;
         END IF;
         
 
-        EXECUTE ('INSERT INTO technical_task (title, state_id, work_state_id, number, amount, date, contract_id, description, document, options) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)  RETURNING *;')
+        EXECUTE ('INSERT INTO technical_task (title, state_id, work_state_id, amount, date, contract_id, description, document, options) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)  RETURNING *;')
 		INTO technical_taskRow
 		USING
 			(params ->> 'title')::text,
 			coalesce((params ->> 'state_id')::int, 1)::int,
 			coalesce((params ->> 'work_state_id')::int, 1)::int,
-			(params ->> 'number')::int,
 			(params ->> 'amount')::int,
 			(params ->> 'date')::timestamp,
 			(params ->> 'contract_id')::int,
@@ -68,7 +66,6 @@ BEGIN
 			['title', 'title', 'text'],
 			['state_id', 'state_id', 'number'],
 			['work_state_id', 'work_state_id', 'number'],
-			['number', 'number', 'number'],
 			['amount', 'amount', 'number'],
 			['date', 'date', 'timestamp'],
 			['contract_id', 'contract_id', 'number'],
