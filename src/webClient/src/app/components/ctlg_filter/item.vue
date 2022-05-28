@@ -19,8 +19,11 @@
       </div>
       
       <div class="row q-col-gutter-md q-mb-sm">
-      <div class="col-md-8 col-sm-12 col-xs-12">
-          <q-input outlined type='text' v-model="item.where_str" :label="$t('ctlg_filter.where_str')" autogrow :readonly='false'  class='q-mb-sm col-md-8 col-sm-12 col-xs-12' />
+      <div class="col-md-4 col-sm-6 col-xs-12">
+          <q-input outlined type='text' v-model="item.where_str" :label="$t('ctlg_filter.where_str')" autogrow :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
+      </div>
+      <div class="col-md-2 col-sm-3 col-xs-6">
+          <q-select outlined :label="$t('ctlg_filter.index')" v-model='item.index' :options='[{"label":"задачи","value":"task","color":""},{"label":"задачи разработки","value":"development_task","color":""}]'   :readonly='false'  class='q-mb-sm col-md-2 col-sm-3 col-xs-6' />
       </div>
       </div>
       
@@ -54,9 +57,9 @@
                 flds: [
                         {name: 'title', label: 'название',  required: true},
                         {name: 'user_table_id', label: 'пользователь'},
-                        {name: 'index', label: 'список'},
                         {name: 'is_default', label: 'по умолчанию'},
                         {name: 'where_str', label: 'условия фильтра'},
+                        {name: 'index', label: 'список'},
                 ],
                 optionsFlds: [],
                 
@@ -70,7 +73,7 @@
             resultModify(res) {
                 
 				if (res.index) {
-                    let arr = [{"label":"задачи","value":"task","color":""},{"label":"функциональные требования","value":"functional_requirement","color":""}]
+                    let arr = [{"label":"задачи","value":"task","color":""},{"label":"задачи разработки","value":"development_task","color":""}]
                     let index_item = arr.find(v => v.value === res.index)
                     if (index_item) res.index = {value: res.index, label: index_item.label}
                     }

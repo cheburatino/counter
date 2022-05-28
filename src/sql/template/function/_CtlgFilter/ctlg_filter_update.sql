@@ -41,14 +41,14 @@ BEGIN
         END IF;
         
 
-        EXECUTE ('INSERT INTO ctlg_filter (title, user_table_id, index, is_default, where_str, options) VALUES ($1, $2, $3, $4, $5, $6)  RETURNING *;')
+        EXECUTE ('INSERT INTO ctlg_filter (title, user_table_id, is_default, where_str, index, options) VALUES ($1, $2, $3, $4, $5, $6)  RETURNING *;')
 		INTO ctlg_filterRow
 		USING
 			(params ->> 'title')::text,
 			(params ->> 'user_table_id')::int,
-			(params ->> 'index')::text,
 			coalesce((params ->> 'is_default')::bool, false)::bool,
 			(params ->> 'where_str')::text,
+			(params ->> 'index')::text,
 			coalesce(params -> 'options', '{}')::jsonb;
 
         
@@ -57,9 +57,9 @@ BEGIN
         updateValue = '' || update_str_from_json(params, ARRAY [
 			['title', 'title', 'text'],
 			['user_table_id', 'user_table_id', 'number'],
-			['index', 'index', 'text'],
 			['is_default', 'is_default', 'bool'],
 			['where_str', 'where_str', 'text'],
+			['index', 'index', 'text'],
             ['options', 'options', 'jsonb'],
             ['deleted', 'deleted', 'bool']
             ]);

@@ -22,11 +22,11 @@ func GetDoc(project *t.ProjectType) t.DocType {
 		Flds: []t.FldType{
 			t.GetFldTitle(),
 			t.GetFldRef("user_table_id", "пользователь", "user", [][]int{{1, 2}}, "col-2"),
-			t.GetFldSelectString("index", "список", 20, [][]int{{1, 3}}, []t.FldVueOptionsItem{
-				{Value: "task", Label: "задачи"},
-				{Value: "functional_requirement", Label: "функциональные требования"}}, "col-2"),
 			t.GetFldCheckbox("is_default", "по умолчанию", [][]int{{1, 3}}, "col-2").SetDefault("false"),
-			t.GetFldString("where_str", "условия фильтра", 0, [][]int{{2, 1}}, "col-8"),
+			t.GetFldString("where_str", "условия фильтра", 0, [][]int{{2, 1}}, "col-4"),
+			t.GetFldSelectString("index", "список", 20, [][]int{{2, 2}}, []t.FldVueOptionsItem{
+				{Value: "task", Label: "задачи"},
+				{Value: "development_task", Label: "задачи разработки"}}, "col-2").SetIsSearch(),
 		},
 		Vue: t.DocVue{
 			RouteName:      name,

@@ -166,7 +166,7 @@ const notifyError = (msg) => {
 const i18n_ctlg_filter_index = (v) => {
 	const d = {
 		task: 'задачи',
-		functional_requirement: 'функциональные требования'
+		development_task: 'задачи разработки'
 	}
 	return Array.isArray(v) ? v.map(v1 => d[v1]) : d[v]
 }
@@ -174,7 +174,7 @@ const i18n_ctlg_filter_index = (v) => {
 const i18n_ctlg_order_by_index = (v) => {
 	const d = {
 		task: 'задачи',
-		functional_requirement: 'функциональные требования'
+		development_task: 'задачи разработки'
 	}
 	return Array.isArray(v) ? v.map(v1 => d[v1]) : d[v]
 }

@@ -14,10 +14,10 @@ BEGIN
 		select title, avatar into userTableTitle, userTableAvatar from "user" where id = new.user_table_id;
         
         -- заполняем options.title
-        NEW.options = coalesce(OLD.options, '{}'::jsonb) || NEW.options || jsonb_build_object('title', jsonb_build_object('title', new.title, 'user_table_title', userTableTitle, 'userTable_avatar', userTableAvatar));
+        NEW.options = coalesce(OLD.options, '{}'::jsonb) || NEW.options || jsonb_build_object('title', jsonb_build_object('title', new.title, 'user_table_title', userTableTitle, 'userTable_avatar', userTableAvatar, 'index', new.index));
         -- заполняем search_text
         
-        NEW.search_text = concat(new.title, ' ', userTableTitle, ' ', searchTxtVar);
+        NEW.search_text = concat(new.title, ' ', userTableTitle, ' ', new.index, ' ', searchTxtVar);
 
         
 

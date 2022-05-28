@@ -24,7 +24,7 @@ func GetDoc(project *t.ProjectType) t.DocType {
 			t.GetFldRef("user_table_id", "пользователь", "user", [][]int{{1, 2}}, "col-2"),
 			t.GetFldSelectString("index", "список", 20, [][]int{{1, 3}}, []t.FldVueOptionsItem{
 				{Value: "task", Label: "задачи"},
-				{Value: "functional_requirement", Label: "функциональные требования"}}, "col-2"),
+				{Value: "development_task", Label: "задачи разработки"}}, "col-2").SetIsSearch(),
 			t.GetFldCheckbox("is_default", "по умолчанию", [][]int{{1, 3}}, "col-2").SetDefault("false"),
 			t.GetFldString("order_by_str", "условия сортировки", 0, [][]int{{2, 1}}, "col-8"),
 		},

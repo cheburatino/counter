@@ -70,7 +70,7 @@
             resultModify(res) {
                 
 				if (res.index) {
-                    let arr = [{"label":"задачи","value":"task","color":""},{"label":"функциональные требования","value":"functional_requirement","color":""}]
+                    let arr = [{"label":"задачи","value":"task","color":""},{"label":"задачи разработки","value":"development_task","color":""}]
                     let index_item = arr.find(v => v.value === res.index)
                     if (index_item) res.index = {value: res.index, label: index_item.label}
                     }
