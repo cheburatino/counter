@@ -23,6 +23,7 @@ func GetDoc(project *t.ProjectType) t.DocType {
 			t.GetFldTitle().SetIsNotUniq(),
 			t.GetFldRef("user_table_id", "пользователь", "user", [][]int{{1, 2}}, "col-2"),
 			t.GetFldSelectString("index", "список", 20, [][]int{{1, 3}}, []t.FldVueOptionsItem{
+				{Value: "system", Label: "системы"},
 				{Value: "task", Label: "задачи"},
 				{Value: "development_task", Label: "задачи разработки"},
 				{Value: "technical_task", Label: "технические задания"},

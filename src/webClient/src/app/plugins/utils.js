@@ -165,6 +165,7 @@ const notifyError = (msg) => {
 
 const i18n_ctlg_filter_index = (v) => {
 	const d = {
+		system: 'системы',
 		task: 'задачи',
 		development_task: 'задачи разработки',
 		technical_task: 'технические задания',
@@ -178,6 +179,7 @@ const i18n_ctlg_filter_index = (v) => {
 				
 const i18n_ctlg_order_by_index = (v) => {
 	const d = {
+		system: 'системы',
 		task: 'задачи',
 		development_task: 'задачи разработки',
 		technical_task: 'технические задания',

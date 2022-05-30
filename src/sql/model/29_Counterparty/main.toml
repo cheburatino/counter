@@ -30,9 +30,9 @@ triggers = [
 
 
 methods = [
-	"counterparty_list",
 	"counterparty_update",
 	"counterparty_get_by_id",
+	"counterparty_list",
 	"counterparty_trigger_before",
 	"counterparty_trigger_after"
 ]

@@ -15,7 +15,7 @@ const (
 
 func GetDoc(project *t.ProjectType) t.DocType {
 	doc := t.DocType{
-		Project: project,
+		Project:    project,
 		Name:       name,
 		NameRu:     name_ru,
 		PathPrefix: "docs",
@@ -35,7 +35,10 @@ func GetDoc(project *t.ProjectType) t.DocType {
 			BreadcrumbIcon: breadcrumb_icon,
 			Roles:          []string{},
 		},
-		//Templates:   map[string]*t.DocTemplate{"webClient_item.vue": {},},
+		Templates: map[string]*t.DocTemplate{
+			"webClient_index.vue":   {},
+			"sql_function_list.sql": {},
+		},
 		IsBaseTemplates: t.DocIsBaseTemplates{true, true},
 		Sql: t.DocSql{
 			IsSearchText:    true,
@@ -69,11 +72,11 @@ func GetDoc(project *t.ProjectType) t.DocType {
 	}
 
 	doc.AddFld(t.GetFldVueCompositionRefList(&doc, t.VueCompRefListWidgetParams{
-		Label:      "платежи",              // название списка, которе выводится на экране
-		FldName:    "payment_list",           // название поля. Любое, в формате snake_case. На основе этого названия формируется название компоненты во vue.
-		TableName:  "payment",                // название связанной таблицы, из которой будут выгружаться записи
-		RefFldName: "invoice_id", // название поля в связанной таблицы, по которому осуществляется связь
-		Avatar:     "image/payment.png",      // иконка, которая выводится в списке
+		Label:      "платежи",           // название списка, которе выводится на экране
+		FldName:    "payment_list",      // название поля. Любое, в формате snake_case. На основе этого названия формируется название компоненты во vue.
+		TableName:  "payment",           // название связанной таблицы, из которой будут выгружаться записи
+		RefFldName: "invoice_id",        // название поля в связанной таблицы, по которому осуществляется связь
+		Avatar:     "image/payment.png", // иконка, которая выводится в списке
 		NewFlds: []t.FldType{
 			t.GetFldString("title", "название", 300, [][]int{{1, 1}}).SetIsRequired(),
 		}, // список полей, которые заполняются при добавлении новой записи
