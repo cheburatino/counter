@@ -386,7 +386,7 @@
           params: {
             id: -1,
             title: this.newFilterTitle,
-            index: 'system',
+            index: 'payment',
             where_str: this.newFilterСondition,
             user_table_id: this.currentUser.id,
             is_default: this.defCheckbox
@@ -404,7 +404,7 @@
           params: {
             id: -1,
             title: this.newOrderTitle,
-            index: 'system',
+            index: 'payment',
             order_by_str: this.newOrderСondition,
             user_table_id: this.currentUser.id,
             is_default: this.defCheckboxOrder
@@ -450,7 +450,7 @@
           params: {
             id: this.curFilter.id,
             title: this.editFilterTitle,
-            index: 'system',
+            index: 'payment',
             where_str: this.editFilterСondition,
             user_table_id: this.currentUser.id,
             is_default: this.defCheckbox
@@ -468,7 +468,7 @@
           params: {
             id: this.curOrder.id,
             title: this.editOrderTitle,
-            index: 'system',
+            index: 'payment',
             order_by_str: this.editOrderСondition,
             user_table_id: this.currentUser.id,
             is_default: this.defCheckboxOrder
@@ -485,7 +485,7 @@
           method: 'ctlg_filter_list',
           params: {
             user_table_id: this.currentUser.id,
-            index: 'system',
+            index: 'payment',
           }
         }).subscribe(v => {
           if (v.ok) {
@@ -507,7 +507,7 @@
           method: 'ctlg_order_by_list',
           params: {
             user_table_id: this.currentUser.id,
-            index: 'system',
+            index: 'payment',
           }
         }).subscribe(v => {
           if (v.ok) {

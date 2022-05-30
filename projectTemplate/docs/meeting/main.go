@@ -15,7 +15,7 @@ const (
 
 func GetDoc(project *t.ProjectType) t.DocType {
 	doc := t.DocType{
-		Project: project,
+		Project:    project,
 		Name:       name,
 		NameRu:     name_ru,
 		PathPrefix: "docs",
@@ -40,7 +40,10 @@ func GetDoc(project *t.ProjectType) t.DocType {
 			BreadcrumbIcon: breadcrumb_icon,
 			Roles:          []string{},
 		},
-		//Templates:   map[string]*t.DocTemplate{"webClient_item.vue": {},},
+		Templates: map[string]*t.DocTemplate{
+			"webClient_index.vue":   {},
+			"sql_function_list.sql": {},
+		},
 		IsBaseTemplates: t.DocIsBaseTemplates{true, true},
 		Sql: t.DocSql{
 			IsSearchText:    true,
