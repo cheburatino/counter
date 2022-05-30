@@ -39,12 +39,13 @@ func GetDoc(project *t.ProjectType) t.DocType {
 			MenuIcon:       menu_icon,
 			BreadcrumbIcon: breadcrumb_icon,
 			Roles:          []string{},
-			FilterList: []t.VueDocListFilter{
-				{FldName: "state", IsRef: true, RefTable: "ctlg_digital_solution_state"},
-				{FldName: "system_id", IsRef: true, RefTable: "system"},
-			},
 		},
-		//Templates: map[string]*t.DocTemplate{},
+
+		Templates: map[string]*t.DocTemplate{
+			"sql_function_list.sql": {},
+			"webClient_index.vue":   {},
+		},
+
 		IsBaseTemplates: t.DocIsBaseTemplates{true, true},
 		Sql: t.DocSql{
 			IsSearchText:    true,
