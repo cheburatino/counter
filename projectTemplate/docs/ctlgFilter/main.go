@@ -20,13 +20,19 @@ func GetDoc(project *t.ProjectType) t.DocType {
 		NameRu:     name_ru,
 		PathPrefix: "docs",
 		Flds: []t.FldType{
-			t.GetFldTitle(),
+			t.GetFldTitle().SetIsNotUniq(),
 			t.GetFldRef("user_table_id", "пользователь", "user", [][]int{{1, 2}}, "col-2"),
 			t.GetFldCheckbox("is_default", "по умолчанию", [][]int{{1, 3}}, "col-2").SetDefault("false"),
 			t.GetFldString("where_str", "условия фильтра", 0, [][]int{{2, 1}}, "col-4"),
 			t.GetFldSelectString("index", "список", 20, [][]int{{2, 2}}, []t.FldVueOptionsItem{
 				{Value: "task", Label: "задачи"},
-				{Value: "development_task", Label: "задачи разработки"}}, "col-2").SetIsSearch(),
+				{Value: "development_task", Label: "задачи разработки"},
+				{Value: "technical_task", Label: "технические задания"},
+				{Value: "contract", Label: "договоры"},
+				{Value: "invoice", Label: "счета"},
+				{Value: "payment", Label: "платежи"},
+				{Value: "meeting", Label: "встречи"},
+			}, "col-2").SetIsSearch(),
 		},
 		Vue: t.DocVue{
 			RouteName:      name,

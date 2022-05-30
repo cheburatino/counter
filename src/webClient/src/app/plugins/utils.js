@@ -166,7 +166,12 @@ const notifyError = (msg) => {
 const i18n_ctlg_filter_index = (v) => {
 	const d = {
 		task: 'задачи',
-		development_task: 'задачи разработки'
+		development_task: 'задачи разработки',
+		technical_task: 'технические задания',
+		contract: 'договоры',
+		invoice: 'счета',
+		payment: 'платежи',
+		meeting: 'встречи'
 	}
 	return Array.isArray(v) ? v.map(v1 => d[v1]) : d[v]
 }
@@ -174,7 +179,12 @@ const i18n_ctlg_filter_index = (v) => {
 const i18n_ctlg_order_by_index = (v) => {
 	const d = {
 		task: 'задачи',
-		development_task: 'задачи разработки'
+		development_task: 'задачи разработки',
+		technical_task: 'технические задания',
+		contract: 'договоры',
+		invoice: 'счета',
+		payment: 'платежи',
+		meeting: 'встречи'
 	}
 	return Array.isArray(v) ? v.map(v1 => d[v1]) : d[v]
 }

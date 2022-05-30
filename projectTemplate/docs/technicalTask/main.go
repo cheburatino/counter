@@ -15,7 +15,7 @@ const (
 
 func GetDoc(project *t.ProjectType) t.DocType {
 	doc := t.DocType{
-		Project: project,
+		Project:    project,
 		Name:       name,
 		NameRu:     name_ru,
 		PathPrefix: "docs",
@@ -37,7 +37,10 @@ func GetDoc(project *t.ProjectType) t.DocType {
 			BreadcrumbIcon: breadcrumb_icon,
 			Roles:          []string{},
 		},
-		//Templates:   map[string]*t.DocTemplate{"webClient_item.vue": {},},
+		Templates: map[string]*t.DocTemplate{
+			"webClient_index.vue":   {},
+			"sql_function_list.sql": {},
+		},
 		IsBaseTemplates: t.DocIsBaseTemplates{true, true},
 		Sql: t.DocSql{
 			IsSearchText:    true,
@@ -57,11 +60,11 @@ func GetDoc(project *t.ProjectType) t.DocType {
 	doc.Init()
 
 	doc.AddFld(t.GetFldVueCompositionRefList(&doc, t.VueCompRefListWidgetParams{
-		Label:      "задачи разработки",           // название списка, которе выводится на экране
-		FldName:    "development_task_list",           // название поля. Любое, в формате snake_case. На основе этого названия формируется название компоненты во vue.
-		TableName:  "development_task",                // название связанной таблицы, из которой будут выгружаться записи
-		RefFldName: "technical_task_id", 					 // название поля в связанной таблицы, по которому осуществляется связь
-		Avatar:     "image/development_task.png",      // иконка, которая выводится в списке
+		Label:      "задачи разработки",          // название списка, которе выводится на экране
+		FldName:    "development_task_list",      // название поля. Любое, в формате snake_case. На основе этого названия формируется название компоненты во vue.
+		TableName:  "development_task",           // название связанной таблицы, из которой будут выгружаться записи
+		RefFldName: "technical_task_id",          // название поля в связанной таблицы, по которому осуществляется связь
+		Avatar:     "image/development_task.png", // иконка, которая выводится в списке
 		NewFlds: []t.FldType{
 			t.GetFldString("title", "название", 300, [][]int{{1, 1}}).SetIsRequired(),
 		}, // список полей, которые заполняются при добавлении новой записи
@@ -72,11 +75,11 @@ func GetDoc(project *t.ProjectType) t.DocType {
 	}, [][]int{{4, 2}}, "col-2"))
 
 	doc.AddFld(t.GetFldVueCompositionRefList(&doc, t.VueCompRefListWidgetParams{
-		Label:      "счета",           // название списка, которе выводится на экране
-		FldName:    "invoice_list",           // название поля. Любое, в формате snake_case. На основе этого названия формируется название компоненты во vue.
-		TableName:  "invoice",                // название связанной таблицы, из которой будут выгружаться записи
-		RefFldName: "technical_task_id", 					 // название поля в связанной таблицы, по которому осуществляется связь
-		Avatar:     "image/invoice.svg",      // иконка, которая выводится в списке
+		Label:      "счета",             // название списка, которе выводится на экране
+		FldName:    "invoice_list",      // название поля. Любое, в формате snake_case. На основе этого названия формируется название компоненты во vue.
+		TableName:  "invoice",           // название связанной таблицы, из которой будут выгружаться записи
+		RefFldName: "technical_task_id", // название поля в связанной таблицы, по которому осуществляется связь
+		Avatar:     "image/invoice.svg", // иконка, которая выводится в списке
 		NewFlds: []t.FldType{
 			t.GetFldString("title", "название", 300, [][]int{{1, 1}}).SetIsRequired(),
 		}, // список полей, которые заполняются при добавлении новой записи
@@ -87,11 +90,11 @@ func GetDoc(project *t.ProjectType) t.DocType {
 	}, [][]int{{4, 3}}, "col-2"))
 
 	doc.AddFld(t.GetFldVueCompositionRefList(&doc, t.VueCompRefListWidgetParams{
-		Label:      "акт",           				 // название списка, которе выводится на экране
-		FldName:    "completion_act_list",           // название поля. Любое, в формате snake_case. На основе этого названия формируется название компоненты во vue.
-		TableName:  "completion_act",                // название связанной таблицы, из которой будут выгружаться записи
-		RefFldName: "technical_task_id", 			 // название поля в связанной таблицы, по которому осуществляется связь
-		Avatar:     "image/completion_act.png",      // иконка, которая выводится в списке
+		Label:      "акт",                      // название списка, которе выводится на экране
+		FldName:    "completion_act_list",      // название поля. Любое, в формате snake_case. На основе этого названия формируется название компоненты во vue.
+		TableName:  "completion_act",           // название связанной таблицы, из которой будут выгружаться записи
+		RefFldName: "technical_task_id",        // название поля в связанной таблицы, по которому осуществляется связь
+		Avatar:     "image/completion_act.png", // иконка, которая выводится в списке
 		NewFlds: []t.FldType{
 			t.GetFldString("title", "название", 300, [][]int{{1, 1}}).SetIsRequired(),
 		}, // список полей, которые заполняются при добавлении новой записи

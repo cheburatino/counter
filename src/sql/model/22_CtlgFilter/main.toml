@@ -18,7 +18,6 @@ fields = [
 ]
 
 fkConstraints = [
-	{name="ctlg_filter_title_already_exist", ext="UNIQUE (title)"},
 {fld="user_table_id", ref="\"user\"", fk="id"}
 ]
 
@@ -31,9 +30,9 @@ triggers = [
 
 
 methods = [
+	"ctlg_filter_get_by_id",
 	"ctlg_filter_list",
 	"ctlg_filter_update",
-	"ctlg_filter_get_by_id",
 	"ctlg_filter_trigger_before",
 	"ctlg_filter_trigger_after"
 ]

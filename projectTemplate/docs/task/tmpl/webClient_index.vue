@@ -337,8 +337,6 @@
         orderLoading: false,
         isDeleteOrderModal: false,
         storeOrderByName: ''
-
-
       }
     },
     methods: {

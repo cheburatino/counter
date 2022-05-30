@@ -1,12 +1,12 @@
 
 export default {
- 		state_id: 'статус',
  		description: 'описание',
- 		date: 'дата',
- 		counterparty_id: 'контрагент',
  		document: 'документ',
+ 		title: 'название',
+ 		counterparty_id: 'контрагент',
+ 		name_plural_deleted: 'удаленные Договоры',
+ 		date: 'дата',
+ 		state_id: 'статус',
  		name: 'договор',
  		name_plural: 'Договоры',
- 		name_plural_deleted: 'удаленные Договоры',
- 		title: 'название',
 }
