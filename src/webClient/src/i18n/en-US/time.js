@@ -1,12 +1,12 @@
 
 export default {
  		name_plural_deleted: 'deleted time',
- 		task_id: 'task ',
- 		specialist_id: 'specialist ',
+ 		title: 'title',
  		type_id: 'type ',
+ 		task_id: 'task ',
  		digital_solution_id: 'digital solution ',
  		name: 'time',
- 		name_plural: 'time',
- 		title: 'title',
  		minute: 'minute',
+ 		specialist_id: 'specialist ',
+ 		name_plural: 'time',
 }
