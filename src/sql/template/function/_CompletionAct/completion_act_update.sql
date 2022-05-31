@@ -42,15 +42,15 @@ BEGIN
         END IF;
         
 
-        EXECUTE ('INSERT INTO completion_act (title, date, state_id, technical_task_id, draft, signed, options) VALUES ($1, $2, $3, $4, $5, $6, $7)  RETURNING *;')
+        EXECUTE ('INSERT INTO completion_act (title, date, state_id, technical_task_id, document, description, options) VALUES ($1, $2, $3, $4, $5, $6, $7)  RETURNING *;')
 		INTO completion_actRow
 		USING
 			(params ->> 'title')::text,
 			(params ->> 'date')::timestamp,
 			coalesce((params ->> 'state_id')::int, 1)::int,
 			(params ->> 'technical_task_id')::int,
-			(params -> 'draft')::jsonb,
-			(params -> 'signed')::jsonb,
+			(params -> 'document')::jsonb,
+			(params ->> 'description')::text,
 			coalesce(params -> 'options', '{}')::jsonb;
 
         
@@ -61,8 +61,8 @@ BEGIN
 			['date', 'date', 'timestamp'],
 			['state_id', 'state_id', 'number'],
 			['technical_task_id', 'technical_task_id', 'number'],
-			['draft', 'draft', 'jsonb'],
-			['signed', 'signed', 'jsonb'],
+			['document', 'document', 'jsonb'],
+			['description', 'description', 'text'],
             ['options', 'options', 'jsonb'],
             ['deleted', 'deleted', 'bool']
             ]);

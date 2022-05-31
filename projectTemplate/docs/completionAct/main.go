@@ -24,8 +24,8 @@ func GetDoc(project *t.ProjectType) t.DocType {
 			t.GetFldDate("date", "дата подписи", [][]int{{1, 2}}, "col-2"),
 			t.GetFldRef("state_id", "статус", "ctlg_completion_act_state", [][]int{{1, 3}}, "col-2", "isClearable").SetDefault("1"),
 			t.GetFldRef("technical_task_id", "техническое задание", "technical_task", [][]int{{2, 1}}, "isShowLink", "isClearable"),
-			t.GetFldFiles("draft", "черновик", [][]int{{3, 1}}, t.FldVueFilesParams{}, "col-4"),
-			t.GetFldFiles("signed", "подписанный", [][]int{{3, 2}}, t.FldVueFilesParams{}, "col-4"),
+			t.GetFldFiles("document", "документ", [][]int{{2, 2}}, t.FldVueFilesParams{}, "col-4"),
+			t.GetFldString("description", "описание", 0, [][]int{{3, 1}}, "col-8"),
 		},
 		Vue: t.DocVue{
 			RouteName:      name,

@@ -22,14 +22,14 @@
       <div class="col-md-4 col-sm-6 col-xs-12">
           <comp-fld-ref-search outlined pgMethod="technical_task_list" :label="$t('completion_act.technical_task_id')" :item='item.technical_task_title' :itemId='item.technical_task_id' :ext='{"avatar":"image/technical_task.svg","isClearable":"true","pathUrl":"/technical_task"}' @update="v=> item.technical_task_id = v.id" @clear="item.technical_task_id = null" :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
       </div>
+      <div class="col-md-4 col-sm-6 col-xs-12">
+          <comp-fld-files v-if="this.id != 'new'" fldName='document' :label="$t('completion_act.document')" :fld='item.document' :ext = '{tableName: "completion_act", tableId: this.id}' @update="v=> item.document = v" :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
+      </div>
       </div>
       
       <div class="row q-col-gutter-md q-mb-sm">
-      <div class="col-md-4 col-sm-6 col-xs-12">
-          <comp-fld-files v-if="this.id != 'new'" fldName='draft' :label="$t('completion_act.draft')" :fld='item.draft' :ext = '{tableName: "completion_act", tableId: this.id}' @update="v=> item.draft = v" :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
-      </div>
-      <div class="col-md-4 col-sm-6 col-xs-12">
-          <comp-fld-files v-if="this.id != 'new'" fldName='signed' :label="$t('completion_act.signed')" :fld='item.signed' :ext = '{tableName: "completion_act", tableId: this.id}' @update="v=> item.signed = v" :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
+      <div class="col-md-8 col-sm-12 col-xs-12">
+          <q-input outlined type='text' v-model="item.description" :label="$t('completion_act.description')" autogrow :readonly='false'  class='q-mb-sm col-md-8 col-sm-12 col-xs-12' />
       </div>
       </div>
       
@@ -65,8 +65,8 @@
                         {name: 'date', label: 'дата подписи'},
                         {name: 'state_id', label: 'статус'},
                         {name: 'technical_task_id', label: 'техническое задание'},
-                        {name: 'draft', label: 'черновик'},
-                        {name: 'signed', label: 'подписанный'},
+                        {name: 'document', label: 'документ'},
+                        {name: 'description', label: 'описание'},
                 ],
                 optionsFlds: [],
                 
