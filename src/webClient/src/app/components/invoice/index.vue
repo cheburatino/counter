@@ -281,7 +281,6 @@
         filterSystemId: null,
         filterDigitalSolutionTitle: null,
         filterDigitalSolutionId: null,
-        sqlRest: 'state_id != 4',
         sqlRestList: [],
         active: true,
         isCreateFilterModal: false,

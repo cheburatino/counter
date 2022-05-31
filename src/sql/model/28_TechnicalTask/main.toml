@@ -36,9 +36,9 @@ triggers = [
 
 
 methods = [
+	"technical_task_get_by_id",
 	"technical_task_list",
 	"technical_task_update",
-	"technical_task_get_by_id",
 	"technical_task_trigger_before",
 	"technical_task_trigger_after"
 ]
