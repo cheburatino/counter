@@ -19,7 +19,6 @@ fields = [
 ]
 
 fkConstraints = [
-	{name="completion_act_title_already_exist", ext="UNIQUE (title)"},
 	{fld="state_id", ref="ctlg_completion_act_state", fk="id"},
 	{fld="technical_task_id", ref="technical_task", fk="id"}
 ]

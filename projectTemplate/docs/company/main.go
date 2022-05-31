@@ -21,6 +21,8 @@ func GetDoc(project *t.ProjectType) t.DocType {
 		PathPrefix: "docs",
 		Flds: []t.FldType{
 			t.GetFldTitle(),
+			// Юр.лица {{2, 1}}
+			// Договоры {{2, 2}}
 		},
 		Vue: t.DocVue{
 			RouteName:      name,
@@ -46,6 +48,36 @@ func GetDoc(project *t.ProjectType) t.DocType {
 	}
 
 	doc.Init()
+
+	doc.AddFld(t.GetFldVueCompositionRefList(&doc, t.VueCompRefListWidgetParams{
+		Label:      "юр.лица",      // название списка, которе выводится на экране
+		FldName:    "legal_entity_list",      // название поля. Любое, в формате snake_case. На основе этого названия формируется название компоненты во vue.
+		TableName:  "legal_entity",           // название связанной таблицы, из которой будут выгружаться записи
+		RefFldName: "company_id",              // название поля в связанной таблицы, по которому осуществляется связь
+		Avatar:     "image/counterparty.svg", // иконка, которая выводится в списке
+		NewFlds: []t.FldType{
+			t.GetFldString("title", "название", 300, [][]int{{1, 1}}).SetIsRequired(),
+		}, // список полей, которые заполняются при добавлении новой записи
+		TitleTemplate: `
+                <q-item-label>{{v.title}}</q-item-label>
+                <q-item-label caption><q-badge color="orange">{{v.options.title.state_title}}</q-badge></q-item-label>
+            `, // шаблон для названия в списке (vue синтаксис)
+	}, [][]int{{2, 1}}, "col-4"))
+
+	doc.AddFld(t.GetFldVueCompositionRefList(&doc, t.VueCompRefListWidgetParams{
+		Label:      "договоры",      // название списка, которе выводится на экране
+		FldName:    "contract_list",      // название поля. Любое, в формате snake_case. На основе этого названия формируется название компоненты во vue.
+		TableName:  "contract",           // название связанной таблицы, из которой будут выгружаться записи
+		RefFldName: "legal_entity_id",              // название поля в связанной таблицы, по которому осуществляется связь
+		Avatar:     "image/contract.svg", // иконка, которая выводится в списке
+		NewFlds: []t.FldType{
+			t.GetFldString("title", "название", 300, [][]int{{1, 1}}).SetIsRequired(),
+		}, // список полей, которые заполняются при добавлении новой записи
+		TitleTemplate: `
+                <q-item-label>{{v.title}}</q-item-label>
+                <q-item-label caption><q-badge color="orange">{{v.options.title.state_title}}</q-badge></q-item-label>
+            `, // шаблон для названия в списке (vue синтаксис)
+	}, [][]int{{2, 2}}, "col-4"))
 
 	return doc
 }

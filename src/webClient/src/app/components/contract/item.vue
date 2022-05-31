@@ -20,10 +20,16 @@
       
       <div class="row q-col-gutter-md q-mb-sm">
       <div class="col-md-4 col-sm-6 col-xs-12">
-          <comp-fld-ref-search outlined pgMethod="counterparty_list" :label="$t('contract.counterparty_id')" :item='item.counterparty_title' :itemId='item.counterparty_id' :ext='{"avatar":"image/counterparty.svg","isClearable":"true","pathUrl":"/counterparty"}' @update="v=> item.counterparty_id = v.id" @clear="item.counterparty_id = null" :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
+          <comp-fld-ref-search outlined pgMethod="company_list" :label="$t('contract.company_id')" :item='item.company_title' :itemId='item.company_id' :ext='{"avatar":"image/company.svg","isClearable":"true","pathUrl":"/company"}' @update="v=> item.company_id = v.id" @clear="item.company_id = null" :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
       </div>
       <div class="col-md-4 col-sm-6 col-xs-12">
-          <q-input outlined type='text' v-model="item.description" :label="$t('contract.description')" autogrow :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
+          <comp-fld-ref-search outlined pgMethod="legal_entity_list" :label="$t('contract.counterparty_id')" :item='item.counterparty_title' :itemId='item.counterparty_id' :ext='{"avatar":"image/counterparty.svg","isClearable":"true","pathUrl":"/legal_entity"}' @update="v=> item.counterparty_id = v.id" @clear="item.counterparty_id = null" :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
+      </div>
+      </div>
+      
+      <div class="row q-col-gutter-md q-mb-sm">
+      <div class="col-md-8 col-sm-12 col-xs-12">
+          <q-input outlined type='text' v-model="item.description" :label="$t('contract.description')" autogrow :readonly='false'  class='q-mb-sm col-md-8 col-sm-12 col-xs-12' />
       </div>
       </div>
       
@@ -67,6 +73,7 @@
                         {name: 'title', label: 'название',  required: true},
                         {name: 'date', label: 'дата'},
                         {name: 'state_id', label: 'статус'},
+                        {name: 'company_id', label: 'компания'},
                         {name: 'counterparty_id', label: 'контрагент'},
                         {name: 'description', label: 'описание'},
                         {name: 'document', label: 'документ'},

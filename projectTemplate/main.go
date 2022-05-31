@@ -6,7 +6,6 @@ import (
 	"github.com/cheburatino/electron_is/projectTemplate/docs/companyManLink"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/completionAct"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/contract"
-	"github.com/cheburatino/electron_is/projectTemplate/docs/counterparty"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/ctlgCompletionActState"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/ctlgContractState"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/ctlgCustomerTaskState"
@@ -27,6 +26,7 @@ import (
 	"github.com/cheburatino/electron_is/projectTemplate/docs/developmentTask"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/digitalSolution"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/invoice"
+	"github.com/cheburatino/electron_is/projectTemplate/docs/legalEntity"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/man"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/meeting"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/newsFromDima"
@@ -78,7 +78,7 @@ func getProject() t.ProjectType {
 		meeting.GetDoc(p),
 		contract.GetDoc(p),
 		technicalTask.GetDoc(p),
-		counterparty.GetDoc(p),
+		legalEntity.GetDoc(p),
 		company.GetDoc(p),
 		man.GetDoc(p),
 		system.GetDoc(p),
@@ -124,8 +124,8 @@ func getProject() t.ProjectType {
 		},},
 		{Text: "CRM", Icon: "image/crm.png", IsFolder: true, Roles: []string{utils.RoleAdmin}, LinkList: []t.VueMenu{
 			{Text: "Компании", Url: "company"},
+			{Text: "Юр.лица", Url: "legal_entity"},
 			{Text: "Контакты", Url: "man"},
-			{Text: "Контрагенты", Url: "counterparty"},
 			{Text: "Договоры", Url: "contract"},
 			{Text: "ТЗ", Url: "technical_task"},
 			{Text: "Акты", Url: "completion_act"},

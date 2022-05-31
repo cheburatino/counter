@@ -29,9 +29,9 @@ triggers = [
 
 
 methods = [
-	"work_list",
 	"work_update",
 	"work_get_by_id",
+	"work_list",
 	"work_trigger_before",
 	"work_trigger_after"
 ]

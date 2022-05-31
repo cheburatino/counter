@@ -75,8 +75,8 @@
 ],},
 {isFolder: true, icon: 'image/crm.png', text: 'CRM', roles: ['admin'], linkList: 								[
 								{icon: '', text: 'Компании', url: '/company', roles: []},
+								{icon: '', text: 'Юр.лица', url: '/legal_entity', roles: []},
 								{icon: '', text: 'Контакты', url: '/man', roles: []},
-								{icon: '', text: 'Контрагенты', url: '/counterparty', roles: []},
 								{icon: '', text: 'Договоры', url: '/contract', roles: []},
 								{icon: '', text: 'ТЗ', url: '/technical_task', roles: []},
 								{icon: '', text: 'Акты', url: '/completion_act', roles: []},

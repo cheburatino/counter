@@ -8,7 +8,7 @@ AS
 $function$
 
 DECLARE
-    counterpartyRow     counterparty%ROWTYPE;
+    counterpartyRow     legal_entity%ROWTYPE;
     checkMsg    TEXT;
     result      JSONB;
     updateValue TEXT;
@@ -25,6 +25,7 @@ BEGIN
     END IF;
 	
 
+    
     
     
     

@@ -27,6 +27,12 @@
       </div>
       </div>
       
+      <div class="row q-col-gutter-md q-mb-sm">
+      <div class="col-md-4 col-sm-6 col-xs-12">
+          <contract-list-ref-list-widget v-if='item.id != -1' :id='item.id' :readonly='false'/>
+      </div>
+      </div>
+      
 
       <!--  кнопки   -->
       <comp-item-btn-save v-if="!isOpenInDialog" @save="save" :readonly="false" @cancel="$router.push(docUrl)"/>
@@ -40,11 +46,11 @@
 </template>
 
 <script>
-
+	import contractListRefListWidget from './comp/contractListRefListWidget.vue'
     import currentUserMixin from '../../../app/mixins/currentUser'
     export default {
         props: ['id', 'isOpenInDialog'],
-        components: {},
+        components: {contractListRefListWidget},
         mixins: [currentUserMixin,],
         computed: {
             docUrl: function() {
