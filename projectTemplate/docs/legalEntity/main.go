@@ -54,7 +54,7 @@ func GetDoc(project *t.ProjectType) t.DocType {
 		Label:      "договоры",      // название списка, которе выводится на экране
 		FldName:    "contract_list",      // название поля. Любое, в формате snake_case. На основе этого названия формируется название компоненты во vue.
 		TableName:  "contract",           // название связанной таблицы, из которой будут выгружаться записи
-		RefFldName: "legal_entity_id",              // название поля в связанной таблицы, по которому осуществляется связь
+		RefFldName: "counterparty_id",              // название поля в связанной таблицы, по которому осуществляется связь
 		Avatar:     "image/contract.svg", // иконка, которая выводится в списке
 		NewFlds: []t.FldType{
 			t.GetFldString("title", "название", 300, [][]int{{1, 1}}).SetIsRequired(),

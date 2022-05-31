@@ -1,13 +1,13 @@
 
 export default {
- 		name_plural: 'payment',
- 		title: 'title',
- 		amount: 'amount',
- 		payment_date: 'payment date',
- 		payment_order: 'payment order',
  		name: 'payment',
- 		name_plural_deleted: 'deleted payment',
- 		payment_receipt_date: 'payment receipt date',
+ 		title: 'title',
  		invoice_id: 'invoice ',
  		description: 'description',
+ 		payment_order: 'payment order',
+ 		name_plural: 'payment',
+ 		name_plural_deleted: 'deleted payment',
+ 		amount: 'amount',
+ 		payment_date: 'payment date',
+ 		payment_receipt_date: 'payment receipt date',
 }
