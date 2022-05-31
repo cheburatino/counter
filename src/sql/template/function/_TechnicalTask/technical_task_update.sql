@@ -47,15 +47,15 @@ BEGIN
         END IF;
         
 
-        EXECUTE ('INSERT INTO technical_task (title, state_id, work_state_id, amount, date, contract_id, description, document, options) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)  RETURNING *;')
+        EXECUTE ('INSERT INTO technical_task (title, state_id, work_state_id, contract_id, amount, date, description, document, options) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)  RETURNING *;')
 		INTO technical_taskRow
 		USING
 			(params ->> 'title')::text,
 			coalesce((params ->> 'state_id')::int, 1)::int,
 			coalesce((params ->> 'work_state_id')::int, 1)::int,
+			(params ->> 'contract_id')::int,
 			(params ->> 'amount')::int,
 			(params ->> 'date')::timestamp,
-			(params ->> 'contract_id')::int,
 			(params ->> 'description')::text,
 			(params -> 'document')::jsonb,
 			coalesce(params -> 'options', '{}')::jsonb;
@@ -67,9 +67,9 @@ BEGIN
 			['title', 'title', 'text'],
 			['state_id', 'state_id', 'number'],
 			['work_state_id', 'work_state_id', 'number'],
+			['contract_id', 'contract_id', 'number'],
 			['amount', 'amount', 'number'],
 			['date', 'date', 'timestamp'],
-			['contract_id', 'contract_id', 'number'],
 			['description', 'description', 'text'],
 			['document', 'document', 'jsonb'],
             ['options', 'options', 'jsonb'],

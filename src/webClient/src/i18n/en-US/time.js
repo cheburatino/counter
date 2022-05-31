@@ -1,12 +1,12 @@
 
 export default {
- 		specialist_id: 'specialist ',
- 		name_plural: 'time',
+ 		name: 'time',
  		name_plural_deleted: 'deleted time',
- 		title: 'title',
  		minute: 'minute',
+ 		specialist_id: 'specialist ',
  		type_id: 'type ',
+ 		name_plural: 'time',
+ 		title: 'title',
  		task_id: 'task ',
  		digital_solution_id: 'digital solution ',
- 		name: 'time',
 }

@@ -19,14 +19,14 @@
       </div>
       
       <div class="row q-col-gutter-md q-mb-sm">
+      <div class="col-md-4 col-sm-6 col-xs-12" v-if="item.state_id !== 6">
+          <comp-fld-ref-search outlined pgMethod="contract_list" :label="$t('technical_task.contract_id')" :item='item.contract_title' :itemId='item.contract_id' :ext='{"avatar":"image/contract.svg","isClearable":"true","pathUrl":"/contract"}' @update="v=> item.contract_id = v.id" @clear="item.contract_id = null" :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12'  v-if="item.state_id !== 6" />
+      </div>
       <div class="col-md-2 col-sm-3 col-xs-6">
           <q-input outlined type='number' v-model="item.amount" :label="$t('technical_task.amount')" :readonly='false'  class='q-mb-sm col-md-2 col-sm-3 col-xs-6' />
       </div>
       <div class="col-md-2 col-sm-3 col-xs-6">
           <comp-fld-date outlined :label="$t('technical_task.date')" :date-string="$utils.formatPgDate(item.date)" @update="v=> item.date = v" :readonly='false'  class='q-mb-sm col-md-2 col-sm-3 col-xs-6' />
-      </div>
-      <div class="col-md-4 col-sm-6 col-xs-12" v-if="item.state_id !== 6">
-          <comp-fld-ref-search outlined pgMethod="contract_list" :label="$t('technical_task.contract_id')" :item='item.contract_title' :itemId='item.contract_id' :ext='{"avatar":"image/contract.svg","isClearable":"true","pathUrl":"/contract"}' @update="v=> item.contract_id = v.id" @clear="item.contract_id = null" :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12'  v-if="item.state_id !== 6" />
       </div>
       </div>
       
@@ -64,13 +64,13 @@
 </template>
 
 <script>
-	import completionActListRefListWidget from './comp/completionActListRefListWidget.vue'
 	import developmentTaskListRefListWidget from './comp/developmentTaskListRefListWidget.vue'
 	import invoiceListRefListWidget from './comp/invoiceListRefListWidget.vue'
+	import completionActListRefListWidget from './comp/completionActListRefListWidget.vue'
     import currentUserMixin from '../../../app/mixins/currentUser'
     export default {
         props: ['id', 'isOpenInDialog'],
-        components: {completionActListRefListWidget, developmentTaskListRefListWidget, invoiceListRefListWidget},
+        components: {developmentTaskListRefListWidget, invoiceListRefListWidget, completionActListRefListWidget},
         mixins: [currentUserMixin,],
         computed: {
             docUrl: function() {
@@ -84,9 +84,9 @@
                         {name: 'title', label: 'название',  required: true},
                         {name: 'state_id', label: 'статус документа'},
                         {name: 'work_state_id', label: 'статус работ по ТЗ'},
+                        {name: 'contract_id', label: 'договор'},
                         {name: 'amount', label: 'сумма'},
                         {name: 'date', label: 'дата подписания ТЗ'},
-                        {name: 'contract_id', label: 'договор'},
                         {name: 'description', label: 'описание'},
                         {name: 'document', label: 'документ'},
                 ],
