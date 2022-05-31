@@ -44,6 +44,12 @@ func GetDoc(project *t.ProjectType) t.DocType {
 			IsSearchText:    true,
 			IsBeforeTrigger: true,
 			IsAfterTrigger:  true,
+			Hooks: t.DocSqlHooks{BeforeTriggerBefore: []string{
+				`
+		-- заполняем компанию, с которой связан контрагент
+		new.company_id = (select company_id from legal_entity where id = new.counterparty_id);
+`,
+			}},
 		},
 	}
 

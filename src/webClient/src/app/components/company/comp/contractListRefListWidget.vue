@@ -69,7 +69,7 @@
             },
             reload(isDeleted) {
                 !isDeleted ? this.deleted = false : this.deleted = true
-                this.$utils.callPgMethod('contract_list', {'legal_entity_id': this.id, deleted: this.deleted, 'order_by': 'created_at desc', }, (result) => this.list = result)
+                this.$utils.callPgMethod('contract_list', {'company_id': this.id, deleted: this.deleted, 'order_by': 'created_at desc', }, (result) => this.list = result)
             },
             saveNew() {
                 
@@ -77,7 +77,7 @@
                     this.$q.notify({type: 'negative', message: 'не заполнено поле: "название"'})
                     return
                 }
-                let params = Object.assign({id: -1, legal_entity_id: this.id}, this.item)
+                let params = Object.assign({id: -1, company_id: this.id}, this.item)
                 
                     
                 // если IsStateMachine то contract_create, в остальных случаях contract_update
