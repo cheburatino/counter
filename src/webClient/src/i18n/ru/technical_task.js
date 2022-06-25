@@ -1,14 +1,14 @@
 
 export default {
- 		name: 'техническое задание',
  		title: 'название',
  		state_id: 'статус документа',
- 		work_state_id: 'статус работ по ТЗ',
+ 		description: 'описание',
  		document: 'документ',
- 		name_plural: 'Технические задания',
+ 		name: 'техническое задание',
  		name_plural_deleted: 'удаленные Технические задания',
+ 		work_state_id: 'статус работ по ТЗ',
  		contract_id: 'договор',
  		amount: 'сумма',
  		date: 'дата подписания ТЗ',
- 		description: 'описание',
+ 		name_plural: 'Технические задания',
 }

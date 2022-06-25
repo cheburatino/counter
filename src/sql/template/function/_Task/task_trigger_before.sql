@@ -25,6 +25,7 @@ BEGIN
 		if new.development_task_id notnull
 		then
             new.system_id = (select system_id from development_task where id = new.development_task_id);
+            new.digital_solution_id = (select digital_solution_id from development_task where id = new.development_task_id);
         end if;
 			
         -- заполняем options.title
