@@ -60,6 +60,14 @@ func GetDoc(project *t.ProjectType) t.DocType {
 			IsSearchText:    true,
 			IsBeforeTrigger: true,
 			IsAfterTrigger:  true,
+			Hooks: t.DocSqlHooks{BeforeTriggerBefore: []string{
+				`
+		if new.digital_solution_id notnull
+		then
+            new.system_id = (select system_id from digital_solution where id = new.digital_solution_id);
+        end if;
+`,
+			}},
 		},
 	}
 

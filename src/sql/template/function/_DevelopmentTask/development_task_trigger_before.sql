@@ -24,6 +24,11 @@ BEGIN
 		select title into responsibleTitle from man where id = new.responsible_id;
 		select title into sprintTitle from sprint where id = new.sprint_id;
         
+		if new.digital_solution_id notnull
+		then
+            new.system_id = (select system_id from digital_solution where id = new.digital_solution_id);
+        end if;
+
         -- заполняем options.title
         NEW.options = coalesce(OLD.options, '{}'::jsonb) || NEW.options || jsonb_build_object('title', jsonb_build_object('title', new.title, 'type_title', typeTitle, 'state_title', stateTitle, 'system_title', systemTitle, 'digital_solution_title', digitalSolutionTitle, 'technical_task_title', technicalTaskTitle, 'responsible_title', responsibleTitle, 'sprint_title', sprintTitle));
         -- заполняем search_text

@@ -26,9 +26,9 @@ triggers = [
 
 
 methods = [
+	"ctlg_contract_state_get_by_id",
 	"ctlg_contract_state_list",
 	"ctlg_contract_state_update",
-	"ctlg_contract_state_get_by_id",
 	"ctlg_contract_state_trigger_before",
 	"ctlg_contract_state_trigger_after"
 ]
