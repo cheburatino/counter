@@ -62,8 +62,8 @@
 </template>
 
 <script>
-	import digitalSolutionListRefListWidget from './comp/digitalSolutionListRefListWidget.vue'
 	import developmentTaskListRefListWidget from './comp/developmentTaskListRefListWidget.vue'
+	import digitalSolutionListRefListWidget from './comp/digitalSolutionListRefListWidget.vue'
     import currentUserMixin from '../../../app/mixins/currentUser'
     export default {
         props: ['id', 'isOpenInDialog'],
