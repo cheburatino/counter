@@ -156,7 +156,7 @@
     <q-dialog v-model="isFiltersModal">
       <q-card>
         <q-card-section>
-          <div class="text-h6">Filter list</div>
+          <div class="text-h6">Варианты фильтров</div>
         </q-card-section>
 
         <q-card-section>
@@ -169,7 +169,7 @@
     <q-dialog v-model="isOrderModal">
       <q-card>
         <q-card-section>
-          <div class="text-h6">Order_by list:</div>
+          <div class="text-h6">Варианты сортировки</div>
         </q-card-section>
 
         <q-card-section>
@@ -384,7 +384,7 @@
           params: {
             id: -1,
             title: this.newFilterTitle,
-            index: 'task',
+            index: 'digital_solution',
             where_str: this.newFilterСondition,
             user_table_id: this.currentUser.id,
             is_default: this.defCheckbox
@@ -402,7 +402,7 @@
           params: {
             id: -1,
             title: this.newOrderTitle,
-            index: 'task',
+            index: 'digital_solution',
             order_by_str: this.newOrderСondition,
             user_table_id: this.currentUser.id,
             is_default: this.defCheckboxOrder
@@ -448,7 +448,7 @@
           params: {
             id: this.curFilter.id,
             title: this.editFilterTitle,
-            index: 'task',
+            index: 'digital_solution',
             where_str: this.editFilterСondition,
             user_table_id: this.currentUser.id,
             is_default: this.defCheckbox
@@ -466,7 +466,7 @@
           params: {
             id: this.curOrder.id,
             title: this.editOrderTitle,
-            index: 'task',
+            index: 'digital_solution',
             order_by_str: this.editOrderСondition,
             user_table_id: this.currentUser.id,
             is_default: this.defCheckboxOrder
@@ -483,7 +483,7 @@
           method: 'ctlg_filter_list',
           params: {
             user_table_id: this.currentUser.id,
-            index: 'task',
+            index: 'digital_solution',
           }
         }).subscribe(v => {
           if (v.ok) {
@@ -505,7 +505,7 @@
           method: 'ctlg_order_by_list',
           params: {
             user_table_id: this.currentUser.id,
-            index: 'task',
+            index: 'digital_solution',
           }
         }).subscribe(v => {
           if (v.ok) {

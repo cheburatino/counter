@@ -64,9 +64,11 @@
                 menuLinks: [
                     // for codeGenerate ##sidemenu_slot1
 
-									{icon: 'image/task.svg', text: 'i18n_menu.task', url: '/task', roles: ['admin', 'specialist']},
+									{icon: 'image/task.svg', text: 'i18n_menu.task', url: '/task', roles: ['admin']},
 
-									{icon: 'image/meeting.svg', text: 'i18n_menu.meeting', url: '/meeting', roles: ['admin', 'specialist']},
+									{icon: 'image/work.png', text: 'i18n_menu.work', url: '/work', roles: ['admin']},
+
+									{icon: 'image/meeting.svg', text: 'i18n_menu.meeting', url: '/meeting', roles: ['admin']},
 {isFolder: true, icon: 'image/development.png', text: 'Разработка', roles: ['admin'], linkList: 								[
 								{icon: '', text: 'Системы', url: '/system', roles: []},
 								{icon: '', text: 'Цифровые решения', url: '/digital_solution', roles: []},
@@ -86,8 +88,10 @@
 {isFolder: true, icon: 'image/catalog.svg', text: 'Справочники', roles: ['admin'], linkList: 								[
 								{icon: 'image/user.svg', text: 'Пользователи', url: '/users', roles: []},
 								{icon: '', text: 'Статусы встреч', url: '/ctlg_meeting_state', roles: []},
+								{icon: '', text: 'Статусы систем', url: '/ctlg_system_state', roles: []},
 								{icon: '', text: 'Статусы цифровых решений', url: '/ctlg_digital_solution_state', roles: []},
 								{icon: '', text: 'Статусы задач', url: '/ctlg_task_state', roles: []},
+								{icon: '', text: 'Статусы дел', url: '/ctlg_work_state', roles: []},
 								{icon: '', text: 'Статусы задач разработки', url: '/ctlg_development_task_state', roles: []},
 								{icon: '', text: 'Статусы задач заказчиков', url: '/ctlg_customer_task_state', roles: []},
 								{icon: '', text: 'Статусы договоров', url: '/ctlg_contract_state', roles: []},

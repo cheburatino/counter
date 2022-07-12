@@ -14,7 +14,7 @@
           <comp-fld-ref-search outlined pgMethod="company_list" :label="$t('system.customer_id')" :item='item.customer_title' :itemId='item.customer_id' :ext='{"avatar":"image/company.svg","isClearable":"true","pathUrl":"/company"}' @update="v=> item.customer_id = v.id" @clear="item.customer_id = null" :readonly='false'  class='q-mb-sm col-md-2 col-sm-3 col-xs-6' />
       </div>
       <div class="col-md-2 col-sm-3 col-xs-6">
-          <q-input outlined type='text' v-model="item.state" :label="$t('system.state')" autogrow :readonly='false'  class='q-mb-sm col-md-2 col-sm-3 col-xs-6' />
+          <comp-fld-ref-search outlined pgMethod="ctlg_system_state_list" :label="$t('system.state_id')" :item='item.state_title' :itemId='item.state_id' :ext='{}' @update="v=> item.state_id = v.id" @clear="item.state_id = null" :readonly='false'  class='q-mb-sm col-md-2 col-sm-3 col-xs-6' />
       </div>
       </div>
       
@@ -35,10 +35,10 @@
       
       <div class="row q-col-gutter-md q-mb-sm">
       <div class="col-md-4 col-sm-6 col-xs-12">
-          <development-task-list-ref-list-widget v-if='item.id != -1' :id='item.id' :readonly='false'/>
+          <digital-solution-list-ref-list-widget v-if='item.id != -1' :id='item.id' :readonly='false'/>
       </div>
       <div class="col-md-4 col-sm-6 col-xs-12">
-          <digital-solution-list-ref-list-widget v-if='item.id != -1' :id='item.id' :readonly='false'/>
+          <development-task-list-ref-list-widget v-if='item.id != -1' :id='item.id' :readonly='false'/>
       </div>
       </div>
       
@@ -62,12 +62,12 @@
 </template>
 
 <script>
-	import developmentTaskListRefListWidget from './comp/developmentTaskListRefListWidget.vue'
 	import digitalSolutionListRefListWidget from './comp/digitalSolutionListRefListWidget.vue'
+	import developmentTaskListRefListWidget from './comp/developmentTaskListRefListWidget.vue'
     import currentUserMixin from '../../../app/mixins/currentUser'
     export default {
         props: ['id', 'isOpenInDialog'],
-        components: {developmentTaskListRefListWidget, digitalSolutionListRefListWidget},
+        components: {digitalSolutionListRefListWidget, developmentTaskListRefListWidget},
         mixins: [currentUserMixin,],
         computed: {
             docUrl: function() {
@@ -80,7 +80,7 @@
                 flds: [
                         {name: 'title', label: 'название',  required: true},
                         {name: 'customer_id', label: 'заказчик'},
-                        {name: 'state', label: 'статус'},
+                        {name: 'state_id', label: 'статус'},
                         {name: 'description', label: 'описание'},
                         {name: 'files', label: 'файлы'},
                         {name: 'images', label: 'изображения'},

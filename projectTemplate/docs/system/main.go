@@ -22,12 +22,12 @@ func GetDoc(project *t.ProjectType) t.DocType {
 		Flds: []t.FldType{
 			t.GetFldTitle(),
 			t.GetFldRef("customer_id", "заказчик", "company", [][]int{{1, 2}}, "col-2", "isShowLink", "isClearable"),
-			t.GetFldString("state", "статус", 50, [][]int{{1, 3}}, "col-2"),
+			t.GetFldRef("state_id", "статус", "ctlg_system_state", [][]int{{1, 3}}, "col-2"),
 			t.GetFldString("description", "описание", 0, [][]int{{2, 1}}, "col-8"),
 			t.GetFldFiles("files", "файлы", [][]int{{3, 1}}, t.FldVueFilesParams{}),
 			t.GetFldImgList("images", "изображения", [][]int{{3, 2}}, t.FldVueImgParams{}),
-			// Задачи разработки {{4,1}}
-			// Цифровые решения {{4,2}}
+			// Цифровые решения {{4, 1}}
+			// Задачи разработки {{4, 2}}
 		},
 		Vue: t.DocVue{
 			RouteName:      name,
@@ -65,18 +65,18 @@ func GetDoc(project *t.ProjectType) t.DocType {
 			return `
 				 <q-item-section>
 				    <q-item-label lines="1">{{item.title}}</q-item-label>
-					<q-item-label caption><q-badge color="positive">{{item.options.title.customer_title}}</q-badge></q-item-label>
+					<q-item-label caption><q-badge color="positive">{{item.options.title.customer_title}}</q-badge> <q-badge color="orange">{{item.options.title.state_title}}</q-badge></q-item-label>
 				 </q-item-section>
 			`
 		},
 	}
 
 	doc.AddFld(t.GetFldVueCompositionRefList(&doc, t.VueCompRefListWidgetParams{
-		Label:      "задачи разработки",          // название списка, которе выводится на экране
-		FldName:    "development_task_list",      // название поля. Любое, в формате snake_case. На основе этого названия формируется название компоненты во vue.
-		TableName:  "development_task",           // название связанной таблицы, из которой будут выгружаться записи
+		Label:      "цифровые решения",           // название списка, которе выводится на экране
+		FldName:    "digital_solution_list",      // название поля. Любое, в формате snake_case. На основе этого названия формируется название компоненты во vue.
+		TableName:  "digital_solution",           // название связанной таблицы, из которой будут выгружаться записи
 		RefFldName: "system_id",                  // название поля в связанной таблицы, по которому осуществляется связь
-		Avatar:     "image/development_task.png", // иконка, которая выводится в списке
+		Avatar:     "image/digital_solution.svg", // иконка, которая выводится в списке
 		NewFlds: []t.FldType{
 			t.GetFldString("title", "название", 300, [][]int{{1, 1}}).SetIsRequired(),
 		}, // список полей, которые заполняются при добавлении новой записи
@@ -87,11 +87,11 @@ func GetDoc(project *t.ProjectType) t.DocType {
 	}, [][]int{{4, 1}}, "col-4"))
 
 	doc.AddFld(t.GetFldVueCompositionRefList(&doc, t.VueCompRefListWidgetParams{
-		Label:      "цифровые решения",           // название списка, которе выводится на экране
-		FldName:    "digital_solution_list",      // название поля. Любое, в формате snake_case. На основе этого названия формируется название компоненты во vue.
-		TableName:  "digital_solution",           // название связанной таблицы, из которой будут выгружаться записи
+		Label:      "задачи разработки",          // название списка, которе выводится на экране
+		FldName:    "development_task_list",      // название поля. Любое, в формате snake_case. На основе этого названия формируется название компоненты во vue.
+		TableName:  "development_task",           // название связанной таблицы, из которой будут выгружаться записи
 		RefFldName: "system_id",                  // название поля в связанной таблицы, по которому осуществляется связь
-		Avatar:     "image/digital_solution.svg", // иконка, которая выводится в списке
+		Avatar:     "image/development_task.png", // иконка, которая выводится в списке
 		NewFlds: []t.FldType{
 			t.GetFldString("title", "название", 300, [][]int{{1, 1}}).SetIsRequired(),
 		}, // список полей, которые заполняются при добавлении новой записи

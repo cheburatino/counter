@@ -44,12 +44,12 @@ BEGIN
         END IF;
         
 
-        EXECUTE ('INSERT INTO system (title, customer_id, state, description, files, images, options) VALUES ($1, $2, $3, $4, $5, $6, $7)  RETURNING *;')
+        EXECUTE ('INSERT INTO system (title, customer_id, state_id, description, files, images, options) VALUES ($1, $2, $3, $4, $5, $6, $7)  RETURNING *;')
 		INTO systemRow
 		USING
 			(params ->> 'title')::text,
 			(params ->> 'customer_id')::int,
-			(params ->> 'state')::text,
+			(params ->> 'state_id')::int,
 			(params ->> 'description')::text,
 			(params -> 'files')::jsonb,
 			(params -> 'images')::jsonb,
@@ -61,7 +61,7 @@ BEGIN
         updateValue = '' || update_str_from_json(params, ARRAY [
 			['title', 'title', 'text'],
 			['customer_id', 'customer_id', 'number'],
-			['state', 'state', 'text'],
+			['state_id', 'state_id', 'number'],
 			['description', 'description', 'text'],
 			['files', 'files', 'jsonb'],
 			['images', 'images', 'jsonb'],

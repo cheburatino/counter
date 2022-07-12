@@ -3,18 +3,6 @@
 <template>
   <q-page :padding="!isOpenInDialog">
     <comp-breadcrumb class="text-capitalize" v-if="!isOpenInDialog" :list="[{label: $t('task.name_plural'), docType:'task'}]"/>
-    <!-- фильтры   -->
-<!--    <div class="row q-mt-sm q-col-gutter-sm">-->
-<!--        <div class=" col-md-2 col-sm-4 col-xs-6">-->
-<!--          <comp-fld-ref-search dense outlined pgMethod="ctlg_task_state_list" label="" :item='filterCtlgTaskStateTitle' :itemId='filterCtlgTaskStateId' :ext='{isClearable: true}'  @update="updateFilterCtlgTaskState" @clear="updateFilterCtlgTaskState"  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />-->
-<!--        </div>-->
-<!--        <div class=" col-md-2 col-sm-4 col-xs-6">-->
-<!--          <comp-fld-ref-search dense outlined pgMethod="system_list" label="" :item='filterSystemTitle' :itemId='filterSystemId' :ext='{isClearable: true}'  @update="updateFilterSystem" @clear="updateFilterSystem"  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />-->
-<!--        </div>-->
-<!--        <div class=" col-md-2 col-sm-4 col-xs-6">-->
-<!--          <comp-fld-ref-search dense outlined pgMethod="digital_solution_list" label="" :item='filterDigitalSolutionTitle' :itemId='filterDigitalSolutionId' :ext='{isClearable: true}'  @update="updateFilterDigitalSolution" @clear="updateFilterDigitalSolution"  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />-->
-<!--        </div>-->
-<!--    </div>-->
 
     <comp-doc-list ref="docList" :listTitle="$t('task.name_plural')" :listDeletedTitle="$t('task.name_plural_deleted')" pg-method="task_list"
                    :list-sort-data="listSortData" :list-filter-data="listFilterData"
@@ -88,7 +76,7 @@
              <q-badge v-if="item.system_id" class="q-ma-xs" color="primary">{{item.options.title.system_title}}</q-badge>
              <q-badge class="q-ma-xs" v-if="item.digital_solution_id" color="purple-3">ЦР: {{item.options.title.digital_solution_title}}</q-badge>
            </q-item-label>
-           <q-item-label caption>Плановая дата завершения: {{$utils.formatPgDate(item.plan_end_date)}}</q-item-label>
+           <q-item-label caption v-if="item.plan_end_date">Плановая дата завершения: {{$utils.formatPgDate(item.plan_end_date)}}</q-item-label>
            <q-item-label v-if="item.fact_end_date" caption>Фактическая дата завершения: {{$utils.formatPgDate(item.fact_end_date)}}</q-item-label>
 				 </q-item-section>
 			
@@ -177,7 +165,7 @@
     <q-dialog v-model="isFiltersModal">
       <q-card>
         <q-card-section>
-          <div class="text-h6">Filter list</div>
+          <div class="text-h6">Варианты фильтров</div>
         </q-card-section>
 
         <q-card-section>
@@ -190,7 +178,7 @@
     <q-dialog v-model="isOrderModal">
       <q-card>
         <q-card-section>
-          <div class="text-h6">Order_by list:</div>
+          <div class="text-h6">Варианты сортировки</div>
         </q-card-section>
 
         <q-card-section>

@@ -1,9 +1,7 @@
 package main
 
 import (
-	"github.com/cheburatino/electron_is/projectTemplate/docs/comment"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/company"
-	"github.com/cheburatino/electron_is/projectTemplate/docs/companyManLink"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/completionAct"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/contract"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/ctlgCompletionActState"
@@ -16,6 +14,7 @@ import (
 	"github.com/cheburatino/electron_is/projectTemplate/docs/ctlgInvoiceState"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/ctlgMeetingState"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/ctlgOrderBy"
+	"github.com/cheburatino/electron_is/projectTemplate/docs/ctlgSystemState"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/ctlgTaskState"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/ctlgTaskType"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/ctlgTechnicalTaskState"
@@ -60,6 +59,7 @@ func getProject() t.ProjectType {
 
 	p.Docs = []t.DocType{
 		ctlgTimeType.GetDoc(p),
+		ctlgSystemState.GetDoc(p),
 		ctlgMeetingState.GetDoc(p),
 		ctlgDigitalSolutionState.GetDoc(p),
 		ctlgTaskType.GetDoc(p),
@@ -91,9 +91,7 @@ func getProject() t.ProjectType {
 		completionAct.GetDoc(p),
 		sprint.GetDoc(p),
 		work.GetDoc(p),
-		companyManLink.GetDoc(p),
 		time.GetDoc(p),
-		comment.GetDoc(p),
 		newsFromDima.GetDoc(p),
 	}
 
@@ -114,8 +112,9 @@ func getProject() t.ProjectType {
 
 	// боковое меню для Vue
 	p.Vue.Menu = []t.VueMenu{
-		{DocName: "task", Roles: []string{utils.RoleAdmin, ROLE_SPECIALIST}},
-		{DocName: "meeting", Roles: []string{utils.RoleAdmin, ROLE_SPECIALIST}},
+		{DocName: "task", Roles: []string{utils.RoleAdmin}},
+		{DocName: "work", Roles: []string{utils.RoleAdmin}},
+		{DocName: "meeting", Roles: []string{utils.RoleAdmin}},
 		{Text: "Разработка", Icon: "image/development.png", IsFolder: true, Roles: []string{utils.RoleAdmin}, LinkList: []t.VueMenu{
 			{Text: "Системы", Url: "system"},
 			{Text: "Цифровые решения", Url: "digital_solution"},
@@ -135,8 +134,10 @@ func getProject() t.ProjectType {
 		{Text: "Справочники", Icon: "image/catalog.svg", IsFolder: true, Roles: []string{utils.RoleAdmin}, LinkList: []t.VueMenu{
 			{Url: "users", Text: "Пользователи", Icon: "image/user.svg"},
 			{Text: "Статусы встреч", Url: "ctlg_meeting_state"},
+			{Text: "Статусы систем", Url: "ctlg_system_state"},
 			{Text: "Статусы цифровых решений", Url: "ctlg_digital_solution_state"},
 			{Text: "Статусы задач", Url: "ctlg_task_state"},
+			{Text: "Статусы дел", Url: "ctlg_work_state"},
 			{Text: "Статусы задач разработки", Url: "ctlg_development_task_state"},
 			{Text: "Статусы задач заказчиков", Url: "ctlg_customer_task_state"},
 			{Text: "Статусы договоров", Url: "ctlg_contract_state"},

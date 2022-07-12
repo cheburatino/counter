@@ -68,8 +68,8 @@
 	
         
 				 <q-item-section>
-				    <q-item-label lines="1">{{item.title}}</q-item-label>
-					<q-item-label caption><q-badge color="positive">{{item.options.title.customer_title}}</q-badge></q-item-label>
+           <q-item-label lines="1">{{item.title}}</q-item-label>
+           <q-item-label caption><q-badge color="positive">{{item.options.title.customer_title}}</q-badge> <q-badge color="orange">{{item.options.title.state_title}}</q-badge></q-item-label>
 				 </q-item-section>
 			
         <q-item-section top side>
@@ -157,7 +157,7 @@
     <q-dialog v-model="isFiltersModal">
       <q-card>
         <q-card-section>
-          <div class="text-h6">Filter list</div>
+          <div class="text-h6">Варианты фильтров</div>
         </q-card-section>
 
         <q-card-section>
@@ -170,7 +170,7 @@
     <q-dialog v-model="isOrderModal">
       <q-card>
         <q-card-section>
-          <div class="text-h6">Order_by list:</div>
+          <div class="text-h6">Варианты сортировки</div>
         </q-card-section>
 
         <q-card-section>

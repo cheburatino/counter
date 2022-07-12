@@ -5,18 +5,24 @@ $$
 DECLARE
         r record;
 	stateTitle TEXT;
+	systemTitle TEXT;
+	digitalSolutionTitle TEXT;
+	taskTitle TEXT;
 
        searchTxtVar TEXT := '';
 BEGIN
 
         -- заполняем ref поля
 		select title into stateTitle from ctlg_work_state where id = new.state_id;
+		select title into systemTitle from system where id = new.system_id;
+		select title into digitalSolutionTitle from digital_solution where id = new.digital_solution_id;
+		select title into taskTitle from task where id = new.task_id;
         
         -- заполняем options.title
-        NEW.options = coalesce(OLD.options, '{}'::jsonb) || NEW.options || jsonb_build_object('title', jsonb_build_object('title', new.title, 'state_title', stateTitle));
+        NEW.options = coalesce(OLD.options, '{}'::jsonb) || NEW.options || jsonb_build_object('title', jsonb_build_object('title', new.title, 'state_title', stateTitle, 'system_title', systemTitle, 'digital_solution_title', digitalSolutionTitle, 'task_title', taskTitle));
         -- заполняем search_text
         
-        NEW.search_text = concat(new.title, ' ', stateTitle, ' ', searchTxtVar);
+        NEW.search_text = concat(new.title, ' ', stateTitle, ' ', systemTitle, ' ', digitalSolutionTitle, ' ', taskTitle, ' ', searchTxtVar);
 
         
 

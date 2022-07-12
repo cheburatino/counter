@@ -165,8 +165,10 @@ const notifyError = (msg) => {
 
 const i18n_ctlg_filter_index = (v) => {
 	const d = {
-		system: 'системы',
 		task: 'задачи',
+		work: 'дела',
+		system: 'системы',
+		digital_solution: 'цифровые решения',
 		development_task: 'задачи разработки',
 		technical_task: 'технические задания',
 		contract: 'договоры',
@@ -179,8 +181,10 @@ const i18n_ctlg_filter_index = (v) => {
 				
 const i18n_ctlg_order_by_index = (v) => {
 	const d = {
-		system: 'системы',
 		task: 'задачи',
+		work: 'дела',
+		system: 'системы',
+		digital_solution: 'цифровые решения',
 		development_task: 'задачи разработки',
 		technical_task: 'технические задания',
 		contract: 'договоры',

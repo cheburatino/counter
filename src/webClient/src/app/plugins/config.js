@@ -12,6 +12,7 @@ export default {
   // yandexMetrikaId: 54433825,
   breadcrumbIcons: {
     ctlg_time_type: 'fas fa-list-ul',
+ctlg_system_state: 'fas fa-list-ul',
 ctlg_meeting_state: 'fas fa-list-ul',
 ctlg_digital_solution_state: 'fas fa-list-ul',
 ctlg_task_type: 'fas fa-list-ul',
@@ -43,9 +44,7 @@ payment: 'fas fa-list-ul',
 completion_act: 'fas fa-list-ul',
 sprint: 'fas fa-list-ul',
 work: 'fas fa-laptop-code',
-company_man_link: 'fas fa-list-ul',
 time: 'fas fa-building',
-comment: 'far fa-comment-dots',
 news_from_dima: 'far fa-newspaper'
   },
   

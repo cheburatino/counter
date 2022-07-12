@@ -1,0 +1,50 @@
+docType = "CompletionAct"
+tableComment = "акт выполненных работ"
+
+tableName ="completion_act"
+
+fields = [
+	{name="id",			type="serial"},
+	{name="title",					type="char",	size=150, 	ext="not null",	 comment="название"},
+	{name="date",					type="timestamp",	 comment="дата подписи"},
+	{name="state_id",					type="int", 	ext=" default 1",	 comment="статус"},
+	{name="technical_task_id",					type="int",	 comment="техническое задание"},
+	{name="document",					type="jsonb",	 comment="документ"},
+	{name="description",					type="text",	 comment="описание"},
+	{name="search_text",			type="text",	comment="колонка для поиска"},
+	{name="options",				type="jsonb",	comment="разные дополнительные параметры"},
+	{name="created_at",				type="timestamp",	ext="with time zone"},
+	{name="updated_at",				type="timestamp",	ext="with time zone"},
+	{name="deleted",				type="bool",	ext="not null default false"}
+]
+
+fkConstraints = [
+	{fld="state_id", ref="ctlg_completion_act_state", fk="id"},
+	{fld="technical_task_id", ref="technical_task", fk="id"}
+]
+
+triggers = [
+	{name="completion_act_created", when="before insert or update", ref="for each row", funcName="builtin_fld_update"},
+	{name="completion_act_trigger_before", when="before insert or update", ref="for each row", funcName="completion_act_trigger_before"},
+	{name="completion_act_trigger_after", when="after insert or update", ref="for each row", funcName="completion_act_trigger_after"}
+]
+
+
+
+methods = [
+	"completion_act_update",
+	"completion_act_get_by_id",
+	"completion_act_list",
+	"completion_act_trigger_before",
+	"completion_act_trigger_after"
+]
+
+alterScripts = [
+	"alter table completion_act add column if not exists title CHARACTER VARYING(150);",
+	"alter table completion_act add column if not exists date timestamp;",
+	"alter table completion_act add column if not exists state_id int;",
+	"alter table completion_act add column if not exists technical_task_id int;",
+	"alter table completion_act add column if not exists document jsonb;",
+	"alter table completion_act add column if not exists description text;",
+	"alter table completion_act add column if not exists search_text text;"
+]

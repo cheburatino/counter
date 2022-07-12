@@ -15,7 +15,7 @@ const (
 
 func GetDoc(project *t.ProjectType) t.DocType {
 	doc := t.DocType{
-		Project: project,
+		Project:    project,
 		Name:       name,
 		NameRu:     name_ru,
 		PathPrefix: "docs",
@@ -45,9 +45,10 @@ func GetDoc(project *t.ProjectType) t.DocType {
 			BreadcrumbIcon: breadcrumb_icon,
 			Roles:          []string{},
 		},
-		//Templates: map[string]*t.DocTemplate{
-		//	"sql_function_list.sql": {},
-		//},
+		Templates: map[string]*t.DocTemplate{
+			"sql_function_list.sql": {},
+			"webClient_index.vue":   {},
+		},
 		IsBaseTemplates: t.DocIsBaseTemplates{true, true},
 		Sql: t.DocSql{
 			IsSearchText:    true,
@@ -66,7 +67,6 @@ func GetDoc(project *t.ProjectType) t.DocType {
 	// создаем стандартные методы sql "list", "update", "get_by_id" с возможностью ограничения по ролям
 	doc.Sql.FillBaseMethods(doc.Name)
 	doc.Vue.AddFixedSaveBtn()
-
 
 	doc.Vue.I18n = map[string]string{
 		"listTitle":        utils.UpperCaseFirst(name_ru_plural),

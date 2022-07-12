@@ -70,7 +70,7 @@
             resultModify(res) {
                 
 				if (res.index) {
-                    let arr = [{"label":"системы","value":"system","color":""},{"label":"задачи","value":"task","color":""},{"label":"задачи разработки","value":"development_task","color":""},{"label":"технические задания","value":"technical_task","color":""},{"label":"договоры","value":"contract","color":""},{"label":"счета","value":"invoice","color":""},{"label":"платежи","value":"payment","color":""},{"label":"встречи","value":"meeting","color":""}]
+                    let arr = [{"label":"задачи","value":"task","color":""},{"label":"дела","value":"work","color":""},{"label":"системы","value":"system","color":""},{"label":"цифровые решения","value":"digital_solution","color":""},{"label":"задачи разработки","value":"development_task","color":""},{"label":"технические задания","value":"technical_task","color":""},{"label":"договоры","value":"contract","color":""},{"label":"счета","value":"invoice","color":""},{"label":"платежи","value":"payment","color":""},{"label":"встречи","value":"meeting","color":""}]
                     let index_item = arr.find(v => v.value === res.index)
                     if (index_item) res.index = {value: res.index, label: index_item.label}
                     }

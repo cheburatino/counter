@@ -25,8 +25,10 @@ func GetDoc(project *t.ProjectType) t.DocType {
 			t.GetFldCheckbox("is_default", "по умолчанию", [][]int{{1, 3}}, "col-2").SetDefault("false"),
 			t.GetFldString("where_str", "условия фильтра", 0, [][]int{{2, 1}}, "col-4"),
 			t.GetFldSelectString("index", "список", 20, [][]int{{2, 2}}, []t.FldVueOptionsItem{
-				{Value: "system", Label: "системы"},
 				{Value: "task", Label: "задачи"},
+				{Value: "work", Label: "дела"},
+				{Value: "system", Label: "системы"},
+				{Value: "digital_solution", Label: "цифровые решения"},
 				{Value: "development_task", Label: "задачи разработки"},
 				{Value: "technical_task", Label: "технические задания"},
 				{Value: "contract", Label: "договоры"},
