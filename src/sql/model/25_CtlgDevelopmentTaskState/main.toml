@@ -26,9 +26,9 @@ triggers = [
 
 
 methods = [
+	"ctlg_development_task_state_list",
 	"ctlg_development_task_state_update",
 	"ctlg_development_task_state_get_by_id",
-	"ctlg_development_task_state_list",
 	"ctlg_development_task_state_trigger_before",
 	"ctlg_development_task_state_trigger_after"
 ]
