@@ -7,7 +7,7 @@ fields = [
 	{name="id",			type="serial"},
 	{name="title",					type="char",	size=150, 	ext="not null",	 comment="название"},
 	{name="type_id",					type="int",	 comment="тип задачи"},
-	{name="state_id",					type="int", 	ext=" default 2",	 comment="статус"},
+	{name="state_id",					type="int", 	ext=" default 1",	 comment="статус"},
 	{name="system_id",					type="int",	 comment="система"},
 	{name="digital_solution_id",					type="int",	 comment="цифровое решение"},
 	{name="plan_end_date",					type="timestamp",	 comment="плановая дата завершения"},
@@ -48,11 +48,11 @@ triggers = [
 
 
 methods = [
+	"task_get_by_id",
 	"task_get_specialist",
 	"task_get_specialist_role",
 	"task_list",
 	"task_update",
-	"task_get_by_id",
 	"task_trigger_before",
 	"task_trigger_after"
 ]

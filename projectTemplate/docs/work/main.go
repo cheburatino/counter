@@ -20,8 +20,8 @@ func GetDoc(project *t.ProjectType) t.DocType {
 		NameRu:     name_ru,
 		PathPrefix: "docs",
 		Flds: []t.FldType{
-			t.GetFldTitle(),
-			t.GetFldRef("state_id", "статус", "ctlg_work_state", [][]int{{1, 2}}),
+			t.GetFldTitle().SetIsNotUniq(),
+			t.GetFldRef("state_id", "статус", "ctlg_work_state", [][]int{{1, 2}}).SetDefault("1"),
 			t.GetFldRef("system_id", "система", "system", [][]int{{2, 1}}, "col-2", "isShowLink", "isClearable"),
 			t.GetFldRef("digital_solution_id", "цифровое решение", "digital_solution", [][]int{{2, 2}}, "col-2", "isShowLink", "isClearable"),
 			t.GetFldRef("task_id", "задача", "task", [][]int{{2, 3}}, "isShowLink", "isClearable"),

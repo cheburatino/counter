@@ -22,7 +22,7 @@ func GetDoc(project *t.ProjectType) t.DocType {
 		Flds: []t.FldType{
 			t.GetFldTitle().SetIsNotUniq(),
 			t.GetFldRef("type_id", "тип задачи", "ctlg_task_type", [][]int{{1, 2}}, "col-2"),
-			t.GetFldRef("state_id", "статус", "ctlg_task_state", [][]int{{1, 3}}, "col-2").SetDefault("2"),
+			t.GetFldRef("state_id", "статус", "ctlg_task_state", [][]int{{1, 3}}, "col-2").SetDefault("1"),
 			t.GetFldRef("system_id", "система", "system", [][]int{{2, 1}}, "isShowLink", "isClearable"),
 			t.GetFldRef("digital_solution_id", "цифровое решение", "digital_solution", [][]int{{2, 2}}, "isShowLink", "isClearable"),
 			//t.GetFldRef("development_task_id", "задача на разработку", "development_task", [][]int{{2, 4}}, "col-2", "isShowLink", "isClearable"),

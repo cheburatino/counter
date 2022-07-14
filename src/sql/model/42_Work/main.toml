@@ -6,7 +6,7 @@ tableName ="work"
 fields = [
 	{name="id",			type="serial"},
 	{name="title",					type="char",	size=150, 	ext="not null",	 comment="название"},
-	{name="state_id",					type="int",	 comment="статус"},
+	{name="state_id",					type="int", 	ext=" default 1",	 comment="статус"},
 	{name="system_id",					type="int",	 comment="система"},
 	{name="digital_solution_id",					type="int",	 comment="цифровое решение"},
 	{name="task_id",					type="int",	 comment="задача"},
@@ -33,7 +33,6 @@ fields = [
 ]
 
 fkConstraints = [
-	{name="work_title_already_exist", ext="UNIQUE (title)"},
 	{fld="state_id", ref="ctlg_work_state", fk="id"},
 	{fld="system_id", ref="system", fk="id"},
 	{fld="digital_solution_id", ref="digital_solution", fk="id"},
@@ -49,9 +48,9 @@ triggers = [
 
 
 methods = [
-	"work_update",
 	"work_get_by_id",
 	"work_list",
+	"work_update",
 	"work_trigger_before",
 	"work_trigger_after"
 ]

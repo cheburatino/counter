@@ -62,7 +62,7 @@ BEGIN
 		USING
 			(params ->> 'title')::text,
 			(params ->> 'type_id')::int,
-			coalesce((params ->> 'state_id')::int, 2)::int,
+			coalesce((params ->> 'state_id')::int, 1)::int,
 			(params ->> 'system_id')::int,
 			(params ->> 'digital_solution_id')::int,
 			(params ->> 'plan_end_date')::timestamp,

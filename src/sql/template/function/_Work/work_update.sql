@@ -60,7 +60,7 @@ BEGIN
 		INTO workRow
 		USING
 			(params ->> 'title')::text,
-			(params ->> 'state_id')::int,
+			coalesce((params ->> 'state_id')::int, 1)::int,
 			(params ->> 'system_id')::int,
 			(params ->> 'digital_solution_id')::int,
 			(params ->> 'task_id')::int,
