@@ -31,10 +31,12 @@ BEGIN
     -- сборка условия WHERE (where_str_build - функция из папки base)
     whereStr = where_str_build(params, 'doc', ARRAY [
         ['ilike', 'search_text', 'search_text'],
-		['notQuoted', 'state_id', 'doc.state_id'],
-		['notQuoted', 'system_id', 'doc.system_id'],
-		['notQuoted', 'digital_solution_id', 'doc.digital_solution_id'],
-		['notQuoted', 'task_id', 'doc.task_id']
+        ['notQuoted', 'state_id', 'doc.state_id'],
+        ['notQuoted', 'system_id', 'doc.system_id'],
+        ['notQuoted', 'digital_solution_id', 'doc.digital_solution_id'],
+        ['notQuoted', 'task_id', 'doc.task_id'],
+        ['notQuoted', 'meeting_id', 'doc.meeting_id'],
+        ['notQuoted', 'time_id', 'doc.time_id']
     ]);
 
     -- добавляем в фильтр условия из where на клиенте

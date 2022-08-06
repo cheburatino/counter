@@ -8,6 +8,8 @@ DECLARE
 	systemTitle TEXT;
 	digitalSolutionTitle TEXT;
 	taskTitle TEXT;
+	meetingTitle TEXT;
+	timeTitle TEXT;
 
        searchTxtVar TEXT := '';
 BEGIN
@@ -17,6 +19,8 @@ BEGIN
 		select title into systemTitle from system where id = new.system_id;
 		select title into digitalSolutionTitle from digital_solution where id = new.digital_solution_id;
 		select title into taskTitle from task where id = new.task_id;
+		select title into meetingTitle from meeting where id = new.meeting_id;
+		select title into timeTitle from time where id = new.time_id;
         
 		if new.task_id notnull
 		then
@@ -25,10 +29,10 @@ BEGIN
         end if;		
 			
         -- заполняем options.title
-        NEW.options = coalesce(OLD.options, '{}'::jsonb) || NEW.options || jsonb_build_object('title', jsonb_build_object('title', new.title, 'state_title', stateTitle, 'system_title', systemTitle, 'digital_solution_title', digitalSolutionTitle, 'task_title', taskTitle));
+        NEW.options = coalesce(OLD.options, '{}'::jsonb) || NEW.options || jsonb_build_object('title', jsonb_build_object('title', new.title, 'state_title', stateTitle, 'system_title', systemTitle, 'digital_solution_title', digitalSolutionTitle, 'task_title', taskTitle, 'meeting_title', meetingTitle, 'time_title', timeTitle));
         -- заполняем search_text
         
-        NEW.search_text = concat(new.title, ' ', stateTitle, ' ', systemTitle, ' ', digitalSolutionTitle, ' ', taskTitle, ' ', searchTxtVar);
+        NEW.search_text = concat(new.title, ' ', stateTitle, ' ', systemTitle, ' ', digitalSolutionTitle, ' ', taskTitle, ' ', meetingTitle, ' ', timeTitle, ' ', searchTxtVar);
 
         
 

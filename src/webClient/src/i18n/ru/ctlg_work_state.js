@@ -1,7 +1,7 @@
 
 export default {
- 		name_plural: 'Статусы дел',
- 		name_plural_deleted: 'удаленные Статусы дел',
+ 		name: 'статус работы',
+ 		name_plural: 'Статусы работ',
+ 		name_plural_deleted: 'удаленные Статусы работ',
  		title: 'название',
- 		name: 'статус дела',
 }

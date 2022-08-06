@@ -10,12 +10,10 @@ fields = [
 	{name="system_id",					type="int",	 comment="система"},
 	{name="digital_solution_id",					type="int",	 comment="цифровое решение"},
 	{name="task_id",					type="int",	 comment="задача"},
-	{name="plan_end_date",					type="timestamp",	 comment="плановая дата завершения"},
-	{name="fact_end_date",					type="timestamp",	 comment="фактическая дата завершения"},
-	{name="estimate",					type="int",	 comment="оценка"},
-	{name="worked_time",					type="int",	 comment="затрачено"},
-	{name="specialist_priority",					type="int",	 comment="приоритет"},
-	{name="today",					type="bool", 	ext=" default false",	 comment="в работе сегодня"},
+	{name="meeting_id",					type="int",	 comment="встреча"},
+	{name="worked_time",					type="int",	 comment="затрачено минут"},
+	{name="is_paid",					type="bool", 	ext=" default true",	 comment="оплачиваемая"},
+	{name="time_id",					type="int", 	ext="not null",	 comment="время"},
 	{name="description",					type="text",	 comment="описание"},
 	{name="files",					type="jsonb",	 comment="файлы"},
 	{name="images",					type="jsonb",	 comment="изображения"},
@@ -36,7 +34,9 @@ fkConstraints = [
 	{fld="state_id", ref="ctlg_work_state", fk="id"},
 	{fld="system_id", ref="system", fk="id"},
 	{fld="digital_solution_id", ref="digital_solution", fk="id"},
-	{fld="task_id", ref="task", fk="id"}
+	{fld="task_id", ref="task", fk="id"},
+	{fld="meeting_id", ref="meeting", fk="id"},
+	{fld="time_id", ref="time", fk="id"}
 ]
 
 triggers = [
@@ -48,9 +48,9 @@ triggers = [
 
 
 methods = [
+	"work_list",
 	"work_update",
 	"work_get_by_id",
-	"work_list",
 	"work_trigger_before",
 	"work_trigger_after"
 ]
@@ -61,12 +61,10 @@ alterScripts = [
 	"alter table work add column if not exists system_id int;",
 	"alter table work add column if not exists digital_solution_id int;",
 	"alter table work add column if not exists task_id int;",
-	"alter table work add column if not exists plan_end_date timestamp;",
-	"alter table work add column if not exists fact_end_date timestamp;",
-	"alter table work add column if not exists estimate int;",
+	"alter table work add column if not exists meeting_id int;",
 	"alter table work add column if not exists worked_time int;",
-	"alter table work add column if not exists specialist_priority int;",
-	"alter table work add column if not exists today bool;",
+	"alter table work add column if not exists is_paid bool;",
+	"alter table work add column if not exists time_id int;",
 	"alter table work add column if not exists description text;",
 	"alter table work add column if not exists files jsonb;",
 	"alter table work add column if not exists images jsonb;",

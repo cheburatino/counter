@@ -22,29 +22,23 @@
       <div class="col-md-2 col-sm-3 col-xs-6">
           <comp-fld-ref-search outlined pgMethod="digital_solution_list" :label="$t('work.digital_solution_id')" :item='item.digital_solution_title' :itemId='item.digital_solution_id' :ext='{"avatar":"image/digital_solution.svg","isClearable":"true","pathUrl":"/digital_solution"}' @update="v=> item.digital_solution_id = v.id" @clear="item.digital_solution_id = null" :readonly='false'  class='q-mb-sm col-md-2 col-sm-3 col-xs-6' />
       </div>
-      <div class="col-md-4 col-sm-6 col-xs-12">
-          <comp-fld-ref-search outlined pgMethod="task_list" :label="$t('work.task_id')" :item='item.task_title' :itemId='item.task_id' :ext='{"avatar":"image/task.svg","isClearable":"true","pathUrl":"/task"}' @update="v=> item.task_id = v.id" @clear="item.task_id = null" :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
+      <div class="col-md-2 col-sm-3 col-xs-6">
+          <comp-fld-ref-search outlined pgMethod="task_list" :label="$t('work.task_id')" :item='item.task_title' :itemId='item.task_id' :ext='{"avatar":"image/task.svg","isClearable":"true","pathUrl":"/task"}' @update="v=> item.task_id = v.id" @clear="item.task_id = null" :readonly='false'  class='q-mb-sm col-md-2 col-sm-3 col-xs-6' />
+      </div>
+      <div class="col-md-2 col-sm-3 col-xs-6">
+          <comp-fld-ref-search outlined pgMethod="meeting_list" :label="$t('work.meeting_id')" :item='item.meeting_title' :itemId='item.meeting_id' :ext='{"avatar":"image/meeting.svg","isClearable":"true","pathUrl":"/meeting"}' @update="v=> item.meeting_id = v.id" @clear="item.meeting_id = null" :readonly='false'  class='q-mb-sm col-md-2 col-sm-3 col-xs-6' />
       </div>
       </div>
       
       <div class="row q-col-gutter-md q-mb-sm">
       <div class="col-md-2 col-sm-3 col-xs-6">
-          <comp-fld-date outlined :label="$t('work.plan_end_date')" :date-string="$utils.formatPgDate(item.plan_end_date)" @update="v=> item.plan_end_date = v" :readonly='false'  class='q-mb-sm col-md-2 col-sm-3 col-xs-6' />
+          <q-input outlined type='number' v-model="item.worked_time" :label="$t('work.worked_time')" :readonly='false'  class='q-mb-sm col-md-2 col-sm-3 col-xs-6' />
       </div>
       <div class="col-md-2 col-sm-3 col-xs-6">
-          <comp-fld-date outlined :label="$t('work.fact_end_date')" :date-string="$utils.formatPgDate(item.fact_end_date)" @update="v=> item.fact_end_date = v" :readonly='false'  class='q-mb-sm col-md-2 col-sm-3 col-xs-6' />
+          <q-checkbox :label="$t('work.is_paid')" v-model='item.is_paid' :disable='false' :false-value='false' indeterminate-value='some'  class='q-mb-sm col-md-2 col-sm-3 col-xs-6' />
       </div>
-      <div class="col-md-1 col-sm-2 col-xs-6">
-          <q-input outlined type='number' v-model="item.estimate" :label="$t('work.estimate')" :readonly='false'  class='q-mb-sm col-md-1 col-sm-2 col-xs-6' />
-      </div>
-      <div class="col-md-1 col-sm-2 col-xs-6">
-          <q-input outlined type='number' v-model="item.worked_time" :label="$t('work.worked_time')" :readonly='false'  class='q-mb-sm col-md-1 col-sm-2 col-xs-6' />
-      </div>
-      <div class="col-md-1 col-sm-2 col-xs-6">
-          <q-input outlined type='number' v-model="item.specialist_priority" :label="$t('work.specialist_priority')" :readonly='false'  class='q-mb-sm col-md-1 col-sm-2 col-xs-6' />
-      </div>
-      <div class="col-md-1 col-sm-2 col-xs-6">
-          <q-checkbox :label="$t('work.today')" v-model='item.today' :disable='false' :false-value='false' indeterminate-value='some'  class='q-mb-sm col-md-1 col-sm-2 col-xs-6' />
+      <div class="col-md-4 col-sm-6 col-xs-12">
+          <comp-fld-ref-search outlined pgMethod="time_list" :label="$t('work.time_id')" :item='item.time_title' :itemId='item.time_id' :ext='{"avatar":"image/time.svg","pathUrl":"/time"}' @update="v=> item.time_id = v.id" @clear="item.time_id = null" :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
       </div>
       </div>
       
@@ -133,12 +127,10 @@
                         {name: 'system_id', label: 'система'},
                         {name: 'digital_solution_id', label: 'цифровое решение'},
                         {name: 'task_id', label: 'задача'},
-                        {name: 'plan_end_date', label: 'плановая дата завершения'},
-                        {name: 'fact_end_date', label: 'фактическая дата завершения'},
-                        {name: 'estimate', label: 'оценка'},
-                        {name: 'worked_time', label: 'затрачено'},
-                        {name: 'specialist_priority', label: 'приоритет'},
-                        {name: 'today', label: 'в работе сегодня'},
+                        {name: 'meeting_id', label: 'встреча'},
+                        {name: 'worked_time', label: 'затрачено минут'},
+                        {name: 'is_paid', label: 'оплачиваемая'},
+                        {name: 'time_id', label: 'время',  required: true},
                         {name: 'description', label: 'описание'},
                         {name: 'files', label: 'файлы'},
                         {name: 'images', label: 'изображения'},

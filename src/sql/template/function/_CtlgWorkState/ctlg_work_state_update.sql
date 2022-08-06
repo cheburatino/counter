@@ -1,4 +1,4 @@
--- создание статус дела
+-- создание статус работы
 
 DROP FUNCTION IF EXISTS ctlg_work_state_update(params JSONB);
 CREATE OR REPLACE FUNCTION ctlg_work_state_update(params JSONB)

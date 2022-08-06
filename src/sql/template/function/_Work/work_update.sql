@@ -44,19 +44,17 @@ BEGIN
     
     
     
-    
-    
 
     if (params ->> 'id')::int = -1 then
         -- проверика наличия обязательных параметров
-        checkMsg = check_required_params(params, ARRAY ['title']);
+        checkMsg = check_required_params(params, ARRAY ['title', 'time_id']);
         IF checkMsg IS NOT NULL
         THEN
             RETURN checkMsg;
         END IF;
         
 
-        EXECUTE ('INSERT INTO work (title, state_id, system_id, digital_solution_id, task_id, plan_end_date, fact_end_date, estimate, worked_time, specialist_priority, today, description, files, images, process, process_files, process_images, result, result_files, result_images, options) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21)  RETURNING *;')
+        EXECUTE ('INSERT INTO work (title, state_id, system_id, digital_solution_id, task_id, meeting_id, worked_time, is_paid, time_id, description, files, images, process, process_files, process_images, result, result_files, result_images, options) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19)  RETURNING *;')
 		INTO workRow
 		USING
 			(params ->> 'title')::text,
@@ -64,12 +62,10 @@ BEGIN
 			(params ->> 'system_id')::int,
 			(params ->> 'digital_solution_id')::int,
 			(params ->> 'task_id')::int,
-			(params ->> 'plan_end_date')::timestamp,
-			(params ->> 'fact_end_date')::timestamp,
-			(params ->> 'estimate')::int,
+			(params ->> 'meeting_id')::int,
 			(params ->> 'worked_time')::int,
-			(params ->> 'specialist_priority')::int,
-			coalesce((params ->> 'today')::bool, false)::bool,
+			coalesce((params ->> 'is_paid')::bool, true)::bool,
+			(params ->> 'time_id')::int,
 			(params ->> 'description')::text,
 			(params -> 'files')::jsonb,
 			(params -> 'images')::jsonb,
@@ -90,12 +86,10 @@ BEGIN
 			['system_id', 'system_id', 'number'],
 			['digital_solution_id', 'digital_solution_id', 'number'],
 			['task_id', 'task_id', 'number'],
-			['plan_end_date', 'plan_end_date', 'timestamp'],
-			['fact_end_date', 'fact_end_date', 'timestamp'],
-			['estimate', 'estimate', 'number'],
+			['meeting_id', 'meeting_id', 'number'],
 			['worked_time', 'worked_time', 'number'],
-			['specialist_priority', 'specialist_priority', 'number'],
-			['today', 'today', 'bool'],
+			['is_paid', 'is_paid', 'bool'],
+			['time_id', 'time_id', 'number'],
 			['description', 'description', 'text'],
 			['files', 'files', 'jsonb'],
 			['images', 'images', 'jsonb'],

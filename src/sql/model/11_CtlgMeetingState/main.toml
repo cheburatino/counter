@@ -26,9 +26,9 @@ triggers = [
 
 
 methods = [
-	"ctlg_meeting_state_list",
 	"ctlg_meeting_state_update",
 	"ctlg_meeting_state_get_by_id",
+	"ctlg_meeting_state_list",
 	"ctlg_meeting_state_trigger_before",
 	"ctlg_meeting_state_trigger_after"
 ]

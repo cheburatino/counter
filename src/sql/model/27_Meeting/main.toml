@@ -6,8 +6,9 @@ tableName ="meeting"
 fields = [
 	{name="id",			type="serial"},
 	{name="title",					type="char",	size=150, 	ext="not null",	 comment="название"},
-	{name="datetime",					type="timestamp",	 comment="дата и время"},
+	{name="time_id",					type="int",	 comment="время"},
 	{name="state_id",					type="int", 	ext=" default 1",	 comment="статус"},
+	{name="datetime",					type="timestamp",	 comment="дата и время"},
 	{name="place",					type="text",	 comment="место"},
 	{name="description",					type="text",	 comment="описание и темы"},
 	{name="description_files",					type="jsonb",	 comment="файлы описания"},
@@ -27,6 +28,7 @@ fields = [
 
 fkConstraints = [
 	{name="meeting_title_already_exist", ext="UNIQUE (title)"},
+	{fld="time_id", ref="time", fk="id"},
 	{fld="state_id", ref="ctlg_meeting_state", fk="id"}
 ]
 
@@ -48,8 +50,9 @@ methods = [
 
 alterScripts = [
 	"alter table meeting add column if not exists title CHARACTER VARYING(150);",
-	"alter table meeting add column if not exists datetime timestamp;",
+	"alter table meeting add column if not exists time_id int;",
 	"alter table meeting add column if not exists state_id int;",
+	"alter table meeting add column if not exists datetime timestamp;",
 	"alter table meeting add column if not exists place text;",
 	"alter table meeting add column if not exists description text;",
 	"alter table meeting add column if not exists description_files jsonb;",

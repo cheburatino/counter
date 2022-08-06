@@ -39,6 +39,7 @@ BEGIN
     
     
     
+    
 
     if (params ->> 'id')::int = -1 then
         -- проверика наличия обязательных параметров
@@ -49,12 +50,13 @@ BEGIN
         END IF;
         
 
-        EXECUTE ('INSERT INTO meeting (title, datetime, state_id, place, description, description_files, description_images, notes, notes_files, notes_images, result, result_files, result_images, options) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14)  RETURNING *;')
+        EXECUTE ('INSERT INTO meeting (title, time_id, state_id, datetime, place, description, description_files, description_images, notes, notes_files, notes_images, result, result_files, result_images, options) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15)  RETURNING *;')
 		INTO meetingRow
 		USING
 			(params ->> 'title')::text,
-			(params ->> 'datetime')::timestamp,
+			(params ->> 'time_id')::int,
 			coalesce((params ->> 'state_id')::int, 1)::int,
+			(params ->> 'datetime')::timestamp,
 			(params ->> 'place')::text,
 			(params ->> 'description')::text,
 			(params -> 'description_files')::jsonb,
@@ -72,8 +74,9 @@ BEGIN
     else
         updateValue = '' || update_str_from_json(params, ARRAY [
 			['title', 'title', 'text'],
-			['datetime', 'datetime', 'timestamp'],
+			['time_id', 'time_id', 'number'],
 			['state_id', 'state_id', 'number'],
+			['datetime', 'datetime', 'timestamp'],
 			['place', 'place', 'text'],
 			['description', 'description', 'text'],
 			['description_files', 'description_files', 'jsonb'],

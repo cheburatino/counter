@@ -1,4 +1,4 @@
--- получение списка дело
+-- получение списка работа
 -- параметры:
 -- deleted         type: bool - удаленные / существующие. Дефолт: false
 -- order_by        type: string - поле для сортировки и направление сортировки. Например, orderBy: "id desc"
@@ -34,14 +34,12 @@ BEGIN
 		['notQuoted', 'state_id', 'doc.state_id'],
 		['notQuoted', 'system_id', 'doc.system_id'],
 		['notQuoted', 'digital_solution_id', 'doc.digital_solution_id'],
-		['notQuoted', 'task_id', 'doc.task_id']
+		['notQuoted', 'task_id', 'doc.task_id'],
+		['notQuoted', 'meeting_id', 'doc.meeting_id'],
+		['notQuoted', 'time_id', 'doc.time_id']
     ]);
 
-    -- добавляем в фильтр условия из where на клиенте
-    if params->>'where_param' notnull
-    then
-        whereStr = format('%s and (%s)', whereStr, params->>'where_param');
-    end if;
+    
 
     -- финальная сборка строки с условиями выборки (build_query_part_for_list - функция из папки base)
     condQueryStr = '' || whereStr || build_query_part_for_list(params);
