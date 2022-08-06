@@ -7,8 +7,8 @@ import (
 
 const (
 	name            = "work"
-	name_ru         = "дело"
-	name_ru_plural  = "дела"
+	name_ru         = "работа"
+	name_ru_plural  = "работы"
 	menu_icon       = "image/work.png"
 	breadcrumb_icon = "fas fa-laptop-code"
 )
