@@ -51,7 +51,7 @@ func GetDoc(project *t.ProjectType) t.DocType {
 			Roles:          []string{},
 		},
 		Templates: map[string]*t.DocTemplate{
-			//"sql_function_list.sql": {},
+			"sql_function_list.sql": {},
 			"webClient_index.vue":   {},
 		},
 		IsBaseTemplates: t.DocIsBaseTemplates{true, true},
@@ -61,10 +61,15 @@ func GetDoc(project *t.ProjectType) t.DocType {
 			IsAfterTrigger:  true,
 			Hooks: t.DocSqlHooks{BeforeTriggerBefore: []string{`
 		if new.task_id notnull
-		then
+        then
             new.digital_solution_id = (select digital_solution_id from task where id = new.task_id);
             new.system_id = (select system_id from task where id = new.task_id);
-        end if;		
+        end if;
+
+        if new.task_id isnull and new.digital_solution_id notnull
+        then
+            new.system_id = (select system_id from digital_solution where id = new.digital_solution_id);
+        end if;	
 			`}},
 		},
 	}

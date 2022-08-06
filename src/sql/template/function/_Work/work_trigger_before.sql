@@ -23,10 +23,15 @@ BEGIN
 		select title into timeTitle from time where id = new.time_id;
         
 		if new.task_id notnull
-		then
+        then
             new.digital_solution_id = (select digital_solution_id from task where id = new.task_id);
             new.system_id = (select system_id from task where id = new.task_id);
-        end if;		
+        end if;
+
+        if new.task_id isnull and new.digital_solution_id notnull
+        then
+            new.system_id = (select system_id from digital_solution where id = new.digital_solution_id);
+        end if;	
 			
         -- заполняем options.title
         NEW.options = coalesce(OLD.options, '{}'::jsonb) || NEW.options || jsonb_build_object('title', jsonb_build_object('title', new.title, 'state_title', stateTitle, 'system_title', systemTitle, 'digital_solution_title', digitalSolutionTitle, 'task_title', taskTitle, 'meeting_title', meetingTitle, 'time_title', timeTitle));

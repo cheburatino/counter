@@ -138,7 +138,7 @@ func getProject() t.ProjectType {
 			{Text: "Статусы систем", Url: "ctlg_system_state"},
 			{Text: "Статусы цифровых решений", Url: "ctlg_digital_solution_state"},
 			{Text: "Статусы задач", Url: "ctlg_task_state"},
-			{Text: "Статусы дел", Url: "ctlg_work_state"},
+			{Text: "Статусы работ", Url: "ctlg_work_state"},
 			{Text: "Статусы времени", Url: "ctlg_time_state"},
 			{Text: "Статусы задач разработки", Url: "ctlg_development_task_state"},
 			{Text: "Статусы задач заказчиков", Url: "ctlg_customer_task_state"},

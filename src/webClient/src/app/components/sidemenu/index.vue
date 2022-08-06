@@ -93,7 +93,7 @@
 								{icon: '', text: 'Статусы систем', url: '/ctlg_system_state', roles: []},
 								{icon: '', text: 'Статусы цифровых решений', url: '/ctlg_digital_solution_state', roles: []},
 								{icon: '', text: 'Статусы задач', url: '/ctlg_task_state', roles: []},
-								{icon: '', text: 'Статусы дел', url: '/ctlg_work_state', roles: []},
+								{icon: '', text: 'Статусы работ', url: '/ctlg_work_state', roles: []},
 								{icon: '', text: 'Статусы времени', url: '/ctlg_time_state', roles: []},
 								{icon: '', text: 'Статусы задач разработки', url: '/ctlg_development_task_state', roles: []},
 								{icon: '', text: 'Статусы задач заказчиков', url: '/ctlg_customer_task_state', roles: []},

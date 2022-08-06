@@ -31,14 +31,11 @@ BEGIN
     -- сборка условия WHERE (where_str_build - функция из папки base)
     whereStr = where_str_build(params, 'doc', ARRAY [
         ['ilike', 'search_text', 'search_text'],
+		['notQuoted', 'time_id', 'doc.time_id'],
 		['notQuoted', 'state_id', 'doc.state_id']
     ]);
 
-    -- добавляем в фильтр условия из where на клиенте
-    if params->>'where_param' notnull
-    then
-        whereStr = format('%s and (%s)', whereStr, params->>'where_param');
-    end if;
+    
 
     -- финальная сборка строки с условиями выборки (build_query_part_for_list - функция из папки base)
     condQueryStr = '' || whereStr || build_query_part_for_list(params);

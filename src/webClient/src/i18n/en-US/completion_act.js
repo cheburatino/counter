@@ -1,12 +1,12 @@
 
 export default {
  		name_plural_deleted: 'deleted completion act',
- 		title: 'title',
+ 		date: 'date',
  		document: 'document',
- 		description: 'description',
  		name: 'completion act',
  		name_plural: 'completion act',
- 		date: 'date',
- 		state_id: 'state ',
  		technical_task_id: 'technical task ',
+ 		description: 'description',
+ 		title: 'title',
+ 		state_id: 'state ',
 }

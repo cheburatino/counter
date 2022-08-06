@@ -31,9 +31,10 @@ func GetDoc(project *t.ProjectType) t.DocType {
 			t.GetFldString("notes", "заметки", 0, [][]int{{5, 1}}, "col-8"),
 			t.GetFldFiles("notes_files", "файлы заметок", [][]int{{6, 1}}, t.FldVueFilesParams{}),
 			t.GetFldImgList("notes_images", "изображения заметок", [][]int{{6, 2}}, t.FldVueImgParams{}),
-			t.GetFldString("result", "результаты", 0, [][]int{{7, 1}}, "col-8"),
-			t.GetFldFiles("result_files", "файлы результатов", [][]int{{8, 1}}, t.FldVueFilesParams{}),
-			t.GetFldImgList("result_images", "изображения результатов", [][]int{{8, 2}}, t.FldVueImgParams{}),
+			// Работы {{7, 1}}
+			t.GetFldString("result", "результаты", 0, [][]int{{8, 1}}, "col-8"),
+			t.GetFldFiles("result_files", "файлы результатов", [][]int{{9, 1}}, t.FldVueFilesParams{}),
+			t.GetFldImgList("result_images", "изображения результатов", [][]int{{9, 2}}, t.FldVueImgParams{}),
 		},
 		Vue: t.DocVue{
 			RouteName:      name,
@@ -43,7 +44,7 @@ func GetDoc(project *t.ProjectType) t.DocType {
 		},
 		Templates: map[string]*t.DocTemplate{
 			"webClient_index.vue":   {},
-			"sql_function_list.sql": {},
+			//"sql_function_list.sql": {},
 		},
 		IsBaseTemplates: t.DocIsBaseTemplates{true, true},
 		Sql: t.DocSql{
@@ -74,6 +75,23 @@ func GetDoc(project *t.ProjectType) t.DocType {
 			`
 		},
 	}
+
+	doc.AddFld(t.GetFldVueCompositionRefList(&doc, t.VueCompRefListWidgetParams{
+		Label:      "работы",           // название списка, которе выводится на экране
+		FldName:    "work_list",      // название поля. Любое, в формате snake_case. На основе этого названия формируется название компоненты во vue.
+		TableName:  "work",           // название связанной таблицы, из которой будут выгружаться записи
+		RefFldName: "meeting_id",                  // название поля в связанной таблицы, по которому осуществляется связь
+		Avatar:     "image/work.png", // иконка, которая выводится в списке
+		NewFlds: []t.FldType{
+			t.GetFldString("title", "название", 300, [][]int{{1, 1}}).SetIsRequired(),
+		}, // список полей, которые заполняются при добавлении новой записи
+		TitleTemplate: `
+                <q-item-label>{{v.title}}</q-item-label>
+                <q-item-label caption>
+					<q-badge color="orange">{{v.options.title.state_title}}</q-badge> <q-badge v-if="v.state_id === 3" color="positive">{{v.worked_time}} минут</q-badge>
+				</q-item-label>
+            `, // шаблон для названия в списке (vue синтаксис)
+	}, [][]int{{7, 1}}, "col-4"))
 
 	return doc
 }
