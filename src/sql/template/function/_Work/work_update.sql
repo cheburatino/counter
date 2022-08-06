@@ -1,4 +1,4 @@
--- создание дело
+-- создание работа
 
 DROP FUNCTION IF EXISTS work_update(params JSONB);
 CREATE OR REPLACE FUNCTION work_update(params JSONB)
