@@ -60,7 +60,7 @@ func GetDoc(project *t.ProjectType) t.DocType {
 		if new.task_id notnull
 		then
             new.digital_solution_id = (select digital_solution_id from task where id = new.task_id);
-            new.system_id = (select system_id from digital_solution where id = new.digital_solution_id);
+            new.system_id = (select system_id from task where id = new.task_id);
         end if;		
 			`}},
 		},

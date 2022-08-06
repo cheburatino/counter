@@ -12,8 +12,6 @@ const routes = [
   {path: '/users/:id', component: () => import(`../app/components/users/item.vue`), props: true},
   {path: '/profile', component: () => import(`../app/components/currentUser/profile.vue`)},
   // for codeGenerate ##routes_slot1
-	{path: '/ctlg_time_type', component: () => import(`../app/components/ctlg_time_type/index.vue`), props: true},
-	{path: '/ctlg_time_type/:id', component: () => import(`../app/components/ctlg_time_type/item.vue`), props: true},
 	{path: '/ctlg_system_state', component: () => import(`../app/components/ctlg_system_state/index.vue`), props: true},
 	{path: '/ctlg_system_state/:id', component: () => import(`../app/components/ctlg_system_state/item.vue`), props: true},
 	{path: '/ctlg_meeting_state', component: () => import(`../app/components/ctlg_meeting_state/index.vue`), props: true},
@@ -46,6 +44,8 @@ const routes = [
 	{path: '/ctlg_development_task_state/:id', component: () => import(`../app/components/ctlg_development_task_state/item.vue`), props: true},
 	{path: '/ctlg_development_task_type', component: () => import(`../app/components/ctlg_development_task_type/index.vue`), props: true},
 	{path: '/ctlg_development_task_type/:id', component: () => import(`../app/components/ctlg_development_task_type/item.vue`), props: true},
+	{path: '/ctlg_time_state', component: () => import(`../app/components/ctlg_time_state/index.vue`), props: true},
+	{path: '/ctlg_time_state/:id', component: () => import(`../app/components/ctlg_time_state/item.vue`), props: true},
 	{path: '/meeting', component: () => import(`../app/components/meeting/index.vue`), props: true},
 	{path: '/meeting/:id', component: () => import(`../app/components/meeting/item.vue`), props: true},
 	{path: '/contract', component: () => import(`../app/components/contract/index.vue`), props: true},

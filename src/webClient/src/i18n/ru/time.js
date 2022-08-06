@@ -1,12 +1,14 @@
 
 export default {
+ 		title: 'название',
+ 		state_id: 'статус',
+ 		effort: 'затрачено',
+ 		end_time: 'завершение',
+ 		effort_for_customer_task: 'время для задач разработки',
+ 		effort_for_task: 'время для задач',
  		name_plural: 'Время',
  		name_plural_deleted: 'удаленные Время',
- 		specialist_id: 'специалист',
- 		type_id: 'тип времени',
- 		digital_solution_id: 'цифровое решение',
+ 		description: 'описание',
  		name: 'время',
- 		title: 'название',
- 		minute: 'кол-во минут',
- 		task_id: 'задача',
+ 		start_time: 'начало',
 }

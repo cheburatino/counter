@@ -9,7 +9,7 @@ const (
 	name            = "time"
 	name_ru         = "время"
 	name_ru_plural  = "время"
-	menu_icon       = "image/time_fast.svg"
+	menu_icon       = "image/time.svg"
 	breadcrumb_icon = "fas fa-building"
 )
 
@@ -20,12 +20,14 @@ func GetDoc(project *t.ProjectType) t.DocType {
 		NameRu:     name_ru,
 		PathPrefix: "docs",
 		Flds: []t.FldType{
-			t.GetFldTitle(),
-			t.GetFldInt("minute", "кол-во минут", [][]int{{2, 1}}),
-			t.GetFldRef("specialist_id", "специалист", "man", [][]int{{2, 2}}),
-			t.GetFldRef("type_id", "тип времени", "ctlg_time_type", [][]int{{3, 1}}),
-			t.GetFldRef("task_id", "задача", "task", [][]int{{4, 1}}),
-			t.GetFldRef("digital_solution_id", "цифровое решение", "digital_solution", [][]int{{5, 1}}),
+			t.GetFldTitleComputed("format('%s, %s - %s', stateTitle, to_char(new.start_time, 'dd.mm.yyyy HH24:MI'), to_char(new.end_time, 'dd.mm.yyyy HH24:MI'))"),
+			t.GetFldRef("state_id", "статус", "ctlg_time_state", [][]int{{1, 2}}, "col-2"),
+			t.GetFldInt("effort", "затрачено", [][]int{{1, 3}}, "col-1"),
+			t.GetFldDateTime("start_time", "начало", [][]int{{2, 1}}, "col-2").SetDefault("now()"),
+			t.GetFldDateTime("end_time", "завершение", [][]int{{2, 2}}, "col-2"),
+			t.GetFldInt("effort_for_customer_task", "время для задач разработки", [][]int{{2, 3}}, "col-2"),
+			t.GetFldInt("effort_for_task", "время для задач", [][]int{{2, 4}}, "col-2"),
+			t.GetFldString("description", "описание", 0, [][]int{{3, 1}}, "col-8"),
 		},
 		Vue: t.DocVue{
 			RouteName:      name,

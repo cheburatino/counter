@@ -16,9 +16,6 @@ if new.title != old.title then
  for r in select * from customer_task where responsible_id = new.id loop
  update customer_task set updated_at=now() where id = r.id;
  end loop;
- for r in select * from time where specialist_id = new.id loop
- update time set updated_at=now() where id = r.id;
- end loop;
 
  end if;
  end if;

@@ -1,4 +1,4 @@
-package ctlgTimeType
+package ctlgTimeState
 
 import (
 	t "github.com/pepelazz/nla_framework/types"
@@ -6,9 +6,9 @@ import (
 )
 
 const (
-	name            = "ctlg_time_type"
-	name_ru         = "тип времени"
-	name_ru_plural  = "типы времени"
+	name            = "ctlg_time_state"
+	name_ru         = "статус времени"
+	name_ru_plural  = "статусы времени"
 	menu_icon       = "image/catalog.svg"
 	breadcrumb_icon = "fas fa-list-ul"
 )

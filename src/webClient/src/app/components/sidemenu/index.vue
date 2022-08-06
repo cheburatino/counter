@@ -64,6 +64,8 @@
                 menuLinks: [
                     // for codeGenerate ##sidemenu_slot1
 
+									{icon: 'image/time.svg', text: 'i18n_menu.time', url: '/time', roles: ['admin']},
+
 									{icon: 'image/task.svg', text: 'i18n_menu.task', url: '/task', roles: ['admin']},
 
 									{icon: 'image/work.png', text: 'i18n_menu.work', url: '/work', roles: ['admin']},
@@ -92,6 +94,7 @@
 								{icon: '', text: 'Статусы цифровых решений', url: '/ctlg_digital_solution_state', roles: []},
 								{icon: '', text: 'Статусы задач', url: '/ctlg_task_state', roles: []},
 								{icon: '', text: 'Статусы дел', url: '/ctlg_work_state', roles: []},
+								{icon: '', text: 'Статусы времени', url: '/ctlg_time_state', roles: []},
 								{icon: '', text: 'Статусы задач разработки', url: '/ctlg_development_task_state', roles: []},
 								{icon: '', text: 'Статусы задач заказчиков', url: '/ctlg_customer_task_state', roles: []},
 								{icon: '', text: 'Статусы договоров', url: '/ctlg_contract_state', roles: []},

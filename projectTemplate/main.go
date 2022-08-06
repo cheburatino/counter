@@ -19,7 +19,7 @@ import (
 	"github.com/cheburatino/electron_is/projectTemplate/docs/ctlgTaskType"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/ctlgTechnicalTaskState"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/ctlgTechnicalTaskWorkState"
-	"github.com/cheburatino/electron_is/projectTemplate/docs/ctlgTimeType"
+	"github.com/cheburatino/electron_is/projectTemplate/docs/ctlgTimeState"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/ctlgWorkState"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/customerTask"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/developmentTask"
@@ -58,7 +58,6 @@ func getProject() t.ProjectType {
 	p.FillI18n()
 
 	p.Docs = []t.DocType{
-		ctlgTimeType.GetDoc(p),
 		ctlgSystemState.GetDoc(p),
 		ctlgMeetingState.GetDoc(p),
 		ctlgDigitalSolutionState.GetDoc(p),
@@ -75,6 +74,7 @@ func getProject() t.ProjectType {
 		ctlgOrderBy.GetDoc(p),
 		ctlgDevelopmentTaskState.GetDoc(p),
 		ctlgDevelopmentTaskType.GetDoc(p),
+		ctlgTimeState.GetDoc(p),
 		meeting.GetDoc(p),
 		contract.GetDoc(p),
 		technicalTask.GetDoc(p),
@@ -112,6 +112,7 @@ func getProject() t.ProjectType {
 
 	// боковое меню для Vue
 	p.Vue.Menu = []t.VueMenu{
+		{DocName: "time", Roles: []string{utils.RoleAdmin}},
 		{DocName: "task", Roles: []string{utils.RoleAdmin}},
 		{DocName: "work", Roles: []string{utils.RoleAdmin}},
 		{DocName: "meeting", Roles: []string{utils.RoleAdmin}},
@@ -138,6 +139,7 @@ func getProject() t.ProjectType {
 			{Text: "Статусы цифровых решений", Url: "ctlg_digital_solution_state"},
 			{Text: "Статусы задач", Url: "ctlg_task_state"},
 			{Text: "Статусы дел", Url: "ctlg_work_state"},
+			{Text: "Статусы времени", Url: "ctlg_time_state"},
 			{Text: "Статусы задач разработки", Url: "ctlg_development_task_state"},
 			{Text: "Статусы задач заказчиков", Url: "ctlg_customer_task_state"},
 			{Text: "Статусы договоров", Url: "ctlg_contract_state"},

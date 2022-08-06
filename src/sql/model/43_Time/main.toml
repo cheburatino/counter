@@ -5,12 +5,14 @@ tableName ="time"
 
 fields = [
 	{name="id",			type="serial"},
-	{name="title",					type="char",	size=150, 	ext="not null",	 comment="название"},
-	{name="minute",					type="int",	 comment="кол-во минут"},
-	{name="specialist_id",					type="int",	 comment="специалист"},
-	{name="type_id",					type="int",	 comment="тип времени"},
-	{name="task_id",					type="int",	 comment="задача"},
-	{name="digital_solution_id",					type="int",	 comment="цифровое решение"},
+	{name="title",					type="text",	 comment="название"},
+	{name="state_id",					type="int",	 comment="статус"},
+	{name="effort",					type="int",	 comment="затрачено"},
+	{name="start_time",					type="timestamp", 	ext=" default now()",	 comment="начало"},
+	{name="end_time",					type="timestamp",	 comment="завершение"},
+	{name="effort_for_customer_task",					type="int",	 comment="время для задач разработки"},
+	{name="effort_for_task",					type="int",	 comment="время для задач"},
+	{name="description",					type="text",	 comment="описание"},
 	{name="search_text",			type="text",	comment="колонка для поиска"},
 	{name="options",				type="jsonb",	comment="разные дополнительные параметры"},
 	{name="created_at",				type="timestamp",	ext="with time zone"},
@@ -19,11 +21,7 @@ fields = [
 ]
 
 fkConstraints = [
-	{name="time_title_already_exist", ext="UNIQUE (title)"},
-	{fld="specialist_id", ref="man", fk="id"},
-	{fld="type_id", ref="ctlg_time_type", fk="id"},
-	{fld="task_id", ref="task", fk="id"},
-	{fld="digital_solution_id", ref="digital_solution", fk="id"}
+	{fld="state_id", ref="ctlg_time_state", fk="id"}
 ]
 
 triggers = [
@@ -35,19 +33,21 @@ triggers = [
 
 
 methods = [
-	"time_get_by_id",
 	"time_list",
 	"time_update",
+	"time_get_by_id",
 	"time_trigger_before",
 	"time_trigger_after"
 ]
 
 alterScripts = [
-	"alter table time add column if not exists title CHARACTER VARYING(150);",
-	"alter table time add column if not exists minute int;",
-	"alter table time add column if not exists specialist_id int;",
-	"alter table time add column if not exists type_id int;",
-	"alter table time add column if not exists task_id int;",
-	"alter table time add column if not exists digital_solution_id int;",
+	"alter table time add column if not exists title text;",
+	"alter table time add column if not exists state_id int;",
+	"alter table time add column if not exists effort int;",
+	"alter table time add column if not exists start_time timestamp;",
+	"alter table time add column if not exists end_time timestamp;",
+	"alter table time add column if not exists effort_for_customer_task int;",
+	"alter table time add column if not exists effort_for_task int;",
+	"alter table time add column if not exists description text;",
 	"alter table time add column if not exists search_text text;"
 ]

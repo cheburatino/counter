@@ -1,14 +1,14 @@
 
 export default {
  		title: 'title',
- 		work_state_id: 'work state ',
- 		contract_id: 'contract ',
+ 		state_id: 'state ',
  		amount: 'amount',
  		date: 'date',
- 		description: 'description',
- 		name_plural: 'technical task',
- 		name_plural_deleted: 'deleted technical task',
- 		document: 'document',
  		name: 'technical task',
- 		state_id: 'state ',
+ 		name_plural_deleted: 'deleted technical task',
+ 		work_state_id: 'work state ',
+ 		contract_id: 'contract ',
+ 		description: 'description',
+ 		document: 'document',
+ 		name_plural: 'technical task',
 }

@@ -10,32 +10,32 @@
       <div class="col-md-4 col-sm-6 col-xs-12">
           <q-input outlined type='text' v-model="item.title" :label="$t('time.title')" autogrow :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
       </div>
+      <div class="col-md-2 col-sm-3 col-xs-6">
+          <comp-fld-ref-search outlined pgMethod="ctlg_time_state_list" :label="$t('time.state_id')" :item='item.state_title' :itemId='item.state_id' :ext='{}' @update="v=> item.state_id = v.id" @clear="item.state_id = null" :readonly='false'  class='q-mb-sm col-md-2 col-sm-3 col-xs-6' />
       </div>
-      
-      <div class="row q-col-gutter-md q-mb-sm">
-      <div class="col-md-4 col-sm-6 col-xs-12">
-          <q-input outlined type='number' v-model="item.minute" :label="$t('time.minute')" :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
-      </div>
-      <div class="col-md-4 col-sm-6 col-xs-12">
-          <comp-fld-ref-search outlined pgMethod="man_list" :label="$t('time.specialist_id')" :item='item.specialist_title' :itemId='item.specialist_id' :ext='{}' @update="v=> item.specialist_id = v.id" @clear="item.specialist_id = null" :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
+      <div class="col-md-1 col-sm-2 col-xs-6">
+          <q-input outlined type='number' v-model="item.effort" :label="$t('time.effort')" :readonly='false'  class='q-mb-sm col-md-1 col-sm-2 col-xs-6' />
       </div>
       </div>
       
       <div class="row q-col-gutter-md q-mb-sm">
-      <div class="col-md-4 col-sm-6 col-xs-12">
-          <comp-fld-ref-search outlined pgMethod="ctlg_time_type_list" :label="$t('time.type_id')" :item='item.type_title' :itemId='item.type_id' :ext='{}' @update="v=> item.type_id = v.id" @clear="item.type_id = null" :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
+      <div class="col-md-2 col-sm-3 col-xs-6">
+          <comp-fld-date-time outlined :label="$t('time.start_time')" :date-string="$utils.formatPgDateTime(item.start_time)" @update="v=> item.start_time = v" @clear="item.start_time=null" :readonly='false'  class='q-mb-sm col-md-2 col-sm-3 col-xs-6' />
+      </div>
+      <div class="col-md-2 col-sm-3 col-xs-6">
+          <comp-fld-date-time outlined :label="$t('time.end_time')" :date-string="$utils.formatPgDateTime(item.end_time)" @update="v=> item.end_time = v" @clear="item.end_time=null" :readonly='false'  class='q-mb-sm col-md-2 col-sm-3 col-xs-6' />
+      </div>
+      <div class="col-md-2 col-sm-3 col-xs-6">
+          <q-input outlined type='number' v-model="item.effort_for_customer_task" :label="$t('time.effort_for_customer_task')" :readonly='false'  class='q-mb-sm col-md-2 col-sm-3 col-xs-6' />
+      </div>
+      <div class="col-md-2 col-sm-3 col-xs-6">
+          <q-input outlined type='number' v-model="item.effort_for_task" :label="$t('time.effort_for_task')" :readonly='false'  class='q-mb-sm col-md-2 col-sm-3 col-xs-6' />
       </div>
       </div>
       
       <div class="row q-col-gutter-md q-mb-sm">
-      <div class="col-md-4 col-sm-6 col-xs-12">
-          <comp-fld-ref-search outlined pgMethod="task_list" :label="$t('time.task_id')" :item='item.task_title' :itemId='item.task_id' :ext='{}' @update="v=> item.task_id = v.id" @clear="item.task_id = null" :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
-      </div>
-      </div>
-      
-      <div class="row q-col-gutter-md q-mb-sm">
-      <div class="col-md-4 col-sm-6 col-xs-12">
-          <comp-fld-ref-search outlined pgMethod="digital_solution_list" :label="$t('time.digital_solution_id')" :item='item.digital_solution_title' :itemId='item.digital_solution_id' :ext='{}' @update="v=> item.digital_solution_id = v.id" @clear="item.digital_solution_id = null" :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
+      <div class="col-md-8 col-sm-12 col-xs-12">
+          <q-input outlined type='text' v-model="item.description" :label="$t('time.description')" autogrow :readonly='false'  class='q-mb-sm col-md-8 col-sm-12 col-xs-12' />
       </div>
       </div>
       
@@ -67,12 +67,14 @@
             return {
                 item: null,
                 flds: [
-                        {name: 'title', label: 'название',  required: true},
-                        {name: 'minute', label: 'кол-во минут'},
-                        {name: 'specialist_id', label: 'специалист'},
-                        {name: 'type_id', label: 'тип времени'},
-                        {name: 'task_id', label: 'задача'},
-                        {name: 'digital_solution_id', label: 'цифровое решение'},
+                        {name: 'title', label: 'название'},
+                        {name: 'state_id', label: 'статус'},
+                        {name: 'effort', label: 'затрачено'},
+                        {name: 'start_time', label: 'начало'},
+                        {name: 'end_time', label: 'завершение'},
+                        {name: 'effort_for_customer_task', label: 'время для задач разработки'},
+                        {name: 'effort_for_task', label: 'время для задач'},
+                        {name: 'description', label: 'описание'},
                 ],
                 optionsFlds: [],
                 
