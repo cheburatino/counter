@@ -37,9 +37,9 @@ func GetDoc(project *t.ProjectType) t.DocType {
 			t.GetFldFiles("files", "файлы", [][]int{{5, 1}}, t.FldVueFilesParams{}),
 			t.GetFldImgList("images", "изображения", [][]int{{5, 2}}, t.FldVueImgParams{}),
 			t.GetFldString("process", "процесс", 0, [][]int{{6, 1}}, "col-8"),
-			t.GetFldFiles("process_files", "файлы результата", [][]int{{7, 1}}, t.FldVueFilesParams{}),
-			t.GetFldImgList("process_images", "изображения результата", [][]int{{7, 2}}, t.FldVueImgParams{}),
-			// Дела {{8, 1}}
+			t.GetFldFiles("process_files", "файлы процесса", [][]int{{7, 1}}, t.FldVueFilesParams{}),
+			t.GetFldImgList("process_images", "изображения процесса", [][]int{{7, 2}}, t.FldVueImgParams{}),
+			// Работы {{8, 1}}
 			t.GetFldString("result", "результат", 0, [][]int{{9, 1}}, "col-8"),
 			t.GetFldFiles("result_files", "файлы результата", [][]int{{10, 1}}, t.FldVueFilesParams{}),
 			t.GetFldImgList("result_images", "изображения результата", [][]int{{10, 2}}, t.FldVueImgParams{}),
@@ -106,7 +106,7 @@ func GetDoc(project *t.ProjectType) t.DocType {
 	}
 
 	doc.AddFld(t.GetFldVueCompositionRefList(&doc, t.VueCompRefListWidgetParams{
-		Label:      "дела",            // название списка, которе выводится на экране
+		Label:      "работы",            // название списка, которе выводится на экране
 		FldName:    "work_list",           // название поля. Любое, в формате snake_case. На основе этого названия формируется название компоненты во vue.
 		TableName:  "work",                // название связанной таблицы, из которой будут выгружаться записи
 		RefFldName: "task_id", // название поля в связанной таблицы, по которому осуществляется связь

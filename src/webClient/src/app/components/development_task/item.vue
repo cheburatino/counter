@@ -29,7 +29,7 @@
           <comp-fld-ref-search outlined pgMethod="technical_task_list" :label="$t('development_task.technical_task_id')" :item='item.technical_task_title' :itemId='item.technical_task_id' :ext='{"avatar":"image/technical_task.svg","isClearable":"true","pathUrl":"/technical_task"}' @update="v=> item.technical_task_id = v.id" @clear="item.technical_task_id = null" :readonly='false'  class='q-mb-sm col-md-2 col-sm-3 col-xs-6' />
       </div>
       <div class="col-md-2 col-sm-3 col-xs-6">
-          <comp-fld-ref-search outlined pgMethod="man_list" :label="$t('development_task.responsible_id')" :item='item.responsible_title' :itemId='item.responsible_id' :ext='{"company_id": 1, isClearable: "true", pathUrl: "/man", avatar: "image/man.svg"}' @update="v=> item.responsible_id = v.id" @clear="item.responsible_id = null" :readonly='false'  class='q-mb-sm col-md-2 col-sm-3 col-xs-6' />
+          <comp-fld-ref-search outlined pgMethod="man_list" :label="$t('development_task.responsible_id')" :item='item.responsible_title' :itemId='item.responsible_id' :ext='{"company_id": 1, avatar: "image/man.svg", isClearable: "true", pathUrl: "/man"}' @update="v=> item.responsible_id = v.id" @clear="item.responsible_id = null" :readonly='false'  class='q-mb-sm col-md-2 col-sm-3 col-xs-6' />
       </div>
       </div>
       
