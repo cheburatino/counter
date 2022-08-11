@@ -1,14 +1,14 @@
 
 export default {
- 		description: 'description',
- 		name: 'time',
- 		title: 'title',
- 		state_id: 'state ',
- 		effort_for_task: 'effort for task',
  		end_time: 'end time',
- 		effort_for_customer_task: 'effort for customer task',
+ 		description: 'description',
  		name_plural: 'time',
  		name_plural_deleted: 'deleted time',
- 		effort: 'effort',
+ 		state_id: 'state ',
  		start_time: 'start time',
+ 		effort_for_task: 'effort for task',
+ 		name: 'time',
+ 		title: 'title',
+ 		effort: 'effort',
+ 		effort_for_customer_task: 'effort for customer task',
 }

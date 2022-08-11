@@ -48,9 +48,9 @@ triggers = [
 
 
 methods = [
+	"customer_task_list",
 	"customer_task_update",
 	"customer_task_get_by_id",
-	"customer_task_list",
 	"customer_task_trigger_before",
 	"customer_task_trigger_after"
 ]
