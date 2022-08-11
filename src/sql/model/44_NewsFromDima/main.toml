@@ -31,9 +31,9 @@ triggers = [
 
 
 methods = [
-	"news_from_dima_list",
 	"news_from_dima_update",
 	"news_from_dima_get_by_id",
+	"news_from_dima_list",
 	"news_from_dima_trigger_before",
 	"news_from_dima_trigger_after"
 ]

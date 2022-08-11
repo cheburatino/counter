@@ -20,7 +20,7 @@ func GetDoc(project *t.ProjectType) t.DocType {
 		NameRu:     name_ru,
 		PathPrefix: "docs",
 		Flds: []t.FldType{
-			t.GetFldTitleComputed("format('%s, %s - %s', stateTitle, to_char(new.start_time, 'dd.mm.yyyy HH24:MI'), to_char(new.end_time, 'dd.mm.yyyy HH24:MI'))"),
+			t.GetFldTitleComputed("format('%s, %s - %s', to_char(new.start_time, 'dd.mm.yyyy'), stateTitle, to_char(new.start_time, 'HH24:MI'), to_char(new.end_time, 'HH24:MI'))"),
 			t.GetFldRef("state_id", "статус", "ctlg_time_state", [][]int{{1, 2}}, "col-2"),
 			t.GetFldInt("effort", "затрачено", [][]int{{1, 3}}, "col-1"),
 			t.GetFldDateTime("start_time", "начало", [][]int{{2, 1}}, "col-2").SetDefault("now()"),
@@ -41,9 +41,6 @@ func GetDoc(project *t.ProjectType) t.DocType {
 			IsSearchText:    true,
 			IsBeforeTrigger: true,
 			IsAfterTrigger:  true,
-			Hooks: t.DocSqlHooks{BeforeTriggerBefore: []string{`
-			
-			`}},
 		},
 	}
 
