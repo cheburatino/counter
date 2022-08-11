@@ -112,8 +112,8 @@ func getProject() t.ProjectType {
 
 	// боковое меню для Vue
 	p.Vue.Menu = []t.VueMenu{
-		{DocName: "time", Roles: []string{utils.RoleAdmin}},
 		{DocName: "task", Roles: []string{utils.RoleAdmin}},
+		{DocName: "time", Roles: []string{utils.RoleAdmin}},
 		{DocName: "work", Roles: []string{utils.RoleAdmin}},
 		{DocName: "meeting", Roles: []string{utils.RoleAdmin}},
 		{Text: "Разработка", Icon: "image/development.png", IsFolder: true, Roles: []string{utils.RoleAdmin}, LinkList: []t.VueMenu{

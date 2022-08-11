@@ -64,9 +64,9 @@
                 menuLinks: [
                     // for codeGenerate ##sidemenu_slot1
 
-									{icon: 'image/time.svg', text: 'i18n_menu.time', url: '/time', roles: ['admin']},
-
 									{icon: 'image/task.svg', text: 'i18n_menu.task', url: '/task', roles: ['admin']},
+
+									{icon: 'image/time.svg', text: 'i18n_menu.time', url: '/time', roles: ['admin']},
 
 									{icon: 'image/work.png', text: 'i18n_menu.work', url: '/work', roles: ['admin']},
 

@@ -50,11 +50,11 @@ triggers = [
 
 
 methods = [
+	"task_get_specialist",
 	"task_get_specialist_role",
 	"task_list",
 	"task_update",
 	"task_get_by_id",
-	"task_get_specialist",
 	"task_trigger_before",
 	"task_trigger_after"
 ]

@@ -12,6 +12,8 @@ BEGIN
         -- заполняем ref поля
 		select title into stateTitle from ctlg_time_state where id = new.state_id;
         
+			
+			
         NEW.title = format('%s, %s - %s', stateTitle, to_char(new.start_time, 'dd.mm.yyyy HH24:MI'), to_char(new.end_time, 'dd.mm.yyyy HH24:MI'));
         -- заполняем options.title
         NEW.options = coalesce(OLD.options, '{}'::jsonb) || NEW.options || jsonb_build_object('title', jsonb_build_object('title', new.title, 'state_title', stateTitle));

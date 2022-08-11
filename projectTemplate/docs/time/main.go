@@ -41,6 +41,9 @@ func GetDoc(project *t.ProjectType) t.DocType {
 			IsSearchText:    true,
 			IsBeforeTrigger: true,
 			IsAfterTrigger:  true,
+			Hooks: t.DocSqlHooks{BeforeTriggerBefore: []string{`
+			
+			`}},
 		},
 	}
 
