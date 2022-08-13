@@ -33,22 +33,18 @@ BEGIN
     
     
     
-    
-    
 
     if (params ->> 'id')::int = -1 then
         
 
-        EXECUTE ('INSERT INTO time (title, state_id, effort, start_time, end_time, effort_for_customer_task, effort_for_task, description, options) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)  RETURNING *;')
+        EXECUTE ('INSERT INTO time (title, state_id, effort, start_time, end_time, description, options) VALUES ($1, $2, $3, $4, $5, $6, $7)  RETURNING *;')
 		INTO timeRow
 		USING
 			(params ->> 'title')::text,
 			(params ->> 'state_id')::int,
 			(params ->> 'effort')::int,
-			coalesce((params ->> 'start_time')::timestamp, now())::timestamp,
+			(params ->> 'start_time')::timestamp,
 			(params ->> 'end_time')::timestamp,
-			(params ->> 'effort_for_customer_task')::int,
-			(params ->> 'effort_for_task')::int,
 			(params ->> 'description')::text,
 			coalesce(params -> 'options', '{}')::jsonb;
 
@@ -61,8 +57,6 @@ BEGIN
 			['effort', 'effort', 'number'],
 			['start_time', 'start_time', 'timestamp'],
 			['end_time', 'end_time', 'timestamp'],
-			['effort_for_customer_task', 'effort_for_customer_task', 'number'],
-			['effort_for_task', 'effort_for_task', 'number'],
 			['description', 'description', 'text'],
             ['options', 'options', 'jsonb'],
             ['deleted', 'deleted', 'bool']

@@ -20,14 +20,12 @@ func GetDoc(project *t.ProjectType) t.DocType {
 		NameRu:     name_ru,
 		PathPrefix: "docs",
 		Flds: []t.FldType{
-			t.GetFldTitleComputed("format('%s, %s - %s', to_char(new.start_time, 'dd.mm.yyyy'), stateTitle, to_char(new.start_time, 'HH24:MI'), to_char(new.end_time, 'HH24:MI'))"),
+			t.GetFldTitleComputed("stateTitle || case when new.start_time notnull then format(', %s', to_char(new.start_time, 'dd.mm.yyyy')) else '' end || case when new.start_time notnull then format(', %s', to_char(new.start_time, 'HH24:MI')) else '' end || case when new.end_time notnull then format(' - %s', to_char(new.end_time, 'HH24:MI')) else '' end"),
 			t.GetFldRef("state_id", "статус", "ctlg_time_state", [][]int{{1, 2}}, "col-2"),
-			t.GetFldInt("effort", "затрачено", [][]int{{1, 3}}, "col-1"),
-			t.GetFldDateTime("start_time", "начало", [][]int{{2, 1}}, "col-2").SetDefault("now()"),
-			t.GetFldDateTime("end_time", "завершение", [][]int{{2, 2}}, "col-2"),
-			t.GetFldInt("effort_for_customer_task", "время для задач разработки", [][]int{{2, 3}}, "col-2"),
-			t.GetFldInt("effort_for_task", "время для задач", [][]int{{2, 4}}, "col-2"),
-			t.GetFldString("description", "описание", 0, [][]int{{3, 1}}, "col-8"),
+			t.GetFldInt("effort", "полезная нагрузка", [][]int{{1, 3}}, "col-2").SetVif("item.state_id == 2"),
+			t.GetFldDateTime("start_time", "начало", [][]int{{2, 1}}),
+			t.GetFldDateTime("end_time", "завершение", [][]int{{2, 2}}),
+			t.GetFldString("description", "заметки", 0, [][]int{{3, 1}}, "col-8"),
 		},
 		Vue: t.DocVue{
 			RouteName:      name,
@@ -41,6 +39,10 @@ func GetDoc(project *t.ProjectType) t.DocType {
 			IsSearchText:    true,
 			IsBeforeTrigger: true,
 			IsAfterTrigger:  true,
+			Hooks: t.DocSqlHooks{BeforeTriggerBefore: []string{`
+		new.effort = (select sum(worked_time) from work where time_id = new.id and state_id = 3);	
+			`}},
+
 		},
 	}
 

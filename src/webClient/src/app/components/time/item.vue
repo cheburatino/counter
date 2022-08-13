@@ -13,23 +13,17 @@
       <div class="col-md-2 col-sm-3 col-xs-6">
           <comp-fld-ref-search outlined pgMethod="ctlg_time_state_list" :label="$t('time.state_id')" :item='item.state_title' :itemId='item.state_id' :ext='{}' @update="v=> item.state_id = v.id" @clear="item.state_id = null" :readonly='false'  class='q-mb-sm col-md-2 col-sm-3 col-xs-6' />
       </div>
-      <div class="col-md-1 col-sm-2 col-xs-6">
-          <q-input outlined type='number' v-model="item.effort" :label="$t('time.effort')" :readonly='false'  class='q-mb-sm col-md-1 col-sm-2 col-xs-6' />
+      <div class="col-md-2 col-sm-3 col-xs-6" v-if="item.state_id == 2">
+          <q-input outlined type='number' v-model="item.effort" :label="$t('time.effort')" :readonly='false'  class='q-mb-sm col-md-2 col-sm-3 col-xs-6'  v-if="item.state_id == 2" />
       </div>
       </div>
       
       <div class="row q-col-gutter-md q-mb-sm">
-      <div class="col-md-2 col-sm-3 col-xs-6">
-          <comp-fld-date-time outlined :label="$t('time.start_time')" :date-string="$utils.formatPgDateTime(item.start_time)" @update="v=> item.start_time = v" @clear="item.start_time=null" :readonly='false'  class='q-mb-sm col-md-2 col-sm-3 col-xs-6' />
+      <div class="col-md-4 col-sm-6 col-xs-12">
+          <comp-fld-date-time outlined :label="$t('time.start_time')" :date-string="$utils.formatPgDateTime(item.start_time)" @update="v=> item.start_time = v" @clear="item.start_time=null" :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
       </div>
-      <div class="col-md-2 col-sm-3 col-xs-6">
-          <comp-fld-date-time outlined :label="$t('time.end_time')" :date-string="$utils.formatPgDateTime(item.end_time)" @update="v=> item.end_time = v" @clear="item.end_time=null" :readonly='false'  class='q-mb-sm col-md-2 col-sm-3 col-xs-6' />
-      </div>
-      <div class="col-md-2 col-sm-3 col-xs-6">
-          <q-input outlined type='number' v-model="item.effort_for_customer_task" :label="$t('time.effort_for_customer_task')" :readonly='false'  class='q-mb-sm col-md-2 col-sm-3 col-xs-6' />
-      </div>
-      <div class="col-md-2 col-sm-3 col-xs-6">
-          <q-input outlined type='number' v-model="item.effort_for_task" :label="$t('time.effort_for_task')" :readonly='false'  class='q-mb-sm col-md-2 col-sm-3 col-xs-6' />
+      <div class="col-md-4 col-sm-6 col-xs-12">
+          <comp-fld-date-time outlined :label="$t('time.end_time')" :date-string="$utils.formatPgDateTime(item.end_time)" @update="v=> item.end_time = v" @clear="item.end_time=null" :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
       </div>
       </div>
       
@@ -75,12 +69,10 @@
                 flds: [
                         {name: 'title', label: 'название'},
                         {name: 'state_id', label: 'статус'},
-                        {name: 'effort', label: 'затрачено'},
+                        {name: 'effort', label: 'полезная нагрузка'},
                         {name: 'start_time', label: 'начало'},
                         {name: 'end_time', label: 'завершение'},
-                        {name: 'effort_for_customer_task', label: 'время для задач разработки'},
-                        {name: 'effort_for_task', label: 'время для задач'},
-                        {name: 'description', label: 'описание'},
+                        {name: 'description', label: 'заметки'},
                 ],
                 optionsFlds: [],
                 
