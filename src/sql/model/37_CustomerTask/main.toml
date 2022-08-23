@@ -10,8 +10,8 @@ fields = [
 	{name="system_id",					type="int",	 comment="система"},
 	{name="task_id",					type="int",	 comment="задача"},
 	{name="responsible_id",					type="int",	 comment="ответственный"},
-	{name="plan_start_date",					type="timestamp",	 comment="плановая дата начала"},
 	{name="plan_end_date",					type="timestamp",	 comment="плановая дата завершения"},
+	{name="fact_end_date",					type="timestamp",	 comment="фактическая дата завершения"},
 	{name="description",					type="text",	 comment="описание"},
 	{name="description_files",					type="jsonb",	 comment="файлы описания"},
 	{name="description_images",					type="jsonb",	 comment="изображения описания"},
@@ -46,9 +46,9 @@ triggers = [
 
 
 methods = [
-	"customer_task_list",
 	"customer_task_update",
 	"customer_task_get_by_id",
+	"customer_task_list",
 	"customer_task_trigger_before",
 	"customer_task_trigger_after"
 ]
@@ -59,8 +59,8 @@ alterScripts = [
 	"alter table customer_task add column if not exists system_id int;",
 	"alter table customer_task add column if not exists task_id int;",
 	"alter table customer_task add column if not exists responsible_id int;",
-	"alter table customer_task add column if not exists plan_start_date timestamp;",
 	"alter table customer_task add column if not exists plan_end_date timestamp;",
+	"alter table customer_task add column if not exists fact_end_date timestamp;",
 	"alter table customer_task add column if not exists description text;",
 	"alter table customer_task add column if not exists description_files jsonb;",
 	"alter table customer_task add column if not exists description_images jsonb;",

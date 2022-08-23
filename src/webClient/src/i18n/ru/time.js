@@ -1,12 +1,12 @@
 
 export default {
  		name: 'время',
- 		state_id: 'статус',
+ 		title: 'название',
  		start_time: 'начало',
+ 		description: 'заметки',
  		name_plural: 'Время',
  		name_plural_deleted: 'удаленные Время',
- 		title: 'название',
+ 		state_id: 'статус',
  		effort: 'полезная нагрузка',
  		end_time: 'завершение',
- 		description: 'заметки',
 }

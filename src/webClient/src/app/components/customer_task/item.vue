@@ -29,10 +29,10 @@
       
       <div class="row q-col-gutter-md q-mb-sm">
       <div class="col-md-4 col-sm-6 col-xs-12">
-          <comp-fld-date outlined :label="$t('customer_task.plan_start_date')" :date-string="$utils.formatPgDate(item.plan_start_date)" @update="v=> item.plan_start_date = v" :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
+          <comp-fld-date outlined :label="$t('customer_task.plan_end_date')" :date-string="$utils.formatPgDate(item.plan_end_date)" @update="v=> item.plan_end_date = v" :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
       </div>
       <div class="col-md-4 col-sm-6 col-xs-12">
-          <comp-fld-date outlined :label="$t('customer_task.plan_end_date')" :date-string="$utils.formatPgDate(item.plan_end_date)" @update="v=> item.plan_end_date = v" :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
+          <comp-fld-date outlined :label="$t('customer_task.fact_end_date')" :date-string="$utils.formatPgDate(item.fact_end_date)" @update="v=> item.fact_end_date = v" :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
       </div>
       </div>
       
@@ -124,8 +124,8 @@
                         {name: 'system_id', label: 'система'},
                         {name: 'task_id', label: 'задача'},
                         {name: 'responsible_id', label: 'ответственный'},
-                        {name: 'plan_start_date', label: 'плановая дата начала'},
                         {name: 'plan_end_date', label: 'плановая дата завершения'},
+                        {name: 'fact_end_date', label: 'фактическая дата завершения'},
                         {name: 'description', label: 'описание'},
                         {name: 'description_files', label: 'файлы описания'},
                         {name: 'description_images', label: 'изображения описания'},

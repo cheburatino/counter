@@ -26,9 +26,9 @@ triggers = [
 
 
 methods = [
+	"work_time_sheet_list",
 	"work_time_sheet_update",
 	"work_time_sheet_get_by_id",
-	"work_time_sheet_list",
 	"work_time_sheet_trigger_before",
 	"work_time_sheet_trigger_after"
 ]
