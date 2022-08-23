@@ -1,12 +1,12 @@
 
 export default {
- 		name: 'system',
- 		title: 'title',
+ 		customer_id: 'customer ',
  		state_id: 'state ',
+ 		description: 'description',
  		files: 'files',
+ 		name: 'system',
  		name_plural: 'system',
  		name_plural_deleted: 'deleted system',
- 		customer_id: 'customer ',
- 		description: 'description',
+ 		title: 'title',
  		images: 'images',
 }

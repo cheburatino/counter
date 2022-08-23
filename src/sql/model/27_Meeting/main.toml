@@ -41,9 +41,9 @@ triggers = [
 
 
 methods = [
-	"meeting_get_by_id",
 	"meeting_list",
 	"meeting_update",
+	"meeting_get_by_id",
 	"meeting_trigger_before",
 	"meeting_trigger_after"
 ]

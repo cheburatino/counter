@@ -13,9 +13,6 @@ if new.title != old.title then
  for r in select * from development_task where digital_solution_id = new.id loop
  update development_task set updated_at=now() where id = r.id;
  end loop;
- for r in select * from work where digital_solution_id = new.id loop
- update work set updated_at=now() where id = r.id;
- end loop;
 
  end if;
  end if;
