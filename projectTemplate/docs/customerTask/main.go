@@ -22,10 +22,9 @@ func GetDoc(project *t.ProjectType) t.DocType {
 		Flds: []t.FldType{
 			t.GetFldTitle(),
 			t.GetFldRef("state_id", "статус", "ctlg_customer_task_state", [][]int{{1, 2}}).SetDefault("1"),
-			t.GetFldRef("system_id", "система", "system", [][]int{{2, 1}}, "col-2", "isShowLink", "isClearable"),
-			t.GetFldRef("digital_solution_id", "цифровое решение", "digital_solution", [][]int{{2, 2}}, "col-2", "isShowLink", "isClearable"),
-			t.GetFldRef("development_task_id", "задача разработки", "development_task", [][]int{{2, 3}}, "col-2", "isShowLink", "isClearable"),
-			t.GetFldRef("responsible_id", "ответственный", "man", [][]int{{2, 4}}, "col-2", "isShowLink", "isClearable"),
+			t.GetFldRef("system_id", "система", "system", [][]int{{2, 1}}, "isShowLink", "isClearable"),
+			t.GetFldRef("task_id", "задача", "task", [][]int{{2, 2}}, "col-2", "isShowLink", "isClearable"),
+			t.GetFldRef("responsible_id", "ответственный", "man", [][]int{{2, 3}}, "col-2", "isShowLink", "isClearable"),
 			t.GetFldDate("plan_start_date", "плановая дата начала", [][]int{{3, 1}}),
 			t.GetFldDate("plan_end_date", "плановая дата завершения", [][]int{{3, 2}}),
 			t.GetFldString("description", "описание", 0, [][]int{{4, 1}}, "col-8"),

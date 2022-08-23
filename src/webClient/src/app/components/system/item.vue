@@ -35,10 +35,10 @@
       
       <div class="row q-col-gutter-md q-mb-sm">
       <div class="col-md-4 col-sm-6 col-xs-12">
-          <digital-solution-list-ref-list-widget v-if='item.id != -1' :id='item.id' :readonly='false'/>
+          <task-list-ref-list-widget v-if='item.id != -1' :id='item.id' :readonly='false'/>
       </div>
       <div class="col-md-4 col-sm-6 col-xs-12">
-          <development-task-list-ref-list-widget v-if='item.id != -1' :id='item.id' :readonly='false'/>
+          <customer-task-list-ref-list-widget v-if='item.id != -1' :id='item.id' :readonly='false'/>
       </div>
       </div>
       
@@ -62,12 +62,12 @@
 </template>
 
 <script>
-	import digitalSolutionListRefListWidget from './comp/digitalSolutionListRefListWidget.vue'
-	import developmentTaskListRefListWidget from './comp/developmentTaskListRefListWidget.vue'
+	import customerTaskListRefListWidget from './comp/customerTaskListRefListWidget.vue'
+	import taskListRefListWidget from './comp/taskListRefListWidget.vue'
     import currentUserMixin from '../../../app/mixins/currentUser'
     export default {
         props: ['id', 'isOpenInDialog'],
-        components: {digitalSolutionListRefListWidget, developmentTaskListRefListWidget},
+        components: {taskListRefListWidget, customerTaskListRefListWidget},
         mixins: [currentUserMixin,],
         computed: {
             docUrl: function() {

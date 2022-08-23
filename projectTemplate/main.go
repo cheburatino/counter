@@ -36,6 +36,7 @@ import (
 	"github.com/cheburatino/electron_is/projectTemplate/docs/technicalTask"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/time"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/work"
+	"github.com/cheburatino/electron_is/projectTemplate/docs/workTimeSheet"
 	"github.com/otiai10/copy"
 	"github.com/pepelazz/nla_framework"
 	t "github.com/pepelazz/nla_framework/types"
@@ -78,6 +79,7 @@ func getProject() t.ProjectType {
 		meeting.GetDoc(p),
 		contract.GetDoc(p),
 		technicalTask.GetDoc(p),
+		workTimeSheet.GetDoc(p),
 		legalEntity.GetDoc(p),
 		company.GetDoc(p),
 		man.GetDoc(p),
@@ -113,21 +115,24 @@ func getProject() t.ProjectType {
 	// боковое меню для Vue
 	p.Vue.Menu = []t.VueMenu{
 		{DocName: "task", Roles: []string{utils.RoleAdmin}},
-		{DocName: "time", Roles: []string{utils.RoleAdmin}},
+		//{DocName: "time", Roles: []string{utils.RoleAdmin}},
 		{DocName: "work", Roles: []string{utils.RoleAdmin}},
 		{DocName: "meeting", Roles: []string{utils.RoleAdmin}},
-		{Text: "Разработка", Icon: "image/development.png", IsFolder: true, Roles: []string{utils.RoleAdmin}, LinkList: []t.VueMenu{
-			{Text: "Системы", Url: "system"},
-			{Text: "Цифровые решения", Url: "digital_solution"},
-			{Text: "Задачи разработки", Url: "development_task"},
-			{Text: "Задачи заказчика", Url: "customer_task"},
-		},},
+		{DocName: "system", Roles: []string{utils.RoleAdmin}},
+		{DocName: "customer_task", Roles: []string{utils.RoleAdmin}},
+		//{Text: "Разработка", Icon: "image/development.png", IsFolder: true, Roles: []string{utils.RoleAdmin}, LinkList: []t.VueMenu{
+		//	{Text: "Системы", Url: "system"},
+		//	{Text: "Цифровые решения", Url: "digital_solution"},
+		//	{Text: "Задачи разработки", Url: "development_task"},
+		//	{Text: "Задачи заказчика", Url: "customer_task"},
+		//},},
 		{Text: "CRM", Icon: "image/crm.png", IsFolder: true, Roles: []string{utils.RoleAdmin}, LinkList: []t.VueMenu{
 			{Text: "Компании", Url: "company"},
 			{Text: "Юр.лица", Url: "legal_entity"},
 			{Text: "Контакты", Url: "man"},
 			{Text: "Договоры", Url: "contract"},
 			{Text: "ТЗ", Url: "technical_task"},
+			{Text: "ЛУРВ", Url: "work_time_sheet"},
 			{Text: "Акты", Url: "completion_act"},
 			{Text: "Счета", Url: "invoice"},
 			{Text: "Платежи", Url: "payment"},

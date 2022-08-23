@@ -22,8 +22,11 @@
       <div class="col-md-4 col-sm-6 col-xs-12">
           <comp-fld-ref-search outlined pgMethod="system_list" :label="$t('task.system_id')" :item='item.system_title' :itemId='item.system_id' :ext='{"avatar":"image/system.svg","isClearable":"true","pathUrl":"/system"}' @update="v=> item.system_id = v.id" @clear="item.system_id = null" :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
       </div>
-      <div class="col-md-4 col-sm-6 col-xs-12">
-          <comp-fld-ref-search outlined pgMethod="digital_solution_list" :label="$t('task.digital_solution_id')" :item='item.digital_solution_title' :itemId='item.digital_solution_id' :ext='{"avatar":"image/digital_solution.svg","isClearable":"true","pathUrl":"/digital_solution"}' @update="v=> item.digital_solution_id = v.id" @clear="item.digital_solution_id = null" :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
+      <div class="col-md-2 col-sm-3 col-xs-6">
+          <comp-fld-ref-search outlined pgMethod="work_time_sheet_list" :label="$t('task.work_time_sheet_id')" :item='item.work_time_sheet_title' :itemId='item.work_time_sheet_id' :ext='{"avatar":"image/work_time_sheet.png","isClearable":"true","pathUrl":"/work_time_sheet"}' @update="v=> item.work_time_sheet_id = v.id" @clear="item.work_time_sheet_id = null" :readonly='false'  class='q-mb-sm col-md-2 col-sm-3 col-xs-6' />
+      </div>
+      <div class="col-md-2 col-sm-3 col-xs-6">
+          <comp-fld-ref-search outlined pgMethod="technical_task_list" :label="$t('task.technical_task_id')" :item='item.technical_task_title' :itemId='item.technical_task_id' :ext='{"avatar":"image/technical_task.svg","isClearable":"true","pathUrl":"/technical_task"}' @update="v=> item.technical_task_id = v.id" @clear="item.technical_task_id = null" :readonly='false'  class='q-mb-sm col-md-2 col-sm-3 col-xs-6' />
       </div>
       </div>
       
@@ -82,6 +85,9 @@
       <div class="col-md-4 col-sm-6 col-xs-12">
           <work-list-ref-list-widget v-if='item.id != -1' :id='item.id' :readonly='false'/>
       </div>
+      <div class="col-md-4 col-sm-6 col-xs-12">
+          <customer-task-list-ref-list-widget v-if='item.id != -1' :id='item.id' :readonly='false'/>
+      </div>
       </div>
       
       <div class="row q-col-gutter-md q-mb-sm">
@@ -120,10 +126,11 @@
 
 <script>
 	import workListRefListWidget from './comp/workListRefListWidget.vue'
+	import customerTaskListRefListWidget from './comp/customerTaskListRefListWidget.vue'
     import currentUserMixin from '../../../app/mixins/currentUser'
     export default {
         props: ['id', 'isOpenInDialog'],
-        components: {workListRefListWidget},
+        components: {workListRefListWidget, customerTaskListRefListWidget},
         mixins: [currentUserMixin,],
         computed: {
             docUrl: function() {
@@ -138,7 +145,8 @@
                         {name: 'type_id', label: 'тип задачи'},
                         {name: 'state_id', label: 'статус'},
                         {name: 'system_id', label: 'система'},
-                        {name: 'digital_solution_id', label: 'цифровое решение'},
+                        {name: 'work_time_sheet_id', label: 'лурв'},
+                        {name: 'technical_task_id', label: 'тз'},
                         {name: 'plan_end_date', label: 'плановая дата завершения'},
                         {name: 'fact_end_date', label: 'фактическая дата завершения'},
                         {name: 'specialist_priority', label: 'приоритет'},

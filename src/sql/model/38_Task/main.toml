@@ -9,7 +9,8 @@ fields = [
 	{name="type_id",					type="int",	 comment="тип задачи"},
 	{name="state_id",					type="int", 	ext=" default 1",	 comment="статус"},
 	{name="system_id",					type="int",	 comment="система"},
-	{name="digital_solution_id",					type="int",	 comment="цифровое решение"},
+	{name="work_time_sheet_id",					type="int",	 comment="лурв"},
+	{name="technical_task_id",					type="int",	 comment="тз"},
 	{name="plan_end_date",					type="timestamp",	 comment="плановая дата завершения"},
 	{name="fact_end_date",					type="timestamp",	 comment="фактическая дата завершения"},
 	{name="specialist_priority",					type="int",	 comment="приоритет"},
@@ -36,7 +37,8 @@ fkConstraints = [
 	{fld="type_id", ref="ctlg_task_type", fk="id"},
 	{fld="state_id", ref="ctlg_task_state", fk="id"},
 	{fld="system_id", ref="system", fk="id"},
-	{fld="digital_solution_id", ref="digital_solution", fk="id"}
+	{fld="work_time_sheet_id", ref="work_time_sheet", fk="id"},
+	{fld="technical_task_id", ref="technical_task", fk="id"}
 ]
 
 triggers = [
@@ -48,11 +50,11 @@ triggers = [
 
 
 methods = [
+	"task_get_by_id",
+	"task_get_specialist",
 	"task_get_specialist_role",
 	"task_list",
 	"task_update",
-	"task_get_by_id",
-	"task_get_specialist",
 	"task_trigger_before",
 	"task_trigger_after"
 ]
@@ -62,7 +64,8 @@ alterScripts = [
 	"alter table task add column if not exists type_id int;",
 	"alter table task add column if not exists state_id int;",
 	"alter table task add column if not exists system_id int;",
-	"alter table task add column if not exists digital_solution_id int;",
+	"alter table task add column if not exists work_time_sheet_id int;",
+	"alter table task add column if not exists technical_task_id int;",
 	"alter table task add column if not exists plan_end_date timestamp;",
 	"alter table task add column if not exists fact_end_date timestamp;",
 	"alter table task add column if not exists specialist_priority int;",

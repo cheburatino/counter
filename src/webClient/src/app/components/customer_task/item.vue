@@ -16,14 +16,11 @@
       </div>
       
       <div class="row q-col-gutter-md q-mb-sm">
-      <div class="col-md-2 col-sm-3 col-xs-6">
-          <comp-fld-ref-search outlined pgMethod="system_list" :label="$t('customer_task.system_id')" :item='item.system_title' :itemId='item.system_id' :ext='{"avatar":"image/system.svg","isClearable":"true","pathUrl":"/system"}' @update="v=> item.system_id = v.id" @clear="item.system_id = null" :readonly='false'  class='q-mb-sm col-md-2 col-sm-3 col-xs-6' />
+      <div class="col-md-4 col-sm-6 col-xs-12">
+          <comp-fld-ref-search outlined pgMethod="system_list" :label="$t('customer_task.system_id')" :item='item.system_title' :itemId='item.system_id' :ext='{"avatar":"image/system.svg","isClearable":"true","pathUrl":"/system"}' @update="v=> item.system_id = v.id" @clear="item.system_id = null" :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
       </div>
       <div class="col-md-2 col-sm-3 col-xs-6">
-          <comp-fld-ref-search outlined pgMethod="digital_solution_list" :label="$t('customer_task.digital_solution_id')" :item='item.digital_solution_title' :itemId='item.digital_solution_id' :ext='{"avatar":"image/digital_solution.svg","isClearable":"true","pathUrl":"/digital_solution"}' @update="v=> item.digital_solution_id = v.id" @clear="item.digital_solution_id = null" :readonly='false'  class='q-mb-sm col-md-2 col-sm-3 col-xs-6' />
-      </div>
-      <div class="col-md-2 col-sm-3 col-xs-6">
-          <comp-fld-ref-search outlined pgMethod="development_task_list" :label="$t('customer_task.development_task_id')" :item='item.development_task_title' :itemId='item.development_task_id' :ext='{"avatar":"image/development_task.png","isClearable":"true","pathUrl":"/development_task"}' @update="v=> item.development_task_id = v.id" @clear="item.development_task_id = null" :readonly='false'  class='q-mb-sm col-md-2 col-sm-3 col-xs-6' />
+          <comp-fld-ref-search outlined pgMethod="task_list" :label="$t('customer_task.task_id')" :item='item.task_title' :itemId='item.task_id' :ext='{"avatar":"image/task.svg","isClearable":"true","pathUrl":"/task"}' @update="v=> item.task_id = v.id" @clear="item.task_id = null" :readonly='false'  class='q-mb-sm col-md-2 col-sm-3 col-xs-6' />
       </div>
       <div class="col-md-2 col-sm-3 col-xs-6">
           <comp-fld-ref-search outlined pgMethod="man_list" :label="$t('customer_task.responsible_id')" :item='item.responsible_title' :itemId='item.responsible_id' :ext='{"avatar":"image/man.svg","isClearable":"true","pathUrl":"/man"}' @update="v=> item.responsible_id = v.id" @clear="item.responsible_id = null" :readonly='false'  class='q-mb-sm col-md-2 col-sm-3 col-xs-6' />
@@ -125,8 +122,7 @@
                         {name: 'title', label: 'название',  required: true},
                         {name: 'state_id', label: 'статус'},
                         {name: 'system_id', label: 'система'},
-                        {name: 'digital_solution_id', label: 'цифровое решение'},
-                        {name: 'development_task_id', label: 'задача разработки'},
+                        {name: 'task_id', label: 'задача'},
                         {name: 'responsible_id', label: 'ответственный'},
                         {name: 'plan_start_date', label: 'плановая дата начала'},
                         {name: 'plan_end_date', label: 'плановая дата завершения'},

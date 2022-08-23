@@ -13,6 +13,9 @@ if new.title != old.title then
  for r in select * from development_task where technical_task_id = new.id loop
  update development_task set updated_at=now() where id = r.id;
  end loop;
+ for r in select * from task where technical_task_id = new.id loop
+ update task set updated_at=now() where id = r.id;
+ end loop;
  for r in select * from invoice where technical_task_id = new.id loop
  update invoice set updated_at=now() where id = r.id;
  end loop;

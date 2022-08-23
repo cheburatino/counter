@@ -41,7 +41,7 @@ BEGIN
 		INTO timeRow
 		USING
 			(params ->> 'title')::text,
-			(params ->> 'state_id')::int,
+			coalesce((params ->> 'state_id')::int, 1)::int,
 			(params ->> 'effort')::int,
 			(params ->> 'start_time')::timestamp,
 			(params ->> 'end_time')::timestamp,

@@ -47,6 +47,8 @@ BEGIN
     
     
     
+    
+    
 
     if (params ->> 'id')::int = -1 then
         -- проверика наличия обязательных параметров
@@ -57,14 +59,15 @@ BEGIN
         END IF;
         
 
-        EXECUTE ('INSERT INTO task (title, type_id, state_id, system_id, digital_solution_id, plan_end_date, fact_end_date, specialist_priority, estimate, worked_time, today, description, files, images, process, process_files, process_images, result, result_files, result_images, options) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21)  RETURNING *;')
+        EXECUTE ('INSERT INTO task (title, type_id, state_id, system_id, work_time_sheet_id, technical_task_id, plan_end_date, fact_end_date, specialist_priority, estimate, worked_time, today, description, files, images, process, process_files, process_images, result, result_files, result_images, options) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21, $22)  RETURNING *;')
 		INTO taskRow
 		USING
 			(params ->> 'title')::text,
 			(params ->> 'type_id')::int,
 			coalesce((params ->> 'state_id')::int, 1)::int,
 			(params ->> 'system_id')::int,
-			(params ->> 'digital_solution_id')::int,
+			(params ->> 'work_time_sheet_id')::int,
+			(params ->> 'technical_task_id')::int,
 			(params ->> 'plan_end_date')::timestamp,
 			(params ->> 'fact_end_date')::timestamp,
 			(params ->> 'specialist_priority')::int,
@@ -90,7 +93,8 @@ BEGIN
 			['type_id', 'type_id', 'number'],
 			['state_id', 'state_id', 'number'],
 			['system_id', 'system_id', 'number'],
-			['digital_solution_id', 'digital_solution_id', 'number'],
+			['work_time_sheet_id', 'work_time_sheet_id', 'number'],
+			['technical_task_id', 'technical_task_id', 'number'],
 			['plan_end_date', 'plan_end_date', 'timestamp'],
 			['fact_end_date', 'fact_end_date', 'timestamp'],
 			['specialist_priority', 'specialist_priority', 'number'],

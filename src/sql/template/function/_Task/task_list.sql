@@ -33,12 +33,7 @@ BEGIN
         ['ilike', 'search_text', 'search_text'],
         ['notQuoted', 'type_id', 'doc.type_id'],
         ['notQuoted', 'state_id', 'doc.state_id'],
-        ['notQuoted', 'customer_id', 'doc.customer_id'],
-        ['notQuoted', 'request_id', 'doc.request_id'],
-        ['notQuoted', 'system_id', 'doc.system_id'],
-        ['notQuoted', 'digital_solution_id', 'doc.digital_solution_id'],
-        ['notQuoted', 'development_task_id', 'doc.development_task_id'],
-        ['notQuoted', 'bug_id', 'doc.bug_id']
+        ['notQuoted', 'system_id', 'doc.system_id']
     ]);
 
     -- добавляем в фильтр условия из where на клиенте

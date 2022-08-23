@@ -6,7 +6,7 @@ tableName ="time"
 fields = [
 	{name="id",			type="serial"},
 	{name="title",					type="text",	 comment="название"},
-	{name="state_id",					type="int",	 comment="статус"},
+	{name="state_id",					type="int", 	ext=" default 1",	 comment="статус"},
 	{name="effort",					type="int",	 comment="полезная нагрузка"},
 	{name="start_time",					type="timestamp",	 comment="начало"},
 	{name="end_time",					type="timestamp",	 comment="завершение"},

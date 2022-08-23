@@ -66,23 +66,20 @@
 
 									{icon: 'image/task.svg', text: 'i18n_menu.task', url: '/task', roles: ['admin']},
 
-									{icon: 'image/time.svg', text: 'i18n_menu.time', url: '/time', roles: ['admin']},
-
 									{icon: 'image/work.png', text: 'i18n_menu.work', url: '/work', roles: ['admin']},
 
 									{icon: 'image/meeting.svg', text: 'i18n_menu.meeting', url: '/meeting', roles: ['admin']},
-{isFolder: true, icon: 'image/development.png', text: 'Разработка', roles: ['admin'], linkList: 								[
-								{icon: '', text: 'Системы', url: '/system', roles: []},
-								{icon: '', text: 'Цифровые решения', url: '/digital_solution', roles: []},
-								{icon: '', text: 'Задачи разработки', url: '/development_task', roles: []},
-								{icon: '', text: 'Задачи заказчика', url: '/customer_task', roles: []},
-],},
+
+									{icon: 'image/system.svg', text: 'i18n_menu.system', url: '/system', roles: ['admin']},
+
+									{icon: 'image/customer_task.png', text: 'i18n_menu.customer_task', url: '/customer_task', roles: ['admin']},
 {isFolder: true, icon: 'image/crm.png', text: 'CRM', roles: ['admin'], linkList: 								[
 								{icon: '', text: 'Компании', url: '/company', roles: []},
 								{icon: '', text: 'Юр.лица', url: '/legal_entity', roles: []},
 								{icon: '', text: 'Контакты', url: '/man', roles: []},
 								{icon: '', text: 'Договоры', url: '/contract', roles: []},
 								{icon: '', text: 'ТЗ', url: '/technical_task', roles: []},
+								{icon: '', text: 'ЛУРВ', url: '/work_time_sheet', roles: []},
 								{icon: '', text: 'Акты', url: '/completion_act', roles: []},
 								{icon: '', text: 'Счета', url: '/invoice', roles: []},
 								{icon: '', text: 'Платежи', url: '/payment', roles: []},

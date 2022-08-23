@@ -21,7 +21,7 @@ func GetDoc(project *t.ProjectType) t.DocType {
 		PathPrefix: "docs",
 		Flds: []t.FldType{
 			t.GetFldTitleComputed("stateTitle || case when new.start_time notnull then format(', %s', to_char(new.start_time, 'dd.mm.yyyy')) else '' end || case when new.start_time notnull then format(', %s', to_char(new.start_time, 'HH24:MI')) else '' end || case when new.end_time notnull then format(' - %s', to_char(new.end_time, 'HH24:MI')) else '' end"),
-			t.GetFldRef("state_id", "статус", "ctlg_time_state", [][]int{{1, 2}}, "col-2"),
+			t.GetFldRef("state_id", "статус", "ctlg_time_state", [][]int{{1, 2}}, "col-2").SetDefault("1"),
 			t.GetFldInt("effort", "полезная нагрузка", [][]int{{1, 3}}, "col-2").SetVif("item.state_id == 2"),
 			t.GetFldDateTime("start_time", "начало", [][]int{{2, 1}}),
 			t.GetFldDateTime("end_time", "завершение", [][]int{{2, 2}}),

@@ -1,12 +1,12 @@
 
 export default {
- 		state_id: 'state ',
- 		effort: 'effort',
- 		description: 'description',
  		name: 'time',
+ 		title: 'title',
+ 		effort: 'effort',
+ 		start_time: 'start time',
+ 		description: 'description',
  		name_plural: 'time',
  		name_plural_deleted: 'deleted time',
- 		title: 'title',
- 		start_time: 'start time',
+ 		state_id: 'state ',
  		end_time: 'end time',
 }
