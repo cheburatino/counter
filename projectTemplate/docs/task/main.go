@@ -69,7 +69,7 @@ func GetDoc(project *t.ProjectType) t.DocType {
 		if new.state_id = 5 and coalesce(new.worked_time, 0) = 0 then raise exception 'невозможно завершить задачу без затраченного времени'; end if;
 				`},
 				AfterTriggerAfter: []string{`
-		if coalesce(new.system_id, '') != coalesce(old.system_id, '')
+		if coalesce(new.system_id, 0) != coalesce(old.system_id, 0)
 		then
 			update work set system_id = new.system_id where task_id = new.id;
 		end if;

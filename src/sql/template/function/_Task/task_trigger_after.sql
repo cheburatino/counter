@@ -23,7 +23,7 @@ if new.title != old.title then
         
 
         
-		if coalesce(new.system_id, '') != coalesce(old.system_id, '')
+		if coalesce(new.system_id, 0) != coalesce(old.system_id, 0)
 		then
 			update work set system_id = new.system_id where task_id = new.id;
 		end if;
