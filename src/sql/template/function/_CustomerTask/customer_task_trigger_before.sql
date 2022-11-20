@@ -18,11 +18,6 @@ BEGIN
 		select title into taskTitle from task where id = new.task_id;
 		select title into responsibleTitle from man where id = new.responsible_id;
         
-		if new.development_task_id notnull
-		then
-            new.system_id = (select system_id from development_task where id = new.development_task_id);
-        end if;
-			
         -- заполняем options.title
         NEW.options = coalesce(OLD.options, '{}'::jsonb) || NEW.options || jsonb_build_object('title', jsonb_build_object('title', new.title, 'state_title', stateTitle, 'system_title', systemTitle, 'task_title', taskTitle, 'responsible_title', responsibleTitle));
         -- заполняем search_text

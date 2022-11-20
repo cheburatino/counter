@@ -585,14 +585,14 @@
           })
         }
       },
-      updateFilterDigitalSolution(v) {
-        this.$refs.docList.changeItemList({'digital_solution_id': v ? v.id : null})
-        if (v) {
-          this.$utils.callPgMethod(`digital_solution_get_by_id`, {id: v.id}, (res) => {
-            this.filterDigitalSolutionTitle = res.title
-          })
-        }
-      },
+      // updateFilterDigitalSolution(v) {
+      //   this.$refs.docList.changeItemList({'digital_solution_id': v ? v.id : null})
+      //   if (v) {
+      //     this.$utils.callPgMethod(`digital_solution_get_by_id`, {id: v.id}, (res) => {
+      //       this.filterDigitalSolutionTitle = res.title
+      //     })
+      //   }
+      // },
     },
     watch: {
       sqlRest(v) {
@@ -627,10 +627,10 @@
         let id = +urlParams.get('system_id')
         if (id) this.updateFilterSystem({id})
       }
-      if (urlParams.has('digital_solution_id')) {
-        let id = +urlParams.get('digital_solution_id')
-        if (id) this.updateFilterDigitalSolution({id})
-      }
+      // if (urlParams.has('digital_solution_id')) {
+      //   let id = +urlParams.get('digital_solution_id')
+      //   if (id) this.updateFilterDigitalSolution({id})
+      // }
 
       this.sqlRestBtnClickHandler()
       this.loadFilterList()

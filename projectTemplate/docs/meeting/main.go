@@ -21,10 +21,9 @@ func GetDoc(project *t.ProjectType) t.DocType {
 		PathPrefix: "docs",
 		Flds: []t.FldType{
 			t.GetFldTitle(),
-			t.GetFldRef("time_id", "время", "time", [][]int{{1, 2}}, "col-2", "isShowLink", "isClearable"),
-			t.GetFldRef("state_id", "статус", "ctlg_meeting_state", [][]int{{1, 3}}, "col-2").SetDefault("1"),
-			t.GetFldDateTime("datetime", "дата и время", [][]int{{2, 1}}, "col-2"),
-			t.GetFldString("place", "место", 0, [][]int{{2, 2}}, "col-6"),
+			t.GetFldRef("state_id", "статус", "ctlg_meeting_state", [][]int{{1, 2}}, "col-4").SetDefault("1"),
+			t.GetFldDateTime("datetime", "дата и время", [][]int{{2, 1}}, "col-4"),
+			t.GetFldString("place", "место", 0, [][]int{{2, 2}}, "col-4"),
 			t.GetFldString("description", "описание и темы", 0, [][]int{{3, 1}}, "col-8"),
 			t.GetFldFiles("description_files", "файлы описания", [][]int{{4, 1}}, t.FldVueFilesParams{}),
 			t.GetFldImgList("description_images", "изображения описания", [][]int{{4, 2}}, t.FldVueImgParams{}),

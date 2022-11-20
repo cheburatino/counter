@@ -10,12 +10,6 @@ BEGIN
 IF (TG_OP = 'UPDATE') THEN
 -- при смене названия обновляем все ссылающиеся записи, чтобы там переписалось новое название
 if new.title != old.title then
- for r in select * from digital_solution where system_id = new.id loop
- update digital_solution set updated_at=now() where id = r.id;
- end loop;
- for r in select * from development_task where system_id = new.id loop
- update development_task set updated_at=now() where id = r.id;
- end loop;
  for r in select * from customer_task where system_id = new.id loop
  update customer_task set updated_at=now() where id = r.id;
  end loop;

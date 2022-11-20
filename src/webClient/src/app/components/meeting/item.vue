@@ -10,20 +10,17 @@
       <div class="col-md-4 col-sm-6 col-xs-12">
           <q-input outlined type='text' v-model="item.title" :label="$t('meeting.title')" autogrow :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
       </div>
-      <div class="col-md-2 col-sm-3 col-xs-6">
-          <comp-fld-ref-search outlined pgMethod="time_list" :label="$t('meeting.time_id')" :item='item.time_title' :itemId='item.time_id' :ext='{"avatar":"image/time.svg","isClearable":"true","pathUrl":"/time"}' @update="v=> item.time_id = v.id" @clear="item.time_id = null" :readonly='false'  class='q-mb-sm col-md-2 col-sm-3 col-xs-6' />
-      </div>
-      <div class="col-md-2 col-sm-3 col-xs-6">
-          <comp-fld-ref-search outlined pgMethod="ctlg_meeting_state_list" :label="$t('meeting.state_id')" :item='item.state_title' :itemId='item.state_id' :ext='{}' @update="v=> item.state_id = v.id" @clear="item.state_id = null" :readonly='false'  class='q-mb-sm col-md-2 col-sm-3 col-xs-6' />
+      <div class="col-md-4 col-sm-6 col-xs-12">
+          <comp-fld-ref-search outlined pgMethod="ctlg_meeting_state_list" :label="$t('meeting.state_id')" :item='item.state_title' :itemId='item.state_id' :ext='{}' @update="v=> item.state_id = v.id" @clear="item.state_id = null" :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
       </div>
       </div>
       
       <div class="row q-col-gutter-md q-mb-sm">
-      <div class="col-md-2 col-sm-3 col-xs-6">
-          <comp-fld-date-time outlined :label="$t('meeting.datetime')" :date-string="$utils.formatPgDateTime(item.datetime)" @update="v=> item.datetime = v" @clear="item.datetime=null" :readonly='false'  class='q-mb-sm col-md-2 col-sm-3 col-xs-6' />
+      <div class="col-md-4 col-sm-6 col-xs-12">
+          <comp-fld-date-time outlined :label="$t('meeting.datetime')" :date-string="$utils.formatPgDateTime(item.datetime)" @update="v=> item.datetime = v" @clear="item.datetime=null" :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
       </div>
-      <div class="col-6">
-          <q-input outlined type='text' v-model="item.place" :label="$t('meeting.place')" autogrow :readonly='false'  class='q-mb-sm col-6' />
+      <div class="col-md-4 col-sm-6 col-xs-12">
+          <q-input outlined type='text' v-model="item.place" :label="$t('meeting.place')" autogrow :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
       </div>
       </div>
       
@@ -107,7 +104,6 @@
                 item: null,
                 flds: [
                         {name: 'title', label: 'название',  required: true},
-                        {name: 'time_id', label: 'время'},
                         {name: 'state_id', label: 'статус'},
                         {name: 'datetime', label: 'дата и время'},
                         {name: 'place', label: 'место'},

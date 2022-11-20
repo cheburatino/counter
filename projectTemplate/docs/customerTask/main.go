@@ -53,14 +53,6 @@ func GetDoc(project *t.ProjectType) t.DocType {
 			IsSearchText:    true,
 			IsBeforeTrigger: true,
 			IsAfterTrigger:  true,
-			Hooks: t.DocSqlHooks{BeforeTriggerBefore: []string{
-				`
-		if new.development_task_id notnull
-		then
-            new.system_id = (select system_id from development_task where id = new.development_task_id);
-        end if;
-			`,
-			}},
 		},
 	}
 	// создаем стандартные методы sql "list", "update", "get_by_id" с возможностью ограничения по ролям

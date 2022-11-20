@@ -11,7 +11,7 @@
     <!-- основная страница, после авторизации  -->
     <q-layout view="hHh lpR fFf" v-if="isLoggedIn && isWorking">
 
-      <q-header elevated class="bg-white text-grey-8 q-py-xs">
+      <q-header elevated class="main-header q-py-xs">
         <q-toolbar>
           <q-btn dense flat round icon="menu" @click="leftSide = !leftSide"/>
 
@@ -66,7 +66,7 @@
     components: {authComp, currentUserToolbarMenu, sideMenu, waitingAuthPage, firedPage,},
     data() {
       return {
-        leftSide: true,
+        leftSide: false,
         isShowMsgList: false,
         isShowTaskList: false,
         messageCounter: 0,

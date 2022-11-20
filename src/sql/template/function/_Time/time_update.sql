@@ -33,18 +33,21 @@ BEGIN
     
     
     
+    
 
     if (params ->> 'id')::int = -1 then
         
 
-        EXECUTE ('INSERT INTO time (title, state_id, effort, start_time, end_time, description, options) VALUES ($1, $2, $3, $4, $5, $6, $7)  RETURNING *;')
+        EXECUTE ('INSERT INTO time (title, effort, state_id, start_time, end_time, executor_id, work_id, description, options) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)  RETURNING *;')
 		INTO timeRow
 		USING
 			(params ->> 'title')::text,
+			coalesce((params ->> 'effort')::int, 0)::int,
 			coalesce((params ->> 'state_id')::int, 1)::int,
-			(params ->> 'effort')::int,
 			(params ->> 'start_time')::timestamp,
 			(params ->> 'end_time')::timestamp,
+			(params ->> 'executor_id')::int,
+			(params ->> 'work_id')::int,
 			(params ->> 'description')::text,
 			coalesce(params -> 'options', '{}')::jsonb;
 
@@ -53,10 +56,12 @@ BEGIN
     else
         updateValue = '' || update_str_from_json(params, ARRAY [
 			['title', 'title', 'text'],
-			['state_id', 'state_id', 'number'],
 			['effort', 'effort', 'number'],
+			['state_id', 'state_id', 'number'],
 			['start_time', 'start_time', 'timestamp'],
 			['end_time', 'end_time', 'timestamp'],
+			['executor_id', 'executor_id', 'number'],
+			['work_id', 'work_id', 'number'],
 			['description', 'description', 'text'],
             ['options', 'options', 'jsonb'],
             ['deleted', 'deleted', 'bool']

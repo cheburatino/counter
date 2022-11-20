@@ -64,13 +64,13 @@
 </template>
 
 <script>
+	import developmentTaskListRefListWidget from './comp/developmentTaskListRefListWidget.vue'
 	import invoiceListRefListWidget from './comp/invoiceListRefListWidget.vue'
 	import completionActListRefListWidget from './comp/completionActListRefListWidget.vue'
-	import developmentTaskListRefListWidget from './comp/developmentTaskListRefListWidget.vue'
     import currentUserMixin from '../../../app/mixins/currentUser'
     export default {
         props: ['id', 'isOpenInDialog'],
-        components: {developmentTaskListRefListWidget, invoiceListRefListWidget, completionActListRefListWidget},
+        components: {completionActListRefListWidget, developmentTaskListRefListWidget, invoiceListRefListWidget},
         mixins: [currentUserMixin,],
         computed: {
             docUrl: function() {

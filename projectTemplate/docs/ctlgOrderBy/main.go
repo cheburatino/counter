@@ -26,7 +26,6 @@ func GetDoc(project *t.ProjectType) t.DocType {
 				{Value: "task", Label: "задачи"},
 				{Value: "work", Label: "дела"},
 				{Value: "system", Label: "системы"},
-				{Value: "digital_solution", Label: "цифровые решения"},
 				{Value: "development_task", Label: "задачи разработки"},
 				{Value: "technical_task", Label: "технические задания"},
 				{Value: "contract", Label: "договоры"},

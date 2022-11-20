@@ -7051,6 +7051,11 @@ vue-style-loader@4.1.3:
     hash-sum "^1.0.2"
     loader-utils "^1.0.2"
 
+vue3-draggable@^2.0.9:
+  version "2.0.9"
+  resolved "https://registry.yarnpkg.com/vue3-draggable/-/vue3-draggable-2.0.9.tgz#cca733432dbca51c0ba88c5c33a8843f26b8f8c9"
+  integrity sha512-OpjCSzGpkXsraBJzYrMS5LKXHThb0r+V8zItUNOZF7gZgdH0Cg2IL3XT0x4IhJdMaLvzRZCXE6UQj/459npJIw==
+
 vue@3.2.21:
   version "3.2.21"
   resolved "https://registry.yarnpkg.com/vue/-/vue-3.2.21.tgz#55f5665172d95cf97e806b9aad0a375180be23a1"

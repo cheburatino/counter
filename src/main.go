@@ -16,6 +16,7 @@ import (
 	"math/rand"
 	"os"
 	"time"
+	"fmt"
 )
 
 var (
@@ -53,13 +54,21 @@ func main() {
 	config, err = types.ReadConfigFile("./config.toml")
 	utils.CheckErr(err, "Read config")
 
+    if os.Getenv("IS_DEVELOPMENT") != "true" {
+        time.Sleep(5 * time.Second)
+    }
+
 	// postgres
 	err = pg.StartPostgres(config.Postgres)
 	utils.CheckErr(err, "StartPostgres")
 
 	// подключаемся к серверу сбора логов
-	err = graylog.Init(config.Graylog)
-	utils.CheckErr(err, "Connect to GraylogConfig")
+	err = graylog.Init(config.Graylog, func() map[string]string {
+        return nil
+    }())
+	if err != nil {
+	    fmt.Printf("Connect to GraylogConfig %s\n", err)
+	}
 
 	// инициализируем генератор случайных чисел
 	rand.Seed(time.Now().UnixNano())

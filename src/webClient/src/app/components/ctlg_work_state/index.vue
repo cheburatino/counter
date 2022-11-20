@@ -40,9 +40,11 @@
 </template>
 
 <script>
+
   import currentUserMixin from '../../../app/mixins/currentUser'
   export default {
     props: ['isOpenInDialog', 'ext'],
+    components: {},
     mixins: [currentUserMixin],
     computed: {
       currentUrl: () => '/ctlg_work_state/',

@@ -23,7 +23,7 @@
           <q-input outlined type='text' v-model="item.where_str" :label="$t('ctlg_filter.where_str')" autogrow :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
       </div>
       <div class="col-md-2 col-sm-3 col-xs-6">
-          <q-select outlined :label="$t('ctlg_filter.index')" v-model='item.index' :options='[{"label":"задачи","value":"task","color":""},{"label":"дела","value":"work","color":""},{"label":"системы","value":"system","color":""},{"label":"цифровые решения","value":"digital_solution","color":""},{"label":"задачи разработки","value":"development_task","color":""},{"label":"технические задания","value":"technical_task","color":""},{"label":"договоры","value":"contract","color":""},{"label":"счета","value":"invoice","color":""},{"label":"платежи","value":"payment","color":""},{"label":"встречи","value":"meeting","color":""}]'   :readonly='false'  class='q-mb-sm col-md-2 col-sm-3 col-xs-6' />
+          <q-select outlined :label="$t('ctlg_filter.index')" v-model='item.index' :options='[{"label":"задачи","value":"task","color":""},{"label":"дела","value":"work","color":""},{"label":"системы","value":"system","color":""},{"label":"задачи заказчика","value":"customer_task","color":""},{"label":"технические задания","value":"technical_task","color":""},{"label":"договоры","value":"contract","color":""},{"label":"счета","value":"invoice","color":""},{"label":"платежи","value":"payment","color":""},{"label":"встречи","value":"meeting","color":""}]'   :readonly='false'  class='q-mb-sm col-md-2 col-sm-3 col-xs-6' />
       </div>
       </div>
       
@@ -73,7 +73,7 @@
             resultModify(res) {
                 
 				if (res.index) {
-                    let arr = [{"label":"задачи","value":"task","color":""},{"label":"дела","value":"work","color":""},{"label":"системы","value":"system","color":""},{"label":"цифровые решения","value":"digital_solution","color":""},{"label":"задачи разработки","value":"development_task","color":""},{"label":"технические задания","value":"technical_task","color":""},{"label":"договоры","value":"contract","color":""},{"label":"счета","value":"invoice","color":""},{"label":"платежи","value":"payment","color":""},{"label":"встречи","value":"meeting","color":""}]
+                    let arr = [{"label":"задачи","value":"task","color":""},{"label":"дела","value":"work","color":""},{"label":"системы","value":"system","color":""},{"label":"задачи заказчика","value":"customer_task","color":""},{"label":"технические задания","value":"technical_task","color":""},{"label":"договоры","value":"contract","color":""},{"label":"счета","value":"invoice","color":""},{"label":"платежи","value":"payment","color":""},{"label":"встречи","value":"meeting","color":""}]
                     let index_item = arr.find(v => v.value === res.index)
                     if (index_item) res.index = {value: res.index, label: index_item.label}
                     }

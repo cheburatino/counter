@@ -42,6 +42,11 @@ BEGIN
     
     
     
+    
+    
+    
+    
+    
 
     if (params ->> 'id')::int = -1 then
         -- проверика наличия обязательных параметров
@@ -52,19 +57,23 @@ BEGIN
         END IF;
         
 
-        EXECUTE ('INSERT INTO work (title, worked_time, state_id, system_id, task_id, meeting_id, is_paid, description, files, images, process, process_files, process_images, result, result_files, result_images, options) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17)  RETURNING *;')
+        EXECUTE ('INSERT INTO work (title, estimate, worked_time, today, specialist_priority, state_id, system_id, executor_id, task_id, plan_end_date, fact_end_date, description, description_files, description_images, process, process_files, process_images, result, result_files, result_images, options) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21)  RETURNING *;')
 		INTO workRow
 		USING
 			(params ->> 'title')::text,
+			(params ->> 'estimate')::int,
 			(params ->> 'worked_time')::int,
+			coalesce((params ->> 'today')::bool, false)::bool,
+			(params ->> 'specialist_priority')::int,
 			coalesce((params ->> 'state_id')::int, 1)::int,
 			(params ->> 'system_id')::int,
+			(params ->> 'executor_id')::int,
 			(params ->> 'task_id')::int,
-			(params ->> 'meeting_id')::int,
-			coalesce((params ->> 'is_paid')::bool, true)::bool,
+			(params ->> 'plan_end_date')::timestamp,
+			(params ->> 'fact_end_date')::timestamp,
 			(params ->> 'description')::text,
-			(params -> 'files')::jsonb,
-			(params -> 'images')::jsonb,
+			(params -> 'description_files')::jsonb,
+			(params -> 'description_images')::jsonb,
 			(params ->> 'process')::text,
 			(params -> 'process_files')::jsonb,
 			(params -> 'process_images')::jsonb,
@@ -78,15 +87,19 @@ BEGIN
     else
         updateValue = '' || update_str_from_json(params, ARRAY [
 			['title', 'title', 'text'],
+			['estimate', 'estimate', 'number'],
 			['worked_time', 'worked_time', 'number'],
+			['today', 'today', 'bool'],
+			['specialist_priority', 'specialist_priority', 'number'],
 			['state_id', 'state_id', 'number'],
 			['system_id', 'system_id', 'number'],
+			['executor_id', 'executor_id', 'number'],
 			['task_id', 'task_id', 'number'],
-			['meeting_id', 'meeting_id', 'number'],
-			['is_paid', 'is_paid', 'bool'],
+			['plan_end_date', 'plan_end_date', 'timestamp'],
+			['fact_end_date', 'fact_end_date', 'timestamp'],
 			['description', 'description', 'text'],
-			['files', 'files', 'jsonb'],
-			['images', 'images', 'jsonb'],
+			['description_files', 'description_files', 'jsonb'],
+			['description_images', 'description_images', 'jsonb'],
 			['process', 'process', 'text'],
 			['process_files', 'process_files', 'jsonb'],
 			['process_images', 'process_images', 'jsonb'],

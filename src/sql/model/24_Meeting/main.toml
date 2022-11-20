@@ -1,0 +1,64 @@
+docType = "Meeting"
+tableComment = "встреча"
+
+tableName ="meeting"
+
+fields = [
+	{name="id",			type="serial"},
+	{name="title",					type="char",	size=150, 	ext="not null",	 comment="название"},
+	{name="state_id",					type="int", 	ext=" default 1",	 comment="статус"},
+	{name="datetime",					type="timestamp",	 comment="дата и время"},
+	{name="place",					type="text",	 comment="место"},
+	{name="description",					type="text",	 comment="описание и темы"},
+	{name="description_files",					type="jsonb",	 comment="файлы описания"},
+	{name="description_images",					type="jsonb",	 comment="изображения описания"},
+	{name="notes",					type="text",	 comment="заметки"},
+	{name="notes_files",					type="jsonb",	 comment="файлы заметок"},
+	{name="notes_images",					type="jsonb",	 comment="изображения заметок"},
+	{name="result",					type="text",	 comment="результаты"},
+	{name="result_files",					type="jsonb",	 comment="файлы результатов"},
+	{name="result_images",					type="jsonb",	 comment="изображения результатов"},
+	{name="search_text",			type="text",	comment="колонка для поиска"},
+	{name="options",				type="jsonb",	comment="разные дополнительные параметры"},
+	{name="created_at",				type="timestamp",	ext="with time zone"},
+	{name="updated_at",				type="timestamp",	ext="with time zone"},
+	{name="deleted",				type="bool",	ext="not null default false"}
+]
+
+fkConstraints = [
+	{name="meeting_title_already_exist", ext="UNIQUE (title)"},
+	{fld="state_id", ref="ctlg_meeting_state", fk="id"}
+]
+
+triggers = [
+	{name="meeting_created", when="before insert or update", ref="for each row", funcName="builtin_fld_update"},
+	{name="meeting_trigger_before", when="before insert or update", ref="for each row", funcName="meeting_trigger_before"},
+	{name="meeting_trigger_after", when="after insert or update", ref="for each row", funcName="meeting_trigger_after"}
+]
+
+
+
+methods = [
+	"meeting_list",
+	"meeting_update",
+	"meeting_get_by_id",
+	"meeting_trigger_before",
+	"meeting_trigger_after"
+]
+
+alterScripts = [
+	"alter table meeting add column if not exists title CHARACTER VARYING(150);",
+	"alter table meeting add column if not exists state_id int;",
+	"alter table meeting add column if not exists datetime timestamp;",
+	"alter table meeting add column if not exists place text;",
+	"alter table meeting add column if not exists description text;",
+	"alter table meeting add column if not exists description_files jsonb;",
+	"alter table meeting add column if not exists description_images jsonb;",
+	"alter table meeting add column if not exists notes text;",
+	"alter table meeting add column if not exists notes_files jsonb;",
+	"alter table meeting add column if not exists notes_images jsonb;",
+	"alter table meeting add column if not exists result text;",
+	"alter table meeting add column if not exists result_files jsonb;",
+	"alter table meeting add column if not exists result_images jsonb;",
+	"alter table meeting add column if not exists search_text text;"
+]

@@ -7,9 +7,6 @@ import (
 	"github.com/cheburatino/electron_is/projectTemplate/docs/ctlgCompletionActState"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/ctlgContractState"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/ctlgCustomerTaskState"
-	"github.com/cheburatino/electron_is/projectTemplate/docs/ctlgDevelopmentTaskState"
-	"github.com/cheburatino/electron_is/projectTemplate/docs/ctlgDevelopmentTaskType"
-	"github.com/cheburatino/electron_is/projectTemplate/docs/ctlgDigitalSolutionState"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/ctlgFilter"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/ctlgInvoiceState"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/ctlgMeetingState"
@@ -22,15 +19,11 @@ import (
 	"github.com/cheburatino/electron_is/projectTemplate/docs/ctlgTimeState"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/ctlgWorkState"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/customerTask"
-	"github.com/cheburatino/electron_is/projectTemplate/docs/developmentTask"
-	"github.com/cheburatino/electron_is/projectTemplate/docs/digitalSolution"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/invoice"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/legalEntity"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/man"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/meeting"
-	"github.com/cheburatino/electron_is/projectTemplate/docs/newsFromDima"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/payment"
-	"github.com/cheburatino/electron_is/projectTemplate/docs/sprint"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/system"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/task"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/technicalTask"
@@ -61,7 +54,6 @@ func getProject() t.ProjectType {
 	p.Docs = []t.DocType{
 		ctlgSystemState.GetDoc(p),
 		ctlgMeetingState.GetDoc(p),
-		ctlgDigitalSolutionState.GetDoc(p),
 		ctlgTaskType.GetDoc(p),
 		ctlgTaskState.GetDoc(p),
 		ctlgCustomerTaskState.GetDoc(p),
@@ -73,8 +65,6 @@ func getProject() t.ProjectType {
 		ctlgInvoiceState.GetDoc(p),
 		ctlgFilter.GetDoc(p),
 		ctlgOrderBy.GetDoc(p),
-		ctlgDevelopmentTaskState.GetDoc(p),
-		ctlgDevelopmentTaskType.GetDoc(p),
 		ctlgTimeState.GetDoc(p),
 		meeting.GetDoc(p),
 		contract.GetDoc(p),
@@ -84,17 +74,15 @@ func getProject() t.ProjectType {
 		company.GetDoc(p),
 		man.GetDoc(p),
 		system.GetDoc(p),
-		digitalSolution.GetDoc(p),
-		developmentTask.GetDoc(p),
 		customerTask.GetDoc(p),
 		task.GetDoc(p),
 		invoice.GetDoc(p),
 		payment.GetDoc(p),
 		completionAct.GetDoc(p),
-		sprint.GetDoc(p),
 		work.GetDoc(p),
 		time.GetDoc(p),
-		newsFromDima.GetDoc(p),
+		//sprint.GetDoc(p),
+		//newsFromDima.GetDoc(p),
 	}
 
 	// названием базы маленькими буквами, без пробелов
@@ -112,20 +100,18 @@ func getProject() t.ProjectType {
 
 	p.Config.Graylog = t.GraylogConfig{Host: "85.143.214.161", Port: 12201}
 
+	//p.Vue.Theme = t.VueTheme{
+	//	IsDarkThemeExist: true,
+	//}
+
 	// боковое меню для Vue
 	p.Vue.Menu = []t.VueMenu{
-		{DocName: "task", Roles: []string{utils.RoleAdmin}},
-		//{DocName: "time", Roles: []string{utils.RoleAdmin}},
+		{DocName: "system"},
+		{DocName: "task"},
 		{DocName: "work", Roles: []string{utils.RoleAdmin}},
-		{DocName: "meeting", Roles: []string{utils.RoleAdmin}},
-		{DocName: "system", Roles: []string{utils.RoleAdmin}},
-		{DocName: "customer_task", Roles: []string{utils.RoleAdmin}},
-		//{Text: "Разработка", Icon: "image/development.png", IsFolder: true, Roles: []string{utils.RoleAdmin}, LinkList: []t.VueMenu{
-		//	{Text: "Системы", Url: "system"},
-		//	{Text: "Цифровые решения", Url: "digital_solution"},
-		//	{Text: "Задачи разработки", Url: "development_task"},
-		//	{Text: "Задачи заказчика", Url: "customer_task"},
-		//},},
+		{DocName: "time", Roles: []string{utils.RoleAdmin}},
+		{DocName: "meeting"},
+		{DocName: "customer_task"},
 		{Text: "CRM", Icon: "image/crm.png", IsFolder: true, Roles: []string{utils.RoleAdmin}, LinkList: []t.VueMenu{
 			{Text: "Компании", Url: "company"},
 			{Text: "Юр.лица", Url: "legal_entity"},
@@ -141,7 +127,6 @@ func getProject() t.ProjectType {
 			{Url: "users", Text: "Пользователи", Icon: "image/user.svg"},
 			{Text: "Статусы встреч", Url: "ctlg_meeting_state"},
 			{Text: "Статусы систем", Url: "ctlg_system_state"},
-			{Text: "Статусы цифровых решений", Url: "ctlg_digital_solution_state"},
 			{Text: "Статусы задач", Url: "ctlg_task_state"},
 			{Text: "Статусы работ", Url: "ctlg_work_state"},
 			{Text: "Статусы времени", Url: "ctlg_time_state"},

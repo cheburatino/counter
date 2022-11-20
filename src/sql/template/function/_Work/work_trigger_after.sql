@@ -7,10 +7,26 @@ DECLARE
         jsonbEl      jsonb;
 BEGIN
         
+IF (TG_OP = 'UPDATE') THEN
+-- при смене названия обновляем все ссылающиеся записи, чтобы там переписалось новое название
+if new.title != old.title then
+ for r in select * from time where work_id = new.id loop
+ update time set updated_at=now() where id = r.id;
+ end loop;
+
+ end if;
+ end if;
 
         
 
         
+		-- хук из main.go
+		if new.worked_time != old.worked_time
+		then
+            update task set worked_time = (select sum(worked_time) from work where task_id = new.task_id) where id = new.task_id;
+        end if;
+        --/ хук из main.go
+				
 
     RETURN NEW;
 END;

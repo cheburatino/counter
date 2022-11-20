@@ -73,7 +73,6 @@
             <q-badge color="orange">{{item.options.title.state_title}}</q-badge>
             <q-badge v-if="item.today" class="q-ma-xs" color="primary">На сегодня</q-badge>
             <q-badge v-if="item.system_id" class="q-ma-xs" color="primary">{{item.options.title.system_title}}</q-badge>
-            <q-badge v-if="item.digital_solution_id" class="q-ma-xs" color="purple-3">{{item.options.title.digital_solution_title}}</q-badge>
             <q-badge v-if="item.task_id" class="q-ma-xs" color="green">{{item.options.title.task_title}}</q-badge>
           </q-item-label>
           <q-item-label caption v-if="item.plan_end_date">Плановая дата завершения: {{$utils.formatPgDate(item.plan_end_date)}}</q-item-label>

@@ -44,7 +44,7 @@
           <q-input outlined type='number' v-model="item.estimate" :label="$t('task.estimate')" :readonly='false'  class='q-mb-sm col-md-1 col-sm-2 col-xs-6' />
       </div>
       <div class="col-md-1 col-sm-2 col-xs-6">
-          <q-input outlined type='number' v-model="item.worked_time" :label="$t('task.worked_time')" :readonly='false'  class='q-mb-sm col-md-1 col-sm-2 col-xs-6' />
+          <q-input outlined type='number' v-model="item.worked_time" :label="$t('task.worked_time')" :readonly='true'  class='q-mb-sm col-md-1 col-sm-2 col-xs-6' />
       </div>
       <div class="col-md-1 col-sm-2 col-xs-6">
           <q-checkbox :label="$t('task.today')" v-model='item.today' :disable='false' :false-value='false' indeterminate-value='some'  class='q-mb-sm col-md-1 col-sm-2 col-xs-6' />
@@ -125,12 +125,12 @@
 </template>
 
 <script>
-	import workListRefListWidget from './comp/workListRefListWidget.vue'
 	import customerTaskListRefListWidget from './comp/customerTaskListRefListWidget.vue'
+	import workListRefListWidget from './comp/workListRefListWidget.vue'
     import currentUserMixin from '../../../app/mixins/currentUser'
     export default {
         props: ['id', 'isOpenInDialog'],
-        components: {customerTaskListRefListWidget, workListRefListWidget},
+        components: {workListRefListWidget, customerTaskListRefListWidget},
         mixins: [currentUserMixin,],
         computed: {
             docUrl: function() {

@@ -1,12 +1,14 @@
 
 export default {
- 		name: 'время',
  		title: 'название',
- 		start_time: 'начало',
- 		description: 'заметки',
- 		name_plural: 'Время',
- 		name_plural_deleted: 'удаленные Время',
- 		state_id: 'статус',
  		effort: 'полезная нагрузка',
+ 		state_id: 'статус',
+ 		start_time: 'начало',
+ 		work_id: 'работа',
+ 		name: 'время',
+ 		name_plural_deleted: 'удаленные Время',
  		end_time: 'завершение',
+ 		executor_id: 'исполнитель',
+ 		description: 'описание',
+ 		name_plural: 'Время',
 }

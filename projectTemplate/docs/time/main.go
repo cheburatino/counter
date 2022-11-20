@@ -20,12 +20,14 @@ func GetDoc(project *t.ProjectType) t.DocType {
 		NameRu:     name_ru,
 		PathPrefix: "docs",
 		Flds: []t.FldType{
-			t.GetFldTitleComputed("stateTitle || case when new.start_time notnull then format(', %s', to_char(new.start_time, 'dd.mm.yyyy')) else '' end || case when new.start_time notnull then format(', %s', to_char(new.start_time, 'HH24:MI')) else '' end || case when new.end_time notnull then format(' - %s', to_char(new.end_time, 'HH24:MI')) else '' end"),
-			t.GetFldRef("state_id", "статус", "ctlg_time_state", [][]int{{1, 2}}, "col-2").SetDefault("1"),
-			t.GetFldInt("effort", "полезная нагрузка", [][]int{{1, 3}}, "col-2").SetVif("item.state_id == 2"),
-			t.GetFldDateTime("start_time", "начало", [][]int{{2, 1}}),
-			t.GetFldDateTime("end_time", "завершение", [][]int{{2, 2}}),
-			t.GetFldString("description", "заметки", 0, [][]int{{3, 1}}, "col-8"),
+			t.GetFldTitleComputed("format('Статус: %s Начало: %s Завершение: %s Полезная нагрузка: %s', stateTitle, to_char(new.start_time, 'dd.mm - hh24:mi'), coalesce(to_char(new.end_time, 'dd.mm - hh24:mi'), 'не завершено'), new.effort)"),
+			t.GetFldInt("effort", "полезная нагрузка", [][]int{{1, 2}}, "col-2").SetDefault("0"),
+			t.GetFldRef("state_id", "статус", "ctlg_time_state", [][]int{{1, 3}}, "col-2").SetDefault("1"),
+			t.GetFldDateTime("start_time", "начало", [][]int{{2, 1}}, "col-2"),
+			t.GetFldDateTime("end_time", "завершение", [][]int{{2, 2}}, "col-2"),
+			t.GetFldRef("executor_id", "исполнитель", "man", [][]int{{2, 3}}, "isShowLink", "isClearable"),
+			t.GetFldRef("work_id", "работа", "work", [][]int{{3, 1}}, "isShowLink", "isClearable"),
+			t.GetFldString("description", "описание", 0, [][]int{{4, 1}}, "col-8"),
 		},
 		Vue: t.DocVue{
 			RouteName:      name,
@@ -39,10 +41,23 @@ func GetDoc(project *t.ProjectType) t.DocType {
 			IsSearchText:    true,
 			IsBeforeTrigger: true,
 			IsAfterTrigger:  true,
-			Hooks: t.DocSqlHooks{BeforeTriggerBefore: []string{`
-		new.effort = (select sum(worked_time) from work where time_id = new.id and state_id = 3);	
-			`}},
+			Hooks: t.DocSqlHooks{
+				AfterTriggerAfter: []string{`
+		-- хук из main.go
+		if new.start_time isnull then new.start_time = now(); end if;
 
+        if new.effort != old.effort or new.state_id != old.state_id
+        then
+            update work set worked_time = (select sum(effort) from time where work_id = new.work_id and state_id = 2) where id = new.work_id;
+        end if;
+        -- /хук из main.go
+				`},
+				BeforeTriggerBefore: []string{`
+		-- хук из main.go
+		if new.end_time < new.start_time then raise exception 'дата завершения не может быть меньше даты начала'; end if;
+		if new.state_id = 2 and new.end_time isnull then raise exception 'невозможно завершить время если не указана дата завершения'; end if;
+				`},
+			},
 		},
 	}
 
@@ -55,23 +70,6 @@ func GetDoc(project *t.ProjectType) t.DocType {
 	}
 
 	doc.Init()
-
-	doc.AddFld(t.GetFldVueCompositionRefList(&doc, t.VueCompRefListWidgetParams{
-		Label:      "работы",           // название списка, которе выводится на экране
-		FldName:    "work_list",      // название поля. Любое, в формате snake_case. На основе этого названия формируется название компоненты во vue.
-		TableName:  "work",           // название связанной таблицы, из которой будут выгружаться записи
-		RefFldName: "time_id",                  // название поля в связанной таблицы, по которому осуществляется связь
-		Avatar:     "image/work.png", // иконка, которая выводится в списке
-		NewFlds: []t.FldType{
-			t.GetFldString("title", "название", 300, [][]int{{1, 1}}).SetIsRequired(),
-		}, // список полей, которые заполняются при добавлении новой записи
-		TitleTemplate: `
-                <q-item-label>{{v.title}}</q-item-label>
-                <q-item-label caption>
-					<q-badge color="orange">{{v.options.title.state_title}}</q-badge> <q-badge v-if="v.state_id === 3" color="positive">{{v.worked_time}} минут</q-badge>
-				</q-item-label>
-            `, // шаблон для названия в списке (vue синтаксис)
-	}, [][]int{{4, 1}}, "col-4"))
 
 	return doc
 }

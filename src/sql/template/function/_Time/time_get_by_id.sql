@@ -23,8 +23,10 @@ BEGIN
     END IF;
 
     with t1 as (select * from time where id = (params ->> 'id')::int),
-		t2 as (select t1.*, c.title as state_title from t1 left join ctlg_time_state c on c.id = t1.state_id)
- 	select row_to_json(t2.*)::jsonb into result from t2;
+		t2 as (select t1.*, c.title as state_title from t1 left join ctlg_time_state c on c.id = t1.state_id),
+		t3 as (select t2.*, c.title as executor_title from t2 left join man c on c.id = t2.executor_id),
+		t4 as (select t3.*, c.title as work_title from t3 left join work c on c.id = t3.work_id)
+ 	select row_to_json(t4.*)::jsonb into result from t4;
 
     -- случай когда записи с таким id не найдено
     IF result ->> 'id' ISNULL

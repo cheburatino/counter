@@ -1,13 +1,13 @@
 
 export default {
- 		first_name: 'first name',
- 		middle_name: 'mdle name',
- 		user_table_id: 'user table ',
- 		name_plural: 'man',
+ 		position: 'position',
+ 		name_plural_deleted: 'deleted man',
  		title: 'title',
  		last_name: 'last name',
- 		position: 'position',
+ 		first_name: 'first name',
+ 		user_table_id: 'user table ',
  		name: 'man',
- 		name_plural_deleted: 'deleted man',
+ 		name_plural: 'man',
+ 		middle_name: 'mdle name',
  		company_id: 'company ',
 }

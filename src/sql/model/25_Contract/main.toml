@@ -1,0 +1,54 @@
+docType = "Contract"
+tableComment = "договор"
+
+tableName ="contract"
+
+fields = [
+	{name="id",			type="serial"},
+	{name="title",					type="char",	size=150, 	ext="not null",	 comment="название"},
+	{name="date",					type="timestamp",	 comment="дата"},
+	{name="state_id",					type="int", 	ext=" default 1",	 comment="статус"},
+	{name="company_id",					type="int",	 comment="компания"},
+	{name="counterparty_id",					type="int",	 comment="контрагент"},
+	{name="description",					type="text",	 comment="описание"},
+	{name="document",					type="jsonb",	 comment="документ"},
+	{name="search_text",			type="text",	comment="колонка для поиска"},
+	{name="options",				type="jsonb",	comment="разные дополнительные параметры"},
+	{name="created_at",				type="timestamp",	ext="with time zone"},
+	{name="updated_at",				type="timestamp",	ext="with time zone"},
+	{name="deleted",				type="bool",	ext="not null default false"}
+]
+
+fkConstraints = [
+	{name="contract_title_already_exist", ext="UNIQUE (title)"},
+	{fld="state_id", ref="ctlg_contract_state", fk="id"},
+	{fld="company_id", ref="company", fk="id"},
+	{fld="counterparty_id", ref="legal_entity", fk="id"}
+]
+
+triggers = [
+	{name="contract_created", when="before insert or update", ref="for each row", funcName="builtin_fld_update"},
+	{name="contract_trigger_before", when="before insert or update", ref="for each row", funcName="contract_trigger_before"},
+	{name="contract_trigger_after", when="after insert or update", ref="for each row", funcName="contract_trigger_after"}
+]
+
+
+
+methods = [
+	"contract_get_by_id",
+	"contract_list",
+	"contract_update",
+	"contract_trigger_before",
+	"contract_trigger_after"
+]
+
+alterScripts = [
+	"alter table contract add column if not exists title CHARACTER VARYING(150);",
+	"alter table contract add column if not exists date timestamp;",
+	"alter table contract add column if not exists state_id int;",
+	"alter table contract add column if not exists company_id int;",
+	"alter table contract add column if not exists counterparty_id int;",
+	"alter table contract add column if not exists description text;",
+	"alter table contract add column if not exists document jsonb;",
+	"alter table contract add column if not exists search_text text;"
+]

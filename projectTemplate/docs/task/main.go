@@ -30,7 +30,7 @@ func GetDoc(project *t.ProjectType) t.DocType {
 			t.GetFldDate("fact_end_date", "фактическая дата завершения", [][]int{{3, 2}}, "col-2"),
 			t.GetFldInt("specialist_priority", "приоритет", [][]int{{3, 3}}, "col-1"),
 			t.GetFldInt("estimate", "оценка", [][]int{{3, 4}}, "col-1"),
-			t.GetFldInt("worked_time", "затрачено", [][]int{{3, 5}}, "col-1"),
+			t.GetFldInt("worked_time", "затрачено", [][]int{{3, 5}}, "col-1").SetReadonly("true"),
 			t.GetFldCheckbox("today", "в работе сегодня", [][]int{{3, 6}}, "col-1").SetDefault("false"),
 			t.GetFldString("description", "описание", 0, [][]int{{4, 1}}, "col-8"),
 			t.GetFldFiles("files", "файлы", [][]int{{5, 1}}, t.FldVueFilesParams{}),
@@ -63,20 +63,6 @@ func GetDoc(project *t.ProjectType) t.DocType {
 				"task_get_specialist":      {Name: "task_get_specialist"},
 				"task_get_specialist_role": {Name: "task_get_specialist_role"},
 			},
-			Hooks: t.DocSqlHooks{BeforeTriggerBefore: []string{
-				`
-		if new.development_task_id notnull
-		then
-            new.system_id = (select system_id from development_task where id = new.development_task_id);
-            new.digital_solution_id = (select digital_solution_id from development_task where id = new.development_task_id);
-        end if;
-
-		if new.digital_solution_id notnull
-		then
-            new.system_id = (select system_id from digital_solution where id = new.digital_solution_id);
-        end if;
-			`,
-			}},
 		},
 	}
 	// создаем стандартные методы sql "list", "update", "get_by_id" с возможностью ограничения по ролям
@@ -98,7 +84,7 @@ func GetDoc(project *t.ProjectType) t.DocType {
 				 <q-item-section>
 				    <q-item-label lines="1">{{item.title}}</q-item-label>
 					<q-item-label caption>
-						<q-item-label caption><q-badge class="q-ma-sm" color="orange">{{item.options.title.state_title}}</q-badge><q-badge class="q-ma-sm" color="primary">{{item.options.title.system_title}}</q-badge><q-badge class="q-ma-sm" color="light-blue-3">{{item.options.title.executor_title}}</q-badge><q-badge class="q-ma-sm" color="yellow-5">{{item.options.title.digital_solution_title}}</q-badge><q-badge class="q-ma-sm" color="info">{{item.plan_end_date}}</q-badge></q-item-label>
+						<q-item-label caption><q-badge class="q-ma-sm" color="orange">{{item.options.title.state_title}}</q-badge><q-badge class="q-ma-sm" color="primary">{{item.options.title.system_title}}</q-badge><q-badge class="q-ma-sm" color="light-blue-3">{{item.options.title.executor_title}}</q-badge><q-badge class="q-ma-sm" color="info">{{item.plan_end_date}}</q-badge></q-item-label>
 					</q-item-label>
 				 </q-item-section>
 			`

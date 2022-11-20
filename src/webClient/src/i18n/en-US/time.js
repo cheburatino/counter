@@ -1,12 +1,14 @@
 
 export default {
- 		end_time: 'end time',
+ 		work_id: 'work ',
  		name: 'time',
+ 		title: 'title',
+ 		end_time: 'end time',
+ 		executor_id: 'executor ',
+ 		start_time: 'start time',
+ 		description: 'description',
  		name_plural: 'time',
  		name_plural_deleted: 'deleted time',
- 		title: 'title',
  		effort: 'effort',
- 		start_time: 'start time',
  		state_id: 'state ',
- 		description: 'description',
 }

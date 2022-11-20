@@ -22,16 +22,31 @@
         <q-item clickable class="GL__menu-link">
           <q-item-section @click="$emit('logout')">{{$t('profile.exit')}}</q-item-section>
         </q-item>
+        
       </q-list>
     </q-menu>
   </q-btn>
 </template>
 
 <script>
+    
     export default {
         props: ['currentUser'],
+        
         data() {
             return {}
         },
+        
     }
 </script>
+
+
+
+<style lang="scss">
+body {
+  .main-header {
+    background-color: #fff;
+    color: $grey-8;
+  }
+}
+</style>
