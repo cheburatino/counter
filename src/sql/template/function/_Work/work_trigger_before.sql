@@ -22,6 +22,8 @@ BEGIN
         then
             new.system_id = (select system_id from task where id = new.task_id);
         end if;
+
+		if new.state_id = 3 and coalesce(new.worked_time, 0) = 0 then raise exception 'невозможно завершить работу без затраченного времени'; end if;
 				
         -- заполняем options.title
         NEW.options = coalesce(OLD.options, '{}'::jsonb) || NEW.options || jsonb_build_object('title', jsonb_build_object('title', new.title, 'state_title', stateTitle, 'system_title', systemTitle, 'executor_title', executorTitle, 'task_title', taskTitle));

@@ -125,8 +125,8 @@
 </template>
 
 <script>
-	import customerTaskListRefListWidget from './comp/customerTaskListRefListWidget.vue'
 	import workListRefListWidget from './comp/workListRefListWidget.vue'
+	import customerTaskListRefListWidget from './comp/customerTaskListRefListWidget.vue'
     import currentUserMixin from '../../../app/mixins/currentUser'
     export default {
         props: ['id', 'isOpenInDialog'],

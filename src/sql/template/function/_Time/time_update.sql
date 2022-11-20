@@ -34,11 +34,12 @@ BEGIN
     
     
     
+    
 
     if (params ->> 'id')::int = -1 then
         
 
-        EXECUTE ('INSERT INTO time (title, effort, state_id, start_time, end_time, executor_id, work_id, description, options) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)  RETURNING *;')
+        EXECUTE ('INSERT INTO time (title, effort, state_id, start_time, end_time, executor_id, system_id, work_id, description, options) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)  RETURNING *;')
 		INTO timeRow
 		USING
 			(params ->> 'title')::text,
@@ -47,6 +48,7 @@ BEGIN
 			(params ->> 'start_time')::timestamp,
 			(params ->> 'end_time')::timestamp,
 			(params ->> 'executor_id')::int,
+			(params ->> 'system_id')::int,
 			(params ->> 'work_id')::int,
 			(params ->> 'description')::text,
 			coalesce(params -> 'options', '{}')::jsonb;
@@ -61,6 +63,7 @@ BEGIN
 			['start_time', 'start_time', 'timestamp'],
 			['end_time', 'end_time', 'timestamp'],
 			['executor_id', 'executor_id', 'number'],
+			['system_id', 'system_id', 'number'],
 			['work_id', 'work_id', 'number'],
 			['description', 'description', 'text'],
             ['options', 'options', 'jsonb'],

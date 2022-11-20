@@ -20,13 +20,14 @@ func GetDoc(project *t.ProjectType) t.DocType {
 		NameRu:     name_ru,
 		PathPrefix: "docs",
 		Flds: []t.FldType{
-			t.GetFldTitleComputed("format('Статус: %s Начало: %s Завершение: %s Полезная нагрузка: %s', stateTitle, to_char(new.start_time, 'dd.mm - hh24:mi'), coalesce(to_char(new.end_time, 'dd.mm - hh24:mi'), 'не завершено'), new.effort)"),
+			t.GetFldTitleComputed("format('Статус: %s Начало: %s Завершение: %s Полезная нагрузка: %s', stateTitle, to_char(new.start_time, 'dd.mm - hh24:mi'), coalesce(to_char(new.end_time, 'dd.mm - hh24:mi'), 'не завершено'), new.effort)", "col-8"),
 			t.GetFldInt("effort", "полезная нагрузка", [][]int{{1, 2}}, "col-2").SetDefault("0"),
 			t.GetFldRef("state_id", "статус", "ctlg_time_state", [][]int{{1, 3}}, "col-2").SetDefault("1"),
 			t.GetFldDateTime("start_time", "начало", [][]int{{2, 1}}, "col-2"),
 			t.GetFldDateTime("end_time", "завершение", [][]int{{2, 2}}, "col-2"),
 			t.GetFldRef("executor_id", "исполнитель", "man", [][]int{{2, 3}}, "isShowLink", "isClearable"),
-			t.GetFldRef("work_id", "работа", "work", [][]int{{3, 1}}, "isShowLink", "isClearable"),
+			t.GetFldRef("system_id", "система", "system", [][]int{{3, 1}}, "isShowLink", "isClearable"),
+			t.GetFldRef("work_id", "работа", "work", [][]int{{3, 2}}, "isShowLink", "isClearable"),
 			t.GetFldString("description", "описание", 0, [][]int{{4, 1}}, "col-8"),
 		},
 		Vue: t.DocVue{
@@ -54,8 +55,11 @@ func GetDoc(project *t.ProjectType) t.DocType {
 				`},
 				BeforeTriggerBefore: []string{`
 		-- хук из main.go
+		if new.system_id isnull then new.system_id = (select system_id from work where id = new.work_id); end if;
 		if new.end_time < new.start_time then raise exception 'дата завершения не может быть меньше даты начала'; end if;
 		if new.state_id = 2 and new.end_time isnull then raise exception 'невозможно завершить время если не указана дата завершения'; end if;
+		if new.state_id = 2 and coalesce(new.effort, 0) = 0 then raise exception 'невозможно завершить время без полезной нагрузки'; end if;
+		if new.state_id = 2 and new.description isnull then raise exception 'невозможно завершить время без описания'; end if;
 				`},
 			},
 		},

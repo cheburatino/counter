@@ -7,8 +7,8 @@
       <!--  поля формы    -->
       
       <div class="row q-col-gutter-md q-mb-sm">
-      <div class="col-md-4 col-sm-6 col-xs-12">
-          <q-input outlined type='text' v-model="item.title" :label="$t('time.title')" autogrow :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
+      <div class="col-md-8 col-sm-12 col-xs-12">
+          <q-input outlined type='text' v-model="item.title" :label="$t('time.title')" autogrow :readonly='false'  class='q-mb-sm col-md-8 col-sm-12 col-xs-12' />
       </div>
       <div class="col-md-2 col-sm-3 col-xs-6">
           <q-input outlined type='number' v-model="item.effort" :label="$t('time.effort')" :readonly='false'  class='q-mb-sm col-md-2 col-sm-3 col-xs-6' />
@@ -31,6 +31,9 @@
       </div>
       
       <div class="row q-col-gutter-md q-mb-sm">
+      <div class="col-md-4 col-sm-6 col-xs-12">
+          <comp-fld-ref-search outlined pgMethod="system_list" :label="$t('time.system_id')" :item='item.system_title' :itemId='item.system_id' :ext='{"avatar":"image/system.svg","isClearable":"true","pathUrl":"/system"}' @update="v=> item.system_id = v.id" @clear="item.system_id = null" :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
+      </div>
       <div class="col-md-4 col-sm-6 col-xs-12">
           <comp-fld-ref-search outlined pgMethod="work_list" :label="$t('time.work_id')" :item='item.work_title' :itemId='item.work_id' :ext='{"avatar":"image/work.png","isClearable":"true","pathUrl":"/work"}' @update="v=> item.work_id = v.id" @clear="item.work_id = null" :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
       </div>
@@ -76,6 +79,7 @@
                         {name: 'start_time', label: 'начало'},
                         {name: 'end_time', label: 'завершение'},
                         {name: 'executor_id', label: 'исполнитель'},
+                        {name: 'system_id', label: 'система'},
                         {name: 'work_id', label: 'работа'},
                         {name: 'description', label: 'описание'},
                 ],

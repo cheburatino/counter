@@ -21,9 +21,9 @@ if new.title != old.title then
 
         
 		-- хук из main.go
-		if new.worked_time != old.worked_time
+		if coalesce(new.worked_time, 0) != coalesce(old.worked_time, 0)
 		then
-            update task set worked_time = (select sum(worked_time) from work where task_id = new.task_id) where id = new.task_id;
+            update task set worked_time = (select coalesce(sum(worked_time), 0) from work where task_id = new.task_id) where id = new.task_id;
         end if;
         --/ хук из main.go
 				

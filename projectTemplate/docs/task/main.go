@@ -63,6 +63,18 @@ func GetDoc(project *t.ProjectType) t.DocType {
 				"task_get_specialist":      {Name: "task_get_specialist"},
 				"task_get_specialist_role": {Name: "task_get_specialist_role"},
 			},
+			Hooks: t.DocSqlHooks{
+				BeforeTriggerBefore: []string{`
+		if new.state_id = 5 and new.fact_end_date isnull then raise exception 'невозможно завершить задачу без фактической даты завершения'; end if;
+		if new.state_id = 5 and coalesce(new.worked_time, 0) = 0 then raise exception 'невозможно завершить задачу без затраченного времени'; end if;
+				`},
+				AfterTriggerAfter: []string{`
+		if coalesce(new.system_id, '') != coalesce(old.system_id, '')
+		then
+			update work set system_id = new.system_id where task_id = new.id;
+		end if;
+				`},
+			},
 		},
 	}
 	// создаем стандартные методы sql "list", "update", "get_by_id" с возможностью ограничения по ролям

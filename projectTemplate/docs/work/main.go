@@ -62,12 +62,14 @@ func GetDoc(project *t.ProjectType) t.DocType {
         then
             new.system_id = (select system_id from task where id = new.task_id);
         end if;
+
+		if new.state_id = 3 and coalesce(new.worked_time, 0) = 0 then raise exception 'невозможно завершить работу без затраченного времени'; end if;
 				`},
 				AfterTriggerAfter: []string{`
 		-- хук из main.go
-		if new.worked_time != old.worked_time
+		if coalesce(new.worked_time, 0) != coalesce(old.worked_time, 0)
 		then
-            update task set worked_time = (select sum(worked_time) from work where task_id = new.task_id) where id = new.task_id;
+            update task set worked_time = (select coalesce(sum(worked_time), 0) from work where task_id = new.task_id) where id = new.task_id;
         end if;
         --/ хук из main.go
 				`},
