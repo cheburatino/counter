@@ -23,7 +23,7 @@ func GetDoc(project *t.ProjectType) t.DocType {
 			t.GetFldTitle().SetIsNotUniq(),
 			t.GetFldRef("type_id", "тип задачи", "ctlg_task_type", [][]int{{1, 2}}, "col-2"),
 			t.GetFldRef("state_id", "статус", "ctlg_task_state", [][]int{{1, 3}}, "col-2").SetDefault("1"),
-			t.GetFldRef("system_id", "система", "system", [][]int{{2, 1}},  "isShowLink", "isClearable"),
+			t.GetFldRef("system_id", "система", "system", [][]int{{2, 1}}, "isShowLink", "isClearable"),
 			t.GetFldRef("work_time_sheet_id", "лурв", "work_time_sheet", [][]int{{2, 2}}, "col-2", "isShowLink", "isClearable"),
 			t.GetFldRef("technical_task_id", "тз", "technical_task", [][]int{{2, 3}}, "col-2", "isShowLink", "isClearable"),
 			t.GetFldDate("plan_end_date", "плановая дата завершения", [][]int{{3, 1}}, "col-2"),
@@ -40,7 +40,7 @@ func GetDoc(project *t.ProjectType) t.DocType {
 			t.GetFldImgList("process_images", "изображения процесса", [][]int{{7, 2}}, t.FldVueImgParams{}),
 			// Работы {{8, 1}}
 			// Задачи заказчика {{8, 2}}
-			t.GetFldString("result", "результат", 0, [][]int{{9, 1}}, "col-8"),
+			t.GetFldString("result", "результатос", 0, [][]int{{9, 1}}, "col-8"),
 			t.GetFldFiles("result_files", "файлы результата", [][]int{{10, 1}}, t.FldVueFilesParams{}),
 			t.GetFldImgList("result_images", "изображения результата", [][]int{{10, 2}}, t.FldVueImgParams{}),
 		},
@@ -53,6 +53,7 @@ func GetDoc(project *t.ProjectType) t.DocType {
 		Templates: map[string]*t.DocTemplate{
 			"sql_function_list.sql": {},
 			"webClient_index.vue":   {},
+			"webClient_item.vue":    {},
 		},
 		IsBaseTemplates: t.DocIsBaseTemplates{true, true},
 		Sql: t.DocSql{
@@ -104,11 +105,11 @@ func GetDoc(project *t.ProjectType) t.DocType {
 	}
 
 	doc.AddFld(t.GetFldVueCompositionRefList(&doc, t.VueCompRefListWidgetParams{
-		Label:      "работы",            // название списка, которе выводится на экране
-		FldName:    "work_list",           // название поля. Любое, в формате snake_case. На основе этого названия формируется название компоненты во vue.
-		TableName:  "work",                // название связанной таблицы, из которой будут выгружаться записи
-		RefFldName: "task_id", // название поля в связанной таблицы, по которому осуществляется связь
-		Avatar:     "image/work.png",      // иконка, которая выводится в списке
+		Label:      "работы",         // название списка, которе выводится на экране
+		FldName:    "work_list",      // название поля. Любое, в формате snake_case. На основе этого названия формируется название компоненты во vue.
+		TableName:  "work",           // название связанной таблицы, из которой будут выгружаться записи
+		RefFldName: "task_id",        // название поля в связанной таблицы, по которому осуществляется связь
+		Avatar:     "image/work.png", // иконка, которая выводится в списке
 		NewFlds: []t.FldType{
 			t.GetFldString("title", "название", 300, [][]int{{1, 1}}).SetIsRequired(),
 		}, // список полей, которые заполняются при добавлении новой записи
@@ -119,11 +120,11 @@ func GetDoc(project *t.ProjectType) t.DocType {
 	}, [][]int{{8, 1}}, "col-4"))
 
 	doc.AddFld(t.GetFldVueCompositionRefList(&doc, t.VueCompRefListWidgetParams{
-		Label:      "задачи заказчика",            // название списка, которе выводится на экране
-		FldName:    "customer_task_list",           // название поля. Любое, в формате snake_case. На основе этого названия формируется название компоненты во vue.
-		TableName:  "customer_task",                // название связанной таблицы, из которой будут выгружаться записи
-		RefFldName: "task_id", // название поля в связанной таблицы, по которому осуществляется связь
-		Avatar:     "image/customer_task.png",      // иконка, которая выводится в списке
+		Label:      "задачи заказчика",        // название списка, которе выводится на экране
+		FldName:    "customer_task_list",      // название поля. Любое, в формате snake_case. На основе этого названия формируется название компоненты во vue.
+		TableName:  "customer_task",           // название связанной таблицы, из которой будут выгружаться записи
+		RefFldName: "task_id",                 // название поля в связанной таблицы, по которому осуществляется связь
+		Avatar:     "image/customer_task.png", // иконка, которая выводится в списке
 		NewFlds: []t.FldType{
 			t.GetFldString("title", "название", 300, [][]int{{1, 1}}).SetIsRequired(),
 		}, // список полей, которые заполняются при добавлении новой записи

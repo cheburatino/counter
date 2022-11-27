@@ -23,7 +23,7 @@ fields = [
 	{name="process",					type="text",	 comment="процесс"},
 	{name="process_files",					type="jsonb",	 comment="файлы процесса"},
 	{name="process_images",					type="jsonb",	 comment="изображения процесса"},
-	{name="result",					type="text",	 comment="результат"},
+	{name="result",					type="text",	 comment="результатос"},
 	{name="result_files",					type="jsonb",	 comment="файлы результата"},
 	{name="result_images",					type="jsonb",	 comment="изображения результата"},
 	{name="search_text",			type="text",	comment="колонка для поиска"},

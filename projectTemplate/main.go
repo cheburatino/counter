@@ -30,10 +30,10 @@ import (
 	"github.com/cheburatino/electron_is/projectTemplate/docs/time"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/work"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/workTimeSheet"
+	"github.com/cheburatino/electron_is/projectTemplate/utils"
 	"github.com/otiai10/copy"
 	"github.com/pepelazz/nla_framework"
 	t "github.com/pepelazz/nla_framework/types"
-	"github.com/pepelazz/projectBlueprint/projectTemplate/utils"
 	"os"
 )
 
@@ -66,16 +66,16 @@ func getProject() t.ProjectType {
 		ctlgFilter.GetDoc(p),
 		ctlgOrderBy.GetDoc(p),
 		ctlgTimeState.GetDoc(p),
-		meeting.GetDoc(p),
-		contract.GetDoc(p),
-		technicalTask.GetDoc(p),
-		workTimeSheet.GetDoc(p),
-		legalEntity.GetDoc(p),
 		company.GetDoc(p),
-		man.GetDoc(p),
 		system.GetDoc(p),
-		customerTask.GetDoc(p),
+		legalEntity.GetDoc(p),
+		contract.GetDoc(p),
+		workTimeSheet.GetDoc(p),
+		technicalTask.GetDoc(p),
 		task.GetDoc(p),
+		meeting.GetDoc(p),
+		man.GetDoc(p),
+		customerTask.GetDoc(p),
 		invoice.GetDoc(p),
 		payment.GetDoc(p),
 		completionAct.GetDoc(p),
@@ -122,7 +122,7 @@ func getProject() t.ProjectType {
 			{Text: "Акты", Url: "completion_act"},
 			{Text: "Счета", Url: "invoice"},
 			{Text: "Платежи", Url: "payment"},
-		},},
+		}},
 		{Text: "Справочники", Icon: "image/catalog.svg", IsFolder: true, Roles: []string{utils.RoleAdmin}, LinkList: []t.VueMenu{
 			{Url: "users", Text: "Пользователи", Icon: "image/user.svg"},
 			{Text: "Статусы встреч", Url: "ctlg_meeting_state"},
