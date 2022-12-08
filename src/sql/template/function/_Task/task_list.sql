@@ -26,21 +26,22 @@ BEGIN
         RETURN checkMsg;
     END IF;
 
-
+    
 
     -- сборка условия WHERE (where_str_build - функция из папки base)
     whereStr = where_str_build(params, 'doc', ARRAY [
         ['ilike', 'search_text', 'search_text'],
-        ['notQuoted', 'type_id', 'doc.type_id'],
-        ['notQuoted', 'state_id', 'doc.state_id'],
-        ['notQuoted', 'system_id', 'doc.system_id']
+		['notQuoted', 'type_id', 'doc.type_id'],
+		['notQuoted', 'stage_id', 'doc.stage_id'],
+		['notQuoted', 'state_id', 'doc.state_id'],
+		['notQuoted', 'system_id', 'doc.system_id'],
+		['notQuoted', 'work_time_sheet_id', 'doc.work_time_sheet_id'],
+		['notQuoted', 'technical_task_id', 'doc.technical_task_id'],
+		['notQuoted', 'executor_responsible_id', 'doc.executor_responsible_id'],
+		['notQuoted', 'customer_responsible_id', 'doc.customer_responsible_id']
     ]);
 
-    -- добавляем в фильтр условия из where на клиенте
-    if params->>'where_param' notnull
-    then
-        whereStr = format('%s and (%s)', whereStr, params->>'where_param');
-    end if;
+    
 
     -- финальная сборка строки с условиями выборки (build_query_part_for_list - функция из папки base)
     condQueryStr = '' || whereStr || build_query_part_for_list(params);

@@ -1,15 +1,15 @@
 
 export default {
- 		system_id: 'система',
- 		description: 'описание',
  		name: 'время',
- 		title: 'название',
+ 		name_plural: 'Время',
  		effort: 'полезная нагрузка',
+ 		state_id: 'статус',
  		start_time: 'начало',
+ 		work_id: 'работа',
+ 		description: 'описание',
+ 		name_plural_deleted: 'удаленные Время',
+ 		title: 'название',
  		end_time: 'завершение',
  		executor_id: 'исполнитель',
- 		work_id: 'работа',
- 		name_plural: 'Время',
- 		name_plural_deleted: 'удаленные Время',
- 		state_id: 'статус',
+ 		system_id: 'система',
 }

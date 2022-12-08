@@ -3,16 +3,19 @@ package main
 import (
 	"github.com/cheburatino/electron_is/projectTemplate/docs/company"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/completionAct"
+	"github.com/cheburatino/electron_is/projectTemplate/docs/contact"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/contract"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/ctlgCompletionActState"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/ctlgContractState"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/ctlgCustomerTaskState"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/ctlgFilter"
+	"github.com/cheburatino/electron_is/projectTemplate/docs/ctlgHystoryType"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/ctlgInvoiceState"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/ctlgMeetingState"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/ctlgOrderBy"
+	"github.com/cheburatino/electron_is/projectTemplate/docs/ctlgPlanDateChangeSide"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/ctlgSystemState"
-	"github.com/cheburatino/electron_is/projectTemplate/docs/ctlgTaskState"
+	"github.com/cheburatino/electron_is/projectTemplate/docs/ctlgTaskStage"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/ctlgTaskType"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/ctlgTechnicalTaskState"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/ctlgTechnicalTaskWorkState"
@@ -24,6 +27,7 @@ import (
 	"github.com/cheburatino/electron_is/projectTemplate/docs/man"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/meeting"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/payment"
+	"github.com/cheburatino/electron_is/projectTemplate/docs/planDateChange"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/system"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/task"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/technicalTask"
@@ -31,6 +35,7 @@ import (
 	"github.com/cheburatino/electron_is/projectTemplate/docs/work"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/workTimeSheet"
 	"github.com/cheburatino/electron_is/projectTemplate/utils"
+	"github.com/cheburatino/pim/projectTemplate/docs/ctlgTaskState"
 	"github.com/otiai10/copy"
 	"github.com/pepelazz/nla_framework"
 	t "github.com/pepelazz/nla_framework/types"
@@ -52,9 +57,12 @@ func getProject() t.ProjectType {
 	p.FillI18n()
 
 	p.Docs = []t.DocType{
+		ctlgPlanDateChangeSide.GetDoc(p),
+		ctlgHystoryType.GetDoc(p),
 		ctlgSystemState.GetDoc(p),
 		ctlgMeetingState.GetDoc(p),
 		ctlgTaskType.GetDoc(p),
+		ctlgTaskStage.GetDoc(p),
 		ctlgTaskState.GetDoc(p),
 		ctlgCustomerTaskState.GetDoc(p),
 		ctlgWorkState.GetDoc(p),
@@ -67,12 +75,14 @@ func getProject() t.ProjectType {
 		ctlgOrderBy.GetDoc(p),
 		ctlgTimeState.GetDoc(p),
 		company.GetDoc(p),
+		contact.GetDoc(p),
 		system.GetDoc(p),
 		legalEntity.GetDoc(p),
 		contract.GetDoc(p),
 		workTimeSheet.GetDoc(p),
 		technicalTask.GetDoc(p),
 		task.GetDoc(p),
+		planDateChange.GetDoc(p),
 		meeting.GetDoc(p),
 		man.GetDoc(p),
 		customerTask.GetDoc(p),
@@ -112,10 +122,11 @@ func getProject() t.ProjectType {
 		{DocName: "time", Roles: []string{utils.RoleAdmin}},
 		{DocName: "meeting"},
 		{DocName: "customer_task"},
+		{DocName: "plan_date_change"},
 		{Text: "CRM", Icon: "image/crm.png", IsFolder: true, Roles: []string{utils.RoleAdmin}, LinkList: []t.VueMenu{
 			{Text: "Компании", Url: "company"},
 			{Text: "Юр.лица", Url: "legal_entity"},
-			{Text: "Контакты", Url: "man"},
+			{Text: "Контакты", Url: "contact"},
 			{Text: "Договоры", Url: "contract"},
 			{Text: "ТЗ", Url: "technical_task"},
 			{Text: "ЛУРВ", Url: "work_time_sheet"},
@@ -127,18 +138,19 @@ func getProject() t.ProjectType {
 			{Url: "users", Text: "Пользователи", Icon: "image/user.svg"},
 			{Text: "Статусы встреч", Url: "ctlg_meeting_state"},
 			{Text: "Статусы систем", Url: "ctlg_system_state"},
-			{Text: "Статусы задач", Url: "ctlg_task_state"},
+			{Text: "Этапы задачи", Url: "ctlg_task_stage"},
+			{Text: "Состояния задачи", Url: "ctlg_task_state"},
 			{Text: "Статусы работ", Url: "ctlg_work_state"},
 			{Text: "Статусы времени", Url: "ctlg_time_state"},
-			{Text: "Статусы задач разработки", Url: "ctlg_development_task_state"},
 			{Text: "Статусы задач заказчиков", Url: "ctlg_customer_task_state"},
 			{Text: "Статусы договоров", Url: "ctlg_contract_state"},
 			{Text: "Статусы документов по ТЗ", Url: "ctlg_technical_task_state"},
 			{Text: "Статусы работ по ТЗ", Url: "ctlg_technical_task_work_state"},
 			{Text: "Статусы актов", Url: "ctlg_completion_act_state"},
 			{Text: "Статусы счетов", Url: "ctlg_invoice_state"},
-			{Text: "Типы задач разработки", Url: "ctlg_development_task_type"},
+			{Text: "Типы истории", Url: "ctlg_history_type"},
 			{Text: "Типы задач", Url: "ctlg_task_type"},
+			{Text: "Из-за кого изменилась плановая дата", Url: "ctlg_plan_date_change_side"},
 			{Text: "Фильтры", Url: "ctlg_filter"},
 			{Text: "Сортировки", Url: "ctlg_order_by"},
 		}},

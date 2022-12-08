@@ -1,0 +1,47 @@
+docType = "CtlgOrderBy"
+tableComment = "сортировка"
+
+tableName ="ctlg_order_by"
+
+fields = [
+	{name="id",			type="serial"},
+	{name="title",					type="char",	size=150, 	ext="not null",	 comment="название"},
+	{name="user_table_id",					type="int",	 comment="пользователь"},
+	{name="index",					type="char",	size=20,	 comment="список"},
+	{name="is_default",					type="bool", 	ext=" default false",	 comment="по умолчанию"},
+	{name="order_by_str",					type="text",	 comment="условия сортировки"},
+	{name="search_text",			type="text",	comment="колонка для поиска"},
+	{name="options",				type="jsonb",	comment="разные дополнительные параметры"},
+	{name="created_at",				type="timestamp",	ext="with time zone"},
+	{name="updated_at",				type="timestamp",	ext="with time zone"},
+	{name="deleted",				type="bool",	ext="not null default false"}
+]
+
+fkConstraints = [
+{fld="user_table_id", ref="\"user\"", fk="id"}
+]
+
+triggers = [
+	{name="ctlg_order_by_created", when="before insert or update", ref="for each row", funcName="builtin_fld_update"},
+	{name="ctlg_order_by_trigger_before", when="before insert or update", ref="for each row", funcName="ctlg_order_by_trigger_before"},
+	{name="ctlg_order_by_trigger_after", when="after insert or update", ref="for each row", funcName="ctlg_order_by_trigger_after"}
+]
+
+
+
+methods = [
+	"ctlg_order_by_list",
+	"ctlg_order_by_update",
+	"ctlg_order_by_get_by_id",
+	"ctlg_order_by_trigger_before",
+	"ctlg_order_by_trigger_after"
+]
+
+alterScripts = [
+	"alter table ctlg_order_by add column if not exists title CHARACTER VARYING(150);",
+	"alter table ctlg_order_by add column if not exists user_table_id int;",
+	"alter table ctlg_order_by add column if not exists index CHARACTER VARYING(20);",
+	"alter table ctlg_order_by add column if not exists is_default bool;",
+	"alter table ctlg_order_by add column if not exists order_by_str text;",
+	"alter table ctlg_order_by add column if not exists search_text text;"
+]

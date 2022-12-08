@@ -1,4 +1,4 @@
-package ctlgTaskState
+package c
 
 import (
 	t "github.com/pepelazz/nla_framework/types"
@@ -7,15 +7,15 @@ import (
 
 const (
 	name            = "ctlg_task_state"
-	name_ru         = "статус задачи"
-	name_ru_plural  = "статусы задач"
+	name_ru         = "состояние задачи"
+	name_ru_plural  = "состояния задачи"
 	menu_icon       = "image/catalog.svg"
 	breadcrumb_icon = "fas fa-list-ul"
 )
 
 func GetDoc(project *t.ProjectType) t.DocType {
 	doc := t.DocType{
-		Project: project,
+		Project:    project,
 		Name:       name,
 		NameRu:     name_ru,
 		PathPrefix: "docs",

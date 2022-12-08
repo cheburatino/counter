@@ -22,7 +22,8 @@ func GetDoc(project *t.ProjectType) t.DocType {
 		Flds: []t.FldType{
 			t.GetFldTitle().SetIsNotUniq(),
 			t.GetFldRef("type_id", "тип задачи", "ctlg_task_type", [][]int{{1, 2}}, "col-2"),
-			t.GetFldRef("state_id", "статус", "ctlg_task_state", [][]int{{1, 3}}, "col-2").SetDefault("1"),
+			t.GetFldRef("stage_id", "этап", "ctlg_task_stage", [][]int{{1, 3}}, "col-1").SetDefault("1").SetIsRequired(),
+			t.GetFldRef("state_id", "статус", "ctlg_task_state", [][]int{{1, 4}}, "col-1").SetDefault("1").SetIsRequired(),
 			t.GetFldRef("system_id", "система", "system", [][]int{{2, 1}}, "isShowLink", "isClearable"),
 			t.GetFldRef("work_time_sheet_id", "лурв", "work_time_sheet", [][]int{{2, 2}}, "col-2", "isShowLink", "isClearable"),
 			t.GetFldRef("technical_task_id", "тз", "technical_task", [][]int{{2, 3}}, "col-2", "isShowLink", "isClearable"),
@@ -43,6 +44,10 @@ func GetDoc(project *t.ProjectType) t.DocType {
 			t.GetFldString("result", "результатос", 0, [][]int{{9, 1}}, "col-8"),
 			t.GetFldFiles("result_files", "файлы результата", [][]int{{10, 1}}, t.FldVueFilesParams{}),
 			t.GetFldImgList("result_images", "изображения результата", [][]int{{10, 2}}, t.FldVueImgParams{}),
+			t.GetFldJsonbComposition("history", "история", [][]int{{11, 2}}, "col-4", "history"),
+			t.GetFldJsonbComposition("related_history", "связанная история", [][]int{{11, 2}}, "col-4", "relatedHistory"),
+			t.GetFldRef("executor_responsible_id", "ответственный исполнитель", "contact", [][]int{{12, 1}}, "isShowLink", "isClearable"),
+			t.GetFldRef("customer_responsible_id", "ответственный заказчик", "contact", [][]int{{12, 2}}, "isShowLink", "isClearable"),
 		},
 		Vue: t.DocVue{
 			RouteName:      name,
@@ -51,9 +56,9 @@ func GetDoc(project *t.ProjectType) t.DocType {
 			Roles:          []string{},
 		},
 		Templates: map[string]*t.DocTemplate{
-			"sql_function_list.sql": {},
-			"webClient_index.vue":   {},
-			"webClient_item.vue":    {},
+			"sql_function_update.sql":           {},
+			"sql_function_save_history.sql":     {},
+			"sql_function_change_plan_date.sql": {},
 		},
 		IsBaseTemplates: t.DocIsBaseTemplates{true, true},
 		Sql: t.DocSql{
@@ -61,8 +66,8 @@ func GetDoc(project *t.ProjectType) t.DocType {
 			IsBeforeTrigger: true,
 			IsAfterTrigger:  true,
 			Methods: map[string]*t.DocSqlMethod{
-				"task_get_specialist":      {Name: "task_get_specialist"},
-				"task_get_specialist_role": {Name: "task_get_specialist_role"},
+				"task_save_history":     {Name: "task_save_history"},
+				"task_change_plan_date": {Name: "task_change_plan_date"},
 			},
 			Hooks: t.DocSqlHooks{
 				BeforeTriggerBefore: []string{`

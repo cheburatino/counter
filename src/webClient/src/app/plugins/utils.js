@@ -206,6 +206,22 @@ const i18n_ctlg_order_by_index = (v) => {
 	return Array.isArray(v) ? v.map(v1 => d[v1]) : d[v]
 }
 				
+const i18n_plan_date_change_direction = (v) => {
+	const d = {
+		'boost': 'ускорение',
+		'slowdown': 'замедление'
+	}
+	return Array.isArray(v) ? v.map(v1 => d[v1]) : d[v]
+}
+				
+const color_plan_date_change_direction = (v) => {
+	const d = {
+		'boost': 'positive',
+		'slowdown': 'negative'
+	}
+	return Array.isArray(v) ? v.map(v1 => d[v1]) : d[v]
+}
+				
 
 export default {
   postApiRequest,
@@ -224,6 +240,8 @@ export default {
   _,
   i18n_ctlg_filter_index,
 	i18n_ctlg_order_by_index,
+	i18n_plan_date_change_direction,
+	color_plan_date_change_direction,
 	
 }
 

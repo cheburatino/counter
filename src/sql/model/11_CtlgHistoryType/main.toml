@@ -1,0 +1,43 @@
+docType = "CtlgHistoryType"
+tableComment = "тип истории"
+
+tableName ="ctlg_history_type"
+
+fields = [
+	{name="id",			type="serial"},
+	{name="title",					type="char",	size=150, 	ext="not null",	 comment="название"},
+	{name="entity",					type="char",	size=20,	 comment="сущность"},
+	{name="icon",					type="char",	size=30,	 comment="иконка"},
+	{name="color",					type="char",	size=30,	 comment="цвет"},
+	{name="search_text",			type="text",	comment="колонка для поиска"},
+	{name="options",				type="jsonb",	comment="разные дополнительные параметры"},
+	{name="created_at",				type="timestamp",	ext="with time zone"},
+	{name="updated_at",				type="timestamp",	ext="with time zone"},
+	{name="deleted",				type="bool",	ext="not null default false"}
+]
+
+
+
+triggers = [
+	{name="ctlg_history_type_created", when="before insert or update", ref="for each row", funcName="builtin_fld_update"},
+	{name="ctlg_history_type_trigger_before", when="before insert or update", ref="for each row", funcName="ctlg_history_type_trigger_before"},
+	{name="ctlg_history_type_trigger_after", when="after insert or update", ref="for each row", funcName="ctlg_history_type_trigger_after"}
+]
+
+
+
+methods = [
+	"ctlg_history_type_list",
+	"ctlg_history_type_update",
+	"ctlg_history_type_get_by_id",
+	"ctlg_history_type_trigger_before",
+	"ctlg_history_type_trigger_after"
+]
+
+alterScripts = [
+	"alter table ctlg_history_type add column if not exists title CHARACTER VARYING(150);",
+	"alter table ctlg_history_type add column if not exists entity CHARACTER VARYING(20);",
+	"alter table ctlg_history_type add column if not exists icon CHARACTER VARYING(30);",
+	"alter table ctlg_history_type add column if not exists color CHARACTER VARYING(30);",
+	"alter table ctlg_history_type add column if not exists search_text text;"
+]

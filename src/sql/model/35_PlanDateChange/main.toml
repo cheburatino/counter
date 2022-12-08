@@ -1,0 +1,61 @@
+docType = "PlanDateChange"
+tableComment = "изменение плановой даты"
+
+tableName ="plan_date_change"
+
+fields = [
+	{name="id",			type="serial"},
+	{name="title",					type="text",	 comment="название"},
+	{name="task_id",					type="int",	 comment="задача"},
+	{name="work_day_quantity",					type="int",	 comment="кол-во рабочих дней"},
+	{name="direction",					type="char",	size=20,	 comment="направление"},
+	{name="old_plan_date",					type="timestamp",	 comment="старая дата"},
+	{name="new_plan_date",					type="timestamp",	 comment="новая дата"},
+	{name="reason",					type="text",	 comment="причина"},
+	{name="side_id",					type="int",	 comment="на чьей стороне причина"},
+	{name="customer_confirm",					type="bool", 	ext=" default false",	 comment="подтверждено заказчиком"},
+	{name="customer_confirm_datetime",					type="timestamp",	 comment="дата и время подтверждения заказчиком"},
+	{name="author_id",					type="int",	 comment="автор"},
+	{name="search_text",			type="text",	comment="колонка для поиска"},
+	{name="options",				type="jsonb",	comment="разные дополнительные параметры"},
+	{name="created_at",				type="timestamp",	ext="with time zone"},
+	{name="updated_at",				type="timestamp",	ext="with time zone"},
+	{name="deleted",				type="bool",	ext="not null default false"}
+]
+
+fkConstraints = [
+	{fld="task_id", ref="task", fk="id"},
+	{fld="side_id", ref="ctlg_plan_date_change_side", fk="id"},
+{fld="author_id", ref="\"user\"", fk="id"}
+]
+
+triggers = [
+	{name="plan_date_change_created", when="before insert or update", ref="for each row", funcName="builtin_fld_update"},
+	{name="plan_date_change_trigger_before", when="before insert or update", ref="for each row", funcName="plan_date_change_trigger_before"},
+	{name="plan_date_change_trigger_after", when="after insert or update", ref="for each row", funcName="plan_date_change_trigger_after"}
+]
+
+
+
+methods = [
+	"plan_date_change_get_by_id",
+	"plan_date_change_list",
+	"plan_date_change_update",
+	"plan_date_change_trigger_before",
+	"plan_date_change_trigger_after"
+]
+
+alterScripts = [
+	"alter table plan_date_change add column if not exists title text;",
+	"alter table plan_date_change add column if not exists task_id int;",
+	"alter table plan_date_change add column if not exists work_day_quantity int;",
+	"alter table plan_date_change add column if not exists direction CHARACTER VARYING(20);",
+	"alter table plan_date_change add column if not exists old_plan_date timestamp;",
+	"alter table plan_date_change add column if not exists new_plan_date timestamp;",
+	"alter table plan_date_change add column if not exists reason text;",
+	"alter table plan_date_change add column if not exists side_id int;",
+	"alter table plan_date_change add column if not exists customer_confirm bool;",
+	"alter table plan_date_change add column if not exists customer_confirm_datetime timestamp;",
+	"alter table plan_date_change add column if not exists author_id int;",
+	"alter table plan_date_change add column if not exists search_text text;"
+]
