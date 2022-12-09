@@ -36,9 +36,6 @@ func GetDoc(project *t.ProjectType) t.DocType {
 			t.GetFldString("description", "описание", 0, [][]int{{4, 1}}, "col-8"),
 			t.GetFldFiles("files", "файлы", [][]int{{5, 1}}, t.FldVueFilesParams{}),
 			t.GetFldImgList("images", "изображения", [][]int{{5, 2}}, t.FldVueImgParams{}),
-			t.GetFldString("process", "процесс", 0, [][]int{{6, 1}}, "col-8"),
-			t.GetFldFiles("process_files", "файлы процесса", [][]int{{7, 1}}, t.FldVueFilesParams{}),
-			t.GetFldImgList("process_images", "изображения процесса", [][]int{{7, 2}}, t.FldVueImgParams{}),
 			// Работы {{8, 1}}
 			// Задачи заказчика {{8, 2}}
 			t.GetFldString("result", "результатос", 0, [][]int{{9, 1}}, "col-8"),
@@ -56,9 +53,9 @@ func GetDoc(project *t.ProjectType) t.DocType {
 			Roles:          []string{},
 		},
 		Templates: map[string]*t.DocTemplate{
-			"sql_function_update.sql":           {},
-			"sql_function_save_history.sql":     {},
-			"sql_function_change_plan_date.sql": {},
+			"sql_function_update.sql":               {},
+			"sql_function_save_history.sql":         {},
+			"sql_function_change_plan_end_date.sql": {},
 		},
 		IsBaseTemplates: t.DocIsBaseTemplates{true, true},
 		Sql: t.DocSql{
@@ -66,8 +63,8 @@ func GetDoc(project *t.ProjectType) t.DocType {
 			IsBeforeTrigger: true,
 			IsAfterTrigger:  true,
 			Methods: map[string]*t.DocSqlMethod{
-				"task_save_history":     {Name: "task_save_history"},
-				"task_change_plan_date": {Name: "task_change_plan_date"},
+				"task_save_history":         {Name: "task_save_history"},
+				"task_change_plan_end_date": {Name: "task_change_plan_end_date"},
 			},
 			Hooks: t.DocSqlHooks{
 				BeforeTriggerBefore: []string{`

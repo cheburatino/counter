@@ -1,0 +1,6 @@
+do $$
+declare
+
+begin
+
+end $$;

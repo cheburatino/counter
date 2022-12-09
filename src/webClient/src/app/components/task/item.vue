@@ -70,18 +70,11 @@
       </div>
       
       <div class="row q-col-gutter-md q-mb-sm">
-      <div class="col-md-8 col-sm-12 col-xs-12">
-          <q-input outlined type='text' v-model="item.process" :label="$t('task.process')" autogrow :readonly='false'  class='q-mb-sm col-md-8 col-sm-12 col-xs-12' />
-      </div>
+          not found vueFldTemplate for type ``
       </div>
       
       <div class="row q-col-gutter-md q-mb-sm">
-      <div class="col-md-4 col-sm-6 col-xs-12">
-          <comp-fld-files v-if="this.id != 'new'" fldName='process_files' :label="$t('task.process_files')" :fld='item.process_files' :ext = '{tableName: "task", tableId: this.id}' @update="v=> item.process_files = v" :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
-      </div>
-      <div class="col-md-4 col-sm-6 col-xs-12">
-          <comp-fld-img-list v-if="this.id != 'new'" :label="$t('task.process_images')" :fld='item.process_images' :ext = '{tableName: "task", tableId: this.id, fldName: "process_images"}' @update="v=> item.process_images = v" :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
-      </div>
+          not found vueFldTemplate for type ``
       </div>
       
       <div class="row q-col-gutter-md q-mb-sm">
@@ -178,9 +171,6 @@
                         {name: 'description', label: 'описание'},
                         {name: 'files', label: 'файлы'},
                         {name: 'images', label: 'изображения'},
-                        {name: 'process', label: 'процесс'},
-                        {name: 'process_files', label: 'файлы процесса'},
-                        {name: 'process_images', label: 'изображения процесса'},
                         {name: 'result', label: 'результатос'},
                         {name: 'result_files', label: 'файлы результата'},
                         {name: 'result_images', label: 'изображения результата'},

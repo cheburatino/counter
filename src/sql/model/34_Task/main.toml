@@ -21,9 +21,6 @@ fields = [
 	{name="description",					type="text",	 comment="описание"},
 	{name="files",					type="jsonb",	 comment="файлы"},
 	{name="images",					type="jsonb",	 comment="изображения"},
-	{name="process",					type="text",	 comment="процесс"},
-	{name="process_files",					type="jsonb",	 comment="файлы процесса"},
-	{name="process_images",					type="jsonb",	 comment="изображения процесса"},
 	{name="result",					type="text",	 comment="результатос"},
 	{name="result_files",					type="jsonb",	 comment="файлы результата"},
 	{name="result_images",					type="jsonb",	 comment="изображения результата"},
@@ -59,7 +56,7 @@ triggers = [
 
 methods = [
 	"task_save_history",
-	"task_change_plan_date",
+	"task_change_plan_end_date",
 	"task_list",
 	"task_update",
 	"task_get_by_id",
@@ -84,9 +81,6 @@ alterScripts = [
 	"alter table task add column if not exists description text;",
 	"alter table task add column if not exists files jsonb;",
 	"alter table task add column if not exists images jsonb;",
-	"alter table task add column if not exists process text;",
-	"alter table task add column if not exists process_files jsonb;",
-	"alter table task add column if not exists process_images jsonb;",
 	"alter table task add column if not exists result text;",
 	"alter table task add column if not exists result_files jsonb;",
 	"alter table task add column if not exists result_images jsonb;",

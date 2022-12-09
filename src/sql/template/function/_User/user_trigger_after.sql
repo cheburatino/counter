@@ -18,8 +18,8 @@ if new.fullname != old.fullname OR new.avatar != old.avatar then
  for r in select * from contact where user_table_id = new.id loop
  update contact set updated_at=now() where id = r.id;
  end loop;
- for r in select * from plan_date_change where author_id = new.id loop
- update plan_date_change set updated_at=now() where id = r.id;
+ for r in select * from plan_end_date_change where author_id = new.id loop
+ update plan_end_date_change set updated_at=now() where id = r.id;
  end loop;
  for r in select * from man where user_table_id = new.id loop
  update man set updated_at=now() where id = r.id;

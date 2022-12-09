@@ -81,7 +81,7 @@
 
 									{icon: 'image/customer_task.png', text: 'i18n_menu.customer_task', url: '/customer_task', roles: []},
 
-									{icon: 'image/plan_date_change.png', text: 'i18n_menu.plan_date_change', url: '/plan_date_change', roles: []},
+									{icon: 'image/plan_end_date_change.png', text: 'i18n_menu.plan_end_date_change', url: '/plan_end_date_change', roles: []},
 {isFolder: true, icon: 'image/crm.png', text: 'CRM', roles: ['admin'], linkList: 								[
 								{icon: '', text: 'Компании', url: '/company', roles: []},
 								{icon: '', text: 'Юр.лица', url: '/legal_entity', roles: []},
@@ -109,7 +109,7 @@
 								{icon: '', text: 'Статусы счетов', url: '/ctlg_invoice_state', roles: []},
 								{icon: '', text: 'Типы истории', url: '/ctlg_history_type', roles: []},
 								{icon: '', text: 'Типы задач', url: '/ctlg_task_type', roles: []},
-								{icon: '', text: 'Из-за кого изменилась плановая дата', url: '/ctlg_plan_date_change_side', roles: []},
+								{icon: '', text: 'Из-за кого изменилась плановая дата завершения', url: '/ctlg_plan_end_date_change_side', roles: []},
 								{icon: '', text: 'Фильтры', url: '/ctlg_filter', roles: []},
 								{icon: '', text: 'Сортировки', url: '/ctlg_order_by', roles: []},
 ],},

@@ -13,7 +13,7 @@ import (
 	"github.com/cheburatino/electron_is/projectTemplate/docs/ctlgInvoiceState"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/ctlgMeetingState"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/ctlgOrderBy"
-	"github.com/cheburatino/electron_is/projectTemplate/docs/ctlgPlanDateChangeSide"
+	"github.com/cheburatino/electron_is/projectTemplate/docs/ctlgPlanEndDateChangeSide"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/ctlgSystemState"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/ctlgTaskStage"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/ctlgTaskType"
@@ -27,7 +27,7 @@ import (
 	"github.com/cheburatino/electron_is/projectTemplate/docs/man"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/meeting"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/payment"
-	"github.com/cheburatino/electron_is/projectTemplate/docs/planDateChange"
+	"github.com/cheburatino/electron_is/projectTemplate/docs/planEndDateChange"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/system"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/task"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/technicalTask"
@@ -57,7 +57,7 @@ func getProject() t.ProjectType {
 	p.FillI18n()
 
 	p.Docs = []t.DocType{
-		ctlgPlanDateChangeSide.GetDoc(p),
+		ctlgPlanEndDateChangeSide.GetDoc(p),
 		ctlgHystoryType.GetDoc(p),
 		ctlgSystemState.GetDoc(p),
 		ctlgMeetingState.GetDoc(p),
@@ -82,7 +82,7 @@ func getProject() t.ProjectType {
 		workTimeSheet.GetDoc(p),
 		technicalTask.GetDoc(p),
 		task.GetDoc(p),
-		planDateChange.GetDoc(p),
+		planEndDateChange.GetDoc(p),
 		meeting.GetDoc(p),
 		man.GetDoc(p),
 		customerTask.GetDoc(p),
@@ -122,7 +122,7 @@ func getProject() t.ProjectType {
 		{DocName: "time", Roles: []string{utils.RoleAdmin}},
 		{DocName: "meeting"},
 		{DocName: "customer_task"},
-		{DocName: "plan_date_change"},
+		{DocName: "plan_end_date_change"},
 		{Text: "CRM", Icon: "image/crm.png", IsFolder: true, Roles: []string{utils.RoleAdmin}, LinkList: []t.VueMenu{
 			{Text: "Компании", Url: "company"},
 			{Text: "Юр.лица", Url: "legal_entity"},
@@ -150,7 +150,7 @@ func getProject() t.ProjectType {
 			{Text: "Статусы счетов", Url: "ctlg_invoice_state"},
 			{Text: "Типы истории", Url: "ctlg_history_type"},
 			{Text: "Типы задач", Url: "ctlg_task_type"},
-			{Text: "Из-за кого изменилась плановая дата", Url: "ctlg_plan_date_change_side"},
+			{Text: "Из-за кого изменилась плановая дата завершения", Url: "ctlg_plan_end_date_change_side"},
 			{Text: "Фильтры", Url: "ctlg_filter"},
 			{Text: "Сортировки", Url: "ctlg_order_by"},
 		}},

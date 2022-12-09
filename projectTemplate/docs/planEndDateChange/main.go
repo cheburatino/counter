@@ -1,4 +1,4 @@
-package planDateChange
+package planEndDateChange
 
 import (
 	t "github.com/pepelazz/nla_framework/types"
@@ -6,10 +6,10 @@ import (
 )
 
 const (
-	name            = "plan_date_change"
-	name_ru         = "изменение плановой даты"
-	name_ru_plural  = "изменения плановой даты"
-	menu_icon       = "image/plan_date_change.png"
+	name            = "plan_end_date_change"
+	name_ru         = "изменение плановой даты завершение"
+	name_ru_plural  = "изменения плановой даты завершения"
+	menu_icon       = "image/plan_end_date_change.png"
 	breadcrumb_icon = "fas fa-list-ul"
 )
 
@@ -27,10 +27,10 @@ func GetDoc(project *t.ProjectType) t.DocType {
 				{Label: "ускорение", Value: "boost", Color: "positive"},
 				{Label: "замедление", Value: "slowdown", Color: "negative"},
 			}),
-			t.GetFldDate("old_plan_date", "старая дата", [][]int{{3, 1}}),
-			t.GetFldDate("new_plan_date", "новая дата", [][]int{{3, 2}}),
+			t.GetFldDate("old_plan_end_date", "старая дата", [][]int{{3, 1}}),
+			t.GetFldDate("new_plan_end_date", "новая дата", [][]int{{3, 2}}),
 			t.GetFldString("reason", "причина", 0, [][]int{{4, 1}}, "col-8"),
-			t.GetFldRef("side_id", "на чьей стороне причина", "ctlg_plan_date_change_side", [][]int{{5, 1}}),
+			t.GetFldRef("side_id", "на чьей стороне причина", "ctlg_plan_end_date_change_side", [][]int{{5, 1}}),
 			t.GetFldCheckbox("customer_confirm", "подтверждено заказчиком", [][]int{{6, 1}}).SetDefault("false"),
 			t.GetFldDateTime("customer_confirm_datetime", "дата и время подтверждения заказчиком", [][]int{{7, 1}}),
 			t.GetFldRef("author_id", "автор", "user", [][]int{{8, 1}}, "isShowLink", "isClearable"),

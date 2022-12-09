@@ -1,4 +1,4 @@
-package ctlgPlanDateChangeSide
+package ctlgPlanEndDateChangeSide
 
 import (
 	t "github.com/pepelazz/nla_framework/types"
@@ -6,9 +6,9 @@ import (
 )
 
 const (
-	name            = "ctlg_plan_date_change_side"
-	name_ru         = "из-за кого изменилась плановая дата"
-	name_ru_plural  = "из-за кого изменилась плановая дата"
+	name            = "ctlg_plan_end_date_change_side"
+	name_ru         = "из-за кого изменилась плановая дата завершения"
+	name_ru_plural  = "из-за кого изменилась плановая дата завершения"
 	menu_icon       = "image/catalog.svg"
 	breadcrumb_icon = "fas fa-list-ul"
 )

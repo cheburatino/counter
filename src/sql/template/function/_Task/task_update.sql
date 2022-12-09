@@ -25,7 +25,7 @@ BEGIN
     END IF;
 
     -- проверка наличия изменений по задаче, которые надо записать в историю
-    historyParam = task_save_history(jsonb_build_object('update_params', params));
+    historyParam = task_save_history(params);
     params = params || jsonb_build_object('history', historyParam);
 
     if (params ->> 'id')::int = -1 then
@@ -37,12 +37,13 @@ BEGIN
         END IF;
         
 
-        EXECUTE ('INSERT INTO task (title, type_id, state_id, system_id, work_time_sheet_id, technical_task_id, plan_end_date, fact_end_date, specialist_priority, estimate, worked_time, today, description, files, images, process, process_files, process_images, result, result_files, result_images, history, options) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21, $22, $23)  RETURNING *;')
+        EXECUTE ('INSERT INTO task (title, type_id, state_id, stage_id, system_id, work_time_sheet_id, technical_task_id, plan_end_date, fact_end_date, specialist_priority, estimate, worked_time, today, description, files, images, process, process_files, process_images, result, result_files, result_images, history, options) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21, $22, $23, $24)  RETURNING *;')
 		INTO taskRow
 		USING
 			(params ->> 'title')::text,
 			(params ->> 'type_id')::int,
 			coalesce((params ->> 'state_id')::int, 1)::int,
+			coalesce((params ->> 'stage_id')::int, 1)::int,
 			(params ->> 'system_id')::int,
 			(params ->> 'work_time_sheet_id')::int,
 			(params ->> 'technical_task_id')::int,
@@ -69,6 +70,7 @@ BEGIN
 			['title', 'title', 'text'],
 			['type_id', 'type_id', 'number'],
 			['state_id', 'state_id', 'number'],
+			['stage_id', 'stage_id', 'number'],
 			['system_id', 'system_id', 'number'],
 			['work_time_sheet_id', 'work_time_sheet_id', 'number'],
 			['technical_task_id', 'technical_task_id', 'number'],
