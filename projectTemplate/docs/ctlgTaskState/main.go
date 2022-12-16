@@ -1,4 +1,4 @@
-package c
+package ctlgTaskState
 
 import (
 	t "github.com/pepelazz/nla_framework/types"

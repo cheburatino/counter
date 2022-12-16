@@ -16,6 +16,7 @@ import (
 	"github.com/cheburatino/electron_is/projectTemplate/docs/ctlgPlanEndDateChangeSide"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/ctlgSystemState"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/ctlgTaskStage"
+	"github.com/cheburatino/electron_is/projectTemplate/docs/ctlgTaskState"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/ctlgTaskType"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/ctlgTechnicalTaskState"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/ctlgTechnicalTaskWorkState"
@@ -35,7 +36,6 @@ import (
 	"github.com/cheburatino/electron_is/projectTemplate/docs/work"
 	"github.com/cheburatino/electron_is/projectTemplate/docs/workTimeSheet"
 	"github.com/cheburatino/electron_is/projectTemplate/utils"
-	"github.com/cheburatino/pim/projectTemplate/docs/ctlgTaskState"
 	"github.com/otiai10/copy"
 	"github.com/pepelazz/nla_framework"
 	t "github.com/pepelazz/nla_framework/types"
@@ -110,9 +110,9 @@ func getProject() t.ProjectType {
 
 	p.Config.Graylog = t.GraylogConfig{Host: "85.143.214.161", Port: 12201}
 
-	//p.Vue.Theme = t.VueTheme{
-	//	IsDarkThemeExist: true,
-	//}
+	p.Vue.Theme = t.VueTheme{
+		IsDarkThemeExist: true,
+	}
 
 	// боковое меню для Vue
 	p.Vue.Menu = []t.VueMenu{

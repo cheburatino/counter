@@ -35,8 +35,8 @@ func GetDoc(project *t.ProjectType) t.DocType {
 			t.GetFldFiles("description_files", "файлы описания", [][]int{{5, 1}}, t.FldVueFilesParams{}),
 			t.GetFldImgList("description_images", "изображения описания", [][]int{{5, 2}}, t.FldVueImgParams{}),
 			t.GetFldString("process", "процесс", 0, [][]int{{6, 1}}, "col-8"),
-			t.GetFldFiles("process_files", "файлы результата", [][]int{{7, 1}}, t.FldVueFilesParams{}),
-			t.GetFldImgList("process_images", "изображения результата", [][]int{{7, 2}}, t.FldVueImgParams{}),
+			t.GetFldFiles("process_files", "файлы процесса", [][]int{{7, 1}}, t.FldVueFilesParams{}),
+			t.GetFldImgList("process_images", "изображения процесса", [][]int{{7, 2}}, t.FldVueImgParams{}),
 			t.GetFldString("result", "результат", 0, [][]int{{9, 1}}, "col-8"),
 			t.GetFldFiles("result_files", "файлы результата", [][]int{{10, 1}}, t.FldVueFilesParams{}),
 			t.GetFldImgList("result_images", "изображения результата", [][]int{{10, 2}}, t.FldVueImgParams{}),
@@ -48,8 +48,10 @@ func GetDoc(project *t.ProjectType) t.DocType {
 			Roles:          []string{},
 		},
 		Templates: map[string]*t.DocTemplate{
-			"sql_function_list.sql": {},
-			"webClient_index.vue":   {},
+			"sql_function_list.sql":     {},
+			"webClient_index.vue":       {},
+			"webClient_item.vue":        {Source: "docs/work/tmpl/webClient_item.vue"},
+			"webClient_TimeCounter.vue": {Source: "docs/work/tmpl/webClient_TimeCounter.vue", DistPath: "../src/webClient/src/app/components/work/comp", DistFilename: "TimeCounter.vue"},
 		},
 		IsBaseTemplates: t.DocIsBaseTemplates{true, true},
 		Sql: t.DocSql{

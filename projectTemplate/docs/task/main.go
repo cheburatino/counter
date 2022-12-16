@@ -53,9 +53,15 @@ func GetDoc(project *t.ProjectType) t.DocType {
 			Roles:          []string{},
 		},
 		Templates: map[string]*t.DocTemplate{
-			"sql_function_update.sql":               {},
-			"sql_function_save_history.sql":         {},
-			"sql_function_change_plan_end_date.sql": {},
+			"sql_function_update.sql":                     {},
+			"sql_function_save_history.sql":               {},
+			"sql_function_change_plan_end_date.sql":       {},
+			"webClient_item.vue":                          {Source: "docs/task/tmpl/webClient_item.vue"},
+			"webClient_index.vue":                         {Source: "docs/task/tmpl/webClient_index.vue"},
+			"webClient_planEndDateChangeDialogButton.vue": {Source: "docs/task/tmpl/webClient_planEndDateChangeDialogButton.vue", DistPath: "../src/webClient/src/app/components/task/comp", DistFilename: "planEndDateChangeDialogButton.vue"},
+			"webClient_timelineDialogButton.vue":          {Source: "docs/task/tmpl/webClient_timelineDialogButton.vue", DistPath: "../src/webClient/src/app/components/task/comp", DistFilename: "timelineDialogButton.vue"},
+			"webClient_taskDeleteButton.vue":              {Source: "docs/task/tmpl/webClient_taskDeleteButton.vue", DistPath: "../src/webClient/src/app/components/task/comp", DistFilename: "taskDeleteButton.vue"},
+			"webClient_taskAddButton.vue.vue":             {Source: "docs/task/tmpl/webClient_taskAddButton.vue", DistPath: "../src/webClient/src/app/components/task/comp", DistFilename: "taskAddButton.vue"},
 		},
 		IsBaseTemplates: t.DocIsBaseTemplates{true, true},
 		Sql: t.DocSql{

@@ -345,7 +345,9 @@ createQuasarApp(createApp, quasarUserOptions)
       
       import(/* webpackMode: "eager" */ 'boot/myCommon'),
       
-      import(/* webpackMode: "eager" */ 'boot/i18n')
+      import(/* webpackMode: "eager" */ 'boot/i18n'),
+      
+      import(/* webpackMode: "eager" */ 'quasar-app-extension-qgrid/src/boot/register.js')
       
     ]).then(bootFiles => {
       const boot = bootFiles

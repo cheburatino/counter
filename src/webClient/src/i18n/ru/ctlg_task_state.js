@@ -1,7 +1,7 @@
 
 export default {
+ 		name: 'состояние задачи',
+ 		name_plural: 'Состояния задачи',
+ 		name_plural_deleted: 'удаленные Состояния задачи',
  		title: 'название',
- 		name: 'статус задачи',
- 		name_plural: 'Статусы задач',
- 		name_plural_deleted: 'удаленные Статусы задач',
 }

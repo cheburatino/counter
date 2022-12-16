@@ -1,4 +1,4 @@
--- создание статус задачи
+-- создание состояние задачи
 
 DROP FUNCTION IF EXISTS ctlg_task_state_update(params JSONB);
 CREATE OR REPLACE FUNCTION ctlg_task_state_update(params JSONB)

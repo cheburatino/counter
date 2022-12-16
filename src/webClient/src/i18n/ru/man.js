@@ -1,13 +1,13 @@
 
 export default {
- 		company_id: 'компания',
- 		last_name: 'фамилия',
- 		first_name: 'имя',
  		user_table_id: 'пользователь',
- 		title: 'название',
- 		middle_name: 'отчество',
  		position: 'должность',
  		name: 'контакт',
+ 		title: 'название',
+ 		first_name: 'имя',
+ 		middle_name: 'отчество',
  		name_plural: 'Контакты',
  		name_plural_deleted: 'удаленные Контакты',
+ 		last_name: 'фамилия',
+ 		company_id: 'компания',
 }
