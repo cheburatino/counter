@@ -34,9 +34,9 @@ triggers = [
 
 
 methods = [
+	"contact_get_by_id",
 	"contact_list",
 	"contact_update",
-	"contact_get_by_id",
 	"contact_trigger_before",
 	"contact_trigger_after"
 ]

@@ -3,7 +3,8 @@
   <q-dialog v-model="isPlayDialog">
     <q-card class="q-pa-md q-gutter-sm">
       <h4>Создать время?</h4>
-      <q-btn rounded push icon="local_fire_department" color="secondary" size="xl" label="Ну погнали" @click="createTime"/>
+      <q-btn rounded push icon="local_fire_department" color="secondary" size="xl" label="Ну погнали"
+             @click="createTime"/>
     </q-card>
   </q-dialog>
   <div class="q-col">
@@ -12,9 +13,9 @@
 
         <!--      кнопки запуска и паузы секундомера-->
         <div class="q-pa-md q-gutter-sm">
-          <q-btn rounded push icon="play_arrow" color="secondary" size="xl" @click="playDialog" v-if="!isCounting"/>
-          <q-btn rounded push icon="pause" color="warning" size="xl" @click="stopCountdown" v-if="isCounting"/>
-          <q-btn rounded push icon="done" color="positive" size="xl" @click="stopCountdown" v-if="!isCounting && elapsedSeconds"/>
+          <q-btn rounded push icon="play_arrow" color="secondary" size="xl" @click="counterPlay" v-if="!isCounting"/>
+          <q-btn rounded push icon="pause" color="warning" size="xl" @click="counterPause" v-if="isCounting"/>
+          <q-btn rounded push icon="done" color="positive" size="xl" @click="counterDone" v-if="!isCounting && elapsedSeconds"/>
         </div>
 
         <!--      секундомер-->
@@ -29,8 +30,7 @@
 </template>
 
 <script>
-import {computed, ref, watch} from 'vue'
-import moment from 'moment'
+import {computed, onBeforeUnmount, ref} from 'vue'
 import $utils from 'src/app/plugins/utils'
 
 export default {
@@ -59,31 +59,59 @@ export default {
     // переменная активного времени
     const activeTime = ref(null)
 
+    // переменная значения секундомера
+    const counterValue = computed(() => {
+      // если время активно и нет counter_start_time
+      if (activeTime.value && activeTime.value.state_id === 1 && !activeTime.value.counter_start_time) {
+        if (activeTime.value.effort > 0) {
+          counterDisplayConvert(activeTime.value.effort * 60)
+          initCountdown()
+        }
+        if (activeTime.value.effort === 0) {
+          counterDisplayConvert(Math.ceil((Date.now() - Date.parse(activeTime.value.start_time)) / 1000))
+          initCountdown()
+        }
+      }
+      // если время активно и есть counter_start_time
+      if (activeTime.value && activeTime.value.state_id === 1 && activeTime.value.counter_start_time) {
+        if (activeTime.value.effort > 0) {
+          counterDisplayConvert(Math.ceil((activeTime.value.effort * 60) + ((Date.now() - Date.parse(activeTime.value.counter_start_time)) / 1000)))
+          initCountdown()
+        }
+        else return 0
+      }
+      // если время на паузе
+      if (activeTime.value && activeTime.value.state_id === 2) {
+        if (activeTime.value.effort > 0) {
+          counterDisplayConvert(activeTime.value.effort * 60)
+        }
+        else return 0
+      }
+      return elapsedSeconds.value
+    })
+
     // добавление одной секунды в дисплей
     const addOneSecond = () => {
-      counterDisplay.value = moment(counterDisplay.value, 'mm:ss').add(1, 'seconds').format('mm:ss')
+      // console.log(elapsedSeconds.value)
+      // counterDisplay.value = moment(counterDisplay.value, 'mm:ss').add(1, 'seconds').format('mm:ss')
+      // if (elapsedSeconds.value > 60) counterDisplay.value = moment(counterDisplay.value, 'mm:ss').add(1, 'seconds').format('mm:ss')
+      // if (elapsedSeconds.value < 60) counterDisplay.value = moment(counterDisplay.value, 'hh:mm').add(1, 'seconds').format('hh:mm')
       elapsedSeconds.value++
+      counterDisplayConvert(elapsedSeconds.value)
     }
 
-
+    // корректный ввод времени в секундомер
     const counterDisplayConvert = (secondsElapsed) => {
-      const hours = Math.floor(secondsElapsed % (3600 * 60) / 60 / 60)
-      const minutes = Math.floor((secondsElapsed % 3600) / 60)
-      const seconds = secondsElapsed % 60
       elapsedSeconds.value = secondsElapsed
+      const hours = Math.floor(elapsedSeconds.value % (3600 * 60) / 60 / 60)
+      const minutes = Math.floor((elapsedSeconds.value % 3600) / 60)
+      const seconds = elapsedSeconds.value % 60
 
-      function addZero(value) {
-        return value < 10 ? `0${value}` : value
-      }
+      const addZero = (value) => {return value < 10 ? `0${value}` : value}
 
-      console.log('hours ', hours)
-      console.log('minutes ', minutes)
-      console.log('seconds ', seconds)
-      // if (secondsElapsed) counterDisplay.value = `${hours}:${addZero(minutes)}:${addZero(seconds)}`
-      if (secondsElapsed > 60) counterDisplay.value = `${hours}:${addZero(minutes)}`
-      if (secondsElapsed < 60) counterDisplay.value = `${addZero(minutes)}:${addZero(seconds)}`
+      if (elapsedSeconds.value > 59) counterDisplay.value = `${hours}:${addZero(minutes)}`
+      if (elapsedSeconds.value < 60) counterDisplay.value = `${addZero(minutes)}:${addZero(seconds)}`
     }
-
 
     // запуск секундомера
     const initCountdown = () => {
@@ -99,9 +127,21 @@ export default {
       isCounting.value = false
     }
 
-    // диалоговое окно создания / продолжения Времени
-    const playDialog = () => {
-      isPlayDialog.value = true
+    // кнопка диалогового окна создания / продолжения Времени
+    const counterPlay = () => {
+      if (activeTime.value && activeTime.value.state_id === 2) {
+        $utils.callPgMethod('time_update', {
+          id: activeTime.value.id,
+          effort: Math.ceil(elapsedSeconds.value / 60),
+          counter_start_time: new Date(Date.now() - ((new Date).getTimezoneOffset() * 60 * 1000) ).toISOString(),
+          state_id: 1
+        }, (res) => {
+          getActiveTime()
+          initCountdown()
+          emit('reloadTimeWidget')
+        })
+      }
+      else isPlayDialog.value = true
     }
 
     // создание новой сущности времени и запуск таймера
@@ -109,55 +149,84 @@ export default {
       $utils.callPgMethod('time_update', {
         id: -1,
         work_id: props.item.id,
-        start_time: new Date,
+        start_time: new Date(Date.now() - ((new Date).getTimezoneOffset() * 60 * 1000) ).toISOString(),
         system_id: props.item.system_id,
         state_id: 1
       }, (res) => {
-        console.log(res)
         isPlayDialog.value = false
+        getActiveTime()
         initCountdown()
         emit('reloadTimeWidget')
       })
     }
 
     // определение активного времени
-    $utils.callPgMethod('time_list', {
-      work_id: props.item.id,
-      state_id: 1
-    }, (list) => {
-      if (list[0])
-      $utils.callPgMethod('time_get_by_id', {id: list[0].id}, (res) => {
-        activeTime.value = res
-
+    const getActiveTime = () => {
+      $utils.callPgMethod('time_list', {
+        work_id: props.item.id,
+        order_by: "state_id"
+      }, (list) => {
+        if (list[0])
+          if (list[0].state_id !== 3) {
+            $utils.callPgMethod('time_get_by_id', {id: list[0].id}, (res) => {
+              activeTime.value = res
+              counterValue.value++
+              emit('reloadTimeWidget')
+            })
+          }
+          else activeTime.value = null
       })
-    })
+    }
+    getActiveTime()
 
-    // определение параметров активного времени
-    const counterState = computed(() => {
-      if (activeTime.value) return  activeTime.value.state_id
-      return null
-    })
-
-    const counterValue = computed(() => {
-      if (activeTime.value) {
-        if (activeTime.value.effort > 0) counterDisplayConvert(activeTime.value.effort * 60)
-        if (activeTime.value.effort === 0) counterDisplayConvert(Math.ceil((Date.now() - Date.parse(activeTime.value.start_time)) / 1000))
+    // кнопка паузы секундомера
+    const counterPause = () => {
+      if (activeTime.value.effort === 0) {
+        $utils.callPgMethod('time_update', {
+          id: activeTime.value.id,
+          effort: Math.ceil(elapsedSeconds.value / 60),
+          state_id: 2
+        }, (res) => {
+          emit('reloadTimeWidget')
+          console.log(res)
+          stopCountdown()
+          getActiveTime()
+        })
       }
-      return elapsedSeconds.value
+      if (activeTime.value.effort > 0) {
+        $utils.callPgMethod('time_update', {
+          id: activeTime.value.id,
+          effort: Math.ceil(elapsedSeconds.value / 60),
+          state_id: 2
+        }, (res) => {
+          emit('reloadTimeWidget')
+          stopCountdown()
+          getActiveTime()
+        })
+      }
+    }
+
+    // кнопка завершения секундомера
+    const counterDone = () => {
+      $utils.callPgMethod('time_update', {
+        id: activeTime.value.id,
+        effort: Math.ceil(elapsedSeconds.value / 60),
+        end_time: new Date(Date.now() - ((new Date).getTimezoneOffset() * 60 * 1000) ).toISOString(),
+        state_id: 3
+      }, (res) => {
+        activeTime.value = null
+        elapsedSeconds.value = null
+        emit('reloadTimeWidget')
+        stopCountdown()
+        // getActiveTime()
+        counterDisplay.value = '00:00'
+      })
+    }
+
+    // остановка фронтовой части секундомера при выходе с экрана
+    onBeforeUnmount(() => {
+      stopCountdown()
     })
-
-
-
-
-
-    setTimeout(() => {
-    console.log('counterValue.value', counterValue.value)
-    },500)
-    // $utils.callPgMethod('time_get_by_id', {
-    //   work_id: props.item.work_id
-    // }, (res) => {
-    //   console.log(res)
-    // })
 
     return {
       circleValue,
@@ -167,8 +236,10 @@ export default {
       elapsedSeconds,
       isCounting,
       isPlayDialog,
-      playDialog,
-      createTime
+      counterPlay,
+      createTime,
+      counterPause,
+      counterDone
     }
   }
 }

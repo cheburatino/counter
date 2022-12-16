@@ -1,6 +1,6 @@
 
 export default {
- 		name: 'контакт',
+ 		title: 'название',
  		last_name: 'фамилия',
  		first_name: 'имя',
  		middle_name: 'отчество',
@@ -8,6 +8,6 @@ export default {
  		company_id: 'компания',
  		name_plural: 'Контакты',
  		name_plural_deleted: 'удаленные Контакты',
- 		title: 'название',
  		position: 'должность',
+ 		name: 'контакт',
 }

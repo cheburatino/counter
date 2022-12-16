@@ -101,7 +101,9 @@ func GetDoc(project *t.ProjectType) t.DocType {
 		TitleTemplate: `
                 <q-item-label>{{v.title}}</q-item-label>
                 <q-item-label caption>
-					<q-badge color="orange">{{v.options.title.state_title}}</q-badge>
+					<q-badge color="secondary" v-if="v.state_id === 1">{{v.options.title.state_title}}</q-badge>
+					<q-badge color="warning" v-if="v.state_id === 2">{{v.options.title.state_title}}</q-badge>
+					<q-badge color="grey" v-if="v.state_id === 3">{{v.options.title.state_title}}</q-badge>
 				</q-item-label>
             `, // шаблон для названия в списке (vue синтаксис)
 	}, [][]int{{8, 1}}, "col-4"))
