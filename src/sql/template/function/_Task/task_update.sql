@@ -59,8 +59,6 @@ BEGIN
 			(params ->> 'result')::text,
 			(params -> 'result_files')::jsonb,
 			(params -> 'result_images')::jsonb,
-            (params ->> 'executor_responsible_id')::int,
-            (params ->> 'customer_responsible_id')::int,
             historyParam,
 			coalesce(params -> 'options', '{}')::jsonb;
 
