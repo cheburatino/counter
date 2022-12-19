@@ -6,19 +6,19 @@
       </q-card-section>
       <q-card-section>
         <div>
-<!--          новая плановая дата завершения-->
+          <!--          новая плановая дата завершения-->
           <div>
             <comp-fld-date outlined :label="'новая ' + $t('task.plan_end_date')" :date-string="$utils.formatPgDate(item.plan_end_date)" :readonly='false' @update="v=> planEndDate = v" class='q-mb-sm col-md-4 col-sm-6 col-xs-12'/>
           </div>
-<!--          на чьей стороне причина-->
+          <!--          на чьей стороне причина-->
           <div>
             <comp-fld-ref-search outlined pgMethod="ctlg_plan_end_date_change_side_list" :label="$t('plan_end_date_change.side_id')" :item='item.side_title' :itemId='item.side_id' :ext='{}' @update="v=> sideId = v.id" @clear="sideId = null" :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
           </div>
-<!--          кол-во рабочих дней-->
+          <!--          кол-во рабочих дней-->
           <div>
             <q-input outlined dense type='number' v-model="workDayQuantity" :label="$t('plan_end_date_change.work_day_quantity')" :readonly='false'  class='q-mb-sm col-md-1 col-sm-2 col-xs-4' />
           </div>
-<!--          причина-->
+          <!--          причина-->
           <div>
             <q-input v-model="reason" autogrow label="Причина"/>
           </div>
@@ -34,7 +34,9 @@
   </q-dialog>
 
   <div>
-    <q-btn class="q-ml-sm" icon="event_repeat" size="md" round color="secondary" @click="open()"/>
+    <q-btn class="q-ml-sm" icon="event_repeat" size="md" round color="secondary" @click="open()">
+      <q-tooltip anchor="top middle" self="bottom middle" :offset="[10, 10]">Изменить дату</q-tooltip>
+    </q-btn>
   </div>
 
 </template>

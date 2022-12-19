@@ -26,9 +26,9 @@
                 <!--                кнопка добавления задачи-->
                 <task-add-button @reload="reload"/>
                 <!--                фильтры-->
-                <q-btn color="primary" label="Все" @click="noFilter" />
-                <q-btn color="primary" label="We Are" @click="weAreFilter" />
-                <q-btn color="primary" label="counter" @click="counterFilter" />
+<!--                <q-btn color="primary" label="Все" @click="noFilter" v-if="filterValue !== 'all'"/>-->
+<!--                <q-btn color="primary" label="We Are" @click="weAreFilter" v-if="filterValue === 'all'"/>-->
+<!--                <q-btn color="primary" label="counter" @click="counterFilter" v-if="filterValue === 'all'"/>-->
                 <!--                <q-btn :label="filter" @click="logg(filter)" />-->
                 <q-space />
                 <!--                поиск-->
@@ -122,8 +122,6 @@
                 </q-tr>
               </template>
             </q-table>
-
-            <!--            <q-grid :data="rows" :columns="columns"></q-grid>-->
           </div>
         </div>
       </q-card-section>
@@ -172,11 +170,10 @@ export default {
     const taskList = ref([])
     const rows = ref([])
     const filter = ref ('')
+    const filterValue = ref('all')
     const columns = ref([
       { name: 'id', align: 'center', label: 'ID', field: 'id', sortable: true },
       { name: 'title', align: 'left', label: 'Название', field: 'title', sortable: true },
-      // { name: 'type', align: 'left', label: 'Тип', field: 'type', sortable: true },
-      // { name: 'state', align: 'left', label: 'Статус', field: 'state', sortable: true },
       { name: 'stage', align: 'left', label: 'Этап', field: 'stage', sortable: true },
       { name: 'system', align: 'center', label: 'Система', field: 'system', sortable: true},
       { name: 'history', align: 'center', label: 'История', field: 'history'},
@@ -190,6 +187,7 @@ export default {
 
     const noFilter = () => {
       $utils.callPgMethod('task_list', {deleted: false, order_by: "id desc"}, (res) => {
+        filterValue.value = 'all'
         taskList.value = res
         deleted.value = false
       })
@@ -197,13 +195,17 @@ export default {
 
     const weAreFilter = () => {
       $utils.callPgMethod('task_list', {deleted: false, system_id: 1, order_by: "id desc"}, (res) => {
+        filterValue.value = 'weare'
         taskList.value = res
+        deleted.value = false
       })
     }
 
     const counterFilter = () => {
       $utils.callPgMethod('task_list', {deleted: false, system_id: 2, order_by: "id desc"}, (res) => {
+        filterValue.value = 'counter'
         taskList.value = res
+        deleted.value = false
       })
     }
 
@@ -240,7 +242,8 @@ export default {
       counterFilter,
       noFilter,
       deletedFilter,
-      deleted
+      deleted,
+      filterValue
     }
   }
 }

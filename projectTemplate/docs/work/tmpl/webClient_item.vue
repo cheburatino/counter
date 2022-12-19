@@ -63,16 +63,16 @@
       </div>
 
       <!--        исполнитель-->
-      <div class="row q-col-gutter-md q-mb-sm">
-        <!--        квадратное поле-->
-        <div class="col-md-4 col-sm-6 col-xs-12" v-if="!item.executor_id">
-          <comp-fld-ref-search outlined pgMethod="man_list" :label="$t('work.executor_id')" :item='item.executor_title' :itemId='item.executor_id' :ext='{"avatar":"image/man.svg","isClearable":"true","pathUrl":"/man"}' @update="v=> item.executor_id = v.id" @clear="item.executor_id = null" :readonly='false'  class='q-mb-sm col-md-2 col-sm-3 col-xs-6' />
-        </div>
-        <!--        закруглённое поле-->
-        <div class="col-md-4 col-sm-6 col-xs-12" v-if="item.executor_id">
-          <comp-fld-ref-search rounded dense pgMethod="man_list" :label="$t('work.executor_id')" :item='item.executor_title' :itemId='item.executor_id' :ext='{"avatar":"image/man.svg","isClearable":"true","pathUrl":"/man"}' @update="v=> item.executor_id = v.id" @clear="item.executor_id = null" :readonly='false'  class='q-mb-sm col-md-2 col-sm-3 col-xs-6' />
-        </div>
-      </div>
+      <!--      <div class="row q-col-gutter-md q-mb-sm">-->
+      <!--        &lt;!&ndash;        квадратное поле&ndash;&gt;-->
+      <!--        <div class="col-md-4 col-sm-6 col-xs-12" v-if="!item.executor_id">-->
+      <!--          <comp-fld-ref-search outlined pgMethod="man_list" :label="$t('work.executor_id')" :item='item.executor_title' :itemId='item.executor_id' :ext='{"avatar":"image/man.svg","isClearable":"true","pathUrl":"/man"}' @update="v=> item.executor_id = v.id" @clear="item.executor_id = null" :readonly='false'  class='q-mb-sm col-md-2 col-sm-3 col-xs-6' />-->
+      <!--        </div>-->
+      <!--        &lt;!&ndash;        закруглённое поле&ndash;&gt;-->
+      <!--        <div class="col-md-4 col-sm-6 col-xs-12" v-if="item.executor_id">-->
+      <!--          <comp-fld-ref-search rounded dense pgMethod="man_list" :label="$t('work.executor_id')" :item='item.executor_title' :itemId='item.executor_id' :ext='{"avatar":"image/man.svg","isClearable":"true","pathUrl":"/man"}' @update="v=> item.executor_id = v.id" @clear="item.executor_id = null" :readonly='false'  class='q-mb-sm col-md-2 col-sm-3 col-xs-6' />-->
+      <!--        </div>-->
+      <!--      </div>-->
 
       <!--        задача-->
       <div class="row q-col-gutter-md q-mb-sm">
@@ -152,15 +152,17 @@
         </div>
       </div>
 
-      <!--      секундомер-->
+      <!--      счётчик-->
       <div class="row q-col-gutter-md q-mb-sm">
-        <time-counter :item="item" @reloadTimeWidget="reloadTimeWidget"/>
+        <div class="col-md-4 col-sm-6 col-xs-12">
+          <time-counter :item="item" @reloadTimeWidget="reloadTimeWidget" v-if="item.state_id === 2 || item.state_id === 3 || item.state_id === 4"/>
+        </div>
       </div>
 
       <!--      время-->
       <div class="row q-col-gutter-md q-mb-sm" v-if="item.state_id === 2 || item.state_id === 3 || item.state_id === 4">
         <div class="col-md-4 col-sm-6 col-xs-12">
-          <time-list-ref-list-widget v-if='item.id != -1' :id='item.id' :readonly='false' :key="timeKey"/>
+          <!--          <time-list-ref-list-widget v-if='item.id != -1' :id='item.id' :readonly='false' :key="timeKey"/>-->
         </div>
       </div>
 
@@ -207,11 +209,14 @@
 <script>
 import timeListRefListWidget from './comp/timeListRefListWidget.vue'
 import currentUserMixin from '../../../app/mixins/currentUser'
-import TimeCounter from "src/app/components/work/comp/TimeCounter";
+import TimeCounter from "src/app/components/time/comp/TimeCounter.vue";
 
 export default {
   props: ['id', 'isOpenInDialog'],
-  components: {TimeCounter, timeListRefListWidget},
+  components: {
+    TimeCounter,
+    // timeListRefListWidget
+  },
   mixins: [currentUserMixin,],
   computed: {
     docUrl: function() {

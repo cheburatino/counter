@@ -24,25 +24,24 @@ func GetDoc(project *t.ProjectType) t.DocType {
 			t.GetFldRef("type_id", "тип задачи", "ctlg_task_type", [][]int{{1, 2}}, "col-2"),
 			t.GetFldRef("stage_id", "этап", "ctlg_task_stage", [][]int{{1, 3}}, "col-1").SetDefault("1").SetIsRequired(),
 			t.GetFldRef("state_id", "статус", "ctlg_task_state", [][]int{{1, 4}}, "col-1").SetDefault("1").SetIsRequired(),
-			t.GetFldRef("system_id", "система", "system", [][]int{{2, 1}}, "isShowLink", "isClearable"),
-			t.GetFldRef("work_time_sheet_id", "лурв", "work_time_sheet", [][]int{{2, 2}}, "col-2", "isShowLink", "isClearable"),
-			t.GetFldRef("technical_task_id", "тз", "technical_task", [][]int{{2, 3}}, "col-2", "isShowLink", "isClearable"),
+			t.GetFldRef("system_id", "система", "system", [][]int{{2, 1}}, "isShowLink", "isClearable").SetIsRequired(),
 			t.GetFldDate("plan_end_date", "плановая дата завершения", [][]int{{3, 1}}, "col-2"),
 			t.GetFldDate("fact_end_date", "фактическая дата завершения", [][]int{{3, 2}}, "col-2"),
-			t.GetFldInt("specialist_priority", "приоритет", [][]int{{3, 3}}, "col-1"),
+			t.GetFldInt("customer_priority", "приоритет заказчика", [][]int{{3, 3}}, "col-1"),
 			t.GetFldInt("estimate", "оценка", [][]int{{3, 4}}, "col-1"),
 			t.GetFldInt("worked_time", "затрачено", [][]int{{3, 5}}, "col-1").SetReadonly("true"),
-			t.GetFldCheckbox("today", "в работе сегодня", [][]int{{3, 6}}, "col-1").SetDefault("false"),
 			t.GetFldString("description", "описание", 0, [][]int{{4, 1}}, "col-8"),
-			t.GetFldFiles("files", "файлы", [][]int{{5, 1}}, t.FldVueFilesParams{}),
-			t.GetFldImgList("images", "изображения", [][]int{{5, 2}}, t.FldVueImgParams{}),
+			t.GetFldFiles("description_files", "файлы", [][]int{{5, 1}}, t.FldVueFilesParams{}),
+			t.GetFldImgList("description_images", "изображения", [][]int{{5, 2}}, t.FldVueImgParams{}),
+			t.GetFldString("how_to_check", "как проверить задачу", 0, [][]int{{6, 1}}),
+			t.GetFldFiles("how_to_check_files", "файлы", [][]int{{7, 1}}, t.FldVueFilesParams{}),
+			t.GetFldImgList("how_to_check_images", "изображения", [][]int{{7, 2}}, t.FldVueImgParams{}),
 			// Работы {{8, 1}}
 			// Задачи заказчика {{8, 2}}
-			t.GetFldString("result", "результатос", 0, [][]int{{9, 1}}, "col-8"),
+			t.GetFldString("result", "результат", 0, [][]int{{9, 1}}, "col-8"),
 			t.GetFldFiles("result_files", "файлы результата", [][]int{{10, 1}}, t.FldVueFilesParams{}),
 			t.GetFldImgList("result_images", "изображения результата", [][]int{{10, 2}}, t.FldVueImgParams{}),
 			t.GetFldJsonbComposition("history", "история", [][]int{{11, 2}}, "col-4", "history"),
-			t.GetFldJsonbComposition("related_history", "связанная история", [][]int{{11, 2}}, "col-4", "relatedHistory"),
 			t.GetFldRef("executor_responsible_id", "ответственный исполнитель", "contact", [][]int{{12, 1}}, "isShowLink", "isClearable"),
 			t.GetFldRef("customer_responsible_id", "ответственный заказчик", "contact", [][]int{{12, 2}}, "isShowLink", "isClearable"),
 		},
@@ -53,6 +52,12 @@ func GetDoc(project *t.ProjectType) t.DocType {
 			Roles:          []string{},
 		},
 		Templates: map[string]*t.DocTemplate{
+			"sql_function_create.sql":                     {},
+			"sql_function_to_backlog.sql":                 {},
+			"sql_function_to_in_process.sql":              {},
+			"sql_function_to_internal_check.sql":          {},
+			"sql_function_to_customer_check.sql":          {},
+			"sql_function_to_done.sql":                    {},
 			"sql_function_update.sql":                     {},
 			"sql_function_save_history.sql":               {},
 			"sql_function_change_plan_end_date.sql":       {},
@@ -61,7 +66,8 @@ func GetDoc(project *t.ProjectType) t.DocType {
 			"webClient_planEndDateChangeDialogButton.vue": {Source: "docs/task/tmpl/webClient_planEndDateChangeDialogButton.vue", DistPath: "../src/webClient/src/app/components/task/comp", DistFilename: "planEndDateChangeDialogButton.vue"},
 			"webClient_timelineDialogButton.vue":          {Source: "docs/task/tmpl/webClient_timelineDialogButton.vue", DistPath: "../src/webClient/src/app/components/task/comp", DistFilename: "timelineDialogButton.vue"},
 			"webClient_taskDeleteButton.vue":              {Source: "docs/task/tmpl/webClient_taskDeleteButton.vue", DistPath: "../src/webClient/src/app/components/task/comp", DistFilename: "taskDeleteButton.vue"},
-			"webClient_taskAddButton.vue.vue":             {Source: "docs/task/tmpl/webClient_taskAddButton.vue", DistPath: "../src/webClient/src/app/components/task/comp", DistFilename: "taskAddButton.vue"},
+			"webClient_taskAddButton.vue":                 {Source: "docs/task/tmpl/webClient_taskAddButton.vue", DistPath: "../src/webClient/src/app/components/task/comp", DistFilename: "taskAddButton.vue"},
+			"webClient_setNextStageButton.vue":            {Source: "docs/task/tmpl/webClient_setNextStageButton.vue", DistPath: "../src/webClient/src/app/components/task/comp", DistFilename: "setNextStageButton.vue"},
 		},
 		IsBaseTemplates: t.DocIsBaseTemplates{true, true},
 		Sql: t.DocSql{
@@ -69,13 +75,19 @@ func GetDoc(project *t.ProjectType) t.DocType {
 			IsBeforeTrigger: true,
 			IsAfterTrigger:  true,
 			Methods: map[string]*t.DocSqlMethod{
+				"task_create":               {Name: "task_create"},
+				"task_to_backlog":           {Name: "task_to_backlog"},
+				"task_to_in_process":        {Name: "task_to_in_process"},
+				"task_to_internal_check":    {Name: "task_to_internal_check"},
+				"task_to_customer_check":    {Name: "task_to_customer_check"},
+				"task_to_done":              {Name: "task_to_done"},
 				"task_save_history":         {Name: "task_save_history"},
 				"task_change_plan_end_date": {Name: "task_change_plan_end_date"},
 			},
 			Hooks: t.DocSqlHooks{
 				BeforeTriggerBefore: []string{`
-		if new.state_id = 5 and new.fact_end_date isnull then raise exception 'невозможно завершить задачу без фактической даты завершения'; end if;
-		if new.state_id = 5 and coalesce(new.worked_time, 0) = 0 then raise exception 'невозможно завершить задачу без затраченного времени'; end if;
+		if new.stage_id = 6 and new.fact_end_date isnull then raise exception 'невозможно завершить задачу без фактической даты завершения'; end if;
+		if new.stage_id = 6 and coalesce(new.worked_time, 0) = 0 then raise exception 'невозможно завершить задачу без затраченного времени'; end if;
 				`},
 				AfterTriggerAfter: []string{`
 		if coalesce(new.system_id, 0) != coalesce(old.system_id, 0)

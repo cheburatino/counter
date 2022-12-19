@@ -15,8 +15,6 @@ DECLARE
     historyParam    jsonb;
     
 BEGIN
-
-    
     -- проверика наличия id
     checkMsg = check_required_params(params, ARRAY ['id']);
     IF checkMsg IS NOT NULL
@@ -29,7 +27,7 @@ BEGIN
     params = params || jsonb_build_object('history', historyParam);
 
     if (params ->> 'id')::int = -1 then
-        -- проверика наличия обязательных параметров
+        -- проверка наличия обязательных параметров
         checkMsg = check_required_params(params, ARRAY ['title']);
         IF checkMsg IS NOT NULL
         THEN
@@ -37,7 +35,7 @@ BEGIN
         END IF;
         
 
-        EXECUTE ('INSERT INTO task (title, type_id, state_id, stage_id, system_id, work_time_sheet_id, technical_task_id, plan_end_date, fact_end_date, specialist_priority, estimate, worked_time, today, description, files, images, process, process_files, process_images, result, result_files, result_images, history, options) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21, $22, $23, $24)  RETURNING *;')
+        EXECUTE ('INSERT INTO task (title, type_id, state_id, stage_id, system_id, plan_end_date, fact_end_date, customer_priority, estimate, worked_time, description, description_files, description_images, executor_responsible_id, customer_responsible_id, how_to_check, how_to_check_files, how_to_check_images, result, result_files, result_images, history, options) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21, $22, $23)  RETURNING *;')
 		INTO taskRow
 		USING
 			(params ->> 'title')::text,
@@ -45,23 +43,24 @@ BEGIN
 			coalesce((params ->> 'state_id')::int, 1)::int,
 			coalesce((params ->> 'stage_id')::int, 1)::int,
 			(params ->> 'system_id')::int,
-			(params ->> 'work_time_sheet_id')::int,
-			(params ->> 'technical_task_id')::int,
 			(params ->> 'plan_end_date')::timestamp,
 			(params ->> 'fact_end_date')::timestamp,
-			(params ->> 'specialist_priority')::int,
+			(params ->> 'customer_priority')::int,
 			(params ->> 'estimate')::int,
 			(params ->> 'worked_time')::int,
-			coalesce((params ->> 'today')::bool, false)::bool,
 			(params ->> 'description')::text,
-			(params -> 'files')::jsonb,
-			(params -> 'images')::jsonb,
-			(params ->> 'process')::text,
-			(params -> 'process_files')::jsonb,
-			(params -> 'process_images')::jsonb,
+			(params -> 'description_files')::jsonb,
+			(params -> 'description_images')::jsonb,
+            (params ->> 'executor_responsible_id')::int,
+            (params ->> 'customer_responsible_id')::int,
+			(params ->> 'how_to_check')::text,
+			(params -> 'how_to_check_files')::jsonb,
+			(params -> 'how_to_check_images')::jsonb,
 			(params ->> 'result')::text,
 			(params -> 'result_files')::jsonb,
 			(params -> 'result_images')::jsonb,
+            (params ->> 'executor_responsible_id')::int,
+            (params ->> 'customer_responsible_id')::int,
             historyParam,
 			coalesce(params -> 'options', '{}')::jsonb;
 
@@ -72,20 +71,19 @@ BEGIN
 			['state_id', 'state_id', 'number'],
 			['stage_id', 'stage_id', 'number'],
 			['system_id', 'system_id', 'number'],
-			['work_time_sheet_id', 'work_time_sheet_id', 'number'],
-			['technical_task_id', 'technical_task_id', 'number'],
 			['plan_end_date', 'plan_end_date', 'timestamp'],
 			['fact_end_date', 'fact_end_date', 'timestamp'],
-			['specialist_priority', 'specialist_priority', 'number'],
+			['customer_priority', 'customer_priority', 'number'],
 			['estimate', 'estimate', 'number'],
 			['worked_time', 'worked_time', 'number'],
-			['today', 'today', 'bool'],
 			['description', 'description', 'text'],
-			['files', 'files', 'jsonb'],
-			['images', 'images', 'jsonb'],
-			['process', 'process', 'text'],
-			['process_files', 'process_files', 'jsonb'],
-			['process_images', 'process_images', 'jsonb'],
+			['description_files', 'description_files', 'jsonb'],
+			['description_images', 'description_images', 'jsonb'],
+			['executor_responsible_id', 'executor_responsible_id', 'number'],
+			['customer_responsible_id', 'customer_responsible_id', 'number'],
+			['how_to_check', 'how_to_check', 'text'],
+			['how_to_check_files', 'how_to_check_files', 'jsonb'],
+			['how_to_check_images', 'how_to_check_images', 'jsonb'],
 			['result', 'result', 'text'],
 			['result_files', 'result_files', 'jsonb'],
 			['result_images', 'result_images', 'jsonb'],

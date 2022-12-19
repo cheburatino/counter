@@ -35,8 +35,6 @@ BEGIN
 		['notQuoted', 'stage_id', 'doc.stage_id'],
 		['notQuoted', 'state_id', 'doc.state_id'],
 		['notQuoted', 'system_id', 'doc.system_id'],
-		['notQuoted', 'work_time_sheet_id', 'doc.work_time_sheet_id'],
-		['notQuoted', 'technical_task_id', 'doc.technical_task_id'],
 		['notQuoted', 'executor_responsible_id', 'doc.executor_responsible_id'],
 		['notQuoted', 'customer_responsible_id', 'doc.customer_responsible_id']
     ]);

@@ -20,13 +20,13 @@ func GetDoc(project *t.ProjectType) t.DocType {
 		NameRu:     name_ru,
 		PathPrefix: "docs",
 		Flds: []t.FldType{
-			t.GetFldTitleComputed("format('Статус: %s Начало: %s Завершение: %s Полезная нагрузка: %s', stateTitle, to_char(new.start_time, 'dd.mm - hh24:mi'), coalesce(to_char(new.end_time, 'dd.mm - hh24:mi'), 'не завершено'), new.effort)", "col-8"),
+			t.GetFldTitleComputed("format('id: %s, время: %s', new.id, new.effort)", "col-8"),
+			//t.GetFldTitleComputed("format('Статус: %s Начало: %s Завершение: %s Полезная нагрузка: %s', stateTitle, to_char(new.start_time, 'dd.mm - hh24:mi'), coalesce(to_char(new.end_time, 'dd.mm - hh24:mi'), 'не завершено'), new.effort)", "col-8"),
 			t.GetFldInt("effort", "полезная нагрузка", [][]int{{1, 2}}, "col-2").SetDefault("0"),
 			t.GetFldRef("state_id", "статус", "ctlg_time_state", [][]int{{1, 3}}, "col-2").SetDefault("1").SetIsRequired().SetIsSearch(),
 			t.GetFldDateTime("start_time", "начало", [][]int{{2, 1}}, "col-2"),
 			t.GetFldDateTime("end_time", "завершение", [][]int{{2, 2}}, "col-2"),
 			t.GetFldDateTime("counter_start_time", "старт счётчика", [][]int{{4, 2}}, "col-2"),
-			t.GetFldRef("executor_id", "исполнитель", "man", [][]int{{2, 3}}, "isShowLink", "isClearable"),
 			t.GetFldRef("system_id", "система", "system", [][]int{{3, 1}}, "isShowLink", "isClearable"),
 			t.GetFldRef("work_id", "работа", "work", [][]int{{3, 2}}, "isShowLink", "isClearable").SetIsSearch(),
 			t.GetFldString("description", "описание", 0, [][]int{{4, 1}}, "col-8"),
@@ -38,13 +38,25 @@ func GetDoc(project *t.ProjectType) t.DocType {
 			Roles:          []string{},
 		},
 		Templates: map[string]*t.DocTemplate{
+			"sql_function_counter_continue.sql": {},
+			"sql_function_counter_pause.sql":    {},
+			"sql_function_counter_confirm.sql":  {},
+			"sql_function_counter_create.sql":   {},
 			"webClient_item.vue": {Source: "docs/time/tmpl/webClient_item.vue"},
+			"webClient_TimeCounter.vue":         {Source: "docs/time/tmpl/webClient_TimeCounter.vue", DistPath: "../src/webClient/src/app/components/time/comp", DistFilename: "TimeCounter.vue"},
+
 		},
-		IsBaseTemplates: t.DocIsBaseTemplates{true, true},
+		IsBaseTemplates: t.DocIsBaseTemplates{Vue: true, Sql: true},
 		Sql: t.DocSql{
 			IsSearchText:    true,
 			IsBeforeTrigger: true,
 			IsAfterTrigger:  true,
+			Methods: map[string]*t.DocSqlMethod{
+				"time_counter_continue": {Name: "time_counter_continue"},
+				"time_counter_pause":    {Name: "time_counter_pause"},
+				"time_counter_confirm":  {Name: "time_counter_confirm"},
+				"time_counter_create":   {Name: "time_counter_create"},
+			},
 			Hooks: t.DocSqlHooks{
 				AfterTriggerAfter: []string{`
 		-- хук из main.go

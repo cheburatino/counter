@@ -48,12 +48,10 @@ func GetDoc(project *t.ProjectType) t.DocType {
 			Roles:          []string{},
 		},
 		Templates: map[string]*t.DocTemplate{
-			"sql_function_list.sql":     {},
-			"webClient_index.vue":       {},
-			"webClient_item.vue":        {Source: "docs/work/tmpl/webClient_item.vue"},
-			"webClient_TimeCounter.vue": {Source: "docs/work/tmpl/webClient_TimeCounter.vue", DistPath: "../src/webClient/src/app/components/work/comp", DistFilename: "TimeCounter.vue"},
+			"sql_function_list.sql":             {},"webClient_index.vue":               {},
+			"webClient_item.vue":                {Source: "docs/work/tmpl/webClient_item.vue"},
 		},
-		IsBaseTemplates: t.DocIsBaseTemplates{true, true},
+		IsBaseTemplates: t.DocIsBaseTemplates{Vue: true, Sql: true},
 		Sql: t.DocSql{
 			IsSearchText:    true,
 			IsBeforeTrigger: true,
