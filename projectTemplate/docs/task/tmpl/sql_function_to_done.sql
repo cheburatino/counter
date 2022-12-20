@@ -33,7 +33,7 @@ begin
     if taskRow.estimate isnull then raise exception 'нельзя переводить задачи на этап "Выполнена" без оценки'; end if;
     if taskRow.executor_responsible_id isnull then raise exception 'нельзя переводить задачи на этап "Выполнена" без ответственного исполнителя'; end if;
     if taskRow.customer_responsible_id isnull then raise exception 'нельзя переводить задачи на этап "Выполнена" без ответственного заказчика'; end if;
-    if taskRow.how_to_check isnull or taskRow.how_to_check then raise exception 'нельзя переводить задачи на этап "Выполнена" без описания проверки задачи'; end if;
+    if taskRow.how_to_check isnull or taskRow.how_to_check in ('', ' ') then raise exception 'нельзя переводить задачи на этап "Выполнена" без описания проверки задачи'; end if;
     if taskRow.result isnull or taskRow.result in ('', ' ') then raise exception 'нельзя переводить задачи на этап "Выполнена" без описания результата выполнения задачи'; end if;
 
 

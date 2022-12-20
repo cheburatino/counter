@@ -1,13 +1,13 @@
 
 export default {
- 		name_plural_deleted: 'deleted contact',
- 		last_name: 'last name',
+ 		first_name: 'first name',
  		middle_name: 'mdle name',
+ 		user_table_id: 'user table ',
+ 		name: 'contact',
+ 		title: 'title',
+ 		last_name: 'last name',
  		company_id: 'company ',
  		position: 'position',
- 		name: 'contact',
  		name_plural: 'contact',
- 		title: 'title',
- 		first_name: 'first name',
- 		user_table_id: 'user table ',
+ 		name_plural_deleted: 'deleted contact',
 }

@@ -33,9 +33,9 @@ triggers = [
 
 
 methods = [
+	"system_list",
 	"system_update",
 	"system_get_by_id",
-	"system_list",
 	"system_trigger_before",
 	"system_trigger_after"
 ]

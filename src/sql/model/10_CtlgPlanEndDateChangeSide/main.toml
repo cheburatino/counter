@@ -26,9 +26,9 @@ triggers = [
 
 
 methods = [
-	"ctlg_plan_end_date_change_side_list",
 	"ctlg_plan_end_date_change_side_update",
 	"ctlg_plan_end_date_change_side_get_by_id",
+	"ctlg_plan_end_date_change_side_list",
 	"ctlg_plan_end_date_change_side_trigger_before",
 	"ctlg_plan_end_date_change_side_trigger_after"
 ]
