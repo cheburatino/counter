@@ -38,9 +38,9 @@ triggers = [
 
 
 methods = [
+	"plan_end_date_change_list",
 	"plan_end_date_change_update",
 	"plan_end_date_change_get_by_id",
-	"plan_end_date_change_list",
 	"plan_end_date_change_trigger_before",
 	"plan_end_date_change_trigger_after"
 ]

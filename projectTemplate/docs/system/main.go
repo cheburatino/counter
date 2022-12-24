@@ -37,9 +37,10 @@ func GetDoc(project *t.ProjectType) t.DocType {
 			Roles:          []string{},
 		},
 		Templates: map[string]*t.DocTemplate{
-			"webClient_index.vue":          {},
-			"sql_function_list.sql":        {},
-			"sql_function_token_check.sql": {},
+			"webClient_index.vue":                    {},
+			"sql_function_list.sql":                  {},
+			"sql_function_token_check.sql":           {},
+			"sql_function_nla_doc_get_task_list.sql": {},
 		},
 		IsBaseTemplates: t.DocIsBaseTemplates{true, true},
 		Sql: t.DocSql{
@@ -47,7 +48,8 @@ func GetDoc(project *t.ProjectType) t.DocType {
 			IsBeforeTrigger: true,
 			IsAfterTrigger:  true,
 			Methods: map[string]*t.DocSqlMethod{
-				"system_token_check": {Name: "system_token_check"},
+				"system_token_check":           {Name: "system_token_check"},
+				"system_nla_doc_get_task_list": {Name: "system_nla_doc_get_task_list"},
 			},
 		},
 	}

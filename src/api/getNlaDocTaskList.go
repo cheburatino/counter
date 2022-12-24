@@ -11,6 +11,7 @@ type task struct {
 	Id          interface{} `json:"id"`
 	Title       interface{} `json:"title"`
 	Description interface{} `json:"description"`
+	Stage       interface{} `json:"stage"`
 	State       interface{} `json:"state"`
 	PlanEndDate interface{} `json:"plan_end_date"`
 }
@@ -33,13 +34,15 @@ func GetNlaDocTaskList(c *gin.Context) {
 		return
 	}
 
-	//var res struct {
-	//	TaskList []task `json:"task_list"`
-	//}
-
 	var res []task
 
-	err = pg.CallPgFuncWithStruct("task_list", map[string]interface{}{"user_id": 1, "system_id": 13, "deleted": false}, &res)
+	//err = pg.CallPgFuncWithStruct("task_list", map[string]interface{}{"user_id": 1, "system_id": 13, "deleted": false}, &res)
+	//if err != nil {
+	//	utils.HttpError(c, http.StatusBadRequest, err.Error())
+	//	return
+	//}
+
+	err = pg.CallPgFuncWithStruct("system_nla_doc_get_task_list", nil, &res)
 	if err != nil {
 		utils.HttpError(c, http.StatusBadRequest, err.Error())
 		return

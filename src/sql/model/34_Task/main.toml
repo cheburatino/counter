@@ -52,14 +52,14 @@ triggers = [
 
 
 methods = [
-	"task_create",
 	"task_to_backlog",
-	"task_to_internal_check",
-	"task_to_done",
-	"task_save_history",
-	"task_change_plan_end_date",
-	"task_to_in_process",
 	"task_to_customer_check",
+	"task_to_done",
+	"task_change_plan_end_date",
+	"task_create",
+	"task_to_in_process",
+	"task_to_internal_check",
+	"task_save_history",
 	"task_list",
 	"task_update",
 	"task_get_by_id",

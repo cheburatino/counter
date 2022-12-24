@@ -1,13 +1,13 @@
 
 export default {
- 		name: 'система',
  		name_plural: 'Системы',
- 		title: 'название',
- 		token: 'токен',
- 		files: 'файлы',
- 		name_plural_deleted: 'удаленные Системы',
  		customer_id: 'заказчик',
- 		state_id: 'статус',
+ 		token: 'токен',
  		description: 'описание',
+ 		files: 'файлы',
  		images: 'изображения',
+ 		name: 'система',
+ 		title: 'название',
+ 		state_id: 'статус',
+ 		name_plural_deleted: 'удаленные Системы',
 }

@@ -27,9 +27,9 @@ triggers = [
 
 
 methods = [
-	"ctlg_history_type_update",
 	"ctlg_history_type_get_by_id",
 	"ctlg_history_type_list",
+	"ctlg_history_type_update",
 	"ctlg_history_type_trigger_before",
 	"ctlg_history_type_trigger_after"
 ]
