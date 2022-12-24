@@ -34,8 +34,8 @@
 </template>
 
 <script>
-	import legalEntityListRefListWidget from './comp/legalEntityListRefListWidget.vue'
 	import contractListRefListWidget from './comp/contractListRefListWidget.vue'
+	import legalEntityListRefListWidget from './comp/legalEntityListRefListWidget.vue'
     import currentUserMixin from '../../../app/mixins/currentUser'
     export default {
         props: ['id', 'isOpenInDialog'],

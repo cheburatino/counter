@@ -69,7 +69,7 @@
                 menuLinks: [
                     // for codeGenerate ##sidemenu_slot1
 
-									{icon: 'image/system.svg', text: 'i18n_menu.system', url: '/system', roles: []},
+									{icon: 'image/system.png', text: 'i18n_menu.system', url: '/system', roles: []},
 
 									{icon: 'image/task.svg', text: 'i18n_menu.task', url: '/task', roles: []},
 

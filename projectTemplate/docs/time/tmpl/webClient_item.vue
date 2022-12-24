@@ -72,11 +72,11 @@
       <div class="row q-col-gutter-md q-mb-sm">
         <!--        квадратное поле-->
         <div class="col-md-4 col-sm-6 col-xs-12" v-if="!item.system_id">
-            <comp-fld-ref-search outlined pgMethod="system_list" :label="$t('time.system_id')" :item='item.system_title' :itemId='item.system_id' :ext='{"avatar":"image/system.svg","isClearable":"true","pathUrl":"/system"}' @update="v=> item.system_id = v.id" @clear="item.system_id = null" :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
+            <comp-fld-ref-search outlined pgMethod="system_list" :label="$t('time.system_id')" :item='item.system_title' :itemId='item.system_id' :ext='{"avatar":"image/system.png","isClearable":"true","pathUrl":"/system"}' @update="v=> item.system_id = v.id" @clear="item.system_id = null" :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
         </div>
         <!--        закруглённое поле-->
         <div class="col-md-4 col-sm-6 col-xs-12" v-if="item.system_id">
-            <comp-fld-ref-search rounded dense pgMethod="system_list" :label="$t('time.system_id')" :item='item.system_title' :itemId='item.system_id' :ext='{"avatar":"image/system.svg","isClearable":"true","pathUrl":"/system"}' @update="v=> item.system_id = v.id" @clear="item.system_id = null" :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
+            <comp-fld-ref-search rounded dense pgMethod="system_list" :label="$t('time.system_id')" :item='item.system_title' :itemId='item.system_id' :ext='{"avatar":"image/system.png","isClearable":"true","pathUrl":"/system"}' @update="v=> item.system_id = v.id" @clear="item.system_id = null" :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
         </div>
       </div>
 

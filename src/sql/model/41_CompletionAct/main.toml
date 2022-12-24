@@ -32,9 +32,9 @@ triggers = [
 
 
 methods = [
+	"completion_act_update",
 	"completion_act_get_by_id",
 	"completion_act_list",
-	"completion_act_update",
 	"completion_act_trigger_before",
 	"completion_act_trigger_after"
 ]

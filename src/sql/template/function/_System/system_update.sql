@@ -34,6 +34,7 @@ BEGIN
     
     
     
+    
 
     if (params ->> 'id')::int = -1 then
         -- проверика наличия обязательных параметров
@@ -44,12 +45,13 @@ BEGIN
         END IF;
         
 
-        EXECUTE ('INSERT INTO system (title, customer_id, state_id, description, files, images, options) VALUES ($1, $2, $3, $4, $5, $6, $7)  RETURNING *;')
+        EXECUTE ('INSERT INTO system (title, customer_id, state_id, token, description, files, images, options) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)  RETURNING *;')
 		INTO systemRow
 		USING
 			(params ->> 'title')::text,
 			(params ->> 'customer_id')::int,
 			(params ->> 'state_id')::int,
+			(params ->> 'token')::text,
 			(params ->> 'description')::text,
 			(params -> 'files')::jsonb,
 			(params -> 'images')::jsonb,
@@ -62,6 +64,7 @@ BEGIN
 			['title', 'title', 'text'],
 			['customer_id', 'customer_id', 'number'],
 			['state_id', 'state_id', 'number'],
+			['token', 'token', 'text'],
 			['description', 'description', 'text'],
 			['files', 'files', 'jsonb'],
 			['images', 'images', 'jsonb'],

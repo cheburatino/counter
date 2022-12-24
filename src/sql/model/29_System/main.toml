@@ -8,6 +8,7 @@ fields = [
 	{name="title",					type="char",	size=150, 	ext="not null",	 comment="название"},
 	{name="customer_id",					type="int",	 comment="заказчик"},
 	{name="state_id",					type="int",	 comment="статус"},
+	{name="token",					type="char",	size=30,	 comment="токен"},
 	{name="description",					type="text",	 comment="описание"},
 	{name="files",					type="jsonb",	 comment="файлы"},
 	{name="images",					type="jsonb",	 comment="изображения"},
@@ -33,9 +34,10 @@ triggers = [
 
 
 methods = [
+	"system_get_by_id",
+	"system_token_check",
 	"system_list",
 	"system_update",
-	"system_get_by_id",
 	"system_trigger_before",
 	"system_trigger_after"
 ]
@@ -44,6 +46,7 @@ alterScripts = [
 	"alter table system add column if not exists title CHARACTER VARYING(150);",
 	"alter table system add column if not exists customer_id int;",
 	"alter table system add column if not exists state_id int;",
+	"alter table system add column if not exists token CHARACTER VARYING(30);",
 	"alter table system add column if not exists description text;",
 	"alter table system add column if not exists files jsonb;",
 	"alter table system add column if not exists images jsonb;",

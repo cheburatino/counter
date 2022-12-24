@@ -108,7 +108,16 @@ func getProject() t.ProjectType {
 		{Name: ROLE_SPECIALIST, NameRu: "специалист"},
 	}
 
-	p.Config.Graylog = t.GraylogConfig{Host: "85.143.214.161", Port: 12201}
+	//p.Config.Graylog = t.GraylogConfig{Host: "85.143.214.161", Port: 12201}
+
+	p.Go.Routes = t.ProjectGoRoutes{
+		Imports: []string{
+			"github.com/cheburatino/electron_is/src/api",
+		},
+		NotAuth: []string{
+			"r.POST(\"/get_nla_doc_task_list\", api.GetNlaDocTaskList)",
+		},
+	}
 
 	p.Vue.Theme = t.VueTheme{
 		IsDarkThemeExist: true,

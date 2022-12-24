@@ -95,7 +95,7 @@
                       <q-item-section>
                         <div class="row justify-center items-center">
                           <q-avatar rounded size="sm">
-                            <img src="image/system.svg" alt="">
+                            <img src="image/system.png" alt="">
                           </q-avatar>
 
                           <q-item-label>{{props.row.options.title.system_title}}</q-item-label>

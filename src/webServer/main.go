@@ -10,6 +10,7 @@ import (
 
 	
 	"net/http"
+		"github.com/cheburatino/electron_is/src/api"
 	"fmt"
 )
 
@@ -40,8 +41,7 @@ func StartWebServer(config types.Config) {
 	apiRoute := r.Group("/api", authRequired)
 	{
 		apiRoute.POST("/current_user", apiCurrentUser)
-		apiRoute.POST("/call_pg_func", apiCallPgFunc)// отправка логов в graylog
-		apiRoute.POST("/log", logToGraylog)
+		apiRoute.POST("/call_pg_func", apiCallPgFunc)
 		// подключение по SSE
 		apiRoute.GET("/sse", sse.AddConn)
 		// операции с файлами
@@ -57,6 +57,7 @@ func StartWebServer(config types.Config) {
 
 		
 	}
+	r.POST("/get_nla_doc_task_list", api.GetNlaDocTaskList)
 
 	
 

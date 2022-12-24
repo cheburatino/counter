@@ -14,10 +14,7 @@ enable = true
 port = 3091
 url = "https://system.i-electron.ru"
 
-[graylog]
-host = "85.143.214.161"
-port = 12201
-appName = "electron_is"
+
 
 [email]
 sender = "system@i-electron.ru"
