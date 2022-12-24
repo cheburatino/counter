@@ -1,13 +1,13 @@
 
 export default {
- 		payment_receipt_date: 'дата поступления платежа',
+ 		payment_date: 'дата платежа',
  		invoice_id: 'счёт',
- 		name_plural: 'Платежи',
- 		name_plural_deleted: 'удаленные Платежи',
- 		amount: 'размер платежа',
  		payment_order: 'платёжное поручение',
+ 		name_plural_deleted: 'удаленные Платежи',
+ 		title: 'название',
+ 		amount: 'размер платежа',
  		description: 'описание',
  		name: 'платёж',
- 		title: 'название',
- 		payment_date: 'дата платежа',
+ 		name_plural: 'Платежи',
+ 		payment_receipt_date: 'дата поступления платежа',
 }

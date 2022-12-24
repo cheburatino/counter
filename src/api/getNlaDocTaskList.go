@@ -36,12 +36,6 @@ func GetNlaDocTaskList(c *gin.Context) {
 
 	var res []task
 
-	//err = pg.CallPgFuncWithStruct("task_list", map[string]interface{}{"user_id": 1, "system_id": 13, "deleted": false}, &res)
-	//if err != nil {
-	//	utils.HttpError(c, http.StatusBadRequest, err.Error())
-	//	return
-	//}
-
 	err = pg.CallPgFuncWithStruct("system_nla_doc_get_task_list", nil, &res)
 	if err != nil {
 		utils.HttpError(c, http.StatusBadRequest, err.Error())

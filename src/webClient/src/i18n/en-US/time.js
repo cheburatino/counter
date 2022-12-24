@@ -1,15 +1,15 @@
 
 export default {
- 		title: 'title',
+ 		name_plural: 'time',
+ 		effort: 'effort',
  		start_time: 'start time',
  		end_time: 'end time',
- 		counter_start_time: 'counter start time',
  		system_id: 'system ',
- 		name: 'time',
- 		name_plural: 'time',
- 		name_plural_deleted: 'deleted time',
- 		effort: 'effort',
- 		state_id: 'state ',
  		work_id: 'work ',
  		description: 'description',
+ 		name: 'time',
+ 		name_plural_deleted: 'deleted time',
+ 		title: 'title',
+ 		state_id: 'state ',
+ 		counter_start_time: 'counter start time',
 }

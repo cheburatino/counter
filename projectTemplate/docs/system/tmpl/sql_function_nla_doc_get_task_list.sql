@@ -11,7 +11,7 @@ declare
     result jsonb;
 
 begin
-    with t1 as (select t.id as id, t.title as title, stage.title as stage, state.title as state, t.plan_end_date
+    with t1 as (select t.id as id, t.title as title, t.description as description, stage.title as stage, state.title as state, t.plan_end_date
                     from task t
                         left join ctlg_task_stage stage on t.stage_id = stage.id
                         left join ctlg_task_state state on t.state_id = state.id
