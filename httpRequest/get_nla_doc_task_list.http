@@ -1,5 +1,5 @@
-#POST https://system.i-electron.ru/get_nla_doc_task_list
-POST localhost:3091/get_nla_doc_task_list
+POST https://system.i-electron.ru/get_nla_doc_task_list
+#POST localhost:3091/get_nla_doc_task_list
 Content-Type: application/json;charset=UTF-8
 
 {
