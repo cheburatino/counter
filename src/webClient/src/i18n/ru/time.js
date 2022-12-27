@@ -1,15 +1,15 @@
 
 export default {
- 		name: 'время',
- 		effort: 'полезная нагрузка',
- 		end_time: 'завершение',
+ 		name_plural: 'Время',
+ 		name_plural_deleted: 'удаленные Время',
+ 		start_time: 'начало',
  		counter_start_time: 'старт счётчика',
  		work_id: 'работа',
  		description: 'описание',
- 		name_plural: 'Время',
- 		name_plural_deleted: 'удаленные Время',
+ 		name: 'время',
  		title: 'название',
+ 		effort: 'полезная нагрузка',
  		state_id: 'статус',
- 		start_time: 'начало',
+ 		end_time: 'завершение',
  		system_id: 'система',
 }

@@ -17,8 +17,6 @@
                 :rows="taskList"
                 :columns="columns"
                 row-key="id"
-                :filter="filter"
-                :filter-method="filterMethod"
                 :rows-per-page-options="[10, 25, 50, 100]"
             >
               <!--              верхняя часть таблицы-->
@@ -26,17 +24,8 @@
                 <!--                кнопка добавления задачи-->
                 <task-add-button @reload="reload"/>
                 <!--                фильтры-->
-<!--                <q-btn color="primary" label="Все" @click="noFilter" v-if="filterValue !== 'all'"/>-->
-<!--                <q-btn color="primary" label="We Are" @click="weAreFilter" v-if="filterValue === 'all'"/>-->
-<!--                <q-btn color="primary" label="counter" @click="counterFilter" v-if="filterValue === 'all'"/>-->
-                <!--                <q-btn :label="filter" @click="logg(filter)" />-->
+                <filter-component :tableMode="true" :currentUser="currentUser" @sqlRestBtnClickHandler="sqlRestBtnClickHandler"/>
                 <q-space />
-                <!--                поиск-->
-                <!--                <q-input borderless dense debounce="300" color="primary" v-model="filter" placeholder="Поиск">-->
-                <!--                  <template v-slot:append>-->
-                <!--                    <q-icon name="search"/>-->
-                <!--                  </template>-->
-                <!--                </q-input>-->
               </template>
               <!--              заголовок столбца "Удалить" / "Восстановить"-->
               <template v-slot:header-cell-delete="props">
@@ -95,7 +84,7 @@
                       <q-item-section>
                         <div class="row justify-center items-center">
                           <q-avatar rounded size="sm">
-                            <img src="image/system.png" alt="">
+                            <img src="image/system.svg" alt="">
                           </q-avatar>
 
                           <q-item-label>{{props.row.options.title.system_title}}</q-item-label>
@@ -139,10 +128,11 @@ import $utils from "src/app/plugins/utils";
 import TimelineDialogButton from "src/app/components/task/comp/timelineDialogButton.vue";
 import TaskDeleteButton from "src/app/components/task/comp/taskDeleteButton.vue";
 import TaskAddButton from "src/app/components/task/comp/taskAddButton.vue";
+import FilterComponent from "src/app/components/task/comp/filterComponent.vue";
 
 export default {
   props: ['isOpenInDialog', 'ext'],
-  components: {TaskAddButton, TaskDeleteButton, TimelineDialogButton},
+  components: {FilterComponent, TaskAddButton, TaskDeleteButton, TimelineDialogButton},
   mixins: [currentUserMixin],
   computed: {
     currentUrl: () => '/task/',
@@ -169,8 +159,6 @@ export default {
     // таблица вместо списка
     const taskList = ref([])
     const rows = ref([])
-    const filter = ref ('')
-    const filterValue = ref('all')
     const columns = ref([
       { name: 'id', align: 'center', label: 'ID', field: 'id', sortable: true },
       { name: 'title', align: 'left', label: 'Название', field: 'title', sortable: true },
@@ -181,29 +169,8 @@ export default {
       { name: 'log', align: 'center', label: 'лог', field: 'log'},
     ])
 
-    const filterMethod = () => {
-
-    }
-
-    const noFilter = () => {
-      $utils.callPgMethod('task_list', {deleted: false, order_by: "id desc"}, (res) => {
-        filterValue.value = 'all'
-        taskList.value = res
-        deleted.value = false
-      })
-    }
-
-    const weAreFilter = () => {
-      $utils.callPgMethod('task_list', {deleted: false, system_id: 1, order_by: "id desc"}, (res) => {
-        filterValue.value = 'weare'
-        taskList.value = res
-        deleted.value = false
-      })
-    }
-
-    const counterFilter = () => {
-      $utils.callPgMethod('task_list', {deleted: false, system_id: 2, order_by: "id desc"}, (res) => {
-        filterValue.value = 'counter'
+    const sqlRestBtnClickHandler = (v) => {
+      $utils.callPgMethod('task_list', v, (res) => {
         taskList.value = res
         deleted.value = false
       })
@@ -233,17 +200,12 @@ export default {
       reload,
       open,
       columns,
-      filter,
-      filterMethod,
       rows,
       taskList,
       logg,
-      weAreFilter,
-      counterFilter,
-      noFilter,
       deletedFilter,
       deleted,
-      filterValue
+      sqlRestBtnClickHandler
     }
   }
 }

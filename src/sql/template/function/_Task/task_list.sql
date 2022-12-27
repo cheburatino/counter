@@ -40,6 +40,12 @@ BEGIN
     ]);
 
     
+		-- добавляем в фильтр условия из where на клиенте
+		if params->>'where_param' notnull
+		then
+			whereStr = format('%s and (%s)', whereStr, params->>'where_param');
+		end if;
+
 
     -- финальная сборка строки с условиями выборки (build_query_part_for_list - функция из папки base)
     condQueryStr = '' || whereStr || build_query_part_for_list(params);

@@ -34,11 +34,11 @@ triggers = [
 
 
 methods = [
-	"system_get_by_id",
 	"system_token_check",
 	"system_nla_doc_get_task_list",
 	"system_list",
 	"system_update",
+	"system_get_by_id",
 	"system_trigger_before",
 	"system_trigger_after"
 ]

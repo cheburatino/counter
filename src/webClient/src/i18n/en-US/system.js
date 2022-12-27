@@ -1,13 +1,13 @@
 
 export default {
- 		files: 'files',
- 		name: 'system',
  		name_plural: 'system',
- 		token: 'token',
+ 		customer_id: 'customer ',
  		state_id: 'state ',
- 		description: 'description',
+ 		token: 'token',
  		images: 'images',
+ 		name: 'system',
  		name_plural_deleted: 'deleted system',
  		title: 'title',
- 		customer_id: 'customer ',
+ 		description: 'description',
+ 		files: 'files',
 }
