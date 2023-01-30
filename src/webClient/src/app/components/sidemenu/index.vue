@@ -78,10 +78,6 @@
 									{icon: 'image/time.svg', text: 'i18n_menu.time', url: '/time', roles: ['admin']},
 
 									{icon: 'image/meeting.svg', text: 'i18n_menu.meeting', url: '/meeting', roles: []},
-
-									{icon: 'image/customer_task.png', text: 'i18n_menu.customer_task', url: '/customer_task', roles: []},
-
-									{icon: 'image/plan_end_date_change.png', text: 'i18n_menu.plan_end_date_change', url: '/plan_end_date_change', roles: []},
 {isFolder: true, icon: 'image/crm.png', text: 'CRM', roles: ['admin'], linkList: 								[
 								{icon: '', text: 'Компании', url: '/company', roles: []},
 								{icon: '', text: 'Юр.лица', url: '/legal_entity', roles: []},
@@ -101,7 +97,6 @@
 								{icon: '', text: 'Состояния задачи', url: '/ctlg_task_state', roles: []},
 								{icon: '', text: 'Статусы работ', url: '/ctlg_work_state', roles: []},
 								{icon: '', text: 'Статусы времени', url: '/ctlg_time_state', roles: []},
-								{icon: '', text: 'Статусы задач заказчиков', url: '/ctlg_customer_task_state', roles: []},
 								{icon: '', text: 'Статусы договоров', url: '/ctlg_contract_state', roles: []},
 								{icon: '', text: 'Статусы документов по ТЗ', url: '/ctlg_technical_task_state', roles: []},
 								{icon: '', text: 'Статусы работ по ТЗ', url: '/ctlg_technical_task_work_state', roles: []},
@@ -109,7 +104,6 @@
 								{icon: '', text: 'Статусы счетов', url: '/ctlg_invoice_state', roles: []},
 								{icon: '', text: 'Типы истории', url: '/ctlg_history_type', roles: []},
 								{icon: '', text: 'Типы задач', url: '/ctlg_task_type', roles: []},
-								{icon: '', text: 'Из-за кого изменилась плановая дата завершения', url: '/ctlg_plan_end_date_change_side', roles: []},
 								{icon: '', text: 'Фильтры', url: '/ctlg_filter', roles: []},
 								{icon: '', text: 'Сортировки', url: '/ctlg_order_by', roles: []},
 ],},

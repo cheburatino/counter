@@ -52,23 +52,21 @@ func GetDoc(project *t.ProjectType) t.DocType {
 			Roles:          []string{},
 		},
 		Templates: map[string]*t.DocTemplate{
-			"sql_function_create.sql":                     {},
-			"sql_function_to_backlog.sql":                 {},
-			"sql_function_to_in_process.sql":              {},
-			"sql_function_to_internal_check.sql":          {},
-			"sql_function_to_customer_check.sql":          {},
-			"sql_function_to_done.sql":                    {},
-			"sql_function_update.sql":                     {},
-			"sql_function_save_history.sql":               {},
-			"sql_function_change_plan_end_date.sql":       {},
-			"webClient_item.vue":                          {Source: "docs/task/tmpl/webClient_item.vue"},
-			"webClient_index.vue":                         {Source: "docs/task/tmpl/webClient_index.vue"},
-			"webClient_filterComponent.vue":               {Source: "docs/task/tmpl/webClient_filterComponent.vue", DistPath: "../src/webClient/src/app/components/task/comp", DistFilename: "filterComponent.vue"},
-			"webClient_planEndDateChangeDialogButton.vue": {Source: "docs/task/tmpl/webClient_planEndDateChangeDialogButton.vue", DistPath: "../src/webClient/src/app/components/task/comp", DistFilename: "planEndDateChangeDialogButton.vue"},
-			"webClient_timelineDialogButton.vue":          {Source: "docs/task/tmpl/webClient_timelineDialogButton.vue", DistPath: "../src/webClient/src/app/components/task/comp", DistFilename: "timelineDialogButton.vue"},
-			"webClient_taskDeleteButton.vue":              {Source: "docs/task/tmpl/webClient_taskDeleteButton.vue", DistPath: "../src/webClient/src/app/components/task/comp", DistFilename: "taskDeleteButton.vue"},
-			"webClient_taskAddButton.vue":                 {Source: "docs/task/tmpl/webClient_taskAddButton.vue", DistPath: "../src/webClient/src/app/components/task/comp", DistFilename: "taskAddButton.vue"},
-			"webClient_setNextStageButton.vue":            {Source: "docs/task/tmpl/webClient_setNextStageButton.vue", DistPath: "../src/webClient/src/app/components/task/comp", DistFilename: "setNextStageButton.vue"},
+			"sql_function_create.sql":            {},
+			"sql_function_to_backlog.sql":        {},
+			"sql_function_to_in_process.sql":     {},
+			"sql_function_to_internal_check.sql": {},
+			"sql_function_to_customer_check.sql": {},
+			"sql_function_to_done.sql":           {},
+			"sql_function_update.sql":            {},
+			"sql_function_save_history.sql":      {},
+			"webClient_item.vue":                 {Source: "docs/task/tmpl/webClient_item.vue"},
+			"webClient_index.vue":                {Source: "docs/task/tmpl/webClient_index.vue"},
+			"webClient_filterComponent.vue":      {Source: "docs/task/tmpl/webClient_filterComponent.vue", DistPath: "../src/webClient/src/app/components/task/comp", DistFilename: "filterComponent.vue"},
+			"webClient_timelineDialogButton.vue": {Source: "docs/task/tmpl/webClient_timelineDialogButton.vue", DistPath: "../src/webClient/src/app/components/task/comp", DistFilename: "timelineDialogButton.vue"},
+			"webClient_taskDeleteButton.vue":     {Source: "docs/task/tmpl/webClient_taskDeleteButton.vue", DistPath: "../src/webClient/src/app/components/task/comp", DistFilename: "taskDeleteButton.vue"},
+			"webClient_taskAddButton.vue":        {Source: "docs/task/tmpl/webClient_taskAddButton.vue", DistPath: "../src/webClient/src/app/components/task/comp", DistFilename: "taskAddButton.vue"},
+			"webClient_setNextStageButton.vue":   {Source: "docs/task/tmpl/webClient_setNextStageButton.vue", DistPath: "../src/webClient/src/app/components/task/comp", DistFilename: "setNextStageButton.vue"},
 		},
 		IsBaseTemplates: t.DocIsBaseTemplates{true, true},
 		Sql: t.DocSql{
@@ -76,14 +74,13 @@ func GetDoc(project *t.ProjectType) t.DocType {
 			IsBeforeTrigger: true,
 			IsAfterTrigger:  true,
 			Methods: map[string]*t.DocSqlMethod{
-				"task_create":               {Name: "task_create"},
-				"task_to_backlog":           {Name: "task_to_backlog"},
-				"task_to_in_process":        {Name: "task_to_in_process"},
-				"task_to_internal_check":    {Name: "task_to_internal_check"},
-				"task_to_customer_check":    {Name: "task_to_customer_check"},
-				"task_to_done":              {Name: "task_to_done"},
-				"task_save_history":         {Name: "task_save_history"},
-				"task_change_plan_end_date": {Name: "task_change_plan_end_date"},
+				"task_create":            {Name: "task_create"},
+				"task_to_backlog":        {Name: "task_to_backlog"},
+				"task_to_in_process":     {Name: "task_to_in_process"},
+				"task_to_internal_check": {Name: "task_to_internal_check"},
+				"task_to_customer_check": {Name: "task_to_customer_check"},
+				"task_to_done":           {Name: "task_to_done"},
+				"task_save_history":      {Name: "task_save_history"},
 			},
 			Hooks: t.DocSqlHooks{
 				BeforeTriggerBefore: []string{`
@@ -146,21 +143,6 @@ func GetDoc(project *t.ProjectType) t.DocType {
                 <q-item-label caption><q-badge color="orange">{{v.options.title.state_title}}</q-badge></q-item-label>
             `, // шаблон для названия в списке (vue синтаксис)
 	}, [][]int{{8, 1}}, "col-4"))
-
-	doc.AddFld(t.GetFldVueCompositionRefList(&doc, t.VueCompRefListWidgetParams{
-		Label:      "задачи заказчика",        // название списка, которе выводится на экране
-		FldName:    "customer_task_list",      // название поля. Любое, в формате snake_case. На основе этого названия формируется название компоненты во vue.
-		TableName:  "customer_task",           // название связанной таблицы, из которой будут выгружаться записи
-		RefFldName: "task_id",                 // название поля в связанной таблицы, по которому осуществляется связь
-		Avatar:     "image/customer_task.png", // иконка, которая выводится в списке
-		NewFlds: []t.FldType{
-			t.GetFldString("title", "название", 300, [][]int{{1, 1}}).SetIsRequired(),
-		}, // список полей, которые заполняются при добавлении новой записи
-		TitleTemplate: `
-                <q-item-label>{{v.title}}</q-item-label>
-                <q-item-label caption><q-badge color="orange">{{v.options.title.state_title}}</q-badge></q-item-label>
-            `, // шаблон для названия в списке (vue синтаксис)
-	}, [][]int{{8, 2}}, "col-4"))
 
 	return doc
 }

@@ -1,7 +1,7 @@
 <template>
   <q-page padding>
-
     <comp-breadcrumb v-if="!isOpenInDialog" :list="[{label:'Технические задания', to:'/technical_task',  docType: 'technical_task'},  {label: item ? (item.title ? item.title : 'Редактирование') : '',  docType: 'edit'}]"/>
+
 
     <div v-if="item" class="q-mt-sm">
       <!--  поля формы    -->
@@ -64,13 +64,13 @@
 </template>
 
 <script>
+	import developmentTaskListRefListWidget from './comp/developmentTaskListRefListWidget.vue'
 	import invoiceListRefListWidget from './comp/invoiceListRefListWidget.vue'
 	import completionActListRefListWidget from './comp/completionActListRefListWidget.vue'
-	import developmentTaskListRefListWidget from './comp/developmentTaskListRefListWidget.vue'
     import currentUserMixin from '../../../app/mixins/currentUser'
     export default {
         props: ['id', 'isOpenInDialog'],
-        components: {developmentTaskListRefListWidget, invoiceListRefListWidget, completionActListRefListWidget},
+        components: {invoiceListRefListWidget, completionActListRefListWidget, developmentTaskListRefListWidget},
         mixins: [currentUserMixin,],
         computed: {
             docUrl: function() {

@@ -1,8 +1,8 @@
 
 [postgres]
 user = "postgres"
-password = "ktulhu77"
-dbName = "electron_is"
+password = "maximum777strong_password!"
+dbName = "counter"
 host = "postgres"
 port = 5432
 modelDir = ["./sql/model"]
@@ -11,8 +11,8 @@ templateDir = ["./sql/template"]
 
 [webServer]
 enable = true
-port = 3091
-url = "https://system.i-electron.ru"
+port = 3098
+url = "https://demo-counter.i-electron.ru"
 
 
 

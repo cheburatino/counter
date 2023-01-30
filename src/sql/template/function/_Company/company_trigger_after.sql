@@ -22,9 +22,6 @@ if new.title != old.title then
  for r in select * from contract where company_id = new.id loop
  update contract set updated_at=now() where id = r.id;
  end loop;
- for r in select * from man where company_id = new.id loop
- update man set updated_at=now() where id = r.id;
- end loop;
 
  end if;
  end if;

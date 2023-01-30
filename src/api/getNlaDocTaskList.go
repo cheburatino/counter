@@ -1,8 +1,8 @@
 package api
 
 import (
-	"github.com/cheburatino/electron_is/src/pg"
-	"github.com/cheburatino/electron_is/src/utils"
+	"github.com/cheburatino/counter/src/pg"
+	"github.com/cheburatino/counter/src/utils"
 	"github.com/gin-gonic/gin"
 	"net/http"
 )

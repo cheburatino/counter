@@ -2,8 +2,8 @@ package auth
 
 import (
 	"encoding/json"
-	"github.com/cheburatino/electron_is/src/pg"
-	"github.com/cheburatino/electron_is/src/types"
+	"github.com/cheburatino/counter/src/pg"
+	"github.com/cheburatino/counter/src/types"
 )
 
 var (

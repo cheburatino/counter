@@ -46,7 +46,6 @@ BEGIN
     
     
     
-    
 
     if (params ->> 'id')::int = -1 then
         -- проверика наличия обязательных параметров
@@ -57,7 +56,7 @@ BEGIN
         END IF;
         
 
-        EXECUTE ('INSERT INTO work (title, estimate, worked_time, today, specialist_priority, state_id, system_id, executor_id, task_id, plan_end_date, fact_end_date, description, description_files, description_images, process, process_files, process_images, result, result_files, result_images, options) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21)  RETURNING *;')
+        EXECUTE ('INSERT INTO work (title, estimate, worked_time, today, specialist_priority, state_id, system_id, task_id, plan_end_date, fact_end_date, description, description_files, description_images, process, process_files, process_images, result, result_files, result_images, options) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20)  RETURNING *;')
 		INTO workRow
 		USING
 			(params ->> 'title')::text,
@@ -67,7 +66,6 @@ BEGIN
 			(params ->> 'specialist_priority')::int,
 			coalesce((params ->> 'state_id')::int, 1)::int,
 			(params ->> 'system_id')::int,
-			(params ->> 'executor_id')::int,
 			(params ->> 'task_id')::int,
 			(params ->> 'plan_end_date')::timestamp,
 			(params ->> 'fact_end_date')::timestamp,
@@ -93,7 +91,6 @@ BEGIN
 			['specialist_priority', 'specialist_priority', 'number'],
 			['state_id', 'state_id', 'number'],
 			['system_id', 'system_id', 'number'],
-			['executor_id', 'executor_id', 'number'],
 			['task_id', 'task_id', 'number'],
 			['plan_end_date', 'plan_end_date', 'timestamp'],
 			['fact_end_date', 'fact_end_date', 'timestamp'],

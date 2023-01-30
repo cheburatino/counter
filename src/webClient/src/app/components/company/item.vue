@@ -1,7 +1,7 @@
 <template>
   <q-page padding>
-
     <comp-breadcrumb v-if="!isOpenInDialog" :list="[{label:'Компании', to:'/company',  docType: 'company'},  {label: item ? (item.title ? item.title : 'Редактирование') : '',  docType: 'edit'}]"/>
+
 
     <div v-if="item" class="q-mt-sm">
       <!--  поля формы    -->
@@ -39,7 +39,7 @@
     import currentUserMixin from '../../../app/mixins/currentUser'
     export default {
         props: ['id', 'isOpenInDialog'],
-        components: {contractListRefListWidget, legalEntityListRefListWidget},
+        components: {legalEntityListRefListWidget, contractListRefListWidget},
         mixins: [currentUserMixin,],
         computed: {
             docUrl: function() {

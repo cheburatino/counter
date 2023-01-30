@@ -3,7 +3,7 @@ package api
 import (
 	"errors"
 	"fmt"
-	"github.com/cheburatino/electron_is/src/pg"
+	"github.com/cheburatino/counter/src/pg"
 )
 
 func checkSystemToken(token string) error {

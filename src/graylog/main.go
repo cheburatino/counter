@@ -2,7 +2,7 @@ package graylog
 
 import (
 	"fmt"
-	"github.com/cheburatino/electron_is/src/types"
+	"github.com/cheburatino/counter/src/types"
 	"gopkg.in/aphistic/golf.v0"
 )
 

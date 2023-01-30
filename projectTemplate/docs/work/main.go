@@ -27,8 +27,7 @@ func GetDoc(project *t.ProjectType) t.DocType {
 			t.GetFldInt("specialist_priority", "приоритет", [][]int{{1, 5}}, "col-1"),
 			t.GetFldRef("state_id", "статус", "ctlg_work_state", [][]int{{1, 6}}, "col-2").SetDefault("1"),
 			t.GetFldRef("system_id", "система", "system", [][]int{{2, 1}}, "col-2", "isShowLink", "isClearable"),
-			t.GetFldRef("executor_id", "исполнитель", "man", [][]int{{2, 2}}, "col-2", "isShowLink", "isClearable"),
-			t.GetFldRef("task_id", "задача", "task", [][]int{{2, 3}}, "isShowLink", "isClearable"),
+			t.GetFldRef("task_id", "задача", "task", [][]int{{2, 2}}, "isShowLink", "isClearable"),
 			t.GetFldDate("plan_end_date", "плановая дата завершения", [][]int{{3, 1}}),
 			t.GetFldDate("fact_end_date", "фактическая дата завершения", [][]int{{3, 2}}),
 			t.GetFldString("description", "описание", 0, [][]int{{4, 1}}, "col-8"),
@@ -48,8 +47,8 @@ func GetDoc(project *t.ProjectType) t.DocType {
 			Roles:          []string{},
 		},
 		Templates: map[string]*t.DocTemplate{
-			"sql_function_list.sql":             {},"webClient_index.vue":               {},
-			"webClient_item.vue":                {Source: "docs/work/tmpl/webClient_item.vue"},
+			"sql_function_list.sql": {}, "webClient_index.vue": {},
+			"webClient_item.vue": {Source: "docs/work/tmpl/webClient_item.vue"},
 		},
 		IsBaseTemplates: t.DocIsBaseTemplates{Vue: true, Sql: true},
 		Sql: t.DocSql{

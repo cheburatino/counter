@@ -3,7 +3,7 @@ package pg
 import (
 	"database/sql"
 	"fmt"
-	"github.com/cheburatino/electron_is/src/types"
+	"github.com/cheburatino/counter/src/types"
 	"github.com/pepelazz/pg_generate"
 )
 

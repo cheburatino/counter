@@ -3,12 +3,12 @@ package main
 import (
 	"encoding/gob"
 	"flag"
-	"github.com/cheburatino/electron_is/src/jobs"
-	"github.com/cheburatino/electron_is/src/pg"
-	"github.com/cheburatino/electron_is/src/types"
-	"github.com/cheburatino/electron_is/src/utils"
-	"github.com/cheburatino/electron_is/src/webServer"
-	"github.com/cheburatino/electron_is/src/sse"
+	"github.com/cheburatino/counter/src/jobs"
+	"github.com/cheburatino/counter/src/pg"
+	"github.com/cheburatino/counter/src/types"
+	"github.com/cheburatino/counter/src/utils"
+	"github.com/cheburatino/counter/src/webServer"
+	"github.com/cheburatino/counter/src/sse"
 	
 	
 	

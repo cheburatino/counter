@@ -1,8 +1,8 @@
 {
-  "name": "Electron",
+  "name": "Counter",
   "version": "0.0.1",
-  "description": "Electron",
-  "productName": "Electron",
+  "description": "Counter",
+  "productName": "Counter",
   "author": "pepelazz <pepelazz00@gmail.com>",
   "private": true,
   "scripts": {

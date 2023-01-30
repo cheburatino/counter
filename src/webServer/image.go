@@ -8,7 +8,7 @@ import (
 	"github.com/muesli/smartcrop/nfnt"
 	"github.com/nfnt/resize"
 	"github.com/oklog/ulid"
-	"github.com/cheburatino/electron_is/src/utils"
+	"github.com/cheburatino/counter/src/utils"
 	"image"
 	"image/gif"
 	"image/jpeg"

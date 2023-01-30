@@ -1,16 +1,16 @@
 package webServer
 
 import (
-	"github.com/cheburatino/electron_is/src/sse"
-	"github.com/cheburatino/electron_is/src/types"
-	"github.com/cheburatino/electron_is/src/utils"
-	"github.com/cheburatino/electron_is/src/webServer/auth"
+	"github.com/cheburatino/counter/src/sse"
+	"github.com/cheburatino/counter/src/types"
+	"github.com/cheburatino/counter/src/utils"
+	"github.com/cheburatino/counter/src/webServer/auth"
 	"github.com/gin-gonic/gin"
 
 
 	
 	"net/http"
-		"github.com/cheburatino/electron_is/src/api"
+		"github.com/cheburatino/counter/src/api"
 	"fmt"
 )
 

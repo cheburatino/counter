@@ -2,7 +2,7 @@ package sse
 
 import (
 	"github.com/gin-gonic/gin"
-	"github.com/cheburatino/electron_is/src/utils"
+	"github.com/cheburatino/counter/src/utils"
 	"net/http"
 )
 

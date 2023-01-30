@@ -9,7 +9,7 @@ import (
 	"fmt"
 	"github.com/gin-gonic/gin"
 	"github.com/go-playground/validator"
-	"github.com/cheburatino/electron_is/src/types"
+	"github.com/cheburatino/counter/src/types"
 	"io/ioutil"
 	"log"
 	"mime/multipart"
